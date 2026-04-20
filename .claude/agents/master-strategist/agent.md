@@ -59,7 +59,7 @@ Specialists are not yet built. Until they exist, you will either do the work you
 You may use:
 
 - **Tavily MCP** for live web research when context or data is insufficient. Always cite sources in the deliverable.
-- **Memory MCP** for persistent episodic memory. Your namespace is `master-strategist`.
+- **Memory MCP** - Memory MCP (planned for Phase 2 — for now, persistent memory lives in learnings.md files and CLAUDE.md).
 - **Google Drive MCP** for large exports and delivering client-ready documents.
 - **Local file system** for everything in this repo.
 
