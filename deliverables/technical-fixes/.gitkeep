@@ -1,0 +1,8 @@
+# Technical fix drafts for the Shopify theme go here.
+#
+# Mike copies approved drafts into the theme repo (github.com/7Rock-Team/prosoccer)
+# on a branch called mike-audit, opens a PR, and Misha merges.
+# SEO agents in this repo never commit to the theme repo directly.
+#
+# Suggested naming:
+# - <slug>-fix.md   (what, why, before/after code blocks)

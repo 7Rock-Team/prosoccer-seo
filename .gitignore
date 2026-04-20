@@ -1,0 +1,44 @@
+# OS
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+**/secrets/**
+
+# Claude Code local overrides
+.claude/settings.local.json
+.claude/.local/
+
+# Large data dumps kept out of version control
+data/**/*.csv
+data/**/*.xlsx
+data/**/*.xls
+data/**/*.json
+data/**/*.zip
+data/**/*.tsv
+!data/README.md
+!data/**/.gitkeep
+
+# Generated report binaries (keep templates and markdown, not PDFs)
+reports/monthly/*.pdf
+reports/monthly/*.docx
+!reports/monthly/.gitkeep
+
+# Temporary
+*.tmp
+*.log
+*.bak
