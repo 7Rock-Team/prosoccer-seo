@@ -24,8 +24,8 @@ Log site-specific SEO observations that should shape future strategy, content te
 **Evidence:** `data/gsc-exports/2025-04-to-2026-04_top-pages.csv`, cross-referenced in Phase 2 Task 2 deliverable.
 **Strategic implication:** Player-spotlight templates (single player tied to club + country) may be a higher-yield content type than country-level collections. Worth testing with Messi (Argentina), Vinicius (Brazil), Mbappé (France), Haaland (Norway) post-WC sprint. Keyword Research Agent should validate query volume on player-name searches before scoping.
 
-### 2026-04-21 - soccertop.com backlink concentration confirmed non-affiliate
+### 2026-04-21 - soccertop.com backlink concentration
 
-**Finding:** A single UAE domain (soccertop.com) concentrates ~16M backlinks, representing over 90% of ProSoccer's total backlink profile. Confirmed NOT an AWIN affiliate and NOT in PayAudit (Mike verified both sources).
+**Finding:** ~16M backlinks from a single UAE domain (soccertop.com), over 90% of ProSoccer's total backlink profile. Confirmed NOT an AWIN affiliate and NOT in PayAudit per Mike's verification.
 **Evidence:** Majestic backlink report (Phase 1 audit, file 7). AWIN roster and PayAudit cross-reference by Mike, 2026-04-21.
-**Strategic implication:** High-priority disavow candidate for Technical SEO Agent Month 1 work. The concentration distorts aggregate backlink metrics upward without providing proportional authority value. Origin investigation is a follow-up task; most likely a scrape/mirror site or a negative SEO pattern. Any disavow action still routes through Mike's approval, but the AWIN-affiliate safety check is cleared.
+**Strategic implication:** High-priority disavow candidate for Technical SEO Agent Month 1 work. Origin investigation (scrape, mirror, or negative SEO) is a separate follow-up. Korean backlink cluster still pending AWIN/PayAudit verification.
