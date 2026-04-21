@@ -42,3 +42,6 @@ reports/monthly/*.docx
 *.tmp
 *.log
 *.bak
+
+# Generated presentation build output (keep source scripts, not rendered artifacts)
+scripts/build/
