@@ -20,4 +20,10 @@ Pulled: April 20, 2026
 ## Key trend
 - Avg position improved from 20.8 → 10.0 over the 12-month window
 - Weekly clicks grew from ~2,900 to ~4,300
-- Cause of improvement is unclear and worth investigating
+- Position lift started mid-September 2025 (before 7 Rock re-engaged Feb 2026) — not attributable to our work
+- Impressions surged 2x starting Feb 2026 (330k/week → 700k+/week), CTR compressed through the surge — consistent with Google AI Overviews impression double-counting, not a real click gain
+
+## Data hygiene
+Raw CSVs live on Mike's local machine in this folder and are gitignored per `.gitignore`.
+Only this README is version-controlled. Future state: move raw exports to Google Drive
+and reference from here. Do not commit raw exports containing query- or URL-level detail.
