@@ -117,7 +117,7 @@ Before we commit a full 12 months to a plan that assumes "more traffic equals mo
 - Checkout abandonment analysis, device-segmented.
 - Cross-reference all findings with the existing prosoccer-theme CRO/technical audit.
 
-**Why this matters to the 12-month plan.** If the diagnostic shows that conversion is materially below industry expectations, fixing conversion is likely faster and cheaper than growing traffic to compensate. That could materially change the path to the 85 orders/day target: less "build new content," more "fix what's already getting traffic." Any code fixes flow into the prosoccer-theme repo via Mike's `mike-audit` branch per the established workflow. This is not a CRO engagement, but the SEO team flags conversion issues the moment the data reveals them.
+**Why this matters to the 12-month plan.** If the diagnostic shows that conversion is materially below industry expectations, fixing conversion is likely faster and cheaper than growing traffic to compensate. That could materially change the path to the 75 to 85 orders/day target: less "build new content," more "fix what's already getting traffic." Any code fixes flow into the prosoccer-theme repo via Mike's `mike-audit` branch per the established workflow. This is not a CRO engagement, but the SEO team flags conversion issues the moment the data reveals them. Any CRO fixes identified in the diagnostic flow into the separate prosoccer-theme CRO project that 7 Rock already manages, or get raised as a separate scope conversation with Tony. The diagnostic is about diagnosis, not scope expansion inside this engagement.
 
 ## The Outcomes We'll Measure
 
@@ -127,12 +127,12 @@ These are the four metrics that lead every monthly report to Tony. Secondary met
 
 | Metric | Current baseline | 12-month target | Source |
 |---|---|---|---|
-| Online orders/day (average, in-scope channels) | ~54 | 85 | Shopify; excludes POS, Channable, Draft Orders |
+| Online orders/day (average, in-scope channels) | ~54 | 75 to 85 | Shopify; excludes POS, Channable, Draft Orders |
 | Google organic revenue (rolling 12 months, in-scope channels) | ~$950K | $1.2M+ | Shopify "search/google" referrer |
 | Google Ads monthly spend reduction | $30K/month baseline | $5K to $8K/month saved (17% to 27%) | Tony's Ads account |
 | High-order days per year (90+ orders/day) | ~8 | 50+ | Shopify, in-scope channels |
 
-**About the 85/day target.** Q1 2026 averaged roughly 54 orders/day. 85/day is a 57% lift. That's aggressive on purpose. Compounding organic channels scale non-linearly once the technical foundation is right and content starts ranking. The 3.7M non-branded impression pool, plus the World Cup surge, plus Merchant Listings defense, plus any conversion-rate fixes from the Month 1 diagnostic, gives us the inputs to get there. We believe it's achievable. We don't believe it's guaranteed.
+**About the 75 to 85/day target.** Q1 2026 averaged roughly 54 orders/day. 75/day is the defensible floor we expect to hit, a 39% lift that the 3.7M non-branded impression pool, the World Cup sprint, and Merchant Listings defense should deliver when executed well. 85/day is the stretch. For context, 85/day annualizes to roughly 31,000 in-scope orders, which would exceed ProSoccer's 2024 full-year total, so we're naming it as ambition rather than commitment. Compounding organic channels scale non-linearly once the technical foundation is right and content starts ranking, which makes the stretch credible; it isn't guaranteed. Any conversion-rate fixes surfaced by the Month 1 diagnostic would add upside on top of the range.
 
 **About the $950K to $1.2M revenue target.** $950K is a working estimate based on Q4 2025 plus Q1 2026 "search/google" referrer data annualized, with a conservative adjustment for the Q4 holiday lift. We'll refine the baseline once we have a full trailing 12 months of referrer data (June 2026). The $1.2M target reflects a 26% lift on a conservative baseline.
 
@@ -185,7 +185,9 @@ Keep this list short. Reference it whenever scope creep shows up.
 
 ## Open Questions for Tony
 
-### Confirmed inputs (for record, no action needed)
+### Starting assumptions (confirmed with Mike)
+
+These are the inputs that anchor every target and metric above. If anything has changed since we last aligned, tell us now so we can recalibrate.
 
 - **Google Ads monthly spend baseline:** $30,000/month total, all campaigns.
 - **Order volume scope:** all sales channels included EXCEPT Point of Sale, Channable (Amazon/eBay), and Draft Orders. Online Store, Shop, Tapcart, BSS B2B, Redo, and other web-based channels are all counted.
