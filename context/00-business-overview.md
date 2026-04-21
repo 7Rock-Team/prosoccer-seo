@@ -45,7 +45,19 @@ Example:
 
 ## History That Matters for SEO
 
-_Anything in company history that shapes SEO decisions. Past penalties, domain migrations, major rebrands, acquisitions, platform switches, site outages._
+### 7 Rock engagement timeline
+
+- **2021 to 2022:** 7 Rock Marketing (Mike Hakopyan) took on ProSoccer as a marketing partner and executed the Magento to Shopify Plus platform migration. All migration-era URL mapping, redirects, and schema work originated with 7 Rock.
+- **2023 to 2024:** 7 Rock continued as marketing partner through this period.
+- **2025:** Another agency managed the account. Late 2025, that agency completed a Shopify theme migration to the current theme (separate from the 2021 to 2022 platform migration).
+- **February 2026:** ProSoccer returned to 7 Rock.
+- **January 2026 (pre-return):** At the client's request, 7 Rock's whitelabel team produced a full SEO audit as a pre-engagement diagnostic. It was never scoped to include implementation. It is 7 Rock's own team's work, not a previous agency deliverable.
+
+### What this means for SEO decisions
+
+- Legacy URL issues flagged in the January 2026 audit that trace back to the 2021 to 2022 Magento to Shopify Plus migration are 7 Rock's own legacy to clean up, and that cleanup should be verified rather than re-scoped.
+- Technical regressions that surfaced after the late 2025 theme migration are a separate investigation. That theme work was the other agency's, and any related damage (Core Web Vitals, internal linking, structured data, template-level SEO elements) needs its own diff against the pre-theme-migration state.
+- Ranking declines visible in the 24-month trend data should be interpreted with the 2025 management gap and late-2025 theme change as two distinct candidate causes, not one.
 
 ## Current Pain Points (As Tony and Jorge Describe Them)
 
