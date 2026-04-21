@@ -223,14 +223,19 @@ These are the inputs that anchor every target and metric above. If anything has 
 - **Google Ads monthly spend baseline:** $30,000/month total, all campaigns.
 - **Order volume scope:** all sales channels included EXCEPT Point of Sale, Channable (Amazon/eBay), and Draft Orders. Online Store, Shop, Tapcart, BSS B2B, Redo, and other web-based channels are all counted.
 - **High-order day threshold:** 90+ orders per day (using the scope above).
-- **Paid tool approval:** always requires Tony's knowledge and sign-off, regardless of dollar amount.
 - **Affiliate program operation:** 7 Rock manages ProSoccer's affiliate program on AWIN (Affiliate Window) and uses PayAudit as the pre-AWIN transaction approval system. Any backlink audit or disavow recommendation cross-references both rosters before action.
 
 ### Still open (needs Tony's input at kickoff)
 
 1. **Attribution model confirmation.** Our baselines use Shopify's "search/google" referrer as the organic signal. Do you track organic revenue under a specific attribution model we should align with (last-click, assisted, post-view), or should we additionally pull GA4 Organic Search data to triangulate?
 
-2. **World Cup sprint approval model.** We'll ship 7 to 9 new or refreshed pieces inside the 8-week sprint (7 national team pages across the three layers described in Goal 2, plus 1 LA watch guide and 1 authenticity guide). Given the timeline, we'd like to run weekly batch approvals rather than page-by-page sign-off. Does that work for you?
+2. **World Cup sprint approval model.** The 8-week sprint covers 9 pieces of work total:
+
+    - Optimization of 7 existing national team collection pages (we're not creating new collections; these already exist on ProSoccer). The work spans 3 layers as described in Goal 2: fast polish on pages already ranking in striking distance, heavier work on pages that need rebuilding, and quick metadata fixes on pages that rank despite broken titles and descriptions.
+
+    - Two new blog articles: an LA watch guide and an authenticity guide.
+
+    Given the timeline, we'd like to run weekly batch approvals rather than page-by-page sign-off. Is that okay with you?
 
 3. **Cadence confirmation.** Monthly reports starting end of May 2026, delivered from `reports/monthly/`. Any format or medium preferences? PDF, Google Doc, live walkthrough?
 
