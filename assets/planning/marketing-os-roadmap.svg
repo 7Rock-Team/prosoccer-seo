@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 900 900" role="img">
+<title>7 Rock Marketing OS — Progress Map</title>
+<desc>Three-layer roadmap showing ProSoccer SEO workforce build, Marketing OS extraction, and multi-client replication. Current state as of April 21, 2026.</desc>
+
+<defs>
+<style>
+.title { font: 500 20px 'Inter', 'Calibri', sans-serif; fill: #0E0E0E; }
+.layer-heading { font: 500 15px 'Inter', 'Calibri', sans-serif; fill: #0E0E0E; }
+.box-title { font: 500 13px 'Inter', 'Calibri', sans-serif; }
+.box-subtitle { font: 400 11px 'Inter', 'Calibri', sans-serif; }
+.section-note { font: italic 12px 'Inter', 'Calibri', sans-serif; fill: #5F5E5A; }
+
+.done-fill { fill: #E1F5EE; stroke: #0F6E56; stroke-width: 0.5; }
+.done-title { fill: #085041; }
+.done-sub { fill: #0F6E56; }
+
+.active-fill { fill: #FAEEDA; stroke: #854F0B; stroke-width: 0.5; }
+.active-title { fill: #633806; }
+.active-sub { fill: #854F0B; }
+
+.future-fill { fill: #F1EFE8; stroke: #5F5E5A; stroke-width: 0.5; }
+.future-title { fill: #2C2C2A; }
+.future-sub { fill: #444441; }
+
+.extraction-fill { fill: #EEEDFE; stroke: #534AB7; stroke-width: 0.5; }
+.extraction-title { fill: #3C3489; }
+.extraction-sub { fill: #534AB7; }
+
+.replicate-fill { fill: #FAECE7; stroke: #993C1D; stroke-width: 0.5; }
+.replicate-title { fill: #712B13; }
+.replicate-sub { fill: #993C1D; }
+
+.brand-fill { fill: #FF5151; stroke: #A32D2D; stroke-width: 0.5; }
+.brand-title { fill: #FFFFFF; }
+.brand-sub { fill: #FCEBEB; }
+
+.layer-container { fill: none; stroke: #B4B2A9; stroke-width: 0.5; stroke-dasharray: 4 4; }
+.arrow-line { stroke: #5F5E5A; stroke-width: 1.5; fill: none; }
+</style>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</marker>
+</defs>
+
+<text x="30" y="35" class="title">7 Rock Marketing OS — Progress Map</text>
+<text x="30" y="55" class="section-note">Updated: April 21, 2026 · ProSoccer.com SEO Workforce Build</text>
+
+<rect x="20" y="75" width="860" height="350" rx="12" class="layer-container"/>
+<text x="40" y="100" class="layer-heading">Layer 1 — ProSoccer SEO workforce (active)</text>
+<text x="40" y="118" class="section-note">Building 7 specialist agents + Master Strategist</text>
+
+<g><rect x="40" y="135" width="180" height="50" rx="8" class="done-fill"/><text x="130" y="156" text-anchor="middle" class="box-title done-title">Project scaffold</text><text x="130" y="173" text-anchor="middle" class="box-subtitle done-sub">53 files on GitHub</text></g>
+<g><rect x="230" y="135" width="180" height="50" rx="8" class="done-fill"/><text x="320" y="156" text-anchor="middle" class="box-title done-title">Master Strategist agent</text><text x="320" y="173" text-anchor="middle" class="box-subtitle done-sub">Built, tested, operational</text></g>
+<g><rect x="420" y="135" width="180" height="50" rx="8" class="done-fill"/><text x="510" y="156" text-anchor="middle" class="box-title done-title">Brand voice locked</text><text x="510" y="173" text-anchor="middle" class="box-subtitle done-sub">Plain language rule added</text></g>
+<g><rect x="610" y="135" width="180" height="50" rx="8" class="done-fill"/><text x="700" y="156" text-anchor="middle" class="box-title done-title">MCP stack live</text><text x="700" y="173" text-anchor="middle" class="box-subtitle done-sub">Tavily, Drive, Playwright</text></g>
+
+<g><rect x="40" y="195" width="180" height="50" rx="8" class="done-fill"/><text x="130" y="216" text-anchor="middle" class="box-title done-title">Phase 1 + 2 discovery</text><text x="130" y="233" text-anchor="middle" class="box-subtitle done-sub">Jan audit + site crawl</text></g>
+<g><rect x="230" y="195" width="180" height="50" rx="8" class="done-fill"/><text x="320" y="216" text-anchor="middle" class="box-title done-title">Goals doc drafted</text><text x="320" y="233" text-anchor="middle" class="box-subtitle done-sub">Locked, needs Phase 2 revision</text></g>
+<g><rect x="420" y="195" width="180" height="50" rx="8" class="done-fill"/><text x="510" y="216" text-anchor="middle" class="box-title done-title">Tony deliverable v1</text><text x="510" y="233" text-anchor="middle" class="box-subtitle done-sub">12-page branded PDF</text></g>
+<g><rect x="610" y="195" width="180" height="50" rx="8" class="done-fill"/><text x="700" y="216" text-anchor="middle" class="box-title done-title">Infrastructure tracked</text><text x="700" y="233" text-anchor="middle" class="box-subtitle done-sub">Scripts, voice check, brand</text></g>
+
+<g><rect x="40" y="260" width="370" height="50" rx="8" class="active-fill"/><text x="225" y="281" text-anchor="middle" class="box-title active-title">Goals doc revision (next session)</text><text x="225" y="298" text-anchor="middle" class="box-subtitle active-sub">Fold Phase 2 findings into source of truth</text></g>
+<g><rect x="420" y="260" width="370" height="50" rx="8" class="active-fill"/><text x="605" y="281" text-anchor="middle" class="box-title active-title">Tony v2 regeneration queued</text><text x="605" y="298" text-anchor="middle" class="box-subtitle active-sub">Real named pages, plain language</text></g>
+
+<text x="40" y="335" class="section-note">Next: 6 specialist agents (April 22 onward)</text>
+
+<g><rect x="40" y="350" width="115" height="50" rx="8" class="future-fill"/><text x="97" y="371" text-anchor="middle" class="box-title future-title">Keyword Research</text><text x="97" y="388" text-anchor="middle" class="box-subtitle future-sub">Day 1 priority</text></g>
+<g><rect x="165" y="350" width="115" height="50" rx="8" class="future-fill"/><text x="222" y="371" text-anchor="middle" class="box-title future-title">Technical SEO</text><text x="222" y="388" text-anchor="middle" class="box-subtitle future-sub">Day 2</text></g>
+<g><rect x="290" y="350" width="115" height="50" rx="8" class="future-fill"/><text x="347" y="371" text-anchor="middle" class="box-title future-title">On-Page SEO</text><text x="347" y="388" text-anchor="middle" class="box-subtitle future-sub">Days 3-4</text></g>
+<g><rect x="415" y="350" width="115" height="50" rx="8" class="future-fill"/><text x="472" y="371" text-anchor="middle" class="box-title future-title">Content Writer</text><text x="472" y="388" text-anchor="middle" class="box-subtitle future-sub">Week 2 (voice calibration)</text></g>
+<g><rect x="540" y="350" width="115" height="50" rx="8" class="future-fill"/><text x="597" y="371" text-anchor="middle" class="box-title future-title">Competitor Intel</text><text x="597" y="388" text-anchor="middle" class="box-subtitle future-sub">Week 2</text></g>
+<g><rect x="665" y="350" width="115" height="50" rx="8" class="future-fill"/><text x="722" y="371" text-anchor="middle" class="box-title future-title">Reporting</text><text x="722" y="388" text-anchor="middle" class="box-subtitle future-sub">Before May report</text></g>
+
+<line x1="450" y1="425" x2="450" y2="460" class="arrow-line" marker-end="url(#arrow)"/>
+
+<rect x="20" y="465" width="860" height="200" rx="12" class="layer-container"/>
+<text x="40" y="490" class="layer-heading">Layer 2 — Marketing OS extraction</text>
+<text x="40" y="508" class="section-note">After ProSoccer workforce proves the pattern (months 2-4)</text>
+
+<g><rect x="40" y="525" width="250" height="50" rx="8" class="extraction-fill"/><text x="165" y="546" text-anchor="middle" class="box-title extraction-title">Extract Context Hub</text><text x="165" y="563" text-anchor="middle" class="box-subtitle extraction-sub">prosoccer-hub repo (reusable)</text></g>
+<g><rect x="300" y="525" width="250" height="50" rx="8" class="extraction-fill"/><text x="425" y="546" text-anchor="middle" class="box-title extraction-title">Build Agency OS</text><text x="425" y="563" text-anchor="middle" class="box-subtitle extraction-sub">Cross-client methodology</text></g>
+<g><rect x="560" y="525" width="250" height="50" rx="8" class="extraction-fill"/><text x="685" y="546" text-anchor="middle" class="box-title extraction-title">Templates + scaffolds</text><text x="685" y="563" text-anchor="middle" class="box-subtitle extraction-sub">Ready to clone pattern</text></g>
+
+<g><rect x="155" y="590" width="280" height="50" rx="8" class="extraction-fill"/><text x="295" y="611" text-anchor="middle" class="box-title extraction-title">PPC service line</text><text x="295" y="628" text-anchor="middle" class="box-subtitle extraction-sub">Google Ads + Meta agents</text></g>
+<g><rect x="465" y="590" width="280" height="50" rx="8" class="extraction-fill"/><text x="605" y="611" text-anchor="middle" class="box-title extraction-title">Social service line</text><text x="605" y="628" text-anchor="middle" class="box-subtitle extraction-sub">Organic social agents</text></g>
+
+<line x1="450" y1="665" x2="450" y2="700" class="arrow-line" marker-end="url(#arrow)"/>
+
+<rect x="20" y="705" width="860" height="175" rx="12" class="layer-container"/>
+<text x="40" y="730" class="layer-heading">Layer 3 — Multi-client replication</text>
+<text x="40" y="748" class="section-note">Each new client makes the system smarter (months 4+)</text>
+
+<g><rect x="40" y="765" width="180" height="50" rx="8" class="replicate-fill"/><text x="130" y="786" text-anchor="middle" class="box-title replicate-title">Client #1</text><text x="130" y="803" text-anchor="middle" class="box-subtitle replicate-sub">ProSoccer (proven)</text></g>
+<g><rect x="230" y="765" width="180" height="50" rx="8" class="replicate-fill"/><text x="320" y="786" text-anchor="middle" class="box-title replicate-title">Client #2</text><text x="320" y="803" text-anchor="middle" class="box-subtitle replicate-sub">Half-day to spin up</text></g>
+<g><rect x="420" y="765" width="180" height="50" rx="8" class="replicate-fill"/><text x="510" y="786" text-anchor="middle" class="box-title replicate-title">Client #3</text><text x="510" y="803" text-anchor="middle" class="box-subtitle replicate-sub">Pattern fully refined</text></g>
+<g><rect x="610" y="765" width="180" height="50" rx="8" class="replicate-fill"/><text x="700" y="786" text-anchor="middle" class="box-title replicate-title">Client #N</text><text x="700" y="803" text-anchor="middle" class="box-subtitle replicate-sub">Compounds forever</text></g>
+
+<g><rect x="230" y="830" width="400" height="40" rx="8" class="brand-fill"/><text x="430" y="855" text-anchor="middle" class="box-title brand-title">Agency value compounds with every new client</text></g>
+
+</svg>
