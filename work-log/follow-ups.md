@@ -18,3 +18,6 @@ _Lightweight tracker for open items awaiting action from Mike, a specialist agen
 ## Closed
 
 _None yet._
+
+## Coming Up
+| 2026-04-21 | Name all 7 specialist agents with human/memorable names (proposed starting point: ORIN, KIRA, VERITAS, SCRIBE, SAGE, RECON, METRIK — Mike to review and adjust). Friendly names used everywhere including Tony-facing docs. Rename propagates to agent definition headers, memory file first-person references, context files, progress map SVG labels, and client deliverable references. | Mike | Open |
