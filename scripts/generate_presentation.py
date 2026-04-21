@@ -2,14 +2,19 @@
 Generate the client-facing SEO strategy presentation for Tony Tatikian.
 
 Produces:
-  - deliverables/strategy-presentations/2026-04_seo-goals-presentation-for-tony.docx
-  - deliverables/strategy-presentations/2026-04_seo-goals-presentation-for-tony.pdf
+  - deliverables/strategy-presentations/2026-04_seo-goals-presentation-for-tony-v2.docx
+  - deliverables/strategy-presentations/2026-04_seo-goals-presentation-for-tony-v2.pdf
 
 Source content: context/06-business-goals.md (locked).
+
+Page-layout rule: every top-level section starts on a fresh page. This is enforced
+structurally by the @section decorator; don't rely on future contributors remembering
+to call add_page_break() at the top of each section body.
 """
 
 from __future__ import annotations
 
+import functools
 import os
 import sys
 from pathlib import Path
@@ -32,7 +37,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 LOGO_PATH = REPO_ROOT / "assets" / "brand" / "7rock-logo.png"
 OUT_DIR = REPO_ROOT / "deliverables" / "strategy-presentations"
 BUILD_DIR = REPO_ROOT / "scripts" / "build"
-OUT_DOCX = OUT_DIR / "2026-04_seo-goals-presentation-for-tony.docx"
+OUT_DOCX = OUT_DIR / "2026-04_seo-goals-presentation-for-tony-v2.docx"
 
 # Brand colors
 RED = "FF5151"
@@ -337,6 +342,22 @@ def add_page_break(doc):
     run.add_break(WD_BREAK.PAGE)
 
 
+def section(builder):
+    """Decorator: enforce that a top-level section starts on a fresh page.
+
+    Apply to every top-level section builder (Executive Summary through Next Steps).
+    Do not apply to build_cover: the cover is page 1, no break before it.
+
+    Any helper function that builds a sub-section inside a larger section should NOT
+    be decorated; only the outermost builder in main() gets @section.
+    """
+    @functools.wraps(builder)
+    def wrapped(doc, *args, **kwargs):
+        add_page_break(doc)
+        return builder(doc, *args, **kwargs)
+    return wrapped
+
+
 # Page number field helper
 def insert_page_number(paragraph):
     run = paragraph.add_run()
@@ -395,6 +416,11 @@ def set_page_margins(doc):
 # =============================================================================
 # CONTENT BUILDERS
 # =============================================================================
+#
+# Every top-level section builder is decorated with @section, which inserts a
+# page break before the section. Do not add add_page_break() calls inside a
+# decorated builder's body.
+# =============================================================================
 
 def build_cover(doc):
     # Logo top-left
@@ -440,6 +466,7 @@ def build_cover(doc):
     meta_line("Date", "April 2026")
 
 
+@section
 def build_executive_summary(doc):
     add_heading(doc, "Executive summary", level=1)
 
@@ -465,14 +492,15 @@ def build_executive_summary(doc):
         "Four goals get us there: grow non-branded organic revenue, capture World Cup 2026 "
         "traffic through an 8-week focused sprint, defend organic revenue against AI Overview "
         "click erosion through Merchant Center feed work, and establish an AI search visibility "
-        "baseline while Shopify's new Agentic Storefronts feature is still young. The Month 1 "
-        "diagnostic confirms whether the immediate priority is traffic, conversion, or both.",
+        "baseline while Shopify's new Agentic Storefronts feature is still young. Phase 2 "
+        "discovery (April 2026) closed out the upfront diagnostic work, so Month 1 is execution, "
+        "not investigation.",
         size=11, color=RGB_BODY,
     )
 
 
+@section
 def build_why_now(doc):
-    add_page_break(doc)
     add_heading(doc, "Why this matters now", level=1)
 
     add_paragraph(
@@ -496,10 +524,10 @@ def build_why_now(doc):
 
     add_paragraph(
         doc,
-        "One honest note on the baseline. Q1 2026 tracks slightly behind the pace ProSoccer "
-        "held through full-year 2024. We're not relitigating that gap in this document. "
-        "We're naming it so the forward plan is built on real ground, and so the targets "
-        "below reflect what's actually in front of us.",
+        "One honest note on the baseline. Q1 2026 averaged roughly 54 orders per day, tracking "
+        "slightly behind the pace ProSoccer held through full-year 2024 (about 57 per day). "
+        "We're not relitigating that gap in this document. We're naming it so the forward plan "
+        "is built on real ground, and so the targets below reflect what's actually in front of us.",
         size=11, color=RGB_BODY,
     )
 
@@ -507,12 +535,115 @@ def build_why_now(doc):
         doc,
         BUILD_DIR / "chart1_organic_share.png",
         width_inches=6.3,
-        caption="Organic search revenue share, online store channel, trailing 6 months.",
+        caption=(
+            "Google organic share of Online Store revenue, representative annualized figure "
+            "from trailing 6 months of referrer data."
+        ),
     )
 
 
+@section
+def build_what_we_found(doc):
+    add_heading(doc, "What we found", level=1)
+
+    add_paragraph(
+        doc,
+        "Phase 2 discovery ran across the first three weeks of April 2026. These are the "
+        "findings that came back when we looked at the site and the Search Console data "
+        "directly. They're the ground the twelve-month plan is built on.",
+        size=11, color=RGB_BODY,
+    )
+
+    findings = [
+        ("The ranking trajectory is improving.",
+         "Average Google position has moved from 20.8 to 9.6 over the past twelve months "
+         "(weekly GSC data, April 2025 to April 2026). That's not a plateau or a decline. "
+         "The site is trending up."),
+        ("The late-2025 theme migration caused a temporary regression, and the site has recovered.",
+         "Between November 2025 and January 2026, average position slipped 3 to 4 spots, a "
+         "standard post-theme-swap re-indexing effect. Rankings have since recovered to "
+         "pre-migration levels across February to April 2026. Month 1 work starts from a "
+         "recovered position, not a falling one. We're not claiming credit for the recovery "
+         "since we haven't shipped implementation yet."),
+        ("Magento legacy is clean.",
+         "A scan of the 12-month GSC top-pages export for every legacy URL pattern (.html, "
+         "?id=, /catalog/product, /index.php, and others) returned zero matches. No legacy "
+         "URLs from the 2021-to-2022 Shopify migration are receiving traffic today. That "
+         "cleanup held up. No follow-up action needed."),
+        ("USMNT keyword cannibalization is a newly surfaced technical issue.",
+         "Three overlapping US collection URLs are splitting link equity across the same "
+         "product set. USMNT currently sits at position 46 despite a 79,559-impression pool "
+         "in GSC. Canonical URL consolidation, with 301s from the non-canonical variants into "
+         "one canonical, is a high-priority Month 1 technical fix and a hard prerequisite for "
+         "any USMNT on-page sprint work."),
+        ("National team pages aren't a single cohort. They're three different patterns.",
+         "Four pages already rank in striking distance of page one (Guatemala 9.4, El Salvador "
+         "10.8, South Korea 12.6, Italy 14.0). Two rank near page one despite broken or empty "
+         "metadata (El Salvador 10.8, Honduras 10.7), which makes the metadata fix the "
+         "lowest-effort, highest-return work in the sprint. Two pages (Mexico at 28.4, USMNT "
+         "at 45.8) need heavier intervention than polish. That's why Goal 2 splits into three "
+         "layers rather than treating the national team set as a uniform task."),
+    ]
+
+    for title, body in findings:
+        add_heading(doc, title, level=3)
+        add_paragraph(doc, body, size=11, color=RGB_BODY)
+
+
+@section
+def build_twelve_months_phases(doc):
+    add_heading(doc, "The 12 months in three phases", level=1)
+
+    add_paragraph(
+        doc,
+        "Three phases, not one linear plan. Recover what's leaking, stabilize the machine, "
+        "then compound.",
+        size=11, color=RGB_BODY,
+    )
+
+    phases = [
+        ("Recover", "Late April to July 2026",
+         "World Cup sprint execution. USMNT URL consolidation. Fast-polish and quick-win "
+         "national team pages. DataFeedWatch feed audit. Agentic Storefront audit. Manual AI "
+         "citation baseline. Scope is narrow and sprint-shaped. First monthly report lands end "
+         "of May 2026 as the execution era's first formal deliverable."),
+        ("Stabilize", "August to December 2026",
+         "Post-World Cup normalization. Tier-B national team pages (confirmed by Keyword "
+         "Research Agent output) enter Goal 1 rotation as compounding assets. Product schema, "
+         "review schema, and Merchant Listings defense continue. Q4 holiday positioning."),
+        ("Grow", "January to April 2027",
+         "Compounding categories lead the workstream mix: club jerseys, goalkeeper, futsal, "
+         "youth. AI search visibility tool decision revisited against 90+ days of manual "
+         "tracking data. Quarterly re-plan against Q1 2027 results."),
+    ]
+
+    table = doc.add_table(rows=1, cols=3)
+    table.autofit = True
+    remove_table_borders(table)
+
+    for i, (name, months, desc) in enumerate(phases):
+        cell = table.rows[0].cells[i]
+        set_cell_shading(cell, ACCENT_BG)
+        set_cell_margins(cell, top=240, bottom=240, left=240, right=240)
+
+        # Phase name in red
+        cell.paragraphs[0].text = ""
+        p_name = cell.paragraphs[0]
+        r_name = p_name.add_run(name)
+        style_run(r_name, size=16, bold=True, color=RGB_RED, font=HEADING_FONT)
+
+        p_months = cell.add_paragraph()
+        p_months.paragraph_format.space_after = Pt(8)
+        r_m = p_months.add_run(months)
+        style_run(r_m, size=10, bold=True, color=RGB_NEAR_BLACK, font=BODY_FONT)
+
+        p_desc = cell.add_paragraph()
+        r_d = p_desc.add_run(desc)
+        style_run(r_d, size=10, color=RGB_BODY, font=BODY_FONT)
+
+
+@section
 def build_four_goals(doc):
-    add_page_break(doc)
     add_heading(doc, "The four primary goals", level=1)
 
     # Goal 1
@@ -556,12 +687,58 @@ def build_four_goals(doc):
     add_paragraph(
         doc,
         "The FIFA World Cup runs June 11 through July 19, 2026. The opener is at LA Stadium "
-        "on June 12, inside ProSoccer's home market. Standard SEO lead time for an event like "
-        "this is 6 to 12 months. We have 8 weeks. That constraint shapes scope: we refresh "
-        "the national team collection pages that already rank between positions 9 and 14 "
-        "(Mexico, El Salvador, Guatemala, South Korea, Italy, USMNT), add one local LA watch "
-        "guide tied to the Pasadena store, and add one authenticity guide that converts "
-        "casual fans into buyers.",
+        "on June 12, inside ProSoccer's home market. Phase 2 discovery showed the national "
+        "team collection pages fall into three layers, and each layer has a different workload "
+        "inside the sprint.",
+        size=11, color=RGB_BODY,
+    )
+
+    add_heading(doc, "Layer 1, fast polish (4 pages)", level=3)
+    add_paragraph(
+        doc,
+        "Guatemala (position 9.4), Italy (14.0), South Korea (12.6), and El Salvador (10.8). "
+        "Standard on-page optimization: titles, meta descriptions, H1 polish, and intro copy "
+        "that earns the click. El Salvador's broken-metadata fix folds into this page's pass, "
+        "not a separate workstream. These four represent the highest-probability page-one gains "
+        "available inside the 8-week window.",
+        size=11, color=RGB_BODY,
+    )
+
+    add_heading(doc, "Layer 2, heavy lift (2 pages)", level=3)
+    add_paragraph(
+        doc,
+        "Mexico (currently at position 28.4) needs an on-page rewrite plus internal linking, "
+        "not polish. USMNT (45.8) requires canonical URL consolidation before any on-page work "
+        "will pay off. The consolidation is a Technical SEO task and a hard prerequisite for "
+        "the USMNT content sprint. Mexico carries the bigger opportunity on paper (119,131 GSC "
+        "impressions versus USMNT's 79,559) and the LA Mexican diaspora strength; expect "
+        "measurable progress inside the sprint, not full recovery.",
+        size=11, color=RGB_BODY,
+    )
+
+    add_heading(doc, "Layer 3, quick win (1 page)", level=3)
+    add_paragraph(
+        doc,
+        "Honduras (position 10.7) with empty metadata and only 6 products still pulls a 1.15% "
+        "click-through rate from a small impression pool. Writing a proper title and meta "
+        "description is the entire scope. Lowest-effort, highest-return item on the sprint board.",
+        size=11, color=RGB_BODY,
+    )
+
+    add_paragraph(
+        doc,
+        "Plus two non-country pieces: one local \"where to watch in LA\" guide tied to the "
+        "Pasadena store, and one authenticity guide (real vs. replica vs. fake jersey) that "
+        "converts casual fans.",
+        size=11, color=RGB_BODY,
+    )
+    add_paragraph(
+        doc,
+        "One pending follow-up may reshuffle Layer 1 priority: which countries actually play "
+        "matches at LA Stadium during the tournament isn't yet confirmed. Once FIFA publishes "
+        "the venue-by-venue schedule, we'll re-check Layer 1 against the LA-hosted countries "
+        "and may promote or swap pages based on which national teams are competing in "
+        "ProSoccer's home market.",
         size=11, color=RGB_BODY,
     )
     add_paragraph(
@@ -652,45 +829,59 @@ def build_four_goals(doc):
     ])
 
 
-def build_diagnostic(doc):
-    add_page_break(doc)
-    add_heading(doc, "Month 1 diagnostic: traffic problem or conversion problem?", level=1)
+@section
+def build_execution_start(doc):
+    add_heading(doc, "Late April to May 2026: execution start", level=1)
 
     add_paragraph(
         doc,
-        "Before we commit twelve months to a plan that assumes \"more traffic equals more orders,\" "
-        "we confirm whether the traffic ProSoccer already has is converting at expected rates. "
-        "The baseline gives us good reasons to check. Organic clicks grew about 58% over the past "
-        "twelve months, but order volume didn't grow proportionally. Q1 2026 online store orders "
-        "dropped roughly 22% versus Q4 2025. Desktop average position sits 5.5 spots worse than "
-        "mobile. The Shopify theme migrated late in 2025 and PageSpeed scores are weak.",
+        "Phase 2 discovery (April 2026) answered most of the diagnostic questions we would "
+        "otherwise have opened Month 1 with. We don't need an investigation to tell us whether "
+        "the traffic problem is real. We need execution to act on what we already know. Here's "
+        "what the data says and how that shapes the first weeks of work.",
         size=11, color=RGB_BODY,
     )
 
-    add_heading(doc, "What the diagnostic delivers", level=3)
-
-    bullets = [
-        "Traffic-to-cart-to-checkout-to-purchase funnel analysis, segmented by device (GA4 plus Shopify).",
-        "Product detail page load-time analysis on the top 10 revenue SKUs.",
-        "Mobile versus desktop conversion rate comparison at category level.",
-        "Checkout abandonment analysis, device-segmented.",
-        "Cross-reference against the existing prosoccer-theme CRO audit already in progress.",
+    findings = [
+        ("Traffic trajectory: improving.",
+         "Average Google position moved from 20.8 to 9.6 over the past twelve months. Clicks "
+         "grew roughly 58% in the same window. Traffic is not the problem."),
+        ("Technical integrity: clean on the legacy-URL front.",
+         "No Magento-era URLs are receiving impressions or clicks in current GSC data. The "
+         "2021-to-2022 migration cleanup held up."),
+        ("Theme migration impact: temporary, and resolved.",
+         "The late-2025 theme ship caused a 3-to-4 position regression across November 2025 "
+         "to January 2026. Rankings have since recovered to pre-migration levels. Any residual "
+         "theme-level SEO issues are now affecting the recovered baseline, which means fixes "
+         "produce lift above current position, not just a return to neutral."),
+        ("Conversion gap hypothesis: still valid.",
+         "Q1 2026 averaged roughly 54 orders per day, below what the current impression "
+         "trajectory would predict. Q1 2026 Online Store orders dropped 22% versus Q4 2025 "
+         "even as average position improved. The 5.5-position gap between desktop (19.4) and "
+         "mobile (13.9) is a plausible contributor, possibly a rendering or template issue "
+         "specific to desktop. Continued conversion work flows into the separate "
+         "prosoccer-theme CRO project that 7 Rock already manages, not this SEO scope. The "
+         "SEO team flags conversion issues when the data reveals them; it doesn't own the fixes."),
+        ("New technical finding: USMNT cannibalization.",
+         "Three overlapping US collection URLs are splitting link equity. Canonical "
+         "consolidation is named as a high-priority Month 1 deliverable and a hard "
+         "prerequisite for the USMNT on-page sprint work."),
     ]
-    for b in bullets:
-        p = doc.add_paragraph(style="List Bullet")
-        p.paragraph_format.space_after = Pt(2)
-        run = p.add_run(b)
-        style_run(run, size=11, color=RGB_BODY, font=BODY_FONT)
+
+    for title, body in findings:
+        add_heading(doc, title, level=3)
+        add_paragraph(doc, body, size=11, color=RGB_BODY)
 
     add_callout(doc, lines=[
-        ("Scope guardrail: the diagnostic is diagnosis, not scope expansion. Any CRO fixes "
-         "identified flow into the separate prosoccer-theme project already in motion, or "
-         "become a separate scope conversation. This engagement stays SEO.", False),
+        ("Month 1 scope shifts accordingly: less diagnose, more ship. The Technical SEO "
+         "Month 1 list now explicitly includes USMNT URL consolidation as a named "
+         "high-priority deliverable. Device-level conversion findings continue to flow to "
+         "the CRO project via Mike's mike-audit branch in the theme repo.", False),
     ])
 
 
+@section
 def build_outcomes(doc):
-    add_page_break(doc)
     add_heading(doc, "The outcomes we'll measure", level=1)
 
     add_paragraph(
@@ -765,8 +956,8 @@ def build_outcomes(doc):
         "Cup sprint, and Merchant Listings defense. 85 is the stretch target; it annualizes to "
         "roughly 31,000 in-scope orders, which would clear ProSoccer's 2024 full-year total. "
         "Compounding organic channels scale non-linearly once the foundation is right, so 85 "
-        "is credible as ambition, not as commitment. Any conversion-rate fixes surfaced by the "
-        "Month 1 diagnostic add upside on top of that range.",
+        "is credible as ambition, not as commitment. Any conversion-rate fixes shipped through "
+        "the separate prosoccer-theme CRO project add upside on top of that range.",
         size=10, color=RGB_BODY,
     )
 
@@ -774,7 +965,10 @@ def build_outcomes(doc):
         doc,
         BUILD_DIR / "chart3_high_order_days.png",
         width_inches=6.3,
-        caption="High-order days per year, the pattern we're restoring and exceeding.",
+        caption=(
+            "2024 = 30 high-order days (per Shopify channel data). Current 9-month window "
+            "tracking at 8. 2026 target of 50+ days rebuilds on the 2024 baseline."
+        ),
     )
 
     add_heading(doc, "Secondary metrics tracked monthly", level=3)
@@ -794,66 +988,52 @@ def build_outcomes(doc):
         style_run(run, size=10, color=RGB_BODY, font=BODY_FONT)
 
 
-def build_roadmap(doc):
-    add_page_break(doc)
-    add_heading(doc, "12-month roadmap", level=1)
+@section
+def build_what_we_wont_do(doc):
+    add_heading(doc, "What we won't do", level=1)
 
     add_paragraph(
         doc,
-        "Three phases. Recover what's leaking, stabilize the machine, then compound.",
+        "Keep this list short. Reference it whenever scope creep shows up.",
         size=11, color=RGB_BODY,
     )
 
-    phases = [
-        ("Recover", "Months 1 to 3",
-         "Month 1 diagnostic runs. Category Priority Matrix is built. DataFeedWatch feed "
-         "audit ships. Shopify Agentic Storefronts audit confirms AI-channel status. First "
-         "monthly report sets the true baseline across all four commercial metrics."),
-        ("Stabilize", "Months 4 to 8",
-         "Core goal execution. Content cadence kicks in for priority categories. Merchant "
-         "Center feed fixes land and start showing up in Merchant Listings click share. "
-         "World Cup sprint executes through June and July. AI visibility tracking sheet runs "
-         "weekly, building 90 days of real data."),
-        ("Grow", "Months 9 to 12",
-         "Compounding gains start showing. Category expansion into matrix-validated tiers. "
-         "AI search integration moves from monitoring into active optimization wherever "
-         "citations and orders are growing. Tool decision revisits with 90+ days of data."),
+    items = [
+        "No generic \"sports store\" or \"athletic gear\" optimization. ProSoccer is soccer-specific; pretending otherwise dilutes everything.",
+        "No bottom-of-funnel discount queries that erode margin (\"soccer cleats under $30\" and similar).",
+        "No local SEO in markets where ProSoccer has no storefront and no service coverage.",
+        "No generic World Cup content where we'd lose to FIFA.com, Fox Sports, and ESPN. Specific national team pages, specific LA viewing content, and authenticity content inside the catalog context are all in scope.",
+        "No content published without a clear tie to a goal on this page.",
+        "No replacing Google Ads. The plan reduces its share of the revenue mix; it doesn't kill the program.",
     ]
-
-    table = doc.add_table(rows=1, cols=3)
-    table.autofit = True
-    remove_table_borders(table)
-
-    for i, (name, months, desc) in enumerate(phases):
-        cell = table.rows[0].cells[i]
-        set_cell_shading(cell, ACCENT_BG)
-        set_cell_margins(cell, top=240, bottom=240, left=240, right=240)
-
-        # Phase name in red
-        cell.paragraphs[0].text = ""
-        p_name = cell.paragraphs[0]
-        r_name = p_name.add_run(name)
-        style_run(r_name, size=16, bold=True, color=RGB_RED, font=HEADING_FONT)
-
-        p_months = cell.add_paragraph()
-        p_months.paragraph_format.space_after = Pt(8)
-        r_m = p_months.add_run(months)
-        style_run(r_m, size=10, bold=True, color=RGB_NEAR_BLACK, font=BODY_FONT)
-
-        p_desc = cell.add_paragraph()
-        r_d = p_desc.add_run(desc)
-        style_run(r_d, size=10, color=RGB_BODY, font=BODY_FONT)
+    for item in items:
+        p = doc.add_paragraph(style="List Bullet")
+        p.paragraph_format.space_after = Pt(4)
+        run = p.add_run(item)
+        style_run(run, size=11, color=RGB_BODY, font=BODY_FONT)
 
 
-def build_assumptions(doc):
-    add_page_break(doc)
-    add_heading(doc, "What we've agreed on", level=1)
+@section
+def build_starting_assumptions(doc):
+    add_heading(doc, "Starting assumptions", level=1)
+
+    add_paragraph(
+        doc,
+        "These are the inputs anchoring every target and metric in this document. If any have "
+        "shifted since we last aligned, flag them so we can recalibrate before Month 1 ships.",
+        size=11, color=RGB_BODY,
+    )
 
     confirmed = [
         ("Google Ads monthly spend baseline", "$30,000 per month, all campaigns."),
-        ("Order volume scope", "All sales channels except Point of Sale, Channable (Amazon/eBay), and Draft Orders. Online Store, Shop, Tapcart, BSS B2B, Redo, and other web channels are all counted."),
+        ("Order volume scope",
+         "All sales channels except Point of Sale, Channable (Amazon/eBay), and Draft Orders. "
+         "Online Store, Shop, Tapcart, BSS B2B, Redo, and other web channels are all counted."),
         ("High-order day threshold", "90+ orders per day, using the scope above."),
-        ("Paid tool approval", "Always requires Tony's knowledge and sign-off, regardless of dollar amount."),
+        ("Affiliate program operation",
+         "7 Rock manages the ProSoccer affiliate program on AWIN (Affiliate Window) and uses "
+         "PayAudit as the pre-AWIN transaction approval system. Any backlink audit or disavow "
+         "recommendation cross-references both rosters before action."),
     ]
 
     for label, value in confirmed:
@@ -864,51 +1044,77 @@ def build_assumptions(doc):
         r_val = p.add_run(value)
         style_run(r_val, size=11, color=RGB_BODY, font=BODY_FONT)
 
+
+@section
+def build_open_questions(doc):
+    add_heading(doc, "Open questions for your review", level=1)
+
     add_paragraph(
         doc,
-        "These anchor the plan. The following need your input before we lock the quarter.",
+        "Three items need your input before Month 1 locks. Everything else on the plan is "
+        "proceeding on the stated assumptions.",
         size=11, color=RGB_BODY,
     )
 
-    add_heading(doc, "Open questions for your review", level=1)
-
-    questions = [
-        ("Attribution model.",
-         "Our baselines use Shopify's \"search/google\" referrer as the organic signal. Do you "
-         "track organic revenue under a specific attribution model (last-click, assisted, "
-         "post-view) we should align with, or should we additionally pull GA4 Organic Search "
-         "to triangulate?"),
-        ("World Cup sprint approval model.",
-         "We'll propose 5 to 8 new or refreshed pages inside the 8-week sprint. Given the "
-         "timeline, we'd like to run weekly batch approvals rather than page-by-page sign-off. "
-         "Does that model work for you?"),
-        ("Goal sign-off.",
-         "Do the four primary goals and four outcome metrics match what you want? Anything "
-         "to add, remove, or re-prioritize before we lock the quarter's plan?"),
-        ("Cadence confirmation.",
-         "Monthly reports starting May 2026. Format and medium preferences? PDF, Google Doc, "
-         "live walkthrough?"),
-    ]
-
-    for i, (title, body) in enumerate(questions, start=1):
+    def render_q(num, title, body, *, space_after=8):
         p = doc.add_paragraph()
-        p.paragraph_format.space_after = Pt(8)
-        r_num = p.add_run(f"{i}.  ")
+        p.paragraph_format.space_after = Pt(space_after)
+        r_num = p.add_run(f"{num}.  ")
         style_run(r_num, size=11, bold=True, color=RGB_RED, font=BODY_FONT)
         r_title = p.add_run(title + "  ")
         style_run(r_title, size=11, bold=True, color=RGB_NEAR_BLACK, font=BODY_FONT)
         r_body = p.add_run(body)
         style_run(r_body, size=11, color=RGB_BODY, font=BODY_FONT)
 
+    render_q(1, "Attribution model.",
+        "Our baselines use Shopify's \"search/google\" referrer as the organic signal. Do you "
+        "track organic revenue under a specific attribution model (last-click, assisted, "
+        "post-view) we should align with, or should we additionally pull GA4 Organic Search "
+        "data to triangulate?")
 
+    # Question 2 has a multi-part body: lead-in, two bullets, trailing paragraph.
+    render_q(2, "World Cup sprint approval model.",
+        "The 8-week sprint covers 9 pieces of work total:",
+        space_after=4)
+
+    q2_bullets = [
+        "Optimization of 7 existing national team collection pages (we're not creating new "
+        "collections; these already exist on ProSoccer). The work spans 3 layers as described "
+        "in Goal 2: fast polish on pages already ranking in striking distance, heavier work on "
+        "pages that need rebuilding, and quick metadata fixes on pages that rank despite broken "
+        "titles and descriptions.",
+        "Two new blog articles: an LA watch guide and an authenticity guide.",
+    ]
+    for b in q2_bullets:
+        bp = doc.add_paragraph(style="List Bullet")
+        bp.paragraph_format.space_after = Pt(4)
+        bp.paragraph_format.left_indent = Inches(0.6)
+        run = bp.add_run(b)
+        style_run(run, size=11, color=RGB_BODY, font=BODY_FONT)
+
+    p_tail = doc.add_paragraph()
+    p_tail.paragraph_format.space_after = Pt(8)
+    p_tail.paragraph_format.left_indent = Inches(0.3)
+    r_tail = p_tail.add_run(
+        "Given the timeline, we'd like to run weekly batch approvals rather than "
+        "page-by-page sign-off. Is that okay with you?"
+    )
+    style_run(r_tail, size=11, color=RGB_BODY, font=BODY_FONT)
+
+    render_q(3, "Cadence confirmation.",
+        "Monthly reports starting end of May 2026, delivered from reports/monthly/. Format "
+        "and medium preferences: PDF, Google Doc, live walkthrough?")
+
+
+@section
 def build_next_steps(doc):
-    add_page_break(doc)
     add_heading(doc, "Next steps", level=1)
 
     steps = [
         "Review this document and note any changes.",
-        "30-minute alignment call to answer the four open questions.",
-        "We begin the Month 1 diagnostic and DataFeedWatch audit immediately upon approval.",
+        "30-minute alignment call to answer the three open questions.",
+        "Upon approval, Month 1 execution begins: USMNT URL consolidation, the fast-polish "
+        "layer of the World Cup sprint, and the DataFeedWatch feed audit.",
         "First monthly report delivered end of May 2026.",
     ]
     for i, s in enumerate(steps, start=1):
@@ -951,15 +1157,19 @@ def main():
 
     set_page_margins(doc)
 
-    # Build pages in order
+    # Build pages in order. Every @section-decorated builder inserts its own
+    # page break before rendering, so section ordering here IS the page order.
     build_cover(doc)
     build_executive_summary(doc)
     build_why_now(doc)
+    build_what_we_found(doc)
+    build_twelve_months_phases(doc)
     build_four_goals(doc)
-    build_diagnostic(doc)
+    build_execution_start(doc)
     build_outcomes(doc)
-    build_roadmap(doc)
-    build_assumptions(doc)
+    build_what_we_wont_do(doc)
+    build_starting_assumptions(doc)
+    build_open_questions(doc)
     build_next_steps(doc)
 
     # Configure footer last (after sections are set)

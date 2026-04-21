@@ -10,9 +10,9 @@ import win32com.client as win32
 
 REPO = Path(__file__).resolve().parent.parent
 DOCX = (REPO / "deliverables" / "strategy-presentations"
-        / "2026-04_seo-goals-presentation-for-tony.docx").resolve()
+        / "2026-04_seo-goals-presentation-for-tony-v2.docx").resolve()
 PDF = (REPO / "deliverables" / "strategy-presentations"
-       / "2026-04_seo-goals-presentation-for-tony.pdf").resolve()
+       / "2026-04_seo-goals-presentation-for-tony-v2.pdf").resolve()
 
 # Word constants
 wdFormatPDF = 17
