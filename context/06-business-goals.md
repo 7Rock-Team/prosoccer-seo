@@ -12,9 +12,33 @@ Every goal below exists to serve this commercial outcome. If a proposed piece of
 
 ## Why This, Why Now
 
+7 Rock re-engaged with ProSoccer in February 2026. Discovery ran through April. Execution begins late April 2026 with the AI specialist workforce coming online.
+
 Q1 2026 averaged roughly 54 orders/day across all in-scope sales channels (Online Store, Shop, Tapcart, BSS B2B, Redo, and other web channels; excludes Point of Sale, Channable marketplaces, and Draft Orders). Google organic was the single largest referral source on the web channels, contributing approximately 2,397 orders and $225K in Q1 2026 alone. That's both an asset and a risk. It's an asset because the channel is already carrying the single largest share of web orders. It's a risk because two outside forces are about to hit it at the same time: Google's AI Overviews are already compressing click-through rates on shopping queries, and the FIFA World Cup opens in LA on June 12, 2026. One compresses, one inflates. Both demand a response.
 
 For context: the 2024 full year averaged roughly 57 orders/day on the same scope. Q1 2026 tracks slightly below that pace. That delta has a long backstory we aren't going to relitigate here. What matters now is the forward plan.
+
+## What we found
+
+This section captures what showed up when 7 Rock actually looked at the site and the Search Console data over the past two weeks. Findings from Phase 2 discovery, not hypotheses.
+
+**The ranking trajectory is improving.** Average Google position has moved from 20.8 to 9.6 over the past 12 months (weekly GSC data, April 2025 to April 2026). That's not a plateau or a decline. The site is trending up.
+
+**The late-2025 theme migration caused a temporary regression.** Between November 2025 and January 2026, average position slipped 3 to 4 spots, a standard post-theme-swap re-indexing effect. Rankings have since recovered to pre-migration levels across February to April 2026. The recovery coincides with 7 Rock's re-engagement in February, but we haven't shipped any implementation work yet, so natural recovery from the theme damage is the more likely driver. We're not claiming credit for the recovery. What matters for planning is that Month 1 work starts from a recovered position, not a falling one.
+
+**Magento legacy is clean.** A scan of the 12-month GSC top-pages export for `.html`, `?id=`, `/catalog/product`, `/index.php`, and other Magento patterns returned zero matches. No legacy URLs from the 2021 to 2022 Shopify migration are receiving traffic today. That cleanup held up. No follow-up action needed.
+
+**USMNT keyword cannibalization is a newly surfaced technical issue.** Three overlapping US collection URLs (`/collections/united-states-men`, `/collections/united-states-men-women`, and `/collections/united-states-women`) are splitting link equity across the same product set. USMNT currently sits at position 46 despite a 79,559-impression pool in GSC. Canonical URL consolidation, with 301s from the non-canonical variants into one canonical, is a high-priority Month 1 technical fix and a prerequisite for any USMNT on-page sprint work.
+
+**National team pages aren't a single cohort. They're three different patterns.** Four pages already rank in striking distance of page 1: Guatemala 9.4, El Salvador 10.8, South Korea 12.6, and Italy 14.0. Two pages rank near page 1 despite broken or empty metadata (default Shopify titles, empty meta descriptions): El Salvador 10.8 and Honduras 10.7. The metadata fixes alone are the lowest-effort, highest-return work in the sprint. Two pages need heavier intervention than polish: Mexico at 28.4 and USMNT at 45.8. That's why Goal 2 below splits into three layers rather than treating the national team set as a uniform task.
+
+## The 12 months in three phases
+
+**Recover (late April to July 2026).** World Cup sprint execution, USMNT URL consolidation, fast-polish and quick-win national team pages, DataFeedWatch feed audit, Agentic Storefront audit, manual AI citation baseline. Scope is narrow and sprint-shaped. First monthly report lands end of May 2026 as the execution era's first formal deliverable.
+
+**Stabilize (August to December 2026).** Post-World Cup normalization. Tier-B national team pages, to be confirmed by Keyword Research Agent output, enter Goal 1 rotation as compounding assets. Product schema, review schema, and Merchant Listings defense continue. Q4 holiday positioning.
+
+**Grow (January to April 2027).** Compounding categories (club jerseys, goalkeeper, futsal, youth) lead the workstream mix. AI search visibility tool decision revisited against the manual tracking data. Quarterly re-plan against Q1 2027 results.
 
 ## Primary Goals (12 months)
 
@@ -49,7 +73,17 @@ The Keyword Research Agent (scheduled for build in the next workforce phase) wil
 
 **Scope.** A narrow, 8-week content and optimization sprint tied to the FIFA World Cup (June 11 to July 19, 2026). The US hosts 78 of the 104 matches. The opener is at LA Stadium on June 12, 2026, which sits directly inside ProSoccer's home market.
 
-**What we'll do.** Refresh and optimize the national team collection pages for the teams with LA-area diaspora demand (Mexico, El Salvador, Guatemala, South Korea, Italy, USMNT). These pages already rank between positions 9 and 14 in Google. They need on-page work, not net-new pages. Add one local "where to watch in LA" guide tied to the Pasadena store. Add one authenticity guide ("how to spot a real vs. replica vs. fake jersey") that converts casual fans.
+**What we'll do.** Based on the Phase 2 discovery findings (see "What we found" above), the national team collection pages fall into three layers. Each layer has a different workload inside the sprint.
+
+**Layer 1, fast polish (4 pages).** Guatemala (position 9.4), Italy (14.0), South Korea (12.6), and El Salvador (10.8). Standard on-page optimization: title rewrites, meta description updates, H1 polish, intro copy that earns the click. El Salvador's broken-metadata fix is a low-effort pre-step inside this page's optimization pass, not a separate workstream. These four represent the highest-probability page-1 gains available inside the 8-week window.
+
+**Layer 2, heavy lift (2 pages).** Mexico (currently at position 28.4) needs an on-page rewrite plus internal linking support, not polish. USMNT (position 45.8) requires canonical URL consolidation across the three overlapping US collection URLs (see "What we found" above) before any on-page work will pay off. The consolidation is a Technical SEO task and a hard prerequisite for the USMNT content sprint. Mexico carries the bigger opportunity on paper (119,131 GSC impressions vs. USMNT's 79,559) and the LA Mexican diaspora strength; expect measurable progress inside the sprint, not full recovery.
+
+**Layer 3, quick win (1 page).** Honduras currently ranks at position 10.7 with empty metadata and only 6 products in the collection, and still pulls a 1.15% click-through rate from a small impression pool. Writing a proper title and meta description is the entire scope. Lowest-effort, highest-return item on the sprint board.
+
+**Plus two non-country pieces, previously scoped.** One local "where to watch in LA" guide tied to the Pasadena store. One authenticity guide ("how to spot a real vs. replica vs. fake jersey") that converts casual fans.
+
+**One pending follow-up that may reshuffle Layer 1 priority.** Which countries actually play matches at LA Stadium (SoFi) during the tournament is not yet confirmed. Once FIFA publishes the venue-by-venue match schedule, we'll re-check Layer 1 against the LA-hosted countries and may promote or swap pages based on which national teams are actively competing in ProSoccer's home market.
 
 **What we won't do.** We aren't chasing generic "World Cup 2026" queries. FIFA.com, Fox Sports, and ESPN will take that traffic and we'll lose. We stay narrow and close to the catalog.
 
@@ -100,24 +134,21 @@ Month 1 and Month 2 deliverables inside this workstream:
 
 **Why this goal matters.** We can't report on what we don't measure. If AI search referrals grow from 10 orders/quarter to 100 orders/quarter over the next year, we want to see that curve, not miss it. And Shopify's built-in AI integrations may already be sending traffic we're not attributing correctly.
 
-## Month 1 Diagnostic: Is This a Traffic Problem or a Conversion Problem?
+## Late April to May 2026: execution start
 
-Before we commit a full 12 months to a plan that assumes "more traffic equals more orders," we need to confirm that the traffic ProSoccer already has is converting at expected rates. The baseline data gives us real reasons to check:
+Phase 2 discovery (April 2026) answered most of the diagnostic questions we set at the start of this engagement. We no longer need a Month 1 investigation to tell us whether the traffic problem is real; we need Month 1 execution to act on what we already know. Here's what the data says.
 
-- Organic clicks grew approximately 58% over the past 12 months (GSC), but order volume didn't grow proportionally.
-- Q1 2026 Online Store orders dropped roughly 22% vs. Q4 2025, even as average position improved.
-- Desktop average position (19.4) sits 5.5 positions worse than mobile (13.9), which may indicate a rendering or template issue specific to desktop.
-- The ProSoccer theme migrated to a new theme in late 2025; PageSpeed scores are weak and there's a parallel CRO/theme audit already in progress in the prosoccer-theme repo.
+**Traffic trajectory: improving.** Average Google position has moved from 20.8 to 9.6 over the past 12 months. Clicks grew approximately 58% in the same window. Traffic is not the problem.
 
-**Month 1 diagnostic deliverable:**
+**Technical integrity: clean on the legacy-URL front.** No Magento-era URLs are receiving impressions or clicks in current GSC data. The 2021 to 2022 migration cleanup held up.
 
-- Traffic-to-cart-to-checkout-to-purchase funnel analysis, segmented by device (GA4 + Shopify).
-- Product detail page (PDP) load time analysis, focused on the top 10 revenue-producing SKUs.
-- Mobile vs. desktop conversion rate comparison at a category level.
-- Checkout abandonment analysis, device-segmented.
-- Cross-reference all findings with the existing prosoccer-theme CRO/technical audit.
+**Theme migration impact: temporary, and resolved.** The late-2025 theme ship caused a 3-to-4 position regression across November 2025 to January 2026. Rankings have since recovered to pre-migration levels. Any residual theme-level SEO issues are now affecting the recovered baseline, meaning fixes produce lift above current position, not just a return to neutral.
 
-**Why this matters to the 12-month plan.** If the diagnostic shows that conversion is materially below industry expectations, fixing conversion is likely faster and cheaper than growing traffic to compensate. That could materially change the path to the 75 to 85 orders/day target: less "build new content," more "fix what's already getting traffic." Any code fixes flow into the prosoccer-theme repo via Mike's `mike-audit` branch per the established workflow. This is not a CRO engagement, but the SEO team flags conversion issues the moment the data reveals them. Any CRO fixes identified in the diagnostic flow into the separate prosoccer-theme CRO project that 7 Rock already manages, or get raised as a separate scope conversation with Tony. The diagnostic is about diagnosis, not scope expansion inside this engagement.
+**Conversion gap hypothesis: still valid.** Q1 2026 averaged roughly 54 orders per day, below what the current impression trajectory would predict. Q1 2026 Online Store orders dropped 22% versus Q4 2025 even as average position improved. The 5.5-position gap between desktop (19.4) and mobile (13.9) is a plausible contributor, possibly a rendering or template issue specific to desktop. Continued conversion diagnosis and fixes flow into the separate prosoccer-theme CRO project that 7 Rock already manages, not into this SEO scope. The SEO team flags conversion issues the moment the data reveals them; it doesn't own the fixes.
+
+**New technical finding: USMNT keyword cannibalization.** Three overlapping US collection URLs are splitting link equity (see "What we found" above). Canonical consolidation enters the Month 1 technical work list as a named deliverable and a hard prerequisite for any USMNT sprint work.
+
+**Month 1 scope, in light of these findings.** Less "diagnose," more "ship." The technical SEO Month 1 list now explicitly includes USMNT URL consolidation as a high-priority item. Any device-level conversion findings continue to flow to the CRO project via Mike's `mike-audit` branch in the theme repo. The diagnostic is closed as a discrete discovery workstream; what it produced now lives inside Goal 1, Goal 2, and Goal 3 execution.
 
 ## The Outcomes We'll Measure
 
@@ -132,7 +163,7 @@ These are the four metrics that lead every monthly report to Tony. Secondary met
 | Google Ads monthly spend reduction | $30K/month baseline | $5K to $8K/month saved (17% to 27%) | Tony's Ads account |
 | High-order days per year (90+ orders/day) | ~8 | 50+ | Shopify, in-scope channels |
 
-**About the 75 to 85/day target.** Q1 2026 averaged roughly 54 orders/day. 75/day is the defensible floor we expect to hit, a 39% lift that the 3.7M non-branded impression pool, the World Cup sprint, and Merchant Listings defense should deliver when executed well. 85/day is the stretch. For context, 85/day annualizes to roughly 31,000 in-scope orders, which would exceed ProSoccer's 2024 full-year total, so we're naming it as ambition rather than commitment. Compounding organic channels scale non-linearly once the technical foundation is right and content starts ranking, which makes the stretch credible; it isn't guaranteed. Any conversion-rate fixes surfaced by the Month 1 diagnostic would add upside on top of the range.
+**About the 75 to 85/day target.** Q1 2026 averaged roughly 54 orders/day. 75/day is the defensible floor we expect to hit, a 39% lift that the 3.7M non-branded impression pool, the World Cup sprint, and Merchant Listings defense should deliver when executed well. 85/day is the stretch. For context, 85/day annualizes to roughly 31,000 in-scope orders, which would exceed ProSoccer's 2024 full-year total, so we're naming it as ambition rather than commitment. Compounding organic channels scale non-linearly once the technical foundation is right and content starts ranking, which makes the stretch credible; it isn't guaranteed. Any conversion-rate fixes delivered through the separate prosoccer-theme CRO project would add upside on top of the range.
 
 **About the $950K to $1.2M revenue target.** $950K is a working estimate based on Q4 2025 plus Q1 2026 "search/google" referrer data annualized, with a conservative adjustment for the Q4 holiday lift. We'll refine the baseline once we have a full trailing 12 months of referrer data (June 2026). The $1.2M target reflects a 26% lift on a conservative baseline.
 
@@ -193,16 +224,15 @@ These are the inputs that anchor every target and metric above. If anything has 
 - **Order volume scope:** all sales channels included EXCEPT Point of Sale, Channable (Amazon/eBay), and Draft Orders. Online Store, Shop, Tapcart, BSS B2B, Redo, and other web-based channels are all counted.
 - **High-order day threshold:** 90+ orders per day (using the scope above).
 - **Paid tool approval:** always requires Tony's knowledge and sign-off, regardless of dollar amount.
+- **Affiliate program operation:** 7 Rock manages ProSoccer's affiliate program on AWIN (Affiliate Window) and uses PayAudit as the pre-AWIN transaction approval system. Any backlink audit or disavow recommendation cross-references both rosters before action.
 
 ### Still open (needs Tony's input at kickoff)
 
-1. **Attribution model.** Our baselines use Shopify's "search/google" referrer as the organic signal. Should we additionally pull GA4 Organic Search channel data to triangulate, or do you track organic revenue under a specific attribution model (last-click, assisted, post-view) we should align with instead?
+1. **Attribution model confirmation.** Our baselines use Shopify's "search/google" referrer as the organic signal. Do you track organic revenue under a specific attribution model we should align with (last-click, assisted, post-view), or should we additionally pull GA4 Organic Search data to triangulate?
 
-2. **World Cup sprint approval model.** We'll propose 5 to 8 new or refreshed pages inside the 8-week World Cup sprint (national team PDPs, LA watch guide, authenticity content). Given the timeline, we'd like to run a weekly approval batch rather than page-by-page sign-off. Confirm that model works for you.
+2. **World Cup sprint approval model.** We'll ship 7 to 9 new or refreshed pieces inside the 8-week sprint (7 national team pages across the three layers described in Goal 2, plus 1 LA watch guide and 1 authenticity guide). Given the timeline, we'd like to run weekly batch approvals rather than page-by-page sign-off. Does that work for you?
 
-3. **Goal sign-off.** Do you agree with the four primary goals and four outcome metrics as written above? Anything you want added, removed, or re-prioritized before we lock the quarter's plan?
-
-4. **Cadence confirmation.** Monthly reports starting May 2026, delivered from `reports/monthly/`. Confirm, and let us know any format or medium preferences (PDF, Google Doc, live walkthrough).
+3. **Cadence confirmation.** Monthly reports starting end of May 2026, delivered from `reports/monthly/`. Any format or medium preferences? PDF, Google Doc, live walkthrough?
 
 ---
 
