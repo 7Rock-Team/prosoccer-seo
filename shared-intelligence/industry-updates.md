@@ -19,4 +19,9 @@ Log industry developments that could change SEO priorities. Every entry has a da
 
 ## Entries
 
-_No entries yet. Add the first when you see something that moves the board._
+### 2026-04-20 - Shopify activates Agentic Storefronts for all stores
+
+**Source:** Shopify (shopify.com/blog/perplexity-shopping), Ask Phill (Shopify agentic commerce guide), Weaverse (Agentic Storefronts 2026).
+**What changed:** In late March 2026, Shopify's Winter '26 Edition activated Agentic Storefronts by default on all merchant stores. Products auto-syndicate via the Shopify Catalog to ChatGPT, Google AI Mode, Microsoft Copilot, and Perplexity. ChatGPT and Google AI Mode orders flow into Shopify admin with AI channel attribution; Perplexity orders go through PayPal's Buy with Pro and do NOT appear in Shopify referrer data.
+**So what for us:** ProSoccer is on Shopify Plus, so products are likely already discoverable in all four AI channels by default. Perplexity sales are invisible to our current referrer-based attribution, so our ChatGPT-only reporting understates total AI-originated revenue.
+**Action:** Goal 4 in `context/06-business-goals.md` includes a Month 1 audit of Agentic Storefront status, AI channel toggles, and store policy accuracy in the Shopify admin. Owner: Master Strategist until the Technical SEO specialist is built.
