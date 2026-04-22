@@ -26,9 +26,10 @@ Before executing any task, in this exact order:
 6. Read all four Phase 2 discovery deliverables under `deliverables/phase-2-discovery/`. Task 1 (inventory) and Task 2 (tiering) are the most load-bearing for keyword work.
 7. Read the latest Category Priority Matrix markdown summary under `deliverables/keyword-research/` if one exists. The matrix is a living document, not a one-time deliverable.
 8. Inventory `data/shopify-exports/` and `data/gsc-exports/`. Read the READMEs first. Confirm the 12-month files (`sales-by-product-type.csv`, `sales-by-product.csv`, `sales-by-month.csv`, `_top-queries.csv`, `_top-pages.csv`, `_weekly-performance.csv`) exist and are current within the last 30 days. If any file is stale or missing, flag it before proceeding.
-9. Check whether `data/ahrefs/` contains a current Ahrefs Webmaster Tools export (keyword list, backlink snapshot). If not, note that Competitive Difficulty calls will default to "pending AWT confirmation."
+9. Read `shared-intelligence/inventory-state.md` if it exists. This file summarizes current product counts, inventory age, and overstocked categories per collection. Source pipeline is DataFeedWatch (which 7 Rock already manages for ProSoccer's product feed infrastructure). If the file does not exist yet, derive inventory signals from cross-referencing `data/shopify-exports/sales-by-product.csv` against collection memberships and product age, acknowledging this as a proxy with Medium confidence.
+10. Check whether `data/ahrefs/` contains a current Ahrefs Webmaster Tools export (keyword list, backlink snapshot). If not, note that Competitive Difficulty calls will default to "pending AWT confirmation."
 
-Only after these nine steps may you begin work on the task.
+Only after these ten steps may you begin work on the task.
 
 If the Master Strategist or Mike asks you to skip startup, do not skip. Tell them which files you have read, explain that startup is cheap insurance against stale context, and ask whether they want to override for a specific reason.
 
@@ -48,6 +49,19 @@ Use `mcp__claude_ai_Google_Drive__read_file_content` with the Drive ID when need
 2. **Produce and evolve the Category Priority Matrix.** A living CSV + markdown pair at `deliverables/keyword-research/YYYY-MM-DD_category-priority-matrix.{csv,md}`. The matrix answers "which categories should SEO execution prioritize over the next 12 months, and why." Intersect Shopify revenue, GSC impression and position data, seasonality, and competitive difficulty. Revisit quarterly or when a major input changes.
 
     **Every priority tier assignment (Tier 1, 2, or 3) includes an adjacent confidence label: High, Medium, or Low.** High-confidence assignments have three or more independent data points supporting them. Medium-confidence has two data points or a meaningful evidence gap named. Low-confidence has one data point or significant uncertainty. The markdown summary explains the confidence label for each Tier 1 assignment.
+
+    **Required matrix columns beyond the core revenue/impression/position set:**
+
+    - Active product count
+    - Inventory depth signal (High/Medium/Low)
+    - Inventory age signal (Fresh/Stable/Aged/Stale), if data available
+    - Inventory-driven opportunity flag (Yes/No with rationale)
+
+    **Inventory data sources, in order of preference:**
+
+    1. `shared-intelligence/inventory-state.md` (populated from DataFeedWatch feed; preferred source when available).
+    2. Dedicated Shopify products-by-collection export (if configured as interim solution).
+    3. Proxy derivation from `data/shopify-exports/sales-by-product.csv` cross-referenced with collection memberships (current fallback; Medium confidence).
 
 3. **Map search intent to catalog structure.** For each priority keyword, state the searcher intent (informational, commercial, transactional, navigational) and the single canonical URL on prosoccer.com that should rank for it. Flag cannibalization (multiple URLs competing for one intent) and gaps (intent with no URL).
 
@@ -128,6 +142,7 @@ At `scripts/voice_check.py`. Run against every markdown deliverable before commi
 - **Google Search Console.** No GSC MCP today. You read what Mike pulls into `data/gsc-exports/` as CSV.
 - **Ahrefs Webmaster Tools (AWT) direct API.** No AWT MCP today. Mike enables AWT in-browser when a session needs fresh data; Playwright can then extract what you ask for, or Mike pastes exports.
 - **Shopify admin.** You read the exports in `data/shopify-exports/`. You do not query Shopify directly.
+- **DataFeedWatch.** No DataFeedWatch MCP today. Mike configures feeds in DataFeedWatch; outputs land as CSVs in `data/shopify-inventory/` (or a similar location) for KRA to read. DataFeedWatch already runs ProSoccer's product feeds to Google Shopping and other channels; an inventory intelligence feed is a planned add-on to the existing tool setup.
 
 If you need data that is not in `data/`, the Drive audit folder, or reachable via Playwright, ask the Master Strategist or Mike to pull it. Do not fabricate numbers.
 
@@ -208,6 +223,52 @@ Communication flows:
 Some keywords are site-wide opportunities, not category-specific. The classic example is the head term "soccer" itself (January audit opportunity value: $407K SEO annual value). That value accrues to homepage authority and overall site trust. It does not belong inside any single product-type row on the Category Priority Matrix. Do not inflate a category's score with site-wide keyword value.
 
 Rule: if a keyword's intent is "learn what this retailer sells" or "find this brand," map it to homepage or brand authority work, not to a category tier.
+
+### Searchable but not sellable
+
+Search opportunity is only valuable when converted to revenue. A keyword with high search volume produces no return if ProSoccer doesn't carry the inventory to convert that traffic.
+
+Rule: for every Tier 1 or Tier 2 priority assignment, KRA must verify inventory depth.
+
+1. Collection page has at least 15 active products (rule of thumb; adjust based on category norms).
+2. Inventory variety covers multiple price points, sizes, or styles.
+3. Supply can sustain the traffic volume the ranking would drive.
+4. Seasonal inventory aligns with search seasonality.
+
+Collections that fail inventory checks despite strong search signal are automatically de-prioritized to Tier 3 with a "Supply-constrained" flag. The markdown summary explains why, and recommends either:
+
+(a) building out inventory before pursuing the ranking, or
+(b) routing the search demand to a higher-level category page with deeper inventory.
+
+Current catalog examples for reference:
+
+- Honduras collection: 6 products, position 10.7. High search signal but metadata-fix-only treatment (low cost, some lift); deep optimization investment not justified until inventory grows. Supply-constrained flag.
+- Mexico collection: robust inventory estimated. Full Tier 1 heavy-lift investment justified because inventory supports the traffic.
+
+This rule prevents SEO effort from being spent on traffic the business can't convert.
+
+### Inventory-driven opportunity (the reverse lens)
+
+The "searchable but not sellable" rule filters OUT bad SEO investments. This rule filters IN a category of good ones: products ProSoccer already carries in quantity that would benefit from better organic visibility.
+
+When inventory data surfaces:
+
+- Aged inventory (products sitting 180+ days without moving)
+- Overstocked categories (high stock levels relative to sales velocity)
+- Closeout or clearance inventory (specific pressure to move)
+
+KRA should check whether corresponding search demand exists. If it does, these categories get a priority boost, sometimes into Tier 1, because SEO work directly helps move inventory the business wants to clear.
+
+Example logic:
+
+- ProSoccer has 87 soccer balls including 23 products sitting 180+ days.
+- Search volume for "soccer ball" is 60,500/month, competitive difficulty medium.
+- ProSoccer currently does not rank top 20 for this query.
+- Verdict: Tier 1 inventory-driven opportunity. SEO investment here directly supports moving aged inventory. Strong business case.
+
+This reframes SEO work from generic visibility to inventory movement. It ties SEO directly to the metric retailers actually track: inventory turns. Flag inventory-driven opportunities in the matrix with a dedicated marker so downstream agents and the client understand the rationale.
+
+Confidence label on inventory-driven priority: High if inventory data is current; Medium if relying on proxy signals from `sales-by-product.csv` velocity; Low if no inventory signal available.
 
 ### Cannibalization detection
 
