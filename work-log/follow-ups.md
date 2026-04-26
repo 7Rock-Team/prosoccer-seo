@@ -18,6 +18,7 @@ _Lightweight tracker for open items awaiting action from Mike, a specialist agen
 | 2026-04-21 | Configure DataFeedWatch feed for inventory intelligence: product ID, title, collection, stock level, product type, vendor, price, days since created, days since last sale, inventory age signal, movement signal, overstocked flag. Output as CSV to a location KRA can read (data/shopify-inventory/). Extends the existing DataFeedWatch account 7 Rock already manages. | Mike to configure; Master Strategist to wire into workflow | Open |
 | 2026-04-21 | Build shared-intelligence/inventory-state.md infrastructure: template with collection-level rollups, monthly update mechanism, cross-agent startup protocol references. Master Strategist summarizes DataFeedWatch feed output into this file for all agents to consume. | Master Strategist in future session | Open |
 | 2026-04-21 | Interim inventory approach: manual Shopify inventory export (product title, collection, stock level, date created, last sale date) to data/shopify-inventory/. Use until DataFeedWatch feed is configured. First matrix can rely on this interim data. | Mike to export one-time; KRA to consume | Open |
+| 2026-04-22 | Inventory classification methodology deferred until DataFeedWatch feed lands or dedicated Shopify products-by-collection export is available. KIRA matrix v1 uses sales-by-product.csv as Medium-confidence proxy for inventory signals. When data is available, define formal Hero/Mid/Zombie thresholds with Mike based on operational reality, not assumed numbers. | Mike to advise; Master Strategist to formalize when data lands | Open |
 
 ## Closed
 
@@ -25,3 +26,5 @@ _None yet._
 
 ## Coming Up
 | 2026-04-21 | Name all 7 specialist agents with human/memorable names (proposed starting point: ORIN, KIRA, VERITAS, SCRIBE, SAGE, RECON, METRIK, with Mike to review and adjust). Friendly names used everywhere including Tony-facing docs. Rename propagates to agent definition headers, memory file first-person references, context files, progress map SVG labels, and client deliverable references. | Mike | Open |
+
+| 2026-04-21 | Evaluate Firecrawl for agent workforce. Capabilities: AI-optimized web scraping, full-site crawls, clean markdown output, batch SERP inspection. Strongest fit for RECON (competitor monitoring) and SAGE (content research). Free tier available for testing. Paid tier $80-100/month likely if workforce benefits justify. Test during April 22-27 before RECON build on April 28-29. | Mike to sign up for free tier; Master Strategist to evaluate during RECON build | Open |
