@@ -1,11 +1,23 @@
-# Data Quality Note: Category Priority Matrix v1
+# Data Quality Note: Category Priority Matrix v1.1
 
 **Date:** 2026-04-26
 **Author:** KIRA (Keyword Research Agent)
 **Companion to:** `2026-04-26_category-priority-matrix.csv` and `.md`
+**Status:** v1.1 update (expanded scope: World Cup contender coverage; v1 baseline committed as `9313965`)
 **Purpose:** Document material data quirks that shape the matrix's confidence labels, plus the upstream fixes Mike can hand to Shopify admin so the next quarterly matrix lands cleaner.
 
 This note is the honest accounting of "what we know we don't know cleanly," and where the data could be better. It's separate from the matrix narrative on purpose: the matrix tells Tony what to prioritize; this note tells Mike what to fix in the data plumbing so the next matrix is sharper.
+
+## Section 0: v1.1 update summary
+
+v1.1 expanded the matrix from 28 rows to 34 rows, with 6 net-new team rows (Uruguay, Japan, Senegal, Morocco, Norway, Jamaica) and 8 v1 Tier 2 country pages promoted to Tier 1 based on DataForSEO volume confirmation. Tier 1 reorganized into three execution waves to manage operational reality. Two v1 framework-consistency issues were not affected by v1.1 changes; they remain documented in their original sections below.
+
+What's new in this note for v1.1:
+- Section 4 (DataForSEO KD coverage gap) updated with combined v1 + v1.1 round data
+- Section 6 (DataForSEO API spend transparency) updated with cumulative figures
+- Section 5 (theme migration orphan collections) gains a Senegal legacy long-slug VERITAS callout
+- Section 7 (upstream fixes) gains Senegal-and-related-legacy-slugs as a VERITAS Technical SEO scope item
+- Section 8 (what changes in matrix v2) updated to reference v1.1 baseline state
 
 ## Section 1: Shopify exports (5 material quirks)
 
@@ -82,7 +94,7 @@ Pattern B is safer because it preserves the date stamp on the export, which beco
 
 The agent definition Section 2 step 10 directs KIRA to check `data/ahrefs/` for current Ahrefs Webmaster Tools (AWT) export. The directory is empty (only `.gitkeep`). No keyword list, no backlink snapshot.
 
-**Pre-DataForSEO state.** Competitive difficulty calls would have defaulted to "pending AWT confirmation, Medium-Low confidence" per the agent definition. That posture would have applied to all 28 matrix rows.
+**Pre-DataForSEO state.** Competitive difficulty calls would have defaulted to "pending AWT confirmation, Medium-Low confidence" per the agent definition. That posture would have applied to all 34 matrix rows in v1.1 (28 in the v1 baseline).
 
 **Post-DataForSEO state (live as of 2026-04-26).** Competitive difficulty calls now route through DataForSEO Keyword Difficulty as primary source, with fallback to inferred-from-SERP analysis where DataForSEO doesn't return a value. Confidence improves from Medium-Low to Medium-High where DataForSEO returns KD; stays Medium where it doesn't. Net effect: no Tier 1 call in the matrix is gated on AWT data anymore.
 
@@ -92,27 +104,20 @@ The agent definition Section 2 step 10 directs KIRA to check `data/ahrefs/` for 
 
 ## Section 4: DataForSEO KD coverage gap
 
-The DataForSEO `bulk_keyword_difficulty` endpoint returned a Keyword Difficulty value for **only 2 of 13** keywords queried in this matrix session:
+Across the v1 round (13 keywords) and the v1.1 round (17 keywords), DataForSEO's `bulk_keyword_difficulty` endpoint returned a Keyword Difficulty value for **only 4 of 30 keywords queried** (13%):
 
-| Keyword | KD returned |
-|---|---|
-| real madrid jersey | 5 |
-| south korea jersey | 3 |
-| mexico jersey | (not returned) |
-| guatemala soccer jersey | (not returned) |
-| italy soccer jersey | (not returned) |
-| el salvador jersey | (not returned) |
-| honduras soccer jersey | (not returned) |
-| usmnt jersey | (not returned) |
-| best goalkeeper gloves | (not returned) |
-| goalkeeper jerseys | (not returned) |
-| lamine yamal jersey | (not returned) |
-| messi argentina jersey | (not returned) |
-| futsal shoes | (not returned) |
+| Round | Keyword | KD returned |
+|---|---|---|
+| v1 | real madrid jersey | 5 |
+| v1 | south korea jersey | 3 |
+| v1.1 | england jersey | 5 |
+| v1.1 | japan jersey | 15 |
 
-**Working theory** (not confirmed with DataForSEO documentation): the `bulk_keyword_difficulty` endpoint appears to skip KD calculation on keywords below a volume or recency threshold, or where SERP composition is highly mixed (many SERP feature types blocking a clean organic top-10 read). The 2 keywords that returned KD are both clean organic SERPs with high volume and stable intent.
+The other 26 keywords (11 from v1, 15 from v1.1) returned no KD value. v1.1 keywords without KD: argentina, brazil, france, germany, spain, portugal, netherlands, belgium, croatia, colombia, uruguay, senegal, morocco, norway, jamaica jersey. v1 keywords without KD: mexico, guatemala soccer, italy soccer, el salvador, honduras soccer, usmnt, best goalkeeper gloves, goalkeeper jerseys, lamine yamal, messi argentina, futsal shoes.
 
-**The workaround actually used.** The `keyword_overview` endpoint returned **volume, intent, and paid competition** for all 13 keywords in the same batch. That gave us:
+**Working theory** (not confirmed with DataForSEO documentation): the `bulk_keyword_difficulty` endpoint appears to skip KD calculation on keywords below a volume or recency threshold, or where SERP composition is highly mixed (many SERP feature types blocking a clean organic top-10 read). The 4 keywords that returned KD across both rounds are mid-to-high volume queries with stable organic SERPs.
+
+**The workaround actually used.** The `keyword_overview` endpoint returned **volume, intent, and paid competition** for all 30 keywords in both batches. That gave us:
 - Volume confirmation (the matrix's Tier 1 calls reference these volumes)
 - Intent classification (informational / commercial / transactional)
 - Paid competition score (0 to 1, where most jersey queries scored 0.95 to 1.0 = HIGH)
@@ -125,9 +130,9 @@ For competitive difficulty inference on the 11 keywords without KD, the matrix u
 - Phase 1 audit Trust Flow data on the verified peer set (soccerpost, soccer.com, prosoccer, wegotsoccer, soccervillage, soccerzoneusa, worldsoccershop, pelesoccer, soccerwearhouse [`shared-intelligence/seo-findings.md` 2026-04-21]).
 
 **Confidence impact:** competitive difficulty calls in the matrix carry these labels:
-- **High** (DataForSEO KD confirmed): 2 keywords (real madrid jersey, south korea jersey)
-- **Medium-High** (DataForSEO inferred from volume + paid competition + SERP pattern): the rest of the Tier 1 candidates
-- **Medium-Low** (no DataForSEO query, inferred from existing GSC rank data): Tier 2 country pages
+- **High** (DataForSEO KD confirmed): 4 keywords (real madrid jersey, south korea jersey, england jersey, japan jersey)
+- **Medium-High** (DataForSEO inferred from volume + paid competition + SERP pattern): most Tier 1 and Tier 2 candidates
+- **Medium-Low** (no DataForSEO query, inferred from existing GSC rank data): Chile (not in v1.1 batch)
 
 **Recommendation for v2 query design.** Try alternate keyword phrasings that may carry KD data: "mexico jersey adidas" instead of "mexico jersey"; "best goalkeeper gloves 2026" instead of "best goalkeeper gloves". Also try `dataforseo_labs_google_keyword_overview` with `include_clickstream_data=true` (not used in v1; might surface KD on more keywords). Test in a small batch (5 keywords) before scaling.
 
@@ -146,19 +151,21 @@ Phase 2 Task 1 surfaced two stale "copy" variants of live collection pages, pres
 
 **Related Phase 2 finding worth flagging here too.** `/collections/chile` was Cloudflare-rate-limited (HTTP 429) on both initial crawl and retry [Phase 2 Task 1; Phase 2 Task 4]. Inventory state for Chile is unknown; the page exists and ranks position 10.96 with 88 clicks [`_top-pages.csv` row 155], so it's not blocked from Google. The matrix lists Chile as Tier 2 Low confidence with this caveat. Re-crawl with a different user-agent or longer delay is a Technical SEO follow-up.
 
+**v1.1 addition: Senegal legacy long-slug pattern.** v1.1 surfaced that `/collections/senegal-national-soccer-team-jerseys-apparel` is the only Senegal page on the site; no short-slug `/collections/senegal` exists. Phase 2 Task 1 inventoried 7 such legacy long-slug pages on the `{country}-national-soccer-team-jerseys-apparel` pattern (Algeria, Ghana, Senegal, Sweden, New Zealand, Scotland, Australia). DataForSEO confirmed Senegal jersey volume at 1,000/mo with -70% quarterly trend (post-2022 surge faded). Per Mike's volume threshold logic, 1,000/mo is well below the 5K/mo migration urgency line. **VERITAS scope item: audit all legacy long-slug national team patterns; for each, decide migrate-with-301 to short-slug, deprecate, or leave-as-is based on volume threshold and inventory state.**
+
 ## Section 6: DataForSEO API spend transparency
 
-| Metric | Value |
-|---|---|
-| API calls this matrix session | 3 |
-| Endpoints used | `serp_organic_live_advanced` (1 query), `keyword_overview` (1 batch of 13 keywords), `bulk_keyword_difficulty` (1 batch of 13 keywords) |
-| Total keywords analyzed | 14 unique |
-| Estimated spend | ~$0.05 |
-| Session cap target | $5 |
-| Project cap target (matrix v1 scope) | $20 |
-| Cap utilization | <1% |
+| Metric | v1 round | v1.1 round | Cumulative |
+|---|---|---|---|
+| API calls | 3 | 2 | 5 |
+| Endpoints used | `serp_organic_live_advanced`, `keyword_overview`, `bulk_keyword_difficulty` | `keyword_overview`, `bulk_keyword_difficulty` | All three |
+| Keywords analyzed | 14 unique | 17 unique | 30 unique (some overlap likely; counted at batch level) |
+| Estimated spend | ~$0.05 | ~$0.10 | ~$0.15 |
+| Session cap target | $5 | $0.50 (additional) | $5 (session) |
+| Project cap target (matrix scope) | $20 | $20 | $20 |
+| Cap utilization | <1% | <1% (round) | <1% (cumulative) |
 
-**Cost discipline going forward.** Per the agent definition Section 5, KIRA targets <$20 in API spend for matrix work. v1 used <$1; v2 budget is the remaining $19. Per-keyword priority work feeding On-Page SEO is the largest expected ongoing spend; rough estimate of 50 to 100 keywords per quarter at ~$0.005 per keyword combined volume + KD = $0.50 to $1.00 per quarter. Well within budget.
+**Cost discipline going forward.** Per the agent definition Section 5, KIRA targets <$20 in API spend for matrix work. v1 + v1.1 combined used <$1; v2 budget is the remaining $19+. Per-keyword priority work feeding On-Page SEO is the largest expected ongoing spend; rough estimate of 50 to 100 keywords per quarter at ~$0.005 per keyword combined volume + KD = $0.50 to $1.00 per quarter. Well within budget.
 
 **Per the agent definition: bulk operations require explicit Mike approval.** None used in this session. If a future analysis would benefit from a bulk SERP scan (say, top-100 SERP results across 50 keywords for competitor visibility), KIRA surfaces the request with cost estimate before running.
 
@@ -174,6 +181,7 @@ Bundled list of what Mike can hand to Shopify admin (Jorge) and to the developer
 | 4 | Resolve theme migration orphan collections (spain-jerseys-copy, france-hats-copy): canonical or noindex or delete | Misal + Misha | 1-2 hours | Low to Medium (prevents future link equity split; small immediate impact) |
 | 5 | Re-crawl /collections/chile with delay or alternate user-agent | Mike or Technical SEO Agent (when built) | 30 minutes | Low (informational completion; page already performs) |
 | 6 | Configure DataFeedWatch inventory feed (logged separately in `work-log/follow-ups.md`) | Mike + DataFeedWatch | 4-8 hours | High (lifts goalkeeper Tier 1 Medium to High; firms up all inventory-driven opportunity flags; lifts matrix v2 confidence broadly) |
+| 7 | **NEW v1.1**: Audit legacy long-slug national team patterns (`/collections/{country}-national-soccer-team-jerseys-apparel` for Senegal, Algeria, Ghana, Sweden, New Zealand, Scotland, Australia). For each: decide migrate-with-301, deprecate, or leave-as-is based on volume threshold and inventory state. | VERITAS (Technical SEO Agent) | 2-3 hours | Medium (cleans up SEO debt; resolves split-equity risk on Senegal-style legacy slugs) |
 
 **The DataFeedWatch inventory feed (item 6) is the single highest-impact upstream fix on this list.** It moves the matrix's largest confidence weakness (the inventory signal column) from Medium to High across most rows. Currently logged in `work-log/follow-ups.md` 2026-04-21 entry as Mike-to-configure plus Master-Strategist-to-wire-into-workflow.
 
