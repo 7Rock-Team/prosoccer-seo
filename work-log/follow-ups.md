@@ -19,6 +19,7 @@ _Lightweight tracker for open items awaiting action from Mike, a specialist agen
 | 2026-04-21 | Build shared-intelligence/inventory-state.md infrastructure: template with collection-level rollups, monthly update mechanism, cross-agent startup protocol references. Master Strategist summarizes DataFeedWatch feed output into this file for all agents to consume. | Master Strategist in future session | Open |
 | 2026-04-21 | Interim inventory approach: manual Shopify inventory export (product title, collection, stock level, date created, last sale date) to data/shopify-inventory/. Use until DataFeedWatch feed is configured. First matrix can rely on this interim data. | Mike to export one-time; KRA to consume | Open |
 | 2026-04-22 | Inventory classification methodology deferred until DataFeedWatch feed lands or dedicated Shopify products-by-collection export is available. KIRA matrix v1 uses sales-by-product.csv as Medium-confidence proxy for inventory signals. When data is available, define formal Hero/Mid/Zombie thresholds with Mike based on operational reality, not assumed numbers. | Mike to advise; Master Strategist to formalize when data lands | Open |
+| 2026-04-26 | Install mcp-gsc (Google Search Console MCP) before VERITAS build tomorrow morning. Mike has Google service account experience. Provides live GSC data access for METRIK reporting and tactical work between matrix refreshes. Reduces dependency on manual GSC CSV exports for ongoing operational work. | Mike to install; Master Strategist to integrate during METRIK build | Open |
 
 ## Closed
 
