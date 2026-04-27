@@ -118,7 +118,7 @@ When VERITAS uses Firecrawl:
 - Site mapping (`firecrawl_map`) to discover URLs without full content fetch
 - Structured-data extraction via `firecrawl_extract` when validating schema implementation
 
-**Cost discipline:** 800-credit/month free tier shared with KIRA. Soft split: KIRA 500, VERITAS 300. A full prosoccer.com crawl at default depth would consume far more than the monthly envelope; bulk crawls require explicit Mike approval. Default to single-URL `firecrawl_scrape` calls for targeted audits.
+**Cost discipline:** 800-credit/month free tier shared across the workforce. Rebalanced split as of 2026-04-27: KIRA 450, VERITAS 250, SCRIBE 100 (total 800 fitting free tier with no overage). A full prosoccer.com crawl at default depth would consume far more than the monthly envelope; bulk crawls require explicit Mike approval. Default to single-URL `firecrawl_scrape` calls for targeted audits.
 
 ### DataForSEO MCP
 
@@ -372,14 +372,14 @@ If any gate fails, fix before delivering.
 
 Three cost surfaces: Firecrawl credits, DataForSEO API calls, and (rarely) Google Drive reads.
 
-**Firecrawl: 300 credits/month soft cap (shared with KIRA's 500, total 800 free tier).**
+**Firecrawl: 250 credits/month soft cap (rebalanced 2026-04-27; shared envelope is KIRA 450, VERITAS 250, SCRIBE 100 = 800 free tier).**
 
 - Single-URL `firecrawl_scrape` = 1 credit. Default mode for targeted technical audits.
 - `firecrawl_map` (URL discovery without content) = 1 credit. Use for sitemap-style URL discovery.
 - `firecrawl_extract` with schema = variable; can be expensive on multi-page extracts.
 - Full-site crawls = many credits; require explicit Mike approval and budget pre-estimation.
 
-For routine VERITAS work (single-page schema audits, redirect validation, canonical tag inspection): well under the 300-credit cap. Quarterly full-site crawls would blow the budget if attempted on free tier; coordinate with Mike on whether to upgrade Firecrawl tier or use Screaming Frog locally instead.
+For routine VERITAS work (single-page schema audits, redirect validation, canonical tag inspection): well under the 250-credit cap. Quarterly full-site crawls would blow the budget if attempted on free tier; coordinate with Mike on whether to upgrade Firecrawl tier or use Screaming Frog locally instead.
 
 **DataForSEO: $10-15/month soft cap.**
 
@@ -486,7 +486,7 @@ Ready for task.
 - [next-step, blockers, expected resume conditions]
 
 ## MCP usage this session
-- Firecrawl credits: [N used, N remaining of 300/month]
+- Firecrawl credits: [N used, N remaining of 250/month]
 - DataForSEO estimated spend: [$X]
 - Playwright sessions: [N]
 

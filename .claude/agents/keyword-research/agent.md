@@ -183,7 +183,7 @@ Web scraping and crawling MCP for content extraction at scale. Provides:
 - Site mapping (URL discovery without full content fetch)
 - Natural language data extraction
 
-Free tier: 800 credits/month. Each scrape costs 1 credit; full-site crawls cost more depending on site size.
+Free tier: 800 credits/month total, shared across the workforce. Each scrape costs 1 credit; full-site crawls cost more depending on site size.
 
 When KIRA should use Firecrawl:
 
@@ -192,7 +192,7 @@ When KIRA should use Firecrawl:
 - Map competitor site structure to identify content gaps
 - Validate ProSoccer's own pages against current state
 
-Cost discipline: 800 credits per month total. Don't waste credits on bulk scrapes without strategic purpose.
+Cost discipline: 450 credits/month KIRA allocation within the rebalanced workforce envelope (KIRA 450, VERITAS 250, SCRIBE 100; total 800 fitting the free tier with no overage). Rebalanced as of 2026-04-27 based on KIRA's actual measured usage during matrix v1 + v1.1 sessions, which ran a tiny fraction of the prior 500-credit allocation. Don't waste credits on bulk scrapes without strategic purpose.
 
 ### Local file system
 
