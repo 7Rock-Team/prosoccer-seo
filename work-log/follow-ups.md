@@ -19,11 +19,12 @@ _Lightweight tracker for open items awaiting action from Mike, a specialist agen
 | 2026-04-21 | Build shared-intelligence/inventory-state.md infrastructure: template with collection-level rollups, monthly update mechanism, cross-agent startup protocol references. Master Strategist summarizes DataFeedWatch feed output into this file for all agents to consume. | Master Strategist in future session | Open |
 | 2026-04-21 | Interim inventory approach: manual Shopify inventory export (product title, collection, stock level, date created, last sale date) to data/shopify-inventory/. Use until DataFeedWatch feed is configured. First matrix can rely on this interim data. | Mike to export one-time; KRA to consume | Open |
 | 2026-04-22 | Inventory classification methodology deferred until DataFeedWatch feed lands or dedicated Shopify products-by-collection export is available. KIRA matrix v1 uses sales-by-product.csv as Medium-confidence proxy for inventory signals. When data is available, define formal Hero/Mid/Zombie thresholds with Mike based on operational reality, not assumed numbers. | Mike to advise; Master Strategist to formalize when data lands | Open |
-| 2026-04-26 | Install mcp-gsc (Google Search Console MCP) before VERITAS build tomorrow morning. Mike has Google service account experience. Provides live GSC data access for METRIK reporting and tactical work between matrix refreshes. Reduces dependency on manual GSC CSV exports for ongoing operational work. | Mike to install; Master Strategist to integrate during METRIK build | Open |
 
 ## Closed
 
-_None yet._
+| Date opened | Task | Owner | Status |
+|---|---|---|---|
+| 2026-04-26 | Install mcp-gsc (Google Search Console MCP) before VERITAS build. Provides live GSC data access for METRIK reporting and tactical work between matrix refreshes. Resolved 2026-04-26: installed via uvx with OAuth user authentication; service account approach hit GSC user-grant rejection so OAuth path was used instead. MCP registered in local project-scope Claude Code config (`C:\Users\Ashot\.claude.json` under project entry for prosoccer-seo). First-run browser auth pending; triggers on first MCP call after Claude Code restart. Setup took approximately 2 hours total due to Microsoft Store Python alias issue and service account email rejection by GSC; documented for future MCP installs that need OAuth. | Mike (installed); Master Strategist to integrate during METRIK build | Closed (resolved 2026-04-26) |
 
 ## Coming Up
 | 2026-04-21 | Name all 7 specialist agents with human/memorable names (proposed starting point: ORIN, KIRA, VERITAS, SCRIBE, SAGE, RECON, METRIK, with Mike to review and adjust). Friendly names used everywhere including Tony-facing docs. Rename propagates to agent definition headers, memory file first-person references, context files, progress map SVG labels, and client deliverable references. | Mike | Open |
