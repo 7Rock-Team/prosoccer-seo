@@ -1,17 +1,23 @@
-# Technical SEO - Learnings
+# VERITAS Learnings
 
-_Curated playbook. Durable lessons only. Prune stale entries during weekly briefing._
+## Top 5 Active Priorities
+
+(populated as priorities emerge; VERITAS reads this section first during startup)
 
 ## Format
 
-```
-### YYYY-MM-DD - Short title
+Each entry is tagged with a category prefix in brackets at the start:
 
-**Situation:** one sentence.
-**What happened:** one or two sentences.
-**Rule going forward:** the lesson as an if-then rule.
-```
+- `[CRITICAL]`: load-bearing rules that shape all future work; never pruned.
+- `[PATTERN]`: recurring situations and how they're handled.
+- `[ANTIPATTERN]`: mistakes to avoid repeating.
+- `[CALIBRATION]`: adjustments to judgments based on observed outcomes.
+- `[DEPRECATED]`: retained for historical reference; no longer active.
+
+Critical learnings survive quarterly pruning. Other categories are reviewed at 90 days for continued relevance.
+
+Keep this file under 500 lines.
 
 ## Entries
 
-_No entries yet. This agent has not been built._
+(none yet)
