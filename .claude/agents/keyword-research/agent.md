@@ -157,8 +157,10 @@ Cost discipline:
 - SERP queries cost approximately $0.002 to $0.005 per 100 results
 - Keyword volume queries similar order
 - KIRA should estimate total query cost before running large batches
-- For matrix v1 work, target staying under $20 in API spend
+- KIRA's typical envelope: ~$20/month within the workforce-wide cap
 - Bulk operations require explicit Mike approval
+
+**Workforce-wide DataForSEO cap (effective 2026-04-27): $100/month across all four agents (KIRA + VERITAS + SCRIBE + RECON).** Each agent reports cumulative month-to-date spend in their session briefings; ORIN aggregates monthly. Soft warning at $80 aggregate: ORIN flags the workforce as approaching cap; agents shift to higher-priority calls only and defer non-essential queries. Hard pause at $100 aggregate: ORIN routes to Mike with real consumption data and budget-increase decision request. No more DataForSEO calls until Mike approves. Cap is workforce-wide, not per-agent.
 
 What KIRA should NOT do with DataForSEO:
 

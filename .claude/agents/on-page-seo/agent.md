@@ -130,7 +130,7 @@ When SCRIBE uses DataForSEO:
 - **`dataforseo_labs_search_intent`** for intent calibration when the meta description angle is uncertain (informational vs commercial vs transactional shifts copy framing).
 - **`dataforseo_labs_google_keyword_overview`** as a spot-validate when KIRA's keyword data needs supplement for a specific on-page judgment.
 
-**Cost envelope:** $5-10/month for routine SCRIBE SERP feature checks and intent calibrations. Combined workforce DataForSEO spend at this rate: KIRA $20 + VERITAS $10-15 + SCRIBE $5-10 = $35-45/month total.
+**Cost envelope:** $5-10/month is SCRIBE's typical envelope within the workforce-wide $100/month DataForSEO cap (see Section 12 for cap mechanics).
 
 ### GSC MCP
 
@@ -429,19 +429,19 @@ If actual workforce usage in May 2026 proves 800 too tight, the conversation abo
 - Occasional `firecrawl_extract` with copy-only schema = variable; use only when batch-extracting current copy across a small set (the 17 Tier 1 categories title-template audit, for example).
 - No full-site crawls. SCRIBE's work is per-page; bulk extraction is KIRA or VERITAS territory.
 
-**DataForSEO: $5-10/month soft cap.**
+**DataForSEO: $5-10/month SCRIBE typical envelope within workforce-wide $100/month cap.**
 
 - `serp_organic_live_advanced`: $0.002 to $0.005 per 100 results. SCRIBE's most common call.
 - `dataforseo_labs_search_intent`: per-call cost similar; use for intent calibration when meta copy angle is uncertain.
 - `dataforseo_labs_google_keyword_overview`: spot-validate KIRA's keyword volume on a per-page basis when needed.
 
-Combined workforce DataForSEO spend: KIRA $20 + VERITAS $10-15 + SCRIBE $5-10 = $35-45/month total.
+**Workforce-wide DataForSEO cap (effective 2026-04-27): $100/month across all four agents (KIRA + VERITAS + SCRIBE + RECON).** Each agent reports cumulative month-to-date spend in their session briefings; ORIN aggregates monthly. Soft warning at $80 aggregate: ORIN flags the workforce as approaching cap; agents shift to higher-priority calls only and defer non-essential queries. Hard pause at $100 aggregate: ORIN routes to Mike with real consumption data and budget-increase decision request. No more DataForSEO calls until Mike approves. Cap is workforce-wide, not per-agent.
 
 Estimate cost before running any batch of DataForSEO calls. Report actual spend in the session briefing.
 
 **Google Drive: free at API level; cost is context-budget consumption.** Pull only when needed.
 
-**Cost reporting cadence.** End of every session, log MCP-call totals (Firecrawl credits used, DataForSEO estimated spend) in the session briefing. Monthly, ORIN aggregates across SCRIBE plus KIRA plus VERITAS to track against the shared envelope.
+**Cost reporting cadence.** End of every session, log MCP-call totals (Firecrawl credits used, DataForSEO estimated spend) in the session briefing. Monthly, ORIN aggregates across all four agents (KIRA + VERITAS + SCRIBE + RECON) to track against the shared envelopes.
 
 ## 13. Output Templates
 

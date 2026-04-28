@@ -132,7 +132,7 @@ When VERITAS uses DataForSEO:
 - **`domain_analytics_technologies_domain_technologies`** for tech-stack detection on competitor sites or for verifying ProSoccer's own emitted technologies
 - **`serp_organic_live_advanced`** when validating that a redirect or consolidation actually moved a query
 
-**Cost envelope:** $10-15/month for VERITAS routine technical use, separate from KIRA's $20/month keyword envelope. Lighthouse runs cost more per call than basic on-page checks; budget accordingly. Bulk operations require approval.
+**Cost envelope:** $10-15/month is VERITAS's typical envelope within the workforce-wide $100/month DataForSEO cap (see Section 12 for cap mechanics). Lighthouse runs cost more per call than basic on-page checks; budget accordingly. Bulk operations require approval.
 
 ### GSC MCP
 
@@ -381,18 +381,20 @@ Three cost surfaces: Firecrawl credits, DataForSEO API calls, and (rarely) Googl
 
 For routine VERITAS work (single-page schema audits, redirect validation, canonical tag inspection): well under the 250-credit cap. Quarterly full-site crawls would blow the budget if attempted on free tier; coordinate with Mike on whether to upgrade Firecrawl tier or use Screaming Frog locally instead.
 
-**DataForSEO: $10-15/month soft cap.**
+**DataForSEO: $10-15/month VERITAS typical envelope within workforce-wide $100/month cap.**
 
 - `on_page_instant_pages`: ~$0.001 to $0.005 per call.
 - `on_page_lighthouse`: more expensive per call; use selectively (Deliverable 4 mobile/desktop diagnostic budgets ~10 to 20 Lighthouse runs).
 - `backlinks_summary` and related: per-call cost varies; bulk operations need approval.
 - `serp_organic_live_advanced` for redirect-validation queries: ~$0.002 to $0.005 per 100 results.
 
+**Workforce-wide DataForSEO cap (effective 2026-04-27): $100/month across all four agents (KIRA + VERITAS + SCRIBE + RECON).** Each agent reports cumulative month-to-date spend in their session briefings; ORIN aggregates monthly. Soft warning at $80 aggregate: ORIN flags the workforce as approaching cap; agents shift to higher-priority calls only and defer non-essential queries. Hard pause at $100 aggregate: ORIN routes to Mike with real consumption data and budget-increase decision request. No more DataForSEO calls until Mike approves. Cap is workforce-wide, not per-agent.
+
 Estimate cost before running any batch of DataForSEO calls. Report actual spend in the session briefing.
 
 **Google Drive: free at API level; the cost is context-budget consumption.** Pull only when needed.
 
-**Cost reporting cadence.** End of every session, log MCP-call totals (Firecrawl credits used, DataForSEO estimated spend) in the session briefing. Monthly, ORIN aggregates across VERITAS plus KIRA to track against the shared envelope.
+**Cost reporting cadence.** End of every session, log MCP-call totals (Firecrawl credits used, DataForSEO estimated spend) in the session briefing. Monthly, ORIN aggregates across all four agents (KIRA + VERITAS + SCRIBE + RECON) to track against the shared envelopes.
 
 ## 13. Output Templates
 
