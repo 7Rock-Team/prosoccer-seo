@@ -310,6 +310,24 @@ URL: <full path>
 Date: YYYY-MM-DD
 Specialist: KIRA
 
+## Ranking Eligibility Check (FIRST: gates whether downstream KIRA work and specialist sequence proceed)
+
+### Current rank state (data, not interpretation)
+- Current avg position last 30 days: <N.NN> [GSC MCP get_search_analytics YYYY-MM-DD]
+- Current CTR vs position-average benchmark: <N.NN% actual vs ~N.NN% expected for that position band>
+- Target keyword(s) the page ranks for: <list>
+- Target keyword(s) the page does NOT rank for: <list of high-value keywords missing>
+- Schema markup completeness state (brief; full audit is VERITAS): [complete / partial / absent / not yet evaluated]
+
+### Ranking eligibility verdict (one of four; mutually exclusive)
+- [ ] **Optimize fully**: page has clear gap (low rank, low CTR, weak foundation, off-target keywords). Default sequence proceeds.
+- [ ] **Optimize selectively**: page ranks well but specific weakness identified (e.g., CTR below position-average -> meta description fix only). Reduced-scope sequence; ORIN routes per Section 9 verdict-handling logic.
+- [ ] **Leave alone**: page ranks well (top 5), CTR healthy, technical foundation solid, no clear improvement opportunity. No optimization recommended. Triggers verdict micro-gate per ORIN Section 9.
+- [ ] **Different intervention**: page has issues but on-page work isn't the answer (URL consolidation needed, schema-only fix, intent shift, etc.). Triggers verdict micro-gate per ORIN Section 9; ORIN routes alternative deliverable to Mike.
+
+### Verdict reasoning
+[1-2 sentences anchored to the rank state data above. Examples: "Position 4.2 with 6.8% CTR which exceeds the 5.1% position-average benchmark; Product schema complete; no ranking gap; verdict is Leave alone." OR "Position 28.4 with 0.13% CTR; ranks for 'mexico jersey' but not 'mexico national team jersey' which has 4x the volume; off-target keywords; verdict is Optimize fully."]
+
 ## Keyword scope
 - Primary target keyword: <kw> [DataForSEO volume; KD; intent source]
 - Secondary keywords: <list with sources>
@@ -348,7 +366,7 @@ Specialist: KIRA
 [Yes, with named blocker (URL consolidation pending / schema dependency missing / redirect chain affecting canonical / indexation issue / Phase 2 documented blocker) / No]
 
 ## Pause-and-surface flag (per ORIN Section 9)
-[Yes, with named conflict (tier mismatch / inventory-gate failure / positioning conflict / cannibalization reframe) / No]
+[Yes, with named conflict (tier mismatch / inventory-gate failure / positioning conflict / cannibalization reframe / verdict is "Leave alone" or "Different intervention") / No]
 
 Sources cited: [bracket-notation citations per Section 6]
 Confidence: [High / Medium / Low]

@@ -32,6 +32,8 @@ _ORIN uses this template for every per-page optimization brief. File the populat
 - **Matrix tier:** [Tier 1 / Tier 2 / Tier 3 / Hypothesis]
 - **Avatar fit (primary):** [Carlos / Jennifer / Tyler / Mike the Coach]
 - **Avatar fit (secondary if relevant):** [...]
+- **KIRA Ranking Eligibility Verdict:** [Optimize fully / Optimize selectively / Leave alone / Different intervention]
+- **Verdict reasoning:** [1-2 sentences from KIRA's contribution]
 
 ## Performance baseline (matches master CSV row)
 

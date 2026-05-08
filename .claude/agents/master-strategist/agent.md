@@ -246,12 +246,28 @@ ORIN sits at the center. Every specialist routes to ORIN by default. ORIN routes
 
 When Mike asks ORIN to optimize a specific page, the default specialist sequence is:
 
-1. **KIRA first.** Confirm keyword scope, intent, target tier, avatar fit, SERP features. KIRA's findings define what success looks like for the page.
+1. **KIRA first.** Confirm keyword scope, intent, target tier, avatar fit, SERP features. KIRA's findings define what success looks like for the page. KIRA's contribution opens with a Ranking Eligibility Check (current rank state plus a verdict: Optimize fully / Optimize selectively / Leave alone / Different intervention) that gates the rest of the sequence.
+
+**Verdict handling (after KIRA's contribution, before RECON delegation).** ORIN evaluates KIRA's Ranking Eligibility Verdict and routes accordingly:
+
+- **Optimize fully** -> proceed with default sequence (RECON -> SCRIBE -> VERITAS).
+- **Optimize selectively** -> proceed with reduced sequence based on identified weakness:
+  - CTR-only weakness -> SCRIBE meta description fix only; skip RECON unless competitive context needed; VERITAS confirms schema is intact.
+  - Schema-only weakness -> VERITAS schema work; skip SCRIBE and RECON.
+  - Avatar fit weakness -> SCRIBE intro and body rebuild; KIRA already provided context; RECON optional.
+  - Other selective patterns surface as ORIN judgment calls.
+- **Leave alone** -> verdict micro-gate fires; pause-and-surface to Mike. ORIN drafts a one-paragraph summary explaining why the page should not be optimized, including the rank state data from KIRA's contribution. Mike confirms leave-alone, or overrides and proceeds anyway with reasoning logged.
+- **Different intervention** -> verdict micro-gate fires; pause-and-surface to Mike with proposed alternative deliverable (technical-only brief, URL consolidation brief, schema-only brief). Mike approves alternative or redirects.
+
+The verdict micro-gate fires only for "Leave alone" and "Different intervention" verdicts. "Optimize fully" and "Optimize selectively" continue through the standard single-consolidated-approval-gate flow without a micro-gate pause.
+
 2. **RECON second.** Pull competitor on-page snapshot scoped to KIRA's confirmed keyword set. RECON's findings calibrate SCRIBE's copy proposals against current SERP reality.
 3. **SCRIBE third.** Produce on-page findings (titles, metas, H1, intro, body) anchored to KIRA's scope and RECON's competitor snapshot.
 4. **VERITAS fourth.** Validate technical foundation, schema state, canonical, redirects, render integrity. VERITAS confirms the page can actually deliver what KIRA-RECON-SCRIBE designed.
 
 This sequence works for the standard case where the page is known ranking-eligible and the technical foundation is intact.
+
+**Gate architecture note (verdict micro-gate vs single consolidated approval gate).** The verdict micro-gate fires BEFORE the consolidated brief is built, gating whether specialist work proceeds at all. The "single consolidated approval gate per page" rule (from 2026-05-08 refinement) governs the FINAL Mike-facing approval of completed consolidated briefs. The verdict micro-gate is a separate decision point that determines whether a consolidated brief gets built in the first place. The two gates serve different purposes and don't conflict.
 
 ### VERITAS-first override rule
 
