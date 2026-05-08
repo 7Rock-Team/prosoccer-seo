@@ -29,3 +29,9 @@ Log site-specific SEO observations that should shape future strategy, content te
 **Finding:** ~16M backlinks from a single UAE domain (soccertop.com), over 90% of ProSoccer's total backlink profile. Confirmed NOT an AWIN affiliate and NOT in PayAudit per Mike's verification.
 **Evidence:** Majestic backlink report (Phase 1 audit, file 7). AWIN roster and PayAudit cross-reference by Mike, 2026-04-21.
 **Strategic implication:** High-priority disavow candidate for Technical SEO Agent Month 1 work. Origin investigation (scrape, mirror, or negative SEO) is a separate follow-up. Korean backlink cluster still pending AWIN/PayAudit verification.
+
+### 2026-05-08 - GSC property inventory and canonical reporting choice
+
+**Finding:** ProSoccer.com has 8 GSC properties: one Domain property (sc-domain:prosoccer.com), two root URL-prefix properties (https://prosoccer.com/, https://www.prosoccer.com/), four locale URL-prefix variants (en-au, en-ca, en-gb, en-es), one legacy subdomain (sc-domain:magento1.prosoccer.com), and one separate domain (https://prosoccerteamstore.com/). The Domain property is the only one that aggregates www, non-www, and locale subpaths into a single search-surface view. Note: prosoccerteamstore.com out of scope per Mike 2026-05-08; workforce focuses exclusively on prosoccer.com properties.
+**Evidence:** gsc-server list_properties call, 2026-05-08. 25 total properties returned across all 7 Rock client accounts; 8 belong to the ProSoccer footprint.
+**Strategic implication:** Workforce-wide reporting (METRIK, ORIN, RECON) defaults to sc-domain:prosoccer.com for aggregated metrics. Locale URL-prefix properties (en-au, en-ca, en-gb, en-es) are used only when locale-segmented data is specifically needed, e.g., regional ranking deltas, hreflang QA, or locale-specific keyword tracking. magento1.prosoccer.com (legacy subdomain, deprecation status unconfirmed) tracked in work-log/follow-ups.md.
