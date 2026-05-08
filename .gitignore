@@ -45,3 +45,18 @@ reports/monthly/*.docx
 
 # Generated presentation build output (keep source scripts, not rendered artifacts)
 scripts/build/
+
+# Credentials and secrets — never commit
+*.json
+!package.json
+!package-lock.json
+!tsconfig.json
+.gcp/
+credentials/
+.env
+.env.local
+*-credentials.json
+*-service-account*.json
+
+# Workforce cost log — local only; not committed to GitHub
+deliverables/tracking/cost-log.md

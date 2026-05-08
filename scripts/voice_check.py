@@ -70,23 +70,45 @@ def extract_text(path: Path) -> str:
     raise ValueError(f"Unsupported file type: {suffix}. Supported: {sorted(SUPPORTED_EXTS)}")
 
 
-def find_line_contexts(lines: list[str], pattern: re.Pattern) -> list[tuple[int, str]]:
-    """Return (line_number, line_text) tuples for each line where the pattern matches."""
+def strip_backticks(text: str) -> str:
+    """Blank out content inside fenced code blocks (```...```) and inline backticks (`...`).
+
+    Voice rules apply to ProSoccer's own prose, not to verbatim quotations of
+    competitor copy, code, or terminal output that get cited inside backticks.
+    Replacement preserves newlines so line numbers in violation output stay accurate.
+    """
+    def blank_keep_newlines(match: re.Match) -> str:
+        return "".join("\n" if c == "\n" else " " for c in match.group(0))
+
+    text = re.sub(r"```.*?```", blank_keep_newlines, text, flags=re.DOTALL)
+    text = re.sub(r"`[^`\n]*`", blank_keep_newlines, text)
+    return text
+
+
+def find_line_contexts(
+    scan_lines: list[str], display_lines: list[str], pattern: re.Pattern
+) -> list[tuple[int, str]]:
+    """Return (line_number, line_text) tuples for each line where the pattern matches.
+
+    Matches are evaluated against scan_lines (backtick content blanked); the
+    displayed context is taken from display_lines (original text).
+    """
     hits: list[tuple[int, str]] = []
-    for idx, line in enumerate(lines, start=1):
-        if pattern.search(line):
-            hits.append((idx, line.strip()))
+    for idx, (sline, dline) in enumerate(zip(scan_lines, display_lines), start=1):
+        if pattern.search(sline):
+            hits.append((idx, dline.strip()))
     return hits
 
 
 def check(text: str) -> int:
     """Run the voice check against the text. Return 0 if clean, 1 if violations found."""
     violations: list[str] = []
-    lines = text.splitlines()
+    display_lines = text.splitlines()
+    scan_lines = strip_backticks(text).splitlines()
 
     for em in EM_DASHES:
         pattern = re.compile(re.escape(em))
-        hits = find_line_contexts(lines, pattern)
+        hits = find_line_contexts(scan_lines, display_lines, pattern)
         if hits:
             name = "em-dash" if em == "—" else "en-dash"
             violations.append(f"{name.upper()} '{em}' found on {len(hits)} line(s):")
@@ -97,7 +119,7 @@ def check(text: str) -> int:
 
     for word in FORBIDDEN_WORDS:
         pattern = re.compile(r"\b" + re.escape(word) + r"\b", re.IGNORECASE)
-        hits = find_line_contexts(lines, pattern)
+        hits = find_line_contexts(scan_lines, display_lines, pattern)
         if hits:
             violations.append(f"FORBIDDEN WORD '{word}' found on {len(hits)} line(s):")
             for ln, ctx in hits[:5]:
@@ -107,7 +129,7 @@ def check(text: str) -> int:
 
     for phrase in FORBIDDEN_PHRASES:
         pattern = re.compile(r"\b" + re.escape(phrase) + r"\b", re.IGNORECASE)
-        hits = find_line_contexts(lines, pattern)
+        hits = find_line_contexts(scan_lines, display_lines, pattern)
         if hits:
             violations.append(f"FORBIDDEN PHRASE '{phrase}' found on {len(hits)} line(s):")
             for ln, ctx in hits[:5]:
@@ -117,7 +139,7 @@ def check(text: str) -> int:
 
     for opener in SENTENCE_OPENERS:
         pattern = re.compile(r"(?:^|[.!?]\s+)" + re.escape(opener), re.MULTILINE)
-        hits = find_line_contexts(lines, pattern)
+        hits = find_line_contexts(scan_lines, display_lines, pattern)
         if hits:
             violations.append(f"FORBIDDEN SENTENCE OPENER '{opener}' found on {len(hits)} line(s):")
             for ln, ctx in hits[:5]:
