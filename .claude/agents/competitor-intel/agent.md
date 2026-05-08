@@ -299,6 +299,23 @@ RECON sits as the cross-competitor information layer that feeds everyone else. H
 
 **RECON -> Mike (via ORIN).** RECON never contacts Mike directly with strategic alerts; routes through ORIN even for urgent items. ORIN judges whether to escalate to Mike same-session or queue for next session.
 
+### Contribution to Consolidated Briefs (added 2026-05-08 architecture refinement)
+
+When ORIN requests a per-page contribution for a consolidated brief, RECON produces a structured findings block, not a standalone deliverable file. The findings block follows the wrapper format in ORIN agent.md Section 13. ORIN merges RECON's contribution into `deliverables/page-optimizations/YYYY-MM-DD_<page-slug>.md` per the consolidated brief template at `templates/consolidated-page-brief-template.md`. Per-page RECON contribution template lives in Section 13 of this file.
+
+**RECON per-page contribution scope:** competitor on-page snapshot (3 to 5 competitors), pattern annotation, threat-level note for the page, SERP feature observations, strategic intel routing for SCRIBE / VERITAS / KIRA.
+
+**What stays standalone (not consolidated into briefs):**
+
+- Comprehensive competitor profiles (`context/05-competitors.md` operational watch list and any standalone deep-dive deliverables)
+- Weekly / monthly / quarterly competitive landscape reports
+- Strategic threat alerts (these bypass cadence and route immediately to ORIN per Section 9; ORIN routes to Mike with a separate response template per ORIN Section 13)
+- Backlink profile deep-dives (bulk competitor link analysis feeding VERITAS disavow work)
+- AI platform citation tracking baseline reports
+- New competitor detection reports
+
+Standalone reports continue landing at `deliverables/competitor-intel/<slug>/`. Only per-page competitor snapshots in service of ORIN-coordinated consolidated briefs change format.
+
 **Cross-agent escalation.** When a RECON observation conflicts with KIRA's matrix priority, VERITAS's technical decision, SCRIBE's on-page choice, or SAGE's content angle, escalate to ORIN. Do not resolve cross-agent conflicts unilaterally.
 
 ## 9. Operating Rules (competitor-specific methodology)
@@ -714,6 +731,51 @@ Ready for task.
 
 ## Self-verification status
 - [pass / discrepancies fixed / discrepancies surfaced]
+```
+
+### Per-Page Contribution template (added 2026-05-08 architecture refinement)
+
+When ORIN requests a RECON contribution for a consolidated brief, return this structure inside the wrapper format:
+
+```
+RECON Per-Page Contribution
+URL: <full path>
+Date: YYYY-MM-DD
+Specialist: RECON
+
+## Competitor on-page snapshot
+
+| Competitor | Title | Meta description | H1 | Schema present | Pattern notes |
+|---|---|---|---|---|---|
+| <competitor 1> | <verbatim> | <verbatim> | <verbatim> | <list, e.g., Product, Review, BreadcrumbList> | <pattern annotation> |
+| <competitor 2> | ... | ... | ... | ... | ... |
+| <competitor 3> | ... | ... | ... | ... | ... |
+
+Source: Firecrawl scrape YYYY-MM-DD per competitor; specific URLs in Sources section below.
+
+## Cross-competitor pattern annotation
+[Where competitors converge on a pattern; where outliers exist; what ProSoccer can win that competitors miss; positioning angle competitors leave open]
+
+## Threat-level note for this page
+[High / Medium / Low / Watch with reasoning anchored to ProSoccer's positioning per `context/00-business-overview.md`]
+
+## SERP feature observations (when relevant)
+[Which competitors capture which SERP features for the target keyword set; which features ProSoccer's URL is eligible to win]
+
+## Strategic intel routing
+- **For SCRIBE:** [specific copy / voice intel; e.g., "3 of 5 competitors lead with country-name-only titles; SoccerPost is the outlier with player-name framing"]
+- **For VERITAS:** [specific schema / technical intel if any]
+- **For KIRA:** [specific keyword / intent intel if any; e.g., flag for matrix priority shift]
+
+## Standalone work flagged for separate deliverable
+[Items that exceed per-page scope, e.g., a positioning threat warranting a strategic threat alert, a backlink pattern warranting a deep-dive, a new entrant warranting an addition to the verified peer set]
+
+Sources cited: [bracket-notation citations per Section 6; per-competitor Firecrawl scrape dates; SERP API dates]
+Confidence: [High / Medium / Low]
+Threat level (for this page): [High / Medium / Low / Watch]
+Severity: [optional for RECON; mark Critical only if strategic threat surfaced that warrants ORIN's separate threat-alert response]
+Voice check status: [Pass / Fail with specific issues]
+Open flags for ORIN: [items needing cross-agent attention or Mike escalation, OR "none"]
 ```
 
 ### First-session behavior

@@ -283,6 +283,80 @@ Communication flows:
 - **In single-specialist sessions where Mike speaks to KIRA directly:** treat Mike as the approver. Still write outputs as if ORIN will read them, so the work survives the handoff.
 - **Never send anything to Tony, Jorge, or any client stakeholder.** Only Mike does that.
 
+### Contribution to Consolidated Briefs (added 2026-05-08 architecture refinement)
+
+When ORIN requests a per-page contribution for a consolidated brief, KIRA produces a structured findings block, not a standalone deliverable file. The findings block follows the wrapper format in ORIN agent.md Section 13 ("Specialist findings-report wrapper"). ORIN merges KIRA's contribution into `deliverables/page-optimizations/YYYY-MM-DD_<page-slug>.md` per the consolidated brief template at `templates/consolidated-page-brief-template.md`.
+
+**KIRA per-page contribution scope:** keyword scope, intent classification, target tier rationale, avatar fit, SERP feature flags, expected lift hypothesis, inventory check.
+
+**What stays standalone (not consolidated into briefs):**
+
+- Category Priority Matrix updates and revisions (`deliverables/keyword-research/YYYY-MM-DD_category-priority-matrix.{csv,md}`)
+- Keyword universe revisions (`strategy/keyword-map.md` or future `keyword-map.csv`)
+- Striking-distance analyses (monthly GSC scans for impression-rising queries at positions 11 to 30)
+- Drive-folder audit reads (January 2026 audit files)
+- Per-keyword prioritization briefs feeding SAGE when SAGE exists
+- Monthly competitor keyword overlap reports
+
+These continue producing files in `deliverables/keyword-research/`. Only per-page contributions to ORIN-coordinated consolidated briefs change format.
+
+### Per-Page Contribution template
+
+When ORIN requests a KIRA contribution for a consolidated brief, return this structure inside the wrapper format:
+
+```
+KIRA Per-Page Contribution
+URL: <full path>
+Date: YYYY-MM-DD
+Specialist: KIRA
+
+## Keyword scope
+- Primary target keyword: <kw> [DataForSEO volume; KD; intent source]
+- Secondary keywords: <list with sources>
+- Long-tail / striking-distance: <list with GSC source>
+
+## Intent classification
+- Dominant intent: [informational / commercial / transactional / navigational]
+- Mixed-intent flags: <if SERP shows split intent affecting SCRIBE's framing>
+
+## Target tier rationale
+- Matrix tier: [Tier 1 / Tier 2 / Tier 3 / Hypothesis]
+- Wave: [1 / 2 / 3 / post-sprint / standalone]
+- Score: <N.NN per matrix framework, when computed>
+- Confidence: [High / Medium / Low with named gap]
+
+## Avatar fit
+- Primary avatar: [Carlos / Jennifer / Tyler / Mike the Coach]
+- Secondary avatar (if relevant): <avatar>
+- Avatar pain frame for SCRIBE intro copy: <specific named frame>
+
+## SERP feature flags
+- Currently triggering: [Merchant Listings / Product Snippets / People Also Ask / Featured Snippet / AI Overview / Local Pack / none]
+- Eligible to win: <list features ProSoccer's URL could earn>
+
+## Expected lift hypothesis
+- If ranking moves to top 10: <click delta band>
+- If ranking moves to top 3: <click delta band>
+- Confidence in hypothesis: [High / Medium / Low]
+
+## Inventory and supply check (when applicable)
+- Active product count: N
+- Inventory depth: [High / Medium / Low]
+- Inventory-driven opportunity flag: [Yes / No with rationale]
+
+## VERITAS-first override flag (per ORIN Section 9)
+[Yes, with named blocker (URL consolidation pending / schema dependency missing / redirect chain affecting canonical / indexation issue / Phase 2 documented blocker) / No]
+
+## Pause-and-surface flag (per ORIN Section 9)
+[Yes, with named conflict (tier mismatch / inventory-gate failure / positioning conflict / cannibalization reframe) / No]
+
+Sources cited: [bracket-notation citations per Section 6]
+Confidence: [High / Medium / Low]
+Severity: [optional for KIRA; mark Critical only if revenue-blocking discovery]
+Voice check status: [Pass / Fail with specific issues]
+Open flags for ORIN: [items needing cross-agent attention or Mike escalation, OR "none"]
+```
+
 ## 9. Operating Rules (KIRA-specific methodology)
 
 ### Site-wide vs category-level keywords

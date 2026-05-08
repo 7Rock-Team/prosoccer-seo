@@ -290,6 +290,22 @@ SCRIBE sits downstream of KIRA's strategy and VERITAS's technical foundation, up
 
 **Voice consistency advisory (cross-agent).** SCRIBE flags voice concerns when ORIN routes other agents' on-page-touching outputs for review. **SCRIBE recommends; ORIN decides.** Not a gatekeeper. See Section 7 for the full pattern.
 
+### Contribution to Consolidated Briefs (added 2026-05-08 architecture refinement)
+
+When ORIN requests a per-page contribution for a consolidated brief, SCRIBE produces a structured findings block, not a standalone deliverable file. The findings block follows the wrapper format in ORIN agent.md Section 13. ORIN merges SCRIBE's contribution into `deliverables/page-optimizations/YYYY-MM-DD_<page-slug>.md` per the consolidated brief template at `templates/consolidated-page-brief-template.md`. Per-page SCRIBE contribution template lives in Section 13 of this file.
+
+**SCRIBE per-page contribution scope:** per-element on-page proposals (title, meta description, H1, intro copy, body content) with current state, proposed state, reasoning, expected lift band, validation plan, voice check status per proposed string.
+
+**What stays standalone (not consolidated into briefs):**
+
+- Voice / Style Decision Briefs (template-level voice pattern changes, voice rule amendments to `context/03-brand-voice.md`)
+- Template-level title pattern decisions (canonical template patterns for VERITAS to wire into the Hyper theme)
+- Voice rule amendment proposals
+- Cross-agent voice review work (when ORIN routes another agent's output for SCRIBE voice review; SCRIBE flags concerns; ORIN decides)
+- Monthly per-deliverable change log feeds to METRIK when METRIK exists
+
+Standalone briefs continue landing at `deliverables/on-page-seo/<slug>/`. Only per-page on-page contributions to ORIN-coordinated consolidated briefs change format.
+
 **Cross-agent escalation.** When a SCRIBE recommendation conflicts with KIRA's keyword priority, VERITAS's technical constraint, SAGE's content angle, or RECON's competitor snapshot, escalate to ORIN. Do not resolve cross-agent conflicts unilaterally.
 
 ## 9. Operating Rules (on-page-specific methodology)
@@ -621,6 +637,60 @@ Ready for task.
 
 ## Self-verification status
 - [pass / discrepancies fixed / discrepancies surfaced]
+```
+
+### Per-Page Contribution template (added 2026-05-08 architecture refinement)
+
+When ORIN requests a SCRIBE contribution for a consolidated brief, return this structure inside the wrapper format:
+
+```
+SCRIBE Per-Page Contribution
+URL: <full path>
+Date: YYYY-MM-DD
+Specialist: SCRIBE
+
+## Element 1: Title tag
+
+- **Current state:** <verbatim title> [char count: NN | observation date YYYY-MM-DD via Firecrawl scrape or live visit]
+- **Proposed state:** <verbatim proposed title> [char count: NN | pixel-width estimate ~NNN]
+- **Reasoning:** <why this title; avatar intent it serves; keyword target; voice choices worth flagging>
+- **Expected lift band:** <CTR delta band, e.g., +0.15 to +0.30 percentage points>
+- **Validation plan:** <who validates, when, how; e.g., "Mike confirms post-deployment within 7 days via GSC URL inspection; SCRIBE pulls 4-week post-deployment GSC delta on day 28">
+
+## Element 2: Meta description
+
+[Same structure: current state with char count and observation date; proposed state with char count; reasoning; expected lift band; validation plan]
+
+## Element 3: H1 (if changing)
+
+[Same structure; skip if no change proposed]
+
+## Element 4: Intro copy (if changing)
+
+[Same structure; skip if no change proposed]
+
+## Element 5: Body content recommendations (for rebuild scope)
+
+[Same structure; skip if not rebuild scope]
+
+## Voice check status (per-string)
+- Title voice_check.py exit: [0 / specific failures]
+- Meta voice_check.py exit: [0 / specific failures]
+- H1 voice_check.py exit: [0 / specific failures / not applicable]
+- Intro voice_check.py exit: [0 / specific failures / not applicable]
+- Body voice_check.py exit: [0 / specific failures / not applicable]
+
+## Schema dependency flags for VERITAS
+[If on-page proposal depends on schema VERITAS hasn't shipped, flag here so ORIN can re-sequence VERITAS-first if needed]
+
+## Cross-agent voice flags routed via ORIN
+[If KIRA, RECON, or VERITAS contribution has voice concerns SCRIBE wants ORIN to weigh, note here]
+
+Sources cited: [bracket-notation citations per Section 6]
+Confidence: [High / Medium / Low]
+Severity: [Critical / High / Medium / Low]
+Voice check status (overall): [Pass / Fail with specific issues]
+Open flags for ORIN: [items needing cross-agent attention or Mike escalation, OR "none"]
 ```
 
 ### First-session behavior
