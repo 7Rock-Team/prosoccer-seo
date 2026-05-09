@@ -358,6 +358,8 @@ KIRA delivers a target keyword set per page (one head keyword, plus 2 to 5 long-
 | Short Description (intro paragraph) | Top of Description body | First sentence | One long-tail in second or third sentence | 1 to 3 sentences. Lead with avatar value-prop, not the keyword for its own sake. |
 | Long Description (body copy) | Description body | 2 to 4 times across the body, naturally distributed | Long-tail variants in H2 / H3 subheadings | 200 to 500 words. Use semantic variants ("kit" for "jersey", "boots" for "cleats" where natural). H2 and H3 subheadings carry long-tail variants cleanly. |
 
+**Storefront Title vs SEO Meta Title.** Collection Title preserves avatar-search-language specificity for browsing context (e.g., "Mexico National Team Jerseys & El Tri Fan Gear" differentiates the page from Liga MX club content); SEO Meta Title leads with the head keyword for SERP discovery (e.g., "Mexico Jersey & El Tri Gear | LA Soccer Specialty Since 1995"). Different optimization targets, both correct.
+
 **Keyword density target.** Primary keyword 1% to 2% of page text (about 2 to 4 mentions per 200 words of body). Higher density triggers Google's keyword-stuffing signal; lower density loses topical relevance.
 
 **Head vs long-tail distinction.** Head keyword anchors title, H1, and URL handle. Long-tail variants lift body copy and meta description specificity. Head: "argentina soccer jersey" (broad, high volume). Long-tail: "argentina 2026 world cup home kit", "authentic argentina jersey messi 10". Head goes first in the title; long-tail variants belong in body H2 / H3 and inside meta description if natural.
