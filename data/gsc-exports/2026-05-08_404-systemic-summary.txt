@@ -1,0 +1,39 @@
+GSC 404-table classification (sample = 1000; full set ~13K-14K per Chart)
+
+Systemic (group, don't list individually): 958 (95.8%)
+  systemic-locale-other                       228
+  systemic-es-locale                          173
+  systemic-types-collection                   133
+  systemic-locale-discovery-widget             99
+  systemic-asset-template-var                  81
+  systemic-video-stream-app                    81
+  systemic-duplicated-locale                   56
+  systemic-numeric-product-id                  40
+  systemic-wpm-sandbox                         26
+  systemic-magento-legacy                      11
+  systemic-discovery-widget                     8
+  systemic-pagination                           6
+  systemic-variant-on-dead-product              5
+  systemic-blog-duplicated-path                 4
+  systemic-encoded-handle                       4
+  systemic-nested-variant-canonical             3
+
+One-off (individual redirects): 35 (3.5%)
+  one-off-nested-product-dead                  13
+  one-off-legacy-html                           9
+  one-off-nested-variant-dead                   7
+  one-off-product-404                           3
+  one-off-other                                 2
+  one-off-page-404                              1
+
+Excluded (Name Set / intentional): 7
+  excluded-name-set                             7
+
+One-off priority breakdown (drives redirect map size):
+  High        1
+  Medium      0
+  Low         0
+  None       34
+
+High/Medium priority one-offs (top 20 by impressions):
+    2c    61i  one-off-product-404            https://www.prosoccer.com/products/nike-2026-27-usmnt-youth-authentic-home-nn-soccer-jersey
