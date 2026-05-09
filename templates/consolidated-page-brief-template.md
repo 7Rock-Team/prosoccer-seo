@@ -1,16 +1,18 @@
 # Implementation-Ready Page Optimization Brief Template
 
-_Streamlined brief for Mike. Workforce-internal logs preserve full depth (KIRA keyword research, RECON competitor analysis, SCRIBE per-element reasoning, VERITAS schema flags, performance baselines, validation plans, sources, severity, confidence, red-team appendix, implementation checklist). Mike can ask for any of those at any time. Schema flags route to Misha or developer separately, outside this brief. Landmark cases that need the deep version use the archived template at `templates/consolidated-page-brief-template-archive.md`._
+_Streamlined brief for Mike. Workforce-internal logs preserve full depth (KIRA keyword research, RECON competitor analysis, SCRIBE per-element reasoning, VERITAS schema flags, performance baselines, validation plans, sources, severity, confidence, voice check status, red-team appendix, implementation checklist). Mike can ask for any of those at any time. Schema flags route to Misha or developer separately, outside this brief. Landmark cases that need the deep version use the archived template at `templates/consolidated-page-brief-template-archive.md`._
 
 ## How to use this template
 
 1. Copy this file to `deliverables/page-optimizations/YYYY-MM-DD_<page-slug>.md` (replace YYYY-MM-DD with today's date and `<page-slug>` with the URL slug, e.g., `2026-05-08_mexico.md` for `/collections/mexico`).
-2. Fill every field with implementation-ready copy lifted from specialist contributions.
-3. Run `scripts/voice_check.py` on the populated brief and on every quoted copy string before holding for Mike approval.
-4. Per `context/03-brand-voice.md` 'Emotional Connection Over Feature Selling', Short Description leads with feeling, identity, or moment for the primary avatar. Long Description anchors body copy in emotion with features as support, never the lead.
-5. Per `context/03-brand-voice.md` 'Cognitive Load Minimization', lead with the noun, one idea per sentence, short paragraphs, jargon depth matched to avatar fluency.
-6. Per `.claude/agents/on-page-seo/agent.md` Section 9 'Keyword placement per field', main keyword anchors Title and Slug; long-tail variants lift Long Description body copy and H2 subheadings.
-7. Append the matching row to `deliverables/tracking/collections-master.csv` or `products-master.csv` when Mike approves.
+2. Identify page type and load the matching playbook from `context/page-type-playbooks/` per `.claude/agents/on-page-seo/agent.md` Section 2 step 4b. Subject matter from the playbook governs WHAT each field is about; the six copy-writing principles govern HOW it reads.
+3. Fill every field with implementation-ready copy lifted from specialist contributions.
+4. Run `scripts/voice_check.py` on the populated brief and on every quoted copy string before holding for Mike approval. Voice check is a workforce-internal gate; the result lives in the workforce-internal logs, not in the visible brief.
+5. Per `context/03-brand-voice.md` 'Emotional Connection Over Feature Selling', Short Description leads with feeling, identity, or moment for the primary avatar. Long Description anchors body copy in emotion with features as support, never the lead.
+6. Per `context/03-brand-voice.md` 'Cognitive Load Minimization', lead with the noun, one idea per sentence, short paragraphs, jargon depth matched to avatar fluency.
+7. Per `.claude/agents/on-page-seo/agent.md` Section 9 'Keyword placement per field', main keyword anchors Title and Slug; long-tail variants lift Long Description body copy and H2 subheadings.
+8. Slug Optimization Discipline: aggressive default. Recommend a slug change when the current slug is genuinely underoptimized for SEO (too generic, too short, missing primary keyword). Document migration impact for high-traffic pages so Mike can weigh the cost. Always require 301 redirect setup if change is recommended.
+9. Append the matching row to `deliverables/tracking/collections-master.csv` or `products-master.csv` when Mike approves.
 
 ## Template starts below this line
 
@@ -35,7 +37,10 @@ _Streamlined brief for Mike. Workforce-internal logs preserve full depth (KIRA k
 
 ### Slug (URL Handle)
 
-<url-handle>
+- **Current slug:** <current value>
+- **SEO assessment:** <too short / generic / appropriate / too long / broken>
+- **Recommended slug:** <new slug OR "no change" with reasoning>
+- **Migration impact (if change recommended):** <redirect requirement, link equity transfer notes, GSC monitoring period>
 
 ### SEO Meta Title
 
@@ -60,12 +65,3 @@ _Streamlined brief for Mike. Workforce-internal logs preserve full depth (KIRA k
 ## Plain language summary for Tony
 
 <one paragraph, no jargon, leads with the outcome. Drop entirely if the brief never reaches client-side communication.>
-
-## Voice check
-
-- Brief: [PASS / FAIL with line numbers]
-- Per-string: Title [PASS/FAIL], Slug [PASS/FAIL], SEO Meta Title [PASS/FAIL], SEO Meta Description [PASS/FAIL], Short Description [PASS/FAIL], Long Description [PASS/FAIL]
-
----
-
-_Workforce-internal logs preserve the depth on request. Sources, severity, confidence, validation plans, performance baselines, KIRA keyword research, RECON competitor snapshot, SCRIBE per-element reasoning, VERITAS schema findings, implementation checklist, ORIN cross-agent reconciliation, red-team appendix, and master CSV row reference all live in workforce-internal artifacts (specialist briefings under `.claude/agents/<specialist>/briefings/`, ORIN merge notes, master CSV row). Mike can request any of these at any time._

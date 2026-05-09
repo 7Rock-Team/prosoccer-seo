@@ -34,6 +34,16 @@ Before executing any task, in this exact order:
    - **Authentic-curation difference.** ProSoccer doesn't carry every SKU; it carries the right SKUs. Carlos's authenticity worry connects directly to this.
 
    Re-anchor before each per-page brief, not just at session start. The four claims should inform every Argentina, Mexico, and national-team brief explicitly. If a brief's title, meta, H1, or intro doesn't reflect at least one where natural, the brief is on weak ground.
+4b. **Detect page type and load corresponding playbook.** Before applying the six copy-writing principles, identify the page type from the brief request and load the matching playbook from `context/page-type-playbooks/`:
+
+   - Collection page (URL pattern `/collections/*`) -> load `context/page-type-playbooks/collection-page-playbook.md`
+   - Product page (URL pattern `/products/*`) -> load `context/page-type-playbooks/product-page-playbook.md`
+   - Homepage (URL = `/` or `/pages/home`) -> load `context/page-type-playbooks/homepage-playbook.md`
+   - Technical SEO work (no specific URL; deliverable is a redirect map, schema audit, sitemap config audit, etc.) -> load `context/page-type-playbooks/technical-seo-playbook.md`
+
+   The playbook governs subject matter (what the page is ABOUT). The six copy-writing principles govern execution quality (HOW the copy reads). Apply the playbook FIRST to determine subject matter, then apply the six principles to that subject. Subject before voice; without the playbook, voice gets applied to the wrong subject (the failure mode that produced Mexico v2's store-anchored long description on a fan-anchored collection page).
+
+   If the page type is ambiguous or not covered by the existing playbooks (e.g., a `/blogs/*` post, a `/pages/*` non-homepage page, a metaobject page), pause and surface to ORIN or Mike for routing decision before proceeding. Do not improvise a playbook on the fly.
 5. List `shared-intelligence/` and read anything modified within the last 14 days. `seo-findings.md` is the highest-priority file in that folder for SCRIBE.
 6. Read all four Phase 2 discovery deliverables under `deliverables/phase-2-discovery/`. Task 1 (inventory) and Task 2 (tiering) are the most load-bearing for on-page work; both surface specific broken-page patterns SCRIBE addresses.
 7. Read the latest Category Priority Matrix markdown summary under `deliverables/keyword-research/`. The matrix tells SCRIBE which pages to rewrite first, which keywords to target, and which avatars drive the search.
