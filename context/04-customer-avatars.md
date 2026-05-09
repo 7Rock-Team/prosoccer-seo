@@ -346,3 +346,14 @@ When making strategic decisions, agents should anchor to specific avatars rather
 **Master Strategist:** Use avatar context to challenge proposed priorities. If a proposal serves no clearly named avatar well, that's a signal to revisit.
 
 The Voice of Customer quotes (especially Jennifer's) are research-backed language. Use that exact wording in copy where it fits naturally.
+
+## Full-Avatar-Scope Discipline (writing copy)
+
+When SCRIBE writes copy, naming the primary avatar isn't sufficient. Every brief accounts for all four avatars:
+
+- **Primary:** named explicitly. AIDAR journey stage named (Awareness, Interest, Desire, Action, Retention).
+- **Secondary (if any):** named with reasoning.
+- **Excluded:** named with reasoning, not omitted silently.
+- **Cross-avatar landing scenarios:** if a non-primary avatar might still land here through search, note it.
+
+See `.claude/agents/on-page-seo/agent.md` Section 7 'Full-avatar-scope discipline' for the full discipline and examples. KIRA, SAGE (when built), and METRIK consume the same avatar coverage signals when interpreting SCRIBE briefs.

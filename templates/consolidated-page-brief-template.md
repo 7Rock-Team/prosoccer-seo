@@ -1,114 +1,71 @@
-# Consolidated Page Optimization Brief Template
+# Implementation-Ready Page Optimization Brief Template
 
-_ORIN uses this template for every per-page optimization brief. File the populated brief at `deliverables/page-optimizations/YYYY-MM-DD_<page-slug>.md`. Per ORIN agent.md Section 13._
+_Streamlined brief for Mike. Workforce-internal logs preserve full depth (KIRA keyword research, RECON competitor analysis, SCRIBE per-element reasoning, VERITAS schema flags, performance baselines, validation plans, sources, severity, confidence, red-team appendix, implementation checklist). Mike can ask for any of those at any time. Schema flags route to Misha or developer separately, outside this brief. Landmark cases that need the deep version use the archived template at `templates/consolidated-page-brief-template-archive.md`._
 
 ## How to use this template
 
 1. Copy this file to `deliverables/page-optimizations/YYYY-MM-DD_<page-slug>.md` (replace YYYY-MM-DD with today's date and `<page-slug>` with the URL slug, e.g., `2026-05-08_mexico.md` for `/collections/mexico`).
-2. Replace every `<placeholder>` and `[bracketed instruction]` with actual content lifted from specialist contributions or pulled from data sources.
-3. Skip sections that don't apply (mark them "skipped: <reason>" rather than deleting; auditability matters).
-4. Run `scripts/voice_check.py` on the populated brief before holding for Mike approval.
-5. Run the self-verification checklist (ORIN Section 11) before commit.
-6. Append the matching row to `deliverables/tracking/collections-master.csv` or `products-master.csv` when Mike approves.
+2. Fill every field with implementation-ready copy lifted from specialist contributions.
+3. Run `scripts/voice_check.py` on the populated brief and on every quoted copy string before holding for Mike approval.
+4. Per `context/03-brand-voice.md` 'Emotional Connection Over Feature Selling', Short Description leads with feeling, identity, or moment for the primary avatar. Long Description anchors body copy in emotion with features as support, never the lead.
+5. Per `context/03-brand-voice.md` 'Cognitive Load Minimization', lead with the noun, one idea per sentence, short paragraphs, jargon depth matched to avatar fluency.
+6. Per `.claude/agents/on-page-seo/agent.md` Section 9 'Keyword placement per field', main keyword anchors Title and Slug; long-tail variants lift Long Description body copy and H2 subheadings.
+7. Append the matching row to `deliverables/tracking/collections-master.csv` or `products-master.csv` when Mike approves.
 
 ## Template starts below this line
 
 ---
 
-# Consolidated Page Optimization Brief: <page slug>
-
-**Date:** YYYY-MM-DD
-**Author:** ORIN (merging KIRA + RECON + SCRIBE + VERITAS contributions)
-**Audience:** Mike (Gate); routing to [Misal / Misha / Jorge] post-approval
-**Workflow severity:** [Sprint-blocking / High / Medium / Low]
-**Confidence (overall):** [High / Medium / Low]
-**Status:** [draft for Mike review / approved / implementing / shipped / validated / monitoring / complete / regressed]
-
-## Page identifier
+# Page Optimization Brief: <page slug>
 
 - **URL:** <full path>
-- **Page type:** [collection / product / blog / homepage]
-- **Sprint phase:** [Wave 1 / Wave 2 / Wave 3 / post-sprint / standalone]
-- **Matrix tier:** [Tier 1 / Tier 2 / Tier 3 / Hypothesis]
-- **Avatar fit (primary):** [Carlos / Jennifer / Tyler / Mike the Coach]
-- **Avatar fit (secondary if relevant):** [...]
-- **KIRA Ranking Eligibility Verdict:** [Optimize fully / Optimize selectively / Leave alone / Different intervention]
-- **Verdict reasoning:** [1-2 sentences from KIRA's contribution]
+- **Date:** YYYY-MM-DD
+- **Sprint phase:** [Wave 1 / Wave 2 / Wave 3 / standalone / post-sprint]
 
-## Performance baseline (matches master CSV row)
+## Keywords
 
-| Metric | Value | Source |
-|---|---|---|
-| Baseline impressions (12mo) | N | [GSC MCP get_search_analytics YYYY-MM-DD] |
-| Baseline clicks (12mo) | N | [same source] |
-| Baseline avg position | N.N | [same source] |
-| Baseline CTR | N.NN% | [same source] |
+- **Main keyword (head):** <head keyword>
+- **Supporting keywords (long-tail):** <variant 1>, <variant 2>, <variant 3>, <variant 4>
 
-## KIRA findings: keyword scope and strategic priority
+## Storefront fields
 
-[Lifted from KIRA's per-page contribution wrapper. Keyword scope, intent classification, target tier rationale, avatar fit, SERP feature flags, expected lift hypothesis. Sources cited inline.]
+### Title (Collection Title)
 
-**KIRA confidence:** [High / Medium / Low]
-**KIRA open flags for ORIN:** [items needing cross-agent attention or Mike escalation, OR "none"]
+<verbatim title to paste into Shopify Title field>
 
-## RECON findings: competitor snapshot
+### Slug (URL Handle)
 
-[Lifted from RECON's per-page contribution wrapper. 3-to-5 competitor on-page audit, pattern annotation, threat-level note. Skipped entirely if RECON wasn't in this brief's sequence; note "RECON skipped: [reason]" if so.]
+<url-handle>
 
-**RECON confidence:** [High / Medium / Low]
-**RECON threat level (if applicable):** [High / Medium / Low / Watch]
-**RECON open flags for ORIN:** [items, OR "none"]
+### SEO Meta Title
 
-## SCRIBE findings: per-element on-page proposals
+<verbatim meta title>
 
-[Lifted from SCRIBE's per-page contribution wrapper. Per-element (title / meta / H1 / intro / body) current state, proposed state, reasoning, expected lift band, validation plan. Voice check status per proposed string.]
+[NN chars]
 
-**SCRIBE confidence:** [High / Medium / Low]
-**SCRIBE severity:** [Critical / High / Medium / Low]
-**SCRIBE voice check (per-string):** [list each proposed string and exit status]
-**SCRIBE open flags for ORIN:** [items, OR "none"]
+### SEO Meta Description
 
-## VERITAS findings: technical foundation
+<verbatim meta description>
 
-[Lifted from VERITAS's per-page contribution wrapper. Schema state, canonical, redirects, render integrity, indexation. Severity and confidence per finding. Skipped if not in sequence; note "VERITAS skipped: [reason]" if so.]
+[NN chars]
 
-**VERITAS confidence:** [High / Medium / Low]
-**VERITAS severity:** [Critical / High / Medium / Low]
-**VERITAS open flags for ORIN:** [items, OR "none"]
+### Short Description (intro paragraph)
 
-## Implementation checklist
+<emotion-first intro, 1 to 3 sentences. Leading sentence carries feeling, identity, or moment for the primary avatar. Features support the feeling; they never lead.>
 
-| Change | Implementer | File / Surface | Severity | Status |
-|---|---|---|---|---|
-| [Title rewrite] | [Jorge / Misal / Misha] | [Shopify admin / collection.liquid line N] | [Critical / High / Medium / Low] | [pending Mike approval / approved / shipped / validated] |
-| [Meta description rewrite] | [Jorge] | [Shopify admin] | [...] | [...] |
-| [H1 update] | [...] | [...] | [...] | [...] |
-| [Schema injection] | [Misha] | [theme.liquid snippets/X] | [...] | [...] |
-| [URL canonical] | [Misal / Misha] | [...] | [...] | [...] |
+### Long Description (body copy)
 
-## ORIN summary
+<emotion-anchored body copy with H2 structure, 200 to 500 words. Features integrated as support, not the lead. H2 subheadings carry long-tail keyword variants.>
 
-[One paragraph. What ships, why, expected outcome, sequencing rationale across the four specialist contributions. ORIN's added value: where the specialists' findings reinforce each other; where they conflict and how ORIN resolved; where Mike should focus attention during review.]
+## Plain language summary for Tony
 
-## Plain-language summary for Tony (when client-adjacent)
+<one paragraph, no jargon, leads with the outcome. Drop entirely if the brief never reaches client-side communication.>
 
-[One paragraph. No jargon. Lead with the outcome. Drop entirely if the brief never reaches client-side communication.]
+## Voice check
 
-## Voice check status
+- Brief: [PASS / FAIL with line numbers]
+- Per-string: Title [PASS/FAIL], Slug [PASS/FAIL], SEO Meta Title [PASS/FAIL], SEO Meta Description [PASS/FAIL], Short Description [PASS/FAIL], Long Description [PASS/FAIL]
 
-- Brief voice_check.py exit: [0 (clean) / specific failures]
-- Per-string voice_check.py runs (proposed copy): [list each, exit status]
+---
 
-## Sources cited (aggregated)
-
-[All sources from KIRA, RECON, SCRIBE, VERITAS contributions, deduplicated. Plus ORIN-specific sources: GSC MCP baseline pull, master CSV existing-row reference if relevant.]
-
-## Red-team appendix
-
-[Skeptical review across the merged brief. Which claims would Mike challenge? Where do specialist contributions disagree, and how is the disagreement resolved or acknowledged? What's the weakest link?]
-
-## Master CSV row reference
-
-- File: `deliverables/tracking/collections-master.csv` (or `products-master.csv`)
-- Row appended: YYYY-MM-DD HH:MM
-- Status: <status value>
+_Workforce-internal logs preserve the depth on request. Sources, severity, confidence, validation plans, performance baselines, KIRA keyword research, RECON competitor snapshot, SCRIBE per-element reasoning, VERITAS schema findings, implementation checklist, ORIN cross-agent reconciliation, red-team appendix, and master CSV row reference all live in workforce-internal artifacts (specialist briefings under `.claude/agents/<specialist>/briefings/`, ORIN merge notes, master CSV row). Mike can request any of these at any time._

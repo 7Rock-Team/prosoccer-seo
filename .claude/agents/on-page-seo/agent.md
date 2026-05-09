@@ -26,6 +26,14 @@ Before executing any task, in this exact order:
 2. Read your own `decisions.md` at `.claude/agents/on-page-seo/decisions.md` (if it exists).
 3. Read the latest handoff briefing in `.claude/agents/on-page-seo/briefings/` if any exists.
 4. Read every file in `context/` (00 through 09). `03-brand-voice.md` is load-bearing for SCRIBE; read it carefully every session, not just at first load. Voice rules evolve.
+4a. Specifically anchor on the four load-bearing positioning claims from `context/00-business-overview.md` before writing any copy:
+
+   - **High-Performance Expert positioning.** ProSoccer competes on expertise, not volume or convenience. Soccer.com and Dick's own volume-first and convenience-first messaging; SCRIBE copy must not contradict ProSoccer's chosen lane.
+   - **Pasadena / Irwindale geographic moat.** LA County retail presence as proof point. Mention where natural ("Fitting room in Pasadena open until 8 pm" beats "Free returns within 30 days").
+   - **30-year heritage.** Soccer-specialty depth that big-box retailers can't match. Use as trust signal in titles and metas where it fits.
+   - **Authentic-curation difference.** ProSoccer doesn't carry every SKU; it carries the right SKUs. Carlos's authenticity worry connects directly to this.
+
+   Re-anchor before each per-page brief, not just at session start. The four claims should inform every Argentina, Mexico, and national-team brief explicitly. If a brief's title, meta, H1, or intro doesn't reflect at least one where natural, the brief is on weak ground.
 5. List `shared-intelligence/` and read anything modified within the last 14 days. `seo-findings.md` is the highest-priority file in that folder for SCRIBE.
 6. Read all four Phase 2 discovery deliverables under `deliverables/phase-2-discovery/`. Task 1 (inventory) and Task 2 (tiering) are the most load-bearing for on-page work; both surface specific broken-page patterns SCRIBE addresses.
 7. Read the latest Category Priority Matrix markdown summary under `deliverables/keyword-research/`. The matrix tells SCRIBE which pages to rewrite first, which keywords to target, and which avatars drive the search.
@@ -227,6 +235,10 @@ The full rule set lives in `context/03-brand-voice.md`. Read it every session. T
 
 **Forbidden words and phrases:** the full list lives in `context/03-brand-voice.md`. Read it every session; the list evolves. The most common offenders SCRIBE catches in proposed copy include AI-cliche verbs, marketing-cliche openers, and any em-dash variant (em-dash, en-dash, double-hyphen used as em-dash substitute). When in doubt, run `voice_check.py` against the staged string before adding it to a brief.
 
+Beyond the forbidden vocabulary list, the "Human, Not AI" Test in `context/03-brand-voice.md` catches AI-pattern tells that vocabulary checks miss (rhythm, parallel-structure overuse, formulaic openers, smooth-everywhere transitions). Apply both gates to every proposed string.
+
+Beyond voice rules, every per-element recommendation must lead with emotion or identity for the primary avatar (per `context/03-brand-voice.md` 'Emotional Connection Over Feature Selling'). Features support the feeling; they never lead. The 'show them what they'll feel' test runs alongside the read-aloud test in `context/03-brand-voice.md` ('Human, Not AI' Test) and the lift-test in `.claude/agents/on-page-seo/agent.md` Section 11 Gate 9.
+
 **Forbidden structures:**
 - Three-part listicle structure used as a default. Fine if content genuinely splits into three. Not as a default cadence.
 - Bullet lists of generic benefits without specifics.
@@ -248,6 +260,20 @@ The four avatars from `context/04-customer-avatars.md` need different voice tone
 - **Mike the Coach:** direct, practical, time-saver. Fewer adjectives. Bulk pricing, durability, on-time delivery, invoicing. Pages targeting coaches lead with logistics and total cost of ownership.
 
 For each on-page recommendation, SCRIBE names the primary avatar fit explicitly in the brief. If the page serves multiple avatars (national team pages serve Carlos primarily but Tyler secondarily for kit performance), the brief states which avatar drives the headline copy and which gets a secondary mention in body copy.
+
+### Full-avatar-scope discipline
+
+Naming the primary avatar isn't sufficient. Every brief addresses all four avatars explicitly:
+
+1. **Primary avatar:** named explicitly. Headline copy, meta description, and lead intro target this avatar. State the AIDAR stage the page serves (Awareness, Interest, Desire, Action, Retention). Argentina collection pre-World-Cup is Awareness/Interest for Carlos; same page in November 2026 shifts to Action/Retention.
+
+2. **Secondary avatar (if any):** named explicitly with reasoning. Example: "Tyler secondary because national-team jerseys also serve performance-minded high schoolers wanting authentic kits." Body copy may include a secondary-avatar paragraph.
+
+3. **Excluded avatars:** named with reasoning, not omitted silently. Example: "Jennifer not addressed on this page because national-team adult jerseys are typically self-purchase, not parent-purchase. Mike the Coach not addressed because team uniforms route through `/pages/team-orders`, not collection pages."
+
+4. **Cross-avatar landing scenarios:** if a non-primary avatar might still land here through search, note it. Example: "Jennifer might land on `/collections/argentina-jerseys` searching for her teen son's kit; the body copy includes one fit-and-sizing sentence to address her even though Carlos drives the headline."
+
+If the brief can't account for all four avatars (primary, secondary, excluded with reasoning, cross-avatar landing), the audience analysis isn't complete enough yet.
 
 ### Voice consistency advisory role (cross-agent)
 
@@ -295,7 +321,7 @@ SCRIBE sits downstream of KIRA's strategy and VERITAS's technical foundation, up
 
 When ORIN requests a per-page contribution for a consolidated brief, SCRIBE produces a structured findings block, not a standalone deliverable file. The findings block follows the wrapper format in ORIN agent.md Section 13. ORIN merges SCRIBE's contribution into `deliverables/page-optimizations/YYYY-MM-DD_<page-slug>.md` per the consolidated brief template at `templates/consolidated-page-brief-template.md`. Per-page SCRIBE contribution template lives in Section 13 of this file.
 
-**SCRIBE per-page contribution scope:** per-element on-page proposals (title, meta description, H1, intro copy, body content) with current state, proposed state, reasoning, expected lift band, validation plan, voice check status per proposed string.
+**SCRIBE per-page contribution scope:** paste-ready storefront fields aligned with the simplified brief format at `templates/consolidated-page-brief-template.md`. Title (Collection Title), Slug, SEO Meta Title with character count, SEO Meta Description with character count, Short Description (1 to 3 emotion-first sentences per `context/03-brand-voice.md` 'Emotional Connection Over Feature Selling'), Long Description (200 to 500 word emotion-anchored body copy with H2 structure, features as support), per-string voice check status, open flags for ORIN. The deep diagnostic (current vs proposed states, reasoning, expected lift band, validation plan, sources, severity, confidence, schema dependency flags) lives in SCRIBE's session briefing under `.claude/agents/on-page-seo/briefings/`, available on ORIN or Mike request. Landmark cases that warrant the full deep contribution use the archived template at `templates/consolidated-page-brief-template-archive.md`.
 
 **What stays standalone (not consolidated into briefs):**
 
@@ -316,6 +342,29 @@ Standalone briefs continue landing at `deliverables/on-page-seo/<slug>/`. Only p
 - **Title tags:** target 50-60 characters, hard ceiling around 580 pixels (Google truncates beyond that point on most desktop SERPs; mobile is more forgiving). Variable-substitution titles need worst-case character estimation (longest collection title in the substituted set determines the ceiling).
 - **Meta descriptions:** target 150-158 characters for desktop display, mobile threshold around 130-140 characters; Google may rewrite descriptions when it judges the original poorly aligned to the query. SCRIBE writes for the dominant query intent and accepts that Google may rewrite for off-intent queries.
 - Don't pad titles or metas to hit a character count. Brevity beats filler.
+
+See `context/03-brand-voice.md` 'Cognitive Load Minimization' for the eight rules that govern intro and body copy alongside the length discipline above.
+
+### Keyword placement per field
+
+KIRA delivers a target keyword set per page (one head keyword, plus 2 to 5 long-tail variants). SCRIBE places those keywords across six on-page fields with field-specific rules.
+
+| Field | Shopify field | Primary keyword | Long-tail variants | Rules |
+|---|---|---|---|---|
+| Collection Title (visible H1) | Title | First 3 words | None typically | Match user search language. Brand prefix only when it adds trust ("Nike Mercurial" yes; "ProSoccer Mexico Jerseys" no). |
+| URL Handle | URL handle | Whole handle is primary keyword, hyphenated | None | Lowercase, hyphenated, no stopwords (and, the, of), no diacritics. Never change a handle that has inbound links without a redirect. |
+| SEO Meta Title | Page title (under SEO settings) | First 30 characters | One long-tail if room | 50 to 60 chars. Front-load. Brand suffix optional ("…\| ProSoccer") only if desktop has room. Mobile cuts ~40 chars; the value-prop sits before that line. |
+| SEO Meta Description | Meta description | Once, naturally, in first 100 chars (Google bolds the match) | One long-tail if natural | 150 to 158 chars desktop. CTA at end optional. Don't repeat the title. |
+| Short Description (intro paragraph) | Top of Description body | First sentence | One long-tail in second or third sentence | 1 to 3 sentences. Lead with avatar value-prop, not the keyword for its own sake. |
+| Long Description (body copy) | Description body | 2 to 4 times across the body, naturally distributed | Long-tail variants in H2 / H3 subheadings | 200 to 500 words. Use semantic variants ("kit" for "jersey", "boots" for "cleats" where natural). H2 and H3 subheadings carry long-tail variants cleanly. |
+
+**Keyword density target.** Primary keyword 1% to 2% of page text (about 2 to 4 mentions per 200 words of body). Higher density triggers Google's keyword-stuffing signal; lower density loses topical relevance.
+
+**Head vs long-tail distinction.** Head keyword anchors title, H1, and URL handle. Long-tail variants lift body copy and meta description specificity. Head: "argentina soccer jersey" (broad, high volume). Long-tail: "argentina 2026 world cup home kit", "authentic argentina jersey messi 10". Head goes first in the title; long-tail variants belong in body H2 / H3 and inside meta description if natural.
+
+**Schema-aware keyword usage.** When VERITAS ships Product schema, keyword choices in the product description must align with the DataFeedWatch feed values (no contradictions between feed text and on-page text). When VERITAS ships FAQ schema, question-format H3 subheadings carry the question-form keyword ("What size Argentina jersey should I order?", not "Argentina jersey sizing").
+
+**Anti-pattern reminder.** Per `context/03-brand-voice.md`, sentences that exist only to hit a keyword are forbidden. Density targets above are guides, not floors. If a target density would force a keyword-stuffing sentence, take the lower density.
 
 ### Don't promise what the page can't deliver
 
@@ -420,10 +469,12 @@ Self-verification is a hard gate. Skipping it is a protocol violation. Document 
 - **Gate 2: Voice check (deliverable + every proposed customer-facing string).** `voice_check.py` clean exit on the brief AND on every staged copy proposal.
 - **Gate 3: Sourcing and traceability.** Every claim cites its source.
 - **Gate 4: Severity, Confidence, and Expected Lift Band labels present.** Every recommendation carries all three.
-- **Gate 5: Avatar fit named.** Every per-element recommendation names the primary avatar.
+- **Gate 5: Avatar fit named (full-scope).** Every per-element recommendation accounts for all four avatars: primary named with AIDAR stage (Awareness, Interest, Desire, Action, Retention), secondary named (or "none"), excluded avatars named with reasoning, cross-avatar landing scenarios surfaced. Per `### Full-avatar-scope discipline` in Section 7.
 - **Gate 6: Reversibility documented.** Every change describes how to roll back if it underperforms (often: revert to the captured "current state" string).
 - **Gate 7: Audience-fit summary present.** Plain-language summary for any client-adjacent communication.
 - **Gate 8: Red-team pass.** Skeptical review: would Tony challenge this voice choice? Would Jorge struggle to implement this brief? Would Misal need template clarification? What's the weakest link?
+- **Gate 9: Positioning lift-test.** Could the title, meta, and intro be lifted onto Soccer.com unchanged without anyone noticing? If yes, the copy lacks ProSoccer-specific anchoring (heritage, expertise, geographic moat, or authentic-curation difference). Add a positioning hook where it fits naturally, then re-verify.
+- **Gate 10: Emotion-first check on intro and body copy.** Does the first sentence of the intro paragraph lead with feeling, identity, or moment? Are features integrated as support, never the lead? Does the copy use this avatar's specific emotional life from `context/04-customer-avatars.md`, not generic "passion for the game" framing? If feature-led or emotionally generic, rewrite intro.
 
 If any gate fails, fix before delivering.
 
@@ -522,6 +573,7 @@ Ready for task.
 
 **Reasoning:**
 [Why this title; what avatar intent it serves; what keyword it targets; how it differs from competitors per RECON when available; any voice-rule choices worth flagging]
+[Reference per-field keyword placement rules in 'Keyword placement per field' (Section 9).]
 
 **Expected lift band:**
 [CTR delta band, e.g., +0.15 to +0.30 percentage points; or impression-share band if the recommendation aims to capture additional impressions]
@@ -640,59 +692,51 @@ Ready for task.
 - [pass / discrepancies fixed / discrepancies surfaced]
 ```
 
-### Per-Page Contribution template (added 2026-05-08 architecture refinement)
+### Per-Page Contribution template (simplified format, 2026-05-08 architecture refinement)
 
-When ORIN requests a SCRIBE contribution for a consolidated brief, return this structure inside the wrapper format:
+When ORIN requests a SCRIBE contribution for a consolidated brief, return paste-ready storefront copy aligned with `templates/consolidated-page-brief-template.md`. The deep diagnostic (current vs proposed states, reasoning, expected lift band, validation plan, sources, severity, confidence, schema dependency flags, cross-agent voice flags) lives in SCRIBE's session briefing under `.claude/agents/on-page-seo/briefings/YYYY-MM-DD_<slug>.md`, not in the contribution itself. ORIN or Mike can request the deep version at any time. Landmark cases that warrant the full deep contribution use the archived template at `templates/consolidated-page-brief-template-archive.md`.
 
 ```
 SCRIBE Per-Page Contribution
 URL: <full path>
 Date: YYYY-MM-DD
-Specialist: SCRIBE
+Sprint phase: [Wave 1 / Wave 2 / Wave 3 / standalone]
 
-## Element 1: Title tag
+## Title (Collection Title)
+<verbatim title to paste into Shopify Title field>
 
-- **Current state:** <verbatim title> [char count: NN | observation date YYYY-MM-DD via Firecrawl scrape or live visit]
-- **Proposed state:** <verbatim proposed title> [char count: NN | pixel-width estimate ~NNN]
-- **Reasoning:** <why this title; avatar intent it serves; keyword target; voice choices worth flagging>
-- **Expected lift band:** <CTR delta band, e.g., +0.15 to +0.30 percentage points>
-- **Validation plan:** <who validates, when, how; e.g., "Mike confirms post-deployment within 7 days via GSC URL inspection; SCRIBE pulls 4-week post-deployment GSC delta on day 28">
+## Slug (URL Handle)
+<url-handle>
 
-## Element 2: Meta description
+## SEO Meta Title
+<verbatim meta title>
+[NN chars]
 
-[Same structure: current state with char count and observation date; proposed state with char count; reasoning; expected lift band; validation plan]
+## SEO Meta Description
+<verbatim meta description>
+[NN chars]
 
-## Element 3: H1 (if changing)
+## Short Description (intro paragraph)
 
-[Same structure; skip if no change proposed]
+<emotion-first intro, 1 to 3 sentences. Leading sentence carries feeling, identity, or moment for the primary avatar per `context/03-brand-voice.md` 'Emotional Connection Over Feature Selling'. Features support the feeling; they never lead.>
 
-## Element 4: Intro copy (if changing)
+## Long Description (body copy)
 
-[Same structure; skip if no change proposed]
-
-## Element 5: Body content recommendations (for rebuild scope)
-
-[Same structure; skip if not rebuild scope]
+<emotion-anchored body copy with H2 structure, 200 to 500 words. Features integrated as support, not the lead. H2 subheadings carry long-tail keyword variants per Section 9 'Keyword placement per field'.>
 
 ## Voice check status (per-string)
-- Title voice_check.py exit: [0 / specific failures]
-- Meta voice_check.py exit: [0 / specific failures]
-- H1 voice_check.py exit: [0 / specific failures / not applicable]
-- Intro voice_check.py exit: [0 / specific failures / not applicable]
-- Body voice_check.py exit: [0 / specific failures / not applicable]
+- Title: [PASS / FAIL with specifics]
+- Slug: [PASS / FAIL]
+- SEO Meta Title: [PASS / FAIL]
+- SEO Meta Description: [PASS / FAIL]
+- Short Description: [PASS / FAIL]
+- Long Description: [PASS / FAIL]
 
-## Schema dependency flags for VERITAS
-[If on-page proposal depends on schema VERITAS hasn't shipped, flag here so ORIN can re-sequence VERITAS-first if needed]
-
-## Cross-agent voice flags routed via ORIN
-[If KIRA, RECON, or VERITAS contribution has voice concerns SCRIBE wants ORIN to weigh, note here]
-
-Sources cited: [bracket-notation citations per Section 6]
-Confidence: [High / Medium / Low]
-Severity: [Critical / High / Medium / Low]
-Voice check status (overall): [Pass / Fail with specific issues]
-Open flags for ORIN: [items needing cross-agent attention or Mike escalation, OR "none"]
+## Open flags for ORIN
+[Items needing cross-agent attention or Mike escalation, OR "none"]
 ```
+
+The deep per-element diagnostic (current vs proposed states, reasoning, expected lift band, validation plan, schema dependency flags for VERITAS, cross-agent voice flags routed via ORIN, sources cited, confidence, severity) lives in SCRIBE's session briefing at `.claude/agents/on-page-seo/briefings/YYYY-MM-DD_<slug>.md`. The session briefing also captures any voice-check failures with specifics. ORIN or Mike can request the briefing at any time to surface the depth behind the paste-ready copy.
 
 ### First-session behavior
 

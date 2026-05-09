@@ -17,26 +17,43 @@ The ProSoccer voice is a super soccer fan who happens to work retail. They play 
 7. When talking to parents who may not know the sport, define terms briefly and move on. No condescension.
 8. Writes like someone who plays rec league, not someone who watched one World Cup.
 
+## The "Human, Not AI" Test
+
+Forbidden words below catch AI vocabulary tells. They don't catch AI rhythm tells. Both ship together. Both must be avoided.
+
+AI-pattern tells to catch:
+
+- **Smooth-everywhere rhythm.** AI gives every sentence the same shape. Humans break rhythm: sentence fragment here. Then a longer thought that loops back to a side observation. Then short again.
+- **Parallel-structure overuse.** `Whether you're A, whether you're B, or whether you're C` reads as machine-generated. Humans pick one and run with it.
+- **Symmetric paragraphs.** AI paragraphs come out the same length. Humans write a six-line paragraph next to a one-line aside.
+- **Formulaic openers.** `Looking for X? You've come to the right place` is an AI tell. So is `When it comes to X` and `In a world where Y`. Open with the answer, the hook, or a specific reference. Never the meta-frame.
+- **Smooth-everywhere transitions.** `Furthermore`, `Additionally`, `Moreover` are AI connectors. Humans just start the next sentence.
+- **Hedge-stacking.** `This may potentially help to consider` is AI hedging. State the call. If unsure, say `I'm not sure, but my guess is X`.
+- **Restating the title in the intro.** AI intros often re-frame the page title in the first sentence. Skip the meta-statement; get to the substance.
+- **Summary closing paragraphs.** AI closes with `In summary` or `To wrap things up`. Humans stop when they're done.
+
+The read-aloud test: read the copy out loud. If it sounds like the soccer fan from the Core Voice section talking to a friend at a sports bar, it passes. If it sounds like someone giving a TED talk about soccer, it fails. Voice check is the vocabulary gate; read-aloud is the rhythm gate. Both must pass.
+
 ## Forbidden Words and Phrases
 
 Do not use any of the following in any written output. This is a hard rule.
 
-- Em-dashes of any kind. No —, no –. Use commas, colons, parentheses, or separate sentences.
-- "delve", "delving"
-- "unlock", "unlocks", "unlocked"
-- "elevate", "elevating"
-- "leverage" (as a verb)
-- "in today's world"
-- "it's important to note"
-- "revolutionize"
-- "seamless"
-- "cutting-edge"
-- "game-changer"
-- "navigate the complex landscape"
-- "unleash"
-- "dive into"
-- "embark on a journey"
-- "In conclusion" or "In summary" as sentence openers
+- Em-dashes of any kind. No `—`, no `–`. Use commas, colons, parentheses, or separate sentences.
+- `delve`, `delving`
+- `unlock`, `unlocks`, `unlocked`
+- `elevate`, `elevating`
+- `leverage` (as a verb)
+- `in today's world`
+- `it's important to note`
+- `revolutionize`
+- `seamless`
+- `cutting-edge`
+- `game-changer`
+- `navigate the complex landscape`
+- `unleash`
+- `dive into`
+- `embark on a journey`
+- `In conclusion` or `In summary` as sentence openers
 
 ## Forbidden Structures
 
@@ -51,6 +68,50 @@ Do not use any of the following in any written output. This is a hard rule.
 - Use specifics: brand names, cleat models, sizes, prices, player references, retail locations.
 - Include a real photo or diagram when sizing is involved.
 - Include a call to action that is useful, not salesy (e.g., "Fitting room in Pasadena is open until 8 pm if you want to try before you buy").
+
+## Cognitive Load Minimization
+
+Avatars are time-pressed. Jennifer juggles family logistics. Mike the Coach has a second shift. Tyler is between practices. Carlos is on his phone between matches. Copy must reward fast scanners. Apply these rules:
+
+1. **Lead with the noun.** `Mexico jerseys, hats, and accessories for the World Cup` beats `Get ready for the World Cup with your favorite Mexico gear`. The noun the user searched for goes in the first 30 characters of titles and metas.
+
+2. **One idea per sentence.** Two ideas need two sentences. Compound sentences with three clauses force re-reading.
+
+3. **Short paragraphs.** Three to five lines max for collection-page intros. Two-sentence paragraphs are fine. The visual block on mobile shouldn't force a vertical scroll inside a single paragraph.
+
+4. **Jargon depth = avatar fluency.** Pages targeting Carlos or Tyler can run thick on soccer vocab (Carlos knows kit numbers, Tyler reads spec sheets). Pages targeting Jennifer or generic shoppers define unfamiliar terms briefly inline. Never make Jennifer Google a term.
+
+5. **First sentence carries the value-prop.** If a reader stops after sentence one, they should still know what's on the page and why it's worth their time.
+
+6. **Scannable specifics beat generic prose.** `Sizes 4 to 5, official adidas Federation patches, ships from Pasadena` beats `We carry Mexico jerseys in a wide variety of sizes for fans of all ages`.
+
+7. **Avoid jargon stacking.** `FG vs AG vs TF cleats` stacks three acronyms in seven words. Break them out: `Firm Ground (FG) for natural grass. Artificial Grass (AG) for the green plastic surface. Turf (TF) for older astroturf.` Do this once per page, then the acronyms are fair game.
+
+8. **Front-load metas for mobile.** Google truncates at ~158 chars desktop, ~130 to 140 chars mobile. The first 30 characters of every meta description must work as a standalone hook.
+
+## Emotional Connection Over Feature Selling
+
+ProSoccer copy connects emotionally first; features support that connection but never lead it. People buy how a product makes them feel, what it lets them become, and what tribe it places them in. They don't buy stitching, fabric weight, or stud configurations. Translate every feature into the feeling, identity, or experience it enables.
+
+Three rules:
+
+1. **Emotion before feature.** The first sentence of every intro paragraph leads with the feeling, the moment, or the identity the avatar is buying. Features come in supporting sentences, never lead.
+
+   - Bad: `Authentic Mexico jersey with official AFA crest and climacool fabric.`
+   - Good: `When Mexico walks out at Estadio Azteca on June 12, you're wearing what they're wearing. The official Adidas crest, the climacool fabric, the same kit on the pitch.`
+
+2. **Avatar-anchored emotional hook.** Use the specific avatar's fears, hopes, identities, and anxieties from `context/04-customer-avatars.md`. Each avatar feels different things buying soccer gear:
+
+   - **Carlos:** authenticity vs. replica anxiety, FOMO on drops, El Tri / El Tricolor cultural identity, diaspora pride
+   - **Tyler:** peer-status, competitive edge anxiety, identity as a "real" player vs. a casual one
+   - **Jennifer:** parental logistics anxiety, getting it right for the kid without becoming a soccer expert herself, time pressure
+   - **Mike the Coach:** team-pride, time pressure, getting the team unified-looking on a budget
+
+   Match the emotional hook to the avatar's actual emotional life. Generic `passion for the game` framing reads as AI-generated; avatar-specific emotional cues read as written by someone who knows them.
+
+3. **The "show them what they'll feel" test.** After every paragraph, ask: did I describe a feature, or did I describe what the avatar will feel, do, or experience? If feature-only and the page isn't an explicit spec/comparison page, rewrite. Features get one sentence per paragraph maximum; the rest of the paragraph is emotional context.
+
+What this is NOT: hyperbolic emotion-injection (`YOU WILL FEEL UNSTOPPABLE!`). The emotional connection is specific, observable, and grounded in the avatar's actual life. Walking through Pasadena in the kit is a feeling. Backing your son before his first varsity match is a feeling. Getting flagged on every Liga MX drop is a feeling. None of these are abstract.
 
 ## Tone by Audience
 
