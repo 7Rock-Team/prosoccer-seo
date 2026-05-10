@@ -70,6 +70,24 @@ _Streamlined brief for Mike. Workforce-internal logs preserve full depth (KIRA k
 
 <5-7 topic-specific Q-and-A pairs. Each answer 2-4 sentences. NOT generic store-policy questions.>
 
+### Internal links (1-2 max)
+
+<Per `context/page-type-playbooks/collection-page-playbook.md` 'Internal link strategy' (or `product-page-playbook.md` equivalent for product pages). Each link must be live-validated via Firecrawl MCP before inclusion (200 OK, content matches expected page type, no soft-404). Anchor text 2 to 5 words, descriptive, reads naturally.>
+
+1. **URL:** /collections/<slug>
+   - **Anchor text:** <exact phrase used in body>
+   - **Body location:** <H2 sub-section name where the link appears>
+   - **Validation:** 200 OK / fetched YYYY-MM-DD via Firecrawl / content confirmed (<H1 of destination> / <product count> / <other observed signal>)
+   - **Reasoning:** <why this link, why this anchor>
+
+2. **URL:** /collections/<slug>
+   - **Anchor text:** <exact phrase used in body>
+   - **Body location:** <H2 sub-section name>
+   - **Validation:** 200 OK / fetched YYYY-MM-DD via Firecrawl / content confirmed
+   - **Reasoning:** <why this link, why this anchor>
+
+(If a candidate failed live validation, replace the entries above with `### Skipped link (validation failure)` and document the URL, the specific failure reason (404 / 301 redirect to <other> / soft-404 returns homepage / other), and the alternative selected (or `none` if total stayed at 1-2).)
+
 ### SEO Meta Title
 
 <verbatim meta title>
@@ -100,7 +118,3 @@ _Streamlined brief for Mike. Workforce-internal logs preserve full depth (KIRA k
 
 - **Main keyword (head):** <head keyword>
 - **Supporting keywords (long-tail):** <variant 1>, <variant 2>, <variant 3>, <variant 4>
-
----
-
-_Plain-language summary for any audience (Tony, Misha, Jorge, etc.) is available on request, not default brief output. Workforce drafts on request and runs voice check separately when stakes warrant._

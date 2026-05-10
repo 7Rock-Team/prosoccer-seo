@@ -331,7 +331,18 @@ SCRIBE sits downstream of KIRA's strategy and VERITAS's technical foundation, up
 
 When ORIN requests a per-page contribution for a consolidated brief, SCRIBE produces a structured findings block, not a standalone deliverable file. The findings block follows the wrapper format in ORIN agent.md Section 13. ORIN merges SCRIBE's contribution into `deliverables/page-optimizations/YYYY-MM-DD_<page-slug>.md` per the consolidated brief template at `templates/consolidated-page-brief-template.md`. Per-page SCRIBE contribution template lives in Section 13 of this file.
 
-**SCRIBE per-page contribution scope:** paste-ready storefront fields aligned with the simplified brief format at `templates/consolidated-page-brief-template.md`. Title (Collection Title), Slug, SEO Meta Title with character count, SEO Meta Description with character count, Short Description (1 to 3 emotion-first sentences per `context/03-brand-voice.md` 'Emotional Connection Over Feature Selling'), Long Description (200 to 500 word emotion-anchored body copy with H2 structure, features as support), per-string voice check status, open flags for ORIN. The deep diagnostic (current vs proposed states, reasoning, expected lift band, validation plan, sources, severity, confidence, schema dependency flags) lives in SCRIBE's session briefing under `.claude/agents/on-page-seo/briefings/`, available on ORIN or Mike request. Landmark cases that warrant the full deep contribution use the archived template at `templates/consolidated-page-brief-template-archive.md`.
+**SCRIBE per-page contribution scope:** paste-ready storefront fields aligned with the simplified brief format at `templates/consolidated-page-brief-template.md`. Title (Collection Title), Slug, SEO Meta Title with character count, SEO Meta Description with character count, Short Description (1 to 3 emotion-first sentences per `context/03-brand-voice.md` 'Emotional Connection Over Feature Selling'), Long Description (200 to 500 word emotion-anchored body copy with H2 structure, features as support), 1 to 2 live-validated internal links embedded inline in the long description per `context/page-type-playbooks/collection-page-playbook.md` (or `product-page-playbook.md`) 'Internal link strategy', per-string voice check status, open flags for ORIN. The deep diagnostic (current vs proposed states, reasoning, expected lift band, validation plan, sources, severity, confidence, schema dependency flags) lives in SCRIBE's session briefing under `.claude/agents/on-page-seo/briefings/`, available on ORIN or Mike request. Landmark cases that warrant the full deep contribution use the archived template at `templates/consolidated-page-brief-template-archive.md`.
+
+**Internal link selection workflow (added 2026-05-08):** after writing the long description body, SCRIBE runs the internal-link selection step before voice check:
+
+1. Scan the body for natural link candidates: named brands, players, related teams, parent collections, adjacent topics that appear in the topic substance.
+2. For each candidate, run live validation via Firecrawl MCP. Confirm `metadata.statusCode` is 200, confirm the rendered H1 / page title / product count matches expectations, confirm the URL did not silently land on the homepage (soft-404).
+3. For each validated candidate, propose optimal anchor text per the playbook's anchor-text rules (2 to 5 words, descriptive of destination, reads naturally, no exact-match stuffing).
+4. Select 1 to 2 final candidates. If three or more pass validation, choose the two highest topical relevance.
+5. Embed at natural anchor points inline in the body copy.
+6. Document final selections (and any skipped failures with the specific failure reason) in the brief's Internal links sub-section per the playbook's brief-format specification.
+
+A link that fails live validation is worse than no link. SCRIBE skips, documents, and moves on.
 
 **What stays standalone (not consolidated into briefs):**
 
@@ -734,7 +745,23 @@ Sprint phase: [Wave 1 / Wave 2 / Wave 3 / standalone]
 
 ## Long Description (body copy)
 
-<emotion-anchored body copy with H2 structure, 200 to 500 words. Features integrated as support, not the lead. H2 subheadings carry long-tail keyword variants per Section 9 'Keyword placement per field'.>
+<emotion-anchored body copy with H2 structure, 200 to 500 words. Features integrated as support, not the lead. H2 subheadings carry long-tail keyword variants per Section 9 'Keyword placement per field'. 1 to 2 live-validated internal links embedded inline at natural anchor points per `context/page-type-playbooks/collection-page-playbook.md` 'Internal link strategy'.>
+
+## Internal links (1-2 max)
+
+1. **URL:** /collections/<slug>
+   - **Anchor text:** <exact phrase used in body>
+   - **Body location:** <section name where the link appears>
+   - **Validation:** 200 OK / fetched YYYY-MM-DD via Firecrawl / content confirmed (<H1 of destination> / <product count> / <other observed signal>)
+   - **Reasoning:** <why this link, why this anchor>
+
+2. **URL:** /collections/<slug>
+   - **Anchor text:** <exact phrase used in body>
+   - **Body location:** <section name>
+   - **Validation:** 200 OK / fetched YYYY-MM-DD via Firecrawl / content confirmed
+   - **Reasoning:** <why this link, why this anchor>
+
+(If a candidate failed validation, replace this sub-section header with `## Skipped link (validation failure)` and document the failure reason and alternative selected, OR `none` if total stayed at 1-2.)
 
 ## Voice check status (per-string)
 - Title: [PASS / FAIL with specifics]

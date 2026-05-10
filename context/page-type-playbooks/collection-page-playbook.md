@@ -138,6 +138,101 @@ Approximate structure: 5 evergreen H2 sections + 1 contained catalyst section pe
 
 The catalyst section is the place to name the current tournament, the current kit drop, the current squad-naming cycle, the current friendly schedule. Everything else (kit design tradition, color identity, players past-and-present, brand-supplier sequence, cultural diaspora context) holds across cycles.
 
+## Internal link strategy
+
+The long description supports 1 to 2 internal links maximum. More than that turns the body into a navigation menu and dilutes topical authority. Fewer than that leaves the page orphaned in the site's link graph.
+
+### Selection rules
+
+- Link candidates derive from body content (named entities, brands, players, related teams mentioned naturally in the topic substance). The link should serve a reader who's already engaged with the topic, not a reader the page is trying to redirect.
+- Topical relevance over keyword opportunism. The destination must genuinely deepen the topic.
+- All candidate URLs MUST be live-validated before inclusion (see Live validation requirement below).
+
+### Live validation requirement
+
+`deliverables/tracking/sitemap-state.md` confirms a URL is registered in the public sitemap. It does NOT confirm the URL returns the expected live page. Pages can be silently unpublished, set to draft, redirected, blocked by metafield, or returning soft-404s (homepage-instead-of-error, as found in 2026-05-08 404 remediation work).
+
+For each internal link candidate, run live validation:
+
+1. Fetch the URL using Firecrawl MCP (`mcp__firecrawl-mcp__firecrawl_scrape`); fall back to WebFetch or Tavily if Firecrawl is unavailable.
+2. Confirm HTTP status is 200 OK in the scrape response metadata (not 301 / 302 redirect, not 404, not 410, not 5xx). Firecrawl returns `metadata.statusCode` for the resolved URL.
+3. Confirm the rendered page content matches expectations. Check the H1 / page title, the product count if it's a collection, and that the URL did not silently land on the homepage. A `/collections/adidas` link that returns the homepage is a soft-404, not a live link.
+4. If validation fails: log the failure inline in the brief's Internal links sub-section with the specific failure reason, then select an alternative candidate or skip the link.
+
+A link that fails live validation is worse than no link. Broken or unexpected internal links signal to Google that the site has crawl-health issues and to users that they're being misdirected.
+
+### Optimal anchor text
+
+For each validated link, propose explicit anchor text. Best practices:
+
+- 2 to 5 words (longer reads unnatural; shorter lacks context).
+- Descriptive of the destination (signals to the reader what the linked page is about).
+- Reads naturally in body sentence flow (not jammed in awkwardly).
+- Topical relevance to the destination without exact-match keyword stuffing.
+- Varies across the site. Don't reuse identical anchor text from every page linking to the same destination.
+
+Bad anchor text:
+
+- `click here` (no signal)
+- `Mexico jersey` on a link from a Mexico-related page targeting `mexico jersey` head term (exact-match stuffing)
+- `the page about Adidas Mexico jerseys with the Aztec design` (too long, unnatural)
+
+Good anchor text:
+
+- `Adidas national team kits` (descriptive, 4 words, contextual)
+- `every other national team` (natural sentence flow, 4 words)
+- `the full Predator lineup` (specific destination, 4 words)
+
+### Common patterns by collection type
+
+For team collection pages (Mexico, Argentina, Brazil):
+
+- **Brand link:** kit supplier's collection if mentioned in body. E.g., `/collections/adidas-soccer-jerseys`, anchor `Adidas's national team kits` or `Adidas's federation roster`.
+- **Adjacent topic link:** parent national-teams collection (`/collections/national-teams`) or a mentioned related team.
+- **Player link:** if a specific player with their own collection is featured prominently in the body. E.g., `/collections/hirving-lozano` from a Mexico body that names Lozano in the Players sub-section.
+
+For player collection pages (Messi, Ronaldo):
+
+- **Team link:** the player's national team collection.
+- **Brand link:** the player's signature boot or kit brand collection.
+- **Era / tournament link:** relevant historical context collection if one exists.
+
+For brand category collection pages (Adidas Predator, Nike Mercurial):
+
+- **Parent brand collection.**
+- **Prominent player collection** if featured.
+- **Adjacent product category collection.**
+
+### Brief format for surfacing link selections
+
+Embed each validated link inline in the body at its natural anchor point. Below the body copy (after the FAQ sub-block), add a sub-section listing the selections with validation status:
+
+```
+## Internal links (1-2 max)
+
+1. **URL:** /collections/<slug>
+   - **Anchor text:** <exact phrase used in body>
+   - **Body location:** <section name where the link appears>
+   - **Validation:** 200 OK / fetched <date> / content confirmed (<H1 of destination> / <product count> / <other observed signal>)
+   - **Reasoning:** <why this link, why this anchor>
+
+2. **URL:** /collections/<slug>
+   - **Anchor text:** <exact phrase used in body>
+   - **Body location:** <section name>
+   - **Validation:** 200 OK / fetched <date> / content confirmed
+   - **Reasoning:** <why this link, why this anchor>
+```
+
+If a candidate failed validation, document the failure inline so the audit trail is visible:
+
+```
+## Skipped link (validation failure)
+
+- **URL:** /collections/<slug>
+- **Failure:** 404 Not Found / 301 redirect to /collections/<other> / soft-404 returns homepage / <other>
+- **Alternative selected:** <URL of the link that took its place>, OR none (skipped to keep total at 1-2)
+```
+
 ## Worked example 1: National team collection (Mexico template)
 
 URL: `/collections/mexico`

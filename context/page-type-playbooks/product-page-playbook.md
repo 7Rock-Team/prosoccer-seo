@@ -267,6 +267,45 @@ Annotation:
 - Tyler primary in the fit guidance and the use-case detail. Mike the Coach surfaces in the durability and team-issue framing.
 - The store doesn't appear in the body. Bulk-order and team-issue routing for Mike the Coach happens via the team-orders page, not via the product-page description.
 
+## Internal link strategy
+
+Same architecture as the collection-page playbook ('Internal link strategy' in `context/page-type-playbooks/collection-page-playbook.md'), adapted for product-page content. 1 to 2 internal links maximum in the long description body.
+
+### Selection rules
+
+- Links derive from body content (the product's brand, the parent collection it sits in, related products in the same lineup, signature players the product is associated with).
+- Topical relevance over keyword opportunism. The destination must serve the reader who's actively considering this purchase.
+- All candidate URLs MUST be live-validated before inclusion (same Firecrawl scrape + status + content check as the collection-page playbook).
+
+### Live validation requirement
+
+Identical to the collection-page playbook. Use `mcp__firecrawl-mcp__firecrawl_scrape`, confirm `metadata.statusCode` is 200, confirm rendered content matches expectations (H1, product count, no soft-404 to homepage). Document failures inline.
+
+### Optimal anchor text
+
+Same rules as the collection-page playbook. 2 to 5 words, descriptive of destination, reads naturally in body sentence flow, no exact-match stuffing, varied across the site.
+
+### Common patterns by product type
+
+For team kit products (e.g., 2026 Mexico Home Authentic Jersey by Adidas):
+
+- **Collection link:** the team's collection page. E.g., `/collections/mexico` (or `/collections/mexico-soccer-jersey` post-rename), anchor `the Mexico collection` or `the full El Tri lineup`.
+- **Brand link:** the brand's national-team-kit collection if relevant. E.g., `/collections/adidas-soccer-jerseys`, anchor `Adidas's national team kits`.
+
+For performance cleat products (e.g., Nike Mercurial Superfly 9 Elite FG):
+
+- **Brand line collection:** the cleat's lineup. E.g., `/collections/nike-mercurial`, anchor `the Mercurial lineup`.
+- **Surface-type collection:** matched to the cleat's plate. E.g., `/collections/firm-ground-cleats`, anchor `firm-ground cleats`.
+
+For training apparel products (e.g., Adidas Tiro 23 Training Pants):
+
+- **Brand training collection:** E.g., `/collections/adidas-training-apparel`, anchor `Adidas's training kit`.
+- **Use-case collection:** E.g., `/collections/training-pants`, anchor `the full training-pant lineup`.
+
+### Brief format for surfacing link selections
+
+Identical structure to the collection-page playbook. Embed inline; document below the body in an 'Internal links (1-2 max)' sub-section with URL, anchor text, body location, validation status (200 OK + fetched date + content-confirmation signal), and reasoning. Document any skipped failures with the specific reason and the alternative selected (or "none" if total stayed at 1-2).
+
 ## How this playbook integrates with the six copy-writing principles
 
 Same integration order as the collection-page playbook:
