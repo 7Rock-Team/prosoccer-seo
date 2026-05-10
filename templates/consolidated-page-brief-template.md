@@ -12,7 +12,8 @@ _Streamlined brief for Mike. Workforce-internal logs preserve full depth (KIRA k
 6. Per `context/03-brand-voice.md` 'Cognitive Load Minimization', lead with the noun, one idea per sentence, short paragraphs, jargon depth matched to avatar fluency.
 7. Per `.claude/agents/on-page-seo/agent.md` Section 9 'Keyword placement per field', main keyword anchors Title and Slug; long-tail variants lift Long Description body copy and H2 subheadings.
 8. Slug Optimization Discipline: aggressive default. Recommend a slug change when the current slug is genuinely underoptimized for SEO (too generic, too short, missing primary keyword). Document migration impact for high-traffic pages so Mike can weigh the cost. Always require 301 redirect setup if change is recommended.
-9. Append the matching row to `deliverables/tracking/collections-master.csv` or `products-master.csv` when Mike approves.
+9. Brief structure: SEO Implementation H2 surfaces all paste-ready fields up top in the order Mike pastes them into Shopify admin (Title -> Short Description -> Long Description body -> SEO Meta Title -> SEO Meta Description -> Slug). Workforce-internal reference (Avatar Scope, Keywords) drops below the implementation block.
+10. Append the matching row to `deliverables/tracking/collections-master.csv` or `products-master.csv` when Mike approves.
 
 ## Template starts below this line
 
@@ -23,24 +24,51 @@ _Streamlined brief for Mike. Workforce-internal logs preserve full depth (KIRA k
 - **URL:** <full path>
 - **Date:** YYYY-MM-DD
 - **Sprint phase:** [Wave 1 / Wave 2 / Wave 3 / standalone / post-sprint]
+- **AIDAR stage:** [Awareness / Interest / Desire / Action / Retention; note current cycle and expected shift]
 
-## Keywords
-
-- **Main keyword (head):** <head keyword>
-- **Supporting keywords (long-tail):** <variant 1>, <variant 2>, <variant 3>, <variant 4>
-
-## Storefront fields
+## SEO Implementation
 
 ### Title (Collection Title)
 
 <verbatim title to paste into Shopify Title field>
 
-### Slug (URL Handle)
+### Short Description (intro paragraph)
 
-- **Current slug:** <current value>
-- **SEO assessment:** <too short / generic / appropriate / too long / broken>
-- **Recommended slug:** <new slug OR "no change" with reasoning>
-- **Migration impact (if change recommended):** <redirect requirement, link equity transfer notes, GSC monitoring period>
+<emotion-first intro, 1 to 3 sentences, ~50-80 words. Leading sentence carries feeling, identity, or moment for the primary avatar. Features support the feeling; they never lead. Head keyword integrated naturally where it doesn't force the lead.>
+
+### Long Description (body copy)
+
+<emotion-anchored body copy with H2 sub-sections, 200 to 500 words. Features integrated as support, not the lead. H2 sub-sections carry long-tail keyword variants where natural. Per `context/page-type-playbooks/collection-page-playbook.md` 'Evergreen body, contained catalyst', body must be predominantly evergreen with one clearly-framed catalyst section that survives 12+ months without rewrites. FAQ section lives as a body sub-block at the end (same Shopify Description body field as the rest of Long Description).>
+
+(Body sub-sections render as H2 in the live page; paste as-is from this brief into Shopify Description body.)
+
+## H2 Sub-section 1 (catalyst section, current-cycle framing)
+
+<body copy>
+
+## H2 Sub-section 2 (evergreen)
+
+<body copy>
+
+## H2 Sub-section 3 (evergreen)
+
+<body copy>
+
+## H2 Sub-section 4 (evergreen)
+
+<body copy>
+
+## H2 Sub-section 5 (evergreen)
+
+<body copy>
+
+## H2 Sub-section 6 (evergreen)
+
+<body copy>
+
+## <Topic> FAQs
+
+<5-7 topic-specific Q-and-A pairs. Each answer 2-4 sentences. NOT generic store-policy questions.>
 
 ### SEO Meta Title
 
@@ -54,14 +82,25 @@ _Streamlined brief for Mike. Workforce-internal logs preserve full depth (KIRA k
 
 [NN chars]
 
-### Short Description (intro paragraph)
+### Slug (URL Handle)
 
-<emotion-first intro, 1 to 3 sentences. Leading sentence carries feeling, identity, or moment for the primary avatar. Features support the feeling; they never lead.>
+- **Current slug:** <current value>
+- **SEO assessment:** <too short / generic / appropriate / too long / broken>
+- **Recommended slug:** <new slug OR "no change" with reasoning>
+- **Migration impact (if change recommended):** <redirect requirement, link equity transfer notes, GSC monitoring period, rollback condition>
 
-### Long Description (body copy)
+## Avatar Scope
 
-<emotion-anchored body copy with H2 structure, 200 to 500 words. Features integrated as support, not the lead. H2 subheadings carry long-tail keyword variants.>
+- **Primary:** <avatar with reasoning anchor>
+- **Secondary:** <avatar with reasoning, OR "none" with reasoning>
+- **Excluded:** <avatars named with reasoning, not omitted silently>
+- **Cross-avatar landing:** <if a non-primary avatar might still land via search, note it; otherwise "none">
 
-## Plain language summary for Tony
+## Keywords
 
-<one paragraph, no jargon, leads with the outcome. Drop entirely if the brief never reaches client-side communication.>
+- **Main keyword (head):** <head keyword>
+- **Supporting keywords (long-tail):** <variant 1>, <variant 2>, <variant 3>, <variant 4>
+
+---
+
+_Plain-language summary for any audience (Tony, Misha, Jorge, etc.) is available on request, not default brief output. Workforce drafts on request and runs voice check separately when stakes warrant._

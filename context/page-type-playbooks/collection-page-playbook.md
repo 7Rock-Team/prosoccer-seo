@@ -128,11 +128,23 @@ Forbidden FAQ questions (these belong on store-policy pages, not on collection p
 
 Five to seven Q-and-A pairs is the standard range. Each answer is two to four sentences. The schema attaches via VERITAS's FAQPage injection; SCRIBE writes the question-answer copy that the schema surfaces.
 
+## Evergreen body, contained catalyst
+
+Long description body must be predominantly evergreen: topic identity, history, kit lineage, cultural significance, player eras across history, brand-supplier history. Evergreen content survives across catalyst cycles (World Cup, season transitions, kit drops) without requiring page rewrites.
+
+Time-sensitive content is allowed but must be contained to ONE clearly-framed catalyst H2 section, ideally labeled with current-cycle framing (e.g., `## Current Tournament: El Tri at the 2026 World Cup` rather than `## El Tri at the 2026 World Cup`). When the catalyst passes, ONLY that section needs updating; the rest of the page persists.
+
+Approximate structure: 5 evergreen H2 sections + 1 contained catalyst section per collection page. Adjust per topic; sole rule is the page must remain useful 12+ months after publication without major rewrites.
+
+The catalyst section is the place to name the current tournament, the current kit drop, the current squad-naming cycle, the current friendly schedule. Everything else (kit design tradition, color identity, players past-and-present, brand-supplier sequence, cultural diaspora context) holds across cycles.
+
 ## Worked example 1: National team collection (Mexico template)
 
 URL: `/collections/mexico`
 Primary avatar: Carlos
 Topic-research outputs: El Tri founded 1927; FMF; current head coach; 2026 World Cup co-host; Estadio Azteca opener June 11 2026; recent kit history (1986, 1994, 1998, 2010, 2014, 2018, 2022, 2026); diaspora identity in LA; Adidas as kit supplier since 1999.
+
+_The H2 names below reflect the 'Evergreen body, contained catalyst' rule above (1 catalyst + 5 evergreen). Body excerpts are abbreviated to show topic substance per heading; for the full applied example with body content fully matched to evergreen-plus-catalyst structure, see `deliverables/page-optimizations/2026-05-08_mexico-v3.md`._
 
 ```
 Title (Collection Title)
@@ -151,11 +163,11 @@ El Tri opens the 2026 World Cup at Estadio Azteca on June 11. Mexico is the coun
 
 Long Description (H2 sections, topic-anchored, no store mentions in body):
 
-## El Tri at the 2026 World Cup
+## Current Tournament: El Tri at the 2026 World Cup
 
 Mexico co-hosts with the US and Canada. The opener is at Estadio Azteca, the same stadium that hosted the 1970 and 1986 finals. No other country has hosted three Men's World Cups. The squad mixes Liga MX core with Europe-based players: Edson Alvarez, Hirving Lozano, Cesar Montes, Santi Gimenez, Luis Romo. Group draw lands in December 2025.
 
-## The 2026 Home Kit
+## The Aztec Coding Tradition: Mexico's Kit Design Heritage
 
 Adidas keeps the verde primary with a Aztec-coded pattern across the chest and a darker green panel along the shoulders. The crest is centered traditional FMF style. Player version uses Adidas Heat.RDY weave with the closer cut Hugo Sanchez wore in '94 and the squad wears today. Fan version uses softer fabric and a regular fit. Both carry the official tags and holographic.
 
@@ -163,7 +175,7 @@ Adidas keeps the verde primary with a Aztec-coded pattern across the chest and a
 
 The colors are the flag. The eagle on the crest is from the Mexican coat of arms. Green for hope, white for unity, red for the blood of the nation. Every kit since 1968 has held those colors as primary, with the away alternating in white through most eras and once in red ('98). The 2026 third kit, expected closer to the tournament, traditionally lets Adidas experiment with the deep red or a black variant.
 
-## Players to Watch in 2026
+## Players Who've Worn the Green: Past and Present
 
 Lozano on the wing for pace and pocket runs. Alvarez in the double pivot, the squad's metronome. Santi Gimenez at striker after his Feyenoord move and now Milan time. Cesar Montes in the back, leading the line out from the back. The wildcard is Marcelo Flores, the dual-eligible Arsenal academy product who chose El Tri.
 
