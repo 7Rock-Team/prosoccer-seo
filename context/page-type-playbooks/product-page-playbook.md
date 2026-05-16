@@ -306,6 +306,19 @@ For training apparel products (e.g., Adidas Tiro 23 Training Pants):
 
 Identical structure to the collection-page playbook. Embed inline; document below the body in an 'Internal links (1-2 max)' sub-section with URL, anchor text, body location, validation status (200 OK + fetched date + content-confirmation signal), and reasoning. Document any skipped failures with the specific reason and the alternative selected (or "none" if total stayed at 1-2).
 
+## Brand IP Constraints
+
+Hard legal constraint from `context/brand-ip-constraints.md` applies on every brief: FIFA-trademarked terminology family ("World Cup", "FIFA World Cup", "WC", "FIFA" in commercial contexts) is restricted to Adidas-licensed page contexts only.
+
+Before writing copy:
+
+1. Classify the page's brand-affiliation (Adidas-only / non-Adidas / brand-agnostic umbrella).
+2. For non-Adidas pages, use Federation-anchored substitution language per `context/brand-ip-constraints.md`.
+3. The year "2026" alone is permitted everywhere; the FIFA phrases are not.
+4. Verify per-team brand-affiliation during topic research for national-team collection pages and product pages.
+
+Run a final compliance scan across all six fields plus internal link anchors before voice check. Violations are higher-priority than voice violations because they create legal exposure.
+
 ## How this playbook integrates with the six copy-writing principles
 
 Same integration order as the collection-page playbook:

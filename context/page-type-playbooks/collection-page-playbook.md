@@ -391,6 +391,19 @@ Annotation:
 - Carlos secondary lands at the generation history (collectors care about which generation a player wore).
 - Lift test passes: a Soccer.com page on Predator would avoid the Craig Johnston detail and stay closer to "the Predator is a great boot for control." This page commits.
 
+## Brand IP Constraints
+
+Hard legal constraint from `context/brand-ip-constraints.md` applies on every brief: FIFA-trademarked terminology family ("World Cup", "FIFA World Cup", "WC", "FIFA" in commercial contexts) is restricted to Adidas-licensed page contexts only.
+
+Before writing copy:
+
+1. Classify the page's brand-affiliation (Adidas-only / non-Adidas / brand-agnostic umbrella).
+2. For non-Adidas pages, use Federation-anchored substitution language per `context/brand-ip-constraints.md`.
+3. The year "2026" alone is permitted everywhere; the FIFA phrases are not.
+4. Verify per-team brand-affiliation during topic research for national-team collection pages.
+
+Run a final compliance scan across all six fields plus internal link anchors before voice check. Violations are higher-priority than voice violations because they create legal exposure.
+
 ## How this playbook integrates with the six copy-writing principles
 
 The playbook governs subject matter. The six copy-writing principles in `context/03-brand-voice.md` and `.claude/agents/on-page-seo/agent.md` Section 7 govern execution quality. The order is:
