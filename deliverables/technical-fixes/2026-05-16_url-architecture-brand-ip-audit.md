@@ -15,24 +15,44 @@
 - **Total slugs scanned for violation patterns:** 662 collections in sitemap-state.md (2026-05-08 refresh) + GSC top-pages CSV cross-reference for live-but-not-in-sitemap collections.
 - **Pattern matches found:** 22 collection slugs containing `fifa` / `world-cup` / `worldcup` (broken down below).
 - **Adidas-licensed (compliant, no action):** 10 collections.
-- **Non-Adidas violations requiring action or documentation:** 12 collections in sitemap + 4 additional live-but-not-in-sitemap collections found via GSC = 13 distinct violations (some overlap; see Phase 1 table for full list).
+- **Non-Adidas violations:** 15 distinct collection slugs (11 in sitemap + 3 surfaced via GSC top-pages + 1 linked-only from the whitelabel-produced Collection #1 page).
 
 ### Tier breakdown of violations
 
 - **Tier A.1 (HIGH EQUITY, document only):** 0 collections meet the strict pos < 20 AND clicks > 100 criterion.
-- **Tier A.2 (MEDIUM EQUITY, Mike per-URL decision):** 4 collections (positions all on page 2 of Google, clicks 15-50 over 12 months).
-- **Tier A.3 (LOW EQUITY, rename + redirect recommended):** 9 collections below the GSC top-1000 cutoff (i.e., < 14 clicks over 12 months).
+- **Tier A.2 (MEDIUM EQUITY):** 4 collections (positions all on page 1-2 of Google, clicks 15-50 over 12 months).
+- **Tier A.3 (LOW EQUITY):** 11 collections below the GSC top-1000 cutoff (i.e., < 14 clicks over 12 months).
 
-### Recommended action counts
+### Final action counts (after Mike's exception decision 2026-05-17)
 
-- **Mike per-URL decisions needed:** 4 (Tier A.2; see Phase 2).
-- **Tier A.3 remediation map ready for implementation:** 9 slugs to rename + 301 redirect (see Phase 3).
-- **Adidas-compliant (no action):** 10 (see Phase 1 reference table).
-- **Separate VERITAS investigation:** 1 live URL (`/collections/nike-2026-fifa-world-cup-soccer-jerseys`) that does not appear in sitemap-state.md but is linked from a live whitelabel-produced collection page; merits dedicated audit pass to determine whether it is unpublished, sales-channel-off, or otherwise excluded from the sitemap.
+- **Slug-rename actions: 0.** Mike's business decision documented in `context/brand-ip-constraints.md` "Exceptions and grandfathered violations" section: existing slugs stay as-is to avoid any equity risk from URL changes. Both Tier A.2 (4 URLs) and Tier A.3 (11 URLs) are treated as exceptions; the original workforce slug-rename recommendations are documented for the audit trail but superseded by Mike's business call.
+- **Copy-level compliance remediation: 15 URLs.** Customer-facing copy on each of the 15 violation pages (Titles, Meta Titles, Meta Descriptions, Short Descriptions, Long Descriptions, internal link anchor text) still needs full constraint compliance per the brand-ip-constraints.md core rule. This is implemented page-by-page when ORIN audits and regenerates each collection in future whitelabel audit work (or earlier if Mike prioritizes specific pages).
+- **VERITAS visibility investigation (separate brief):** 4 live-but-not-in-sitemap collections (`/collections/2026-fifa-world-cup`, `/collections/2026-fifa-world-cup-qualified-teams`, `/collections/2026-fifa-world-cup-qualified-teams-accessories`, `/collections/nike-2026-fifa-world-cup-soccer-jerseys`).
+- **VERITAS sitemap-refresh script enhancement (separate brief):** add brand IP scan to `scripts/_build_sitemap_state.py` so future slug additions auto-flag at refresh time.
+- **Adidas-compliant (no action):** 10 collections (see Phase 1 reference table).
 
 ### Headline pattern observation
 
-The whitelabel slug-naming convention pre-dates the workforce's Brand IP architecture. The violation set is small (13 distinct URLs across 662 collections, < 2% of the collection catalog) and concentrated in tournament-scoped pages (2022 retrospectives, 2025 Club World Cup, 2026 cycle). No systemic naming-template violation; this looks like ad-hoc slug creation around tournament cycles without brand-affiliation discipline. The new `context/brand-ip-constraints.md` Step 4c discipline prevents future violations of this pattern.
+The whitelabel slug-naming convention pre-dates the workforce's Brand IP architecture. The violation set is small (15 distinct URLs across 662 collections, ~2% of the collection catalog) and concentrated in tournament-scoped pages (2022 retrospectives, 2025 Club Cup, 2026 cycle). No systemic naming-template violation; this looks like ad-hoc slug creation around tournament cycles without brand-affiliation discipline. The new `context/brand-ip-constraints.md` Step 4c discipline prevents future violations of this pattern at slug-creation time; the existing slug violations stay as-is per Mike's exception but their customer-facing copy gets brought into compliance through the ongoing audit-and-regen workflow.
+
+---
+
+## Mike's Exception Decision (2026-05-17)
+
+After reviewing this audit at GATE, Mike documented a business exception for all existing slugs with FIFA terminology violations.
+
+**Decision:** existing slugs stay as-is. No slug renames, no 301 redirects, no URL changes.
+
+**Reasoning:** any URL change carries equity-risk that Mike judges higher than the legal-exposure benefit of cleaning up structural slug compliance. Mike's call: protect existing equity on every URL that has any, defer to copy-level compliance on the customer-facing surface, accept the slug-level brand IP exposure as known and documented.
+
+**Scope of exception:**
+
+- **Slug-level (structural URL):** all 15 non-Adidas violations stay as-is. Tier A.2 (4 URLs) and Tier A.3 (11 URLs) both treated under the exception. The workforce slug-rename recommendations originally documented in Phase 3 of this audit are preserved below for the audit trail but are SUPERSEDED.
+- **Copy-level (customer-facing fields):** full constraint compliance still required on each of the 15 URLs. This is the actively-enforced surface going forward. Implementation through ORIN's ongoing whitelabel audit-and-regen workflow per `context/workforce-conventions.md` page-optimization deliverable structure.
+
+**Where the exception is durable:** documented in `context/brand-ip-constraints.md` under the "Exceptions and grandfathered violations" section. All future agent work reads that file at startup; Step 4c brand-affiliation classification still applies; Gate 11 brand IP compliance scan still applies; the exception only governs the slug-rename question, not the copy-compliance question.
+
+**Where Mike may revisit the exception:** annually (routine re-evaluation), or earlier if Adidas / legal counsel flag a slug as a priority remediation. Per-URL re-evaluation criteria documented in the constraints file.
 
 ---
 
@@ -111,74 +131,65 @@ The top-pages CSV cuts off at row 1000 with a minimum of 14 clicks over 12 month
 
 No violation hits both the position-<20 AND clicks->100 thresholds. The strongest violation (`/collections/2026-fifa-world-cup-qualified-teams-accessories`, pos 10.79) has only 36 clicks. The highest-click violation (`/collections/2026-fifa-world-cup`, 50 clicks) has position 16.94 and 0.72% CTR (sub-1%, indicating weak SERP appeal). None has the equity profile to warrant the "leave alone, accept the exposure" call.
 
-### Tier A.2 (MEDIUM EQUITY, Mike per-URL decision)
+### Tier A.2 (MEDIUM EQUITY)
 
 **Criterion (interpreted to fit observed data):** Average position 10-30 with measurable click volume (10-100 clicks/12mo). Page 1-2 of Google but click volume modest. Mixed trend signals or uncertain ranking stability.
 
 Four violations qualify:
 
-| Slug | Position | Clicks (12mo) | Impressions (12mo) | CTR | Brand class | Recommendation framing |
+| Slug | Position | Clicks (12mo) | Impressions (12mo) | CTR | Brand class | Mike's decision (2026-05-17) |
 |---|---|---|---|---|---|---|
-| `/collections/2026-fifa-world-cup-qualified-teams-accessories` | 10.79 | 36 | 6,085 | 0.59% | brand-agnostic umbrella | Page 1, weak CTR (sub-1%). The position is good but the click yield is low, suggesting users are seeing it in SERP and choosing other results. Rename + redirect risk is moderate; equity loss could be 30-50 clicks/year if redirect underperforms; equity-preservation worth roughly $X (not quantified, low absolute). |
-| `/collections/2026-fifa-world-cup-qualified-teams` | 12.32 | 39 | 9,906 | 0.39% | brand-agnostic umbrella | Page 2 top, very weak CTR. Same posture as #1; the impression volume is high but conversion to clicks is weak. Rename + redirect risk moderate. |
-| `/collections/world-cup-2022-accessories` | 13.12 | 15 | 1,996 | 0.75% | brand-agnostic umbrella | Retrospective 2022 page. Page 2 ranking. Click volume tail and declining-by-relevance (2022 tournament is 4 years stale). Lean toward rename + redirect: relevance is fading regardless of brand IP issue. |
-| `/collections/2026-fifa-world-cup` | 16.94 | 50 | 6,923 | 0.72% | brand-agnostic umbrella | Page 2, modest clicks. The highest-click violation but position weak. Rename + redirect risk moderate; the page is generic enough that a Federation-anchored successor slug should rank for the same intent. |
+| `/collections/2026-fifa-world-cup-qualified-teams-accessories` | 10.79 | 36 | 6,085 | 0.59% | brand-agnostic umbrella | **EXCEPTION: slug stays as-is** per Mike's business decision (no equity risk acceptable; copy-level compliance only). Original workforce rename rec (preserved for audit trail): `/collections/2026-national-team-qualified-accessories`. SUPERSEDED. |
+| `/collections/2026-fifa-world-cup-qualified-teams` | 12.32 | 39 | 9,906 | 0.39% | brand-agnostic umbrella | **EXCEPTION: slug stays as-is.** Original workforce rename rec (preserved): `/collections/2026-qualified-national-teams`. SUPERSEDED. |
+| `/collections/world-cup-2022-accessories` | 13.12 | 15 | 1,996 | 0.75% | brand-agnostic umbrella | **EXCEPTION: slug stays as-is.** Original workforce rename rec (preserved): redirect to `/collections/national-teams-accessories` (retrospective fading). SUPERSEDED. |
+| `/collections/2026-fifa-world-cup` | 16.94 | 50 | 6,923 | 0.72% | brand-agnostic umbrella | **EXCEPTION: slug stays as-is.** Original workforce rename rec (preserved): `/collections/2026-international-tournament` (Federation-anchored). SUPERSEDED. |
 
-**Workforce recommendation per URL (Mike decides):**
-- `/collections/2026-fifa-world-cup-qualified-teams-accessories`: **rename now** (modest equity, replaceable with Federation-anchored slug; suggested target slug `/collections/2026-national-team-qualified-accessories` redirected from the current).
-- `/collections/2026-fifa-world-cup-qualified-teams`: **rename now** (same logic; suggested target slug `/collections/2026-qualified-national-teams`).
-- `/collections/world-cup-2022-accessories`: **rename + redirect to evergreen** (suggested target `/collections/national-teams-accessories` or `/collections/fan-shop-accessories`; the 2022 retrospective is fading anyway).
-- `/collections/2026-fifa-world-cup`: **rename now** (suggested target slug `/collections/2026-international-tournament` or `/collections/2026-tournament-soccer`; the Federation-anchored alternative naming captures the same intent).
+**Exception scope reminder:** the slug stays. The customer-facing copy on each of these 4 URLs is still required to comply with the brand IP constraint when ORIN audits and regenerates each page in future whitelabel audit work. Slug compliance: deferred. Copy compliance: actively enforced.
 
-All four are workforce-recommended for remediation but routed through Mike's per-URL decision per Tier A.2 protocol. Mike's other option per URL: defer remediation, document as known exposure, re-evaluate annually or if Adidas/legal flags.
-
-### Tier A.3 (LOW EQUITY, rename + 301 redirect recommended)
+### Tier A.3 (LOW EQUITY)
 
 **Criterion:** Average position > 50 OR 12-month clicks < 10 OR near-zero impressions OR declining trend with negligible volume. Operationally for this audit: violations NOT in the GSC top-pages CSV (< 14 clicks over 12 months) plus violations with negligible measured traffic.
 
-**Result: 11 collections qualify for Tier A.3 remediation.** Listed in the Phase 3 remediation map below.
+**Result: 11 collections qualify for Tier A.3.** Listed in the Phase 3 table below.
 
 ---
 
-## Phase 3: Tier A.3 Remediation Map
+## Phase 3: Tier A.3 Documented Exception Map
 
-For each Tier A.3 violation, the recommended slug rename and 301 redirect target. Implementation via Shopify admin Online Store > Navigation > URL Redirects (same workflow as the May 8 404 remediation). Equity-loss risk is Low across the board for Tier A.3 by definition; below-cutoff GSC traffic means a redirect that consolidates equity into a Federation-anchored successor is net-positive even if some long-tail rankings shift.
+For each Tier A.3 violation: the original workforce slug-rename recommendation is preserved for the audit trail, then superseded by Mike's exception decision (slug stays as-is, copy-level compliance only). When ORIN audits and regenerates each of these collections in future whitelabel audit work, the brief brings the customer-facing copy into compliance while preserving the existing slug.
 
-| # | Current slug (violation) | Recommended clean slug | 301 redirect target | Equity-loss risk | Implementation notes |
-|---|---|---|---|---|---|
-| 1 | `/collections/2025-fifa-club-world-cup` | `/collections/2025-club-tournament` | `/collections/2025-club-tournament` | Low | Brand-agnostic umbrella; Federation-anchored successor preserves topical intent. |
-| 2 | `/collections/2026-fifa-world-cup-logo-accessories` | (consider deprecation; "logo accessories" implies official FIFA branded merch which IS the FIFA commercial context) | redirect to `/collections/2026-national-team-soccer-accessories` (Collection #2 in current whitelabel audit) | Low | If the collection genuinely sells official FIFA-branded logo merch, the slug AND the product set itself are brand-IP-questionable. Recommend Mike review the actual product mix before remediating. |
-| 3 | `/collections/2026-fifa-world-cup-retro-gear` | `/collections/2026-retro-national-team-gear` | `/collections/2026-retro-national-team-gear` | Low | Brand-agnostic; "retro" framing preserved. |
-| 4 | `/collections/fifa-2023-womens-world-cup` | `/collections/2023-womens-international-tournament` | `/collections/womens-national-teams` (evergreen successor; 2023 retrospective fading) | Low | Retrospective; recommend redirecting to evergreen women's national teams collection rather than creating a 2023-scoped successor that will also fade. |
-| 5 | `/collections/fifa-world-cup-2022-gear` | (deprecate) | `/collections/national-teams` | Low | Retrospective 2022; 4 years stale; redirect to evergreen national-teams umbrella for maximum equity preservation. |
-| 6 | `/collections/nike-mercurial-cr7-2022-world-cup-pack` | `/collections/nike-mercurial-cr7-2022-pack` | `/collections/nike-mercurial-cr7-2022-pack` | Low | Nike-prefixed page; removing "world-cup" from the slug eliminates the brand IP violation without changing the product scope. CR7 + Mercurial + 2022 still uniquely identifies the product set. |
-| 7 | `/collections/puma-2025-club-world-cup-kidsuper-soccer-jerseys` | `/collections/puma-2025-club-tournament-kidsuper-soccer-jerseys` | `/collections/puma-2025-club-tournament-kidsuper-soccer-jerseys` | Low | Puma-prefixed page; "club-tournament" substitution preserves topical reference without invoking FIFA. |
-| 8 | `/collections/world-cup-2022-balls` | (deprecate) | `/collections/soccer-balls` | Low | Retrospective 2022; redirect to evergreen soccer balls collection. |
-| 9 | `/collections/world-cup-2026-keychains` | `/collections/2026-national-team-keychains` | `/collections/2026-national-team-keychains` | Low | Federation-anchored substitution. |
-| 10 | `/collections/world-cup-soccer-balls` | (deprecate) | `/collections/soccer-balls` | Low | Generic violation slug; redirect to evergreen ball collection. |
-| 11 | `/collections/nike-2026-fifa-world-cup-soccer-jerseys` | `/collections/nike-2026-national-team-soccer-jerseys` | `/collections/nike-2026-national-team-soccer-jerseys` | Low | Nike-prefixed page (violation); Federation-anchored successor. **Separate VERITAS investigation needed first** to confirm the current URL's visibility status (live, not in sitemap, not in GSC top-pages: may be unpublished, draft, or sales-channel-off). Resolve visibility before remediation; otherwise the remediation may shift state in an unintended way. |
+| # | Current slug (violation) | Original workforce rename rec (SUPERSEDED) | Mike's decision (2026-05-17) | Copy-compliance follow-up |
+|---|---|---|---|---|
+| 1 | `/collections/2025-fifa-club-world-cup` | `/collections/2025-club-tournament` | **EXCEPTION: slug stays.** | Copy on this page audited and regenerated when whitelabel audit reaches it. |
+| 2 | `/collections/2026-fifa-world-cup-logo-accessories` | redirect to `/collections/2026-national-team-soccer-accessories` | **EXCEPTION: slug stays.** Separate question: Mike should review the product mix on this collection. If the actual products are official FIFA-branded logo merch, that is a deeper brand IP question than slug naming. | Copy audit + product-mix review when whitelabel audit reaches it. |
+| 3 | `/collections/2026-fifa-world-cup-retro-gear` | `/collections/2026-retro-national-team-gear` | **EXCEPTION: slug stays.** | Copy audit on next whitelabel pass. |
+| 4 | `/collections/fifa-2023-womens-world-cup` | redirect to `/collections/womens-national-teams` | **EXCEPTION: slug stays.** | Copy audit on next whitelabel pass. |
+| 5 | `/collections/fifa-world-cup-2022-gear` | redirect to `/collections/national-teams` | **EXCEPTION: slug stays.** | Copy audit on next whitelabel pass. |
+| 6 | `/collections/nike-mercurial-cr7-2022-world-cup-pack` | `/collections/nike-mercurial-cr7-2022-pack` | **EXCEPTION: slug stays** despite brand-prefix + FIFA-term contradiction. Mike's call to apply uniformly. | Copy audit (Nike-licensed page; copy must use Federation-anchored substitution). |
+| 7 | `/collections/puma-2025-club-world-cup-kidsuper-soccer-jerseys` | `/collections/puma-2025-club-tournament-kidsuper-soccer-jerseys` | **EXCEPTION: slug stays** despite brand-prefix + FIFA-term contradiction. | Copy audit (Puma-licensed page; copy must use Federation-anchored substitution). |
+| 8 | `/collections/world-cup-2022-balls` | redirect to `/collections/soccer-balls` | **EXCEPTION: slug stays.** | Copy audit on next whitelabel pass. |
+| 9 | `/collections/world-cup-2026-keychains` | `/collections/2026-national-team-keychains` | **EXCEPTION: slug stays.** | Copy audit on next whitelabel pass. |
+| 10 | `/collections/world-cup-soccer-balls` | redirect to `/collections/soccer-balls` | **EXCEPTION: slug stays.** | Copy audit on next whitelabel pass. |
+| 11 | `/collections/nike-2026-fifa-world-cup-soccer-jerseys` | `/collections/nike-2026-national-team-soccer-jerseys` | **EXCEPTION: slug stays.** VERITAS visibility investigation still recommended (live but not in sitemap, not in GSC top-pages: may be unpublished / sales-channel-off / metafield-hidden). | Copy audit AFTER VERITAS visibility investigation resolves the URL's state. |
 
-**Implementation summary for Mike (Tier A.3):**
-- 11 slug renames + 301 redirects
-- 5 redirects to net-new Federation-anchored slugs (#1, #3, #6, #7, #9)
-- 6 redirects to existing evergreen collections (#2, #4, #5, #8, #10, #11 if VERITAS clears it)
-- All Low equity-loss risk
-- Same Shopify admin URL Redirects workflow as the May 8 404 remediation
+**Implementation summary (Tier A.3 under exception):**
+
+- 0 slug renames.
+- 0 301 redirects.
+- 11 URLs documented as known slug-level exposures with copy-level compliance follow-up routed through ongoing whitelabel audit workflow.
 
 ---
 
-## Phase 4: Tier A.2 Per-URL Decisions Needed
+## Phase 4: Tier A.2 Decisions Documented
 
-See Phase 2 Tier A.2 table above. Four violations require Mike's per-URL decision: rename now (with redirect) vs defer (document as known exposure). Workforce recommendation per URL is provided alongside each option.
+See Phase 2 Tier A.2 table above. Mike's exception decision applied to all four:
 
-### Summary table for Mike
-
-| Slug | Workforce recommendation | Mike's decision needed |
+| Slug | Original workforce rec | Mike's decision (2026-05-17) |
 |---|---|---|
-| `/collections/2026-fifa-world-cup-qualified-teams-accessories` | Rename now → `/collections/2026-national-team-qualified-accessories` | [Rename / Defer] |
-| `/collections/2026-fifa-world-cup-qualified-teams` | Rename now → `/collections/2026-qualified-national-teams` | [Rename / Defer] |
-| `/collections/world-cup-2022-accessories` | Rename now → redirect to `/collections/national-teams-accessories` (or `/collections/fan-shop-accessories`) | [Rename / Defer] |
-| `/collections/2026-fifa-world-cup` | Rename now → `/collections/2026-international-tournament` (or `/collections/2026-tournament-soccer`) | [Rename / Defer] |
+| `/collections/2026-fifa-world-cup-qualified-teams-accessories` | Rename to `/collections/2026-national-team-qualified-accessories` | **EXCEPTION: slug stays.** Copy compliance via whitelabel audit. |
+| `/collections/2026-fifa-world-cup-qualified-teams` | Rename to `/collections/2026-qualified-national-teams` | **EXCEPTION: slug stays.** Copy compliance via whitelabel audit. |
+| `/collections/world-cup-2022-accessories` | Redirect to `/collections/national-teams-accessories` | **EXCEPTION: slug stays.** Copy compliance via whitelabel audit. |
+| `/collections/2026-fifa-world-cup` | Rename to `/collections/2026-international-tournament` | **EXCEPTION: slug stays.** Copy compliance via whitelabel audit. |
 
 ---
 
@@ -196,13 +207,14 @@ See Phase 2 Tier A.2 table above. Four violations require Mike's per-URL decisio
 
 5. **The retrospective collections are double-justified for remediation.** Both `/collections/world-cup-2022-accessories` (A.2) and the 2022/2023 retrospective collections in A.3 have fading topical relevance AND a brand IP violation. The remediation is net-positive on both axes: clean up the brand IP exposure AND consolidate fading equity into evergreen successors.
 
-### Recommended next steps
+### Next steps after Mike's exception decision (2026-05-17)
 
-1. **Mike reviews Tier A.2 (4 URLs).** Per-URL decision: rename or defer. Workforce recommends rename on all 4; Mike's call.
-2. **Mike approves Tier A.3 remediation map (11 URLs).** Once approved, implementation routes through Shopify admin URL Redirects same as the May 8 404 remediation workflow.
-3. **VERITAS investigates 4 live-but-not-in-sitemap collections** (`/collections/2026-fifa-world-cup`, `/collections/2026-fifa-world-cup-qualified-teams`, `/collections/2026-fifa-world-cup-qualified-teams-accessories`, `/collections/nike-2026-fifa-world-cup-soccer-jerseys`) to determine visibility status (unpublished / sales-channel-off / metafield-hidden / other) before the rename remediations land for those URLs.
-4. **VERITAS adds the brand IP scan to the routine sitemap refresh script** (`scripts/_build_sitemap_state.py`) so future collection slug additions get auto-flagged at sitemap refresh time. Routes to a separate VERITAS brief.
-5. **Sitemap-state.md refresh cadence cross-reference with GSC top-pages.** The 2026-05-08 sitemap snapshot missed live collections that GSC sees. Recommend the next sitemap-state.md refresh include a cross-reference pass against the latest GSC top-pages CSV so the "live but not in sitemap" cohort is documented inline rather than discovered audit-by-audit.
+1. **Tier A.2 (4 URLs): RESOLVED.** Exception applied per Mike's business decision; slugs stay as-is. Copy-level compliance routed through ongoing whitelabel audit-and-regen workflow when ORIN reaches each page.
+2. **Tier A.3 (11 URLs): RESOLVED.** Exception applied; slugs stay as-is. Copy-level compliance routed through ongoing whitelabel audit-and-regen workflow.
+3. **VERITAS visibility investigation (APPROVED, separate brief):** 4 live-but-not-in-sitemap collections (`/collections/2026-fifa-world-cup`, `/collections/2026-fifa-world-cup-qualified-teams`, `/collections/2026-fifa-world-cup-qualified-teams-accessories`, `/collections/nike-2026-fifa-world-cup-soccer-jerseys`). Worth understanding visibility status (unpublished / sales-channel-off / metafield-hidden / other) regardless of the slug-remediation question. Mike approved the VERITAS brief; not blocking on this audit's closure.
+4. **VERITAS sitemap-refresh script enhancement (APPROVED, separate brief):** add brand IP scan to `scripts/_build_sitemap_state.py` so future collection slug additions get auto-flagged at refresh time. Defensive automation. Mike approved.
+5. **Sitemap-state.md refresh cadence cross-reference with GSC top-pages.** The 2026-05-08 sitemap snapshot missed live collections that GSC sees. Recommend the next sitemap-state.md refresh include a cross-reference pass against the latest GSC top-pages CSV so the "live but not in sitemap" cohort is documented inline rather than discovered audit-by-audit. Routes to VERITAS alongside the script enhancement (#4).
+6. **Copy-compliance follow-up for the 15 grandfathered violations.** As ORIN works through whitelabel audit Collections #2, #3, and beyond, copy on any of the 15 violation URLs gets brought into compliance with `context/brand-ip-constraints.md`. The slug stays per exception; the customer-facing fields get Federation-anchored substitution. No standalone remediation pass needed; this rides on the ongoing audit workflow.
 
 ---
 
@@ -218,7 +230,7 @@ See Phase 2 Tier A.2 table above. Four violations require Mike's per-URL decisio
 
 - **Severity: High.** Brand IP violations create legal exposure regardless of SEO equity. The Tier A framework manages the SEO-equity preservation question; the legal-exposure question is binary.
 - **Confidence: Medium-High.** Discovery is comprehensive against the two best available sources (sitemap-state.md and GSC top-pages CSV). Position trend signals (improving / stable / declining) were not pulled from the weekly-performance CSV; for the 4 A.2 violations, Mike may want trend data before making per-URL decisions. Workforce can pull that on request.
-- **Expected impact:** zero direct SEO impact from Tier A.3 remediation (by definition; below-cutoff traffic). Modest equity-shift risk on Tier A.2 (4 URLs, total 140 clicks/year combined, replaceable with Federation-anchored successors). High legal-exposure reduction from consolidating all 15 violations into brand-IP-compliant successors.
+- **Expected impact (under Mike's exception decision):** zero SEO impact from slug-level work (no renames, no redirects). Brand IP exposure at the slug level remains and is now documented as a known business-decision exception in `context/brand-ip-constraints.md`. Copy-level legal exposure on the 15 violation URLs gets remediated incrementally as ORIN audits and regenerates each page through the ongoing whitelabel audit workflow.
 
 ## Self-verification status
 
@@ -228,10 +240,13 @@ See Phase 2 Tier A.2 table above. Four violations require Mike's per-URL decisio
 - Tiering criteria match Mike's specification in the 2026-05-16 directive (with the noted interpretation for the position-<20 + clicks-10-100 cross-zone, which Mike's strict criteria leave ambiguous; flagged transparently in Phase 2).
 - Voice check to run on this brief at commit time per workforce discipline.
 
-## Held at GATE for Mike review
+## Decisions Documented (2026-05-17)
 
-Awaiting Mike's:
-1. Decisions on the 4 Tier A.2 per-URL cases.
-2. Approval to proceed with the Tier A.3 remediation map (11 URLs).
-3. Approval to route the 4 live-but-not-in-sitemap collections to VERITAS for visibility investigation before remediation.
-4. Approval to route the routine sitemap-refresh brand IP scan addition to VERITAS as a separate brief.
+Mike's calls on GATE review:
+
+1. **Tier A.2 (4 URLs):** EXCEPTION applied. Slugs stay as-is. Copy compliance via whitelabel audit workflow.
+2. **Tier A.3 (11 URLs):** EXCEPTION applied. Slugs stay as-is. Copy compliance via whitelabel audit workflow.
+3. **VERITAS visibility investigation** (4 live-but-not-in-sitemap collections): APPROVED as separate brief.
+4. **VERITAS sitemap-refresh script enhancement** (brand IP scan in `scripts/_build_sitemap_state.py`): APPROVED as separate brief.
+
+Audit closed. Slug-level work: complete (exception applied + documented). Copy-level work: ongoing through whitelabel audit-and-regen pipeline.

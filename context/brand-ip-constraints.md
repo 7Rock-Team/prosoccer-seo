@@ -76,3 +76,14 @@ Common as of 2026 (verify each during research, not from this list):
 - Castore and others: smaller federations
 
 Treat this list as a starting reference, not authoritative. Verify per team during topic research.
+
+## Exceptions and grandfathered violations
+
+Mike has documented a business exception for existing slugs with FIFA terminology violations: existing slugs stay as-is even when in violation, to avoid any equity risk from URL changes. Customer-facing copy on those pages is still required to be in compliance per the constraint.
+
+This exception applies to:
+
+- All 15 non-Adidas collection slugs identified in the 2026-05-16 URL Architecture Brand IP Audit (`deliverables/technical-fixes/2026-05-16_url-architecture-brand-ip-audit.md`).
+- Future cases where slug rename would risk meaningful ranking equity (case-by-case decision).
+
+Exception scope: structural URL only. Customer-facing copy remains under full constraint discipline.

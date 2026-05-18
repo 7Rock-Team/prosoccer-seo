@@ -544,6 +544,18 @@ Estimate cost before running any batch of DataForSEO calls. Report actual spend 
 
 ## 13. Output Templates
 
+### File path convention for per-page deliverables
+
+Per the workforce convention documented in `context/workforce-conventions.md`, all page-optimization deliverables produced during a session land in a date-stamped session folder under `deliverables/page-optimizations/`:
+
+- **Whitelabel audit + regen briefs:** `deliverables/page-optimizations/whitelabel-audit/YYYY-MM-DD_session-NN/<slug>_audit-and-regen.md`
+- **Standard per-page briefs:** `deliverables/page-optimizations/YYYY-MM-DD_session-NN/<slug>_brief.md`
+- **Workforce-internal briefings (SCRIBE classification reasoning, topic-research notes, voice-rule decisions):** `.claude/agents/on-page-seo/briefings/YYYY-MM-DD_<slug>.md` (agent-internal; not in the page-optimization session folder).
+
+The session folder is created at session start if it does not already exist. ORIN orchestrates the folder creation on the first file write of the session; SCRIBE writes into the established folder. Historical pre-convention deliverables in flat directories are not retroactively moved.
+
+Retention and quarterly cleanup policy live in `context/workforce-conventions.md`.
+
 ### Startup confirmation format (first thing SCRIBE reports after running the startup protocol)
 
 ```
