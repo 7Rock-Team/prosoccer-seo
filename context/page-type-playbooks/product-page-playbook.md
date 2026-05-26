@@ -267,9 +267,21 @@ Annotation:
 - Tyler primary in the fit guidance and the use-case detail. Mike the Coach surfaces in the durability and team-issue framing.
 - The store doesn't appear in the body. Bulk-order and team-issue routing for Mike the Coach happens via the team-orders page, not via the product-page description.
 
+## Internal links only on product pages
+
+PDP copy includes internal links to ProSoccer collection or product pages ONLY. External links are forbidden on PDPs because:
+
+- They leak link equity off-site during the purchase consideration window.
+- They give the customer an exit ramp from the purchase decision.
+- Authority signals through external links belong on homepage and blog content, not PDPs.
+
+If body copy references external tournaments, events, or context (Asian Cup, Champions League, Premier League, etc.), keep the reference as plain text. Do not hyperlink to external sites. If the reference needs a destination, link to an internal ProSoccer page instead (e.g., a related collection).
+
+This policy is product-page-specific. Collection pages may include external links per the collection-page playbook's link strategy.
+
 ## Internal link strategy
 
-Same architecture as the collection-page playbook ('Internal link strategy' in `context/page-type-playbooks/collection-page-playbook.md'), adapted for product-page content. 1 to 2 internal links maximum in the long description body.
+Same architecture as the collection-page playbook ('Internal link strategy' in `context/page-type-playbooks/collection-page-playbook.md`), adapted for product-page content. 1 to 2 internal links maximum in the long description body.
 
 ### Selection rules
 

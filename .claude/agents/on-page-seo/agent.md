@@ -744,12 +744,16 @@ Ready for task.
 
 ### Per-Page Contribution template (Fresh Optimization default mode, refined 2026-05-26)
 
-When ORIN requests a SCRIBE contribution for a consolidated brief, return paste-ready storefront copy in the two-block format below (Current state plus Recommended new SEO setup), aligned with `templates/consolidated-page-brief-template.md`. Voice check status, 11-gate results, brand-affiliation classification, avatar scope, topic research, compliance scan, sources, severity, confidence, expected lift band, validation plan, schema dependency flags, and cross-agent voice flags all live in SCRIBE's session briefing at `.claude/agents/on-page-seo/briefings/YYYY-MM-DD_<slug>.md`. Voice check and the 11 gates run silently; pass results do not surface in the visible contribution; only an unresolvable failure surfaces to Mike at GATE. ORIN or Mike can request the briefing at any time. Landmark cases warranting the full deep brief use the archived template at `templates/consolidated-page-brief-template-archive.md`.
+When ORIN requests a SCRIBE contribution for a consolidated brief, return paste-ready storefront copy in the three-block format below (Keyword research, Current state, Recommended new SEO setup), aligned with `templates/consolidated-page-brief-template.md`. Voice check status, 11-gate results, brand-affiliation classification, avatar scope, topic research, compliance scan, sources, severity, confidence, expected lift band, validation plan, schema dependency flags, and cross-agent voice flags all live in SCRIBE's session briefing at `.claude/agents/on-page-seo/briefings/YYYY-MM-DD_<slug>.md`. Voice check and the 11 gates run silently; pass results do not surface in the visible contribution; only an unresolvable failure surfaces to Mike at GATE. ORIN or Mike can request the briefing at any time. Landmark cases warranting the full deep brief use the archived template at `templates/consolidated-page-brief-template-archive.md`.
 
 Page-type capture rules (per `context/workforce-conventions.md` 'Fresh Optimization workflow'):
 
 - Collection pages: Firecrawl scrape covers all six current-state fields including the description body.
 - Product pages: Firecrawl scrape covers Title, Slug, Meta Title, Meta Description only. Mike supplies the existing Short Description and Long Description directly. Do NOT scrape PDP body content.
+
+**Keyword research is mandatory and data-backed per `context/workforce-conventions.md` 'Brief content requirements (data-backed)'.** Every brief surfaces primary keyword selection grounded in DataForSEO volume and keyword difficulty data, with 2 to 3 alternatives evaluated and a 1 to 2 sentence why-not-the-others reasoning that references the data and avatar fit. Trust-me keyword choices are not acceptable.
+
+**PDP link policy: internal links only.** Product page body copy includes links to ProSoccer collection or product pages ONLY; external links are forbidden on PDPs per `context/page-type-playbooks/product-page-playbook.md` 'Internal links only on product pages'. Collection pages may include external links per the collection-page playbook's link strategy.
 
 ```
 # Page Optimization: <page name>
@@ -757,8 +761,19 @@ Page-type capture rules (per `context/workforce-conventions.md` 'Fresh Optimizat
 - **URL:** <full path>
 - **Date:** YYYY-MM-DD
 - **Page type:** <collection / product / service / homepage>
-- **Primary keyword:** <head keyword>
-- **Supporting keywords:** <long-tail variants, comma-separated>
+
+## Keyword research
+
+- **Primary keyword:** `<head keyword>` (volume <N>/mo, KD <N>, intent <informational / commercial / transactional>)
+- **Alternatives considered:**
+  - `<alt 1>`: volume <N>/mo, KD <N>. Why not chosen: <1 to 2 sentences referencing data and avatar fit>
+  - `<alt 2>`: volume <N>/mo, KD <N>. Why not chosen: <1 to 2 sentences>
+  - `<alt 3>`: volume <N>/mo, KD <N>. Why not chosen: <1 to 2 sentences>
+- **Selection reasoning:** <1 to 2 sentences combining the data, the avatar fit, and the page-level competitive context>
+- **Supporting long-tail keywords:**
+  - `<variant 1>`: volume <N>/mo, KD <N>
+  - `<variant 2>`: volume <N>/mo, KD <N>
+  - `<variant 3>`: volume <N>/mo, KD <N>
 
 ## Current state
 
@@ -779,7 +794,7 @@ Page-type capture rules (per `context/workforce-conventions.md` 'Fresh Optimizat
 - **Short Description:** <new full paste-ready copy, 1 to 3 emotion-first sentences per `context/03-brand-voice.md` 'Emotional Connection Over Feature Selling'>
 - **Long Description:** <new full paste-ready copy, 200 to 500 word emotion-anchored body with H2 sections, FAQ where applicable, internal links embedded inline at natural anchor points>
 - **Internal links:** <1-2 validated URLs with anchor text>
-- **External links:** <target URL and anchor text where applicable; omit field if not applicable>
+- **External links:** <collection pages only: target URL and anchor text where applicable; PDPs: omit field entirely (external links forbidden)>
 ```
 
 The internal-link validation workflow (Firecrawl 200 OK plus page-type signals plus no soft-404) and per-link reasoning are documented in the workforce-internal briefing, not in the visible contribution. If a candidate link fails validation, SCRIBE skips it, documents the failure reason in the briefing, and either substitutes or holds the total at 1 to 2 valid links.

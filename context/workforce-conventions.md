@@ -77,6 +77,35 @@ The whitelabel audit mode adds a `## Comparison with current state` section to t
 4. Workforce-internal briefing stays a separate file and is not surfaced at gate review by default.
 5. For batched sessions, context loads once per session, not per page.
 
+## Brief content requirements (data-backed)
+
+Both PDP and collection-page briefs must surface keyword research data and respect the product-page link policy. These are hard requirements, not optional.
+
+### Keyword research surfacing (mandatory on every brief)
+
+Every visible brief must include a `## Keyword research` block above the Current state block with:
+
+- Primary keyword with monthly search volume and keyword difficulty, intent classification (informational, commercial, transactional). DataForSEO is the source of record.
+- 2 to 3 alternative candidates evaluated, each with volume and KD plus a 1 to 2 sentence why-not-chosen reasoning that references the data and avatar fit.
+- Selection reasoning: 1 to 2 sentences combining the data, the avatar fit, and the page-level competitive context.
+- Supporting long-tail keywords with volume data.
+
+Trust-me keyword choices are not acceptable for agency-grade work. The primary keyword selection must be defensible against "why this keyword and not the other one" with concrete data.
+
+The visible '## Keyword research' block format is canonical in `templates/consolidated-page-brief-template.md` and replicated in `.claude/agents/on-page-seo/agent.md` Section 13.
+
+### Product page link policy: internal only
+
+PDP body copy includes internal links to ProSoccer collection or product pages ONLY. External links are forbidden on PDPs. The reasoning:
+
+- External links leak link equity off-site during the purchase consideration window.
+- They give the customer an exit ramp from the purchase decision.
+- Authority signals through external links belong on homepage and blog content, not on PDPs.
+
+If body copy references external tournaments, events, or context (Asian Cup, Champions League, Premier League, etc.), keep the reference as plain text. Do not hyperlink to external sites. If the reference needs a destination, link to an internal ProSoccer page instead (e.g., a related collection).
+
+The PDP internal-link-only policy is canonical in `context/page-type-playbooks/product-page-playbook.md` 'Internal links only on product pages'. Collection-page external-link policy stays under the collection-page playbook's link strategy section.
+
 ## Cleanup and retention policy
 
 Page-optimization deliverables are operational artifacts with a finite useful life. The audit trail of who-decided-what lives in commit messages and PR descriptions; the deliverable file itself becomes stale once the recommendation has been implemented and either succeeded or been superseded.
@@ -119,5 +148,6 @@ The disposition note is the audit trail of why each folder was safely removable.
 ## Cross-references
 
 - `context/brand-ip-constraints.md` documents the FIFA terminology constraint that applies to all page-optimization deliverables produced under this folder structure.
-- `.claude/agents/on-page-seo/agent.md` Section 8 ("Handoff Patterns") and Section 13 ("Output Templates") reference this convention for the Fresh Optimization workflow and per-page brief file placement.
-- `templates/consolidated-page-brief-template.md` is the canonical brief format for the Fresh Optimization workflow described above.
+- `.claude/agents/on-page-seo/agent.md` Section 8 ("Handoff Patterns") and Section 13 ("Output Templates") reference this convention for the Fresh Optimization workflow, per-page brief file placement, and the mandatory keyword research block.
+- `templates/consolidated-page-brief-template.md` is the canonical brief format for the Fresh Optimization workflow described above, including the '## Keyword research' block.
+- `context/page-type-playbooks/product-page-playbook.md` 'Internal links only on product pages' is the canonical PDP link policy referenced above.

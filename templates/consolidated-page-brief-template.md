@@ -9,12 +9,13 @@ _Streamlined brief for Mike. Default mode is Fresh Optimization: visible content
 3. Capture current state per page type, per `context/workforce-conventions.md` 'Fresh Optimization workflow':
    - **Collection pages:** Firecrawl scrape covers Title, Slug, Meta Title, Meta Description, and the description body.
    - **Product pages:** Firecrawl scrape covers Title, Slug, Meta Title, Meta Description only. Mike supplies the existing Short Description and Long Description directly. Do NOT scrape PDP body content; wait for Mike to provide it.
-4. Topic research via Tavily scaled to familiarity: 2 to 5 queries for well-known topics (Mexico, Argentina, major brands), 5 to 10 for unfamiliar. Do not over-research what prior sessions already documented.
-5. Fill the brief below. Default visible content is the Current state block and the Recommended new SEO setup block.
-6. Validate every proposed internal link via Firecrawl (status code 200, page-type signals confirmed, no soft-404) per the matching playbook's link strategy (1 to 2 max).
-7. Run voice check (`scripts/voice_check.py`) and the 11 gates from `.claude/agents/on-page-seo/agent.md` Section 11 silently. Do NOT document results in the visible brief. Capture all results in the workforce-internal briefing at `.claude/agents/on-page-seo/briefings/YYYY-MM-DD_<slug>.md`. Surface a failure to Mike at GATE only if it cannot be resolved silently.
-8. Hold at GATE for Mike review.
-9. Append the matching row to `deliverables/tracking/collections-master.csv` or `products-master.csv` once Mike approves.
+4. **Keyword research via DataForSEO (mandatory, data-backed).** Pull volume and keyword difficulty for the primary keyword candidate plus 2 to 3 alternatives. Document data and selection reasoning in the visible '## Keyword research' block of the brief per `context/workforce-conventions.md` 'Brief content requirements (data-backed)'. Trust-me keyword choices are not acceptable.
+5. Topic research via Tavily scaled to familiarity: 2 to 5 queries for well-known topics (Mexico, Argentina, major brands), 5 to 10 for unfamiliar. Do not over-research what prior sessions already documented.
+6. Fill the brief below. Default visible content is the Keyword research block, the Current state block, and the Recommended new SEO setup block.
+7. Validate every proposed internal link via Firecrawl (status code 200, page-type signals confirmed, no soft-404) per the matching playbook's link strategy (1 to 2 max). For PDPs, external links are forbidden per `context/page-type-playbooks/product-page-playbook.md` 'Internal links only on product pages'.
+8. Run voice check (`scripts/voice_check.py`) and the 11 gates from `.claude/agents/on-page-seo/agent.md` Section 11 silently. Do NOT document results in the visible brief. Capture all results in the workforce-internal briefing at `.claude/agents/on-page-seo/briefings/YYYY-MM-DD_<slug>.md`. Surface a failure to Mike at GATE only if it cannot be resolved silently.
+9. Hold at GATE for Mike review.
+10. Append the matching row to `deliverables/tracking/collections-master.csv` or `products-master.csv` once Mike approves.
 
 ## Optional mode: Whitelabel audit
 
@@ -29,8 +30,19 @@ When Mike explicitly requests a whitelabel audit (not the default), insert a `##
 - **URL:** <full path>
 - **Date:** YYYY-MM-DD
 - **Page type:** <collection / product / service / homepage>
-- **Primary keyword:** <head keyword>
-- **Supporting keywords:** <long-tail variant 1, variant 2, variant 3>
+
+## Keyword research
+
+- **Primary keyword:** `<head keyword>` (volume <N>/mo, KD <N>, intent <informational / commercial / transactional>)
+- **Alternatives considered:**
+  - `<alt 1>`: volume <N>/mo, KD <N>. Why not chosen: <1 to 2 sentences referencing data and avatar fit>
+  - `<alt 2>`: volume <N>/mo, KD <N>. Why not chosen: <1 to 2 sentences>
+  - `<alt 3>`: volume <N>/mo, KD <N>. Why not chosen: <1 to 2 sentences>
+- **Selection reasoning:** <1 to 2 sentences combining the data, the avatar fit, and the page-level competitive context>
+- **Supporting long-tail keywords:**
+  - `<variant 1>`: volume <N>/mo, KD <N>
+  - `<variant 2>`: volume <N>/mo, KD <N>
+  - `<variant 3>`: volume <N>/mo, KD <N>
 
 ## Current state
 
@@ -51,4 +63,4 @@ When Mike explicitly requests a whitelabel audit (not the default), insert a `##
 - **Short Description:** <new full paste-ready copy>
 - **Long Description:** <new full paste-ready copy with H2 sections, FAQ where applicable, internal links embedded inline at natural anchor points>
 - **Internal links:** <1-2 validated URLs with anchor text>
-- **External links:** <target URL and anchor text where applicable; omit field if not applicable>
+- **External links:** <collection pages only: target URL and anchor text where applicable; PDPs: omit field entirely (external links forbidden per `context/page-type-playbooks/product-page-playbook.md` 'Internal links only on product pages')>
