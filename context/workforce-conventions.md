@@ -41,6 +41,42 @@ Per-page workforce-internal briefings (SCRIBE classification reasoning, KIRA key
 
 Existing flat-directory deliverables (e.g., `deliverables/page-optimizations/2026-05-08_mexico-v3.md`) stay where they are. Do NOT retroactively move historical files into session folders. The convention applies going forward; the audit trail of the convention transition is the git history.
 
+## Fresh Optimization workflow (default mode)
+
+Fresh Optimization is the default workflow for page-optimization deliverables produced by SCRIBE under ORIN orchestration. The whitelabel audit mode is opt-in and used only when Mike explicitly requests it.
+
+### Workflow steps
+
+1. Load context: page-type playbook matching the page (`context/page-type-playbooks/`), `context/brand-ip-constraints.md`, the six copy-writing principles in `context/03-brand-voice.md`.
+2. Capture current state per page type:
+   - **Collection pages:** Firecrawl scrape covers Title, Slug, Meta Title, Meta Description, and the description body.
+   - **Product pages:** Firecrawl scrape covers Title, Slug, Meta Title, Meta Description only. Mike supplies the existing Short Description and Long Description directly. SCRIBE does NOT scrape PDP body content; SCRIBE waits for Mike to provide it.
+3. Topic research via Tavily scaled to familiarity:
+   - Well-known topics (Mexico, Argentina, major brands): 2 to 5 queries.
+   - Unfamiliar topics: 5 to 10 queries.
+   - Do not over-research what prior sessions already documented.
+4. Generate the optimized brief in the format at `templates/consolidated-page-brief-template.md`. Default visible content is the Current state block and the Recommended new SEO setup block, nothing more.
+5. Validate every proposed internal link via Firecrawl (status code 200, page-type signals confirmed, no soft-404) per the matching playbook's link strategy (1 to 2 max).
+6. Run voice check (`scripts/voice_check.py`) and the 11 gates from `.claude/agents/on-page-seo/agent.md` Section 11 silently. Pass results are NOT surfaced in the visible brief; only an unresolvable failure surfaces to Mike. All gate results are documented in the workforce-internal briefing at `.claude/agents/on-page-seo/briefings/YYYY-MM-DD_<slug>.md`.
+7. Hold at GATE for Mike review.
+8. Append the matching row to `deliverables/tracking/collections-master.csv` or `products-master.csv` once Mike approves.
+
+### Workforce-internal briefing (preserved, not surfaced by default)
+
+The workforce-internal briefing at `.claude/agents/on-page-seo/briefings/YYYY-MM-DD_<slug>.md` continues to capture brand-affiliation classification, avatar scope, topic research findings, compliance scan results, per-string voice check status, 11-gate self-verify status, cost tracking, and any other workforce-internal context. Mike can request this briefing on demand at any time. It is not surfaced at gate review by default.
+
+### Optional mode: Whitelabel audit
+
+The whitelabel audit mode adds a `## Comparison with current state` section to the brief between the Current state block and the Recommended new SEO setup block, showing field-by-field deltas with reasoning. This mode is opt-in. Mike must explicitly request "whitelabel audit" (or equivalent phrasing) for the comparison section to appear in the brief. Without an explicit request, Fresh Optimization with no comparison narrative is the default.
+
+### Speed optimizations baked into Fresh Optimization
+
+1. Topic research scales to familiarity rather than running a fixed query count per page.
+2. Voice check and the 11 gates run silently; pass results do not surface; only unresolvable failures get flagged to Mike.
+3. No comparison table or audit narrative in the visible brief unless whitelabel audit mode is requested.
+4. Workforce-internal briefing stays a separate file and is not surfaced at gate review by default.
+5. For batched sessions, context loads once per session, not per page.
+
 ## Cleanup and retention policy
 
 Page-optimization deliverables are operational artifacts with a finite useful life. The audit trail of who-decided-what lives in commit messages and PR descriptions; the deliverable file itself becomes stale once the recommendation has been implemented and either succeeded or been superseded.
@@ -83,5 +119,5 @@ The disposition note is the audit trail of why each folder was safely removable.
 ## Cross-references
 
 - `context/brand-ip-constraints.md` documents the FIFA terminology constraint that applies to all page-optimization deliverables produced under this folder structure.
-- `.claude/agents/on-page-seo/agent.md` Section 13 ("Output Templates") references this convention for per-page brief file placement.
-- `templates/consolidated-page-brief-template.md` template-level file-path guidance may lag this convention until next template refresh; current canonical file-path convention is here.
+- `.claude/agents/on-page-seo/agent.md` Section 8 ("Handoff Patterns") and Section 13 ("Output Templates") reference this convention for the Fresh Optimization workflow and per-page brief file placement.
+- `templates/consolidated-page-brief-template.md` is the canonical brief format for the Fresh Optimization workflow described above.

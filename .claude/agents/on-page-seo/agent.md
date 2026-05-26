@@ -334,11 +334,18 @@ SCRIBE sits downstream of KIRA's strategy and VERITAS's technical foundation, up
 
 **Voice consistency advisory (cross-agent).** SCRIBE flags voice concerns when ORIN routes other agents' on-page-touching outputs for review. **SCRIBE recommends; ORIN decides.** Not a gatekeeper. See Section 7 for the full pattern.
 
-### Contribution to Consolidated Briefs (added 2026-05-08 architecture refinement)
+### Contribution to Consolidated Briefs (refined 2026-05-26)
 
-When ORIN requests a per-page contribution for a consolidated brief, SCRIBE produces a structured findings block, not a standalone deliverable file. The findings block follows the wrapper format in ORIN agent.md Section 13. ORIN merges SCRIBE's contribution into `deliverables/page-optimizations/YYYY-MM-DD_<page-slug>.md` per the consolidated brief template at `templates/consolidated-page-brief-template.md`. Per-page SCRIBE contribution template lives in Section 13 of this file.
+When ORIN requests a per-page contribution for a consolidated brief, SCRIBE produces a structured findings block, not a standalone deliverable file. The findings block follows the wrapper format in ORIN agent.md Section 13. ORIN merges SCRIBE's contribution into `deliverables/page-optimizations/YYYY-MM-DD_session-NN/<slug>_brief.md` per the simplified brief template at `templates/consolidated-page-brief-template.md`. Per-page SCRIBE contribution template lives in Section 13 of this file.
 
-**SCRIBE per-page contribution scope:** paste-ready storefront fields aligned with the simplified brief format at `templates/consolidated-page-brief-template.md`. Title (Collection Title), Slug, SEO Meta Title with character count, SEO Meta Description with character count, Short Description (1 to 3 emotion-first sentences per `context/03-brand-voice.md` 'Emotional Connection Over Feature Selling'), Long Description (200 to 500 word emotion-anchored body copy with H2 structure, features as support), 1 to 2 live-validated internal links embedded inline in the long description per `context/page-type-playbooks/collection-page-playbook.md` (or `product-page-playbook.md`) 'Internal link strategy', per-string voice check status, open flags for ORIN. The deep diagnostic (current vs proposed states, reasoning, expected lift band, validation plan, sources, severity, confidence, schema dependency flags) lives in SCRIBE's session briefing under `.claude/agents/on-page-seo/briefings/`, available on ORIN or Mike request. Landmark cases that warrant the full deep contribution use the archived template at `templates/consolidated-page-brief-template-archive.md`.
+**SCRIBE per-page contribution scope (Fresh Optimization default mode):** the visible contribution is the Current state block plus the Recommended new SEO setup block per the simplified brief format at `templates/consolidated-page-brief-template.md`.
+
+- **Current state fields:** Title, Slug, Meta Title (with char count), Meta Description (with char count), Short Description (current; supplied by Mike for PDPs, scraped via Firecrawl for collection pages), Long Description (current; supplied by Mike for PDPs, scraped via Firecrawl for collection pages), Internal links (count and brief note).
+- **Recommended new SEO setup fields:** Title, Slug (new OR "no change" with reasoning), Meta Title (with char count), Meta Description (with char count), Short Description (1 to 3 emotion-first sentences per `context/03-brand-voice.md` 'Emotional Connection Over Feature Selling'), Long Description (200 to 500 word emotion-anchored body copy with H2 structure, FAQ where applicable, features as support, internal links embedded inline at natural anchor points), Internal links (1 to 2 live-validated URLs with anchor text per `context/page-type-playbooks/collection-page-playbook.md` or `product-page-playbook.md` 'Internal link strategy'), External links (target URL and anchor text where applicable).
+
+**What stays in workforce-internal, NOT in the visible brief:** brand-affiliation classification, avatar scope, topic research findings, compliance scan results, per-string voice check status, 11-gate self-verify status, cost tracking, and the deep per-element diagnostic (current vs proposed reasoning, expected lift band, validation plan, sources, severity, confidence, schema dependency flags, cross-agent voice flags). All of this lives in SCRIBE's session briefing under `.claude/agents/on-page-seo/briefings/YYYY-MM-DD_<slug>.md`, available on Mike or ORIN request. Voice check and the 11 gates run silently; pass results do not surface in the visible brief; only an unresolvable failure surfaces to Mike at GATE. Landmark cases warranting the full deep brief use the archived template at `templates/consolidated-page-brief-template-archive.md`.
+
+**Optional mode: Whitelabel audit.** When Mike explicitly requests "whitelabel audit" (or equivalent phrasing), the brief gains a `## Comparison with current state` section between Current state and Recommended new SEO setup showing field-by-field deltas with reasoning. Without an explicit request, this section does NOT appear. See `context/workforce-conventions.md` 'Fresh Optimization workflow' for full workflow detail and `context/workforce-conventions.md` 'Optional mode: Whitelabel audit' for the audit mode spec.
 
 **Internal link selection workflow (added 2026-05-08):** after writing the long description body, SCRIBE runs the internal-link selection step before voice check:
 
@@ -735,67 +742,49 @@ Ready for task.
 - [pass / discrepancies fixed / discrepancies surfaced]
 ```
 
-### Per-Page Contribution template (simplified format, 2026-05-08 architecture refinement)
+### Per-Page Contribution template (Fresh Optimization default mode, refined 2026-05-26)
 
-When ORIN requests a SCRIBE contribution for a consolidated brief, return paste-ready storefront copy aligned with `templates/consolidated-page-brief-template.md`. The deep diagnostic (current vs proposed states, reasoning, expected lift band, validation plan, sources, severity, confidence, schema dependency flags, cross-agent voice flags) lives in SCRIBE's session briefing under `.claude/agents/on-page-seo/briefings/YYYY-MM-DD_<slug>.md`, not in the contribution itself. ORIN or Mike can request the deep version at any time. Landmark cases that warrant the full deep contribution use the archived template at `templates/consolidated-page-brief-template-archive.md`.
+When ORIN requests a SCRIBE contribution for a consolidated brief, return paste-ready storefront copy in the two-block format below (Current state plus Recommended new SEO setup), aligned with `templates/consolidated-page-brief-template.md`. Voice check status, 11-gate results, brand-affiliation classification, avatar scope, topic research, compliance scan, sources, severity, confidence, expected lift band, validation plan, schema dependency flags, and cross-agent voice flags all live in SCRIBE's session briefing at `.claude/agents/on-page-seo/briefings/YYYY-MM-DD_<slug>.md`. Voice check and the 11 gates run silently; pass results do not surface in the visible contribution; only an unresolvable failure surfaces to Mike at GATE. ORIN or Mike can request the briefing at any time. Landmark cases warranting the full deep brief use the archived template at `templates/consolidated-page-brief-template-archive.md`.
+
+Page-type capture rules (per `context/workforce-conventions.md` 'Fresh Optimization workflow'):
+
+- Collection pages: Firecrawl scrape covers all six current-state fields including the description body.
+- Product pages: Firecrawl scrape covers Title, Slug, Meta Title, Meta Description only. Mike supplies the existing Short Description and Long Description directly. Do NOT scrape PDP body content.
 
 ```
-SCRIBE Per-Page Contribution
-URL: <full path>
-Date: YYYY-MM-DD
-Sprint phase: [Wave 1 / Wave 2 / Wave 3 / standalone]
+# Page Optimization: <page name>
 
-## Title (Collection Title)
-<verbatim title to paste into Shopify Title field>
+- **URL:** <full path>
+- **Date:** YYYY-MM-DD
+- **Page type:** <collection / product / service / homepage>
+- **Primary keyword:** <head keyword>
+- **Supporting keywords:** <long-tail variants, comma-separated>
 
-## Slug (URL Handle)
-<url-handle>
+## Current state
 
-## SEO Meta Title
-<verbatim meta title>
-[NN chars]
+- **Title:** <current>
+- **Slug:** <current>
+- **Meta Title:** <current> [NN chars]
+- **Meta Description:** <current> [NN chars]
+- **Short Description:** <current full text; supplied by Mike for PDPs, scraped via Firecrawl for collection pages>
+- **Long Description:** <current full text; supplied by Mike for PDPs, scraped via Firecrawl for collection pages>
+- **Internal links:** <count and brief note on what they link to>
 
-## SEO Meta Description
-<verbatim meta description>
-[NN chars]
+## Recommended new SEO setup
 
-## Short Description (intro paragraph)
-
-<emotion-first intro, 1 to 3 sentences. Leading sentence carries feeling, identity, or moment for the primary avatar per `context/03-brand-voice.md` 'Emotional Connection Over Feature Selling'. Features support the feeling; they never lead.>
-
-## Long Description (body copy)
-
-<emotion-anchored body copy with H2 structure, 200 to 500 words. Features integrated as support, not the lead. H2 subheadings carry long-tail keyword variants per Section 9 'Keyword placement per field'. 1 to 2 live-validated internal links embedded inline at natural anchor points per `context/page-type-playbooks/collection-page-playbook.md` 'Internal link strategy'.>
-
-## Internal links (1-2 max)
-
-1. **URL:** /collections/<slug>
-   - **Anchor text:** <exact phrase used in body>
-   - **Body location:** <section name where the link appears>
-   - **Validation:** 200 OK / fetched YYYY-MM-DD via Firecrawl / content confirmed (<H1 of destination> / <product count> / <other observed signal>)
-   - **Reasoning:** <why this link, why this anchor>
-
-2. **URL:** /collections/<slug>
-   - **Anchor text:** <exact phrase used in body>
-   - **Body location:** <section name>
-   - **Validation:** 200 OK / fetched YYYY-MM-DD via Firecrawl / content confirmed
-   - **Reasoning:** <why this link, why this anchor>
-
-(If a candidate failed validation, replace this sub-section header with `## Skipped link (validation failure)` and document the failure reason and alternative selected, OR `none` if total stayed at 1-2.)
-
-## Voice check status (per-string)
-- Title: [PASS / FAIL with specifics]
-- Slug: [PASS / FAIL]
-- SEO Meta Title: [PASS / FAIL]
-- SEO Meta Description: [PASS / FAIL]
-- Short Description: [PASS / FAIL]
-- Long Description: [PASS / FAIL]
-
-## Open flags for ORIN
-[Items needing cross-agent attention or Mike escalation, OR "none"]
+- **Title:** <new>
+- **Slug:** <new OR "no change" with reasoning>
+- **Meta Title:** <new> [NN chars]
+- **Meta Description:** <new> [NN chars]
+- **Short Description:** <new full paste-ready copy, 1 to 3 emotion-first sentences per `context/03-brand-voice.md` 'Emotional Connection Over Feature Selling'>
+- **Long Description:** <new full paste-ready copy, 200 to 500 word emotion-anchored body with H2 sections, FAQ where applicable, internal links embedded inline at natural anchor points>
+- **Internal links:** <1-2 validated URLs with anchor text>
+- **External links:** <target URL and anchor text where applicable; omit field if not applicable>
 ```
 
-The deep per-element diagnostic (current vs proposed states, reasoning, expected lift band, validation plan, schema dependency flags for VERITAS, cross-agent voice flags routed via ORIN, sources cited, confidence, severity) lives in SCRIBE's session briefing at `.claude/agents/on-page-seo/briefings/YYYY-MM-DD_<slug>.md`. The session briefing also captures any voice-check failures with specifics. ORIN or Mike can request the briefing at any time to surface the depth behind the paste-ready copy.
+The internal-link validation workflow (Firecrawl 200 OK plus page-type signals plus no soft-404) and per-link reasoning are documented in the workforce-internal briefing, not in the visible contribution. If a candidate link fails validation, SCRIBE skips it, documents the failure reason in the briefing, and either substitutes or holds the total at 1 to 2 valid links.
+
+Optional mode: when Mike explicitly requests a whitelabel audit, insert a `## Comparison with current state` section between Current state and Recommended new SEO setup showing field-by-field deltas with reasoning. Without an explicit request, the comparison section does NOT appear.
 
 ### First-session behavior
 
