@@ -27,6 +27,67 @@ The following are in scope and the body copy must serve them:
 - The avatar's emotional context for ownership. What does wearing or using this product mean to the avatar? Carlos buying the 2026 El Tri home authentic feels something different from Tyler buying the same kit. Same product, different emotional anchor.
 - Fit, sizing, and care information where relevant. Product copy is a place where avatar pain frames map directly to copy that closes the sale. Jennifer's "Wide Foot Nightmare" frame, Carlos's "is this real or fake" frame, Tyler's "will it actually run faster than my last pair" frame.
 
+## Five canonical brief-craft rules
+
+These five rules govern every brief SCRIBE produces under the Fresh Optimization workflow. They emerged from the 2026-05-26 UAE PDP refinement session and lock in agency-grade craft standards across all future briefs. The five rules below are the NEW codification from this session; the PDP external link policy (internal-only, locked) is already canonical in 'Internal links only on product pages' later in this playbook, and the 1 to 2 internal-links target is already canonical in 'Internal link strategy' later in this playbook. Those existing policies stand; the five rules below extend them with the craft conventions that emerged from the UAE v3 work. Cross-referenced from `.claude/agents/on-page-seo/agent.md` Section 13 and `context/workforce-conventions.md`.
+
+### Rule 1: Supporting keywords distributed as semantic variants in body
+
+Each supporting keyword from the brief's Keyword research block appears 1 to 2 times in the Long Description, woven naturally as a semantic variant. The goal is topic depth signal, not keyword stuffing or exact-match density. A variant must read as natural English in its sentence; if a variant cannot land naturally, skip it rather than force the appearance. The primary keyword maintains 2 to 4 exact-match appearances across the body per the keyword-density guidance in `.claude/agents/on-page-seo/agent.md` Section 9 'Keyword placement per field'.
+
+Worked example: UAE 2026 PDP v3 at `deliverables/page-optimizations/2026-05-26_session-01/uae-2026-home-stadium_brief-v3.md` distributes `uae football jersey`, `uae fa jersey`, `uae national team jersey`, and `uae football kit` across the body, each variant once or twice in natural reads.
+
+### Rule 2: Primary keyword appears in at least one H2 header
+
+Minimum one H2 in the Long Description contains the primary keyword or a close variant. The header signal carries SEO weight beyond body-text density. One natural integration is the floor, not the ceiling; don't force every H2 to carry the keyword. If the natural H2 framing cannot integrate the primary keyword, restructure the H2 rather than force the keyword into a clumsy heading.
+
+Worked example: UAE 2026 PDP v3 first H2 reads "The 2026 UAE Soccer Jersey by adidas" (primary keyword plus brand qualifier as natural framing).
+
+### Rule 3: Meta description structure (commercial intent + trust signal + emotional CTA)
+
+The Meta Description is structured in three parts:
+
+1. **First sentence: commercial intent confirmation.** Primary keyword plus brand. Front-loaded for SERP-bold matching and immediate intent recognition.
+2. **Middle: trust signal plus specific differentiator.** Trust words ("Official", "Certified", "Licensed") combined with one or two specific differentiators (federation design, signature technology, edition tier).
+3. **Close: emotional or commercial CTA matching body voice.** The close should echo the avatar's emotional anchor from the body. The close must NOT duplicate the Short Description's close (per Rule 5); each field closes with its own punch.
+
+**Tier-aware language for branded products.** Edition tiers on branded national-team and pro-line products are distinct words with specific commercial meaning. "Authentic" and "Stadium" are two different adidas national-team kit tiers (Authentic = match-spec construction; Stadium = Replica-tier). Combining tier words ("Authentic Stadium") reads as a contradiction to soccer-knowledgeable readers. Use "Official" plus the tier name as the trust-and-tier pattern: "Official Stadium home kit" rather than "Authentic Stadium home kit". The same principle applies to other brand-line tier conventions (e.g., Nike Mercurial's Elite vs Vapor tiers); verify the hierarchy in topic research before drafting.
+
+Target length: 150 to 158 characters for desktop display, 130 to 140 for the mobile threshold. The trust-and-tier pattern fits comfortably within both.
+
+Worked example: UAE 2026 PDP v3 Meta Description reads "The 2026 UAE Soccer Jersey by adidas. Official Stadium home kit with UAEFA federation design and Climacool weave. Wear what Al-Abyad wears." (139 chars). First sentence: primary keyword plus brand. Middle: "Official" trust signal, tier-correct "Stadium home kit", "UAEFA federation design", and "Climacool weave" specific differentiators. Close: "Wear what Al-Abyad wears" emotional CTA matching the body's Al-Abyad framing.
+
+### Rule 4: Named entities in body copy serve LLM search discoverability
+
+Body copy includes 5 to 10 specific named entities per page where natural to the topic. LLMs (ChatGPT, Claude, Gemini, AI Overview) latch onto specific named entities far more than generic feature lists when surfacing source citations. A page that names players, federations, tournaments, and signature technology becomes a citable source; a page that says "premium quality jersey for soccer fans" becomes wallpaper.
+
+Categories of named entities to include where relevant:
+
+- **Players** (signature pros associated with the team, kit, or product line)
+- **Teams or clubs** (the affiliation the page is about)
+- **Federations** (governing bodies, e.g., UAEFA, FMF, FA, US Soccer Federation)
+- **Tournaments** (current or upcoming events the product anchors to, e.g., AFC Asian Cup 2027, Copa America 2024)
+- **Signature product lines** (e.g., Mercurial, Predator, Tiempo, Phantom GX)
+- **Signature features or technologies** (Climacool, Heat.RDY, Flyknit, Air Zoom, ACC)
+- **Locations** (relevant geographic anchors: host cities, training centers, stadium names)
+- **Manager or coach names** (head coach of the team, head designer of the brand line where notable)
+
+Each named entity should be specific (`Paulo Bento` not "the coach"), correct (verified in topic research), and integrated naturally into the body's narrative flow.
+
+Worked example: UAE 2026 PDP v3 body names Al-Abyad, UAEFA, AFC Asian Cup, Saudi Arabia, Paulo Bento, Ali Mabkhout, Iraq, South Korea, Vietnam, Group E, Climacool, Stadium edition, and Authentic edition. Thirteen distinct named entities across the four H2 sections.
+
+### Rule 5: Short Description structure
+
+The Short Description (1 to 3 sentences, 200 to 300 chars target) carries five structural requirements:
+
+1. Primary keyword in the first or second sentence.
+2. Avatar identity hook in the first half (Carlos, Tyler, Jennifer, or Mike the Coach framing per `context/04-customer-avatars.md`).
+3. 2 to 3 specific design or product details that differentiate the product from generic competitors.
+4. Emotional or commercial CTA close, DIFFERENT from the Meta Description close. The Meta Description and Short Description must not duplicate the same closing line; each closes with its own punch.
+5. Concise and scannable. The Short Description lives at the top of the description body and competes with the variant selector and add-to-cart for attention.
+
+Worked example: UAE 2026 PDP v3 Short Description reads "For the supporter whose flag carries red, white, black, and green. The 2026 UAE soccer jersey by adidas: clean white base, red V neck and shoulder stripes, sleeve patterning drawn from the federation's Arabic-script logomark. Climacool weave, doubleknit build." Avatar identity hook in sentence one (the Emirati flag supporter, Carlos diaspora frame). Primary keyword in sentence two (`uae soccer jersey`). Three design details in sentence two (white base, red V neck, sleeve patterning). Technical close in sentence three (Climacool weave, doubleknit build), distinct from the Meta Description close ("Wear what Al-Abyad wears").
+
 ## Required pre-write research
 
 Lighter than collection-page research because the topic is narrower (a specific SKU rather than an entire team or brand line). ORIN runs the research before SCRIBE writes; outputs land in SCRIBE's session briefing.
@@ -266,6 +327,123 @@ Annotation:
 - Topic-research outputs: launch era, generation count, AEROREADY detail, fit specifics.
 - Tyler primary in the fit guidance and the use-case detail. Mike the Coach surfaces in the durability and team-issue framing.
 - The store doesn't appear in the body. Bulk-order and team-issue routing for Mike the Coach happens via the team-orders page, not via the product-page description.
+
+## Category-specific H2 templates (DRAFT v1, to be validated through real PDP optimization work)
+
+Draft H2 frameworks per product category. The frameworks are starting patterns; the FINAL template for each category becomes canonical only after a real PDP in that category passes gate review at agency-grade quality. Until then, treat them as DRAFT v1 starting points, not locked rules.
+
+Notes that apply to all categories:
+
+- The five canonical brief-craft rules earlier in this playbook apply universally regardless of category.
+- Section structure may flex based on individual product needs. A specific cleat with minimal player association doesn't force the H2 5 section. A simpler accessory may use 3 H2s where a flagship uses 5.
+- Number of H2s varies by category (4 for most, 5 for soccer cleats, sometimes 3 for simpler accessories).
+- Worked example 1 (Premium kit jersey) and Worked example 2 (Performance cleat) earlier in this playbook are full worked examples for the National Team Jersey and Soccer Cleats categories; the templates below extract and generalize the patterns to cover ProSoccer's full catalog.
+
+### 1. National team jersey (validated: UAE v3, 2026-05-26)
+
+- H2 1: Brand + design + federation identity ("The [Year] [Country] Soccer Jersey by [Brand]")
+- H2 2: Edition tier comparison (Stadium vs Authentic, where applicable)
+- H2 3: Fit and sizing
+- H2 4: What you're buying into (cultural + tournament context + future catalyst)
+
+### 2. Club jersey (DRAFT v1, pending validation)
+
+- H2 1: Brand + design + club crest / identity ("The [Year] [Club] [Home / Away / Third] Jersey")
+- H2 2: Edition tier or player personalization options
+- H2 3: Fit and sizing
+- H2 4: Club narrative + season catalyst + player associations
+
+### 3. Soccer cleats (DRAFT v1, pending validation)
+
+- H2 1: Model + generation + signature technology ("The [Model] [Generation] by [Brand]")
+- H2 2: Surface compatibility (FG / AG / IC / TF breakdown)
+- H2 3: Position fit + player level (Elite / Pro / Club / Junior tiers)
+- H2 4: Fit + sizing (with width considerations)
+- H2 5: Player association + tournament context
+
+### 4. Goalkeeper gloves (DRAFT v1, pending validation)
+
+- H2 1: Cut + palm technology (negative, rolled, flat, hybrid)
+- H2 2: Match conditions (dry / wet / hybrid)
+- H2 3: Player level tier
+- H2 4: Fit and sizing
+
+### 5. Goalkeeper jerseys (DRAFT v1, pending validation)
+
+- H2 1: Brand + design + GK-specific features
+- H2 2: Padded vs unpadded options
+- H2 3: Fit and sizing (GK fits differ from outfield)
+- H2 4: Team affiliation and use cases
+
+### 6. Training apparel (DRAFT v1, pending validation)
+
+- H2 1: Affiliation + design
+- H2 2: Match-day vs training vs lifestyle use
+- H2 3: Fit and sizing
+- H2 4: Material + climate + layering
+
+### 7. Casual / lifestyle apparel (DRAFT v1, pending validation)
+
+- H2 1: Affiliation + design + style identity
+- H2 2: Streetwear vs match-day vs travel use
+- H2 3: Fit and sizing
+- H2 4: Material + season
+
+### 8. Soccer balls (DRAFT v1, pending validation)
+
+- H2 1: Type + use case (match / training / replica)
+- H2 2: Specifications (size, weight, FIFA quality tier)
+- H2 3: League / tournament affiliation
+- H2 4: Technology + construction
+
+### 9. Shin guards (DRAFT v1, pending validation)
+
+- H2 1: Protection level + position fit
+- H2 2: Strap vs slip-in construction
+- H2 3: Fit and sizing
+- H2 4: Material + ventilation
+
+### 10. Goalkeeper accessories: caps, base layers (DRAFT v1, pending validation)
+
+- H2 1: Use case (match conditions, training)
+- H2 2: Material + features
+- H2 3: Fit and sizing
+- H2 4: Brand or team affiliation
+
+### 11. Bags and backpacks (DRAFT v1, pending validation)
+
+- H2 1: Capacity + use case (game day, training, travel)
+- H2 2: Compartments and features
+- H2 3: Material + durability
+- H2 4: Team or brand affiliation
+
+### 12. Socks (DRAFT v1, pending validation)
+
+- H2 1: Team or league affiliation + design
+- H2 2: Material + cushioning
+- H2 3: Fit and sizing
+- H2 4: Match vs training use
+
+### 13. Accessories: scarves, hats, flags (DRAFT v1, pending validation)
+
+- H2 1: Affiliation + design + cultural meaning
+- H2 2: Construction + material
+- H2 3: Use occasions (match day, fan zones, gift)
+- H2 4: Sizing or display considerations
+
+### 14. Equipment: cones, agility ladders, training aids (DRAFT v1, pending validation)
+
+- H2 1: Training application + skill development focus
+- H2 2: Construction + durability
+- H2 3: Set composition + portability
+- H2 4: Skill level + use case
+
+### 15. Goalkeeper coaching gear (DRAFT v1, pending validation)
+
+- H2 1: Training application + GK-specific drill compatibility
+- H2 2: Material + durability
+- H2 3: Set composition
+- H2 4: Coaching context
 
 ## Internal links only on product pages
 

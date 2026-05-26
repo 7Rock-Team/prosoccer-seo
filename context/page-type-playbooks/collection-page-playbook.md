@@ -27,6 +27,67 @@ The following are in scope and the body copy must serve them:
 - Topic-specific information the avatar's super-fans want to learn or be reminded of. Carlos knows the 2026 World Cup hosts. He may not remember the exact group draw or the kit-supplier history. Useful detail for a super-fan beats generic detail for a casual buyer.
 - Product range explanation through the topic lens. "The 2026 home kit, the away kit, and the third drop before kickoff" is product-range explanation through the El Tri lens. "We carry a wide range of Mexico jerseys in many sizes" is product-range explanation through the store lens. The first belongs on the page; the second does not.
 
+## Five canonical brief-craft rules
+
+These five rules govern every brief SCRIBE produces under the Fresh Optimization workflow. They emerged from the 2026-05-26 UAE PDP refinement session and lock in agency-grade craft standards across all future briefs. The five rules below are the NEW codification from this session; the collection-page external-link allowance (per link strategy) and the 1 to 2 internal-links target are already canonical in 'Internal link strategy' later in this playbook. Those existing policies stand; the five rules below extend them with the craft conventions that emerged from the UAE v3 work. Cross-referenced from `.claude/agents/on-page-seo/agent.md` Section 13 and `context/workforce-conventions.md`.
+
+### Rule 1: Supporting keywords distributed as semantic variants in body
+
+Each supporting keyword from the brief's Keyword research block appears 1 to 2 times in the Long Description, woven naturally as a semantic variant. The goal is topic depth signal, not keyword stuffing or exact-match density. A variant must read as natural English in its sentence; if a variant cannot land naturally, skip it rather than force the appearance. The primary keyword maintains 2 to 4 exact-match appearances across the body per the keyword-density guidance in `.claude/agents/on-page-seo/agent.md` Section 9 'Keyword placement per field'.
+
+Worked example: UAE 2026 PDP v3 at `deliverables/page-optimizations/2026-05-26_session-01/uae-2026-home-stadium_brief-v3.md` distributes `uae football jersey`, `uae fa jersey`, `uae national team jersey`, and `uae football kit` across the body, each variant once or twice in natural reads. The same principle applies to collection-page bodies; the worked example is PDP-side because that's where the rule was codified, but it transfers cleanly to collection-page H2s.
+
+### Rule 2: Primary keyword appears in at least one H2 header
+
+Minimum one H2 in the Long Description contains the primary keyword or a close variant. The header signal carries SEO weight beyond body-text density. One natural integration is the floor, not the ceiling; don't force every H2 to carry the keyword. If the natural H2 framing cannot integrate the primary keyword, restructure the H2 rather than force the keyword into a clumsy heading.
+
+Worked example: UAE 2026 PDP v3 first H2 reads "The 2026 UAE Soccer Jersey by adidas" (primary keyword plus brand qualifier as natural framing). Collection-page analogue: a Mexico collection page with primary keyword `mexico soccer jersey` could carry an H2 like "The Mexico Soccer Jersey across the El Tri Cycles."
+
+### Rule 3: Meta description structure (commercial intent + trust signal + emotional CTA)
+
+The Meta Description is structured in three parts:
+
+1. **First sentence: commercial intent confirmation.** Primary keyword plus brand. Front-loaded for SERP-bold matching and immediate intent recognition.
+2. **Middle: trust signal plus specific differentiator.** Trust words ("Official", "Certified", "Licensed") combined with one or two specific differentiators (federation design, signature technology, edition tier).
+3. **Close: emotional or commercial CTA matching body voice.** The close should echo the avatar's emotional anchor from the body. The close must NOT duplicate the Short Description's close (per Rule 5); each field closes with its own punch.
+
+**Tier-aware language for branded products.** Edition tiers on branded national-team and pro-line products are distinct words with specific commercial meaning. "Authentic" and "Stadium" are two different adidas national-team kit tiers (Authentic = match-spec construction; Stadium = Replica-tier). Combining tier words ("Authentic Stadium") reads as a contradiction to soccer-knowledgeable readers. Use "Official" plus the tier name as the trust-and-tier pattern: "Official Stadium home kit" rather than "Authentic Stadium home kit". The same principle applies to other brand-line tier conventions (e.g., Nike Mercurial's Elite vs Vapor tiers); verify the hierarchy in topic research before drafting.
+
+Target length: 150 to 158 characters for desktop display, 130 to 140 for the mobile threshold.
+
+Worked example: UAE 2026 PDP v3 Meta Description reads "The 2026 UAE Soccer Jersey by adidas. Official Stadium home kit with UAEFA federation design and Climacool weave. Wear what Al-Abyad wears." (139 chars).
+
+### Rule 4: Named entities in body copy serve LLM search discoverability
+
+Body copy includes 5 to 10 specific named entities per page where natural to the topic. LLMs (ChatGPT, Claude, Gemini, AI Overview) latch onto specific named entities far more than generic feature lists when surfacing source citations. A page that names players, federations, tournaments, and signature technology becomes a citable source; a page that says "premium quality jersey for soccer fans" becomes wallpaper.
+
+Categories of named entities to include where relevant:
+
+- **Players** (signature pros associated with the team, kit, or product line)
+- **Teams or clubs** (the affiliation the page is about)
+- **Federations** (governing bodies, e.g., UAEFA, FMF, FA, US Soccer Federation)
+- **Tournaments** (current or upcoming events the product anchors to, e.g., AFC Asian Cup 2027, Copa America 2024)
+- **Signature product lines** (e.g., Mercurial, Predator, Tiempo, Phantom GX)
+- **Signature features or technologies** (Climacool, Heat.RDY, Flyknit, Air Zoom, ACC)
+- **Locations** (relevant geographic anchors: host cities, training centers, stadium names)
+- **Manager or coach names** (head coach of the team, head designer of the brand line where notable)
+
+Each named entity should be specific (`Paulo Bento` not "the coach"), correct (verified in topic research), and integrated naturally into the body's narrative flow.
+
+Worked example: UAE 2026 PDP v3 body names Al-Abyad, UAEFA, AFC Asian Cup, Saudi Arabia, Paulo Bento, Ali Mabkhout, Iraq, South Korea, Vietnam, Group E, Climacool, Stadium edition, and Authentic edition. Thirteen distinct named entities across the four H2 sections.
+
+### Rule 5: Short Description structure
+
+The Short Description (1 to 3 sentences, 200 to 300 chars target) carries five structural requirements:
+
+1. Primary keyword in the first or second sentence.
+2. Avatar identity hook in the first half (Carlos, Tyler, Jennifer, or Mike the Coach framing per `context/04-customer-avatars.md`).
+3. 2 to 3 specific design or product details (PDPs) or topic specifics (collection pages) that differentiate from generic competitors.
+4. Emotional or commercial CTA close, DIFFERENT from the Meta Description close. The Meta Description and Short Description must not duplicate the same closing line; each closes with its own punch.
+5. Concise and scannable. The Short Description lives at the top of the description body and competes with adjacent UI elements (variant selector and add-to-cart on PDPs; product grid on collection pages) for attention.
+
+Worked example: UAE 2026 PDP v3 Short Description reads "For the supporter whose flag carries red, white, black, and green. The 2026 UAE soccer jersey by adidas: clean white base, red V neck and shoulder stripes, sleeve patterning drawn from the federation's Arabic-script logomark. Climacool weave, doubleknit build." Avatar identity hook in sentence one. Primary keyword in sentence two. Three design details in sentence two. Technical close in sentence three, distinct from the Meta Description close.
+
 ## Required pre-write research
 
 ORIN runs topic research before SCRIBE writes. The topic research becomes the substantive backbone of the body copy. Without it, SCRIBE falls back on whatever the model already knows about the topic, which is usually generic and often stale.

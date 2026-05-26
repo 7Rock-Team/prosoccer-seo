@@ -98,6 +98,20 @@ The whitelabel audit mode adds a `## Comparison with current state` section to t
 9. No comparison table or audit narrative in the visible brief unless whitelabel audit mode is requested.
 10. For batched sessions, context loads once per session, not per page.
 
+## Five canonical brief-craft rules (cross-reference)
+
+Five rules govern every brief SCRIBE produces under the Fresh Optimization workflow. The rules are canonical in both page-type playbooks: `context/page-type-playbooks/product-page-playbook.md` 'Five canonical brief-craft rules' and `context/page-type-playbooks/collection-page-playbook.md` 'Five canonical brief-craft rules'. The five rules sit alongside the prior canonical policies (PDP external link policy, internal-links 1 to 2 target) which remain in force in their existing playbook sections. Quick index:
+
+1. **Supporting keywords distributed as semantic variants in body** (1 to 2 natural appearances per variant from the brief's Keyword research block, no stuffing).
+2. **Primary keyword in at least one H2 header** (natural integration; restructure the H2 rather than force the keyword).
+3. **Meta description structure** (commercial intent + trust signal + emotional CTA; tier-aware language for branded products: never combine tier words like "Authentic Stadium").
+4. **Named entities in body copy serve LLM search discoverability** (5 to 10 specific named entities per page where natural: players, federations, tournaments, signature product lines, signature features, locations, managers).
+5. **Short Description structure** (primary keyword in sentence 1 or 2; avatar identity hook in first half; 2 to 3 differentiating specifics; CTA close distinct from Meta Description; 200 to 300 chars target).
+
+Worked example for all five rules: UAE 2026 PDP v3 brief at `deliverables/page-optimizations/2026-05-26_session-01/uae-2026-home-stadium_brief-v3.md`.
+
+**Category-specific H2 templates (DRAFT v1)** for 15 product categories ProSoccer sells live in `context/page-type-playbooks/product-page-playbook.md` 'Category-specific H2 templates'. National-team-jersey template is validated as of UAE v3; remaining 14 categories are DRAFT v1 patterns to be validated through real PDP optimization work.
+
 ## Brief content requirements (data-backed)
 
 Both PDP and collection-page briefs must surface a minimal data-backed keyword research block and respect the product-page link policy. These are hard requirements, not optional.
