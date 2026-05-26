@@ -41,60 +41,85 @@ Per-page workforce-internal briefings (SCRIBE classification reasoning, KIRA key
 
 Existing flat-directory deliverables (e.g., `deliverables/page-optimizations/2026-05-08_mexico-v3.md`) stay where they are. Do NOT retroactively move historical files into session folders. The convention applies going forward; the audit trail of the convention transition is the git history.
 
-## Fresh Optimization workflow (default mode)
+## Fresh Optimization workflow (default mode, minimal format as of 2026-05-26 round 2)
 
-Fresh Optimization is the default workflow for page-optimization deliverables produced by SCRIBE under ORIN orchestration. The whitelabel audit mode is opt-in and used only when Mike explicitly requests it.
+Fresh Optimization is the default workflow for page-optimization deliverables produced by SCRIBE under ORIN orchestration. The whitelabel audit mode is opt-in and used only when Mike explicitly requests it. **Target: the visible brief fits on one Google Doc page.**
 
 ### Workflow steps
 
 1. Load context: page-type playbook matching the page (`context/page-type-playbooks/`), `context/brand-ip-constraints.md`, the six copy-writing principles in `context/03-brand-voice.md`.
-2. Capture current state per page type:
-   - **Collection pages:** Firecrawl scrape covers Title, Slug, Meta Title, Meta Description, and the description body.
-   - **Product pages:** Firecrawl scrape covers Title, Slug, Meta Title, Meta Description only. Mike supplies the existing Short Description and Long Description directly. SCRIBE does NOT scrape PDP body content; SCRIBE waits for Mike to provide it.
-3. Topic research via Tavily scaled to familiarity:
+2. Read current state for SCRIBE's own context, but do NOT capture it in the brief:
+   - **Collection pages:** SCRIBE pulls current copy via the firecrawl skill (or Firecrawl MCP when installed, per 'Tool inventory' below) for context. Current state does NOT appear in the visible brief.
+   - **Product pages:** Mike supplies the existing Short Description and Long Description directly as input to the optimization. SCRIBE does NOT scrape PDP body content. Current state does NOT appear in the visible brief.
+   - **Mike references Shopify admin directly for current state during implementation.** The brief is forward-looking only.
+3. Keyword research via DataForSEO MCP (mandatory, data-backed). The workforce-internal briefing carries the full keyword research workup; the visible brief surfaces only the chosen primary keyword (volume + KD) and the supporting long-tail set as a comma-separated list with optional volume.
+4. **Current ranking lookup via DataForSEO SERP API (mandatory).** Run `mcp__dfs-mcp__serp_organic_live_advanced` for the chosen primary keyword; identify whether the target URL appears in the top 100 organic results; capture position OR "not in top 100." Surface as a one-line `Current ranking:` entry in the visible Keyword research block. Apply the ranking-aware posture (see 'Ranking-aware posture' subsection below) before drafting recommendations. GSC MCP is the long-term ranking source of record; install pending per 'Tool inventory' below, DataForSEO SERP API is the current fallback.
+5. Topic research via Tavily / WebSearch scaled to familiarity:
    - Well-known topics (Mexico, Argentina, major brands): 2 to 5 queries.
    - Unfamiliar topics: 5 to 10 queries.
-   - Do not over-research what prior sessions already documented.
-4. Generate the optimized brief in the format at `templates/consolidated-page-brief-template.md`. Default visible content is the Current state block and the Recommended new SEO setup block, nothing more.
-5. Validate every proposed internal link via Firecrawl (status code 200, page-type signals confirmed, no soft-404) per the matching playbook's link strategy (1 to 2 max).
-6. Run voice check (`scripts/voice_check.py`) and the 11 gates from `.claude/agents/on-page-seo/agent.md` Section 11 silently. Pass results are NOT surfaced in the visible brief; only an unresolvable failure surfaces to Mike. All gate results are documented in the workforce-internal briefing at `.claude/agents/on-page-seo/briefings/YYYY-MM-DD_<slug>.md`.
-7. Hold at GATE for Mike review.
-8. Append the matching row to `deliverables/tracking/collections-master.csv` or `products-master.csv` once Mike approves.
+   - Do not over-research what prior sessions already documented. Findings live in the workforce-internal briefing, not the visible brief.
+6. Generate the optimized brief in the format at `templates/consolidated-page-brief-template.md`. Default visible content is the minimal Keyword research block (including Current ranking line and top-5 WARNING line where applicable) and the Recommended new SEO setup block, nothing more. No Current state section. No Source of record paragraph. No Alternatives considered section. No External links field on PDPs. No LLM ranking field (deferred).
+7. Validate every proposed internal link via the firecrawl skill (status code 200, page-type signals confirmed, no soft-404) per the matching playbook's link strategy (1 to 2 max).
+8. Run voice check (`scripts/voice_check.py`) and the 11 gates from `.claude/agents/on-page-seo/agent.md` Section 11 silently. Pass results are NOT surfaced in the visible brief; only an unresolvable failure surfaces to Mike. All gate results are documented in the workforce-internal briefing at `.claude/agents/on-page-seo/briefings/YYYY-MM-DD_<slug>.md`.
+9. Hold at GATE for Mike review.
+10. Append the matching row to `deliverables/tracking/collections-master.csv` or `products-master.csv` once Mike approves.
 
-### Workforce-internal briefing (preserved, not surfaced by default)
+### Ranking-aware posture
 
-The workforce-internal briefing at `.claude/agents/on-page-seo/briefings/YYYY-MM-DD_<slug>.md` continues to capture brand-affiliation classification, avatar scope, topic research findings, compliance scan results, per-string voice check status, 11-gate self-verify status, cost tracking, and any other workforce-internal context. Mike can request this briefing on demand at any time. It is not surfaced at gate review by default.
+The Current ranking position governs how aggressively SCRIBE iterates on Title and H1 copy.
+
+- **Top 5:** WARNING required in the visible brief. The line reads: "Page currently ranks top 5. Title/H1 changes carry equity risk. Confirm with Mike before shipping changes to these fields." Recommendations preserve exact-match phrasing of the primary keyword in Title and H1; copy iteration leans toward Meta Description, Short Description, and Long Description where equity risk is lower.
+- **Top 6 to 20:** Standard recommendations. Current position noted for context. No warning line.
+- **Top 21 to 100:** Standard recommendations. Current position noted for context.
+- **Not ranking (not in top 100):** Standard recommendations. Treated as opportunity for a fresh ranking attempt.
+
+**LLM ranking is deferred.** LLM visibility tooling (ChatGPT citation rates, Claude / Gemini surfaces, AI Overview presence) is immature today. Revisit in 6 months when the category matures and the tooling becomes practical. Do not include an LLM ranking field in the brief.
+
+### Workforce-internal briefing (preserved scope, current state removed)
+
+The workforce-internal briefing at `.claude/agents/on-page-seo/briefings/YYYY-MM-DD_<slug>.md` continues to capture: brand-affiliation classification, avatar scope, topic research findings, compliance scan results, per-string voice check status, 11-gate self-verify status, cost tracking, data provenance / source-of-record (DataForSEO calls, locations, timestamps, status codes), alternatives considered with rejection reasoning, intent percentages, trend data, per-element expected lift bands, validation plans, severity, confidence, schema dependency flags, cross-agent voice flags, and any other workforce-internal context. Mike can request the briefing on demand at any time. It is not surfaced at gate review by default.
+
+**Current state is not captured in the workforce-internal briefing.** Mike sees current state directly in Shopify admin during implementation; Shopify's own field history preserves the audit trail. Duplicating current state in the briefing adds no audit value.
 
 ### Optional mode: Whitelabel audit
 
-The whitelabel audit mode adds a `## Comparison with current state` section to the brief between the Current state block and the Recommended new SEO setup block, showing field-by-field deltas with reasoning. This mode is opt-in. Mike must explicitly request "whitelabel audit" (or equivalent phrasing) for the comparison section to appear in the brief. Without an explicit request, Fresh Optimization with no comparison narrative is the default.
+The whitelabel audit mode adds a `## Comparison with current state` section to the brief before the Recommended new SEO setup block, showing field-by-field deltas with reasoning. The audit mode is the only context where the brief carries current-state strings inline. This mode is opt-in. Mike must explicitly request "whitelabel audit" (or equivalent phrasing) for the comparison section to appear in the brief. Without an explicit request, Fresh Optimization with no comparison narrative is the default.
 
-### Speed optimizations baked into Fresh Optimization
+### Simplifications baked into Fresh Optimization (round 2, 2026-05-26)
 
-1. Topic research scales to familiarity rather than running a fixed query count per page.
-2. Voice check and the 11 gates run silently; pass results do not surface; only unresolvable failures get flagged to Mike.
-3. No comparison table or audit narrative in the visible brief unless whitelabel audit mode is requested.
-4. Workforce-internal briefing stays a separate file and is not surfaced at gate review by default.
-5. For batched sessions, context loads once per session, not per page.
+1. Brief target is one Google Doc page; the format is minimal by construction.
+2. Current state section removed from visible brief and from workforce-internal briefing.
+3. Source of record paragraph removed from visible brief; data provenance lives in workforce-internal briefing only.
+4. Alternatives considered with rejection reasoning removed from visible brief; lives in workforce-internal briefing.
+5. Keyword research block strips intent percentages and trend data from visible brief; lives in workforce-internal briefing.
+6. External links field omitted on PDPs entirely (PDP link policy is internal-only, locked).
+7. Topic research scales to familiarity rather than running a fixed query count per page.
+8. Voice check and the 11 gates run silently; pass results do not surface; only unresolvable failures get flagged to Mike.
+9. No comparison table or audit narrative in the visible brief unless whitelabel audit mode is requested.
+10. For batched sessions, context loads once per session, not per page.
 
 ## Brief content requirements (data-backed)
 
-Both PDP and collection-page briefs must surface keyword research data and respect the product-page link policy. These are hard requirements, not optional.
+Both PDP and collection-page briefs must surface a minimal data-backed keyword research block and respect the product-page link policy. These are hard requirements, not optional.
 
-### Keyword research surfacing (mandatory on every brief)
+### Keyword research surfacing (minimal visible format)
 
-Every visible brief must include a `## Keyword research` block above the Current state block with:
+Every visible brief must include a `## Keyword research` block at the top with:
 
-- Primary keyword with monthly search volume and keyword difficulty, intent classification (informational, commercial, transactional). DataForSEO is the source of record.
-- 2 to 3 alternative candidates evaluated, each with volume and KD plus a 1 to 2 sentence why-not-chosen reasoning that references the data and avatar fit.
-- Selection reasoning: 1 to 2 sentences combining the data, the avatar fit, and the page-level competitive context.
-- Supporting long-tail keywords with volume data.
+- Primary keyword on one line with monthly search volume and keyword difficulty.
+- Supporting long-tail keywords as a comma-separated list with optional volume per term.
+- Current ranking on one line: position number for the primary keyword from DataForSEO SERP API, OR "not in top 100." Lookup date included.
+- WARNING line (top 5 only): the explicit equity-risk note per 'Ranking-aware posture' above.
 
-Trust-me keyword choices are not acceptable for agency-grade work. The primary keyword selection must be defensible against "why this keyword and not the other one" with concrete data.
+Nothing else surfaces in the visible block. No alternatives considered. No rejection reasoning. No intent percentages. No trend data. No source-of-record paragraph. No LLM ranking line. These all live in the workforce-internal briefing as the defensibility audit trail (LLM ranking is deferred entirely per 'Ranking-aware posture' above).
+
+DataForSEO is the source of record. The workforce-internal briefing must document: primary keyword choice with volume + KD + intent (with probabilities from `dataforseo_labs_search_intent` plus main_intent from `dataforseo_labs_google_keyword_overview`), 2 to 3 alternatives considered each with volume + KD + 1 to 2 sentence why-not-chosen reasoning, selection reasoning combining data and avatar fit, supporting long-tail keywords with volume data, and the source-of-record paragraph (calls executed, locations, timestamps, status codes).
+
+Trust-me keyword choices are not acceptable for agency-grade work. The primary keyword selection must be defensible against "why this keyword and not the other one" with concrete data; the workforce-internal briefing is where that defensibility lives. The visible brief stays minimal.
 
 The visible '## Keyword research' block format is canonical in `templates/consolidated-page-brief-template.md` and replicated in `.claude/agents/on-page-seo/agent.md` Section 13.
 
-### Product page link policy: internal only
+### Product page link policy: internal only (External links field omitted entirely on PDPs)
 
 PDP body copy includes internal links to ProSoccer collection or product pages ONLY. External links are forbidden on PDPs. The reasoning:
 
@@ -103,6 +128,8 @@ PDP body copy includes internal links to ProSoccer collection or product pages O
 - Authority signals through external links belong on homepage and blog content, not on PDPs.
 
 If body copy references external tournaments, events, or context (Asian Cup, Champions League, Premier League, etc.), keep the reference as plain text. Do not hyperlink to external sites. If the reference needs a destination, link to an internal ProSoccer page instead (e.g., a related collection).
+
+**The External links field does not appear on PDP briefs at all.** Omitting the field by construction (vs writing "External links: none") is intentional; the visible brief should not carry empty fields. Collection pages may include external links per the collection-page playbook's link strategy; the External links field appears on collection-page briefs only when an outbound link is part of the recommendation.
 
 The PDP internal-link-only policy is canonical in `context/page-type-playbooks/product-page-playbook.md` 'Internal links only on product pages'. Collection-page external-link policy stays under the collection-page playbook's link strategy section.
 
@@ -162,7 +189,9 @@ Refreshed: 2026-05-26.
 ### Install pending (referenced in agent narratives but not yet callable)
 
 - **Firecrawl MCP, `mcp__firecrawl-mcp__*`.** Not installed as of 2026-05-26. Until install lands, fall back in this order: (1) the `firecrawl` skill family (`firecrawl-scrape` for single URLs, `firecrawl-search` for query-first discovery, `firecrawl-map` for URL inventory, `firecrawl-crawl` for bulk extraction, `firecrawl-interact` for dynamic pages) which calls Firecrawl via CLI and ships with this Claude Code build; (2) `WebFetch` for quick single-URL reads when the skill overhead is heavier than needed. Once `mcp__firecrawl-mcp__*` is installed, prefer the MCP tool calls over the skill for lower per-call context overhead.
-- **GSC MCP, `mcp__gsc-server__*`.** Not installed as of 2026-05-26. Until install lands, fall back to CSV exports under `data/gsc-exports/` (12-month `_top-pages.csv`, `_top-queries.csv`, `_search-appearance.csv`). CSV granularity is coarser than the live API: no query-by-page intersection, no live `inspect_url_enhanced`, no Rich Results report, no live coverage-issue inspection. Workable for baseline tracking, CTR ceiling diagnostics at page level, and aggregated query monitoring. Mike refreshes the exports on cadence (target: monthly).
+- **GSC MCP, `mcp__gsc-server__*`.** Not installed as of 2026-05-26. **Install scheduled as a separate workstream for the 2026-05-27 session.** Until install lands, fall back paths by use case:
+  - **Ranking context per page (primary keyword position lookup):** DataForSEO SERP API via `mcp__dfs-mcp__serp_organic_live_advanced`. This is the canonical ranking-context source for the Fresh Optimization workflow Step 4 (see 'Fresh Optimization workflow' above). Once GSC MCP lands, ranking context shifts to GSC `get_search_analytics` per URL for the source-of-record advantage; DataForSEO SERP remains useful for competitor-context lookups but not for ProSoccer's own ranking baseline.
+  - **CTR ceiling diagnostics, query-by-page intersection, indexation state, Rich Results coverage:** CSV exports under `data/gsc-exports/` (12-month `_top-pages.csv`, `_top-queries.csv`, `_search-appearance.csv`). CSV granularity is coarser than the live API: no query-by-page intersection, no live `inspect_url_enhanced`, no Rich Results report, no live coverage-issue inspection. Workable for baseline tracking, CTR ceiling diagnostics at page level, and aggregated query monitoring. Mike refreshes the exports on cadence (target: monthly).
 - **Tavily MCP, `mcp__claude_ai_Tavily__*`.** Registered but unauthenticated as of 2026-05-26. Until auth completes, fall back to `WebSearch` for general topic research, competitor news monitoring, and SERP-feature spot-checks. WebSearch returns snippets only; Tavily would return full-page content. Note the granularity loss in session briefings and surface to ORIN if a brief depends on full-page Tavily extraction.
 
 ### Implicit-fallback drift (the failure mode this inventory prevents)

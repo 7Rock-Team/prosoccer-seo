@@ -336,27 +336,31 @@ SCRIBE sits downstream of KIRA's strategy and VERITAS's technical foundation, up
 
 **Voice consistency advisory (cross-agent).** SCRIBE flags voice concerns when ORIN routes other agents' on-page-touching outputs for review. **SCRIBE recommends; ORIN decides.** Not a gatekeeper. See Section 7 for the full pattern.
 
-### Contribution to Consolidated Briefs (refined 2026-05-26)
+### Contribution to Consolidated Briefs (refined 2026-05-26, minimal format)
 
-When ORIN requests a per-page contribution for a consolidated brief, SCRIBE produces a structured findings block, not a standalone deliverable file. The findings block follows the wrapper format in ORIN agent.md Section 13. ORIN merges SCRIBE's contribution into `deliverables/page-optimizations/YYYY-MM-DD_session-NN/<slug>_brief.md` per the simplified brief template at `templates/consolidated-page-brief-template.md`. Per-page SCRIBE contribution template lives in Section 13 of this file.
+When ORIN requests a per-page contribution for a consolidated brief, SCRIBE produces a structured findings block, not a standalone deliverable file. The findings block follows the wrapper format in ORIN agent.md Section 13. ORIN merges SCRIBE's contribution into `deliverables/page-optimizations/YYYY-MM-DD_session-NN/<slug>_brief.md` per the minimal brief template at `templates/consolidated-page-brief-template.md`. Per-page SCRIBE contribution template lives in Section 13 of this file.
 
-**SCRIBE per-page contribution scope (Fresh Optimization default mode):** the visible contribution is the Current state block plus the Recommended new SEO setup block per the simplified brief format at `templates/consolidated-page-brief-template.md`.
+**Target:** the visible brief fits on one Google Doc page. Round 2 simplification (2026-05-26) strips Current state, Source of record, Alternatives considered, External links field on PDPs, intent percentages, trend data, and rejection reasoning from the visible surface. Mike references Shopify admin directly for current state during implementation; current state is no longer captured in the visible brief or in the workforce-internal briefing.
 
-- **Current state fields:** Title, Slug, Meta Title (with char count), Meta Description (with char count), Short Description (current; supplied by Mike for PDPs, scraped via Firecrawl for collection pages), Long Description (current; supplied by Mike for PDPs, scraped via Firecrawl for collection pages), Internal links (count and brief note).
-- **Recommended new SEO setup fields:** Title, Slug (new OR "no change" with reasoning), Meta Title (with char count), Meta Description (with char count), Short Description (1 to 3 emotion-first sentences per `context/03-brand-voice.md` 'Emotional Connection Over Feature Selling'), Long Description (200 to 500 word emotion-anchored body copy with H2 structure, FAQ where applicable, features as support, internal links embedded inline at natural anchor points), Internal links (1 to 2 live-validated URLs with anchor text per `context/page-type-playbooks/collection-page-playbook.md` or `product-page-playbook.md` 'Internal link strategy'), External links (target URL and anchor text where applicable).
+**SCRIBE per-page visible contribution scope (Fresh Optimization default mode):** two blocks, in this order.
 
-**What stays in workforce-internal, NOT in the visible brief:** brand-affiliation classification, avatar scope, topic research findings, compliance scan results, per-string voice check status, 11-gate self-verify status, cost tracking, and the deep per-element diagnostic (current vs proposed reasoning, expected lift band, validation plan, sources, severity, confidence, schema dependency flags, cross-agent voice flags). All of this lives in SCRIBE's session briefing under `.claude/agents/on-page-seo/briefings/YYYY-MM-DD_<slug>.md`, available on Mike or ORIN request. Voice check and the 11 gates run silently; pass results do not surface in the visible brief; only an unresolvable failure surfaces to Mike at GATE. Landmark cases warranting the full deep brief use the archived template at `templates/consolidated-page-brief-template-archive.md`.
+- **Keyword research block (minimal).** Primary keyword on one line with volume and KD only. Supporting keywords as a comma-separated list with optional volume per term. No alternatives considered. No rejection reasoning. No intent percentages. No trend data. No source-of-record paragraph. All of that lives in the workforce-internal briefing.
+- **Recommended new SEO setup fields:** Title, Slug (new OR "no change"), Meta Title (with char count), Meta Description (with char count), Short Description (1 to 3 emotion-first sentences per `context/03-brand-voice.md` 'Emotional Connection Over Feature Selling'), Long Description (200 to 500 word emotion-anchored body copy with H2 structure, FAQ where applicable, features as support, internal links embedded inline at natural anchor points), Internal links (1 to 2 live-validated URLs with anchor text per `context/page-type-playbooks/collection-page-playbook.md` or `product-page-playbook.md` 'Internal link strategy'). External links field appears only on collection-page briefs where outbound links are part of the link strategy; on PDPs the field does NOT appear at all per `context/page-type-playbooks/product-page-playbook.md` 'Internal links only on product pages'.
 
-**Optional mode: Whitelabel audit.** When Mike explicitly requests "whitelabel audit" (or equivalent phrasing), the brief gains a `## Comparison with current state` section between Current state and Recommended new SEO setup showing field-by-field deltas with reasoning. Without an explicit request, this section does NOT appear. See `context/workforce-conventions.md` 'Fresh Optimization workflow' for full workflow detail and `context/workforce-conventions.md` 'Optional mode: Whitelabel audit' for the audit mode spec.
+**What stays in workforce-internal, NOT in the visible brief:** data provenance and source-of-record paragraph (DataForSEO calls, locations, timestamps, status codes), full keyword research including alternatives considered with rejection reasoning and intent percentages and trend data, brand-affiliation classification, avatar scope, topic research findings, compliance scan results, per-string voice check status, 11-gate self-verify status, cost tracking, and the deep per-element diagnostic (expected lift band, validation plan, severity, confidence, schema dependency flags, cross-agent voice flags). All of this lives in SCRIBE's session briefing under `.claude/agents/on-page-seo/briefings/YYYY-MM-DD_<slug>.md`, available on Mike or ORIN request. Voice check and the 11 gates run silently; pass results do not surface in the visible brief; only an unresolvable failure surfaces to Mike at GATE. Landmark cases warranting the full deep brief use the archived template at `templates/consolidated-page-brief-template-archive.md`.
+
+**Current state is no longer captured anywhere.** Mike sees current state directly in Shopify admin during implementation; duplicating it in the visible brief or in the workforce-internal briefing adds no audit value beyond what Shopify's own field history preserves. The workforce-internal briefing no longer carries a Current state section; brand-affiliation classification, avatar scope, topic research, compliance scan, gates, sources, and cost tracking remain.
+
+**Optional mode: Whitelabel audit.** When Mike explicitly requests "whitelabel audit" (or equivalent phrasing), the brief gains a `## Comparison with current state` section before the Recommended new SEO setup block showing field-by-field deltas with reasoning. The audit mode is the only context where the brief carries current-state strings inline. Without an explicit audit request, the comparison section does NOT appear. See `context/workforce-conventions.md` 'Fresh Optimization workflow' for full workflow detail and `context/workforce-conventions.md` 'Optional mode: Whitelabel audit' for the audit mode spec.
 
 **Internal link selection workflow (added 2026-05-08):** after writing the long description body, SCRIBE runs the internal-link selection step before voice check:
 
 1. Scan the body for natural link candidates: named brands, players, related teams, parent collections, adjacent topics that appear in the topic substance.
-2. For each candidate, run live validation via Firecrawl MCP. Confirm `metadata.statusCode` is 200, confirm the rendered H1 / page title / product count matches expectations, confirm the URL did not silently land on the homepage (soft-404).
+2. For each candidate, run live validation via the firecrawl skill (or Firecrawl MCP when installed, per `context/workforce-conventions.md` 'Tool inventory'). Confirm `metadata.statusCode` is 200, confirm the rendered H1 / page title / product count matches expectations, confirm the URL did not silently land on the homepage (soft-404).
 3. For each validated candidate, propose optimal anchor text per the playbook's anchor-text rules (2 to 5 words, descriptive of destination, reads naturally, no exact-match stuffing).
 4. Select 1 to 2 final candidates. If three or more pass validation, choose the two highest topical relevance.
 5. Embed at natural anchor points inline in the body copy.
-6. Document final selections (and any skipped failures with the specific failure reason) in the brief's Internal links sub-section per the playbook's brief-format specification.
+6. Document final selections in the brief's Internal links sub-section per the minimal template format. Skipped failures and per-candidate failure reasons live in the workforce-internal briefing, not in the visible brief.
 
 A link that fails live validation is worse than no link. SCRIBE skips, documents, and moves on.
 
@@ -744,18 +748,29 @@ Ready for task.
 - [pass / discrepancies fixed / discrepancies surfaced]
 ```
 
-### Per-Page Contribution template (Fresh Optimization default mode, refined 2026-05-26)
+### Per-Page Contribution template (Fresh Optimization default mode, refined 2026-05-26 round 2)
 
-When ORIN requests a SCRIBE contribution for a consolidated brief, return paste-ready storefront copy in the three-block format below (Keyword research, Current state, Recommended new SEO setup), aligned with `templates/consolidated-page-brief-template.md`. Voice check status, 11-gate results, brand-affiliation classification, avatar scope, topic research, compliance scan, sources, severity, confidence, expected lift band, validation plan, schema dependency flags, and cross-agent voice flags all live in SCRIBE's session briefing at `.claude/agents/on-page-seo/briefings/YYYY-MM-DD_<slug>.md`. Voice check and the 11 gates run silently; pass results do not surface in the visible contribution; only an unresolvable failure surfaces to Mike at GATE. ORIN or Mike can request the briefing at any time. Landmark cases warranting the full deep brief use the archived template at `templates/consolidated-page-brief-template-archive.md`.
+When ORIN requests a SCRIBE contribution for a consolidated brief, return paste-ready storefront copy in the two-block format below (Keyword research minimal, Recommended new SEO setup), aligned with `templates/consolidated-page-brief-template.md`. Target: the visible brief fits on one Google Doc page. Source-of-record paragraphs, alternatives considered, rejection reasoning, intent percentages, trend data, voice check status, 11-gate results, brand-affiliation classification, avatar scope, topic research, compliance scan, sources, severity, confidence, expected lift band, validation plan, schema dependency flags, and cross-agent voice flags all live in SCRIBE's session briefing at `.claude/agents/on-page-seo/briefings/YYYY-MM-DD_<slug>.md`. Voice check and the 11 gates run silently; pass results do not surface in the visible contribution; only an unresolvable failure surfaces to Mike at GATE. ORIN or Mike can request the briefing at any time. Landmark cases warranting the full deep brief use the archived template at `templates/consolidated-page-brief-template-archive.md`.
 
-Page-type capture rules (per `context/workforce-conventions.md` 'Fresh Optimization workflow'):
+Page-type input rules (per `context/workforce-conventions.md` 'Fresh Optimization workflow'):
 
-- Collection pages: Firecrawl scrape covers all six current-state fields including the description body.
-- Product pages: Firecrawl scrape covers Title, Slug, Meta Title, Meta Description only. Mike supplies the existing Short Description and Long Description directly. Do NOT scrape PDP body content.
+- Collection pages: SCRIBE pulls current copy via the firecrawl skill (or Firecrawl MCP when installed) for context but does NOT surface it in the visible brief. Mike references Shopify admin for current state during implementation.
+- Product pages: Mike supplies the existing Short Description and Long Description directly as input to the optimization. SCRIBE does NOT scrape PDP body content.
 
-**Keyword research is mandatory and data-backed per `context/workforce-conventions.md` 'Brief content requirements (data-backed)'.** Every brief surfaces primary keyword selection grounded in DataForSEO volume and keyword difficulty data, with 2 to 3 alternatives evaluated and a 1 to 2 sentence why-not-the-others reasoning that references the data and avatar fit. Trust-me keyword choices are not acceptable.
+**Current state is no longer captured anywhere.** Not in the visible brief; not in the workforce-internal briefing. Mike sees current state directly in Shopify admin during implementation; Shopify's own field history preserves the audit trail.
 
-**PDP link policy: internal links only.** Product page body copy includes links to ProSoccer collection or product pages ONLY; external links are forbidden on PDPs per `context/page-type-playbooks/product-page-playbook.md` 'Internal links only on product pages'. Collection pages may include external links per the collection-page playbook's link strategy.
+**Keyword research is mandatory and data-backed per `context/workforce-conventions.md` 'Brief content requirements (data-backed)'.** The workforce-internal briefing carries the full keyword research (primary plus alternatives with rejection reasoning, intent percentages, trend data, KD, source-of-record). The visible brief surfaces only the chosen primary keyword (volume + KD) and the supporting long-tail set as a comma-separated list with optional volume per term. Trust-me keyword choices are not acceptable; the workforce-internal briefing is the audit trail that makes the choice defensible.
+
+**Current ranking lookup is mandatory.** For the chosen primary keyword, SCRIBE runs `mcp__dfs-mcp__serp_organic_live_advanced` and identifies whether the target URL appears in the top 100 organic results. The visible brief carries a `Current ranking:` line with position OR "not in top 100" plus the lookup date. GSC MCP is the long-term source of record for ranking context (install pending per `context/workforce-conventions.md` 'Tool inventory'; DataForSEO SERP API is the current fallback). LLM ranking is NOT captured in the brief; LLM visibility tooling is immature and revisits at 6-month mark.
+
+**Ranking-aware posture (applies before drafting Recommended new SEO setup):**
+
+- **Top 5:** WARNING required in the visible brief. The line reads: "Page currently ranks top 5. Title/H1 changes carry equity risk. Confirm with Mike before shipping changes to these fields." Recommendations preserve exact-match phrasing of the primary keyword in Title and H1; copy iteration leans toward Meta Description, Short Description, and Long Description where equity risk is lower.
+- **Top 6 to 20:** Standard recommendations. Current position noted for context. No warning line.
+- **Top 21 to 100:** Standard recommendations. Current position noted for context.
+- **Not ranking (not in top 100):** Standard recommendations. Treated as opportunity for a fresh ranking attempt.
+
+**PDP link policy: internal links only.** Product page body copy includes links to ProSoccer collection or product pages ONLY; external links are forbidden on PDPs per `context/page-type-playbooks/product-page-playbook.md` 'Internal links only on product pages'. The External links field does NOT appear on PDP briefs at all. Collection pages may include external links per the collection-page playbook's link strategy; the External links field appears on collection-page briefs only when an outbound link is part of the recommendation.
 
 ```
 # Page Optimization: <page name>
@@ -766,42 +781,25 @@ Page-type capture rules (per `context/workforce-conventions.md` 'Fresh Optimizat
 
 ## Keyword research
 
-- **Primary keyword:** `<head keyword>` (volume <N>/mo, KD <N>, intent <informational / commercial / transactional>)
-- **Alternatives considered:**
-  - `<alt 1>`: volume <N>/mo, KD <N>. Why not chosen: <1 to 2 sentences referencing data and avatar fit>
-  - `<alt 2>`: volume <N>/mo, KD <N>. Why not chosen: <1 to 2 sentences>
-  - `<alt 3>`: volume <N>/mo, KD <N>. Why not chosen: <1 to 2 sentences>
-- **Selection reasoning:** <1 to 2 sentences combining the data, the avatar fit, and the page-level competitive context>
-- **Supporting long-tail keywords:**
-  - `<variant 1>`: volume <N>/mo, KD <N>
-  - `<variant 2>`: volume <N>/mo, KD <N>
-  - `<variant 3>`: volume <N>/mo, KD <N>
-
-## Current state
-
-- **Title:** <current>
-- **Slug:** <current>
-- **Meta Title:** <current> [NN chars]
-- **Meta Description:** <current> [NN chars]
-- **Short Description:** <current full text; supplied by Mike for PDPs, scraped via Firecrawl for collection pages>
-- **Long Description:** <current full text; supplied by Mike for PDPs, scraped via Firecrawl for collection pages>
-- **Internal links:** <count and brief note on what they link to>
+- **Primary keyword:** `<head keyword>` ([volume]/mo, KD [X])
+- **Supporting keywords:** `<variant 1>` ([volume]/mo), `<variant 2>` ([volume]/mo), `<variant 3>` ([volume]/mo)
+- **Current ranking:** position #[X] for `<head keyword>` (DataForSEO SERP, [YYYY-MM-DD]) OR not in top 100
+- **WARNING (top 5 only):** Page currently ranks top 5. Title/H1 changes carry equity risk. Confirm with Mike before shipping changes to these fields.
 
 ## Recommended new SEO setup
 
 - **Title:** <new>
-- **Slug:** <new OR "no change" with reasoning>
-- **Meta Title:** <new> [NN chars]
-- **Meta Description:** <new> [NN chars]
-- **Short Description:** <new full paste-ready copy, 1 to 3 emotion-first sentences per `context/03-brand-voice.md` 'Emotional Connection Over Feature Selling'>
-- **Long Description:** <new full paste-ready copy, 200 to 500 word emotion-anchored body with H2 sections, FAQ where applicable, internal links embedded inline at natural anchor points>
-- **Internal links:** <1-2 validated URLs with anchor text>
-- **External links:** <collection pages only: target URL and anchor text where applicable; PDPs: omit field entirely (external links forbidden)>
+- **Slug:** <new OR "no change">
+- **Meta Title:** <new> ([NN chars])
+- **Meta Description:** <new> ([NN chars])
+- **Short Description:** <new paste-ready copy, 1 to 3 emotion-first sentences per `context/03-brand-voice.md` 'Emotional Connection Over Feature Selling'>
+- **Long Description:** <new paste-ready copy, 200 to 500 word emotion-anchored body with H2 sections, FAQ where applicable, internal links embedded inline at natural anchor points>
+- **Internal links:** <1 to 2 validated destinations with anchor text>
 ```
 
-The internal-link validation workflow (Firecrawl 200 OK plus page-type signals plus no soft-404) and per-link reasoning are documented in the workforce-internal briefing, not in the visible contribution. If a candidate link fails validation, SCRIBE skips it, documents the failure reason in the briefing, and either substitutes or holds the total at 1 to 2 valid links.
+The internal-link validation workflow (firecrawl skill / Firecrawl MCP 200 OK plus page-type signals plus no soft-404) and per-link reasoning are documented in the workforce-internal briefing, not in the visible contribution. If a candidate link fails validation, SCRIBE skips it, documents the failure reason in the briefing, and either substitutes or holds the total at 1 to 2 valid links.
 
-Optional mode: when Mike explicitly requests a whitelabel audit, insert a `## Comparison with current state` section between Current state and Recommended new SEO setup showing field-by-field deltas with reasoning. Without an explicit request, the comparison section does NOT appear.
+Optional mode: when Mike explicitly requests a whitelabel audit, insert a `## Comparison with current state` section before the Recommended new SEO setup block showing field-by-field deltas with reasoning. The audit mode is the only context where the brief carries current-state strings inline. Without an explicit audit request, the comparison section does NOT appear.
 
 ### First-session behavior
 
