@@ -357,13 +357,17 @@ Validated by: Nike 2024-25 Liverpool Men's Stadium Away Jersey brief at `deliver
 
 **Refinement note on H2 4:** the Liverpool validation worked with an unusually rich season catalyst (Premier League title win, manager farewell, kit-supplier brand transition, Hillsborough tribute). Mid-table clubs in quiet seasons may not carry the same narrative depth; in those cases, fall back to club heritage (founding history, classic kit cycles, signature players across eras, derby rivalries) as the H2 4 substance. The H2 framing flexes; the section's role (anchor the avatar's emotional connection to the club beyond the on-pitch product spec) does not.
 
-### 3. Soccer cleats (DRAFT v1, pending validation)
+### 3. Soccer cleats (VALIDATED v1, validated by Predator Accuracy.1 FG 2026-05-26)
 
-- H2 1: Model + generation + signature technology ("The [Model] [Generation] by [Brand]")
-- H2 2: Surface compatibility (FG / AG / IC / TF breakdown)
-- H2 3: Position fit + player level (Elite / Pro / Club / Junior tiers)
-- H2 4: Fit + sizing (with width considerations)
-- H2 5: Player association + tournament context
+- H2 1: Model + generation + signature technology ("The [Model] [Generation] by [Brand]"). Player heritage anchor permitted here (heritage-line players who define brand identity, e.g. Beckham/Zidane/Gerrard for Predator); frees H2 5 to do narrative or closeout work.
+- H2 2: Surface compatibility (FG / AG / IC / TF breakdown). REQUIRED across all cleat-category SKUs, not optional. Load-bearing for the competitive-player avatar; high cross-avatar utility for parents shopping for kids' cleats.
+- H2 3: Position fit + player level (Elite / Pro / Club / Junior tiers, plus line-positioning vs sibling silhouettes like Predator vs F50 vs Copa, or Mercurial vs Tiempo vs Phantom).
+- H2 4: Fit + sizing (with width considerations vs sibling lines).
+- H2 5: Player association + tournament context (current-cycle cleats) OR generation-closing / closeout narrative (older-cycle cleats at clearance pricing). Flex the framing based on cleat freshness: when the verifiable current-generation player roster is rich, anchor to it; when the page is a closeout SKU and current-roster verification is thin, pivot to the colorway / pack-context / closing-window narrative that serves the closeout buyer. The H2 framing flexes; the section's role (anchor the avatar's emotional connection beyond the spec sheet) does not.
+
+**Validation history:**
+- Predator Accuracy.1 FG Crazyrush Pack (2026-05-26): 4 of 5 H2s landed clean; H2 5 reshaped from player-association to closing-window narrative because the page is a closeout product and the Accuracy-generation roster was not independently verifiable. This validation produced the three refinements above (heritage anchor in H2 1, surface compatibility required, H2 5 flex pattern). Promotion from DRAFT v1 to VALIDATED v1.
+- Pending: a current-cycle flagship cleat PDP (e.g. Predator 25/26 or Mercurial Superfly 10) to validate the "player-association-rich" framing of H2 5 before promotion from VALIDATED v1 to CANONICAL.
 
 ### 4. Goalkeeper gloves (DRAFT v1, pending validation)
 
@@ -470,6 +474,7 @@ Same architecture as the collection-page playbook ('Internal link strategy' in `
 - Links derive from body content (the product's brand, the parent collection it sits in, related products in the same lineup, signature players the product is associated with).
 - Topical relevance over keyword opportunism. The destination must serve the reader who's actively considering this purchase.
 - All candidate URLs MUST be live-validated before inclusion (same Firecrawl scrape + status + content check as the collection-page playbook).
+- **Prefer specific over generic when both validate.** When choosing between a brand-line collection (e.g. `/collections/adidas-predator`) and a brand-generic collection (e.g. `/collections/adidas-soccer-cleats`), the brand-line link wins because it serves a more committed buyer (someone already shopping the Predator line) and complements rather than duplicates the page's existing brand signals. Reserve the second link slot for a complementary discovery path (surface-category, related lineup, signature player) rather than a duplicate brand-discovery path. Mirrors the team-collection page pattern in `MEMORY.md` (`feedback_internal-link-selection-pattern.md`): prefer player-collection links to brand-line links when both validate.
 
 ### Live validation requirement
 
