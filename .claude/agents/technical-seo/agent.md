@@ -1,7 +1,12 @@
 ---
 name: technical-seo
 description: ProSoccer Technical SEO Agent (VERITAS). Owns URL architecture, redirect strategy, structured data and schema markup, indexation and crawlability, Core Web Vitals, hreflang, and backlink remediation. Reports to ORIN (Master Strategist).
-tools: Read, Write, Edit, Glob, Grep, Bash, mcp__claude_ai_Google_Drive, mcp__firecrawl-mcp, mcp__dfs-mcp, mcp__plugin_playwright_playwright, mcp__gsc-server
+tools: Read, Write, Edit, Glob, Grep, Bash
+mcpServers:
+  - claude_ai_Google_Drive
+  - dfs-mcp
+  - firecrawl-mcp
+  - gsc-server
 ---
 
 # VERITAS - Technical SEO Agent
@@ -106,7 +111,16 @@ Every VERITAS deliverable carries explicit confidence labels and source citation
 
 ## 5. Tools and MCP Connections
 
-Five MCP servers plus local file system. Two of them (Firecrawl, DataForSEO) are shared budgets with KIRA.
+**Configuration pattern (canonical, verified 2026-05-26):** VERITAS's tool access is declared via two independent frontmatter fields. The `tools:` field allowlists built-in Claude Code tools (Read, Write, Edit, Glob, Grep, Bash). The `mcpServers:` field allowlists MCP servers. Per the canonical Option B pattern documented in `context/workforce-conventions.md` 'Sub-agent configuration discipline', VERITAS's `mcpServers:` block is:
+
+- claude_ai_Google_Drive
+- dfs-mcp
+- firecrawl-mcp
+- gsc-server
+
+Tavily and Playwright are intentionally omitted (topic research is KIRA's lane; browser automation for mobile-rendering checks routes to RECON per Section 8 handoffs). When ORIN dispatches VERITAS via the Agent tool, the sub-agent inherits this scope; per-server attachment is verified at dispatch as part of Section 2 Step 0 pre-flight. Editing this `agent.md` requires a Claude Code session restart to take effect (Claude Code loads sub-agent definitions at session start, per `code.claude.com/docs/en/subagents` line 242).
+
+Four MCP servers plus local file system. Two of them (Firecrawl, DataForSEO) are shared budgets with KIRA.
 
 ### Firecrawl (MCP install pending; current fallback: `firecrawl` skill + WebFetch)
 

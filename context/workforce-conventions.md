@@ -173,8 +173,8 @@ The cleanup commit is its own commit, not bundled with other work. Commit messag
 Quarterly cleanup YYYY-Q[N]: removed N page-optimization session folders past retention window
 
 Folders removed (with disposition):
-- deliverables/page-optimizations/YYYY-MM-DD_session-NN/ — implemented YYYY-MM-DD via Shopify admin
-- deliverables/page-optimizations/whitelabel-audit/YYYY-MM-DD_session-NN/ — superseded by [reference]
+- deliverables/page-optimizations/YYYY-MM-DD_session-NN/: implemented YYYY-MM-DD via Shopify admin
+- deliverables/page-optimizations/whitelabel-audit/YYYY-MM-DD_session-NN/: superseded by [reference]
 - ...
 ```
 
@@ -214,6 +214,28 @@ Before this inventory existed, agent narratives referenced `mcp__firecrawl-mcp__
 
 The pre-flight tool verification protocol in SCRIBE Section 2 Step 0 (canonical pattern, other agents adopt as added) makes the tool inventory explicit at the start of every session. If an agent intends to use a tool listed under "Install pending" above, the session briefing must log the actual fallback used, not just the intended MCP namespace.
 
+### Sub-agent MCP access matrix
+
+Each workforce agent has explicit MCP server access declared in its `agent.md` frontmatter `mcpServers:` block (per the Option B configuration pattern documented in 'Sub-agent configuration discipline' below). Least-privilege scoping: each agent gets only the MCP servers its core function requires.
+
+| Agent | claude_ai_Google_Drive | claude_ai_Tavily | dfs-mcp | firecrawl-mcp | plugin_playwright_playwright | gsc-server |
+|---|:-:|:-:|:-:|:-:|:-:|:-:|
+| master-strategist (ORIN) | yes | yes | yes | yes | yes | yes |
+| on-page-seo (SCRIBE) | yes | yes | yes | yes | no | yes |
+| keyword-research (KIRA) | yes | yes | yes | no | no | yes |
+| competitor-intel (RECON) | yes | no | yes | yes | yes | no |
+| technical-seo (VERITAS) | yes | no | yes | yes | no | yes |
+
+Rationale per agent:
+
+- **ORIN gets all six.** Orchestrator role requires the ability to run any specialist's work at the parent level when needed (e.g., the parent-handles-MCP workaround pattern before the architecture fix).
+- **SCRIBE has DFS + Firecrawl + Tavily + GSC + Drive.** No Playwright (Playwright is RECON's tool for competitor mobile-vs-desktop validation; SCRIBE doesn't need browser automation for copy production).
+- **KIRA has DFS + Tavily + GSC + Drive.** Keyword research is the core function; she doesn't need Firecrawl (page scraping is SCRIBE/VERITAS work) or Playwright (browser automation is RECON's lane).
+- **RECON has DFS + Firecrawl + Playwright + Drive.** Competitor monitoring needs SERP analysis (DFS), competitor page extraction (Firecrawl), and mobile-vs-desktop SERP rendering checks (Playwright). No Tavily (Tavily is internal topic research) and no GSC (GSC is own-site monitoring, not competitor monitoring).
+- **VERITAS has DFS + Firecrawl + GSC + Drive.** Technical SEO needs SERP-position validation (DFS), site crawling (Firecrawl), and coverage diagnostics (GSC). No Playwright (covered by Section 8 handoffs to RECON when mobile-rendering checks are needed) and no Tavily.
+
+When a new specialist is built (SAGE Content Writer, METRIK Reporting), add a row to this matrix as part of the agent.md commit and update each agent's `mcpServers:` block to match.
+
 ### Update protocol
 
 When an MCP install completes or auth lands:
@@ -221,6 +243,63 @@ When an MCP install completes or auth lands:
 1. Move the entry from "Install pending" to "Operational" with the verification date and the verification call used.
 2. Update affected agent narrative sections to remove the install-pending caveats (the inventory references can stay implicit once the MCP is live).
 3. Commit message format: `MCP install: <namespace> live. Tool inventory in workforce-conventions.md updated; agent narratives reference the MCP directly without fallback caveats.`
+
+## Sub-agent configuration discipline
+
+This section codifies the canonical configuration pattern for workforce sub-agents (the `agent.md` frontmatter that determines what tools and MCP servers each sub-agent can actually call). Verified against Claude Code documentation at `code.claude.com/docs/en/subagents` on 2026-05-26.
+
+### Frontmatter pattern (Option B, canonical)
+
+Two independent frontmatter fields govern tool availability:
+
+- **`tools:`** is the allowlist for built-in Claude Code tools (Read, Write, Edit, Glob, Grep, Bash, etc.). If `tools:` is set as an allowlist, only those tools are callable; the sub-agent CANNOT use any MCP tools unless `mcpServers:` is also set. If `tools:` is omitted entirely, the sub-agent inherits every tool from the parent.
+- **`mcpServers:`** is the allowlist for MCP servers. Each entry is either a bare server-name reference (e.g., `- dfs-mcp`) to a server configured in the parent session, or an inline server definition keyed by name. This field is the ONLY documented mechanism for scoping MCP access to a sub-agent.
+
+The canonical pattern for ProSoccer workforce agents:
+
+```yaml
+---
+name: <agent-name>
+description: <agent description>
+tools: Read, Write, Edit, Glob, Grep, Bash
+mcpServers:
+  - <server-1>
+  - <server-2>
+  - <server-N>
+---
+```
+
+`tools:` carries only built-in capabilities. `mcpServers:` carries the per-agent MCP scope. Both fields are independent allowlists.
+
+### Failure mode this pattern fixes
+
+Before 2026-05-26, agent frontmatter declared MCP servers using invalid syntax in the `tools:` field (e.g., `tools: Read, Write, ..., mcp__dfs-mcp, mcp__firecrawl-mcp, ...`). Per Claude Code documentation (subagents page, line 315): "This example uses `tools` to exclusively allow Read, Grep, Glob, and Bash. The subagent can't edit files, write files, or use any MCP tools." Bare MCP names in the `tools:` field are not valid tool references; they're neither tool names (which follow `mcp__<server>__<tool>` format) nor server references (which belong in the separate `mcpServers:` field).
+
+The visible symptom: sub-agents dispatched via the Agent tool reported their callable tools as `Read, Write, Edit, Glob, Grep, Bash` only, with no MCP tools exposed, despite frontmatter declarations to the contrary. The parent-handles-MCP workaround pattern (ORIN runs MCP calls, hands data to the sub-agent) was a band-aid; this configuration fix is the architectural correction.
+
+### Least-privilege scoping principle
+
+Each agent declares ONLY the MCP servers its core function requires. Master-strategist (ORIN) gets the full set because it orchestrates; specialists get only what they need to do their job. See the 'Sub-agent MCP access matrix' above for the canonical per-agent allocation. When adding a new MCP to the workforce (e.g., a future Ahrefs MCP), update the matrix and each agent's `mcpServers:` block to either include the server or explicitly omit it with a rationale logged here.
+
+### Restart-required behavior
+
+Per Claude Code documentation (subagents page, line 242): "Subagents are loaded at session start. If you add or edit a subagent file directly on disk, restart your session to load it." Editing any `agent.md` frontmatter (or the body) requires a Claude Code restart before the changes take effect in dispatched sub-agents. This is structural to Claude Code; it is not configurable.
+
+Practical implication: when restructuring agent.md files for an architectural change like the Option B fix, the workflow is (1) commit the edits, (2) restart Claude Code, (3) verify the new configuration in dispatched sub-agents, (4) only then proceed with workflows that depend on the fix.
+
+### Step 0 verification at sub-agent dispatch
+
+The SCRIBE Section 2 Step 0 pre-flight tool verification protocol (canonical pattern, other agents adopt as added) now includes verifying the `mcpServers:` block matches the expected per-agent access. Specifically:
+
+1. On dispatch, the sub-agent confirms which MCP server names appear callable in its tool schema (i.e., tools prefixed `mcp__<server-name>__*` should exist for every server in the `mcpServers:` block).
+2. If a server listed in `mcpServers:` is not callable, the sub-agent logs the discrepancy in its session briefing and surfaces to ORIN or Mike before proceeding.
+3. If a server NOT in the agent's `mcpServers:` block appears callable, log the over-permission as a config drift to be reconciled in the next agent.md commit.
+
+This catches both under-permission (configuration didn't take effect, restart was skipped, server name typo) and over-permission (sub-agent inherited more than scoped) before they corrupt deliverable audit trails.
+
+### Plugin-provided MCP servers (caveat)
+
+Per Claude Code documentation, plugin sub-agents (sub-agents loaded from a Claude Code plugin) do NOT support the `mcpServers:`, `hooks:`, or `permissionMode:` frontmatter fields. Our workforce agents live under `.claude/agents/` (project scope, not plugin scope), so this caveat does not apply to us. If a future workforce agent is ever loaded from a plugin, the `mcpServers:` block will be ignored and the agent will inherit the parent session's MCP scope by default; document the constraint in the agent's own agent.md.
 
 ## Cross-references
 

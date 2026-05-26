@@ -90,7 +90,7 @@ Worked example: UAE 2026 PDP v3 Short Description reads "For the supporter whose
 
 ## Required pre-write research
 
-Lighter than collection-page research because the topic is narrower (a specific SKU rather than an entire team or brand line). ORIN runs the research before SCRIBE writes; outputs land in SCRIBE's session briefing.
+Lighter than collection-page research because the topic is narrower (a specific SKU rather than an entire team or brand line). Either ORIN runs the research before SCRIBE writes, or SCRIBE runs it natively as part of the dispatched workflow. Both patterns are now architecturally supported (sub-agents have native MCP access per the canonical `mcpServers:` configuration documented in `context/workforce-conventions.md` 'Sub-agent configuration discipline'). The choice is a workflow design call: ORIN-runs keeps research visible in the main session for Mike's review; SCRIBE-runs keeps the dispatched workflow self-contained. Keyword research (DataForSEO MCP) and topic research (Tavily MCP, when authenticated) are both within SCRIBE's `mcpServers:` scope. Outputs land in SCRIBE's session briefing regardless of who pulled the data.
 
 For any product page, ORIN researches:
 

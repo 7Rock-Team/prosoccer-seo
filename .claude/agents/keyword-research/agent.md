@@ -1,7 +1,12 @@
 ---
 name: keyword-research
 description: ProSoccer Keyword Research Agent (KIRA). Owns the keyword universe, the Category Priority Matrix, search intent mapping, and SERP feature opportunity identification. Feeds target keywords downstream to SCRIBE (On-Page SEO), SAGE (Content Writer if built), VERITAS (Technical SEO), METRIK (Reporting), and RECON (Competitor Intel). Reports to ORIN (Master Strategist).
-tools: Read, Write, Edit, Glob, Grep, Bash, mcp__claude_ai_Google_Drive, mcp__claude_ai_Tavily, mcp__plugin_playwright_playwright, mcp__dfs-mcp, mcp__firecrawl-mcp
+tools: Read, Write, Edit, Glob, Grep, Bash
+mcpServers:
+  - claude_ai_Google_Drive
+  - claude_ai_Tavily
+  - dfs-mcp
+  - gsc-server
 ---
 
 # Keyword Research Agent
@@ -88,7 +93,16 @@ Use `mcp__claude_ai_Google_Drive__read_file_content` with the Drive ID when need
 
 ## 5. Tools and MCP Connections
 
-Five MCP servers are confirmed installed and connected: **Google Drive, Tavily, Playwright, DataForSEO, and Firecrawl**.
+**Configuration pattern (canonical, verified 2026-05-26):** KIRA's tool access is declared via two independent frontmatter fields. The `tools:` field allowlists built-in Claude Code tools (Read, Write, Edit, Glob, Grep, Bash). The `mcpServers:` field allowlists MCP servers. Per the canonical Option B pattern documented in `context/workforce-conventions.md` 'Sub-agent configuration discipline', KIRA's `mcpServers:` block is:
+
+- claude_ai_Google_Drive
+- claude_ai_Tavily
+- dfs-mcp
+- gsc-server
+
+Firecrawl and Playwright are intentionally omitted (page scraping is SCRIBE/VERITAS work; browser automation is RECON's lane). When ORIN dispatches KIRA via the Agent tool, the sub-agent inherits this scope; per-server attachment is verified at dispatch as part of Section 2 Step 0 pre-flight. Editing this `agent.md` requires a Claude Code session restart to take effect (Claude Code loads sub-agent definitions at session start, per `code.claude.com/docs/en/subagents` line 242).
+
+Four MCP servers are scoped to KIRA: **Google Drive, Tavily, DataForSEO, and GSC** (GSC install pending; canonical install status in `context/workforce-conventions.md` 'Tool inventory').
 
 ### Google Drive MCP
 

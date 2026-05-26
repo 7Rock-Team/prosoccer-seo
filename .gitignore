@@ -32,7 +32,6 @@ data/**/*.zip
 data/**/*.tsv
 !data/README.md
 !data/**/.gitkeep
-
 # Generated report binaries (keep templates and markdown, not PDFs)
 reports/monthly/*.pdf
 reports/monthly/*.docx

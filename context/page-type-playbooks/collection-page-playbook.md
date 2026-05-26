@@ -90,7 +90,7 @@ Worked example: UAE 2026 PDP v3 Short Description reads "For the supporter whose
 
 ## Required pre-write research
 
-ORIN runs topic research before SCRIBE writes. The topic research becomes the substantive backbone of the body copy. Without it, SCRIBE falls back on whatever the model already knows about the topic, which is usually generic and often stale.
+Either ORIN runs topic research before SCRIBE writes, or SCRIBE runs it natively as part of the dispatched workflow. Both patterns are now architecturally supported (sub-agents have native MCP access per the canonical `mcpServers:` configuration documented in `context/workforce-conventions.md` 'Sub-agent configuration discipline'). The choice is a workflow design call: ORIN-runs keeps research visible in the main session for Mike's review; SCRIBE-runs keeps the dispatched workflow self-contained. Topic research becomes the substantive backbone of the body copy. Without it, SCRIBE falls back on whatever the model already knows about the topic, which is usually generic and often stale.
 
 For any collection page, ORIN researches:
 
