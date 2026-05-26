@@ -346,12 +346,16 @@ Notes that apply to all categories:
 - H2 3: Fit and sizing
 - H2 4: What you're buying into (cultural + tournament context + future catalyst)
 
-### 2. Club jersey (DRAFT v1, pending validation)
+### 2. Club jersey (CANONICAL as of 2026-05-26)
+
+Validated by: Nike 2024-25 Liverpool Men's Stadium Away Jersey brief at `deliverables/page-optimizations/2026-05-26_session-01/nike-2024-25-liverpool-mens-stadium-away-jersey_brief.md`. Template applied clean without flex; topic depth from Slot title + Klopp farewell + Nike-to-adidas transition + Hillsborough tribute filled the framework substantively.
 
 - H2 1: Brand + design + club crest / identity ("The [Year] [Club] [Home / Away / Third] Jersey")
 - H2 2: Edition tier or player personalization options
 - H2 3: Fit and sizing
-- H2 4: Club narrative + season catalyst + player associations
+- H2 4: Club narrative + season catalyst + player associations (or club heritage where the current narrative is thin)
+
+**Refinement note on H2 4:** the Liverpool validation worked with an unusually rich season catalyst (Premier League title win, manager farewell, kit-supplier brand transition, Hillsborough tribute). Mid-table clubs in quiet seasons may not carry the same narrative depth; in those cases, fall back to club heritage (founding history, classic kit cycles, signature players across eras, derby rivalries) as the H2 4 substance. The H2 framing flexes; the section's role (anchor the avatar's emotional connection to the club beyond the on-pitch product spec) does not.
 
 ### 3. Soccer cleats (DRAFT v1, pending validation)
 
