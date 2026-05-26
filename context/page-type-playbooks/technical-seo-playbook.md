@@ -116,7 +116,7 @@ Scope: audit Product schema across 17 Tier 1 collection pages and their associat
 
 2. **Add `gtin13` field to product-schema.liquid snippet.** Source: product metafield `custom.gtin13` (current source per DataFeedWatch feed mapping). Destination: schema field `gtin13`. Implementer: Misha. Time estimate: 1.5 hours. Priority: High. Verification: same as fix 1. Rollback: revert.
 
-3. **Verify Merchant Listings eligibility shifts after deploy.** GSC Rich Results report; expect Product Snippets count to decrease and Merchant Listings count to increase across affected URLs. Implementer: VERITAS. Time estimate: 1 hour at 14 days post-deploy. Priority: High. Verification: GSC Rich Results report shows the migration; cross-check with `mcp__gsc-server__inspect_url_enhanced` on 5 sample URLs.
+3. **Verify Merchant Listings eligibility shifts after deploy.** GSC Rich Results report; expect Product Snippets count to decrease and Merchant Listings count to increase across affected URLs. Implementer: VERITAS. Time estimate: 1 hour at 14 days post-deploy. Priority: High. Verification: GSC Rich Results report shows the migration (Mike pulls via GSC UI today; cross-check via `mcp__gsc-server__inspect_url_enhanced` on 5 sample URLs once the GSC MCP install lands, per `context/workforce-conventions.md` 'Tool inventory').
 
 ## Implementer routing summary
 - **Misha (theme repo, `mike-audit` branch):** fixes 1 and 2.

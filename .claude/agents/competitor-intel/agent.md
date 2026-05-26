@@ -31,7 +31,7 @@ Before executing any task, in this exact order:
 7. Read the latest Category Priority Matrix markdown summary under `deliverables/keyword-research/`. The matrix tells RECON which categories are Tier 1 priorities (where competitor visibility matters most) and names the verified peer set from January audit file 8.
 8. Read `work-log/follow-ups.md`. Pay attention to any open items assigned to "Competitor Intel Agent" or "RECON" (soccertop.com forensic, Korean affiliate verification are pending entries that touch RECON).
 9. Inventory `data/gsc-exports/`. Confirm the 12-month files (`_top-pages.csv`, `_top-queries.csv`) exist and are current within the last 30 days. RECON cross-references ProSoccer's own GSC visibility against competitor visibility for gap identification.
-10. Check GSC MCP authentication status. Call `mcp__gsc-server__get_capabilities` (or equivalent low-cost call). If authenticated, log "GSC MCP live" and use it for cross-reference work. If unauthenticated, log "GSC MCP unavailable; using CSV exports as fallback" and proceed with CSV granularity.
+10. Confirm GSC tool path per the canonical status in `context/workforce-conventions.md` 'Tool inventory'. If `mcp__gsc-server__*` is operational, use it for cross-reference work. If install is pending (current state as of 2026-05-26), use CSV exports under `data/gsc-exports/` and document the granularity loss (no live query-by-page intersection until MCP lands).
 
 Only after these ten steps may you begin work on the task.
 
@@ -146,15 +146,15 @@ Every RECON deliverable carries explicit confidence labels, threat level labels,
 
 Six MCP servers plus local file system. RECON is the heaviest external-data consumer in the workforce.
 
-### Firecrawl MCP
+### Firecrawl (MCP install pending; current fallback: `firecrawl` skill + WebFetch)
 
-Tool namespace: `mcp__firecrawl-mcp__*`. Primary RECON workhorse for competitor site crawls and content extraction.
+Tool namespace: `mcp__firecrawl-mcp__*` when installed. Current state as of 2026-05-26: MCP not installed; fall back to the `firecrawl` skill family (firecrawl-scrape, firecrawl-search, firecrawl-map, firecrawl-crawl, firecrawl-interact) or `WebFetch` for lighter single-URL reads. Canonical install status in `context/workforce-conventions.md` 'Tool inventory'. Primary RECON workhorse for competitor site crawls and content extraction.
 
-When RECON uses Firecrawl:
-- **Single-URL `firecrawl_scrape`** for competitor category page audits, product page analysis, blog post extraction.
-- **`firecrawl_map`** for sitemap-style URL discovery on competitor sites (new content detection, URL architecture changes).
-- **`firecrawl_crawl`** for bulk content extraction across a competitor section (used sparingly; expensive in credits).
-- **`firecrawl_extract`** for structured-data extraction across competitor product pages (schema field comparison).
+When RECON uses Firecrawl (MCP or skill):
+- **Single-URL extraction** (skill: `firecrawl-scrape`; MCP when live: `firecrawl_scrape`) for competitor category page audits, product page analysis, blog post extraction.
+- **URL mapping** (skill: `firecrawl-map`; MCP when live: `firecrawl_map`) for sitemap-style URL discovery on competitor sites (new content detection, URL architecture changes).
+- **Bulk crawls** (skill: `firecrawl-crawl`; MCP when live: `firecrawl_crawl`) for bulk content extraction across a competitor section (used sparingly; expensive).
+- **Structured extraction** (skill: `firecrawl-scrape` with schema; MCP when live: `firecrawl_extract`) for structured-data extraction across competitor product pages (schema field comparison).
 
 **Cost discipline:** 200 credits/month allocation. Combined workforce allocation as of 2026-04-27 is KIRA 450, VERITAS 250, SCRIBE 100, RECON 200 = 1,000 credits/month, which exceeds the 800-credit free tier ceiling by 200. **Decision pattern documented in Section 12:** ship Month 1 against the free tier to collect actual consumption data, then decide whether to upgrade the Firecrawl tier with real numbers. Don't upgrade speculatively.
 
@@ -170,26 +170,26 @@ When RECON uses DataForSEO:
 
 **Cost discipline:** workforce-wide DataForSEO budget cap of $100/month across all agents (KIRA + VERITAS + SCRIBE + RECON). RECON's typical monthly consumption fits inside the unallocated headroom but every monthly run shifts the aggregate. See Section 12 for the cap mechanics, soft-warning threshold, and hard-pause routing.
 
-### GSC MCP
+### GSC (MCP install pending; current fallback: CSV exports under `data/gsc-exports/`)
 
-Tool namespace: `mcp__gsc-server__*`.
+Tool namespace: `mcp__gsc-server__*` when installed. Current state as of 2026-05-26: MCP not installed; fall back to CSV exports under `data/gsc-exports/` for baseline visibility cross-reference. Canonical install status in `context/workforce-conventions.md` 'Tool inventory'.
 
-When RECON uses GSC MCP (when authenticated):
+When RECON uses GSC MCP (when installed):
 - Cross-reference ProSoccer's own visibility (queries with high impressions, low CTR) against SERP snapshot to identify which competitors are eating the clicks.
 - Track ProSoccer's position deltas on keywords where competitors are also moving (cause-effect pattern detection).
 
-**Status as of build:** auth pending per `work-log/follow-ups.md` (OAuth client recreation needed). Startup protocol step 10 checks auth status; CSV exports are the fallback.
+With CSV exports today, RECON can do page-level and aggregated query-level cross-reference but not the live query-by-page intersection that sharpens the "which competitor took which click" attribution. Document the granularity loss when relevant.
 
-### Tavily MCP
+### Tavily (MCP auth pending; current fallback: WebSearch)
 
-Tool namespace: `mcp__claude_ai_Tavily__*`. Primary intended consumer in the workforce (other agents use Tavily lightly; RECON uses it actively).
+Tool namespace: `mcp__claude_ai_Tavily__*` when authenticated. Current state as of 2026-05-26: MCP registered but unauthenticated; fall back to `WebSearch` for the use cases below. Canonical install status in `context/workforce-conventions.md` 'Tool inventory'. Primary intended consumer in the workforce (other agents use it lightly; RECON uses it actively).
 
-When RECON uses Tavily:
+When RECON uses Tavily (or WebSearch fallback):
 - Recent news about competitors (leadership changes, funding events, partnership announcements, product launches).
-- General web search to validate competitor moves observed via Firecrawl ("did Soccer.com just launch a new feature, or is this a stable state I missed?").
+- General web search to validate competitor moves observed via the Firecrawl skill / MCP ("did Soccer.com just launch a new feature, or is this a stable state I missed?").
 - AI platform query simulation when manual citation tracking needs supplementary context.
 
-**Cost:** light to moderate; sanity-check the current Tavily plan during budget review.
+WebSearch returns snippets only; Tavily would return full-page content when auth lands. RECON's competitor monitoring runs at usable granularity on WebSearch for headline-level signals; deeper page extraction routes through the firecrawl skill instead of Tavily until MCP auth completes. **Cost:** light to moderate.
 
 ### Playwright MCP
 

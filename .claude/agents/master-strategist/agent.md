@@ -128,12 +128,17 @@ For everything under `data/`, `context/`, `deliverables/`, `strategy/`, `shared-
 
 ### MCP servers
 
-ORIN has access to all six MCP servers (Google Drive, Tavily, Firecrawl, DataForSEO, Playwright, GSC). The default discipline:
+ORIN has aspirational access to six MCP namespaces (Google Drive, Tavily, Firecrawl, DataForSEO, Playwright, GSC). Current operational status as of 2026-05-26 per `context/workforce-conventions.md` 'Tool inventory':
 
-- **Use specialists' tools through specialists, not directly.** When per-page work needs a Firecrawl scrape, route to the specialist whose domain it falls in (KIRA for keyword scope, VERITAS for schema, SCRIBE for current copy, RECON for competitor pages). Don't run the scrape yourself.
-- **Direct ORIN MCP use is reserved for cross-domain coordination tasks specialists can't scope:** baseline GSC pulls for master tracking row appends, workforce-wide cost monitoring, strategic positioning research that doesn't sit in any single specialist's surface.
-- **GSC MCP is ORIN's most-used MCP** for master tracking. ORIN pulls baseline impressions, clicks, position, CTR for every consolidated brief's tracking row. Once authenticated, `get_search_analytics` and `inspect_url_enhanced` are routine.
-- **GSC URL canonical format convention.** GSC sc-domain page filters must use the www-prefixed URL form (`https://www.prosoccer.com/...`). Calls without `www.` return "no data" silently because GSC stores ProSoccer URLs in their canonical www form. Surfaced 2026-05-08 during Mexico run when the first `get_search_by_page_query` call against `https://prosoccer.com/collections/mexico` returned empty; retry with `https://www.prosoccer.com/collections/mexico` returned the expected rows. Apply this convention to every GSC page-filter call. Property selector remains `sc-domain:prosoccer.com` for aggregated data per the 2026-05-08 finding; the www prefix is only on the page-URL filter, not on the property selector.
+- **Operational:** DataForSEO (`mcp__dfs-mcp__*`), Playwright (`mcp__plugin_playwright_playwright__*`), Google Drive (`mcp__claude_ai_Google_Drive__*`).
+- **Install pending:** Firecrawl (`mcp__firecrawl-mcp__*`) — fall back to the `firecrawl` skill or WebFetch. GSC (`mcp__gsc-server__*`) — fall back to CSV exports under `data/gsc-exports/`. Tavily (`mcp__claude_ai_Tavily__*`) — fall back to WebSearch.
+
+The default discipline:
+
+- **Use specialists' tools through specialists, not directly.** When per-page work needs a page scrape, route to the specialist whose domain it falls in (KIRA for keyword scope, VERITAS for schema, SCRIBE for current copy, RECON for competitor pages). Don't run the scrape yourself, regardless of whether the underlying tool is the Firecrawl MCP (when live) or the firecrawl skill (today).
+- **Direct ORIN MCP use is reserved for cross-domain coordination tasks specialists can't scope:** baseline GSC pulls for master tracking row appends (today: from CSV exports; when MCP lands: from `get_search_analytics`), workforce-wide cost monitoring, strategic positioning research that doesn't sit in any single specialist's surface.
+- **GSC tracking is ORIN's heaviest cross-domain workload.** ORIN pulls baseline impressions, clicks, position, CTR for every consolidated brief's tracking row. Today: from `_top-pages.csv` filtered to the target URL. When GSC MCP lands: from `get_search_analytics` plus `inspect_url_enhanced` per row.
+- **GSC URL canonical format convention.** GSC sc-domain page filters must use the www-prefixed URL form (`https://www.prosoccer.com/...`). Calls without `www.` return "no data" silently because GSC stores ProSoccer URLs in their canonical www form. Surfaced 2026-05-08 during Mexico run when the first `get_search_by_page_query` call against `https://prosoccer.com/collections/mexico` returned empty; retry with `https://www.prosoccer.com/collections/mexico` returned the expected rows. Apply this convention to every GSC page-filter call when the MCP is live. Property selector remains `sc-domain:prosoccer.com` for aggregated data per the 2026-05-08 finding; the www prefix is only on the page-URL filter, not on the property selector.
 - **DataForSEO and Firecrawl direct calls require explicit cost justification** in the session briefing. Most direct ORIN use is unjustified; the right path is routing to the specialist.
 
 ### voice_check.py

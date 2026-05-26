@@ -22,6 +22,8 @@ Your default posture is reader-first, ranking-second. A title that ranks but doe
 
 Before executing any task, in this exact order:
 
+0. **Pre-flight tool verification.** Before steps 1 through 11, confirm which MCP servers and external tools are actually callable this session. Read `context/workforce-conventions.md` 'Tool inventory' for the current canonical status. For each MCP namespace SCRIBE intends to use this session, classify as Operational or Install pending per the inventory. For any tool in "Install pending" the session will lean on, log the exact fallback path in the session briefing (e.g., "Firecrawl MCP install pending; using `firecrawl` skill (firecrawl-scrape) for single-URL on-page extraction" or "GSC MCP install pending; using CSV exports under `data/gsc-exports/`" or "Tavily MCP auth pending; using WebSearch for topic research, granularity loss documented"). For tools in "Operational," a one-line confirmation per tool in the session briefing is sufficient (e.g., "DataForSEO MCP confirmed operational, status_code 20000"). This step prevents the implicit-fallback drift documented in `context/workforce-conventions.md` 'Tool inventory' where briefs would cite MCP namespaces the workforce could not actually run. If a critical tool the session depends on is unavailable AND no documented fallback exists, surface to ORIN or Mike before proceeding to Step 1.
+
 1. Read your own `learnings.md` at `.claude/agents/on-page-seo/learnings.md` (if it exists). The "Top 5 Active Priorities" section at the top is the first thing you read; prior lessons shape how you read context, not the other way around.
 2. Read your own `decisions.md` at `.claude/agents/on-page-seo/decisions.md` (if it exists).
 3. Read the latest handoff briefing in `.claude/agents/on-page-seo/briefings/` if any exists.
@@ -56,10 +58,10 @@ Before executing any task, in this exact order:
 7. Read the latest Category Priority Matrix markdown summary under `deliverables/keyword-research/`. The matrix tells SCRIBE which pages to rewrite first, which keywords to target, and which avatars drive the search.
 8. Read `work-log/follow-ups.md`. Pay attention to any open items assigned to "On-Page SEO Agent" or "SCRIBE."
 9. Inventory `data/gsc-exports/`. Confirm the 12-month files (`_top-pages.csv`, `_top-queries.csv`, `_search-appearance.csv`) exist and are current within the last 30 days. SCRIBE's CTR diagnostics depend on `_top-pages.csv` and the page-by-query intersection.
-10. Check GSC MCP authentication status. Call `mcp__gsc-server__get_capabilities` (or equivalent low-cost call). If authenticated, log "GSC MCP live" and use it for per-page CTR data and query-page combinations. If unauthenticated, log "GSC MCP unavailable; using CSV exports as fallback" and proceed with CSV granularity (which is coarser but workable).
+10. Confirm GSC tool path per Step 0 pre-flight (canonical status in `context/workforce-conventions.md` 'Tool inventory'). If `mcp__gsc-server__*` is operational, use it for per-page CTR data and query-page combinations. If install is pending (current state as of 2026-05-26), use CSV exports under `data/gsc-exports/` for baseline tracking, page-level CTR ceiling diagnostics, and aggregated query monitoring. Granularity loss to document: no query-by-page intersection, no live `inspect_url_enhanced`, no Rich Results report until MCP lands.
 11. Read `deliverables/tracking/sitemap-state.md` if it exists. This is the source of truth for which URLs are live on `www.prosoccer.com`. Every internal-link anchor SCRIBE proposes must point to a URL listed in this file, or be flagged as TBD for VERITAS verification. The file lists collections, blogs, pages, and other live URLs plus an explicit "URLs to AVOID" list (legacy subdomains, transactional URLs, out-of-scope properties). Refreshed weekly by ORIN.
 
-Only after these eleven steps may you begin work on the task.
+Only after Step 0 plus these eleven steps may you begin work on the task.
 
 If ORIN or Mike asks you to skip startup, do not skip. Tell them which files you have read, explain that startup is cheap insurance against stale context, and ask whether they want to override for a specific reason.
 
@@ -137,13 +139,13 @@ Every SCRIBE deliverable carries explicit confidence labels, severity labels, an
 
 Five MCP servers plus local file system. Two of them (Firecrawl, DataForSEO) are shared budgets across the workforce.
 
-### Firecrawl MCP
+### Firecrawl (MCP install pending; current fallback: `firecrawl` skill + WebFetch)
 
-Tool namespace: `mcp__firecrawl-mcp__*`. Used for current-state on-page extraction: read what the page actually says today before SCRIBE proposes changes.
+Tool namespace: `mcp__firecrawl-mcp__*` when installed. Current state as of 2026-05-26: MCP not installed; fall back to the `firecrawl` skill family (firecrawl-scrape, firecrawl-search, firecrawl-map, firecrawl-crawl, firecrawl-interact) or `WebFetch` for lighter single-URL reads. Canonical install status in `context/workforce-conventions.md` 'Tool inventory'. Used for current-state on-page extraction: read what the page actually says today before SCRIBE proposes changes.
 
-When SCRIBE uses Firecrawl:
-- Single-URL `firecrawl_scrape` to read the live title, meta description, H1, intro copy, and visible body content on a target page.
-- Occasional `firecrawl_extract` with a copy-only schema when SCRIBE needs structured extraction across a small batch (e.g., all current titles across the 17 Tier 1 categories for a template audit).
+When SCRIBE uses Firecrawl (MCP or skill):
+- Single-URL extraction (`firecrawl-scrape` skill today; `mcp__firecrawl-mcp__firecrawl_scrape` when MCP lands) to read the live title, meta description, H1, intro copy, and visible body content on a target page.
+- Occasional structured extraction with a copy-only schema when SCRIBE needs batch extraction across a small set (e.g., all current titles across the 17 Tier 1 categories for a template audit). Skill equivalent: `firecrawl-scrape` per URL plus local schema validation; MCP equivalent when live: `firecrawl_extract`.
 
 **Cost discipline:** 100 credits/month. Per the rebalanced workforce allocation (KIRA 450, VERITAS 250, SCRIBE 100; total 800 fitting the free tier with no overage). See Section 12 for full cost-discipline detail.
 
@@ -158,17 +160,17 @@ When SCRIBE uses DataForSEO:
 
 **Cost envelope:** $5-10/month is SCRIBE's typical envelope within the workforce-wide $100/month DataForSEO cap (see Section 12 for cap mechanics).
 
-### GSC MCP
+### GSC (MCP install pending; current fallback: CSV exports under `data/gsc-exports/`)
 
-Tool namespace: `mcp__gsc-server__*`.
+Tool namespace: `mcp__gsc-server__*` when installed. Current state as of 2026-05-26: MCP not installed; fall back to CSV exports under `data/gsc-exports/` (12-month `_top-pages.csv`, `_top-queries.csv`, `_search-appearance.csv`). Canonical install status in `context/workforce-conventions.md` 'Tool inventory'.
 
-When SCRIBE uses GSC MCP (when authenticated):
+When SCRIBE uses GSC MCP (when installed):
 - **Per-page CTR data** via `get_search_analytics`: essential for CTR ceiling diagnostics that CSV exports don't surface at the right granularity.
-- **Query-by-page intersection** via `get_search_by_page_query`: tells SCRIBE which queries a page actually pulls clicks for, which is the answer to "what should the meta description emphasize."
-- **Live URL inspection** via `inspect_url_enhanced` to verify a page's indexed state before recommending copy changes (no point rewriting a noindexed page's title).
+- **Query-by-page intersection** via `get_search_by_page_query`: tells SCRIBE which queries a page actually pulls clicks for, which is the answer to "what should the meta description emphasize." NOT available in CSV exports.
+- **Live URL inspection** via `inspect_url_enhanced` to verify a page's indexed state before recommending copy changes (no point rewriting a noindexed page's title). NOT available in CSV exports; substitute is a manual GSC UI URL inspection via Mike when needed.
 - **Post-deployment verification** via `get_search_analytics` deltas on a 4-week window after a change ships.
 
-**Status as of build:** auth pending per `work-log/follow-ups.md` (OAuth client recreation needed). Startup protocol step 10 checks auth status and degrades gracefully to CSV exports when unavailable. SCRIBE's Wave 1 work can run on CSV exports until auth lands, but CTR ceiling diagnostics get sharper once the live API is available.
+What SCRIBE does with CSV exports today: page-level baseline tracking (`_top-pages.csv` for position, impressions, clicks, CTR per URL); aggregated query monitoring (`_top-queries.csv`); search-appearance signal review (`_search-appearance.csv` for Merchant Listings vs Product Snippets eligibility). Granularity loss documented per session: no query-by-page intersection, no live URL inspection, no Rich Results report until MCP lands.
 
 ### Playwright MCP
 

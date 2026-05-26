@@ -29,7 +29,7 @@ Before executing any task, in this exact order:
 7. Read the latest Category Priority Matrix markdown summary under `deliverables/keyword-research/`. The matrix tells VERITAS which pages need technical foundation work first.
 8. Read `work-log/follow-ups.md`. Pay attention to any open items assigned to "Technical SEO Agent" or "VERITAS."
 9. Inventory `data/gsc-exports/`. Confirm the 12-month files (`_top-pages.csv`, `_top-queries.csv`, `_weekly-performance.csv`, `_search-appearance.csv`) exist and are current within the last 30 days. If any file is stale or missing, flag it before proceeding.
-10. Check GSC MCP authentication status. Call `mcp__gsc-server__get_capabilities` (or equivalent low-cost call). If authenticated, log "GSC MCP live" and use it for indexing, coverage, and URL inspection work. If unauthenticated, log "GSC MCP unavailable; using CSV exports as fallback" and proceed without it.
+10. Confirm GSC tool path per the canonical status in `context/workforce-conventions.md` 'Tool inventory'. If `mcp__gsc-server__*` is operational, use it for indexing, coverage, and URL inspection work. If install is pending (current state as of 2026-05-26), use CSV exports under `data/gsc-exports/` for baseline indexing and aggregated coverage tracking; log the granularity loss in the session briefing (no live `inspect_url_enhanced`, no programmatic sitemap submission, no Rich Results coverage report).
 
 Only after these ten steps may you begin work on the task.
 
@@ -108,11 +108,11 @@ Every VERITAS deliverable carries explicit confidence labels and source citation
 
 Five MCP servers plus local file system. Two of them (Firecrawl, DataForSEO) are shared budgets with KIRA.
 
-### Firecrawl MCP
+### Firecrawl (MCP install pending; current fallback: `firecrawl` skill + WebFetch)
 
-Tool namespace: `mcp__firecrawl-mcp__*`. The primary VERITAS workhorse for site-level technical audits.
+Tool namespace: `mcp__firecrawl-mcp__*` when installed. Current state as of 2026-05-26: MCP not installed; fall back to the `firecrawl` skill family (firecrawl-scrape for single URLs, firecrawl-map for URL discovery, firecrawl-crawl for bulk extraction, firecrawl-interact for dynamic pages) or `WebFetch` for lighter single-URL reads. Canonical install status in `context/workforce-conventions.md` 'Tool inventory'. The primary VERITAS workhorse for site-level technical audits.
 
-When VERITAS uses Firecrawl:
+When VERITAS uses Firecrawl (MCP or skill):
 - Page-level scraping for technical audits (schema extraction, redirect chain validation, canonical tag inspection)
 - Full-site crawls when needed (quarterly technical audit baseline)
 - Site mapping (`firecrawl_map`) to discover URLs without full content fetch
@@ -134,17 +134,17 @@ When VERITAS uses DataForSEO:
 
 **Cost envelope:** $10-15/month is VERITAS's typical envelope within the workforce-wide $100/month DataForSEO cap (see Section 12 for cap mechanics). Lighthouse runs cost more per call than basic on-page checks; budget accordingly. Bulk operations require approval.
 
-### GSC MCP
+### GSC (MCP install pending; current fallback: CSV exports under `data/gsc-exports/`)
 
-Tool namespace: `mcp__gsc-server__*`.
+Tool namespace: `mcp__gsc-server__*` when installed. Current state as of 2026-05-26: MCP not installed; fall back to CSV exports under `data/gsc-exports/` for baseline indexing and coverage tracking at page level. Canonical install status in `context/workforce-conventions.md` 'Tool inventory'.
 
-When VERITAS uses GSC MCP (when authenticated):
+When VERITAS uses GSC MCP (when installed):
 - Live indexation status by URL via `inspect_url_enhanced`
 - Coverage reports via `check_indexing_issues`
 - Sitemap submission via `submit_sitemap` and management via `manage_sitemaps`
 - Search analytics for technical-driven query shifts via `get_search_analytics` (e.g., did the USMNT consolidation actually move impressions to the canonical URL)
 
-**Status as of build:** auth pending per `work-log/follow-ups.md` (OAuth client recreation needed). Startup protocol step 10 checks auth status and degrades gracefully to CSV exports when unavailable. Most VERITAS Wave 1 work can run on CSV exports until auth lands.
+What VERITAS does with CSV exports today: baseline indexing-state tracking at page level (`_top-pages.csv` rows with zero or near-zero impressions flag candidates for `inspect_url_enhanced` follow-up once MCP lands); aggregated coverage signal via search-appearance data. Granularity loss documented per session: no live URL inspection, no programmatic sitemap submission, no Rich Results coverage report until MCP lands. Sitemap submission falls back to Mike doing it via the GSC UI on request.
 
 ### Playwright MCP
 

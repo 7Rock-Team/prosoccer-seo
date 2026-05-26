@@ -145,9 +145,44 @@ The disposition note is the audit trail of why each folder was safely removable.
 - The `templates/` directory.
 - Any deliverable file in `deliverables/technical-fixes/`, `deliverables/keyword-research/`, `deliverables/phase-2-discovery/`, or other non-page-optimization deliverable folders. Those have their own retention conventions to be documented separately as they emerge.
 
+## Tool inventory
+
+This section is the canonical truth source for which MCP servers and external tools are operationally available to the workforce today. Agent narrative sections (`## 5. Tools and MCP Connections` in each `.claude/agents/<agent-name>/agent.md`) may reference MCP namespaces aspirationally; this inventory governs what's actually callable. When a narrative description and this inventory disagree, this inventory wins.
+
+Refreshed: 2026-05-26.
+
+### Operational (live, callable today)
+
+- **DataForSEO MCP, `mcp__dfs-mcp__*`.** Pay-per-use API access covering SERP data, keyword research, keyword difficulty, search intent, on-page audit, backlinks, domain analytics, and DataForSEO Labs endpoints. Credentials verified 2026-05-26 (status_code 20000 returned on `mcp__dfs-mcp__serp_locations`). Workforce-wide hard cap $100/month per Section 12 of each agent.
+- **Playwright MCP, `mcp__plugin_playwright_playwright__*`.** Headless browser automation for live SERP inspection, SPA-rendered content extraction, post-deployment visual validation, and screenshot capture. Read-only posture for all workforce use.
+- **Google Drive MCP, `mcp__claude_ai_Google_Drive__*`.** Reads from the January 2026 audit folder (`1KF1213I-_nf9B04ASKoM_mcv5xydJ3h8`) and other shared Drive artifacts. Free at API level; cost is context-budget consumption.
+- **Local file system.** All `data/`, `context/`, `deliverables/`, `strategy/`, `shared-intelligence/`, `work-log/`, and `.claude/agents/<agent>/` paths. Plus the prosoccer theme repo for read-only template inspection (SCRIBE, VERITAS).
+- **`scripts/voice_check.py`.** Hard gate on every customer-facing copy proposal and every markdown deliverable.
+
+### Install pending (referenced in agent narratives but not yet callable)
+
+- **Firecrawl MCP, `mcp__firecrawl-mcp__*`.** Not installed as of 2026-05-26. Until install lands, fall back in this order: (1) the `firecrawl` skill family (`firecrawl-scrape` for single URLs, `firecrawl-search` for query-first discovery, `firecrawl-map` for URL inventory, `firecrawl-crawl` for bulk extraction, `firecrawl-interact` for dynamic pages) which calls Firecrawl via CLI and ships with this Claude Code build; (2) `WebFetch` for quick single-URL reads when the skill overhead is heavier than needed. Once `mcp__firecrawl-mcp__*` is installed, prefer the MCP tool calls over the skill for lower per-call context overhead.
+- **GSC MCP, `mcp__gsc-server__*`.** Not installed as of 2026-05-26. Until install lands, fall back to CSV exports under `data/gsc-exports/` (12-month `_top-pages.csv`, `_top-queries.csv`, `_search-appearance.csv`). CSV granularity is coarser than the live API: no query-by-page intersection, no live `inspect_url_enhanced`, no Rich Results report, no live coverage-issue inspection. Workable for baseline tracking, CTR ceiling diagnostics at page level, and aggregated query monitoring. Mike refreshes the exports on cadence (target: monthly).
+- **Tavily MCP, `mcp__claude_ai_Tavily__*`.** Registered but unauthenticated as of 2026-05-26. Until auth completes, fall back to `WebSearch` for general topic research, competitor news monitoring, and SERP-feature spot-checks. WebSearch returns snippets only; Tavily would return full-page content. Note the granularity loss in session briefings and surface to ORIN if a brief depends on full-page Tavily extraction.
+
+### Implicit-fallback drift (the failure mode this inventory prevents)
+
+Before this inventory existed, agent narratives referenced `mcp__firecrawl-mcp__firecrawl_scrape`, `mcp__gsc-server__get_search_analytics`, and `mcp__claude_ai_Tavily__tavily_search` as if those tools were live. Sessions that depended on those calls silently degraded to whichever tool happened to work, or stalled, or produced briefs that cited tools the workforce couldn't actually run. This implicit fallback hid the install gap from Mike and produced misleading "tool used" lines in session briefings.
+
+The pre-flight tool verification protocol in SCRIBE Section 2 Step 0 (canonical pattern, other agents adopt as added) makes the tool inventory explicit at the start of every session. If an agent intends to use a tool listed under "Install pending" above, the session briefing must log the actual fallback used, not just the intended MCP namespace.
+
+### Update protocol
+
+When an MCP install completes or auth lands:
+
+1. Move the entry from "Install pending" to "Operational" with the verification date and the verification call used.
+2. Update affected agent narrative sections to remove the install-pending caveats (the inventory references can stay implicit once the MCP is live).
+3. Commit message format: `MCP install: <namespace> live. Tool inventory in workforce-conventions.md updated; agent narratives reference the MCP directly without fallback caveats.`
+
 ## Cross-references
 
 - `context/brand-ip-constraints.md` documents the FIFA terminology constraint that applies to all page-optimization deliverables produced under this folder structure.
 - `.claude/agents/on-page-seo/agent.md` Section 8 ("Handoff Patterns") and Section 13 ("Output Templates") reference this convention for the Fresh Optimization workflow, per-page brief file placement, and the mandatory keyword research block.
+- `.claude/agents/on-page-seo/agent.md` Section 2 Step 0 is the canonical SCRIBE pre-flight tool verification protocol referenced under the Tool inventory section above; other agents may adopt the same pattern as added.
 - `templates/consolidated-page-brief-template.md` is the canonical brief format for the Fresh Optimization workflow described above, including the '## Keyword research' block.
 - `context/page-type-playbooks/product-page-playbook.md` 'Internal links only on product pages' is the canonical PDP link policy referenced above.

@@ -291,7 +291,7 @@ Same architecture as the collection-page playbook ('Internal link strategy' in `
 
 ### Live validation requirement
 
-Identical to the collection-page playbook. Use `mcp__firecrawl-mcp__firecrawl_scrape`, confirm `metadata.statusCode` is 200, confirm rendered content matches expectations (H1, product count, no soft-404 to homepage). Document failures inline.
+Identical to the collection-page playbook. Use the firecrawl skill (`firecrawl-scrape`) or `WebFetch` (MCP install pending; canonical install status in `context/workforce-conventions.md` 'Tool inventory'). Confirm `metadata.statusCode` is 200, confirm rendered content matches expectations (H1, product count, no soft-404 to homepage). Document failures inline.
 
 ### Optimal anchor text
 

@@ -154,8 +154,8 @@ The long description supports 1 to 2 internal links maximum. More than that turn
 
 For each internal link candidate, run live validation:
 
-1. Fetch the URL using Firecrawl MCP (`mcp__firecrawl-mcp__firecrawl_scrape`); fall back to WebFetch or Tavily if Firecrawl is unavailable.
-2. Confirm HTTP status is 200 OK in the scrape response metadata (not 301 / 302 redirect, not 404, not 410, not 5xx). Firecrawl returns `metadata.statusCode` for the resolved URL.
+1. Fetch the URL using the firecrawl skill (`firecrawl-scrape` for the single-URL path; canonical install status for `mcp__firecrawl-mcp__firecrawl_scrape` in `context/workforce-conventions.md` 'Tool inventory'). Fall back to `WebFetch` for lighter reads when the skill overhead is excessive. Once the Firecrawl MCP is installed, prefer the MCP tool call over the skill.
+2. Confirm HTTP status is 200 OK in the response metadata (not 301 / 302 redirect, not 404, not 410, not 5xx). Both the firecrawl skill and the Firecrawl MCP return `metadata.statusCode` for the resolved URL; WebFetch surfaces the same via response headers.
 3. Confirm the rendered page content matches expectations. Check the H1 / page title, the product count if it's a collection, and that the URL did not silently land on the homepage. A `/collections/adidas` link that returns the homepage is a soft-404, not a live link.
 4. If validation fails: log the failure inline in the brief's Internal links sub-section with the specific failure reason, then select an alternative candidate or skip the link.
 

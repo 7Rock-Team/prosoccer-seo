@@ -100,14 +100,14 @@ Tool namespace: `mcp__claude_ai_Google_Drive__*`. Use for:
 
 Default behavior: pull only when file-based data in `data/` is insufficient.
 
-### Tavily MCP
+### Tavily (MCP auth pending; current fallback: WebSearch)
 
-Tool namespace: `mcp__claude_ai_Tavily__*`. Use for:
+Tool namespace: `mcp__claude_ai_Tavily__*` when authenticated. Current state as of 2026-05-26: MCP registered but unauthenticated; fall back to `WebSearch` for general topic research, competitor news, and SERP-feature spot-checks. Canonical install status in `context/workforce-conventions.md` 'Tool inventory'. Use for:
 
 - Supplementary keyword research when GSC plus catalog plus audit data isn't enough (for example, validating a net-new keyword hypothesis or checking seasonality of an unfamiliar query).
 - SERP feature inspection at aggregate level when Playwright is overkill.
 
-Cite the source in the deliverable.
+WebSearch returns snippets only; Tavily would return full-page content when auth lands. Note the granularity loss in the session briefing where it matters. Cite the source (WebSearch or Tavily) in the deliverable.
 
 ### Playwright MCP (Browser Automation)
 
@@ -176,9 +176,9 @@ Tool selection rules:
 - Tavily -> general web search context, current event awareness
 - Playwright -> specific browser interactions when no API exists
 
-### Firecrawl MCP (added 2026-04-25)
+### Firecrawl (MCP install pending; current fallback: `firecrawl` skill + WebFetch)
 
-Web scraping and crawling MCP for content extraction at scale. Provides:
+Tool namespace: `mcp__firecrawl-mcp__*` when installed. Current state as of 2026-05-26: MCP not installed; fall back to the `firecrawl` skill family (firecrawl-scrape, firecrawl-search, firecrawl-map, firecrawl-crawl, firecrawl-interact) or `WebFetch` for lighter reads. Canonical install status in `context/workforce-conventions.md` 'Tool inventory'. Web scraping and crawling for content extraction at scale. Provides (via MCP when live, via skill today):
 
 - Single-URL scraping with clean markdown output
 - Full-site crawling for competitor analysis
