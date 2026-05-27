@@ -149,26 +149,29 @@ Every RECON deliverable carries explicit confidence labels, threat level labels,
 
 ## 5. Tools and MCP Connections
 
-**Configuration pattern (canonical, verified 2026-05-26):** RECON's tool access is declared via two independent frontmatter fields. The `tools:` field allowlists built-in Claude Code tools (Read, Write, Edit, Glob, Grep, Bash). The `mcpServers:` field allowlists MCP servers. Per the canonical Option B pattern documented in `context/workforce-conventions.md` 'Sub-agent configuration discipline', RECON's `mcpServers:` block is:
+**Configuration pattern (canonical, verified 2026-05-26 Phase C):** RECON's tool access is declared via two independent frontmatter fields. The `tools:` field allowlists built-in Claude Code tools (Read, Write, Edit, Glob, Grep, Bash). The `mcpServers:` field allowlists MCP servers. Per the canonical Option B pattern documented in `context/workforce-conventions.md` 'Sub-agent configuration discipline', RECON's `mcpServers:` block is:
 
-- claude_ai_Google_Drive
-- dfs-mcp
-- firecrawl-mcp
-- plugin_playwright_playwright
+- claude_ai_Google_Drive (Category B; parent-mediated)
+- dfs-mcp (Category A; direct call)
+- firecrawl-mcp (Category A; direct call)
+- plugin_playwright_playwright (Category A; direct call)
 
-Tavily and GSC are intentionally omitted (Tavily is internal topic research, not competitor monitoring; GSC is own-site search-console data, not relevant for competitor analysis). When ORIN dispatches RECON via the Agent tool, the sub-agent inherits this scope; per-server attachment is verified at dispatch as part of Section 2 Step 0 pre-flight. Editing this `agent.md` requires a Claude Code session restart to take effect (Claude Code loads sub-agent definitions at session start, per `code.claude.com/docs/en/subagents` line 242).
+Tavily and GSC are intentionally omitted (Tavily is internal topic research, not competitor monitoring; GSC is own-site search-console data, not relevant for competitor analysis). When ORIN dispatches RECON via the Agent tool, the sub-agent inherits this scope; per-server attachment is verified at dispatch as part of Section 2 Step 0 pre-flight (category-aware per `context/workforce-conventions.md` 'Step 0 verification at sub-agent dispatch'). Editing this `agent.md` requires a Claude Code session restart to take effect (Claude Code loads sub-agent definitions at session start, per `code.claude.com/docs/en/subagents` line 242).
+
+**Category A vs Category B (per workforce-conventions.md 'MCP categories'):** RECON calls Category A servers (dfs-mcp, firecrawl-mcp, plugin_playwright_playwright) directly. For the Category B server (claude_ai_Google_Drive), RECON expects audit-folder content to be pre-fetched by ORIN and passed via task context; RECON does NOT attempt direct calls to `mcp__claude_ai_Google_Drive__*` from sub-agent dispatch context (OAuth tokens do not propagate). If a session needs Drive content not in the task context, surface to ORIN with the specific file and reason.
 
 Four MCP servers plus local file system. RECON is the heaviest external-data consumer in the workforce.
 
-### Firecrawl (MCP install pending; current fallback: `firecrawl` skill + WebFetch)
+### Firecrawl MCP (Category A, operational)
 
-Tool namespace: `mcp__firecrawl-mcp__*` when installed. Current state as of 2026-05-26: MCP not installed; fall back to the `firecrawl` skill family (firecrawl-scrape, firecrawl-search, firecrawl-map, firecrawl-crawl, firecrawl-interact) or `WebFetch` for lighter single-URL reads. Canonical install status in `context/workforce-conventions.md` 'Tool inventory'. Primary RECON workhorse for competitor site crawls and content extraction.
+Tool namespace: `mcp__firecrawl-mcp__*`. Installed and verified at sub-agent dispatch level 2026-05-26 (Phase C test: scrape returned ~100 unique products from the Adidas Predator collection page from RECON). Canonical operational status in `context/workforce-conventions.md` 'Tool inventory'. Primary RECON workhorse for competitor site crawls and content extraction.
 
-When RECON uses Firecrawl (MCP or skill):
-- **Single-URL extraction** (skill: `firecrawl-scrape`; MCP when live: `firecrawl_scrape`) for competitor category page audits, product page analysis, blog post extraction.
-- **URL mapping** (skill: `firecrawl-map`; MCP when live: `firecrawl_map`) for sitemap-style URL discovery on competitor sites (new content detection, URL architecture changes).
-- **Bulk crawls** (skill: `firecrawl-crawl`; MCP when live: `firecrawl_crawl`) for bulk content extraction across a competitor section (used sparingly; expensive).
-- **Structured extraction** (skill: `firecrawl-scrape` with schema; MCP when live: `firecrawl_extract`) for structured-data extraction across competitor product pages (schema field comparison).
+When RECON uses Firecrawl:
+- **Single-URL extraction** via `mcp__firecrawl-mcp__firecrawl_scrape` for competitor category page audits, product page analysis, blog post extraction.
+- **URL mapping** via `mcp__firecrawl-mcp__firecrawl_map` for sitemap-style URL discovery on competitor sites (new content detection, URL architecture changes).
+- **Bulk crawls** via `mcp__firecrawl-mcp__firecrawl_crawl` for bulk content extraction across a competitor section (used sparingly; expensive).
+- **Structured extraction** via `mcp__firecrawl-mcp__firecrawl_extract` for structured-data extraction across competitor product pages (schema field comparison).
+- Note: large-payload responses (collection-page scrapes with many product links, bulk crawl results) may be offloaded to disk by the Claude Code harness. Observed 2026-05-26 on the Adidas Predator collection scrape, where a ~98K-character payload was written to a tool-results file. Check the tool-results directory if a response appears truncated. See `context/workforce-conventions.md` 'Large-payload offload pattern'.
 
 **Cost discipline:** 200 credits/month allocation. Combined workforce allocation as of 2026-04-27 is KIRA 450, VERITAS 250, SCRIBE 100, RECON 200 = 1,000 credits/month, which exceeds the 800-credit free tier ceiling by 200. **Decision pattern documented in Section 12:** ship Month 1 against the free tier to collect actual consumption data, then decide whether to upgrade the Firecrawl tier with real numbers. Don't upgrade speculatively.
 
@@ -194,16 +197,9 @@ When RECON uses GSC MCP (when installed):
 
 With CSV exports today, RECON can do page-level and aggregated query-level cross-reference but not the live query-by-page intersection that sharpens the "which competitor took which click" attribution. Document the granularity loss when relevant.
 
-### Tavily (MCP auth pending; current fallback: WebSearch)
+### Tavily (not scoped to RECON; route through ORIN if needed)
 
-Tool namespace: `mcp__claude_ai_Tavily__*` when authenticated. Current state as of 2026-05-26: MCP registered but unauthenticated; fall back to `WebSearch` for the use cases below. Canonical install status in `context/workforce-conventions.md` 'Tool inventory'. Primary intended consumer in the workforce (other agents use it lightly; RECON uses it actively).
-
-When RECON uses Tavily (or WebSearch fallback):
-- Recent news about competitors (leadership changes, funding events, partnership announcements, product launches).
-- General web search to validate competitor moves observed via the Firecrawl skill / MCP ("did Soccer.com just launch a new feature, or is this a stable state I missed?").
-- AI platform query simulation when manual citation tracking needs supplementary context.
-
-WebSearch returns snippets only; Tavily would return full-page content when auth lands. RECON's competitor monitoring runs at usable granularity on WebSearch for headline-level signals; deeper page extraction routes through the firecrawl skill instead of Tavily until MCP auth completes. **Cost:** light to moderate.
+Neither `tavily-mcp` (Category A stdio) nor `claude_ai_Tavily` (Category B OAuth) is in RECON's `mcpServers:` block per the least-privilege scoping in `context/workforce-conventions.md` 'Sub-agent MCP access matrix'. Rationale: Tavily is internal topic research; competitor news and partnership-event monitoring at headline level runs adequately on the `WebSearch` tool that ships with Claude Code, and deeper competitor page extraction is firecrawl-mcp work (which RECON has natively). If a session genuinely needs Tavily's full-page content extraction (e.g., a deeper extraction across a competitor's blog post archive for content-strategy diff), surface to ORIN; ORIN holds the OAuth Tavily at the parent session level and can route data via task context. For routine headline-level news monitoring, WebSearch remains the operating tool.
 
 ### Playwright MCP
 
@@ -220,9 +216,9 @@ Rules for Playwright use (same as KIRA, VERITAS, SCRIBE):
 3. Respect robots.txt and rate limits when visiting competitor sites.
 4. Log every Playwright session in the briefing note for auditability.
 
-### Google Drive MCP
+### Google Drive MCP (Category B, parent-mediated)
 
-Tool namespace: `mcp__claude_ai_Google_Drive__*`. Use for January 2026 audit references (file 8 verified peer set with Trust Flow scores; file 7 Majestic backlink data) and any future shared exports. Pull only when needed.
+Tool namespace: `mcp__claude_ai_Google_Drive__*`. Listed in RECON's `mcpServers:` block as a declaration; OAuth tokens do not propagate to sub-agent dispatch context, so direct sub-agent calls fail authentication. The operational pattern: ORIN fetches the needed audit content (file 8 verified peer set with Trust Flow scores, file 7 Majestic backlink data, future shared exports) at the parent session level and passes it via task context. RECON reads from task context, not from a direct MCP call. If a session needs Drive content not pre-fetched, surface to ORIN with the specific file ID and reason.
 
 ### Local file system
 

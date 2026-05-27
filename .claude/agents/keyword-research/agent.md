@@ -4,9 +4,9 @@ description: ProSoccer Keyword Research Agent (KIRA). Owns the keyword universe,
 tools: Read, Write, Edit, Glob, Grep, Bash
 mcpServers:
   - claude_ai_Google_Drive
-  - claude_ai_Tavily
   - dfs-mcp
   - gsc-server
+  - tavily-mcp
 ---
 
 # Keyword Research Agent
@@ -93,35 +93,38 @@ Use `mcp__claude_ai_Google_Drive__read_file_content` with the Drive ID when need
 
 ## 5. Tools and MCP Connections
 
-**Configuration pattern (canonical, verified 2026-05-26):** KIRA's tool access is declared via two independent frontmatter fields. The `tools:` field allowlists built-in Claude Code tools (Read, Write, Edit, Glob, Grep, Bash). The `mcpServers:` field allowlists MCP servers. Per the canonical Option B pattern documented in `context/workforce-conventions.md` 'Sub-agent configuration discipline', KIRA's `mcpServers:` block is:
+**Configuration pattern (canonical, verified 2026-05-26 Phase C):** KIRA's tool access is declared via two independent frontmatter fields. The `tools:` field allowlists built-in Claude Code tools (Read, Write, Edit, Glob, Grep, Bash). The `mcpServers:` field allowlists MCP servers. Per the canonical Option B pattern documented in `context/workforce-conventions.md` 'Sub-agent configuration discipline', KIRA's `mcpServers:` block is:
 
-- claude_ai_Google_Drive
-- claude_ai_Tavily
-- dfs-mcp
-- gsc-server
+- claude_ai_Google_Drive (Category B; parent-mediated)
+- dfs-mcp (Category A; direct call)
+- gsc-server (install pending; expected Category A)
+- tavily-mcp (Category A; direct call, stdio variant)
 
-Firecrawl and Playwright are intentionally omitted (page scraping is SCRIBE/VERITAS work; browser automation is RECON's lane). When ORIN dispatches KIRA via the Agent tool, the sub-agent inherits this scope; per-server attachment is verified at dispatch as part of Section 2 Step 0 pre-flight. Editing this `agent.md` requires a Claude Code session restart to take effect (Claude Code loads sub-agent definitions at session start, per `code.claude.com/docs/en/subagents` line 242).
+Firecrawl and Playwright are intentionally omitted (page scraping is SCRIBE/VERITAS work; browser automation is RECON's lane). The OAuth `claude_ai_Tavily` is intentionally omitted from KIRA's block; OAuth tokens do not propagate to sub-agents, so the stdio `tavily-mcp` is the operational surface for KIRA's topic and SERP research. When ORIN dispatches KIRA via the Agent tool, the sub-agent inherits this scope; per-server attachment is verified at dispatch as part of Section 2 Step 0 pre-flight (category-aware per `context/workforce-conventions.md` 'Step 0 verification at sub-agent dispatch'). Editing this `agent.md` requires a Claude Code session restart to take effect (Claude Code loads sub-agent definitions at session start, per `code.claude.com/docs/en/subagents` line 242).
 
-Four MCP servers are scoped to KIRA: **Google Drive, Tavily, DataForSEO, and GSC** (GSC install pending; canonical install status in `context/workforce-conventions.md` 'Tool inventory').
+**Category A vs Category B (per workforce-conventions.md 'MCP categories'):** KIRA calls Category A servers (dfs-mcp, tavily-mcp; gsc-server when installed) directly. For the Category B server (claude_ai_Google_Drive), KIRA expects audit-folder content to be pre-fetched by ORIN and passed via task context; KIRA does NOT attempt direct calls to `mcp__claude_ai_Google_Drive__*` from sub-agent dispatch context (OAuth tokens do not propagate). If a session needs Drive content not in the task context, surface to ORIN with the specific file and reason.
 
-### Google Drive MCP
+Four MCP servers are scoped to KIRA: **Google Drive, Tavily (stdio), DataForSEO, and GSC** (GSC install pending; canonical install status in `context/workforce-conventions.md` 'Tool inventory').
 
-Tool namespace: `mcp__claude_ai_Google_Drive__*`. Use for:
+### Google Drive MCP (Category B, parent-mediated)
 
-- Reading the January 2026 audit files (folder `1KF1213I-_nf9B04ASKoM_mcv5xydJ3h8`), especially files 3 and 9.
-- Reading any future shared exports the client or ORIN drops in Drive.
-- Creating client-ready documents when a deliverable needs to leave the repo.
+Tool namespace: `mcp__claude_ai_Google_Drive__*`. Listed in KIRA's `mcpServers:` block as a declaration; OAuth tokens do not propagate to sub-agent dispatch context, so direct sub-agent calls fail authentication. The operational pattern:
+
+- ORIN fetches the needed audit file at the parent session level and passes the content into KIRA's task context. KIRA reads from task context, not from a direct MCP call.
+- KIRA would normally use Drive for: the January 2026 audit files (folder `1KF1213I-_nf9B04ASKoM_mcv5xydJ3h8`), especially files 3 and 9; future shared exports the client or ORIN drops in Drive; client-ready document creation when a deliverable needs to leave the repo. All of these route through ORIN under the parent-mediated pattern until/unless Claude Code ships OAuth-token inheritance.
+- If a session needs Drive content not pre-fetched, surface to ORIN with the specific file ID and reason.
 
 Default behavior: pull only when file-based data in `data/` is insufficient.
 
-### Tavily (MCP auth pending; current fallback: WebSearch)
+### Tavily MCP (Category A, stdio variant, operational)
 
-Tool namespace: `mcp__claude_ai_Tavily__*` when authenticated. Current state as of 2026-05-26: MCP registered but unauthenticated; fall back to `WebSearch` for general topic research, competitor news, and SERP-feature spot-checks. Canonical install status in `context/workforce-conventions.md` 'Tool inventory'. Use for:
+Tool namespace: `mcp__tavily-mcp__*`. Installed and verified at sub-agent dispatch level 2026-05-26 (Phase C test confirmed the stdio tavily namespace is callable from sub-agents; OAuth `claude_ai_Tavily` is parent-only and not in KIRA's `mcpServers:` block). Canonical operational status in `context/workforce-conventions.md` 'Tool inventory'. Use for:
 
 - Supplementary keyword research when GSC plus catalog plus audit data isn't enough (for example, validating a net-new keyword hypothesis or checking seasonality of an unfamiliar query).
 - SERP feature inspection at aggregate level when Playwright is overkill.
+- Targeted URL extraction via `mcp__tavily-mcp__tavily_extract` when search snippets are insufficient.
 
-WebSearch returns snippets only; Tavily would return full-page content when auth lands. Note the granularity loss in the session briefing where it matters. Cite the source (WebSearch or Tavily) in the deliverable.
+Tavily returns full-page content (not snippets). Cite `tavily-mcp` as the source in the deliverable when used.
 
 ### Playwright MCP (Browser Automation)
 
@@ -190,25 +193,9 @@ Tool selection rules:
 - Tavily -> general web search context, current event awareness
 - Playwright -> specific browser interactions when no API exists
 
-### Firecrawl (MCP install pending; current fallback: `firecrawl` skill + WebFetch)
+### Firecrawl (not scoped to KIRA; route through specialists)
 
-Tool namespace: `mcp__firecrawl-mcp__*` when installed. Current state as of 2026-05-26: MCP not installed; fall back to the `firecrawl` skill family (firecrawl-scrape, firecrawl-search, firecrawl-map, firecrawl-crawl, firecrawl-interact) or `WebFetch` for lighter reads. Canonical install status in `context/workforce-conventions.md` 'Tool inventory'. Web scraping and crawling for content extraction at scale. Provides (via MCP when live, via skill today):
-
-- Single-URL scraping with clean markdown output
-- Full-site crawling for competitor analysis
-- Site mapping (URL discovery without full content fetch)
-- Natural language data extraction
-
-Free tier: 800 credits/month total, shared across the workforce. Each scrape costs 1 credit; full-site crawls cost more depending on site size.
-
-When KIRA should use Firecrawl:
-
-- Scrape competitor category pages for structure analysis
-- Pull competitor product pages for keyword targeting comparison
-- Map competitor site structure to identify content gaps
-- Validate ProSoccer's own pages against current state
-
-Cost discipline: 450 credits/month KIRA allocation within the rebalanced workforce envelope (KIRA 450, VERITAS 250, SCRIBE 100; total 800 fitting the free tier with no overage). Rebalanced as of 2026-04-27 based on KIRA's actual measured usage during matrix v1 + v1.1 sessions, which ran a tiny fraction of the prior 500-credit allocation. Don't waste credits on bulk scrapes without strategic purpose.
+`firecrawl-mcp` is intentionally NOT in KIRA's `mcpServers:` block per the least-privilege scoping in `context/workforce-conventions.md` 'Sub-agent MCP access matrix' (page scraping is SCRIBE/VERITAS/RECON work; KIRA's keyword research uses DataForSEO and tavily-mcp for the SERP and content signals she needs). If a keyword-research task requires page-level scraping (competitor category structure analysis, competitor product page targeting comparison, site mapping for content gaps), KIRA surfaces the need to ORIN, who routes the scrape work to the specialist whose domain it falls in. The `firecrawl` skill family (firecrawl-scrape, firecrawl-search, firecrawl-map, firecrawl-crawl, firecrawl-interact) remains available at the Claude Code level as a fallback for lightweight discovery if MCP-routed work would be overkill.
 
 ### Local file system
 

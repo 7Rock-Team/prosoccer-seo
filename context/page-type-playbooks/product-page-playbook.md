@@ -102,6 +102,47 @@ For any product page, ORIN researches:
 
 Six to twelve Tavily queries per product page is normal. Less if the product is a routine SKU in a known line (the third-pass on a Predator model the team has researched twice already). More if it's a flagship release the team hasn't researched before.
 
+## Current state capture (Shopify Hyper theme on ProSoccer)
+
+Before drafting the optimized brief, SCRIBE captures the live state of all six SEO-relevant fields directly from the live PDP via Firecrawl scrape. The live page is the source of truth; Mike does not paste content into the session.
+
+### Field inventory (six fields per PDP)
+
+Every PDP capture must include all six fields, in this order:
+
+1. **Title (H1)**
+2. **Slug** (the `/products/<slug>` path component)
+3. **Meta Title** (the `<title>` element, may differ from H1)
+4. **Meta Description** (the `<meta name="description">` content)
+5. **Short Description** (rendered as the first paragraph in the description body, before bullets or any H2; stored as a Shopify metafield on ProSoccer's Hyper theme installation)
+6. **Long Description** (bullets plus body content below the Short Description; the remainder of the description body after the Short Description paragraph)
+
+### Capture method
+
+`mcp__firecrawl-mcp__firecrawl_scrape` on the target PDP URL returns the rendered page content. SCRIBE parses the scrape output to identify:
+
+- Title from the H1 element.
+- Slug from the URL path.
+- Meta Title and Meta Description from the page metadata block.
+- Short Description from the first paragraph in the description body region (the metafield rendering point on Hyper).
+- Long Description from the content after the Short Description paragraph through the end of the description body.
+
+The Firecrawl scrape captures both Short Description and Long Description in a single call because both render in the visible description body. There is no separate metafield API call needed at capture time; Shopify renders the metafield content into the body HTML, and Firecrawl captures the rendered output.
+
+### Hyper theme metafield reality
+
+ProSoccer runs the Shopify Hyper theme. Short Description is implemented as a Shopify metafield (not as a separate field in the Shopify admin product editor's main description area) and is rendered by the theme's Liquid templates as the first paragraph of the description body, above the bullets and Long Description content. To the avatar, it reads as the lead paragraph of the product description; to the SEO workforce, it is a distinct, separately editable field with its own optimization rules per 'Rule 5: Short Description structure' in 'Five canonical brief-craft rules' above.
+
+This is the field reality discovered 2026-05-26 during Liverpool PDP current-state capture. It supersedes the earlier "Mike supplies the existing Short Description and Long Description directly as input to the optimization" rule that appeared in the Fresh Optimization workflow before the Firecrawl MCP install made native PDP scraping viable at sub-agent dispatch level.
+
+### Blocker condition
+
+If a specific PDP scrape does not produce a clean separation between Short Description and Long Description (no distinct first paragraph; description content appears in an unexpected location; the metafield rendering is missing or merged into an unstructured block), SCRIBE surfaces the capture failure as a blocker BEFORE drafting the brief. Do NOT proceed with an empty Short Description input or a guess at where Short Description ends and Long Description begins. Surface to ORIN with the scrape output for inspection; ORIN routes the field-parsing question to Mike or to a manual Shopify admin lookup as appropriate.
+
+### Brief-format implication
+
+The visible brief stays forward-looking per the Fresh Optimization workflow in `context/workforce-conventions.md` (no Current state section in the brief itself; Mike references Shopify admin during implementation). Current-state capture is for SCRIBE's drafting context, not for surfacing in the deliverable. The capture lives in the workforce-internal briefing at `.claude/agents/on-page-seo/briefings/YYYY-MM-DD_<slug>.md` per the existing data-provenance discipline.
+
 ## Field-specific rules
 
 Same six fields as a collection page, but with product-page subject framing.

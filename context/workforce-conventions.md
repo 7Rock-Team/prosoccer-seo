@@ -49,8 +49,8 @@ Fresh Optimization is the default workflow for page-optimization deliverables pr
 
 1. Load context: page-type playbook matching the page (`context/page-type-playbooks/`), `context/brand-ip-constraints.md`, the six copy-writing principles in `context/03-brand-voice.md`.
 2. Read current state for SCRIBE's own context, but do NOT capture it in the brief:
-   - **Collection pages:** SCRIBE pulls current copy via the firecrawl skill (or Firecrawl MCP when installed, per 'Tool inventory' below) for context. Current state does NOT appear in the visible brief.
-   - **Product pages:** Mike supplies the existing Short Description and Long Description directly as input to the optimization. SCRIBE does NOT scrape PDP body content. Current state does NOT appear in the visible brief.
+   - **Collection pages:** SCRIBE pulls current copy via the Firecrawl MCP (`mcp__firecrawl-mcp__firecrawl_scrape`) for context. Current state does NOT appear in the visible brief.
+   - **Product pages:** SCRIBE pulls all six fields (Title/H1, slug, Meta Title, Meta Description, Short Description, Long Description) via the Firecrawl MCP scrape of the live PDP. Short Description is rendered as the first paragraph in the description body on ProSoccer's Hyper theme (stored as a Shopify metafield); the scrape captures both Short and Long Description in a single call. Mike does NOT paste PDP body content; the live page is source of truth. If the scrape does not produce a clean Short / Long Description separation, surface as a blocker BEFORE drafting the brief per `context/page-type-playbooks/product-page-playbook.md` 'Current state capture (Shopify Hyper theme on ProSoccer)'. Current state does NOT appear in the visible brief.
    - **Mike references Shopify admin directly for current state during implementation.** The brief is forward-looking only.
 3. Keyword research via DataForSEO MCP (mandatory, data-backed). The workforce-internal briefing carries the full keyword research workup; the visible brief surfaces only the chosen primary keyword (volume + KD) and the supporting long-tail set as a comma-separated list with optional volume.
 4. **Current ranking lookup via DataForSEO SERP API (mandatory).** Run `mcp__dfs-mcp__serp_organic_live_advanced` for the chosen primary keyword; identify whether the target URL appears in the top 100 organic results; capture position OR "not in top 100." Surface as a one-line `Current ranking:` entry in the visible Keyword research block. Apply the ranking-aware posture (see 'Ranking-aware posture' subsection below) before drafting recommendations. GSC MCP is the long-term ranking source of record; install pending per 'Tool inventory' below, DataForSEO SERP API is the current fallback.
@@ -190,23 +190,45 @@ The disposition note is the audit trail of why each folder was safely removable.
 
 This section is the canonical truth source for which MCP servers and external tools are operationally available to the workforce today. Agent narrative sections (`## 5. Tools and MCP Connections` in each `.claude/agents/<agent-name>/agent.md`) may reference MCP namespaces aspirationally; this inventory governs what's actually callable. When a narrative description and this inventory disagree, this inventory wins.
 
-Refreshed: 2026-05-26.
+Refreshed: 2026-05-26 (Phase C verification round).
+
+### MCP categories (Category A vs Category B)
+
+MCP servers split into two categories based on transport and credential handling. The distinction governs whether a sub-agent can call the MCP directly or must request the parent to fetch and pass data via task context.
+
+**Category A: stdio transport, environment-variable credentials.** Full sub-agent inheritance via Option B `mcpServers:` declarations. When a sub-agent's frontmatter lists a Category A server, the sub-agent receives a native subprocess connection at dispatch and can call `mcp__<server>__*` tools directly. Credentials live in environment variables passed to the subprocess, not in OAuth state. Verified working 2026-05-26 via Phase C sub-agent test dispatches across SCRIBE, VERITAS, and RECON.
+
+Category A servers:
+
+- `dfs-mcp` (DataForSEO; DataForSEO API credentials via env)
+- `firecrawl-mcp` (Firecrawl; `FIRECRAWL_API_KEY` via env)
+- `tavily-mcp` (Tavily stdio variant; `TAVILY_API_KEY` via env)
+
+**Category B: HTTP transport with OAuth tokens via the claude.ai connector.** OAuth state lives with the top-level Claude Code session that performed the OAuth handshake. When ORIN or any specialist is dispatched as a sub-agent, the `mcpServers:` declaration propagates (the sub-agent knows the server exists) but the OAuth token does not propagate to the sub-agent's MCP client. Direct sub-agent calls fail authentication. The workaround pattern: the parent ORIN session runs the Category B MCP call and passes the fetched data into the specialist's task context as inline data. Specialists treat Category B data as read-from-task-context, not read-from-MCP.
+
+Category B servers:
+
+- `claude_ai_Google_Drive` (Google Drive via claude.ai OAuth connector; reads from the January 2026 audit folder and other shared Drive artifacts)
+- `claude_ai_Tavily` (OAuth-authenticated Tavily via claude.ai connector; superseded by Category A `tavily-mcp` for sub-agent use, kept registered at parent session for ORIN's top-level discovery work when full-page extraction is needed)
+
+This category split is structural to current Claude Code architecture. If a future Claude Code release ships OAuth-token inheritance for sub-agents, the category distinction collapses and both classes work natively at sub-agent dispatch. Until that lands, the categories are operationally distinct and the workforce treats them as such.
 
 ### Operational (live, callable today)
 
-- **DataForSEO MCP, `mcp__dfs-mcp__*`.** Pay-per-use API access covering SERP data, keyword research, keyword difficulty, search intent, on-page audit, backlinks, domain analytics, and DataForSEO Labs endpoints. Credentials verified 2026-05-26 (status_code 20000 returned on `mcp__dfs-mcp__serp_locations`). Workforce-wide hard cap $100/month per Section 12 of each agent.
-- **Playwright MCP, `mcp__plugin_playwright_playwright__*`.** Headless browser automation for live SERP inspection, SPA-rendered content extraction, post-deployment visual validation, and screenshot capture. Read-only posture for all workforce use.
-- **Google Drive MCP, `mcp__claude_ai_Google_Drive__*`.** Reads from the January 2026 audit folder (`1KF1213I-_nf9B04ASKoM_mcv5xydJ3h8`) and other shared Drive artifacts. Free at API level; cost is context-budget consumption.
+- **DataForSEO MCP, `mcp__dfs-mcp__*`** (Category A). Pay-per-use API access covering SERP data, keyword research, keyword difficulty, search intent, on-page audit, backlinks, domain analytics, and DataForSEO Labs endpoints. Credentials verified 2026-05-26 (status_code 20000 returned on `mcp__dfs-mcp__serp_locations`). Sub-agent inheritance verified 2026-05-26 via Phase C. Workforce-wide hard cap $100/month per Section 12 of each agent.
+- **Firecrawl MCP, `mcp__firecrawl-mcp__*`** (Category A). Single-URL scraping, structured extraction, site mapping, bulk crawling, interactive sessions, monitor and agent endpoints. `FIRECRAWL_API_KEY` in env. Installed 2026-05-26; sub-agent inheritance verified the same session (Phase C: status 200 returned on Liverpool PDP, Predator PDP, Predator collection page from SCRIBE, VERITAS, and RECON respectively).
+- **Tavily MCP (stdio), `mcp__tavily-mcp__*`** (Category A). Full-page web search with content extraction, plus extract, crawl, map, and research endpoints. `TAVILY_API_KEY` in env. Installed 2026-05-26 as the sub-agent-compatible replacement for OAuth `claude_ai_Tavily`. Sub-agent inheritance verified the same session (Phase C: three live results returned for a Liverpool jersey query dispatched from SCRIBE).
+- **Playwright MCP, `mcp__plugin_playwright_playwright__*`** (Category A in practice; the plugin runs locally and does not depend on claude.ai OAuth). Headless browser automation for live SERP inspection, SPA-rendered content extraction, post-deployment visual validation, and screenshot capture. Read-only posture for all workforce use.
+- **Google Drive MCP, `mcp__claude_ai_Google_Drive__*`** (Category B). Reads from the January 2026 audit folder (`1KF1213I-_nf9B04ASKoM_mcv5xydJ3h8`) and other shared Drive artifacts. Free at API level; cost is context-budget consumption. Sub-agents see the declaration in their `mcpServers:` blocks but cannot complete OAuth from the sub-agent context. Parent ORIN fetches Drive content and passes it inline to specialists via task context. Direct sub-agent calls fail; surface the discrepancy in the session briefing if encountered.
+- **Tavily MCP (OAuth via claude.ai), `mcp__claude_ai_Tavily__*`** (Category B). Registered at the top-level session for ORIN's parent-only research work. Sub-agents use Category A `tavily-mcp` instead; this OAuth surface is not listed in any sub-agent `mcpServers:` block. Retained at parent session level only.
 - **Local file system.** All `data/`, `context/`, `deliverables/`, `strategy/`, `shared-intelligence/`, `work-log/`, and `.claude/agents/<agent>/` paths. Plus the prosoccer theme repo for read-only template inspection (SCRIBE, VERITAS).
-- **`scripts/voice_check.py`.** Hard gate on every customer-facing copy proposal and every markdown deliverable.
+- **`scripts/voice_check.py`.** Hard gate on every customer-facing copy proposal and every markdown deliverable. Per the 'Voice check discipline' section below, run on every modified file regardless of change type.
 
 ### Install pending (referenced in agent narratives but not yet callable)
 
-- **Firecrawl MCP, `mcp__firecrawl-mcp__*`.** Not installed as of 2026-05-26. Until install lands, fall back in this order: (1) the `firecrawl` skill family (`firecrawl-scrape` for single URLs, `firecrawl-search` for query-first discovery, `firecrawl-map` for URL inventory, `firecrawl-crawl` for bulk extraction, `firecrawl-interact` for dynamic pages) which calls Firecrawl via CLI and ships with this Claude Code build; (2) `WebFetch` for quick single-URL reads when the skill overhead is heavier than needed. Once `mcp__firecrawl-mcp__*` is installed, prefer the MCP tool calls over the skill for lower per-call context overhead.
-- **GSC MCP, `mcp__gsc-server__*`.** Not installed as of 2026-05-26. **Install scheduled as a separate workstream for the 2026-05-27 session.** Until install lands, fall back paths by use case:
+- **GSC MCP, `mcp__gsc-server__*`.** Not installed as of 2026-05-26. **Install scheduled as a separate workstream for the 2026-05-27 session.** Expected to be Category A (stdio + OAuth-via-Google-service-account or env-credentialed; transport TBD at install time). Until install lands, fall back paths by use case:
   - **Ranking context per page (primary keyword position lookup):** DataForSEO SERP API via `mcp__dfs-mcp__serp_organic_live_advanced`. This is the canonical ranking-context source for the Fresh Optimization workflow Step 4 (see 'Fresh Optimization workflow' above). Once GSC MCP lands, ranking context shifts to GSC `get_search_analytics` per URL for the source-of-record advantage; DataForSEO SERP remains useful for competitor-context lookups but not for ProSoccer's own ranking baseline.
   - **CTR ceiling diagnostics, query-by-page intersection, indexation state, Rich Results coverage:** CSV exports under `data/gsc-exports/` (12-month `_top-pages.csv`, `_top-queries.csv`, `_search-appearance.csv`). CSV granularity is coarser than the live API: no query-by-page intersection, no live `inspect_url_enhanced`, no Rich Results report, no live coverage-issue inspection. Workable for baseline tracking, CTR ceiling diagnostics at page level, and aggregated query monitoring. Mike refreshes the exports on cadence (target: monthly).
-- **Tavily MCP, `mcp__claude_ai_Tavily__*`.** Registered but unauthenticated as of 2026-05-26. Until auth completes, fall back to `WebSearch` for general topic research, competitor news monitoring, and SERP-feature spot-checks. WebSearch returns snippets only; Tavily would return full-page content. Note the granularity loss in session briefings and surface to ORIN if a brief depends on full-page Tavily extraction.
 
 ### Implicit-fallback drift (the failure mode this inventory prevents)
 
@@ -218,23 +240,27 @@ The pre-flight tool verification protocol in SCRIBE Section 2 Step 0 (canonical 
 
 Each workforce agent has explicit MCP server access declared in its `agent.md` frontmatter `mcpServers:` block (per the Option B configuration pattern documented in 'Sub-agent configuration discipline' below). Least-privilege scoping: each agent gets only the MCP servers its core function requires.
 
-| Agent | claude_ai_Google_Drive | claude_ai_Tavily | dfs-mcp | firecrawl-mcp | plugin_playwright_playwright | gsc-server |
+The category column reflects the Category A vs Category B distinction documented above. Category A servers grant direct sub-agent MCP access. Category B servers grant declaration-only access; data must be fetched at the parent ORIN level and passed via task context. A cell value of "yes" for a Category B server means the declaration is present in the agent's `mcpServers:` block, not that the sub-agent can complete an OAuth-authenticated call directly.
+
+| Server | Category | master-strategist (ORIN) | on-page-seo (SCRIBE) | keyword-research (KIRA) | competitor-intel (RECON) | technical-seo (VERITAS) |
 |---|:-:|:-:|:-:|:-:|:-:|:-:|
-| master-strategist (ORIN) | yes | yes | yes | yes | yes | yes |
-| on-page-seo (SCRIBE) | yes | yes | yes | yes | no | yes |
-| keyword-research (KIRA) | yes | yes | yes | no | no | yes |
-| competitor-intel (RECON) | yes | no | yes | yes | yes | no |
-| technical-seo (VERITAS) | yes | no | yes | yes | no | yes |
+| dfs-mcp | A | yes | yes | yes | yes | yes |
+| firecrawl-mcp | A | yes | yes | no | yes | yes |
+| tavily-mcp | A | yes | yes | yes | no | no |
+| plugin_playwright_playwright | A | yes | no | no | yes | no |
+| gsc-server (install pending) | A (expected) | yes | yes | yes | no | yes |
+| claude_ai_Google_Drive | B | yes | yes | yes | yes | yes |
+| claude_ai_Tavily | B | parent-only | no | no | no | no |
 
-Rationale per agent:
+Rationale per agent (Category A access governs direct callability; Category B access governs the parent-mediated workaround surface):
 
-- **ORIN gets all six.** Orchestrator role requires the ability to run any specialist's work at the parent level when needed (e.g., the parent-handles-MCP workaround pattern before the architecture fix).
-- **SCRIBE has DFS + Firecrawl + Tavily + GSC + Drive.** No Playwright (Playwright is RECON's tool for competitor mobile-vs-desktop validation; SCRIBE doesn't need browser automation for copy production).
-- **KIRA has DFS + Tavily + GSC + Drive.** Keyword research is the core function; she doesn't need Firecrawl (page scraping is SCRIBE/VERITAS work) or Playwright (browser automation is RECON's lane).
-- **RECON has DFS + Firecrawl + Playwright + Drive.** Competitor monitoring needs SERP analysis (DFS), competitor page extraction (Firecrawl), and mobile-vs-desktop SERP rendering checks (Playwright). No Tavily (Tavily is internal topic research) and no GSC (GSC is own-site monitoring, not competitor monitoring).
-- **VERITAS has DFS + Firecrawl + GSC + Drive.** Technical SEO needs SERP-position validation (DFS), site crawling (Firecrawl), and coverage diagnostics (GSC). No Playwright (covered by Section 8 handoffs to RECON when mobile-rendering checks are needed) and no Tavily.
+- **ORIN gets the full set.** Orchestrator role requires the ability to run any specialist's work at the parent level when needed (e.g., the parent-handles-MCP workaround pattern for Category B servers). ORIN holds the only `claude_ai_Tavily` surface in the workforce.
+- **SCRIBE has DFS + Firecrawl + tavily-mcp + GSC (pending) + Drive (Category B).** Native Category A access to DFS, Firecrawl, and tavily-mcp covers keyword spot-validation, current-state PDP/collection extraction, and topic research with full-page content. No Playwright (Playwright is RECON's tool for competitor mobile-vs-desktop validation; SCRIBE doesn't need browser automation for copy production).
+- **KIRA has DFS + tavily-mcp + GSC (pending) + Drive (Category B).** Keyword research is the core function; native Category A access to DFS and tavily-mcp covers SERP analysis, keyword discovery, and topic research. No Firecrawl (page scraping is SCRIBE/VERITAS work) or Playwright (browser automation is RECON's lane).
+- **RECON has DFS + Firecrawl + Playwright + Drive (Category B).** Competitor monitoring needs SERP analysis (DFS), competitor page extraction (Firecrawl), and mobile-vs-desktop SERP rendering checks (Playwright). No tavily-mcp (Tavily is internal topic research, parent ORIN holds the OAuth Tavily for that work) and no GSC (GSC is own-site monitoring, not competitor monitoring).
+- **VERITAS has DFS + Firecrawl + GSC (pending) + Drive (Category B).** Technical SEO needs SERP-position validation (DFS), site crawling (Firecrawl), and coverage diagnostics (GSC). No Playwright (covered by Section 8 handoffs to RECON when mobile-rendering checks are needed) and no tavily-mcp.
 
-When a new specialist is built (SAGE Content Writer, METRIK Reporting), add a row to this matrix as part of the agent.md commit and update each agent's `mcpServers:` block to match.
+When a new specialist is built (SAGE Content Writer, METRIK Reporting), add a column to this matrix as part of the agent.md commit and update each agent's `mcpServers:` block to match.
 
 ### Update protocol
 
@@ -289,17 +315,72 @@ Practical implication: when restructuring agent.md files for an architectural ch
 
 ### Step 0 verification at sub-agent dispatch
 
-The SCRIBE Section 2 Step 0 pre-flight tool verification protocol (canonical pattern, other agents adopt as added) now includes verifying the `mcpServers:` block matches the expected per-agent access. Specifically:
+The SCRIBE Section 2 Step 0 pre-flight tool verification protocol (canonical pattern, other agents adopt as added) verifies the `mcpServers:` block matches the expected per-agent access, with category-aware behavior. The protocol distinguishes Category A (direct health check) from Category B (parent-context verification).
 
-1. On dispatch, the sub-agent confirms which MCP server names appear callable in its tool schema (i.e., tools prefixed `mcp__<server-name>__*` should exist for every server in the `mcpServers:` block).
-2. If a server listed in `mcpServers:` is not callable, the sub-agent logs the discrepancy in its session briefing and surfaces to ORIN or Mike before proceeding.
-3. If a server NOT in the agent's `mcpServers:` block appears callable, log the over-permission as a config drift to be reconciled in the next agent.md commit.
+**Category A verification (direct health check):**
 
-This catches both under-permission (configuration didn't take effect, restart was skipped, server name typo) and over-permission (sub-agent inherited more than scoped) before they corrupt deliverable audit trails.
+1. On dispatch, the sub-agent confirms which Category A MCP server names appear callable in its tool schema (tools prefixed `mcp__<server-name>__*` exist for every Category A server in the `mcpServers:` block).
+2. The sub-agent runs a no-cost health check call per Category A server it intends to use this session. Suggested test queries (cheap or free, used only to confirm subprocess connection and authentication):
+   - `dfs-mcp`: `mcp__dfs-mcp__serp_locations` (returns location list; no per-call cost). Expected: status_code 20000.
+   - `firecrawl-mcp`: a `mcp__firecrawl-mcp__firecrawl_scrape` on a known-stable URL (e.g., the target page if the session is going to scrape it anyway, so the health check doubles as the first real call). Expected: status_code 200.
+   - `tavily-mcp`: a `mcp__tavily-mcp__tavily_search` with a low-volume query relevant to the session. Expected: top results returned.
+3. If a Category A server listed in `mcpServers:` is not callable (tools missing from schema, or call returns an authentication error), the sub-agent logs the discrepancy in its session briefing and surfaces to ORIN or Mike before proceeding.
+
+**Category B verification (parent-context check):**
+
+1. On dispatch, the sub-agent recognizes that Category B servers (`claude_ai_Google_Drive`, `claude_ai_Tavily`) appear in the `mcpServers:` block as declarations but require parent-mediated data flow.
+2. The sub-agent verifies the parent task context contains the Category B data it needs for the session (e.g., Drive file contents already fetched and passed by ORIN). If the data is present in the task context, proceed.
+3. If a Category B fetch is needed and the data is not in the task context, the sub-agent does NOT attempt the direct MCP call. The sub-agent surfaces to ORIN: "need <specific Drive file or Tavily query> for <reason>; please fetch and pass via task context."
+4. Direct Category B MCP calls attempted from sub-agent context will return OAuth-authentication errors; logging this is fine for diagnostic purposes but the sub-agent should not retry or interpret the failure as a system fault. It is a known architectural constraint.
+
+**Drift detection (both categories):**
+
+1. If a server NOT in the agent's `mcpServers:` block appears callable, log the over-permission as a config drift to be reconciled in the next agent.md commit.
+2. If the categorization of a server appears to have changed (e.g., a Category B server starts returning successful direct calls from sub-agent context), surface immediately: this may indicate a Claude Code release shipped OAuth-token inheritance, which would collapse the category distinction.
+
+This catches both under-permission (configuration didn't take effect, restart was skipped, server name typo, OAuth state missing) and over-permission (sub-agent inherited more than scoped) before they corrupt deliverable audit trails.
 
 ### Plugin-provided MCP servers (caveat)
 
 Per Claude Code documentation, plugin sub-agents (sub-agents loaded from a Claude Code plugin) do NOT support the `mcpServers:`, `hooks:`, or `permissionMode:` frontmatter fields. Our workforce agents live under `.claude/agents/` (project scope, not plugin scope), so this caveat does not apply to us. If a future workforce agent is ever loaded from a plugin, the `mcpServers:` block will be ignored and the agent will inherit the parent session's MCP scope by default; document the constraint in the agent's own agent.md.
+
+## Architectural notes (MCP inheritance, OAuth gap, payload offload)
+
+Three operational architectural facts emerged from the 2026-05-26 work installing Firecrawl + Tavily and verifying sub-agent inheritance. These are recorded here because they shape how the workforce configures and uses MCPs going forward; the underlying behaviors live in Claude Code itself and may shift in future releases.
+
+### Refinement of commit 1ac5701 (partial discovery)
+
+Commit 1ac5701 (2026-05-26 earlier in the day) established the Option B configuration pattern (`tools:` for built-in tools, `mcpServers:` for MCP servers) and verified DataForSEO inheritance at sub-agent dispatch. That commit framed the fix as architectural and complete. The subsequent install work surfaced that the Option B pattern is necessary but not sufficient: for OAuth-authenticated MCP servers (the claude.ai connector class), the `mcpServers:` declaration propagates to sub-agents but the OAuth token does not. The Category A vs Category B distinction codified above is the refinement that completes the picture. Commit 1ac5701 stands as the configuration-pattern fix; this commit refines the discovery with the transport-and-credentialing distinction that determines which servers can be called directly from sub-agent context.
+
+The Liverpool (9eb344d) and Predator (bd309aa) briefs cited in commit 1ac5701 as Phase 6 validation remain valid under the refined model: those briefs were produced with the parent-handles-MCP workaround for the OAuth-class servers, which is exactly the workaround pattern the Category B classification documents. The briefs are not invalidated by the refinement; the architecture documentation just now captures why the workaround was necessary.
+
+### OAuth-token inheritance gap
+
+The mechanism: claude.ai connector MCPs (HTTP transport, OAuth-bearer authentication) maintain their access tokens in the top-level Claude Code session's OAuth state, not in environment variables. When the parent dispatches a sub-agent via the Agent tool, the sub-agent inherits the `mcpServers:` declaration but the OAuth state is not propagated to the sub-agent's MCP client. Direct sub-agent calls to `mcp__claude_ai_*__*` tools return authentication errors.
+
+The architectural implication: until Claude Code ships OAuth-token propagation for sub-agents, any MCP server that depends on the claude.ai connector flow is structurally parent-only. The workaround (parent fetches, passes via task context) is operationally workable but adds a serialization step to multi-agent flows. When evaluating new MCPs for workforce integration, prefer Category A (stdio + env-credential) installations over Category B (OAuth via claude.ai connector) where both options exist for the same underlying service. The Tavily example is instructive: the OAuth `claude_ai_Tavily` worked at top-level but blocked sub-agent dispatch; the stdio `tavily-mcp` (with API key in env) works at every level.
+
+If Claude Code ships OAuth-token inheritance for sub-agents in a future release, the category distinction collapses and both classes become operationally equivalent. The Step 0 drift-detection step is the workforce's early-warning signal for this change.
+
+### Large-payload offload pattern
+
+Observed in the RECON Phase C test (2026-05-26): a `mcp__firecrawl-mcp__firecrawl_scrape` on the Adidas Predator collection page returned a ~98,643-character markdown payload. The Claude Code harness wrote the payload to a tool-results file on disk (path: `<projects-dir>/<session-id>/tool-results/mcp-firecrawl-mcp-firecrawl_scrape-<timestamp>.txt`) rather than inlining the full content into the tool response visible to the sub-agent. The sub-agent received a truncated inline preview plus the file path for follow-up reading.
+
+This is a Claude Code guardrail, not a Firecrawl error. The mechanism is silent (no warning surfaces in the tool result envelope; the agent must notice the response is partial and read the offload file to get the rest). Operational implication for the workforce: large-payload MCP calls (full-site crawls, collection-page scrapes with many product links, bulk DataForSEO endpoints) may land partially inline and partially on disk. Agents should:
+
+1. Treat any unexpectedly short MCP tool response as a candidate for offload-file follow-up; check the tool-results directory for the timestamped file matching the call.
+2. When a call is expected to return a large payload (collection page with 100+ products, bulk DFS endpoint, full-site Firecrawl crawl), plan to read the offload file rather than relying on the inline response.
+3. Log the offload behavior in the session briefing when it occurs; it is a workflow detail that affects audit-trail reproducibility.
+
+The offload threshold is set by the Claude Code harness and not configurable from agent context. The behavior may change in future Claude Code releases; if the threshold shifts or the mechanism changes, surface in the session briefing for forward documentation.
+
+## Voice check discipline (defense-in-depth)
+
+Run `scripts/voice_check.py` on every modified file regardless of what changed. The voice check tooling is fast; there's no operational reason to skip it on a per-edit basis. Defense-in-depth applies even to YAML frontmatter, configuration files, metadata edits, and internal context docs that aren't customer-facing prose.
+
+The rationale: voice violations enter the codebase through editorial drift (an em-dash slipping into a config comment, an AI cliche phrase landing in a metadata description) just as easily as they enter through brief copy. Running the check universally costs nothing and catches incremental drift before it compounds. The discipline removes the judgment call ("is this file customer-facing enough to warrant checking?") that creates inconsistent enforcement.
+
+Scope: every file the agent modifies in a session gets voice-checked before commit. Pass results are not surfaced in the visible session output; only failures surface to Mike or ORIN. Voice check failures on non-customer-facing files (YAML, configs, internal docs) are still resolved before commit, same as failures on customer-facing copy.
 
 ## Cross-references
 

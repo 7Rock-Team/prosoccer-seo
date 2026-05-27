@@ -4,11 +4,11 @@ description: ProSoccer Master Strategist Agent (ORIN). Coordinates the SEO workf
 tools: Read, Write, Edit, Glob, Grep, Bash
 mcpServers:
   - claude_ai_Google_Drive
-  - claude_ai_Tavily
   - dfs-mcp
   - firecrawl-mcp
-  - plugin_playwright_playwright
   - gsc-server
+  - plugin_playwright_playwright
+  - tavily-mcp
 ---
 
 # ORIN - Master Strategist Agent
@@ -120,9 +120,11 @@ Every ORIN deliverable carries explicit confidence labels and source citations. 
 
 ## 5. Tools and MCP Connections
 
-**Configuration pattern (canonical, verified 2026-05-26):** ORIN's tool access is declared via two independent frontmatter fields. The `tools:` field allowlists built-in Claude Code tools (Read, Write, Edit, Glob, Grep, Bash). The `mcpServers:` field allowlists MCP servers. Per the canonical Option B pattern documented in `context/workforce-conventions.md` 'Sub-agent configuration discipline', ORIN's `mcpServers:` block grants access to all six workforce MCP servers (claude_ai_Google_Drive, claude_ai_Tavily, dfs-mcp, firecrawl-mcp, plugin_playwright_playwright, gsc-server). When ORIN dispatches a specialist sub-agent via the Agent tool, the specialist inherits its own per-agent scope (see the 'Sub-agent MCP access matrix' in workforce-conventions.md), not ORIN's full set. Editing this `agent.md` requires a Claude Code session restart to take effect (Claude Code loads sub-agent definitions at session start, per `code.claude.com/docs/en/subagents` line 242).
+**Configuration pattern (canonical, verified 2026-05-26 Phase C):** ORIN's tool access is declared via two independent frontmatter fields. The `tools:` field allowlists built-in Claude Code tools (Read, Write, Edit, Glob, Grep, Bash). The `mcpServers:` field allowlists MCP servers. Per the canonical Option B pattern documented in `context/workforce-conventions.md` 'Sub-agent configuration discipline', ORIN's `mcpServers:` block grants access to the full workforce MCP set: dfs-mcp, firecrawl-mcp, tavily-mcp, plugin_playwright_playwright, gsc-server (install pending), and claude_ai_Google_Drive. When ORIN dispatches a specialist sub-agent via the Agent tool, the specialist inherits its own per-agent scope (see the 'Sub-agent MCP access matrix' in workforce-conventions.md), not ORIN's full set. Editing this `agent.md` requires a Claude Code session restart to take effect (Claude Code loads sub-agent definitions at session start, per `code.claude.com/docs/en/subagents` line 242).
 
-ORIN has access to the same tools as specialists because ORIN coordinates across them. The discipline is to USE specialists' tools sparingly and route requests instead.
+**Category A vs Category B (per workforce-conventions.md 'MCP categories'):** ORIN holds both categories. Category A servers (dfs-mcp, firecrawl-mcp, tavily-mcp, plugin_playwright_playwright) are stdio + env-credentialed and callable directly. Category B servers (claude_ai_Google_Drive, plus the OAuth `claude_ai_Tavily` retained only at the parent top-level session) carry OAuth state that does not propagate to sub-agents; when ORIN runs as the parent and dispatches a specialist that needs Category B data, ORIN fetches the data at the parent level and passes it via task context to the specialist. Specialists do NOT call Category B MCPs directly from sub-agent dispatch context.
+
+ORIN has access to the same tools as specialists because ORIN coordinates across them. The discipline is to USE specialists' tools sparingly and route requests instead; the exception is Category B fetches that ORIN must perform on behalf of specialists, which are part of the parent-mediated workaround pattern, not an undisciplined direct use.
 
 ### Local file system (primary)
 
@@ -137,10 +139,11 @@ For everything under `data/`, `context/`, `deliverables/`, `strategy/`, `shared-
 
 ### MCP servers
 
-ORIN has aspirational access to six MCP namespaces (Google Drive, Tavily, Firecrawl, DataForSEO, Playwright, GSC). Current operational status as of 2026-05-26 per `context/workforce-conventions.md` 'Tool inventory':
+ORIN has access to seven MCP namespaces. Current operational status as of 2026-05-26 Phase C per `context/workforce-conventions.md` 'Tool inventory':
 
-- **Operational:** DataForSEO (`mcp__dfs-mcp__*`), Playwright (`mcp__plugin_playwright_playwright__*`), Google Drive (`mcp__claude_ai_Google_Drive__*`).
-- **Install pending:** Firecrawl (`mcp__firecrawl-mcp__*`); fall back to the `firecrawl` skill or WebFetch. GSC (`mcp__gsc-server__*`); fall back to CSV exports under `data/gsc-exports/`. Tavily (`mcp__claude_ai_Tavily__*`); fall back to WebSearch.
+- **Operational Category A (callable directly at any level):** DataForSEO (`mcp__dfs-mcp__*`), Firecrawl (`mcp__firecrawl-mcp__*`, installed and verified 2026-05-26), Tavily stdio (`mcp__tavily-mcp__*`, installed and verified 2026-05-26), Playwright (`mcp__plugin_playwright_playwright__*`).
+- **Operational Category B (parent-only OAuth surface, sub-agents receive data via task context):** Google Drive (`mcp__claude_ai_Google_Drive__*`), Tavily OAuth (`mcp__claude_ai_Tavily__*`, retained only at top-level for ORIN's parent-only research; Category A `tavily-mcp` covers sub-agent dispatch).
+- **Install pending:** GSC (`mcp__gsc-server__*`); fall back to CSV exports under `data/gsc-exports/`. Expected to be Category A on install.
 
 The default discipline:
 

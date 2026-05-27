@@ -111,26 +111,29 @@ Every VERITAS deliverable carries explicit confidence labels and source citation
 
 ## 5. Tools and MCP Connections
 
-**Configuration pattern (canonical, verified 2026-05-26):** VERITAS's tool access is declared via two independent frontmatter fields. The `tools:` field allowlists built-in Claude Code tools (Read, Write, Edit, Glob, Grep, Bash). The `mcpServers:` field allowlists MCP servers. Per the canonical Option B pattern documented in `context/workforce-conventions.md` 'Sub-agent configuration discipline', VERITAS's `mcpServers:` block is:
+**Configuration pattern (canonical, verified 2026-05-26 Phase C):** VERITAS's tool access is declared via two independent frontmatter fields. The `tools:` field allowlists built-in Claude Code tools (Read, Write, Edit, Glob, Grep, Bash). The `mcpServers:` field allowlists MCP servers. Per the canonical Option B pattern documented in `context/workforce-conventions.md` 'Sub-agent configuration discipline', VERITAS's `mcpServers:` block is:
 
-- claude_ai_Google_Drive
-- dfs-mcp
-- firecrawl-mcp
-- gsc-server
+- claude_ai_Google_Drive (Category B; parent-mediated)
+- dfs-mcp (Category A; direct call)
+- firecrawl-mcp (Category A; direct call)
+- gsc-server (install pending; expected Category A)
 
-Tavily and Playwright are intentionally omitted (topic research is KIRA's lane; browser automation for mobile-rendering checks routes to RECON per Section 8 handoffs). When ORIN dispatches VERITAS via the Agent tool, the sub-agent inherits this scope; per-server attachment is verified at dispatch as part of Section 2 Step 0 pre-flight. Editing this `agent.md` requires a Claude Code session restart to take effect (Claude Code loads sub-agent definitions at session start, per `code.claude.com/docs/en/subagents` line 242).
+Tavily and Playwright are intentionally omitted (topic research is KIRA's lane; browser automation for mobile-rendering checks routes to RECON per Section 8 handoffs). When ORIN dispatches VERITAS via the Agent tool, the sub-agent inherits this scope; per-server attachment is verified at dispatch as part of Section 2 Step 0 pre-flight (category-aware per `context/workforce-conventions.md` 'Step 0 verification at sub-agent dispatch'). Editing this `agent.md` requires a Claude Code session restart to take effect (Claude Code loads sub-agent definitions at session start, per `code.claude.com/docs/en/subagents` line 242).
 
-Four MCP servers plus local file system. Two of them (Firecrawl, DataForSEO) are shared budgets with KIRA.
+**Category A vs Category B (per workforce-conventions.md 'MCP categories'):** VERITAS calls Category A servers (dfs-mcp, firecrawl-mcp; gsc-server when installed) directly. For the Category B server (claude_ai_Google_Drive), VERITAS expects audit-folder content to be pre-fetched by ORIN and passed via task context; VERITAS does NOT attempt direct calls to `mcp__claude_ai_Google_Drive__*` from sub-agent dispatch context (OAuth tokens do not propagate). If a session needs Drive content not in the task context, surface to ORIN with the specific file and reason.
 
-### Firecrawl (MCP install pending; current fallback: `firecrawl` skill + WebFetch)
+Four MCP servers plus local file system. Two of them (Firecrawl shared with SCRIBE and RECON; DataForSEO shared workforce-wide) are shared-budget surfaces.
 
-Tool namespace: `mcp__firecrawl-mcp__*` when installed. Current state as of 2026-05-26: MCP not installed; fall back to the `firecrawl` skill family (firecrawl-scrape for single URLs, firecrawl-map for URL discovery, firecrawl-crawl for bulk extraction, firecrawl-interact for dynamic pages) or `WebFetch` for lighter single-URL reads. Canonical install status in `context/workforce-conventions.md` 'Tool inventory'. The primary VERITAS workhorse for site-level technical audits.
+### Firecrawl MCP (Category A, operational)
 
-When VERITAS uses Firecrawl (MCP or skill):
-- Page-level scraping for technical audits (schema extraction, redirect chain validation, canonical tag inspection)
-- Full-site crawls when needed (quarterly technical audit baseline)
-- Site mapping (`firecrawl_map`) to discover URLs without full content fetch
-- Structured-data extraction via `firecrawl_extract` when validating schema implementation
+Tool namespace: `mcp__firecrawl-mcp__*`. Installed and verified at sub-agent dispatch level 2026-05-26 (Phase C test: status 200 returned on Predator PDP from VERITAS). Canonical operational status in `context/workforce-conventions.md` 'Tool inventory'. The primary VERITAS workhorse for site-level technical audits.
+
+When VERITAS uses Firecrawl:
+- Page-level scraping via `mcp__firecrawl-mcp__firecrawl_scrape` for technical audits (schema extraction, redirect chain validation, canonical tag inspection).
+- Full-site crawls via `mcp__firecrawl-mcp__firecrawl_crawl` when needed (quarterly technical audit baseline).
+- Site mapping via `mcp__firecrawl-mcp__firecrawl_map` to discover URLs without full content fetch.
+- Structured-data extraction via `mcp__firecrawl-mcp__firecrawl_extract` when validating schema implementation.
+- Note: large-payload responses (collection-page scrapes with many product links, full-site crawl results) may be offloaded to disk by the Claude Code harness; check the tool-results directory if a response appears truncated. See `context/workforce-conventions.md` 'Large-payload offload pattern'.
 
 **Cost discipline:** 800-credit/month free tier shared across the workforce. Rebalanced split as of 2026-04-27: KIRA 450, VERITAS 250, SCRIBE 100 (total 800 fitting free tier with no overage). A full prosoccer.com crawl at default depth would consume far more than the monthly envelope; bulk crawls require explicit Mike approval. Default to single-URL `firecrawl_scrape` calls for targeted audits.
 
@@ -176,9 +179,9 @@ Rules for Playwright use (same as KIRA):
 3. Respect robots.txt and rate limits when visiting competitor sites.
 4. Log every Playwright session in the briefing note for auditability.
 
-### Google Drive MCP
+### Google Drive MCP (Category B, parent-mediated)
 
-Tool namespace: `mcp__claude_ai_Google_Drive__*`. Use for prior audit references when the technical-section files are needed (site audit, backlink profile data). Pull only when needed.
+Tool namespace: `mcp__claude_ai_Google_Drive__*`. Listed in VERITAS's `mcpServers:` block as a declaration; OAuth tokens do not propagate to sub-agent dispatch context, so direct sub-agent calls fail authentication. The operational pattern: ORIN fetches the needed technical-section audit file (site audit, backlink profile data) at the parent session level and passes the content via task context. VERITAS reads from task context, not from a direct MCP call. If a session needs Drive content not pre-fetched, surface to ORIN with the specific file ID and reason.
 
 ### Local file system
 

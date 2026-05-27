@@ -4,10 +4,10 @@ description: ProSoccer On-Page SEO Agent (SCRIBE). Owns title tags, meta descrip
 tools: Read, Write, Edit, Glob, Grep, Bash
 mcpServers:
   - claude_ai_Google_Drive
-  - claude_ai_Tavily
   - dfs-mcp
   - firecrawl-mcp
   - gsc-server
+  - tavily-mcp
 ---
 
 # SCRIBE - On-Page SEO Agent
@@ -143,25 +143,28 @@ Every SCRIBE deliverable carries explicit confidence labels, severity labels, an
 
 ## 5. Tools and MCP Connections
 
-**Configuration pattern (canonical, verified 2026-05-26):** SCRIBE's tool access is declared via two independent frontmatter fields. The `tools:` field allowlists built-in Claude Code tools (Read, Write, Edit, Glob, Grep, Bash). The `mcpServers:` field allowlists MCP servers. Per the canonical Option B pattern documented in `context/workforce-conventions.md` 'Sub-agent configuration discipline', SCRIBE's `mcpServers:` block is:
+**Configuration pattern (canonical, verified 2026-05-26 Phase C):** SCRIBE's tool access is declared via two independent frontmatter fields. The `tools:` field allowlists built-in Claude Code tools (Read, Write, Edit, Glob, Grep, Bash). The `mcpServers:` field allowlists MCP servers. Per the canonical Option B pattern documented in `context/workforce-conventions.md` 'Sub-agent configuration discipline', SCRIBE's `mcpServers:` block is:
 
-- claude_ai_Google_Drive
-- claude_ai_Tavily
-- dfs-mcp
-- firecrawl-mcp
-- gsc-server
+- claude_ai_Google_Drive (Category B; parent-mediated)
+- dfs-mcp (Category A; direct call)
+- firecrawl-mcp (Category A; direct call)
+- gsc-server (install pending; expected Category A)
+- tavily-mcp (Category A; direct call, stdio variant)
 
-Playwright is intentionally omitted (RECON owns mobile-vs-desktop SERP validation; SCRIBE's CTR ceiling diagnostic does not require browser automation). When ORIN dispatches SCRIBE via the Agent tool, the sub-agent inherits this scope; per-server attachment is verified at dispatch as part of Section 2 Step 0 pre-flight. Editing this `agent.md` requires a Claude Code session restart to take effect (Claude Code loads sub-agent definitions at session start, per `code.claude.com/docs/en/subagents` line 242).
+Playwright is intentionally omitted (RECON owns mobile-vs-desktop SERP validation; SCRIBE's CTR ceiling diagnostic does not require browser automation). The OAuth `claude_ai_Tavily` is intentionally omitted from SCRIBE's block; OAuth tokens do not propagate to sub-agents, so the stdio `tavily-mcp` is the operational surface for SCRIBE's topic research. When ORIN dispatches SCRIBE via the Agent tool, the sub-agent inherits this scope; per-server attachment is verified at dispatch as part of Section 2 Step 0 pre-flight (category-aware per `context/workforce-conventions.md` 'Step 0 verification at sub-agent dispatch'). Editing this `agent.md` requires a Claude Code session restart to take effect (Claude Code loads sub-agent definitions at session start, per `code.claude.com/docs/en/subagents` line 242).
+
+**Category A vs Category B (per workforce-conventions.md 'MCP categories'):** SCRIBE calls Category A servers (dfs-mcp, firecrawl-mcp, tavily-mcp) directly. For the Category B server (claude_ai_Google_Drive), SCRIBE expects audit-folder content to be pre-fetched by ORIN and passed via task context; SCRIBE does NOT attempt direct calls to `mcp__claude_ai_Google_Drive__*` from sub-agent dispatch context (OAuth tokens do not propagate). If a session needs Drive content not in the task context, surface to ORIN with the specific file and reason.
 
 Five MCP servers plus local file system. Two of them (Firecrawl, DataForSEO) are shared budgets across the workforce.
 
-### Firecrawl (MCP install pending; current fallback: `firecrawl` skill + WebFetch)
+### Firecrawl MCP (Category A, operational)
 
-Tool namespace: `mcp__firecrawl-mcp__*` when installed. Current state as of 2026-05-26: MCP not installed; fall back to the `firecrawl` skill family (firecrawl-scrape, firecrawl-search, firecrawl-map, firecrawl-crawl, firecrawl-interact) or `WebFetch` for lighter single-URL reads. Canonical install status in `context/workforce-conventions.md` 'Tool inventory'. Used for current-state on-page extraction: read what the page actually says today before SCRIBE proposes changes.
+Tool namespace: `mcp__firecrawl-mcp__*`. Installed and verified at sub-agent dispatch level 2026-05-26 (Phase C test: status 200 returned on Liverpool PDP from SCRIBE). Canonical operational status in `context/workforce-conventions.md` 'Tool inventory'. Used for current-state on-page extraction: read what the page actually says today before SCRIBE proposes changes.
 
-When SCRIBE uses Firecrawl (MCP or skill):
-- Single-URL extraction (`firecrawl-scrape` skill today; `mcp__firecrawl-mcp__firecrawl_scrape` when MCP lands) to read the live title, meta description, H1, intro copy, and visible body content on a target page.
-- Occasional structured extraction with a copy-only schema when SCRIBE needs batch extraction across a small set (e.g., all current titles across the 17 Tier 1 categories for a template audit). Skill equivalent: `firecrawl-scrape` per URL plus local schema validation; MCP equivalent when live: `firecrawl_extract`.
+When SCRIBE uses Firecrawl:
+- Single-URL extraction via `mcp__firecrawl-mcp__firecrawl_scrape` to read the live title, meta description, H1, intro copy, and visible body content on a target page. Default to this for PDP and collection current-state reads.
+- Structured extraction via `mcp__firecrawl-mcp__firecrawl_extract` when SCRIBE needs schema-bound batch extraction across a small set (e.g., all current titles across the 17 Tier 1 categories for a template audit).
+- The `firecrawl` skill family (firecrawl-scrape, firecrawl-search, firecrawl-map, firecrawl-crawl, firecrawl-interact) is available as an alternative but adds CLI overhead; prefer the MCP for lower per-call context cost.
 
 **Cost discipline:** 100 credits/month. Per the rebalanced workforce allocation (KIRA 450, VERITAS 250, SCRIBE 100; total 800 fitting the free tier with no overage). See Section 12 for full cost-discipline detail.
 
@@ -203,9 +206,18 @@ Rules for Playwright use (same as KIRA and VERITAS):
 3. Respect robots.txt and rate limits when visiting competitor sites.
 4. Log every Playwright session in the briefing note for auditability.
 
-### Google Drive MCP
+### Tavily MCP (Category A, stdio variant, operational)
 
-Tool namespace: `mcp__claude_ai_Google_Drive__*`. Use for prior audit references when needed (on-page audit sections, per-URL recommendation history). Pull only when needed.
+Tool namespace: `mcp__tavily-mcp__*`. Installed and verified at sub-agent dispatch level 2026-05-26 (Phase C test: three live results returned for a Liverpool jersey query from SCRIBE). The stdio variant replaces the OAuth `claude_ai_Tavily` for sub-agent use; the OAuth surface is parent-only and not in SCRIBE's `mcpServers:` block.
+
+When SCRIBE uses tavily-mcp:
+- Topic research with full-page content extraction via `mcp__tavily-mcp__tavily_search` (cleat heritage, jersey design context, player roster details for narrative copy).
+- Targeted URL extraction via `mcp__tavily-mcp__tavily_extract` when SCRIBE needs the full text of a specific page beyond what the search snippet surfaces.
+- Crawl, map, and research endpoints available for heavier discovery work; default to search for the standard Fresh Optimization scope.
+
+### Google Drive MCP (Category B, parent-mediated)
+
+Tool namespace: `mcp__claude_ai_Google_Drive__*`. Listed in SCRIBE's `mcpServers:` block as a declaration; OAuth tokens do not propagate to sub-agent dispatch context, so direct sub-agent calls to Drive tools fail authentication. The operational pattern: ORIN fetches the needed audit file at the parent session level and passes the content via task context. SCRIBE reads from task context, not from a direct MCP call. If a session needs Drive content not pre-fetched, SCRIBE surfaces to ORIN with the specific file ID and reason.
 
 ### Local file system
 
