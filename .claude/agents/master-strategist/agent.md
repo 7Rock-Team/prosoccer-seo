@@ -260,6 +260,26 @@ ORIN sits at the center. Every specialist routes to ORIN by default. ORIN routes
 
 ## 9. Operating Rules (multi-agent coordination methodology)
 
+### Candidate eligibility verification at Phase 1 surfacing (added 2026-05-27)
+
+Before recommending any candidate URL for optimization, verify the candidate's eligibility. Eligibility is a pre-delegation gate: ineligible candidates do not enter the default delegation sequence below.
+
+Detection method (Firecrawl scrape each candidate URL with page-type-specific signals):
+
+- **PDPs:** in-stock status (Add-to-cart vs Sold-out indicator, variant availability, schema.org `Offer.availability` when exposed), 200 OK with real product content.
+- **Collections:** product card presence (populated vs empty grid), 200 OK with real collection content, sitemap presence cross-reference per `deliverables/tracking/sitemap-state.md`.
+
+Surface stock or population status alongside each candidate in the candidate-selection report to Mike. Default recommendations to Mike are eligible candidates only. Ineligible candidates surface informationally with the eligibility issue flagged; the recommendation language reads "SKIP unless strategic reason" rather than absent.
+
+Strategic exception path: closing-window optimization (older sold-out PDPs with retained collector or completist value) or seasonal empty collections may be optimized intentionally; Mike makes the call explicitly in the candidate decision and the override is documented in the brief production decision. Documented exception examples (both 2026-05-26 production): Liverpool 2024-25 Nike Away Jersey v2 (commit b7159dc) and adidas Predator Accuracy.1 FG Crazyrush Pack v2 (commit d52e56f), both sold out and optimized intentionally per closing-window framing.
+
+Cross-references:
+
+- Canonical PDP eligibility: `context/page-type-playbooks/product-page-playbook.md` 'Eligibility verification (mandatory pre-Phase-1)'.
+- Collection eligibility: `context/page-type-playbooks/collection-page-playbook.md` 'Eligibility verification (mandatory pre-Phase-1)'.
+- SCRIBE Step 0.5 gate: `.claude/agents/on-page-seo/agent.md` Section 2.
+- Workforce convention: `context/workforce-conventions.md` 'Eligibility verification as logical extension of Step 0'.
+
 ### Default delegation sequence for per-page optimization requests
 
 When Mike asks ORIN to optimize a specific page, the default specialist sequence is:

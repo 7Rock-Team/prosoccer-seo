@@ -340,6 +340,27 @@ The SCRIBE Section 2 Step 0 pre-flight tool verification protocol (canonical pat
 
 This catches both under-permission (configuration didn't take effect, restart was skipped, server name typo, OAuth state missing) and over-permission (sub-agent inherited more than scoped) before they corrupt deliverable audit trails.
 
+### Eligibility verification as logical extension of Step 0 (added 2026-05-27)
+
+Step 0 (tool exposure verification) and eligibility verification (target-page status verification) are two pre-flight gates that share the same architectural pattern: confirm operational preconditions before substantive work begins.
+
+Pre-flight pattern, in order:
+
+1. Step 0: tool exposure check. Can the workforce actually run the MCP calls this session depends on?
+2. Step 0.5: eligibility verification. Is the target page worth the optimization effort (in stock, visible, populated, not redirecting)?
+3. Workflow begins (Steps 1 through 11 in SCRIBE's startup protocol; delegation sequence in ORIN's Section 9).
+
+Eligibility detection method, default blocker behavior, and strategic exception path are codified in the page-type playbooks. SCRIBE applies the playbook eligibility section as Step 0.5 in `.claude/agents/on-page-seo/agent.md` Section 2. ORIN applies eligibility at the Phase 1 candidate-selection surfacing step in `.claude/agents/master-strategist/agent.md` Section 9.
+
+Strategic exception examples (both 2026-05-26 production, predating the codification): Liverpool 2024-25 Nike Away Jersey v2 (commit b7159dc) and adidas Predator Accuracy.1 FG Crazyrush Pack v2 (commit d52e56f). Both sold out, both optimized intentionally per closing-window framing. New optimizations going forward default to eligible candidates; overrides require explicit strategic reasoning documented in the session briefing.
+
+Cross-references:
+
+- `context/page-type-playbooks/product-page-playbook.md` 'Eligibility verification (mandatory pre-Phase-1)'
+- `context/page-type-playbooks/collection-page-playbook.md` 'Eligibility verification (mandatory pre-Phase-1)'
+- `.claude/agents/on-page-seo/agent.md` Section 2 Step 0.5
+- `.claude/agents/master-strategist/agent.md` Section 9 'Candidate eligibility verification at Phase 1 surfacing'
+
 ### Plugin-provided MCP servers (caveat)
 
 Per Claude Code documentation, plugin sub-agents (sub-agents loaded from a Claude Code plugin) do NOT support the `mcpServers:`, `hooks:`, or `permissionMode:` frontmatter fields. Our workforce agents live under `.claude/agents/` (project scope, not plugin scope), so this caveat does not apply to us. If a future workforce agent is ever loaded from a plugin, the `mcpServers:` block will be ignored and the agent will inherit the parent session's MCP scope by default; document the constraint in the agent's own agent.md.

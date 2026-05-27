@@ -27,6 +27,60 @@ The following are in scope and the body copy must serve them:
 - The avatar's emotional context for ownership. What does wearing or using this product mean to the avatar? Carlos buying the 2026 El Tri home authentic feels something different from Tyler buying the same kit. Same product, different emotional anchor.
 - Fit, sizing, and care information where relevant. Product copy is a place where avatar pain frames map directly to copy that closes the sale. Jennifer's "Wide Foot Nightmare" frame, Carlos's "is this real or fake" frame, Tyler's "will it actually run faster than my last pair" frame.
 
+## Eligibility verification (mandatory pre-Phase-1)
+
+_Added 2026-05-27. Eligibility check is a gate, not an optimization step. Every PDP candidate proposed for optimization must pass eligibility before any brief production begins. Optimization of sold-out or hidden PDPs is wasted SEO effort: the improved page can't convert._
+
+### In-stock requirement
+
+The PDP must have at least one variant available for purchase. Detection method: Firecrawl scrape the candidate URL and extract stock status from the rendered page.
+
+Stock indicators:
+
+- "Add to cart" button present and active = in stock
+- "Sold out" button, "Unavailable" label, or disabled-state styling = out of stock
+- Variant selectors with all variants marked unavailable = effectively sold out
+- Schema.org `Offer` with `availability` field if exposed in markup = authoritative when present
+
+### Visibility requirement
+
+The PDP must be discoverable through normal customer browsing. Detection method is partly automated, partly deferred:
+
+- Automated check now: Firecrawl scrape returns 200 OK with real product content (not a soft-404, not an auto-redirect to the collection or homepage).
+- Deferred check (full hidden-product detection): Active-but-hidden products carry pre-launch tags, search exclusions, sitemap exclusions, or theme settings that strip them from collection grids and search. Reliable detection requires sitemap state cross-reference (`scripts/_build_sitemap_state.py`) plus collection-page presence verification plus Shopify admin tag review. Defer to a focused architectural workstream once 10/day production reveals the frequency of this issue. For now: if a candidate scrape shows in-stock indicators but feels hidden, verify in Shopify admin before optimizing.
+
+### Default blocker behavior
+
+If eligibility verification fails:
+
+- ORIN candidate-selection phase: surface the ineligible candidate informationally with the eligibility issue flagged; default recommendations stay limited to eligible candidates.
+- SCRIBE Phase 1 capture: detect as BLOCKER and hold at gate. Mike decides: skip the PDP, override with strategic reason, or replace with sibling product (Authentic tier if Stadium sold out, different colorway, different sleeve length).
+
+Don't silently optimize an ineligible PDP. The blocker is the discipline.
+
+### Strategic exception: closing-window optimization
+
+Closing-window narrative (older generations, closeout inventory, end-of-cycle kits) is a valid optimization strategy on sold-out PDPs IF:
+
+- The page has retained value for collectors, completists, or loyalists (e.g., a championship-winning kit, a signature cleat generation, a final season under a kit supplier)
+- SEO equity from optimization persists for any restock potential, organic ranking benefit, or topical authority that flows to sibling pages
+- Mike makes the strategic call explicitly in the candidate decision; the override is documented in the brief production decision
+
+Default behavior: SKIP sold-out PDPs. Override requires explicit strategic reasoning documented in the brief production decision.
+
+Documented examples of the exception (both 2026-05-26 production, predating the eligibility codification):
+
+- Liverpool 2024-25 Nike Away Jersey v2 (commit b7159dc): sold out, optimized intentionally per closing-window framing on the Nike-to-adidas brand transition.
+- adidas Predator Accuracy.1 FG Crazyrush Pack v2 (commit d52e56f): sold out, optimized intentionally per closing-window framing on the two-generation gap to the Predator 26.
+
+New optimizations going forward default to in-stock candidates; closing-window overrides require explicit strategic reasoning.
+
+### Cross-references
+
+- ORIN candidate-selection workflow: `.claude/agents/master-strategist/agent.md` Section 9 'Candidate eligibility verification at Phase 1 surfacing'.
+- SCRIBE pre-Phase-1 gate: `.claude/agents/on-page-seo/agent.md` Section 2 Step 0.5 'Eligibility verification'.
+- Workforce convention: `context/workforce-conventions.md` 'Eligibility verification as logical extension of Step 0'.
+
 ## Primary keyword selection for year/generation/season-bound products
 
 _Added 2026-05-27 from architectural refinement surfaced during client presentation prep. Applies to any product whose identity is bound to a specific year, generation, or season. Precedes the Five canonical brief-craft rules below because primary keyword selection sits upstream of brief construction._

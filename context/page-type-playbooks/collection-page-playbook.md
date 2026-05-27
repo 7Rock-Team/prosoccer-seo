@@ -27,6 +27,50 @@ The following are in scope and the body copy must serve them:
 - Topic-specific information the avatar's super-fans want to learn or be reminded of. Carlos knows the 2026 World Cup hosts. He may not remember the exact group draw or the kit-supplier history. Useful detail for a super-fan beats generic detail for a casual buyer.
 - Product range explanation through the topic lens. "The 2026 home kit, the away kit, and the third drop before kickoff" is product-range explanation through the El Tri lens. "We carry a wide range of Mexico jerseys in many sizes" is product-range explanation through the store lens. The first belongs on the page; the second does not.
 
+## Eligibility verification (mandatory pre-Phase-1)
+
+_Added 2026-05-27. Eligibility check is a gate, not an optimization step. Every collection-page candidate proposed for optimization must pass eligibility before any brief production begins. Optimization of empty, hidden, or redirecting collections is wasted SEO effort: the improved page can't carry traffic to product._
+
+### Populated collection requirement
+
+The collection page must surface real product cards. Detection method: Firecrawl scrape the candidate URL and confirm product cards are rendered.
+
+Indicators:
+
+- One or more product cards present in the rendered HTML = populated
+- Empty product grid with "no products found" or equivalent message = empty
+- Smart collection with an empty tag rule (no products currently match) = empty (e.g., `/collections/backyard-soccer-goals-and-rebounders` flagged in `work-log/follow-ups.md` 2026-05-08)
+
+Empty collections do not qualify for optimization. Brief production cannot lift a page with nothing to sell.
+
+### Visibility requirement
+
+The collection page must be discoverable and indexable.
+
+- Firecrawl scrape returns 200 OK with real collection content (not a soft-404, not a redirect to the homepage, not the empty-state landing).
+- Collection appears in the public sitemap. Source of truth: `deliverables/tracking/sitemap-state.md`. Sitemap-absent collections need VERITAS investigation before optimization (see follow-ups 2026-05-08 reconciliation).
+- Collection's `Online Store` sales channel is active in Shopify admin. Deferred automated check; correlates to sitemap presence.
+
+### Default blocker behavior
+
+If eligibility verification fails (empty collection, sitemap-absent collection, redirecting collection, hidden collection):
+
+- ORIN candidate-selection phase: surface the ineligible candidate informationally with the eligibility issue flagged; default recommendations stay limited to eligible candidates; route the underlying VERITAS issue (sitemap gap, redirect anomaly) to the technical SEO log.
+- SCRIBE Phase 1 capture: detect as BLOCKER and hold at gate. Mike decides: skip the collection, override with strategic reason, or escalate to VERITAS for fix-then-optimize sequencing.
+
+### Strategic exception: temporarily empty seasonal collections
+
+A small set of collections may be intentionally empty out of season (e.g., a "Black Friday Deals" collection in May, a "Champions League Final" collection between tournament cycles, a "Summer 2026 Headquarters" landing collection ahead of seasonal product drops). Optimizing these in advance is occasionally justified for SEO equity ahead of the product wave.
+
+Default behavior: SKIP empty collections. Override requires Mike's explicit approval with clear seasonal reasoning. The override is rare; the default is the discipline.
+
+### Cross-references
+
+- ORIN candidate-selection workflow: `.claude/agents/master-strategist/agent.md` Section 9 'Candidate eligibility verification at Phase 1 surfacing'.
+- SCRIBE pre-Phase-1 gate: `.claude/agents/on-page-seo/agent.md` Section 2 Step 0.5 'Eligibility verification'.
+- Workforce convention: `context/workforce-conventions.md` 'Eligibility verification as logical extension of Step 0'.
+- Product page eligibility (canonical, closing-window exception examples): `context/page-type-playbooks/product-page-playbook.md` 'Eligibility verification (mandatory pre-Phase-1)'.
+
 ## Five canonical brief-craft rules
 
 These five rules govern every brief SCRIBE produces under the Fresh Optimization workflow. They emerged from the 2026-05-26 UAE PDP refinement session and lock in agency-grade craft standards across all future briefs. The five rules below are the NEW codification from this session; the collection-page external-link allowance (per link strategy) and the 1 to 2 internal-links target are already canonical in 'Internal link strategy' later in this playbook. Those existing policies stand; the five rules below extend them with the craft conventions that emerged from the UAE v3 work. Cross-referenced from `.claude/agents/on-page-seo/agent.md` Section 13 and `context/workforce-conventions.md`.
