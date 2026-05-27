@@ -27,6 +27,34 @@ The following are in scope and the body copy must serve them:
 - The avatar's emotional context for ownership. What does wearing or using this product mean to the avatar? Carlos buying the 2026 El Tri home authentic feels something different from Tyler buying the same kit. Same product, different emotional anchor.
 - Fit, sizing, and care information where relevant. Product copy is a place where avatar pain frames map directly to copy that closes the sale. Jennifer's "Wide Foot Nightmare" frame, Carlos's "is this real or fake" frame, Tyler's "will it actually run faster than my last pair" frame.
 
+## Primary keyword selection for year/generation/season-bound products
+
+_Added 2026-05-27 from architectural refinement surfaced during client presentation prep. Applies to any product whose identity is bound to a specific year, generation, or season. Precedes the Five canonical brief-craft rules below because primary keyword selection sits upstream of brief construction._
+
+Many products in the ProSoccer catalog are bound to a specific year, generation, or season. National team jerseys cycle on tournament rhythm (2024-25, 2025-26, 2026 World Cup). Club jerseys cycle on club season. Cleats cycle on brand generation (Predator 22, Predator Accuracy, Predator 24, Predator 26). Training apparel and goalkeeper jerseys often carry season tags. For all of these, primary keyword selection requires specificity match between the keyword and the specific product year or generation, not the highest-volume keyword in the broader category.
+
+**The failure mode this rule prevents:** optimizing a 2024-25 Liverpool away jersey for `liverpool away jersey` (generic category-level term, 590/mo) and watching Google rank the current-cycle adidas 25/26 away product above it because SERP dynamics for unbound queries favor current-cycle relevance. The 2024-25 page can never win an unbound search in 2026; it can win bound searches for `liverpool 2024-25 away jersey`.
+
+**Selection hierarchy for year/generation/season-bound products:**
+
+1. **Primary keyword: year-specific or generation-specific exact-match.** Lower absolute volume, but the intent match is precise and the ranking target is realistic. Examples: `liverpool 2024-25 away jersey`, `predator 24 elite fg`, `mexico 2026 world cup jersey`, `nike goalkeeper jersey 2025-26`. The page can plausibly rank top 10 for these terms because the SERP is narrower and the page's specificity matches the searcher's specificity.
+2. **Supporting keywords: generic category-level terms.** Higher volume, broader topical relevance, but NOT the ranking target. Examples: `liverpool away jersey`, `predator soccer cleats`, `mexico soccer jersey`. These earn natural mention in the body for topical depth and may pick up incidental long-tail traffic, but the page should not be structured to rank against current-cycle competitors for these terms.
+3. **Long-tail modifiers for older products:** emotional, collector, or closing-window variants. Examples: `liverpool 2024-25 away jersey nike farewell`, `predator accuracy crazyrush pack closeout`, `mexico 2022 world cup jersey vintage`. These capture buyer intent specific to the older product's market position (collector, closeout, throwback cycle) where the year-specific term alone doesn't fully signal.
+
+**Realistic ranking position assessment.** Before settling primary keyword, run a DataForSEO SERP check on both the year-specific exact-match candidate and the generic category-level candidate. If the generic-term SERP is dominated by current-cycle brand and retailer pages and the year-specific SERP has open positions (or weaker competition), the year-specific term is the correct primary keyword regardless of volume. Volume without realistic ranking is wasted optimization budget.
+
+**Categories affected:**
+
+- National team jerseys (year/tournament-cycle-specific)
+- Club jerseys (season-specific)
+- Cleats with generation versioning (Predator 22, Accuracy, 24, 26; Mercurial 9, 10; Phantom GX, GX 2; Tiempo generation cycles)
+- Training apparel with season tags
+- Goalkeeper jerseys with season tags
+
+**Categories NOT affected.** Year-agnostic products use the standard category-level keyword selection (head keyword = highest-volume relevant term). Examples: scarves, training balls without year tags, generic shin guards, casual lifestyle apparel without season anchors.
+
+**Reference for SCRIBE operational use.** Selection guidance summary lives in `.claude/agents/on-page-seo/agent.md` Section 9 'Year/generation/season specificity for primary keyword selection'.
+
 ## Five canonical brief-craft rules
 
 These five rules govern every brief SCRIBE produces under the Fresh Optimization workflow. They emerged from the 2026-05-26 UAE PDP refinement session and lock in agency-grade craft standards across all future briefs. The five rules below are the NEW codification from this session; the PDP external link policy (internal-only, locked) is already canonical in 'Internal links only on product pages' later in this playbook, and the 1 to 2 internal-links target is already canonical in 'Internal link strategy' later in this playbook. Those existing policies stand; the five rules below extend them with the craft conventions that emerged from the UAE v3 work. Cross-referenced from `.claude/agents/on-page-seo/agent.md` Section 13 and `context/workforce-conventions.md`.

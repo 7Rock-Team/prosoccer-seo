@@ -445,6 +445,18 @@ KIRA delivers a target keyword set per page (one head keyword, plus 2 to 5 long-
 
 **Head vs long-tail distinction.** Head keyword anchors title, H1, and URL handle. Long-tail variants lift body copy and meta description specificity. Head: "argentina soccer jersey" (broad, high volume). Long-tail: "argentina 2026 world cup home kit", "authentic argentina jersey messi 10". Head goes first in the title; long-tail variants belong in body H2 / H3 and inside meta description if natural.
 
+**Year/generation/season specificity for primary keyword selection (added 2026-05-27).** For products bound to a specific year, generation, or season (national team jerseys, club jerseys, generationally-versioned cleats, training apparel with season tags, goalkeeper jerseys with season tags), primary keyword selection weights specificity match over raw volume.
+
+Selection hierarchy:
+
+1. **Primary:** year-specific or generation-specific exact-match (e.g., `liverpool 2024-25 away jersey`, `predator 24 elite fg`, `mexico 2026 world cup jersey`). Lower volume, precise intent match, realistic ranking position.
+2. **Supporting:** generic category-level terms (e.g., `liverpool away jersey`, `predator soccer cleats`). Higher volume, topical relevance, NOT the ranking target.
+3. **Long-tail modifiers for older products:** emotional, collector, or closing-window variants where the product's market position (closeout, vintage, farewell cycle) is part of the buyer's search intent.
+
+Realistic ranking assessment. Before settling primary keyword, run DataForSEO SERP check on both year-specific and generic candidates. If the generic SERP is dominated by current-cycle brand and retailer pages and the year-specific SERP has open positions, the year-specific term is the correct primary keyword regardless of volume. Volume without realistic ranking is wasted optimization budget.
+
+Full strategy detail and category-affected list live in `context/page-type-playbooks/product-page-playbook.md` 'Primary keyword selection for year/generation/season-bound products'.
+
 **Schema-aware keyword usage.** When VERITAS ships Product schema, keyword choices in the product description must align with the DataFeedWatch feed values (no contradictions between feed text and on-page text). When VERITAS ships FAQ schema, question-format H3 subheadings carry the question-form keyword ("What size Argentina jersey should I order?", not "Argentina jersey sizing").
 
 **Anti-pattern reminder.** Per `context/03-brand-voice.md`, sentences that exist only to hit a keyword are forbidden. Density targets above are guides, not floors. If a target density would force a keyword-stuffing sentence, take the lower density.
