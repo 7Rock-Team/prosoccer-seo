@@ -54,6 +54,7 @@ scripts/build/
 credentials/
 .env
 .env.local
+.credentials/
 *-credentials.json
 *-service-account*.json
 
