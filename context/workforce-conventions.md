@@ -110,7 +110,7 @@ Five rules govern every brief SCRIBE produces under the Fresh Optimization workf
 
 Worked example for all five rules: UAE 2026 PDP v3 brief at `deliverables/page-optimizations/2026-05-26_session-01/uae-2026-home-stadium_brief-v3.md`.
 
-**Category-specific H2 templates (DRAFT v1)** for 15 product categories ProSoccer sells live in `context/page-type-playbooks/product-page-playbook.md` 'Category-specific H2 templates'. National-team-jersey template is validated as of UAE v3; remaining 14 categories are DRAFT v1 patterns to be validated through real PDP optimization work.
+**Category-specific H2 templates** for 15 product categories ProSoccer sells live in `context/page-type-playbooks/product-page-playbook.md` 'Category-specific H2 templates'. National-team-jersey template is CANONICAL, four-time validated within the 2026 World Cup cycle (UAE 2026 Home + Mexico 2026 Home / Away / Third per commits `e56a7d6`, `85dd1f0`, `f2c2c34`); remaining categories are at various validation stages from DRAFT v1 to CANONICAL per the playbook.
 
 ## Brief content requirements (data-backed)
 

@@ -380,7 +380,7 @@ When ORIN requests a per-page contribution for a consolidated brief, SCRIBE prod
 
 Worked example for all five rules: UAE 2026 PDP v3 brief at `deliverables/page-optimizations/2026-05-26_session-01/uae-2026-home-stadium_brief-v3.md`.
 
-**Category-specific H2 templates (DRAFT v1)** for 15 product categories ProSoccer sells live in `context/page-type-playbooks/product-page-playbook.md` 'Category-specific H2 templates'. The national-team-jersey template is validated as of UAE v3; remaining 14 categories are DRAFT v1 patterns to be validated through real PDP optimization work.
+**Category-specific H2 templates** for 15 product categories ProSoccer sells live in `context/page-type-playbooks/product-page-playbook.md` 'Category-specific H2 templates'. The national-team-jersey template is CANONICAL, four-time validated within the 2026 World Cup cycle (UAE 2026 Home + Mexico 2026 Home / Away / Third per commits `e56a7d6`, `85dd1f0`, `f2c2c34`); remaining categories are at various validation stages from DRAFT v1 to CANONICAL per the playbook.
 
 **Target:** the visible brief fits on one Google Doc page. Round 2 simplification (2026-05-26) strips Current state, Source of record, Alternatives considered, External links field on PDPs, intent percentages, trend data, and rejection reasoning from the visible surface. Mike references Shopify admin directly for current state during implementation; current state is no longer captured in the visible brief or in the workforce-internal briefing.
 

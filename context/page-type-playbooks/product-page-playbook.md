@@ -488,12 +488,21 @@ Notes that apply to all categories:
 - Number of H2s varies by category (4 for most, 5 for soccer cleats, sometimes 3 for simpler accessories).
 - Worked example 1 (Premium kit jersey) and Worked example 2 (Performance cleat) earlier in this playbook are full worked examples for the National Team Jersey and Soccer Cleats categories; the templates below extract and generalize the patterns to cover ProSoccer's full catalog.
 
-### 1. National team jersey (validated: UAE v3, 2026-05-26)
+### 1. National team jersey (CANONICAL, four-time validated within 2026 World Cup cycle)
 
 - H2 1: Brand + design + federation identity ("The [Year] [Country] Soccer Jersey by [Brand]")
 - H2 2: Edition tier comparison (Stadium vs Authentic, where applicable)
 - H2 3: Fit and sizing
 - H2 4: What you're buying into (cultural + tournament context + future catalyst)
+
+**Validation history:**
+
+- UAE 2026 Home Stadium Jersey v3 (foundational, 2026-05-26 era at `deliverables/page-optimizations/2026-05-26_session-01/uae-2026-home-stadium_brief-v3.md`): template structure proven against a smaller-federation kit with federation-identity focus.
+- Mexico 2026 Home Stadium SS Jersey (commit `e56a7d6`, 2026-05-28): template validated against a co-host federation with Aztec heritage design depth + Estadio Azteca opener narrative.
+- Mexico 2026 Away Stadium SS Jersey (commit `85dd1f0`, 2026-05-28): template validated with travel / road-match angle on H2 4 and pre-Hispanic Mesoamerican design depth on H2 1.
+- Mexico 2026 Third Stadium SS Jersey (commit `f2c2c34`, 2026-05-28): template validated with special-edition / wardrobe-completionist angle on H2 4 and Adidas x Someone Somewhere artisan collaboration depth on H2 1.
+
+Promotion to CANONICAL on 2026-05-28 after four-time validation across two federations, two design philosophies (UAE classic federation identity, Mexico co-host + Aztec heritage narrative), and three kit types within one team (Home / Away / Third differentiation). Template architecture proven stable; no refinements surfaced through the Mexico kit set production. Promotion documents validation breadth for future workforce session confidence; template structure unchanged.
 
 ### 2. Club jersey (CANONICAL as of 2026-05-26)
 
