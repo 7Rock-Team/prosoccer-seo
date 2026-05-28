@@ -271,7 +271,13 @@ Detection method (Firecrawl scrape each candidate URL with page-type-specific si
 
 Surface stock or population status alongside each candidate in the candidate-selection report to Mike. Default recommendations to Mike are eligible candidates only. Ineligible candidates surface informationally with the eligibility issue flagged; the recommendation language reads "SKIP unless strategic reason" rather than absent.
 
-Strategic exception path: closing-window optimization (older sold-out PDPs with retained collector or completist value) or seasonal empty collections may be optimized intentionally; Mike makes the call explicitly in the candidate decision and the override is documented in the brief production decision. Documented exception examples (both 2026-05-26 production): Liverpool 2024-25 Nike Away Jersey v2 (commit b7159dc) and adidas Predator Accuracy.1 FG Crazyrush Pack v2 (commit d52e56f), both sold out and optimized intentionally per closing-window framing.
+Strategic exception paths for sold-out PDPs (expanded 2026-05-28 to two PDP exception types):
+
+- **Closing-window optimization** for end-of-life, closeout, or discontinued-generation inventory with retained collector or completist value. Restock not expected.
+- **Pre-tournament demand spike optimization** for current-cycle inventory with imminent tournament or seasonal demand event (typically 60 days or less) and expected restock during or after the event window. SEO equity lead time matters; the page must include strong internal linking to the relevant collection so customers landing on a sold-out PDP can navigate to in-stock alternates.
+- **Seasonal empty collections** optimized ahead of product drops (collections-specific exception).
+
+When surfacing sold-out candidates to Mike, ORIN classifies which exception type may apply based on product cycle status (current vs older) and demand event proximity, surfaces the recommendation alongside the eligibility-fail finding, and lets Mike make the call. Override requires explicit Mike approval documented in the brief production decision. Documented exception examples: Liverpool 2024-25 Nike Away Jersey v2 (commit b7159dc, closing-window), adidas Predator Accuracy.1 FG Crazyrush Pack v2 (commit d52e56f, closing-window), Mexico 2026 kit set Stadium SS Home/Away/Third (2026-05-28 codification, pre-tournament demand spike, 2026 World Cup co-host kickoff June 11 makes this the first documented pre-tournament demand spike override). Decision-logic summary: `context/page-type-playbooks/product-page-playbook.md` 'Decision logic for strategic exceptions'.
 
 Cross-references:
 

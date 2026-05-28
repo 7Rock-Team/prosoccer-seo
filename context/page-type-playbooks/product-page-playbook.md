@@ -75,6 +75,32 @@ Documented examples of the exception (both 2026-05-26 production, predating the 
 
 New optimizations going forward default to in-stock candidates; closing-window overrides require explicit strategic reasoning.
 
+### Strategic exception: pre-tournament demand spike optimization
+
+_Added 2026-05-28 from production-reality reality check. Mexico 2026 kit set Stadium SS Home/Away/Third all sold out on Day 1 of 10/day rhythm with the 2026 World Cup opener about 14 days away; structurally a different exception type than closing-window._
+
+Pre-tournament demand spike is a valid strategic exception for sold-out current-cycle PDPs IF:
+
+- Product is current-cycle inventory (not end-of-life, not closeout). This is what distinguishes the exception from closing-window.
+- A major tournament or seasonal demand event is imminent (typically within 30 to 60 days). Examples: World Cup, Euros, Copa América, AFCON, Champions League final, major club season opener, major league cup final.
+- Restock is expected during or after the demand event window. Manufacturer typically restocks current-cycle inventory for tournament periods; pre-tournament sold-out is usually demand-driven inventory turnover, not discontinuation.
+- SEO equity lead time matters. Optimizing now means rankings improve before traffic peaks at the demand event; sold-out copy that ranks at tournament kickoff captures the demand surge.
+- Page must include strong internal linking to the relevant collection page so customers landing on a sold-out PDP can navigate to in-stock alternates (different tier, sleeve length, women's, youth, kids). The collection-page internal link is load-bearing for this exception; without it, the sold-out PDP is a dead end for the buyer.
+
+Default behavior: SKIP sold-out current-cycle PDPs unless the criteria above are met. Override requires explicit strategic reasoning documented in the brief production decision.
+
+Documented example: Mexico 2026 kit set (Home `/products/adidas-2026-mexico-mens-stadium-home-soccer-jersey`, Away `/products/adidas-2026-mexico-mens-stadium-away-soccer-jersey`, Third `/products/adidas-2026-mexico-mens-stadium-third-soccer-jersey`), all Stadium SS, all sold out on 2026-05-28 with 2026 World Cup opener June 11 (about 14 days out). Mexico is co-host with automatic qualification (no qualifying campaign required). Optimized under pre-tournament demand spike exception with `/collections/mexico` internal link strategy to capture buyers needing in-stock alternates (Authentic SS, Stadium LS, Authentic LS, Women's Stadium, Youth Stadium, GK Stadium). First documented pre-tournament demand spike override; codified with this same commit.
+
+### Decision logic for strategic exceptions
+
+Sold-out PDP detected at eligibility verification, check exception type:
+
+1. **End-of-life, closeout, or discontinued generation** with retained collector or completist value, restock not expected: closing-window exception. Examples: Liverpool 2024-25 Nike Away Jersey v2 (b7159dc), adidas Predator Accuracy.1 FG Crazyrush Pack v2 (d52e56f).
+2. **Current-cycle inventory** with imminent tournament or seasonal demand event (typically 60 days or less), restock expected: pre-tournament demand spike exception. Example: Mexico 2026 kit set on 2026-05-28 with WC opener June 11.
+3. **Neither applies**: DEFAULT BLOCKER. Skip the PDP, or swap to an alternate variant (different tier, sleeve length, women's, youth) that is in stock.
+
+Each exception override requires explicit strategic reasoning documented in the brief production decision. The decision is Mike's, not SCRIBE's or ORIN's; the agents surface the exception type as a recommendation, Mike approves or redirects.
+
 ### Cross-references
 
 - ORIN candidate-selection workflow: `.claude/agents/master-strategist/agent.md` Section 9 'Candidate eligibility verification at Phase 1 surfacing'.

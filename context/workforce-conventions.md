@@ -352,7 +352,13 @@ Pre-flight pattern, in order:
 
 Eligibility detection method, default blocker behavior, and strategic exception path are codified in the page-type playbooks. SCRIBE applies the playbook eligibility section as Step 0.5 in `.claude/agents/on-page-seo/agent.md` Section 2. ORIN applies eligibility at the Phase 1 candidate-selection surfacing step in `.claude/agents/master-strategist/agent.md` Section 9.
 
-Strategic exception examples (both 2026-05-26 production, predating the codification): Liverpool 2024-25 Nike Away Jersey v2 (commit b7159dc) and adidas Predator Accuracy.1 FG Crazyrush Pack v2 (commit d52e56f). Both sold out, both optimized intentionally per closing-window framing. New optimizations going forward default to eligible candidates; overrides require explicit strategic reasoning documented in the session briefing.
+Strategic exception types codified across the page-type playbooks (expanded 2026-05-28 to two PDP exception types after the Mexico kit set Day 1 production-reality check surfaced a structurally different sold-out pattern):
+
+- **Closing-window optimization** (PDPs). End-of-life, closeout, or discontinued-generation inventory with retained collector or completist value. Restock not expected. Documented examples: Liverpool 2024-25 Nike Away Jersey v2 (commit b7159dc) and adidas Predator Accuracy.1 FG Crazyrush Pack v2 (commit d52e56f), both 2026-05-26 production predating the codification.
+- **Pre-tournament demand spike optimization** (PDPs). Current-cycle inventory sold out with imminent tournament or seasonal demand event (typically 60 days or less) and expected restock during or after the event window. SEO equity lead time matters; the page must include strong internal linking to the relevant collection so customers landing on a sold-out PDP can navigate to in-stock alternates. Documented example: Mexico 2026 kit set Stadium SS Home/Away/Third (2026-05-28 codification), 2026 World Cup co-host kickoff June 11, about 14 days out, first documented pre-tournament demand spike override.
+- **Seasonal empty collections**. Collection page intentionally empty ahead of product drop or between cycles.
+
+All overrides require explicit Mike approval with the exception type named and strategic reasoning documented in the session briefing or brief production decision. New optimizations going forward default to eligible candidates. Decision-logic summary for choosing between closing-window vs pre-tournament demand spike vs default blocker lives in `context/page-type-playbooks/product-page-playbook.md` 'Decision logic for strategic exceptions'.
 
 Cross-references:
 
