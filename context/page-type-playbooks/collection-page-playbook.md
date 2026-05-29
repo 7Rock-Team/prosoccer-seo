@@ -27,7 +27,11 @@ The following are in scope and the body copy must serve them:
 - Topic-specific information the avatar's super-fans want to learn or be reminded of. Carlos knows the 2026 World Cup hosts. He may not remember the exact group draw or the kit-supplier history. Useful detail for a super-fan beats generic detail for a casual buyer.
 - Product range explanation through the topic lens. "The 2026 home kit, the away kit, and the third drop before kickoff" is product-range explanation through the El Tri lens. "We carry a wide range of Mexico jerseys in many sizes" is product-range explanation through the store lens. The first belongs on the page; the second does not.
 
-## Eligibility verification (mandatory pre-Phase-1)
+## Eligibility verification (Mike-pre-vetted at URL submission, updated 2026-05-29)
+
+_Original codification 2026-05-27 placed eligibility detection in the agent layer via Firecrawl scrape. 2026-05-29 diagnostic on the Mexico Stadium SS PDP kit set confirmed storefront-rendered signals are systematically unreliable (see `context/workforce-conventions.md` 'Eligibility verification (Mike-pre-vetted at URL submission)' for full architectural learning). For collection pages: Mike pre-vetts in Shopify admin (collection populated, visible / indexed, sales channel active, sitemap presence per `deliverables/tracking/sitemap-state.md`) before submitting the URL. Agents skip Firecrawl-based detection. URLs supplied by Mike are assumed eligible unless Mike explicitly flags a strategic exception (e.g., seasonal empty collection). Brief audit trail captures eligibility status as "Mike-verified populated and visible at submission, [YYYY-MM-DD]" or "Mike-flagged [exception type] at submission, [YYYY-MM-DD]: [reasoning]." Strategic exception subsection (seasonal empty) below preserved as architectural concept; trigger is explicit Mike flag, not agent detection._
+
+## Eligibility verification (legacy detection content, superseded 2026-05-29)
 
 _Added 2026-05-27. Eligibility check is a gate, not an optimization step. Every collection-page candidate proposed for optimization must pass eligibility before any brief production begins. Optimization of empty, hidden, or redirecting collections is wasted SEO effort: the improved page can't carry traffic to product._
 

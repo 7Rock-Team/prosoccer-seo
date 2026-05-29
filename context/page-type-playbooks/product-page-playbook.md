@@ -37,36 +37,63 @@ PDP brief production runs at one of three PDP-applicable tiers (Tier 2B is colle
 
 Cross-references: `context/workforce-conventions.md` 'Tiered workflow architecture (cross-cutting pattern)' (workforce-wide pattern + validation milestones), `.claude/agents/master-strategist/agent.md` Section 9 'Tier classification at candidate dispatch' (ORIN classification logic), `.claude/agents/on-page-seo/agent.md` Section 9 'Tiered workflow variants' (SCRIBE's per-tier scope adjustment).
 
-## Eligibility verification (mandatory pre-Phase-1)
+## Eligibility verification (Mike-pre-vetted at URL submission, updated 2026-05-29)
 
-_Added 2026-05-27. Eligibility check is a gate, not an optimization step. Every PDP candidate proposed for optimization must pass eligibility before any brief production begins. Optimization of sold-out or hidden PDPs is wasted SEO effort: the improved page can't convert._
+_Original codification 2026-05-27 placed eligibility detection in the agent layer via Firecrawl scrape. 2026-05-29 diagnostic on the Mexico Stadium SS kit set confirmed storefront-rendered signals (schema.org availability, Add-to-cart button state, variant selector) are systematically unreliable: three different schema.org value formats across three pages of the same theme, dual-schema injection from apps, persistent variant selector lies on Home and Third (in-stock per Shopify admin, sold-out per storefront render). The "Available in stock (X)" inventory hint was the only reliable signal and had been dismissed as a JSON-extraction artifact. Rather than refine detection rules against an architecturally unreliable rendering layer, eligibility responsibility moves to the human-in-the-loop layer._
 
-### In-stock requirement
+### Eligibility responsibility: Mike at URL submission
 
-The PDP must have at least one variant available for purchase. Detection method: Firecrawl scrape the candidate URL and extract stock status from the rendered page.
+Mike verifies eligibility in Shopify admin (inventory adjustment history, product visibility settings, sales channel status, sitemap presence) before submitting a URL to ORIN or SCRIBE for optimization. URLs supplied by Mike are assumed eligible for normal optimization unless Mike explicitly flags a strategic exception. Agents skip Firecrawl-based eligibility detection.
 
-Stock indicators:
+Brief audit trail captures eligibility status verbatim in the strategic context section (or equivalent):
 
-- "Add to cart" button present and active = in stock
-- "Sold out" button, "Unavailable" label, or disabled-state styling = out of stock
-- Variant selectors with all variants marked unavailable = effectively sold out
-- Schema.org `Offer` with `availability` field if exposed in markup = authoritative when present
+- Normal eligible: "Mike-verified in-stock at submission, [YYYY-MM-DD] (Shopify admin)."
+- Strategic exception applied: "Mike-flagged [exception type] at submission, [YYYY-MM-DD]: [reasoning]."
 
-### Visibility requirement
+### Strategic exception: closing-window optimization
 
-The PDP must be discoverable through normal customer browsing. Detection method is partly automated, partly deferred:
+_Trigger updated 2026-05-29: applies when Mike explicitly flags closing-window at URL submission, not when an agent auto-detects sold-out._
 
-- Automated check now: Firecrawl scrape returns 200 OK with real product content (not a soft-404, not an auto-redirect to the collection or homepage).
-- Deferred check (full hidden-product detection): Active-but-hidden products carry pre-launch tags, search exclusions, sitemap exclusions, or theme settings that strip them from collection grids and search. Reliable detection requires sitemap state cross-reference (`scripts/_build_sitemap_state.py`) plus collection-page presence verification plus Shopify admin tag review. Defer to a focused architectural workstream once 10/day production reveals the frequency of this issue. For now: if a candidate scrape shows in-stock indicators but feels hidden, verify in Shopify admin before optimizing.
+Closing-window narrative (older generations, closeout inventory, end-of-cycle kits) is a valid strategic exception for sold-out PDPs IF:
 
-### Default blocker behavior
+- The page has retained value for collectors, completists, or loyalists (e.g., a championship-winning kit, a signature cleat generation, a final season under a kit supplier)
+- SEO equity from optimization persists for any restock potential, organic ranking benefit, or topical authority that flows to sibling pages
+- Mike makes the strategic call explicitly at URL submission; the override is documented in the brief production decision
 
-If eligibility verification fails:
+Documented examples of the exception (both 2026-05-26 production, predating the codification):
 
-- ORIN candidate-selection phase: surface the ineligible candidate informationally with the eligibility issue flagged; default recommendations stay limited to eligible candidates.
-- SCRIBE Phase 1 capture: detect as BLOCKER and hold at gate. Mike decides: skip the PDP, override with strategic reason, or replace with sibling product (Authentic tier if Stadium sold out, different colorway, different sleeve length).
+- Liverpool 2024-25 Nike Away Jersey v2 (commit b7159dc): sold out, optimized intentionally per closing-window framing on the Nike-to-adidas brand transition.
+- adidas Predator Accuracy.1 FG Crazyrush Pack v2 (commit d52e56f): sold out, optimized intentionally per closing-window framing on the two-generation gap to the Predator 26.
 
-Don't silently optimize an ineligible PDP. The blocker is the discipline.
+### Strategic exception: pre-tournament demand spike optimization
+
+_Trigger updated 2026-05-29: applies when Mike explicitly flags pre-tournament demand spike at URL submission, not when an agent auto-detects sold-out current-cycle inventory. The Mexico Stadium SS kit set application (2026-05-28) was triggered by false-positive eligibility detection and has been stripped from those briefs in a fix-forward commit; the exception type itself remains conceptually valid for legitimate future Mike-flagged cases._
+
+Pre-tournament demand spike is a valid strategic exception for sold-out current-cycle PDPs IF:
+
+- Product is current-cycle inventory (not end-of-life, not closeout). This is what distinguishes the exception from closing-window.
+- A major tournament or seasonal demand event is imminent (typically within 30 to 60 days). Examples: World Cup, Euros, Copa América, AFCON, Champions League final, major club season opener, major league cup final.
+- Restock is expected during or after the demand event window. Manufacturer typically restocks current-cycle inventory for tournament periods; pre-tournament sold-out is usually demand-driven inventory turnover, not discontinuation.
+- SEO equity lead time matters. Optimizing now means rankings improve before traffic peaks at the demand event; sold-out copy that ranks at tournament kickoff captures the demand surge.
+- Page must include strong internal linking to the relevant collection page so customers landing on a sold-out PDP can navigate to in-stock alternates (different tier, sleeve length, women's, youth, kids). The collection-page internal link is load-bearing for this exception; without it, the sold-out PDP is a dead end for the buyer.
+
+Override requires Mike's explicit flag at URL submission with the strategic reasoning logged.
+
+### Decision logic for strategic exceptions
+
+Sold-out PDP flagged by Mike at URL submission, check exception type:
+
+1. **End-of-life, closeout, or discontinued generation** with retained collector or completist value, restock not expected: closing-window exception. Examples: Liverpool 2024-25 Nike Away Jersey v2 (b7159dc), adidas Predator Accuracy.1 FG Crazyrush Pack v2 (d52e56f).
+2. **Current-cycle inventory** with imminent tournament or seasonal demand event (typically 60 days or less), restock expected: pre-tournament demand spike exception.
+3. **Neither applies, and Mike still wants the page optimized**: Mike documents the reasoning; ORIN proceeds; brief audit trail captures the reasoning.
+
+Each exception override requires explicit strategic reasoning documented in the brief production decision. The decision is Mike's; agents document, they do not classify.
+
+### Cross-references
+
+- ORIN candidate-handling workflow: `.claude/agents/master-strategist/agent.md` Section 9 'Candidate eligibility verification at Phase 1 surfacing'.
+- SCRIBE pre-Phase-1 audit-trail step: `.claude/agents/on-page-seo/agent.md` Section 2 Step 0.5 'Eligibility verification audit trail (Mike-pre-vetted)'.
+- Workforce convention + architectural learning: `context/workforce-conventions.md` 'Eligibility verification (Mike-pre-vetted at URL submission)'.
 
 ### Strategic exception: closing-window optimization
 

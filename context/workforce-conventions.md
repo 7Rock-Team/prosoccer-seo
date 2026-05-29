@@ -340,7 +340,38 @@ The SCRIBE Section 2 Step 0 pre-flight tool verification protocol (canonical pat
 
 This catches both under-permission (configuration didn't take effect, restart was skipped, server name typo, OAuth state missing) and over-permission (sub-agent inherited more than scoped) before they corrupt deliverable audit trails.
 
-### Eligibility verification as logical extension of Step 0 (added 2026-05-27)
+### Eligibility verification (Mike-pre-vetted at URL submission, updated 2026-05-29)
+
+**Architectural pivot 2026-05-29.** Eligibility responsibility shifted from agent-detected (Firecrawl scrape) to Mike-pre-vetted (Shopify admin) after diagnostic on the Mexico Stadium SS kit set confirmed storefront-rendered signals are systematically unreliable.
+
+**Architectural learning documented (2026-05-29 diagnostic findings):**
+
+- Three different schema.org Offer.availability value formats across three pages of the same Hyper theme on prosoccer.com: bare string `InStock` on Home, full URL `http://schema.org/InStock` on Away, and human-readable `Out of stock` on Third. No internal consistency; format varies per page.
+- Dual-schema injection confirmed on Mexico Away (`schema_offers_count: 2`): two competing Offer entries in JSON-LD, presumably one from Shopify core and one from an app (Rebuy, Klaviyo back-in-stock, pre-order/low-stock apps are likely candidates).
+- Persistent variant selector "lies" on Home and Third: variant selector shows all sizes sold-out and Add-to-cart button disabled, while schema says InStock and the inventory hint shows real units available (31 on Home, 4 on Third). This is not transient cache; it reproduced today on fresh scrape (maxAge=0).
+- The `Available in stock (X)` inventory hint was the only reliable signal across all three pages, accurately matching Mike's Shopify admin observation of stable inventory. This signal had been dismissed on 2026-05-28 as a JSON-extraction artifact because schema + button + variants all contradicted it.
+- Mexico kit set application of the pre-tournament demand spike strategic exception (2026-05-28) was triggered by the false-positive triple-signal and baked false reasoning into all three brief deliverables. Fix-forward commit strips that strategic context while preserving substantive optimization content.
+
+**Conclusion: storefront-rendered signals cannot be trusted for eligibility decisions.** Refining detection rules against an architecturally unreliable rendering layer (apps injecting competing schema, theme bugs in variant selector, format inconsistency across pages) is a losing game. Admin remains the source of truth. Human-in-the-loop at URL submission is the most reliable bridge between admin truth and agent workflow.
+
+**Pre-flight pattern, updated:**
+
+1. Step 0: tool exposure check (unchanged; verifies MCP servers callable this session).
+2. Step 0.5: eligibility audit-trail step (NEW responsibility): URLs are assumed eligible because Mike pre-vetted in admin before submission; SCRIBE captures the eligibility status verbatim in the brief's strategic context section, including any Mike-flagged strategic exception with reasoning. Agents skip Firecrawl-based detection.
+3. Workflow begins (Steps 1 through 11 in SCRIBE's startup protocol; delegation sequence in ORIN's Section 9).
+
+**Strategic exceptions preserved as concepts:** closing-window optimization (sold-out end-of-life / closeout / discontinued-generation pages with retained collector value, no restock expected) and pre-tournament demand spike optimization (sold-out current-cycle pages with imminent tournament and expected restock) remain valid as architectural concepts. Both are now triggered by explicit Mike flag at URL submission, not by agent auto-detection. Codified in `context/page-type-playbooks/product-page-playbook.md` 'Strategic exception' subsections; for collections, seasonal-empty exception preserved similarly.
+
+**Documented exception examples preserved:** Liverpool 2024-25 Nike Away Jersey v2 (commit b7159dc, closing-window) and adidas Predator Accuracy.1 FG Crazyrush Pack v2 (commit d52e56f, closing-window). These were appropriately optimized under closing-window framing per the pages' real end-of-life status and remain canonical examples.
+
+Cross-references:
+
+- `context/page-type-playbooks/product-page-playbook.md` 'Eligibility verification (Mike-pre-vetted at URL submission)' (canonical PDP version)
+- `context/page-type-playbooks/collection-page-playbook.md` 'Eligibility verification (Mike-pre-vetted at URL submission)' (collection version)
+- `.claude/agents/on-page-seo/agent.md` Section 2 Step 0.5 (audit-trail capture)
+- `.claude/agents/master-strategist/agent.md` Section 9 'Candidate eligibility verification at Phase 1 surfacing' (ORIN candidate-handling)
+
+### Eligibility verification as logical extension of Step 0 (added 2026-05-27, superseded 2026-05-29)
 
 Step 0 (tool exposure verification) and eligibility verification (target-page status verification) are two pre-flight gates that share the same architectural pattern: confirm operational preconditions before substantive work begins.
 

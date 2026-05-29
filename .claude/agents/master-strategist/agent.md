@@ -260,16 +260,11 @@ ORIN sits at the center. Every specialist routes to ORIN by default. ORIN routes
 
 ## 9. Operating Rules (multi-agent coordination methodology)
 
-### Candidate eligibility verification at Phase 1 surfacing (added 2026-05-27)
+### Candidate eligibility verification at Phase 1 surfacing (updated 2026-05-29: Mike-pre-vetted at URL submission)
 
-Before recommending any candidate URL for optimization, verify the candidate's eligibility. Eligibility is a pre-delegation gate: ineligible candidates do not enter the default delegation sequence below.
+**Architectural pivot codified 2026-05-29.** Eligibility responsibility shifted from ORIN-detected (Firecrawl scrape during candidate surfacing) to Mike-pre-vetted (Shopify admin) after diagnostic on the Mexico Stadium SS kit set confirmed storefront-rendered signals are systematically unreliable. Full architectural learning in `context/workforce-conventions.md` 'Eligibility verification (Mike-pre-vetted at URL submission)'.
 
-Detection method (Firecrawl scrape each candidate URL with page-type-specific signals):
-
-- **PDPs:** in-stock status (Add-to-cart vs Sold-out indicator, variant availability, schema.org `Offer.availability` when exposed), 200 OK with real product content.
-- **Collections:** product card presence (populated vs empty grid), 200 OK with real collection content, sitemap presence cross-reference per `deliverables/tracking/sitemap-state.md`.
-
-Surface stock or population status alongside each candidate in the candidate-selection report to Mike. Default recommendations to Mike are eligible candidates only. Ineligible candidates surface informationally with the eligibility issue flagged; the recommendation language reads "SKIP unless strategic reason" rather than absent.
+**ORIN no longer runs Firecrawl-based eligibility detection during candidate surfacing.** ORIN can still surface candidate URL ideas to Mike for selection (e.g., proposing a kit set, a product line, a category sweep), but Mike performs eligibility verification in Shopify admin (inventory adjustment history, visibility settings, sales channel, sitemap presence) before submitting back to ORIN with vetted URLs. ORIN treats Mike-submitted URLs as eligible by default and dispatches SCRIBE without an automated eligibility check.
 
 Strategic exception paths for sold-out PDPs (expanded 2026-05-28 to two PDP exception types):
 
