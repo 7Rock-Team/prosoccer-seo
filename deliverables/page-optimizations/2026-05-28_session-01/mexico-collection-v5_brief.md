@@ -6,7 +6,7 @@
 
 ## Strategic context
 
-Co-host kit cycle, 14 days from the June 11 opener at Estadio Azteca. The three Mexico Stadium SS Men's PDPs shipped today (Home `e56a7d6`, Away `85dd1f0`, Third `f2c2c34`) all link here as the buyer-recovery surface for sold-out variants. This page sits at the center of the kit-set ecosystem and the broader Mexico WC26 catalog (103 live products across Stadium / Authentic / LS / Women's / Youth / Kids' / accessories).
+Co-host kit cycle, 14 days from the June 11 opener at Estadio Azteca (at production submission 2026-05-28). Eligibility status: Mike-verified live + in-stock at production submission, 2026-05-28. Shopify admin diagnostic 2026-05-29 confirmed three Mexico Stadium SS Men's PDPs (Home `e56a7d6`, Away `85dd1f0`, Third `f2c2c34`) have stable inventory throughout production window. These remain the strongest internal link targets for the collection page given the kit-set narrative continuity (independent of stock state). This page sits at the center of the kit-set ecosystem and the broader Mexico WC26 catalog (103 live products across Stadium / Authentic / LS / Women's / Youth / Kids' / accessories).
 
 ## Keyword research
 
