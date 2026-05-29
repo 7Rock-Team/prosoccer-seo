@@ -6,7 +6,7 @@
 
 ## Strategic context
 
-Eligibility verification failed: schema-level OutOfStock, all 7 size variants (S, M, L, XL, 2XL, 3XL, 4XL) marked "Variant sold out or unavailable" per Firecrawl scrape 2026-05-28. Pre-tournament demand spike exception applied per commit `120a177` (codified 2026-05-28). Mexico is current-cycle co-host inventory, 2026 World Cup opener is June 11 at Estadio Azteca (about 14 days out), restock expected during tournament window, SEO equity lead time matters to capture pre-event traffic. `/collections/mexico` is anchored prominently in body copy to redirect buyers to in-stock alternates (Authentic SS $149.99, Stadium LS, Authentic LS, Women's Stadium, Youth Stadium, GK Stadium all live per ORIN's 2026-05-27 Phase 1 mapping). Mike approved the exception override at Day 1 Step 0 gate.
+Mike-verified in-stock at production submission, 2026-05-28 (Shopify admin adjustment history confirms stable inventory through this date). Optimization proceeds as normal in-stock PDP; no strategic exception applied. Audit-trail note: yesterday's brief originally cited the pre-tournament demand spike strategic exception (commit `120a177`) based on Firecrawl-detected sold-out signals, which the 2026-05-29 diagnostic (commit `5137d2f`) confirmed were false positives caused by unreliable storefront rendering (schema injection, variant selector lies). The strategic exception context has been stripped via this fix-forward commit; all substantive optimization content (keyword research, H2 framework, body copy, internal links, fact verification, currency check, brand IP compliance, sensitivity check, voice check) preserved as-is.
 
 ## Keyword research
 
