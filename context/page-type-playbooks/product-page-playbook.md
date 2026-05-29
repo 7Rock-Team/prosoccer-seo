@@ -27,6 +27,10 @@ The following are in scope and the body copy must serve them:
 - The avatar's emotional context for ownership. What does wearing or using this product mean to the avatar? Carlos buying the 2026 El Tri home authentic feels something different from Tyler buying the same kit. Same product, different emotional anchor.
 - Fit, sizing, and care information where relevant. Product copy is a place where avatar pain frames map directly to copy that closes the sale. Jennifer's "Wide Foot Nightmare" frame, Carlos's "is this real or fake" frame, Tyler's "will it actually run faster than my last pair" frame.
 
+## Production workflow note (added 2026-05-29)
+
+PDP production runs under ORIN's batch parallel dispatch + single daily batch commit pattern as of 2026-05-29. Mike submits up to a 10-URL batch (eligibility pre-vetted in Shopify admin); ORIN auto-classifies tier per URL; SCRIBE instances run in parallel; ORIN batch-commits all briefs as a single daily commit; single push; Mike reviews at end-of-batch. Per-brief Mike gate review and per-brief commit cycle are replaced; all quality discipline per brief stays intact. Full pattern: `context/workforce-conventions.md` 'Batch parallel dispatch + single daily batch commit'. ORIN procedural detail: `.claude/agents/master-strategist/agent.md` Section 9 'Batch parallel dispatch and single daily batch commit'.
+
 ## Tiered workflow architecture for PDP optimization (added 2026-05-28)
 
 PDP brief production runs at one of three PDP-applicable tiers (Tier 2B is collection-only and lives in `context/page-type-playbooks/collection-page-playbook.md`). Tier is named at dispatch by ORIN; SCRIBE adapts scope accordingly. Quality discipline (voice check, 11 gates including Gate 12 keyword distribution, brand IP, year-specificity, eligibility verification, keyword distribution) preserved universally.

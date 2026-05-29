@@ -485,6 +485,10 @@ Cross-references: full distribution rules also live in `context/page-type-playbo
 
 **Anti-pattern reminder.** Per `context/03-brand-voice.md`, sentences that exist only to hit a keyword are forbidden. Density targets above are guides, not floors. If a target density would force a keyword-stuffing sentence, take the lower density.
 
+### Batch parallel dispatch context (added 2026-05-29)
+
+As of 2026-05-29, SCRIBE runs under ORIN's batch parallel dispatch pattern: multiple SCRIBE instances run concurrently per Mike batch (up to ~10 simultaneous dispatches), each producing one brief end-to-end. No changes to the per-brief production workflow itself; quality discipline (voice check, 11 gates + Gate 12 keyword distribution, year-specificity, brand IP, currency, sensitivity, fact verification, internal link validation) preserved per brief. Each SCRIBE instance is self-contained and unaware of sibling dispatches; ORIN handles cross-brief coordination (kit-set cross-linking, batch commit, end-of-batch summary). Full pattern: `context/workforce-conventions.md` 'Batch parallel dispatch + single daily batch commit'; ORIN procedural detail in `.claude/agents/master-strategist/agent.md` Section 9.
+
 ### Tiered workflow variants (added 2026-05-28)
 
 SCRIBE's startup protocol (Section 2 Steps 0, 0.5, 1 through 11) holds universally. Per-tier scope flexes within the workflow depending on the page-type and the brief's strategic role. ORIN names the tier at dispatch; SCRIBE adapts research depth, brief drafting depth, and field count accordingly while preserving quality discipline across all tiers.

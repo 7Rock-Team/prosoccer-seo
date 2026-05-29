@@ -398,6 +398,20 @@ Cross-references:
 - `.claude/agents/on-page-seo/agent.md` Section 2 Step 0.5
 - `.claude/agents/master-strategist/agent.md` Section 9 'Candidate eligibility verification at Phase 1 surfacing'
 
+### Batch parallel dispatch + single daily batch commit (cross-cutting pattern, added 2026-05-29)
+
+Production workflow runs as batch parallel dispatch with single daily batch commit per Mike's 2026-05-29 operational decision. Mike submits up to a 10-URL batch (eligibility pre-vetted in Shopify admin per the `Eligibility verification (Mike-pre-vetted at URL submission)` pattern). ORIN auto-classifies tier per URL (Tier 1 / 2A / 2B) and dispatches SCRIBE in parallel for all URLs concurrent via simultaneous Agent tool calls in a single message. Each SCRIBE instance runs the full per-tier discipline (research depth, brief drafting depth, field count) with all quality gates intact. After all briefs return, ORIN runs trust-but-verify per brief (read visible brief, independent voice check on both files, confirm gates pass) and then batch-commits all visible briefs + all workforce briefings + any follow-up files as a single atomic commit with comprehensive batch message. Single push.
+
+**Speed target.** 10-URL mixed-tier batch completes in ~25-45 min wall clock vs ~3-4 hours sequential. The slowest individual brief in the batch sets the wall-clock floor; Firecrawl / DataForSEO / Tavily infrastructure response times are the secondary constraint.
+
+**Quality discipline preserved per brief.** Voice check, 11 self-verification gates plus Gate 12 keyword distribution, year-specificity keyword discipline, brand IP compliance, currency check, sensitivity check, fact verification, internal link validation, per-brief workforce briefing audit trail. None of these flex under batch dispatch.
+
+**Operational gates removed (safety gates preserved).** Per-brief Mike gate review replaced by end-of-batch review at single commit gate. Per-brief commit + push cycle replaced by single daily batch commit + push. Tier classification Mike confirmation replaced by ORIN auto-classification with post-batch Mike review of the classifications applied.
+
+**End-of-batch summary.** ORIN surfaces to Mike: brief file paths, tier classifications applied, any quality issues flagged for Mike attention, cost tracking summary, any architectural learnings surfaced through the batch.
+
+Cross-references: `.claude/agents/master-strategist/agent.md` Section 9 'Batch parallel dispatch and single daily batch commit' (ORIN procedural workflow); `.claude/agents/on-page-seo/agent.md` Section 9 'Tiered workflow variants' (per-tier scope SCRIBE applies regardless of dispatch pattern); `context/page-type-playbooks/product-page-playbook.md` 'Tiered workflow architecture for PDP optimization' + `context/page-type-playbooks/collection-page-playbook.md` 'Tier 2B canonical workflow' (per-page-type production workflow now runs under batch parallel dispatch as the production pattern).
+
 ### Tiered workflow architecture (cross-cutting pattern, added 2026-05-28)
 
 Per-page brief production runs at one of four tiers depending on page type and strategic role. Tier is named at dispatch by ORIN (Section 9 'Tier classification at candidate dispatch'); SCRIBE adapts research depth, brief drafting depth, and field count accordingly (Section 9 'Tiered workflow variants'). Quality discipline preserved universally across all tiers.

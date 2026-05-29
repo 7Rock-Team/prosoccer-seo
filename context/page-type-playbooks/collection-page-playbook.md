@@ -75,6 +75,10 @@ Default behavior: SKIP empty collections. Override requires Mike's explicit appr
 - Workforce convention: `context/workforce-conventions.md` 'Eligibility verification as logical extension of Step 0'.
 - Product page eligibility (canonical, closing-window exception examples): `context/page-type-playbooks/product-page-playbook.md` 'Eligibility verification (mandatory pre-Phase-1)'.
 
+## Production workflow note (added 2026-05-29)
+
+Collection-page production runs under ORIN's batch parallel dispatch + single daily batch commit pattern as of 2026-05-29. Mike submits up to a 10-URL batch (eligibility pre-vetted in Shopify admin); ORIN auto-classifies tier (collection pages are Tier 2B); SCRIBE instances run in parallel alongside any PDP work in the same batch; ORIN batch-commits all briefs as a single daily commit; single push; Mike reviews at end-of-batch. Per-brief Mike gate review and per-brief commit cycle are replaced; all Tier 2B quality discipline stays intact. Full pattern: `context/workforce-conventions.md` 'Batch parallel dispatch + single daily batch commit'. ORIN procedural detail: `.claude/agents/master-strategist/agent.md` Section 9 'Batch parallel dispatch and single daily batch commit'.
+
 ## Tier 2B canonical workflow (added 2026-05-28)
 
 Collection-page optimization runs as Tier 2B per the tiered workflow architecture (`context/workforce-conventions.md` 'Tiered workflow architecture (cross-cutting pattern)'). Tier 2B is full agent workflow scoped to six collection-specific fields, target ~15 to 20 min per page.

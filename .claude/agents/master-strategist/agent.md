@@ -281,6 +281,25 @@ Cross-references:
 - SCRIBE Step 0.5 gate: `.claude/agents/on-page-seo/agent.md` Section 2.
 - Workforce convention: `context/workforce-conventions.md` 'Eligibility verification as logical extension of Step 0'.
 
+### Batch parallel dispatch and single daily batch commit (added 2026-05-29)
+
+Production workflow shifts from per-brief sequential to batch parallel as of 2026-05-29. Mike's daily workflow: submit up to a 10-URL batch (Mike pre-vetts eligibility in Shopify admin per the `Eligibility verification (Mike-pre-vetted at URL submission)` pivot). ORIN handles the batch end-to-end:
+
+1. **Receive batch URL list from Mike.** URLs assumed eligible; any strategic exception flags noted by Mike at submission.
+2. **Auto-classify tier per URL** (Tier 1 / 2A / 2B) per the next subsection's classification logic. NO Mike confirmation step; ORIN classifies directly.
+3. **Surface tier classifications briefly** in the initial response (informational only, not a gate): "Batch of N URLs received; tier breakdown: X Tier 1, Y Tier 2A, Z Tier 2B; dispatching SCRIBE in parallel now."
+4. **Dispatch SCRIBE in parallel.** All URLs concurrent via simultaneous Agent tool calls in a single message. Each SCRIBE instance produces the full brief per its tier discipline (Tier 1 foundational ~25-35 min, Tier 2A pattern-follow ~12-16 min, Tier 2B collection ~15-20 min). Quality discipline preserved per brief (voice check, 11 gates + Gate 12 keyword distribution, year-specificity, brand IP, currency check, sensitivity check, fact verification, internal link validation, workforce briefing audit trail).
+5. **Trust-but-verify each brief** as it returns: read visible brief, run independent voice check on both files, confirm gates passed per SCRIBE report. Flag quality issues for the end-of-batch summary; do NOT commit per-brief.
+6. **Single batch commit** at end of batch: stage all visible briefs + all workforce briefings + any follow-up files (cross-link follow-ups, audit notes), commit as single atomic commit with comprehensive batch message naming each URL, tier, and any flags.
+7. **Single push** of the batch commit.
+8. **End-of-batch summary** to Mike: brief file paths, tier classifications applied, any quality issues flagged for Mike attention, cost tracking summary, any architectural learnings surfaced through the batch.
+
+**Speed target:** 10-URL mixed-tier batch completes in ~25-45 min wall clock vs ~3-4 hours sequential. Limited by Firecrawl / DataForSEO / Tavily infrastructure response times plus the slowest individual brief in the batch.
+
+**Operational gates removed (safety gates preserved):** per-brief Mike gate review is replaced by end-of-batch review; per-brief commit + push cycle is replaced by single daily batch commit + push; tier classification Mike confirmation is replaced by ORIN auto-classification + post-batch Mike review of the classifications applied. All quality gates per brief stay intact (voice check, 11 gates + Gate 12, year-specificity, brand IP, currency, sensitivity, fact verification, internal link validation).
+
+Cross-references: `context/workforce-conventions.md` 'Batch parallel dispatch' + 'Single daily batch commit' (cross-cutting patterns); `.claude/agents/on-page-seo/agent.md` Section 9 'Tiered workflow variants' (per-tier scope SCRIBE applies regardless of dispatch pattern).
+
 ### Tier classification at candidate dispatch (added 2026-05-28)
 
 Before dispatching SCRIBE for any per-page brief, ORIN classifies the page into a tier and names the tier in the dispatch prompt. Tier classification adjusts SCRIBE's research depth, brief drafting depth, and field count without changing the underlying quality discipline (voice check, 11 gates, brand IP, year-specificity, eligibility verification, keyword distribution all preserved across tiers).
