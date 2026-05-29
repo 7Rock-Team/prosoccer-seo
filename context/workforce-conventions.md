@@ -367,6 +367,35 @@ Cross-references:
 - `.claude/agents/on-page-seo/agent.md` Section 2 Step 0.5
 - `.claude/agents/master-strategist/agent.md` Section 9 'Candidate eligibility verification at Phase 1 surfacing'
 
+### Tiered workflow architecture (cross-cutting pattern, added 2026-05-28)
+
+Per-page brief production runs at one of four tiers depending on page type and strategic role. Tier is named at dispatch by ORIN (Section 9 'Tier classification at candidate dispatch'); SCRIBE adapts research depth, brief drafting depth, and field count accordingly (Section 9 'Tiered workflow variants'). Quality discipline preserved universally across all tiers.
+
+Tier definitions:
+
+| Tier | Page type | Time target | Scope | Proportion |
+|---|---|---|---|---|
+| Tier 1 | Foundational PDP (template-establishing, hero product, new category first) | ~25 to 35 min | Full SCRIBE workflow: broad Tavily, fresh brief build, all 11 gates | ~5 to 10% of PDPs |
+| Tier 2A | Pattern-follow PDP (follows established CANONICAL template) | ~12 to 16 min | Scoped Tavily (currency only), template-fill drafting | ~70 to 80% of PDPs |
+| Tier 2B | Collection page | ~15 to 20 min | Full workflow scoped to 6 collection-specific fields (Title, Slug, Meta Title, Meta Description, Short Description / hero block, body Description) | All collection pages |
+| Tier 3 | Mike-drafted minimal | ~5 to 10 min | Mike drafts 4 to 6 fields; ORIN runs lightweight QA only | Rare exception |
+
+Universal quality discipline (preserved across all tiers): voice check, 11 self-verification gates (including Gate 12 keyword distribution), brand IP compliance, year-specificity keyword discipline, eligibility verification (Step 0.5), keyword distribution discipline. What flexes per tier: research depth, brief drafting depth, field count.
+
+Validation milestones for canonical templates:
+
+- **National Team Jersey CANONICAL: four-time validated within the 2026 World Cup cycle.** Validation set: UAE 2026 Home Stadium Jersey v3 (foundational), Mexico 2026 Home Stadium SS (commit `e56a7d6`), Mexico 2026 Away Stadium SS (commit `85dd1f0`), Mexico 2026 Third Stadium SS (commit `f2c2c34`). Eligible for Tier 2A on subsequent NTJ work. Promoted 2026-05-28 in commit `44c2f2f`.
+- **Club Jersey CANONICAL: Liverpool 2024-25 Nike Away Jersey v2 validation (commit `b7159dc`).** Eligible for Tier 2A on subsequent club jersey work.
+- **Soccer Cleats VALIDATED v1: Predator Accuracy.1 FG Crazyrush Pack v2 validation (commit `d52e56f`).** Eligible for Tier 2A on subsequent older-cycle cleat work; pending one current-cycle flagship cleat validation for full CANONICAL promotion.
+- **Tier 2B canonical reference: Mexico collection v5 (in production tonight as the first canonical Tier 2B brief under codified discipline; v4 at commit `f3cac86` is the pre-codification sketch that surfaced four template refinements).**
+
+Cross-references:
+
+- ORIN tier classification at dispatch: `.claude/agents/master-strategist/agent.md` Section 9.
+- SCRIBE tiered workflow variants: `.claude/agents/on-page-seo/agent.md` Section 9.
+- PDP-tier playbook detail (Tier 1, 2A, 3): `context/page-type-playbooks/product-page-playbook.md` 'Tiered workflow architecture for PDP optimization'.
+- Collection-tier playbook detail (Tier 2B): `context/page-type-playbooks/collection-page-playbook.md` 'Tier 2B canonical workflow'.
+
 ### Plugin-provided MCP servers (caveat)
 
 Per Claude Code documentation, plugin sub-agents (sub-agents loaded from a Claude Code plugin) do NOT support the `mcpServers:`, `hooks:`, or `permissionMode:` frontmatter fields. Our workforce agents live under `.claude/agents/` (project scope, not plugin scope), so this caveat does not apply to us. If a future workforce agent is ever loaded from a plugin, the `mcpServers:` block will be ignored and the agent will inherit the parent session's MCP scope by default; document the constraint in the agent's own agent.md.

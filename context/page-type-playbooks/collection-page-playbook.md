@@ -71,6 +71,58 @@ Default behavior: SKIP empty collections. Override requires Mike's explicit appr
 - Workforce convention: `context/workforce-conventions.md` 'Eligibility verification as logical extension of Step 0'.
 - Product page eligibility (canonical, closing-window exception examples): `context/page-type-playbooks/product-page-playbook.md` 'Eligibility verification (mandatory pre-Phase-1)'.
 
+## Tier 2B canonical workflow (added 2026-05-28)
+
+Collection-page optimization runs as Tier 2B per the tiered workflow architecture (`context/workforce-conventions.md` 'Tiered workflow architecture (cross-cutting pattern)'). Tier 2B is full agent workflow scoped to six collection-specific fields, target ~15 to 20 min per page.
+
+**Six fields optimized (codified 2026-05-28 per Refinement 1):**
+
+1. **Title (H1):** visible heading on the collection page.
+2. **Slug (URL handle):** typically unchanged unless current is suboptimal; preserve existing slugs to avoid redirect-cost risk and to keep PDP-to-collection internal-link integrity intact.
+3. **Meta Title:** under 60 chars in field; NEVER include "ProSoccer" or brand variant (Hyper theme auto-appends " - ProSoccer" per Refinement 3).
+4. **Meta Description:** ~150 to 158 chars desktop; primary keyword in first 100 chars.
+5. **Short Description / hero block:** 50 to 80 words / ~300 to 450 chars; 3 to 4 sentences; emotion-first; avatar identity hook (per the updated 'Short Description (intro paragraph / hero block)' section below).
+6. **Body Description:** the main body copy field on Shopify collection pages. Collection pages DO carry a body Description (NOT skipped despite the early Tier 2B draft suggesting otherwise). Carries 4 to 6 H2s per the existing 'Long Description (body copy)' section below.
+
+**Six phases (all run regardless of page; per-phase scope flexes with topic complexity):**
+
+1. **Phase 1 Current state capture (~3 min):** Firecrawl scrape collection page; extract the 6 fields above; capture current product count and any filter/sort UI context.
+2. **Phase 1.5 Eligibility verification (~1 min):** apply 'Eligibility verification' section above; PASS / BLOCKER / strategic exception.
+3. **Phase 2 Keyword research (~3 to 4 min):** apply year-specificity discipline + keyword distribution preparation (see 'Keyword distribution discipline' section below); DFS lookup for primary + supporting candidates; SERP ranking assessment.
+4. **Phase 3 Topic research (~2 to 3 min):** scoped Tavily; currency check (squad / fixtures / manager / kit-supplier / cultural anchors); reuse same-day kit set briefings where available to avoid duplicate queries.
+5. **Phase 4 Brief generation (~5 to 7 min):** output the 6 fields applying all codified rules (keyword distribution, FAQ conditional inclusion, brand IP, year-specificity). Apply the five canonical brief-craft rules where structurally applicable (Rule 2 'primary keyword in at least one H2' applies to body Description H2s).
+6. **Phase 5 Voice check + 11 gates (~1 min):** `scripts/voice_check.py` on both visible brief and workforce-internal briefing; 11 self-verification gates per SCRIBE Section 11 (including new Gate 12 keyword distribution).
+7. **Phase 6 Internal link validation (~2 min):** validate 1 to 2 final selected links per 'Internal link strategy' section below; broader-catalog-destination preference per Refinement 1.
+
+Voice consistent with the page-type playbook ecosystem and the avatar's emotional life from `context/04-customer-avatars.md`.
+
+**Canonical reference: Mexico collection v5 (in production tonight as the first canonical Tier 2B brief under this codification).** v4 at commit `f3cac86` is the pre-codification sketch that surfaced the four refinements absorbed in this codification commit.
+
+## Keyword distribution discipline (added 2026-05-28, codifies Refinement 4, collection 6-field adapted)
+
+Keyword SELECTION (year-specificity rule per `context/page-type-playbooks/product-page-playbook.md` 'Primary keyword selection for year/generation/season-bound products') addresses which keyword becomes primary. At the collection-page level, the year-specificity rule inverts at head-term scope: collection pages aggregate product depth across an entire cycle and rank for broader head terms than PDPs, so the primary keyword may legitimately be the unbound head term (e.g., `mexico jersey`) with year-specific variants carried as supporting via natural body copy semantic variants. The selection-vs-deployment distinction still applies.
+
+**Primary keyword placement (mandatory across the six collection fields):**
+
+- **Title / H1:** exact match or close natural variant.
+- **Meta Title:** exact match in field; under 60 chars; NO brand suffix in field.
+- **Meta Description:** exact match or natural variant early in description (within first 100 chars).
+- **Short Description:** exact match or natural variant in first sentence.
+- **Slug:** exact match if creating new; preserve existing slug if optimizing existing page unless clearly suboptimal.
+- **Body Description:** primary keyword in 2 to 3 H2 headings plus naturally in body copy 4 to 7 times (same range as PDP Long Description per Refinement 4).
+
+**Supporting keyword placement (recommended):** body Description 2 to 4 times naturally per supporting variant; at least one H2 heading if the variant fits naturally; NOT in Meta Title (crowded with primary); NOT in Slug (URL stays clean); optional in Short Description if natural.
+
+**Long-tail modifier placement (optional):** body Description especially in cultural-context H2; internal link anchor text where the modifier reads naturally.
+
+**Forbidden: keyword stuffing.** Same rules as PDP version: no more than 7 primary mentions or 1% of word count whichever is lower; no forced H2 keywords; no consecutive sentence repetition; no primary keyword anchoring more than 1 internal link per brief.
+
+**Natural variation allowed.** Variations count toward placement when semantic intent is clear.
+
+**Verification:** SCRIBE Gate 12 checks all four sub-criteria. Failures surface as BLOCKER.
+
+Cross-references: `context/page-type-playbooks/product-page-playbook.md` 'Keyword distribution discipline' (canonical PDP version), `.claude/agents/on-page-seo/agent.md` Section 9 'Keyword distribution discipline' (operational summary + Gate 12 definition).
+
 ## Five canonical brief-craft rules
 
 These five rules govern every brief SCRIBE produces under the Fresh Optimization workflow. They emerged from the 2026-05-26 UAE PDP refinement session and lock in agency-grade craft standards across all future briefs. The five rules below are the NEW codification from this session; the collection-page external-link allowance (per link strategy) and the 1 to 2 internal-links target are already canonical in 'Internal link strategy' later in this playbook. Those existing policies stand; the five rules below extend them with the craft conventions that emerged from the UAE v3 work. Cross-referenced from `.claude/agents/on-page-seo/agent.md` Section 13 and `context/workforce-conventions.md`.
@@ -166,11 +218,15 @@ Per `.claude/agents/on-page-seo/agent.md` Section 9 'Keyword placement per field
 
 Head-keyword-first for SERP discovery. Can be more generic than the storefront Title because the purpose is search ranking, not browsing differentiation.
 
-- Mexico: `Mexico Jersey & El Tri Gear | LA Soccer Specialty Since 1995` (head keyword first; storefront-and-positioning suffix where room).
-- Argentina: `Argentina Jersey & La Albiceleste Kit | ProSoccer LA`.
-- Adidas Predator: `Adidas Predator Cleats | Pro Edition & Elite Models`.
+**Brand suffix rule (codified 2026-05-28, Refinement 3 verified).** Hyper theme auto-appends " - ProSoccer" suffix to the Meta Title across ALL page types (collection pages confirmed via browser tab observation; PDPs confirmed same per Hyper theme default). **NEVER include "ProSoccer" or any brand variant in the Meta Title field.** Including it creates double-branding in SERP display ("Title text | ProSoccer - ProSoccer"). The full 60-char field budget is available for keyword + positioning content.
 
-50 to 60 characters. Front-load the head keyword in the first 30 characters. Mobile cuts around 40 characters; the value-prop sits before that line.
+Examples (post-codification, no brand suffix in field):
+
+- Mexico: `Mexico Jersey & El Tri 2026 World Cup Gear` (42 chars in field; theme renders to ~55 chars SERP display).
+- Argentina: `Argentina Jersey & La Albiceleste 2026 World Cup Kit` (52 chars in field; theme renders to ~65 chars SERP display, slight over but acceptable).
+- Adidas Predator: `Adidas Predator Cleats | Pro Edition & Elite Models` (51 chars in field; theme renders to ~64 chars SERP display).
+
+50 to 60 characters in field. Front-load the head keyword in the first 30 characters. Mobile cuts around 40 characters; the value-prop sits before that line.
 
 ### SEO Meta Description
 
@@ -191,11 +247,11 @@ Store-anchored CTAs (do not use):
 
 150 to 158 characters desktop. The head keyword sits naturally in the first 100 characters (Google bolds the match). Don't repeat the title verbatim.
 
-### Short Description (intro paragraph)
+### Short Description (intro paragraph / hero block)
 
 Emotion-first lead about the topic and what it means to the avatar. Per `context/03-brand-voice.md` 'Emotional Connection Over Feature Selling', the first sentence carries feeling, identity, or moment. Features and product detail come in supporting sentences if at all. By the end of the first paragraph the avatar should feel seen as a fan of the topic.
 
-50 to 80 words. One to three sentences. Does not name the store. Does not name shipping, returns, or retail locations.
+**Target range (codified 2026-05-28, Refinement 1):** 50 to 80 words / approximately 300 to 450 characters. Three to four sentences. Does not name the store. Does not name shipping, returns, or retail locations. This range supersedes the earlier draft Tier 2B sketch (200 to 350 chars) which was a tighter PDP-Rule-5-derived target that didn't carry enough narrative depth for the collection-page hero-block role. The 50 to 80 word range aligns with this playbook's longstanding Short Description spec and produces stronger hero copy.
 
 ### Long Description (body copy)
 
@@ -212,26 +268,33 @@ Each H2 should pass the lift test from `.claude/agents/on-page-seo/agent.md` Sec
 
 Per `.claude/agents/on-page-seo/agent.md` Section 9 'Keyword placement per field', long-tail variants belong inside the H2 wording naturally (not "Mexico Jersey FAQs" but "What the 2026 El Tri Home Kit Means for the Diaspora" or similar).
 
-### FAQ section
+### FAQ section (conditional inclusion, codified 2026-05-28, Refinement 2)
 
-Topic-specific questions fans actually ask. Not generic store questions. The FAQ is a natural place to capture long-tail queries that don't fit the body H2s.
+**FAQ is conditional inclusion, NOT a template requirement.** The deciding question is NOT "do buyers ask questions about this collection" but "do buyers ask questions that the Long Description body copy does not already answer."
 
-For Mexico:
+**FAQ EARNS its place ONLY when all three criteria are met:**
 
-- `When does the 2026 home kit release?`
-- `What's the difference between the player and fan version of the El Tri kit?`
-- `Who's in Mexico's 2026 World Cup squad?`
-- `Why does Mexico wear green?`
-- `Where can I get a kit with Chicharito's name and number?`
+1. Real buyer questions exist with search-volume signal (verified via DataForSEO or known query patterns).
+2. Those questions are NOT addressed in body copy already (substantive narrative coverage in H2s defaults to NO need for FAQ rephrasing).
+3. Adding them as FAQ creates net-new value, not repetition.
 
-Forbidden FAQ questions (these belong on store-policy pages, not on collection pages):
+**Examples where FAQ MIGHT earn inclusion:** return policy specifics not in body, sizing comparison across brands not in body, fixture / schedule specifics for date-bound tournament gear, customization availability questions.
 
-- `What's your return policy?`
-- `How long does shipping take?`
-- `Do you have a fitting room?`
-- `Can I exchange a jersey?`
+**Examples where FAQ should NOT be added:**
 
-Five to seven Q-and-A pairs is the standard range. Each answer is two to four sentences. The schema attaches via VERITAS's FAQPage injection; SCRIBE writes the question-answer copy that the schema surfaces.
+- "What is the X jersey?" (covered in H1 + body H2 1).
+- "Who makes the X jersey?" (covered in body H2 1).
+- "When does X play?" (covered in body H2 4 cultural-context / catalyst section).
+- "What's the difference between the player and fan version?" (covered in body H2 2 edition tier comparison).
+
+**Default behavior: SKIP FAQ unless the three criteria are clearly met.** Don't add FAQ as template requirement. When YES: 3 to 5 questions max (revised down from prior "5 to 7 standard range"), each answer 2 to 4 sentences. Schema attaches via VERITAS's FAQPage injection.
+
+**Forbidden FAQ questions** (these belong on store-policy pages, not on collection pages):
+
+- "What's your return policy?"
+- "How long does shipping take?"
+- "Do you have a fitting room?"
+- "Can I exchange a jersey?"
 
 ## Evergreen body, contained catalyst
 
@@ -252,6 +315,12 @@ The long description supports 1 to 2 internal links maximum. More than that turn
 - Link candidates derive from body content (named entities, brands, players, related teams mentioned naturally in the topic substance). The link should serve a reader who's already engaged with the topic, not a reader the page is trying to redirect.
 - Topical relevance over keyword opportunism. The destination must genuinely deepen the topic.
 - All candidate URLs MUST be live-validated before inclusion (see Live validation requirement below).
+
+**Broader-catalog-destination preference (codified 2026-05-28, Refinement 1).** When PDPs link to the collection page (the established pattern, e.g., kit-set PDPs all link to `/collections/<team>`), the collection's body links should prefer broader catalog destinations (umbrella collections like `/collections/adidas-2026-fifa-world-cup-soccer-jerseys-gear`, brand collections, category collections) rather than reciprocal kit set PDP routing. Reciprocal collection-to-PDP-back-to-collection routing splits equity and duplicates the grid-level surfacing already on the live page.
+
+**Named-entity-anchor exception:** when a specific PDP carries a unique narrative anchor that ties directly to the body copy (the Mexico Third + adidas Archive in Germany narrative example, applied in Mexico collection v4 commit f3cac86 and Mexico collection v5 onward), include the PDP as a secondary body link with named-entity anchor tied to the narrative. The unique narrative tie justifies the reciprocal routing.
+
+**Visible brief format: minimal (codified 2026-05-28).** The visible brief's `Internal links:` sub-section lists only URL + anchor text + body location. NO validation metadata (no "200 OK validated DATE via Firecrawl" boilerplate, no H1 quotes, no product counts, no destination page descriptions). The full validation audit trail (status code, H1 / product count verification, soft-404 check, per-candidate failure reasons for skipped links) lives in the workforce-internal session briefing under `.claude/agents/on-page-seo/briefings/YYYY-MM-DD_<slug>.md`. Per SCRIBE agent.md Section 9 'Internal link selection workflow' step 6: "Document final selections in the brief's Internal links sub-section per the minimal template format. Skipped failures and per-candidate failure reasons live in the workforce-internal briefing, not in the visible brief." This rule applies to all brief tiers (1, 2A, 2B); the visible brief stays paste-ready and one-page for Mike's review while the audit trail stays complete in the workforce briefing.
 
 ### Live validation requirement
 

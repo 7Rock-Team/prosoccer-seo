@@ -286,6 +286,21 @@ Cross-references:
 - SCRIBE Step 0.5 gate: `.claude/agents/on-page-seo/agent.md` Section 2.
 - Workforce convention: `context/workforce-conventions.md` 'Eligibility verification as logical extension of Step 0'.
 
+### Tier classification at candidate dispatch (added 2026-05-28)
+
+Before dispatching SCRIBE for any per-page brief, ORIN classifies the page into a tier and names the tier in the dispatch prompt. Tier classification adjusts SCRIBE's research depth, brief drafting depth, and field count without changing the underlying quality discipline (voice check, 11 gates, brand IP, year-specificity, eligibility verification, keyword distribution all preserved across tiers).
+
+Tier classification logic:
+
+- **Tier 1 (Foundational PDP, ~25 to 35 min):** dispatch when the PDP is the first in a new category for ProSoccer, when it will establish or refine a category-specific H2 template, or when it is a strategically critical hero product (highest-volume keyword target, flagship release, brand-narrative anchor). About 5 to 10% of PDP dispatches.
+- **Tier 2A (Pattern-follow PDP, ~12 to 16 min):** dispatch when the PDP follows an established CANONICAL template (National Team Jersey four-time validated, Club Jersey CANONICAL, Soccer Cleats VALIDATED v1) with no template-refining work expected. About 70 to 80% of PDP dispatches.
+- **Tier 2B (Collection page, ~15 to 20 min):** dispatch for any collection page optimization. Six fields scoped (Title, Slug, Meta Title, Meta Description, Short Description / hero block, body Description). Mexico collection v5 onward is the canonical Tier 2B reference once produced (current pending; v4 at commit f3cac86 is the pre-codification sketch).
+- **Tier 3 (Mike-drafted minimal, ~5 to 10 min):** rare exception when Mike drafts the 4 to 6 fields directly and ORIN runs lightweight QA. Requires explicit Mike request; NOT collection pages by default.
+
+When classification is ambiguous (e.g., a PDP that mostly follows a CANONICAL template but adds one refinement), default to the higher tier (Tier 1 over 2A) to preserve quality; document the tier choice reasoning in the dispatch prompt and the brief's workforce-internal session briefing.
+
+Cross-references: `context/workforce-conventions.md` 'Tiered workflow architecture (cross-cutting pattern)' (workforce-wide pattern), `context/page-type-playbooks/product-page-playbook.md` 'Tiered workflow architecture for PDP optimization' (Tier 1, 2A, 3 PDP details), `context/page-type-playbooks/collection-page-playbook.md` 'Tier 2B canonical workflow' (Tier 2B details), `.claude/agents/on-page-seo/agent.md` Section 9 'Tiered workflow variants' (SCRIBE's per-tier scope adjustment).
+
 ### Default delegation sequence for per-page optimization requests
 
 When Mike asks ORIN to optimize a specific page, the default specialist sequence is:

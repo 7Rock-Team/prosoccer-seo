@@ -436,10 +436,10 @@ KIRA delivers a target keyword set per page (one head keyword, plus 2 to 5 long-
 |---|---|---|---|---|
 | Collection Title (visible H1) | Title | First 3 words | None typically | Match user search language. Brand prefix only when it adds trust ("Nike Mercurial" yes; "ProSoccer Mexico Jerseys" no). |
 | URL Handle | URL handle | Whole handle is primary keyword, hyphenated | None | Lowercase, hyphenated, no stopwords (and, the, of), no diacritics. Never change a handle that has inbound links without a redirect. |
-| SEO Meta Title | Page title (under SEO settings) | First 30 characters | One long-tail if room | 50 to 60 chars. Front-load. Brand suffix optional ("…\| ProSoccer") only if desktop has room. Mobile cuts ~40 chars; the value-prop sits before that line. |
+| SEO Meta Title | Page title (under SEO settings) | First 30 characters | One long-tail if room | 50 to 60 chars in field (Hyper theme auto-appends " - ProSoccer" suffix across ALL page types, verified 2026-05-28; NEVER include "ProSoccer" or any brand variant in the field). Front-load. Mobile cuts ~40 chars; the value-prop sits before that line. |
 | SEO Meta Description | Meta description | Once, naturally, in first 100 chars (Google bolds the match) | One long-tail if natural | 150 to 158 chars desktop. CTA at end optional. Don't repeat the title. |
-| Short Description (intro paragraph) | Top of Description body | First sentence | One long-tail in second or third sentence | 1 to 3 sentences. Lead with avatar value-prop, not the keyword for its own sake. |
-| Long Description (body copy) | Description body | 2 to 4 times across the body, naturally distributed | Long-tail variants in H2 / H3 subheadings | 200 to 500 words. Use semantic variants ("kit" for "jersey", "boots" for "cleats" where natural). H2 and H3 subheadings carry long-tail variants cleanly. |
+| Short Description (intro paragraph) | Top of Description body | First sentence | One long-tail in second or third sentence | PDPs: 1 to 3 sentences, 200 to 300 chars. Collection pages: 3 to 4 sentences, 50 to 80 words / about 300 to 450 chars (collection-page-playbook range, codified 2026-05-28 per Tier 2B refinement). Lead with avatar value-prop, not the keyword for its own sake. |
+| Long Description (body copy) | Description body | 4 to 7 times across the body for the primary keyword per keyword distribution discipline; 2 to 4 times for each supporting variant; long-tail variants in H2 / H3 subheadings | Long-tail variants in H2 / H3 subheadings | 200 to 500 words. Use semantic variants ("kit" for "jersey", "boots" for "cleats" where natural). Apply 'Keyword distribution discipline' section below for full placement and stuffing-prevention rules. |
 
 **Storefront Title vs SEO Meta Title.** Collection Title preserves avatar-search-language specificity for browsing context (e.g., "Mexico National Team Jerseys & El Tri Fan Gear" differentiates the page from Liga MX club content); SEO Meta Title leads with the head keyword for SERP discovery (e.g., "Mexico Jersey & El Tri Gear | LA Soccer Specialty Since 1995"). Different optimization targets, both correct.
 
@@ -459,9 +459,44 @@ Realistic ranking assessment. Before settling primary keyword, run DataForSEO SE
 
 Full strategy detail and category-affected list live in `context/page-type-playbooks/product-page-playbook.md` 'Primary keyword selection for year/generation/season-bound products'.
 
+**Keyword distribution discipline (added 2026-05-28, codifies Refinement 4).** Keyword SELECTION (year-specificity rule above) addresses which keyword becomes primary. Keyword DEPLOYMENT addresses how the chosen primary propagates through the brief's fields. Five sub-rules:
+
+1. **Primary keyword placement (mandatory across required fields):**
+   - Title / H1: exact match or close natural variant.
+   - Meta Title: exact match in field (under 60 chars; Hyper theme auto-appends " - ProSoccer" suffix, do NOT include brand in field).
+   - Meta Description: exact match or natural variant early in description (within first 100 chars).
+   - Short Description: exact match or natural variant in first sentence.
+   - Slug: exact match if creating new; preserve existing slug if optimizing existing page unless clearly suboptimal.
+   - Long Description (PDPs only; collection pages substitute body Description per Tier 2B 6-field scope): primary keyword in 2 to 3 H2 headings plus naturally in body copy 4 to 7 times.
+
+2. **Supporting keyword placement (recommended):** body copy 2 to 4 times naturally; at least one H2 heading if appropriate; NOT in Meta Title (crowded with primary); NOT in Slug (URL stays clean); optional in Short Description if natural.
+
+3. **Long-tail modifier placement (optional):** body copy of Long Description especially in cultural-context H2; internal link anchor text.
+
+4. **Forbidden: keyword stuffing.** Repeating primary keyword more than 7 times in Long Description OR more than 1% of total word count, whichever is lower; forcing primary keyword into headings where it doesn't fit; repeating primary keyword in consecutive sentences without natural variation; using primary keyword as anchor text for more than 1 internal link per brief.
+
+5. **Natural variation allowed.** Primary keyword variations count toward placement (exact, reordered, contextual reference all valid when semantic intent is clear from surrounding context).
+
+Verification: the 11 self-verification gates (Section 11) include Gate 12 (Keyword distribution) that checks (a) primary keyword presence across all required fields, (b) primary keyword count in Long Description within 4 to 7 range, (c) no keyword stuffing detected, (d) supporting keyword present 2 to 4 times. Failures surface as BLOCKER.
+
+Cross-references: full distribution rules also live in `context/page-type-playbooks/product-page-playbook.md` 'Keyword distribution discipline' (canonical) and `context/page-type-playbooks/collection-page-playbook.md` 'Keyword distribution discipline' (collection 6-field adapted).
+
 **Schema-aware keyword usage.** When VERITAS ships Product schema, keyword choices in the product description must align with the DataFeedWatch feed values (no contradictions between feed text and on-page text). When VERITAS ships FAQ schema, question-format H3 subheadings carry the question-form keyword ("What size Argentina jersey should I order?", not "Argentina jersey sizing").
 
 **Anti-pattern reminder.** Per `context/03-brand-voice.md`, sentences that exist only to hit a keyword are forbidden. Density targets above are guides, not floors. If a target density would force a keyword-stuffing sentence, take the lower density.
+
+### Tiered workflow variants (added 2026-05-28)
+
+SCRIBE's startup protocol (Section 2 Steps 0, 0.5, 1 through 11) holds universally. Per-tier scope flexes within the workflow depending on the page-type and the brief's strategic role. ORIN names the tier at dispatch; SCRIBE adapts research depth, brief drafting depth, and field count accordingly while preserving quality discipline across all tiers.
+
+- **Tier 1 (Foundational PDP, ~25 to 35 min).** First PDP in a new category, template-establishing work, or strategically critical hero product. Full SCRIBE workflow: broad Tavily research, fresh brief build, all 11 gates. About 5 to 10% of PDP work.
+- **Tier 2A (Pattern-follow PDP, ~12 to 16 min).** PDP follows an established CANONICAL template (e.g., National Team Jersey four-time validated, Club Jersey CANONICAL, Soccer Cleats VALIDATED v1). Scoped Tavily research (currency check only, not broad cultural context); template-fill brief drafting (canonical structure with verified specifics swapped in, not fresh build). Bulk of PDP work (~70 to 80%).
+- **Tier 2B (Collection page, ~15 to 20 min).** Full agent workflow scoped to the six collection-specific fields (Title, Slug, Meta Title, Meta Description, Short Description / hero block, body Description). NO PDP-style Long Description, BUT body Description is a real field on Shopify collection pages and carries the H2 narrative; do not skip it. Phase 1 scrape plus Phase 1.5 eligibility plus Phase 2 keyword research plus Phase 3 topic research plus Phase 4 brief generation (scoped) plus Phase 5 voice check plus Phase 6 internal link validation.
+- **Tier 3 (Mike-drafted minimal, ~5 to 10 min).** Truly simple cases requiring fast turnaround. Mike drafts 4 to 6 fields directly; ORIN runs lightweight QA (voice check plus DFS keyword verify plus brand IP compliance). Rare exception; NOT collection pages by default; requires explicit Mike request.
+
+Quality discipline preserved universally across all tiers: voice check, 11 self-verification gates (Section 11), brand IP compliance, year-specificity keyword discipline, eligibility verification (Step 0.5), keyword distribution discipline. What flexes per tier: research depth, brief drafting depth, field count.
+
+Cross-references: `context/page-type-playbooks/product-page-playbook.md` 'Tiered workflow architecture for PDP optimization' (Tier 1, 2A, 3 details), `context/page-type-playbooks/collection-page-playbook.md` 'Tier 2B canonical workflow' (Tier 2B details), `context/workforce-conventions.md` 'Tiered workflow architecture (cross-cutting pattern)' (workforce-wide pattern definition).
 
 ### Don't promise what the page can't deliver
 
@@ -573,6 +608,7 @@ Self-verification is a hard gate. Skipping it is a protocol violation. Document 
 - **Gate 9: Positioning lift-test.** Could the title, meta, and intro be lifted onto Soccer.com unchanged without anyone noticing? If yes, the copy lacks ProSoccer-specific anchoring (heritage, expertise, geographic moat, or authentic-curation difference). Add a positioning hook where it fits naturally, then re-verify.
 - **Gate 10: Emotion-first check on intro and body copy.** Does the first sentence of the intro paragraph lead with feeling, identity, or moment? Are features integrated as support, never the lead? Does the copy use this avatar's specific emotional life from `context/04-customer-avatars.md`, not generic "passion for the game" framing? If feature-led or emotionally generic, rewrite intro.
 - **Gate 11: Brand IP compliance scan.** Classify the page's brand-affiliation per `context/brand-ip-constraints.md` (Adidas-only / non-Adidas / brand-agnostic umbrella). If non-Adidas, scan all six fields (Title, Slug, SEO Meta Title, SEO Meta Description, Short Description, Long Description) plus internal link anchor text for the restricted FIFA terminology family ("World Cup", "FIFA World Cup", "WC", "FIFA" in commercial contexts, and clear variations). If any violation is found, rewrite using Federation-anchored substitution language per the constraints file. Constraint precedence: brand IP > voice rules (a Gate 11 failure outranks a Gate 2 failure because the consequence is legal exposure, not stylistic drift). Document the classification and scan result in the brief's workforce-internal section so the audit trail is visible.
+- **Gate 12: Keyword distribution discipline (added 2026-05-28).** Per Section 9 'Keyword distribution discipline' codification: (a) confirm primary keyword present in ALL required fields per page type (PDP six fields including Long Description; collection page six fields including body Description per Tier 2B); (b) confirm primary keyword count in Long Description within 4 to 7 range (PDPs) OR within body Description for collections; (c) confirm no keyword stuffing (no more than 7 mentions or more than 1% of word count, no forced H2 keywords, no consecutive sentence repetition, no primary keyword anchoring more than 1 internal link per brief); (d) confirm supporting keyword present 2 to 4 times in body. Natural variations count toward placement. If any sub-check fails, surface as BLOCKER and refine before commit.
 
 If any gate fails, fix before delivering.
 

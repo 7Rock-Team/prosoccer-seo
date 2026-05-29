@@ -27,6 +27,16 @@ The following are in scope and the body copy must serve them:
 - The avatar's emotional context for ownership. What does wearing or using this product mean to the avatar? Carlos buying the 2026 El Tri home authentic feels something different from Tyler buying the same kit. Same product, different emotional anchor.
 - Fit, sizing, and care information where relevant. Product copy is a place where avatar pain frames map directly to copy that closes the sale. Jennifer's "Wide Foot Nightmare" frame, Carlos's "is this real or fake" frame, Tyler's "will it actually run faster than my last pair" frame.
 
+## Tiered workflow architecture for PDP optimization (added 2026-05-28)
+
+PDP brief production runs at one of three PDP-applicable tiers (Tier 2B is collection-only and lives in `context/page-type-playbooks/collection-page-playbook.md`). Tier is named at dispatch by ORIN; SCRIBE adapts scope accordingly. Quality discipline (voice check, 11 gates including Gate 12 keyword distribution, brand IP, year-specificity, eligibility verification, keyword distribution) preserved universally.
+
+- **Tier 1 (Foundational PDP, ~25 to 35 min).** Dispatch when the PDP is the first in a new category for ProSoccer, when it will establish or refine a category-specific H2 template, or when it is a strategically critical hero product (highest-volume keyword target, flagship release, brand-narrative anchor). Full SCRIBE workflow: broad Tavily research across cultural / squad / tournament / kit-supplier / design dimensions; fresh brief build with template-refinement candidate analysis; all 11 gates surfaced. Estimated 5 to 10% of PDP work.
+- **Tier 2A (Pattern-follow PDP, ~12 to 16 min).** Dispatch when the PDP follows an established CANONICAL template (National Team Jersey four-time validated as of 2026-05-28, Club Jersey CANONICAL, Soccer Cleats VALIDATED v1) with no template-refining work expected. Scoped Tavily research: currency check only (squad / fixtures / manager / kit-supplier currency for the specific page), not broad cultural context (the template already encodes the cultural-context H2 pattern). Template-fill brief drafting: canonical structure with verified product-specific specifics swapped in, not fresh build from blank. Bulk of PDP work (~70 to 80%).
+- **Tier 3 (Mike-drafted minimal, ~5 to 10 min).** Rare exception when Mike drafts 4 to 6 fields directly and ORIN runs lightweight QA (voice check + DFS keyword verify + brand IP compliance scan only). Requires explicit Mike request; NOT collection pages by default; NOT new categories without prior template work.
+
+Cross-references: `context/workforce-conventions.md` 'Tiered workflow architecture (cross-cutting pattern)' (workforce-wide pattern + validation milestones), `.claude/agents/master-strategist/agent.md` Section 9 'Tier classification at candidate dispatch' (ORIN classification logic), `.claude/agents/on-page-seo/agent.md` Section 9 'Tiered workflow variants' (SCRIBE's per-tier scope adjustment).
+
 ## Eligibility verification (mandatory pre-Phase-1)
 
 _Added 2026-05-27. Eligibility check is a gate, not an optimization step. Every PDP candidate proposed for optimization must pass eligibility before any brief production begins. Optimization of sold-out or hidden PDPs is wasted SEO effort: the improved page can't convert._
@@ -134,6 +144,36 @@ Many products in the ProSoccer catalog are bound to a specific year, generation,
 **Categories NOT affected.** Year-agnostic products use the standard category-level keyword selection (head keyword = highest-volume relevant term). Examples: scarves, training balls without year tags, generic shin guards, casual lifestyle apparel without season anchors.
 
 **Reference for SCRIBE operational use.** Selection guidance summary lives in `.claude/agents/on-page-seo/agent.md` Section 9 'Year/generation/season specificity for primary keyword selection'.
+
+## Keyword distribution discipline (added 2026-05-28, codifies Refinement 4)
+
+Keyword SELECTION ('Primary keyword selection for year/generation/season-bound products' section above) addresses which keyword becomes primary. Keyword DEPLOYMENT addresses how the chosen primary propagates through the brief's six fields plus the Long Description body.
+
+**Primary keyword placement (mandatory across all required fields):**
+
+- **Title / H1:** exact match or close natural variant.
+- **Meta Title:** exact match in field; under 60 chars accounting for Hyper theme auto-append of " - ProSoccer" suffix (codified 2026-05-28, theme verified to append across all page types); NEVER include "ProSoccer" or any brand variant in the Meta Title field itself.
+- **Meta Description:** exact match or natural variant early in description (within first 100 chars where Google bolds the match).
+- **Short Description:** exact match or natural variant in first sentence.
+- **Slug:** exact match if creating new; preserve existing slug if optimizing existing page unless clearly suboptimal (slug changes trigger redirect-cost risk).
+- **Long Description:** primary keyword in 2 to 3 H2 headings plus naturally in body copy 4 to 7 times.
+
+**Supporting keyword placement (recommended):** body copy 2 to 4 times naturally per supporting variant; at least one H2 heading if the variant fits naturally; NOT in Meta Title (crowded with primary); NOT in Slug (URL stays clean); optional in Short Description if natural.
+
+**Long-tail modifier placement (optional):** body copy of Long Description especially in cultural-context H2 (typically H2 4 for jerseys, H2 5 for cleats); internal link anchor text where the modifier reads naturally as the link's anchor.
+
+**Forbidden: keyword stuffing.** Specifically:
+
+- Repeating primary keyword more than 7 times in Long Description OR more than 1% of total word count, whichever is lower.
+- Forcing primary keyword into headings where it doesn't fit naturally.
+- Repeating primary keyword in consecutive sentences without natural variation.
+- Using primary keyword as anchor text for more than 1 internal link per brief.
+
+**Natural variation allowed.** Primary keyword variations count toward placement. Example for `mexico 2026 home jersey`: "Mexico 2026 home jersey" (exact), "Mexico home kit 2026" (reordered), "this 2026 home jersey" (natural variant), "this home kit" (contextual reference). Variations valid as long as semantic intent is clear from surrounding context.
+
+**Verification:** SCRIBE Gate 12 (Section 11) checks (a) primary keyword presence across all required fields, (b) primary keyword count in Long Description within 4 to 7 range, (c) no keyword stuffing detected, (d) supporting keyword present 2 to 4 times. Failures surface as BLOCKER and refine before commit.
+
+Cross-references: `.claude/agents/on-page-seo/agent.md` Section 9 'Keyword distribution discipline' (operational summary + Gate 12 definition), `context/page-type-playbooks/collection-page-playbook.md` 'Keyword distribution discipline' (collection 6-field adapted version).
 
 ## Five canonical brief-craft rules
 
