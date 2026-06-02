@@ -42,6 +42,10 @@ reports/monthly/*.docx
 *.log
 *.bak
 
+# Python build artifacts
+__pycache__/
+*.pyc
+
 # Generated presentation build output (keep source scripts, not rendered artifacts)
 scripts/build/
 
