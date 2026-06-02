@@ -99,7 +99,7 @@ Collection-page optimization runs as Tier 2B per the tiered workflow architectur
 3. **Phase 2 Keyword research (~3 to 4 min):** apply year-specificity discipline + keyword distribution preparation (see 'Keyword distribution discipline' section below); DFS lookup for primary + supporting candidates; SERP ranking assessment.
 4. **Phase 3 Topic research (~2 to 3 min):** scoped Tavily; currency check (squad / fixtures / manager / kit-supplier / cultural anchors); reuse same-day kit set briefings where available to avoid duplicate queries.
 5. **Phase 4 Brief generation (~5 to 7 min):** output the 6 fields applying all codified rules (keyword distribution, FAQ conditional inclusion, brand IP, year-specificity). Apply the five canonical brief-craft rules where structurally applicable (Rule 2 'primary keyword in at least one H2' applies to body Description H2s).
-6. **Phase 5 Voice check + 11 gates (~1 min):** `scripts/voice_check.py` on both visible brief and workforce-internal briefing; 11 self-verification gates per SCRIBE Section 11 (including new Gate 12 keyword distribution).
+6. **Phase 5 Voice check + gates (~1 min):** `scripts/voice_check.py` on both visible brief and workforce-internal briefing; 11 self-verification gates per SCRIBE Section 11 plus Gate 12 (keyword distribution) and Gate 13 (anti-stuffing), the 13-gate suite as of 2026-06-02. Gate 13 anti-stuffing self-revision happens in Phase 4 (brief generation) before this Phase 5 voice check.
 7. **Phase 6 Internal link validation (~2 min):** validate 1 to 2 final selected links per 'Internal link strategy' section below; broader-catalog-destination preference per Refinement 1.
 
 Voice consistent with the page-type playbook ecosystem and the avatar's emotional life from `context/04-customer-avatars.md`.
@@ -130,6 +130,66 @@ Keyword SELECTION (year-specificity rule per `context/page-type-playbooks/produc
 **Verification:** SCRIBE Gate 12 checks all four sub-criteria. Failures surface as BLOCKER.
 
 Cross-references: `context/page-type-playbooks/product-page-playbook.md` 'Keyword distribution discipline' (canonical PDP version), `.claude/agents/on-page-seo/agent.md` Section 9 'Keyword distribution discipline' (operational summary + Gate 12 definition).
+
+## Anti-stuffing discipline (Gate 13, added 2026-06-02)
+
+Collection pages are the page type most prone to comma-stacking because a collection aggregates multiple product categories by definition. The temptation is to list every category the collection holds inside the Title or Meta Title. That temptation is the failure mode this gate prevents. Gate 13 sits after Gate 12 in the gates suite (the suite runs 13 gates as of 2026-06-02). It is distinct from Gate 12 (which caps over-repetition of one keyword) and from the Gate 1 voice check (which governs prose voice and forbidden characters). Gate 13 governs the STRUCTURE of any single field so that no field reads as a comma-stacked keyword list. Distinct concerns, distinct gates.
+
+The quality issue that surfaced this gate was a collection Title: `National Team Soccer Accessories: Scarves, Hats, Bags, Flags & Balls` (Day 2 batch #1 URL #2, flagged during Mike's Shopify admin implementation 2026-06-02). A comma-stacked keyword list reads as keyword stuffing to Google quality systems (Helpful Content Update, Spam Updates) regardless of whether each item is technically relevant to the collection, and it degrades user CTR in the SERP even at the same rank position.
+
+**Core principle: product category breadth belongs in the body Description H2 framework and the hero / Long Description body copy, not in the Title or Meta Title fields.** A collection that holds scarves, hats, bags, flags, and balls names that breadth through its H2 sections and narrative, not by stacking the categories in a title-level field. Each output field should read as natural language a human would actually write.
+
+### Anti-patterns to flag (any field)
+
+1. **Comma-stacked keyword lists.** The format `[Topic]: keyword1, keyword2, keyword3 & keyword4` or `[Topic] - A, B, C, D` reads as stuffing regardless of relevance. Any field carrying 3+ comma-separated keywords fails.
+2. **Ampersand-terminated lists.** A trailing `& [final keyword]` at the end of a comma list compounds the spam signal.
+3. **Synonym stacking.** Treating synonyms (jerseys / shirts / kits / tops; cleats / boots / shoes) as variations to stack rather than picking one canonical term per field.
+4. **Modifier stacking.** Stacking audience modifiers (Men's / Boys' / Youth / Kids') or product modifiers (Authentic / Replica / Stadium / Match-Worn) in a single field.
+5. **Brand stacking (titles).** Listing multiple brands (adidas, Nike, Puma) in a title when only one or two are relevant to the collection.
+6. **Price stacking (body copy).** Specific dollar amounts in collection-page body copy (added 2026-06-02). Collections are especially prone to this because they aggregate many products at many price points; the temptation is to enumerate them. Prices decay and belong in product cards and schema, not body prose.
+7. **Brand stacking (body sentences).** Three or more comma-separated brand names in a single sentence within the Body Description (added 2026-06-02). The body-copy extension of anti-pattern 5; collections aggregate multiple brands, so the temptation to list them all in one sentence is high. Brand breadth belongs in product cards and faceted filters, not body prose.
+
+### Stuffed vs natural
+
+- STUFFED: `National Team Soccer Accessories: Scarves, Hats, Bags, Flags & Balls` -> NATURAL: `National Team Soccer Accessories` OR `2026 National Team Soccer Accessories`
+- STUFFED: `Soccer Jerseys, Football Shirts, Kits & Tops` -> NATURAL: `Soccer Jerseys` OR `2026 National Team Soccer Jerseys`
+- STUFFED: `Men's Boys' Youth Soccer Cleats` -> NATURAL: `Soccer Cleats` (audience breadth covered in body copy)
+
+### Pricing discipline (body copy, added 2026-06-02)
+
+Collection body copy must not contain specific dollar amounts. Use tier and positioning language instead. Collections are the page type most prone to price-stacking because they aggregate many products across many price points. This is part of the broader content evergreen-ness principle (`context/workforce-conventions.md` 'Content evergreen-ness'): prices decay fast (sales, retail adjustments, discontinuations), stale prices in body copy create user trust issues (body says $34.99, the PDP shows $39.99), prices carry no SEO ranking benefit for category-intent queries, and every price change otherwise ripples into a body-copy edit. Pricing belongs in PDPs, product cards, and Product schema, where Shopify auto-maintains accuracy.
+
+Stuffed vs natural (the URL #1 pricing block, Day 2 batch #1):
+
+- STUFFED: "Caps run around $34.99 across Mexico, Germany, Spain. Scarves run $24 to $44. Flags run $44.99; Mimi Imports country flags run $19.99. Bags land between $30 and $80." -> NATURAL: "Caps span the federation roster from everyday snapbacks to premium fitted silhouettes; scarves scale from match-day basics to collector-grade weaves; flags range from desk-size to wall-size; bags scale from compact carry to full match-day haulers."
+
+Natural alternatives: tier and positioning language ("entry-level", "mid-tier", "premium", "collector"); comparative language ("scales from compact to wall-size", "ranges from everyday to match-day"); category breadth without specific numbers.
+
+### Brand mention discipline (body copy, added 2026-06-02)
+
+A body sentence must not carry 3+ comma-separated brand names. Stacked brand names read as brand keyword surfacing, not editorial narrative; brand breadth belongs in product cards and faceted filters. Individual brand mentions are fine when the narrative justifies the brand's role: one or two brands per sentence at most, each with role-specific context.
+
+Stuffed vs natural (the URL #1 opening sentence, Day 2 batch #1):
+
+- STUFFED: "adidas, Nike, Puma, Wincraft, Mimi Imports, Logo Brands, and Fan Ink each carry federation-licensed pieces." (7 comma-separated brands) -> NATURAL: "Federation-licensed pieces come from category leaders across apparel, accessories, and collectibles."
+- NATURAL (narratively justified single/dual mention): "adidas covers cap silhouettes across the federation roster; Wincraft owns the wall-flag category."
+
+### Gate 13 check criteria (per brief, across all output fields)
+
+Fields in scope: Title, Meta Title, Meta Description, Short Description / hero block, Body Description (including H2s and H3s), internal link anchor text, FAQ questions and answers when included.
+
+- No field contains a comma-stacked keyword list (3+ comma-separated keywords).
+- No field contains an ampersand-terminated keyword list.
+- No field stacks synonyms of the same concept (pick one canonical term per field).
+- No field stacks modifiers redundantly.
+- No title field stacks brands where only one or two are relevant.
+- NEW (2026-06-02): No specific dollar amounts in collection body copy (use tier / positioning language).
+- NEW (2026-06-02): No body sentence carries 3+ comma-separated brand names (brand mentions require narrative justification, one or two per sentence max).
+- Each field reads as natural human-written prose.
+
+FAIL = revise the field; PASS = the field clears. SCRIBE self-revises any failing field during Phase 4 (brief generation) before the Phase 5 voice check. ORIN re-checks at the orchestrator layer as defense-in-depth.
+
+Cross-references: `context/page-type-playbooks/product-page-playbook.md` 'Anti-stuffing discipline (Gate 13, added 2026-06-02)' (canonical version), `.claude/agents/on-page-seo/agent.md` Section 11 Gate 13 + Section 9 'Anti-stuffing discipline', `.claude/agents/master-strategist/agent.md` Section 9 (ORIN defense-in-depth re-check), `context/workforce-conventions.md` 'Anti-stuffing discipline (Gate 13, cross-cutting)' + 'Content evergreen-ness' + 'Brand styling conventions'. Pricing discipline, body brand-mention discipline, and adidas brand styling (`context/workforce-conventions.md` 'Brand styling conventions': adidas is always lowercase, even at sentence start) are complementary disciplines all surfaced from the same Day 2 batch #1 review (2026-06-02).
 
 ## Five canonical brief-craft rules
 
@@ -218,7 +278,7 @@ The visible H1 on the live collection page. Names the topic specifically. Avatar
 
 - Mexico: `Mexico National Team Jerseys & El Tri Fan Gear`. Differentiates from Liga MX club content.
 - Argentina: `Argentina National Team Jerseys & La Albiceleste Gear`. Differentiates from Argentine club content.
-- Adidas Predator: `Adidas Predator Boots, Cleats & Pro Edition Lineup`. Differentiates from generic "soccer cleats" browsing.
+- adidas Predator: `Adidas Predator Boots, Cleats & Pro Edition Lineup`. Differentiates from generic "soccer cleats" browsing.
 
 Per `.claude/agents/on-page-seo/agent.md` Section 9 'Keyword placement per field', the head keyword sits in the first three words. Brand prefix only when it adds trust.
 
@@ -232,7 +292,7 @@ Examples (post-codification, no brand suffix in field):
 
 - Mexico: `Mexico Jersey & El Tri 2026 World Cup Gear` (42 chars in field; theme renders to ~55 chars SERP display).
 - Argentina: `Argentina Jersey & La Albiceleste 2026 World Cup Kit` (52 chars in field; theme renders to ~65 chars SERP display, slight over but acceptable).
-- Adidas Predator: `Adidas Predator Cleats | Pro Edition & Elite Models` (51 chars in field; theme renders to ~64 chars SERP display).
+- adidas Predator: `Adidas Predator Cleats | Pro Edition & Elite Models` (51 chars in field; theme renders to ~64 chars SERP display).
 
 50 to 60 characters in field. Front-load the head keyword in the first 30 characters. Mobile cuts around 40 characters; the value-prop sits before that line.
 
@@ -269,7 +329,7 @@ H2 patterns by collection type (these are starting frames, not rigid templates; 
 
 - **National team:** team history, current squad, kit history and design, cultural significance to fans, what the next major tournament means, key players to watch.
 - **Player:** biography, career arc, signature moments, current season, what their gear means to fans, kit and boot lineage.
-- **Brand category (e.g., Adidas Predator):** brand heritage, signature design elements, who wears them and why, model lineage (gen-by-gen evolution), current top model, who the line is for.
+- **Brand category (e.g., adidas Predator):** brand heritage, signature design elements, who wears them and why, model lineage (gen-by-gen evolution), current top model, who the line is for.
 - **Product category (e.g., goalkeeper gloves):** what the category is and isn't, how to choose, who plays in this category, signature brands and models, fit and care basics.
 
 Each H2 should pass the lift test from `.claude/agents/on-page-seo/agent.md` Section 11 Gate 9. If the section could appear unchanged on Soccer.com or any generic retailer's site, it lacks topic depth and gets rewritten.
@@ -379,7 +439,7 @@ For player collection pages (Messi, Ronaldo):
 - **Brand link:** the player's signature boot or kit brand collection.
 - **Era / tournament link:** relevant historical context collection if one exists.
 
-For brand category collection pages (Adidas Predator, Nike Mercurial):
+For brand category collection pages (adidas Predator, Nike Mercurial):
 
 - **Parent brand collection.**
 - **Prominent player collection** if featured.
@@ -419,7 +479,7 @@ If a candidate failed validation, document the failure inline so the audit trail
 
 URL: `/collections/mexico`
 Primary avatar: Carlos
-Topic-research outputs: El Tri founded 1927; FMF; current head coach; 2026 World Cup co-host; Estadio Azteca opener June 11 2026; recent kit history (1986, 1994, 1998, 2010, 2014, 2018, 2022, 2026); diaspora identity in LA; Adidas as kit supplier since 1999.
+Topic-research outputs: El Tri founded 1927; FMF; current head coach; 2026 World Cup co-host; Estadio Azteca opener June 11 2026; recent kit history (1986, 1994, 1998, 2010, 2014, 2018, 2022, 2026); diaspora identity in LA; adidas as kit supplier since 1999.
 
 _The H2 names below reflect the 'Evergreen body, contained catalyst' rule above (1 catalyst + 5 evergreen). Body excerpts are abbreviated to show topic substance per heading; for the full applied example with body content fully matched to evergreen-plus-catalyst structure, see `deliverables/page-optimizations/2026-05-08_mexico-v3.md`._
 
@@ -524,7 +584,7 @@ Annotation:
 - The body works for Argentina, Barcelona, and Inter Miami fans simultaneously without diluting any of them.
 - Lift test passes: the specifics (Lusail 2022, the Saudi-offer detail, the Heat.RDY vs league-tech distinction) commit to angles a generic retailer would avoid.
 
-## Worked example 3: Brand category collection (Adidas Predator template)
+## Worked example 3: Brand category collection (adidas Predator template)
 
 URL: `/collections/adidas-predator`
 Primary avatar: Tyler (performance buyer)

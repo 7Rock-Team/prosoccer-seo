@@ -112,6 +112,80 @@ Worked example for all five rules: UAE 2026 PDP v3 brief at `deliverables/page-o
 
 **Category-specific H2 templates** for 15 product categories ProSoccer sells live in `context/page-type-playbooks/product-page-playbook.md` 'Category-specific H2 templates'. National-team-jersey template is CANONICAL, four-time validated within the 2026 World Cup cycle (UAE 2026 Home + Mexico 2026 Home / Away / Third per commits `e56a7d6`, `85dd1f0`, `f2c2c34`); remaining categories are at various validation stages from DRAFT v1 to CANONICAL per the playbook.
 
+## Anti-stuffing discipline (Gate 13, cross-cutting)
+
+Anti-stuffing discipline (Gate 13, added 2026-06-02): Quality issue surfaced in Day 2 batch #1 URL #2 (national-team-accessories) Title field "National Team Soccer Accessories: Scarves, Hats, Bags, Flags & Balls". Comma-stacked keyword list pattern reads as keyword stuffing regardless of whether individual items are technically relevant to the page. Signals to Google quality systems (Helpful Content Update, Spam Updates) and degrades user CTR even at same rank position. Workforce discipline: product category breadth belongs in body H2 framework and Long Description body copy, not in Title or Meta Title fields. Each output field should read as natural language a human would write.
+
+**Gate 13 is its own gate, not folded into the Gate 1 / Gate 2 voice check.** The voice check governs prose voice and forbidden characters; Gate 13 governs structural keyword-stuffing patterns. It is also distinct from Gate 12 keyword distribution, which caps over-repetition of a single keyword across fields. Gate 12 catches one keyword repeated too often; Gate 13 catches a single field shaped as a list of many adjacent keywords. Distinct concerns, distinct gates. Gate 13 sits after Gate 12; the workforce gates suite runs 13 gates as of 2026-06-02 (previously 12).
+
+**Applies to ALL output fields, not just titles:** Title, Meta Title, Meta Description, Short Description, Body / Long Description (including H2s and H3s), internal link anchor text, FAQ questions and answers when included.
+
+Seven anti-patterns flagged (1 through 5 apply in any field; 6 and 7 are body-copy patterns added 2026-06-02 with the Gate 13 scope extension):
+
+1. **Comma-stacked keyword lists** (`[Topic]: keyword1, keyword2, keyword3 & keyword4` or `[Topic] - A, B, C, D`). Any field with 3+ comma-separated keywords fails.
+2. **Ampersand-terminated lists** (trailing `& [final keyword]` on a comma list).
+3. **Synonym stacking** (jerseys / shirts / kits / tops; cleats / boots / shoes). One canonical term per field.
+4. **Modifier stacking** (audience: Men's / Boys' / Youth / Kids'; product: Authentic / Replica / Stadium / Match-Worn).
+5. **Brand stacking in titles** (adidas, Nike, Puma listed in one title when only one or two are relevant).
+6. **Price stacking in body copy.** Specific dollar amounts in collection or product page body copy. Surfaced in Day 2 batch #1 URL #1 Long Description pricing block (6 specific dollar amounts: "Caps run around $34.99... Scarves run $24 to $44. Flags run $44.99; Mimi Imports country flags run $19.99... Bags land between $30 and $80."). Use tier / positioning language instead; see 'Content evergreen-ness' below.
+7. **Brand stacking in body sentences.** 3+ comma-separated brand names in a single sentence within Body Description. Surfaced in Day 2 batch #1 URL #1 Long Description opening sentence (7 comma-separated brands: "adidas, Nike, Puma, Wincraft, Mimi Imports, Logo Brands, and Fan Ink each carry federation-licensed pieces."). Brand breadth belongs in faceted filters and product cards; body copy mentions individual brands only when narrative justifies (one or two per sentence, with role-specific context).
+
+Defense-in-depth: SCRIBE runs the Gate 13 self-check during Phase 4 (brief drafting) before the Phase 5 voice check and self-revises any failing field; ORIN re-checks at the orchestrator layer (the same defense-in-depth posture as the independent voice check), flagging any field with 3+ comma-separated keywords, any body copy with 3+ dollar amounts, or any body sentence with 3+ comma-separated brands for SCRIBE revision. Collection pages carry particular emphasis because a collection aggregates multiple product categories, brands, and price points by definition and is the page type most prone to comma-stacking, price-stacking, and brand-stacking.
+
+**Fix-forward scope.** Day 2 batch #1 (the 10 collection briefs already shipped 2026-05-29) is NOT fix-forwarded per Mike's call (2026-06-02); Mike applies the disciplines manually during Shopify admin implementation. This codification is forward-applicable to all future batches (Day 3+).
+
+Cross-references: `context/page-type-playbooks/product-page-playbook.md` 'Anti-stuffing discipline (Gate 13, added 2026-06-02)' (canonical version with stuffed-vs-natural examples, pricing discipline, brand mention discipline), `context/page-type-playbooks/collection-page-playbook.md` 'Anti-stuffing discipline (Gate 13, added 2026-06-02)' (collection emphasis), `.claude/agents/on-page-seo/agent.md` Section 11 Gate 13 + Section 9 'Anti-stuffing discipline' (SCRIBE Phase 4 self-check), `.claude/agents/master-strategist/agent.md` Section 9 trust-but-verify + Section 11 Gate 9 (ORIN defense-in-depth re-check). See also 'Content evergreen-ness' and 'Brand styling conventions' below.
+
+## Content evergreen-ness
+
+Content evergreen-ness (added 2026-06-02 with Gate 13 extension): Body copy on collection and product pages should not contain specific prices, specific inventory levels, or other ephemeral data points that decay quickly. Pricing information belongs in PDPs, product cards, and schema markup where Shopify automatically maintains accuracy. Body copy should use tier/positioning language ("entry-level," "mid-tier," "premium," "collector") that remains accurate as catalog prices shift. Same principle applies to brand breadth: brand stacking in body sentences belongs in faceted filters and product cards, not body prose. Body copy mentions individual brands only when narrative justifies (one or two per sentence, with role-specific context).
+
+Why it matters operationally: prices decay fast (sales, retail adjustments, discontinuations); stale prices in body copy create user trust issues (body says $34.99, the PDP shows $39.99); specific prices carry no SEO ranking benefit for category-intent queries; body copy with stacked dollar amounts reads as a price catalog, not editorial; and every price change otherwise ripples into a body-copy maintenance edit. The same decay logic applies to any ephemeral data point (live inventory counts, "currently X in stock," time-bound promo figures).
+
+Cross-references: 'Anti-stuffing discipline (Gate 13, cross-cutting)' anti-patterns 6 and 7 above; `context/page-type-playbooks/product-page-playbook.md` 'Pricing discipline (body copy)' + 'Brand mention discipline (body copy)'; `context/page-type-playbooks/collection-page-playbook.md` same subsections.
+
+## Brand styling conventions
+
+Some brands have non-standard capitalization as part of their official trademark identity. This section is the registry; it accumulates as other brand styling rules surface (eBay, iPhone, DeepL, etc.). Each rule applies to ALL output fields: Title, Meta Title, Meta Description, Short Description, Body Description (H2s, H3s, body prose), internal link anchor text, and FAQ questions and answers.
+
+### adidas (always lowercase)
+
+"adidas" is ALWAYS lowercase, regardless of position in a sentence, including sentence start. The lowercase 'a' is part of adidas's registered trademark identity (Bauhaus design heritage from Adi Dassler). There is no exception: adidas is lowercase even at sentence start. If a sentence-start placement feels awkward, restructure the sentence rather than capitalize.
+
+Correct:
+
+- "adidas snapback caps span the federation roster"
+- "Federation gear from adidas, Wincraft, and Mimi Imports anchors the lineup"
+- "The 2026 home kits are produced by adidas under FIFA license"
+- Sentence-start: "adidas covers the cap and bag categories."
+
+Incorrect (do not use):
+
+- `Adidas snapback caps...` (auto-capitalized at sentence start)
+- `ADIDAS Mexico Home Jersey` (all-caps)
+- `Adidas, Nike, and Puma...` (auto-capitalized in a list)
+
+Restructure pattern (light-touch; don't force unnatural phrasing just to avoid sentence-start):
+
+- Awkward: "adidas covers cap silhouettes across the federation roster."
+- Restructured: "Cap silhouettes from adidas span the federation roster."
+
+Both are valid; pick whichever reads more naturally for the surrounding copy.
+
+Enforcement (defense-in-depth): SCRIBE checks adidas lowercase styling during Phase 4 drafting and restructures sentence-start placements rather than capitalizing; ORIN's orchestrator-layer re-check flags any `Adidas` (capitalized) in any output field; `scripts/voice_check.py` enforces a `\bAdidas\b` = FAIL regex at script level (mirrors the em-dash and forbidden-word checks), which catches the most likely failure mode (sentence-start auto-capitalization, a model-level tendency).
+
+Cross-references: `.claude/agents/on-page-seo/agent.md` Section 9 'Brand styling discipline' + Section 11 brand styling check, `.claude/agents/master-strategist/agent.md` Section 9 trust-but-verify + Section 11 Gate 10, `scripts/voice_check.py` (`\bAdidas\b` regex), both page-type playbooks 'Anti-stuffing discipline' cross-references.
+
+Regex implementation note (`scripts/voice_check.py`): The `\bAdidas\b` capitalization check uses targeted exemptions to avoid false positives on workforce-internal taxonomy compounds (`Adidas-only`, `non-Adidas`, `Adidas-licensed`), pedagogical anti-pattern demonstration lines, and code-fenced or backticked demonstration content. The check catches the primary failure mode (sentence-start auto-capitalization in real output copy) without breaking on legitimate internal references. Implementation: a negative lookbehind for hyphen and backtick, a negative lookahead for hyphen+word char, plus a per-line skip when the line carries a pedagogical marker (INCORRECT, DO NOT USE, anti-pattern, STUFFED:, wrong:, bad example).
+
+Known follow-up (no proactive sweep): the other repo files that contain capitalized `Adidas` (roughly 59 `.md` files outside the five edited in this codification, mostly shipped deliverable briefs Mike chose not to fix-forward) are NOT touched here. The `\bAdidas\b` check catches any violation at the modification point; each file reconciles case-by-case at its next edit per natural editing cycles. No repo-wide rewrite is needed or wanted.
+
+### Architectural learning notes (2026-06-02)
+
+**Brand styling discipline (added 2026-06-02 with Gate 13 extension):** Some brands have non-standard capitalization as part of their official trademark identity. adidas is the canonical example, always lowercase, including sentence-start. Workforce discipline: SCRIBE never auto-capitalizes adidas; if sentence-start would feel awkward, restructure the sentence rather than capitalize. ORIN defense-in-depth re-check flags any `Adidas` (capitalized) in output fields. voice_check.py regex check enforces at script level. As other brand styling rules surface, add to this section.
+
+**Content evergreen-ness (added 2026-06-02 with Gate 13 extension):** Body copy on collection and product pages should not contain specific prices, specific inventory levels, or other ephemeral data points that decay quickly. Pricing information belongs in PDPs, product cards, and schema markup where Shopify automatically maintains accuracy. Body copy should use tier/positioning language ("entry-level," "mid-tier," "premium," "collector") that remains accurate as catalog prices shift. Same principle applies to brand breadth: brand stacking in body sentences belongs in faceted filters and product cards, not body prose. Body copy mentions individual brands only when narrative justifies (one or two per sentence, with role-specific context).
+
 ## Brief content requirements (data-backed)
 
 Both PDP and collection-page briefs must surface a minimal data-backed keyword research block and respect the product-page link policy. These are hard requirements, not optional.
@@ -404,7 +478,7 @@ Production workflow runs as batch parallel dispatch with single daily batch comm
 
 **Speed target.** 10-URL mixed-tier batch completes in ~25-45 min wall clock vs ~3-4 hours sequential. The slowest individual brief in the batch sets the wall-clock floor; Firecrawl / DataForSEO / Tavily infrastructure response times are the secondary constraint.
 
-**Quality discipline preserved per brief.** Voice check, 11 self-verification gates plus Gate 12 keyword distribution, year-specificity keyword discipline, brand IP compliance, currency check, sensitivity check, fact verification, internal link validation, per-brief workforce briefing audit trail. None of these flex under batch dispatch.
+**Quality discipline preserved per brief.** Voice check, 11 self-verification gates plus Gate 12 keyword distribution plus Gate 13 anti-stuffing, year-specificity keyword discipline, brand IP compliance, currency check, sensitivity check, fact verification, internal link validation, per-brief workforce briefing audit trail. None of these flex under batch dispatch.
 
 **Operational gates removed (safety gates preserved).** Per-brief Mike gate review replaced by end-of-batch review at single commit gate. Per-brief commit + push cycle replaced by single daily batch commit + push. Tier classification Mike confirmation replaced by ORIN auto-classification with post-batch Mike review of the classifications applied.
 
@@ -425,7 +499,7 @@ Tier definitions:
 | Tier 2B | Collection page | ~15 to 20 min | Full workflow scoped to 6 collection-specific fields (Title, Slug, Meta Title, Meta Description, Short Description / hero block, body Description) | All collection pages |
 | Tier 3 | Mike-drafted minimal | ~5 to 10 min | Mike drafts 4 to 6 fields; ORIN runs lightweight QA only | Rare exception |
 
-Universal quality discipline (preserved across all tiers): voice check, 11 self-verification gates (including Gate 12 keyword distribution), brand IP compliance, year-specificity keyword discipline, eligibility verification (Step 0.5), keyword distribution discipline. What flexes per tier: research depth, brief drafting depth, field count.
+Universal quality discipline (preserved across all tiers): voice check, 11 self-verification gates (including Gate 12 keyword distribution and Gate 13 anti-stuffing), brand IP compliance, year-specificity keyword discipline, eligibility verification (Step 0.5), keyword distribution discipline. What flexes per tier: research depth, brief drafting depth, field count.
 
 Validation milestones for canonical templates:
 
@@ -465,7 +539,7 @@ If Claude Code ships OAuth-token inheritance for sub-agents in a future release,
 
 ### Large-payload offload pattern
 
-Observed in the RECON Phase C test (2026-05-26): a `mcp__firecrawl-mcp__firecrawl_scrape` on the Adidas Predator collection page returned a ~98,643-character markdown payload. The Claude Code harness wrote the payload to a tool-results file on disk (path: `<projects-dir>/<session-id>/tool-results/mcp-firecrawl-mcp-firecrawl_scrape-<timestamp>.txt`) rather than inlining the full content into the tool response visible to the sub-agent. The sub-agent received a truncated inline preview plus the file path for follow-up reading.
+Observed in the RECON Phase C test (2026-05-26): a `mcp__firecrawl-mcp__firecrawl_scrape` on the adidas Predator collection page returned a ~98,643-character markdown payload. The Claude Code harness wrote the payload to a tool-results file on disk (path: `<projects-dir>/<session-id>/tool-results/mcp-firecrawl-mcp-firecrawl_scrape-<timestamp>.txt`) rather than inlining the full content into the tool response visible to the sub-agent. The sub-agent received a truncated inline preview plus the file path for follow-up reading.
 
 This is a Claude Code guardrail, not a Firecrawl error. The mechanism is silent (no warning surfaces in the tool result envelope; the agent must notice the response is partial and read the offload file to get the rest). Operational implication for the workforce: large-payload MCP calls (full-site crawls, collection-page scrapes with many product links, bulk DataForSEO endpoints) may land partially inline and partially on disk. Agents should:
 

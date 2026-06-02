@@ -22,7 +22,7 @@ The following are out of scope for product-page body copy. A draft that includes
 The following are in scope and the body copy must serve them:
 
 - The product itself. Design, technology, materials, features. Every feature is translated to what it ENABLES for the avatar per `context/03-brand-voice.md` 'Emotional Connection Over Feature Selling'. Features support the feeling; they never lead.
-- The brand. Signature elements, heritage, what distinguishes this brand from the alternatives the avatar is also considering. For an Adidas Predator product page, the Predator-line context belongs here. For a Nike Mercurial Superfly page, the Mercurial heritage belongs here.
+- The brand. Signature elements, heritage, what distinguishes this brand from the alternatives the avatar is also considering. For an adidas Predator product page, the Predator-line context belongs here. For a Nike Mercurial Superfly page, the Mercurial heritage belongs here.
 - The product's place in the catalog and lineup. The 2026 home kit, not just "a Mexico jersey." The Mercurial Superfly 9 Elite, not just "a Nike cleat." The avatar wants to know which version of the product this is and what they're getting that other versions don't have.
 - The avatar's emotional context for ownership. What does wearing or using this product mean to the avatar? Carlos buying the 2026 El Tri home authentic feels something different from Tyler buying the same kit. Same product, different emotional anchor.
 - Fit, sizing, and care information where relevant. Product copy is a place where avatar pain frames map directly to copy that closes the sale. Jennifer's "Wide Foot Nightmare" frame, Carlos's "is this real or fake" frame, Tyler's "will it actually run faster than my last pair" frame.
@@ -33,9 +33,9 @@ PDP production runs under ORIN's batch parallel dispatch + single daily batch co
 
 ## Tiered workflow architecture for PDP optimization (added 2026-05-28)
 
-PDP brief production runs at one of three PDP-applicable tiers (Tier 2B is collection-only and lives in `context/page-type-playbooks/collection-page-playbook.md`). Tier is named at dispatch by ORIN; SCRIBE adapts scope accordingly. Quality discipline (voice check, 11 gates including Gate 12 keyword distribution, brand IP, year-specificity, eligibility verification, keyword distribution) preserved universally.
+PDP brief production runs at one of three PDP-applicable tiers (Tier 2B is collection-only and lives in `context/page-type-playbooks/collection-page-playbook.md`). Tier is named at dispatch by ORIN; SCRIBE adapts scope accordingly. Quality discipline (voice check, 11 gates plus Gate 12 keyword distribution plus Gate 13 anti-stuffing, brand IP, year-specificity, eligibility verification, keyword distribution) preserved universally.
 
-- **Tier 1 (Foundational PDP, ~25 to 35 min).** Dispatch when the PDP is the first in a new category for ProSoccer, when it will establish or refine a category-specific H2 template, or when it is a strategically critical hero product (highest-volume keyword target, flagship release, brand-narrative anchor). Full SCRIBE workflow: broad Tavily research across cultural / squad / tournament / kit-supplier / design dimensions; fresh brief build with template-refinement candidate analysis; all 11 gates surfaced. Estimated 5 to 10% of PDP work.
+- **Tier 1 (Foundational PDP, ~25 to 35 min).** Dispatch when the PDP is the first in a new category for ProSoccer, when it will establish or refine a category-specific H2 template, or when it is a strategically critical hero product (highest-volume keyword target, flagship release, brand-narrative anchor). Full SCRIBE workflow: broad Tavily research across cultural / squad / tournament / kit-supplier / design dimensions; fresh brief build with template-refinement candidate analysis; all 13 gates surfaced (11 Section 11 gates plus Gate 12 keyword distribution plus Gate 13 anti-stuffing). Estimated 5 to 10% of PDP work.
 - **Tier 2A (Pattern-follow PDP, ~12 to 16 min).** Dispatch when the PDP follows an established CANONICAL template (National Team Jersey four-time validated as of 2026-05-28, Club Jersey CANONICAL, Soccer Cleats VALIDATED v1) with no template-refining work expected. Scoped Tavily research: currency check only (squad / fixtures / manager / kit-supplier currency for the specific page), not broad cultural context (the template already encodes the cultural-context H2 pattern). Template-fill brief drafting: canonical structure with verified product-specific specifics swapped in, not fresh build from blank. Bulk of PDP work (~70 to 80%).
 - **Tier 3 (Mike-drafted minimal, ~5 to 10 min).** Rare exception when Mike drafts 4 to 6 fields directly and ORIN runs lightweight QA (voice check + DFS keyword verify + brand IP compliance scan only). Requires explicit Mike request; NOT collection pages by default; NOT new categories without prior template work.
 
@@ -206,6 +206,68 @@ Keyword SELECTION ('Primary keyword selection for year/generation/season-bound p
 
 Cross-references: `.claude/agents/on-page-seo/agent.md` Section 9 'Keyword distribution discipline' (operational summary + Gate 12 definition), `context/page-type-playbooks/collection-page-playbook.md` 'Keyword distribution discipline' (collection 6-field adapted version).
 
+## Anti-stuffing discipline (Gate 13, added 2026-06-02)
+
+Keyword distribution discipline (the section above) governs how the primary keyword propagates through fields and caps repetition. Anti-stuffing discipline is a separate concern: it governs the STRUCTURE of any single field so that no field reads as a comma-stacked keyword list. The two are distinct. Gate 12 catches over-repetition of the same keyword; Gate 13 catches list-shaped fields that pack many adjacent keywords into one string. Gate 13 sits after Gate 12 in the gates suite (the suite runs 13 gates as of 2026-06-02). It is also distinct from the Gate 1 voice check, which governs prose voice and forbidden characters; Gate 13 governs structural keyword-stuffing patterns. Distinct concerns, distinct gates.
+
+The quality issue that surfaced this gate: a Title field reading `National Team Soccer Accessories: Scarves, Hats, Bags, Flags & Balls` (Day 2 batch #1 URL #2, flagged during Mike's Shopify admin implementation 2026-06-02). A comma-stacked keyword list reads as keyword stuffing to Google quality systems (Helpful Content Update, Spam Updates) regardless of whether each item is technically relevant to the page, and it degrades user CTR in the SERP even at the same rank position.
+
+**Core principle: product category breadth belongs in the body H2 framework and Long Description body copy, not in the Title or Meta Title fields.** Each output field should read as natural language a human would actually write. Breadth across product categories is expressed through the body's H2 sections and the narrative, not by listing categories in a title-level field.
+
+### Anti-patterns to flag (any field)
+
+1. **Comma-stacked keyword lists.** The format `[Topic]: keyword1, keyword2, keyword3 & keyword4` or `[Topic] - A, B, C, D` reads as stuffing regardless of relevance. Any field carrying 3+ comma-separated keywords fails.
+2. **Ampersand-terminated lists.** A trailing `& [final keyword]` at the end of a comma list compounds the spam signal.
+3. **Synonym stacking.** Treating synonyms (jerseys / shirts / kits / tops; cleats / boots / shoes) as variations to stack rather than picking one canonical term per field.
+4. **Modifier stacking.** Stacking audience modifiers (Men's / Boys' / Youth / Kids') or product modifiers (Authentic / Replica / Stadium / Match-Worn) in a single field.
+5. **Brand stacking (titles).** Listing multiple brands (adidas, Nike, Puma) in a title when only one or two are relevant to the page.
+6. **Price stacking (body copy).** Specific dollar amounts in product-page body copy (added 2026-06-02). Prices decay; they belong in the PDP variant selector, product cards, and schema, not the body prose.
+7. **Brand stacking (body sentences).** Three or more comma-separated brand names in a single sentence within the Body / Long Description (added 2026-06-02). The body-copy extension of anti-pattern 5; brand breadth belongs in product cards and faceted filters, not body prose.
+
+### Stuffed vs natural
+
+- STUFFED: `National Team Soccer Accessories: Scarves, Hats, Bags, Flags & Balls` -> NATURAL: `National Team Soccer Accessories` OR `2026 National Team Soccer Accessories`
+- STUFFED: `Soccer Jerseys, Football Shirts, Kits & Tops` -> NATURAL: `Soccer Jerseys` OR `2026 National Team Soccer Jerseys`
+- STUFFED: `Men's Boys' Youth Soccer Cleats` -> NATURAL: `Soccer Cleats` (audience breadth covered in body copy)
+
+### Pricing discipline (body copy, added 2026-06-02)
+
+Body copy on a product page must not contain specific dollar amounts. Use tier and positioning language instead. This is part of the broader content evergreen-ness principle (`context/workforce-conventions.md` 'Content evergreen-ness'): prices decay fast (sales, retail adjustments, discontinuations), stale prices in body copy create user trust issues (body says $34.99, the PDP shows $39.99), prices carry no SEO ranking benefit for category-intent queries, and every price change otherwise ripples into a body-copy edit. Pricing belongs in the PDP variant selector, product cards, and Product schema, where Shopify auto-maintains accuracy.
+
+Stuffed vs natural:
+
+- STUFFED: "Caps run around $34.99 across Mexico, Germany, Spain." -> NATURAL: "Caps span the federation roster from everyday snapbacks to premium fitted silhouettes."
+- STUFFED: "Scarves run $24 to $44. Flags run $44.99; country flags run $19.99." -> NATURAL: "Scarves scale from match-day basics to collector-grade weaves; flags range from desk-size to wall-size."
+- STUFFED: "Bags land between $30 and $80 across adidas, Nike, and Puma." -> NATURAL: "Bags scale from compact gym carry to full match-day kit haulers."
+
+Natural alternatives: tier and positioning language ("entry-level", "mid-tier", "premium", "collector"); comparative language ("scales from compact to wall-size", "ranges from everyday to match-day"); category breadth without specific numbers.
+
+### Brand mention discipline (body copy, added 2026-06-02)
+
+A body sentence must not carry 3+ comma-separated brand names. Stacked brand names read as brand keyword surfacing, not editorial narrative; brand breadth belongs in product cards and faceted filters. Individual brand mentions are fine when the narrative justifies the brand's role: one or two brands per sentence at most, each with role-specific context.
+
+Stuffed vs natural:
+
+- STUFFED: "adidas, Nike, Puma, Wincraft, Mimi Imports, Logo Brands, and Fan Ink each carry federation-licensed pieces." -> NATURAL: "Federation-licensed pieces come from category leaders across apparel, accessories, and collectibles."
+- NATURAL (narratively justified single/dual mention): "adidas covers cap silhouettes across the federation roster; Wincraft owns the wall-flag category."
+
+### Gate 13 check criteria (per brief, across all output fields)
+
+Fields in scope: Title, Meta Title, Meta Description, Short Description, Body / Long Description (including H2s and H3s), internal link anchor text, FAQ questions and answers when included.
+
+- No field contains a comma-stacked keyword list (3+ comma-separated keywords).
+- No field contains an ampersand-terminated keyword list.
+- No field stacks synonyms of the same concept (pick one canonical term per field).
+- No field stacks modifiers redundantly.
+- No title field stacks brands where only one or two are relevant.
+- NEW (2026-06-02): No specific dollar amounts in product body copy (use tier / positioning language).
+- NEW (2026-06-02): No body sentence carries 3+ comma-separated brand names (brand mentions require narrative justification, one or two per sentence max).
+- Each field reads as natural human-written prose.
+
+FAIL = revise the field; PASS = the field clears. SCRIBE self-revises any failing field during Phase 4 (brief drafting) before the Phase 5 voice check. ORIN re-checks at the orchestrator layer as defense-in-depth.
+
+Cross-references: `.claude/agents/on-page-seo/agent.md` Section 11 Gate 13 (SCRIBE self-check) and Section 9 'Anti-stuffing discipline', `.claude/agents/master-strategist/agent.md` Section 9 (ORIN defense-in-depth re-check), `context/workforce-conventions.md` 'Anti-stuffing discipline (Gate 13, cross-cutting)' + 'Content evergreen-ness' + 'Brand styling conventions'. Pricing discipline, body brand-mention discipline, and adidas brand styling (`context/workforce-conventions.md` 'Brand styling conventions': adidas is always lowercase, even at sentence start) are complementary disciplines all surfaced from the same Day 2 batch #1 review (2026-06-02).
+
 ## Five canonical brief-craft rules
 
 These five rules govern every brief SCRIBE produces under the Fresh Optimization workflow. They emerged from the 2026-05-26 UAE PDP refinement session and lock in agency-grade craft standards across all future briefs. The five rules below are the NEW codification from this session; the PDP external link policy (internal-only, locked) is already canonical in 'Internal links only on product pages' later in this playbook, and the 1 to 2 internal-links target is already canonical in 'Internal link strategy' later in this playbook. Those existing policies stand; the five rules below extend them with the craft conventions that emerged from the UAE v3 work. Cross-referenced from `.claude/agents/on-page-seo/agent.md` Section 13 and `context/workforce-conventions.md`.
@@ -330,9 +392,9 @@ Same six fields as a collection page, but with product-page subject framing.
 
 Names the specific product. Brand, model, version. Avatar-search-language preserved here.
 
-- 2026 Mexico Home Authentic by Adidas: `Mexico 2026 Home Authentic Jersey by Adidas`
+- 2026 Mexico Home Authentic by adidas: `Mexico 2026 Home Authentic Jersey by Adidas`
 - Nike Mercurial Superfly 9 Elite: `Nike Mercurial Superfly 9 Elite FG Soccer Cleats`
-- Adidas Tiro 23 Training Pants: `Adidas Tiro 23 Training Pants`
+- adidas Tiro 23 Training Pants: `Adidas Tiro 23 Training Pants`
 
 The product name appears in this field exactly the way the avatar searches for it. If the avatar searches for "Mexico 2026 home jersey," that's the framing. If the avatar searches for "Mercurial Superfly Elite," that's the framing.
 
@@ -405,7 +467,7 @@ Required if relevant:
 URL: `/products/mexico-2026-home-authentic-jersey-adidas`
 Primary avatar: Carlos
 Secondary avatar: Tyler (performance buyer who wants the player cut for training-and-wear)
-Topic-research outputs: Adidas El Tri kit supplier since 1999; Heat.RDY weave on the player edition; player-edition tighter cut and heat-bonded badges; fan-edition softer fabric and standard fit; price gap typically $30 to $50; the 2026 home kit features a verde primary with Aztec patterning and FMF crest.
+Topic-research outputs: adidas El Tri kit supplier since 1999; Heat.RDY weave on the player edition; player-edition tighter cut and heat-bonded badges; fan-edition softer fabric and standard fit; price gap typically $30 to $50; the 2026 home kit features a verde primary with Aztec patterning and FMF crest.
 
 ```
 Title (Product Title)
@@ -447,7 +509,7 @@ The jersey itself. Federation tags inside the collar with the holographic. The A
 
 Annotation:
 
-- Body copy is about the product and Adidas's design choices, not about the store.
+- Body copy is about the product and adidas's design choices, not about the store.
 - Topic-research outputs are visible: kit-supplier history, Heat.RDY context, player-vs-fan distinction, the verde-primary detail, the youth-sizing fact.
 - Carlos primary anchors the emotional context (Estadio Azteca, "wear what they wear"). Tyler shows up implicitly in the player-edition framing for performance-minded buyers.
 - The store doesn't appear inside the body copy. Returns, shipping, and retail are not mentioned. Those live in the cart and checkout flow.
@@ -509,7 +571,7 @@ Annotation:
 URL: `/products/adidas-tiro-23-training-pants`
 Primary avatar: Tyler (training fit)
 Secondary avatar: Mike the Coach (team kit and travel)
-Topic-research outputs: Tiro line launched in the 2000s as Adidas's training-pant franchise; signature three-stripe down the side; tapered slim-fit cut; AEROREADY moisture management; ankle zip; popular as both a training pant and a casual wear item; Tiro 23 is the current generation as of 2026.
+Topic-research outputs: Tiro line launched in the 2000s as adidas's training-pant franchise; signature three-stripe down the side; tapered slim-fit cut; AEROREADY moisture management; ankle zip; popular as both a training pant and a casual wear item; Tiro 23 is the current generation as of 2026.
 
 ```
 Title (Product Title)
@@ -571,7 +633,7 @@ Notes that apply to all categories:
 - UAE 2026 Home Stadium Jersey v3 (foundational, 2026-05-26 era at `deliverables/page-optimizations/2026-05-26_session-01/uae-2026-home-stadium_brief-v3.md`): template structure proven against a smaller-federation kit with federation-identity focus.
 - Mexico 2026 Home Stadium SS Jersey (commit `e56a7d6`, 2026-05-28): template validated against a co-host federation with Aztec heritage design depth + Estadio Azteca opener narrative.
 - Mexico 2026 Away Stadium SS Jersey (commit `85dd1f0`, 2026-05-28): template validated with travel / road-match angle on H2 4 and pre-Hispanic Mesoamerican design depth on H2 1.
-- Mexico 2026 Third Stadium SS Jersey (commit `f2c2c34`, 2026-05-28): template validated with special-edition / wardrobe-completionist angle on H2 4 and Adidas x Someone Somewhere artisan collaboration depth on H2 1.
+- Mexico 2026 Third Stadium SS Jersey (commit `f2c2c34`, 2026-05-28): template validated with special-edition / wardrobe-completionist angle on H2 4 and adidas x Someone Somewhere artisan collaboration depth on H2 1.
 
 Promotion to CANONICAL on 2026-05-28 after four-time validation across two federations, two design philosophies (UAE classic federation identity, Mexico co-host + Aztec heritage narrative), and three kit types within one team (Home / Away / Third differentiation). Template architecture proven stable; no refinements surfaced through the Mexico kit set production. Promotion documents validation breadth for future workforce session confidence; template structure unchanged.
 
@@ -715,7 +777,7 @@ Same rules as the collection-page playbook. 2 to 5 words, descriptive of destina
 
 ### Common patterns by product type
 
-For team kit products (e.g., 2026 Mexico Home Authentic Jersey by Adidas):
+For team kit products (e.g., 2026 Mexico Home Authentic Jersey by adidas):
 
 - **Collection link:** the team's collection page. E.g., `/collections/mexico` (or `/collections/mexico-soccer-jersey` post-rename), anchor `the Mexico collection` or `the full El Tri lineup`.
 - **Brand link:** the brand's national-team-kit collection if relevant. E.g., `/collections/adidas-soccer-jerseys`, anchor `Adidas's national team kits`.
@@ -725,7 +787,7 @@ For performance cleat products (e.g., Nike Mercurial Superfly 9 Elite FG):
 - **Brand line collection:** the cleat's lineup. E.g., `/collections/nike-mercurial`, anchor `the Mercurial lineup`.
 - **Surface-type collection:** matched to the cleat's plate. E.g., `/collections/firm-ground-cleats`, anchor `firm-ground cleats`.
 
-For training apparel products (e.g., Adidas Tiro 23 Training Pants):
+For training apparel products (e.g., adidas Tiro 23 Training Pants):
 
 - **Brand training collection:** E.g., `/collections/adidas-training-apparel`, anchor `Adidas's training kit`.
 - **Use-case collection:** E.g., `/collections/training-pants`, anchor `the full training-pant lineup`.

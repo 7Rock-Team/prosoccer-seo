@@ -39,6 +39,27 @@ SENTENCE_OPENERS = ["In conclusion", "In summary"]
 
 EM_DASHES = ["—", "–"]  # — and –
 
+# Brand styling: "adidas" is always lowercase, even at sentence start (official
+# trademark styling). Flag a capitalized, standalone "Adidas", EXCEPT when it is:
+#   - inside a fenced block or inline backticks (already blanked by strip_backticks)
+#   - immediately preceded by a backtick or a hyphen (taxonomy compounds like
+#     "non-Adidas", and any backtick-adjacent literal that survived stripping)
+#   - immediately followed by a hyphen + word char ("Adidas-only", "Adidas-licensed",
+#     "Adidas-specific" -- workforce taxonomy jargon, not output styling)
+#   - on a line carrying a pedagogical anti-pattern marker (see PEDAGOGICAL_MARKERS)
+ADIDAS_PATTERN = re.compile(r"(?<![-`])\bAdidas\b(?!-\w)")
+
+# Lines demonstrating what NOT to do are exempt from the Adidas check; the
+# capitalized form on these lines is intentional teaching content.
+PEDAGOGICAL_MARKERS = (
+    "incorrect",
+    "do not use",
+    "anti-pattern",
+    "stuffed:",
+    "wrong:",
+    "bad example",
+)
+
 SUPPORTED_EXTS = {".md", ".txt", ".docx"}
 
 
@@ -145,13 +166,33 @@ def check(text: str) -> int:
             for ln, ctx in hits[:5]:
                 violations.append(f"    line {ln}: {ctx[:120]}")
 
+    # Brand styling check: capitalized "Adidas" (adidas is always lowercase).
+    # Skip lines carrying a pedagogical anti-pattern marker; backtick/fenced
+    # content and taxonomy compounds are excluded by ADIDAS_PATTERN itself.
+    adidas_hits: list[tuple[int, str]] = []
+    for idx, (sline, dline) in enumerate(zip(scan_lines, display_lines), start=1):
+        lowered = sline.lower()
+        if any(marker in lowered for marker in PEDAGOGICAL_MARKERS):
+            continue
+        if ADIDAS_PATTERN.search(sline):
+            adidas_hits.append((idx, dline.strip()))
+    if adidas_hits:
+        violations.append(
+            f"CAPITALIZED 'Adidas' found on {len(adidas_hits)} line(s) "
+            "(adidas is always lowercase, even at sentence start):"
+        )
+        for ln, ctx in adidas_hits[:5]:
+            violations.append(f"    line {ln}: {ctx[:120]}")
+        if len(adidas_hits) > 5:
+            violations.append(f"    ... and {len(adidas_hits) - 5} more")
+
     if violations:
         print("VOICE CHECK FAILED")
         for line in violations:
             print(f"  {line}")
         return 1
 
-    print("VOICE CHECK PASSED: no em-dashes, no en-dashes, no forbidden words/phrases/openers.")
+    print("VOICE CHECK PASSED: no em-dashes, no en-dashes, no forbidden words/phrases/openers, no capitalized Adidas.")
     return 0
 
 
