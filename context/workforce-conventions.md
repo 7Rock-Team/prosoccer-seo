@@ -186,6 +186,42 @@ Known follow-up (no proactive sweep): the other repo files that contain capitali
 
 **Content evergreen-ness (added 2026-06-02 with Gate 13 extension):** Body copy on collection and product pages should not contain specific prices, specific inventory levels, or other ephemeral data points that decay quickly. Pricing information belongs in PDPs, product cards, and schema markup where Shopify automatically maintains accuracy. Body copy should use tier/positioning language ("entry-level," "mid-tier," "premium," "collector") that remains accurate as catalog prices shift. Same principle applies to brand breadth: brand stacking in body sentences belongs in faceted filters and product cards, not body prose. Body copy mentions individual brands only when narrative justifies (one or two per sentence, with role-specific context).
 
+## Unsupported specific counts (Gate 14, cross-cutting)
+
+Gate 14 is a separate gate after Gate 13; the workforce gates suite runs 14 gates as of 2026-06-02 (previously 13). It is the same ephemeral-data family as the Gate 13 pricing discipline (see 'Content evergreen-ness' above): body copy must not contain specific counts of catalog items (federations, brands, products, styles, designs, tiers) that are unverified, decay as inventory shifts, or read as SEO ornamentation. Collection pages are most prone to it (a collection aggregates inventory by definition).
+
+Anti-pattern examples: "Ten federations, four brands, one piece of fan kit...", "Six bag styles across the adidas roster", "Twelve scarf designs span the federation lineup". Natural alternatives: positioning language ("the full federation roster"), comparative language ("category leaders across multiple brands"), specific examples without counts ("Argentina, Mexico, USMNT, and more"), "across" / "spanning" / "from X to Y" framing. Exception (counts permitted): tournament structure ("the 48-team 2026 World Cup expansion") from a public canonical source, year / cycle references ("the 2026 cycle", "the 1986 World Cup"), and product-specific verified specs -- each sourced from a verified authoritative reference and noted in the workforce briefing.
+
+Defense-in-depth: SCRIBE self-revises in Phase 4 (Gate 14) before the Phase 5 voice check; ORIN re-checks at the orchestrator layer (Section 11 Gate 11).
+
+**Architectural learning note.** Gate 14 unsupported specific counts (added 2026-06-02): Quality issue surfaced in Day 2 batch #1 URL #3 Short Description "Ten federations, four brands, one piece of fan kit..." Counts are unverified, decay-prone, and read as SEO ornamentation. Same family as Gate 13 pricing discipline. Body copy uses positioning/comparative language rather than specific catalog counts. Exception: tournament structure, year/cycle, or verified product specs.
+
+Cross-references: both page-type playbooks 'Unsupported specific counts (Gate 14, added 2026-06-02)', `.claude/agents/on-page-seo/agent.md` Section 11 Gate 14 + Section 9, `.claude/agents/master-strategist/agent.md` Section 9 + Section 11 Gate 11.
+
+## Image precision (cross-cutting)
+
+A writing-quality discipline applied at SCRIBE Phase 4 (judgment call, not a regex gate). Every evocative sentence in body copy must pass the "what's the actual image?" test: can the reader picture the specific physical motion, is the temporal sequence clear, are cause-and-effect relationships connected? If any fail, SCRIBE revises before the Phase 5 voice check. ORIN sanity-scans at the orchestrator layer (flag obvious muddy imagery). Muddy "It goes up over your head when the anthem starts and doesn't come off 'till the crowd finds its voice" becomes sharper "Raised overhead during the national anthem and held high through the opening chants."
+
+**Architectural learning note.** Image precision discipline (added 2026-06-02): Quality issue surfaced in Day 2 batch #1 URL #3 Short Description "It goes up over your head when the anthem starts and doesn't come off 'till the crowd finds its voice." SCRIBE was reaching for evocative imagery without nailing physical action or temporal sequence. Phase 4 self-check now applies "what's the actual image?" test to evocative sentences. ORIN orchestrator re-check flags muddy imagery. This is a writing quality discipline distinct from Gate 13 structural patterns.
+
+Cross-references: both page-type playbooks 'Image precision discipline', `.claude/agents/on-page-seo/agent.md` Section 9 + Section 11, `.claude/agents/master-strategist/agent.md` Section 9 + Section 11 Gate 12.
+
+## Parallel construction (cross-cutting)
+
+A writing-quality discipline applied at SCRIBE Phase 4 (judgment call, not a regex gate). When listing 3+ examples in parallel, grammatical construction must match across all items: possessive form, article usage, preposition usage, quote marks, descriptor style. Pick one construction and apply it consistently. ORIN sanity-scans at the orchestrator layer (flag inconsistent 3+ example lists).
+
+**Architectural learning note.** Parallel construction discipline (added 2026-06-02): Quality issue surfaced in Day 2 batch #1 URL #3 Short Description "Argentina's albiceleste, Mexico scarf called 'verde', USMNT red-white-blue, Germany's DFB black-red-gold, and Italy's azzurro" (inconsistent possessive/descriptor/quote usage across 5 parallel examples). Phase 4 self-check now verifies parallel grammatical construction across 3+ example lists. ORIN orchestrator re-check flags inconsistent parallel lists.
+
+Cross-references: both page-type playbooks 'Parallel construction discipline', `.claude/agents/on-page-seo/agent.md` Section 9 + Section 11, `.claude/agents/master-strategist/agent.md` Section 9 + Section 11 Gate 12.
+
+## Supporting keyword selection (cross-cutting)
+
+A keyword-strategy discipline applied at SCRIBE Phase 2 (research) and Phase 4 (drafting). SCRIBE selects ONE supporting keyword for body-copy use, criterion = highest search volume among the Phase 2 supporting candidates. The selected keyword is woven into the Short Description (1 to 2 mentions) and the Long / body Description (3 to 5 mentions). Other supporting candidates stay in the workforce briefing audit trail (full candidate list with volumes, selected keyword + rationale, placement) but are NOT used in body copy. Primary keyword usage follows Gate 12 unchanged. Exception: two supporting keywords within 10% volume AND semantically distinct (not synonyms) -> include the second minimally (1 to 2 body mentions). Gate 12 sub-criterion (d) verifies ONE supporting keyword at 3 to 5 body mentions, not multiple at shallow density; ORIN sanity-scans at the orchestrator layer.
+
+**Architectural learning note.** Supporting keyword selection discipline (added 2026-06-02): SCRIBE was including multiple supporting keywords throughout Short and Long Descriptions, treating each as coverage opportunity. Result: keyword-targeted copy rather than reader-focused copy, dilute signal for any single supporting term. New rule: SCRIBE selects ONE supporting keyword (highest search volume among candidates) for body copy use (1-2 Short Description mentions, 3-5 Long Description mentions). Other supporting candidates preserved in workforce briefing audit trail but not used in output. Exception: two supporting keywords within 10% volume AND semantically distinct permitted minimally.
+
+Cross-references: both page-type playbooks 'Supporting keyword selection' + 'Keyword distribution discipline', `.claude/agents/on-page-seo/agent.md` Section 9 'Supporting keyword selection' + Gate 12, `.claude/agents/master-strategist/agent.md` Section 9 + Section 11 Gate 12.
+
 ## Brief content requirements (data-backed)
 
 Both PDP and collection-page briefs must surface a minimal data-backed keyword research block and respect the product-page link policy. These are hard requirements, not optional.

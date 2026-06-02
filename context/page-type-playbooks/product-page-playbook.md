@@ -33,9 +33,9 @@ PDP production runs under ORIN's batch parallel dispatch + single daily batch co
 
 ## Tiered workflow architecture for PDP optimization (added 2026-05-28)
 
-PDP brief production runs at one of three PDP-applicable tiers (Tier 2B is collection-only and lives in `context/page-type-playbooks/collection-page-playbook.md`). Tier is named at dispatch by ORIN; SCRIBE adapts scope accordingly. Quality discipline (voice check, 11 gates plus Gate 12 keyword distribution plus Gate 13 anti-stuffing, brand IP, year-specificity, eligibility verification, keyword distribution) preserved universally.
+PDP brief production runs at one of three PDP-applicable tiers (Tier 2B is collection-only and lives in `context/page-type-playbooks/collection-page-playbook.md`). Tier is named at dispatch by ORIN; SCRIBE adapts scope accordingly. Quality discipline (voice check, 11 gates plus Gate 12 keyword distribution plus Gate 13 anti-stuffing plus Gate 14 unsupported specific counts, brand IP, year-specificity, eligibility verification, keyword distribution) preserved universally.
 
-- **Tier 1 (Foundational PDP, ~25 to 35 min).** Dispatch when the PDP is the first in a new category for ProSoccer, when it will establish or refine a category-specific H2 template, or when it is a strategically critical hero product (highest-volume keyword target, flagship release, brand-narrative anchor). Full SCRIBE workflow: broad Tavily research across cultural / squad / tournament / kit-supplier / design dimensions; fresh brief build with template-refinement candidate analysis; all 13 gates surfaced (11 Section 11 gates plus Gate 12 keyword distribution plus Gate 13 anti-stuffing). Estimated 5 to 10% of PDP work.
+- **Tier 1 (Foundational PDP, ~25 to 35 min).** Dispatch when the PDP is the first in a new category for ProSoccer, when it will establish or refine a category-specific H2 template, or when it is a strategically critical hero product (highest-volume keyword target, flagship release, brand-narrative anchor). Full SCRIBE workflow: broad Tavily research across cultural / squad / tournament / kit-supplier / design dimensions; fresh brief build with template-refinement candidate analysis; all 14 gates surfaced (11 Section 11 gates plus Gate 12 keyword distribution plus Gate 13 anti-stuffing plus Gate 14 unsupported specific counts). Estimated 5 to 10% of PDP work.
 - **Tier 2A (Pattern-follow PDP, ~12 to 16 min).** Dispatch when the PDP follows an established CANONICAL template (National Team Jersey four-time validated as of 2026-05-28, Club Jersey CANONICAL, Soccer Cleats VALIDATED v1) with no template-refining work expected. Scoped Tavily research: currency check only (squad / fixtures / manager / kit-supplier currency for the specific page), not broad cultural context (the template already encodes the cultural-context H2 pattern). Template-fill brief drafting: canonical structure with verified product-specific specifics swapped in, not fresh build from blank. Bulk of PDP work (~70 to 80%).
 - **Tier 3 (Mike-drafted minimal, ~5 to 10 min).** Rare exception when Mike drafts 4 to 6 fields directly and ORIN runs lightweight QA (voice check + DFS keyword verify + brand IP compliance scan only). Requires explicit Mike request; NOT collection pages by default; NOT new categories without prior template work.
 
@@ -189,7 +189,7 @@ Keyword SELECTION ('Primary keyword selection for year/generation/season-bound p
 - **Slug:** exact match if creating new; preserve existing slug if optimizing existing page unless clearly suboptimal (slug changes trigger redirect-cost risk).
 - **Long Description:** primary keyword in 2 to 3 H2 headings plus naturally in body copy 4 to 7 times.
 
-**Supporting keyword placement (recommended):** body copy 2 to 4 times naturally per supporting variant; at least one H2 heading if the variant fits naturally; NOT in Meta Title (crowded with primary); NOT in Slug (URL stays clean); optional in Short Description if natural.
+**Supporting keyword placement (one supporting keyword, updated 2026-06-02).** SCRIBE selects ONE supporting keyword for body-copy use, not several. Selection criterion: the highest search volume among the supporting candidates from the Phase 2 keyword research. That single supporting keyword is woven naturally into the Short Description (1 to 2 mentions) and the Long Description body copy (3 to 5 mentions), and may take at least one H2 heading if it fits naturally. NOT in Meta Title (crowded with primary); NOT in Slug (URL stays clean). The other supporting candidates stay in the workforce briefing keyword-research record as the audit trail but are NOT deployed in body copy. Rationale: one supporting keyword at depth (3 to 5 body mentions) ranks better than three supporting keywords at shallow density (1 mention each), and copy reads as reader-focused rather than keyword-targeted. See 'Supporting keyword selection (added 2026-06-02)' below for the full rule, exception, and audit-trail requirement.
 
 **Long-tail modifier placement (optional):** body copy of Long Description especially in cultural-context H2 (typically H2 4 for jerseys, H2 5 for cleats); internal link anchor text where the modifier reads naturally as the link's anchor.
 
@@ -202,9 +202,27 @@ Keyword SELECTION ('Primary keyword selection for year/generation/season-bound p
 
 **Natural variation allowed.** Primary keyword variations count toward placement. Example for `mexico 2026 home jersey`: "Mexico 2026 home jersey" (exact), "Mexico home kit 2026" (reordered), "this 2026 home jersey" (natural variant), "this home kit" (contextual reference). Variations valid as long as semantic intent is clear from surrounding context.
 
-**Verification:** SCRIBE Gate 12 (Section 11) checks (a) primary keyword presence across all required fields, (b) primary keyword count in Long Description within 4 to 7 range, (c) no keyword stuffing detected, (d) supporting keyword present 2 to 4 times. Failures surface as BLOCKER and refine before commit.
+**Verification:** SCRIBE Gate 12 (Section 11) checks (a) primary keyword presence across all required fields, (b) primary keyword count in Long Description within 4 to 7 range, (c) no keyword stuffing detected, (d) ONE supporting keyword present at 3 to 5 mentions in body copy (not multiple supporting keywords each at lower density) per the supporting keyword selection rule below. Failures surface as BLOCKER and refine before commit.
 
-Cross-references: `.claude/agents/on-page-seo/agent.md` Section 9 'Keyword distribution discipline' (operational summary + Gate 12 definition), `context/page-type-playbooks/collection-page-playbook.md` 'Keyword distribution discipline' (collection 6-field adapted version).
+## Supporting keyword selection (added 2026-06-02)
+
+SCRIBE selects ONE supporting keyword for body-copy use. The selection criterion is the highest search volume among the supporting keyword candidates from Phase 2 keyword research.
+
+**Anti-pattern (prior behavior).** SCRIBE included multiple supporting keywords throughout the Short and Long Descriptions, treating each as a coverage opportunity. The result reads as keyword-targeted rather than reader-focused and dilutes the ranking signal for any single supporting term. Surfaced across multiple Day 2 batch #1 briefs (2026-06-02).
+
+**The rule (Phase 2 to Phase 4 flow):**
+
+1. Phase 2: SCRIBE produces full keyword research as today (primary plus supporting candidates with volume, KD, trends).
+2. Phase 4: SCRIBE picks ONE supporting keyword, the highest-search-volume candidate from the supporting set.
+3. Phase 4: that single supporting keyword is woven naturally into the Short Description (1 to 2 mentions) and the Long Description body copy (3 to 5 mentions).
+4. The other supporting candidates remain in the workforce-briefing keyword-research record (audit trail) but are NOT used in body copy.
+5. Primary keyword usage follows the existing Gate 12 keyword distribution rules unchanged.
+
+**Exception (two clear winners).** If two supporting keywords have search volumes within 10% of each other AND are semantically distinct (not synonyms), SCRIBE may include the second one minimally (1 to 2 body mentions, not 3 to 5). This is the rare case where two clear winners exist among the supporting candidates.
+
+**Workforce briefing audit trail.** SCRIBE documents: the full supporting candidate list with volumes, the selected supporting keyword plus selection rationale (highest volume), and where the selected keyword appears in the Short Description and Long Description.
+
+Cross-references: `.claude/agents/on-page-seo/agent.md` Section 9 'Keyword distribution discipline' (operational summary + Gate 12 definition + supporting keyword selection), `context/page-type-playbooks/collection-page-playbook.md` 'Keyword distribution discipline' (collection 6-field adapted version), `context/workforce-conventions.md` 'Supporting keyword selection (cross-cutting)'.
 
 ## Anti-stuffing discipline (Gate 13, added 2026-06-02)
 
@@ -267,6 +285,66 @@ Fields in scope: Title, Meta Title, Meta Description, Short Description, Body / 
 FAIL = revise the field; PASS = the field clears. SCRIBE self-revises any failing field during Phase 4 (brief drafting) before the Phase 5 voice check. ORIN re-checks at the orchestrator layer as defense-in-depth.
 
 Cross-references: `.claude/agents/on-page-seo/agent.md` Section 11 Gate 13 (SCRIBE self-check) and Section 9 'Anti-stuffing discipline', `.claude/agents/master-strategist/agent.md` Section 9 (ORIN defense-in-depth re-check), `context/workforce-conventions.md` 'Anti-stuffing discipline (Gate 13, cross-cutting)' + 'Content evergreen-ness' + 'Brand styling conventions'. Pricing discipline, body brand-mention discipline, and adidas brand styling (`context/workforce-conventions.md` 'Brand styling conventions': adidas is always lowercase, even at sentence start) are complementary disciplines all surfaced from the same Day 2 batch #1 review (2026-06-02).
+
+## Unsupported specific counts (Gate 14, added 2026-06-02)
+
+Gate 14 sits after Gate 13 in the gates suite (the suite runs 14 gates as of 2026-06-02). It is the same ephemeral-data family as Gate 13's pricing discipline: body copy must not contain specific counts of catalog items (federations, brands, products, styles, designs, tiers) that are unverified, decay as inventory shifts, or read as SEO ornamentation.
+
+The issue that surfaced this gate: a Short Description reading "Ten federations, four brands, one piece of fan kit... the soccer scarf" (Day 2 batch #1 URL #3, flagged 2026-06-02). Counts like these are usually estimated by SCRIBE from scrape data rather than an authoritative source; they decay as the Shopify catalog changes (products discontinue, new SKUs add); they read as SEO ornamentation when not narratively justified; and they force the reader to either accept or audit the number.
+
+### Anti-pattern examples
+
+- "Ten federations, four brands, one piece of fan kit..."
+- "Six bag styles across the adidas roster"
+- "Twelve scarf designs span the federation lineup"
+- "Three cleat tiers cover every skill level"
+
+### Natural alternatives
+
+- Positioning language: "the full federation roster", "the complete cleat lineup".
+- Comparative language: "category leaders across multiple brands", "a deep selection".
+- Specific examples without counts: "Argentina, Mexico, USMNT, and more".
+- "across" / "spanning" / "from X to Y" framing.
+
+### Exception (verified counts permitted)
+
+Counts are allowed when sourced from a verified authoritative reference and noted in the workforce briefing:
+
+- Tournament structure (e.g., "the 48-team 2026 World Cup expansion") from a public canonical source.
+- Year or cycle references ("the 2026 cycle", "the 1986 World Cup") -- temporal, not inventory.
+- Product-specific verified specs ("the soft-ground cleat's stud configuration") -- physical product attribute.
+
+### Gate 14 check criteria
+
+Body copy must not contain specific counts of catalog items (federations, brands, products, styles, designs, tiers, and similar) unless the count is sourced from a verified authoritative reference and noted in the workforce briefing. SCRIBE self-revises during Phase 4 (brief drafting) before the Phase 5 voice check; ORIN re-checks at the orchestrator layer as a sanity scan.
+
+Cross-references: `.claude/agents/on-page-seo/agent.md` Section 11 Gate 14 + Section 9, `.claude/agents/master-strategist/agent.md` Section 9 + Section 11, `context/workforce-conventions.md` 'Unsupported specific counts (Gate 14, cross-cutting)'.
+
+## Image precision discipline (SCRIBE Phase 4 self-check, added 2026-06-02)
+
+A writing-quality discipline distinct from the structural gates. Every evocative sentence in body copy must pass the "what's the actual image?" test. For any sentence describing physical action, ritual, or sensory experience, SCRIBE asks: can I picture the specific physical motion? Is the temporal sequence clear (when, for how long)? Are the cause-and-effect relationships logically connected? If any of these fail, SCRIBE revises the sentence in Phase 4 before the Phase 5 voice check.
+
+The issue that surfaced this discipline: a Short Description reading "It goes up over your head when the anthem starts and doesn't come off 'till the crowd finds its voice" (Day 2 batch #1 URL #3). "Goes up over your head" is unclear (over the head like a hood, or raised overhead with arms extended?); "'till the crowd finds its voice" is temporally vague.
+
+Muddy vs sharper:
+
+- MUDDY: "It goes up over your head when the anthem starts and doesn't come off 'till the crowd finds its voice." SHARPER: "Raised overhead during the national anthem and held high through the opening chants." (specific physical action, specific temporal sequence, clear cause-and-effect.)
+- MUDDY: "The kit pulses with national pride that washes over the stadium." SHARPER: "The kit carries colors that fans recognize across the stadium and chants that travel from end to end." (specific sensory anchors, specific spatial reference.)
+
+Apply field by field: Short Description (highest density of evocative copy), Long Description body prose, and H2 / H3 framing where evocative. ORIN re-checks at the orchestrator layer as a sanity scan (flag obvious muddy imagery for SCRIBE revision; this is a judgment call, not a regex match).
+
+## Parallel construction discipline (SCRIBE Phase 4 self-check, added 2026-06-02)
+
+A writing-quality discipline distinct from the structural gates. When listing 3+ examples in parallel, grammatical construction must match across all items. Elements that must match: possessive form (all use 's or none do), article usage (all use "the" or none do), preposition usage (same preposition or restructure), quote marks (all quoted or none quoted), descriptor style (all colors, all team names, or a consistent mix).
+
+The issue that surfaced this discipline: a Short Description listing "Argentina's albiceleste, Mexico scarf called 'verde', USMNT red-white-blue, Germany's DFB black-red-gold, and Italy's azzurro" (Day 2 batch #1 URL #3). Mixed possessive (Argentina's, Italy's) vs descriptive (Mexico scarf called, USMNT red-white-blue); mixed quote marks ('verde' quoted, others not); mixed extra qualifiers (Germany's DFB inserted, others none).
+
+Pick one construction and apply it consistently:
+
+- OPTION A (all possessive): "Argentina's albiceleste, Mexico's verde, USMNT's red-white-blue, Germany's black-red-gold, and Italy's azzurro".
+- OPTION B (all descriptive): "the albiceleste of Argentina, the verde of Mexico, the red-white-blue of USMNT, the black-red-gold of Germany, and the azzurro of Italy".
+
+Apply wherever listing 3+ parallel examples: federation / country lists, product type lists, brand attribute lists, tournament / event lists. ORIN re-checks at the orchestrator layer as a sanity scan (flag inconsistent 3+ example lists; judgment call, not a regex match).
 
 ## Five canonical brief-craft rules
 
