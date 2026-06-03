@@ -222,6 +222,65 @@ A keyword-strategy discipline applied at SCRIBE Phase 2 (research) and Phase 4 (
 
 Cross-references: both page-type playbooks 'Supporting keyword selection' + 'Keyword distribution discipline', `.claude/agents/on-page-seo/agent.md` Section 9 'Supporting keyword selection' + Gate 12, `.claude/agents/master-strategist/agent.md` Section 9 + Section 11 Gate 12.
 
+## Editorial philosophy (added 2026-06-02)
+
+The structural gates (Gate 13 anti-stuffing, Gate 14 specific counts) and the judgment-dependent Phase 4 disciplines (image precision, parallel construction, supporting keyword selection) catch specific failures, but they do not capture the underlying editorial stance the workforce writes from. SCRIBE was producing structurally-correct copy that met all 14 gates and the prior Phase 4 disciplines yet still lacked emotional resonance, reader-focused clarity, and value-first orientation, the qualities that actually move a buying decision. This section is that stance, written for every agent that produces reader-facing copy (SCRIBE primarily; future content agents secondarily).
+
+These four sub-disciplines are judgment-dependent, not pattern-matchable. They live at SCRIBE Phase 4 (drafting-time application), ORIN orchestrator defense-in-depth (sanity scan, flag obvious failures, not strict enforcement), and here as cross-cutting philosophy. They are NOT new gates (the suite stays at 14; gates govern structural patterns, editorial philosophy is judgment) and are NOT script-enforced (too judgment-dependent for `voice_check.py` regex).
+
+The example that surfaced the gap, URL #3 (national-team-scarves) Short Description: "Soccer scarves started on the freezing terraces of early-1900s English grounds, and they never left. Shop World Cup scarves like Argentina's albiceleste, Mexico scarf called 'verde'..." The opening line does emotional work (heritage, ritual, place); the next sentence drops into list-of-products mode and the emotional arc collapses. A reader-first version sustains the emotional thread before transitioning to product specifics.
+
+### 1. Reader-first copy orientation
+
+Body copy serves the buyer's emotional connection to what they are buying. SEO ranking is the byproduct, not the goal; keywords appear because they describe what the reader actually cares about, not because they need to appear. Per-sentence test: does this sentence serve the reader's decision-making, or the algorithm? Would a buyer reading it for the first time find it valuable, or feel they are being marketed to?
+
+Anti-patterns: keyword surfacing without reader value (the "ten federations, four brands" stacking Gate 14 caught was a structural manifestation of this deeper failure); specification listing without emotional context (the "caps $34.99, scarves $24 to $44, flags $44.99" pattern Gate 13 caught was the same); generic positioning that could describe any product ("premium quality", "top-tier selection", "best-in-class"); brand or manufacturer specifications leading the copy ("adidas produces the kit using Heat.RDY moisture-wicking fabric") before reader value is established. Natural alternatives: sentences that describe specific buyer experience or identity ("how fans show up when the anthem starts"), concrete sensory anchors ("colors raised, voices behind them"), place / ritual / heritage tied to buyer identity ("what the Rose Bowl section wears").
+
+### 2. Cognitive load reduction
+
+Body copy is read while the buyer is mid-decision, evaluating brand, color, fit, price, occasion, and alternatives. Copy that adds load loses the sale.
+
+- **Sentence length variance:** short 5 to 10 words for emphasis, transition, or a punctuation moment; medium 15 to 25 words for substance; long 30+ words only when narrative justifies (rare). A short, medium, short rhythm reads cleanly; long sentence after long sentence creates dense paragraph blocks. Avoid the dense block.
+- **One concept per sentence:** if a sentence joins two ideas with "and", "but", "while", or "with", consider whether splitting serves the reader. Multiple ideas per sentence force the reader to hold both in working memory.
+- **Concrete over abstract:** "fans raise scarves overhead during the anthem" beats "scarves embody the ritual of supporter culture"; "six matches into the tournament cycle" beats "deep into the competition phase". Specific physical actions, specific places, specific times beat abstract framings.
+- **Scan-ability:** the first sentence of each paragraph and each H2 carries the value proposition. Most collection-page readers scan; they should get the gist without reading every word. Do not bury the lead.
+
+### 3. Value-first sequencing
+
+Lead with what the buyer cares about, not what the product is technically. Specifications, brand-IP context, and manufacturing details come AFTER the emotional / value anchor. Each body section follows the arc:
+
+1. **HOOK (emotional / identity anchor):** why this matters to the buyer's life. "What fans wear when the anthem starts." "The kit your section will be wearing in June." "Carried home from Mexico '86, carried back for '26."
+2. **CONNECTION (specific scenario):** how the buyer uses or experiences this. The specific use case, occasion, or ritual; the concrete sensory or social context; the buyer's actual lived experience.
+3. **SPECIFICS (product context):** what is in the collection, brand details, occasion fit. Tier / positioning language without specific prices; brand callouts with narrative justification; material or construction details only where they serve the buyer's decision.
+4. **ACTION (clear next step):** implicit ("the full federation roster") or explicit when natural ("shop the lineup before kickoff week"). Avoid pressured CTAs ("buy now", "don't wait").
+
+Anti-pattern, starting with brand or spec data before reader value. INCORRECT: "adidas produces the federation kit lineup using Heat.RDY moisture-wicking fabric in Stadium and Authentic tiers. The 2026 collection includes twelve national teams with..." CORRECT: "The 2026 World Cup brings the federations to a continent that has been waiting forty years for the tournament. The kits arrive in two tiers, Stadium for the everyday and Authentic for match day, across the adidas roster including Argentina, Mexico, Germany, Spain, and more."
+
+### 4. Positive emotional anchoring
+
+Copy evokes the positive emotions associated with the purchase: anticipation, identity, belonging, pride, ritual. It never reaches for manipulation, scarcity, fear, or status anxiety. Positive anchors invite the reader into a community or experience they want to belong to; manipulation pressures the reader through fear or insecurity. The first builds long-term brand affinity; the second extracts a single transaction.
+
+**Positive anchors (use), with phrase examples:**
+
+- **BELONGING:** "how fans show up", "what the section wears", "the colors of your side".
+- **IDENTITY:** "colors that say what side you are on", "the crest carried at the shoulder".
+- **RITUAL:** "raised when the anthem starts", "held high through the opening chants".
+- **ANTICIPATION:** "six matches into the tournament cycle", "with kickoff week ahead".
+- **HERITAGE:** "from the 1986 archive to the 2026 Stadium tier", "the legacy carried forward".
+- **PLACE:** "the Rose Bowl, the diaspora's home stadium", "the terraces of early-1900s English grounds".
+
+**Manipulation patterns (never use), with phrase examples:**
+
+- **SCARCITY:** "only 5 left", "selling out fast", "limited stock".
+- **FOMO:** "don't miss", "before they are gone", "act now".
+- **STATUS ANXIETY:** "the kit serious fans wear", "for true supporters only", "what real fans choose".
+- **HYPERBOLE:** "the greatest scarf ever made", "the perfect kit", "unmatched quality".
+- **FALSE URGENCY:** "limited time", "won't last", "while supplies last".
+
+**Architectural learning note.** Editorial philosophy discipline (added 2026-06-02 after Gate 14 codification): Gate 13 anti-stuffing and Gate 14 specific counts catch structural manifestations of a deeper editorial philosophy gap. SCRIBE was producing structurally-correct copy meeting all gates but lacking emotional resonance, reader-focused clarity, and value-first orientation. Four sub-disciplines codified as Phase 4 self-checks plus workforce-conventions philosophy: (1) Reader-first copy orientation, body copy serves buyer's emotional connection, not algorithm. (2) Cognitive load reduction, sentence length variance, one concept per sentence, concrete over abstract, scan-ability. (3) Value-first sequencing, each H2 follows hook -> connection -> specifics -> action arc. (4) Positive emotional anchoring, use belonging / identity / ritual / anticipation / heritage / place anchors; avoid scarcity / FOMO / status anxiety / hyperbole / false urgency manipulation patterns. These are judgment-dependent disciplines, not pattern-matchable structural rules. They live at SCRIBE Phase 4 application plus ORIN orchestrator sanity scan plus workforce-conventions cross-cutting philosophy. NOT codified as new gates (gates govern structural patterns; editorial philosophy is judgment). NOT script-level enforced (too judgment-dependent for regex). Surfaced from Day 2 batch #1 review where briefs met all 14 gates and the 4 prior Phase 4 disciplines but lacked the editorial layer that drives buyer connection.
+
+Cross-references: both page-type playbooks 'Editorial philosophy disciplines (Phase 4 self-checks, added 2026-06-02)', `.claude/agents/on-page-seo/agent.md` Section 9 'Editorial philosophy disciplines' + Section 11, `.claude/agents/master-strategist/agent.md` Section 9 trust-but-verify + Section 11 Gate 12. Related ephemeral-data-avoidance patterns: 'Content evergreen-ness' (Gate 13 pricing) and 'Unsupported specific counts (Gate 14, cross-cutting)'.
+
 ## Brief content requirements (data-backed)
 
 Both PDP and collection-page briefs must surface a minimal data-backed keyword research block and respect the product-page link policy. These are hard requirements, not optional.
