@@ -41,6 +41,98 @@ PDP brief production runs at one of three PDP-applicable tiers (Tier 2B is colle
 
 Cross-references: `context/workforce-conventions.md` 'Tiered workflow architecture (cross-cutting pattern)' (workforce-wide pattern + validation milestones), `.claude/agents/master-strategist/agent.md` Section 9 'Tier classification at candidate dispatch' (ORIN classification logic), `.claude/agents/on-page-seo/agent.md` Section 9 'Tiered workflow variants' (SCRIBE's per-tier scope adjustment).
 
+## PDP-specific SEO discipline (added 2026-06-02)
+
+Source: Mike's review of TinySEO's PDP analysis (2026-06-02), corrected against 2026 ecommerce SEO ranking data and ProSoccer's actual Shopify admin field structure. PDPs serve product-specific search intent (a buyer searching for one cleat in one tier), which differs from the category intent collection pages serve. That difference drives field-length constraints by field, cross-SKU title uniqueness, image and taxonomy requirements, and a body structure that splits reader-first prose from technical bullets. The nine disciplines below are PDP-only; they sit on top of the shared discipline (Gate 13 anti-stuffing, Gate 14 specific counts, the Phase 4 editorial disciplines, brand IP, year-specificity, keyword distribution) and govern Day 3+ PDP production. Day 2 batch #1 (collections) is not fix-forwarded.
+
+### Reader-first operational principle (read this first)
+
+This is the operational principle for ALL PDP copy, in Mike's words: "Write the copy to meet the needs and desires of our avatar first. Not Google algorithm. But also make sure the copy doesn't read like AI wrote it. Everything we talked about earlier: low cognitive load, value and emotion evoking, no feature selling for short or long description copy."
+
+Concretely, on every PDP field:
+
+- Write to the buyer's needs and desires, NOT to Google's algorithm. Ranking is the byproduct.
+- No feature-selling in the Short Description or in the Description prose. Technical specs belong in the "Product Details" bullets, never in prose.
+- Low cognitive load throughout (sentence-length variance, one concept per sentence, concrete over abstract, scan-able leads).
+- Evoke positive emotion: belonging, identity, ritual, anticipation, heritage, place.
+- Avoid manipulation patterns: scarcity, FOMO, status anxiety, hyperbole, false urgency.
+- Copy must read as human-written, not AI-generated.
+
+This is the editorial philosophy codified in commit dcfe6da (`context/workforce-conventions.md` 'Editorial philosophy (added 2026-06-02)'), applied as the governing principle for PDP drafting. The field-length and structure rules below serve this principle; they never override it.
+
+### Field length constraints (hard limits, not targets)
+
+ProSoccer's Hyper theme exposes three distinct description-related fields in Shopify admin, and they have different jobs and different lengths. "Short Description" and "Description" are NOT the same field:
+
+| Field (ProSoccer admin name) | Renders | Length |
+|---|---|---|
+| Title | product title | 30 to 100 characters (min AND max) |
+| Short Description (metafield) | hero block above Add to Cart | 50 to 100 words |
+| Description (body_html) | collapsible accordion below the product images | tiered by product complexity (see below) |
+| Meta Title | SERP title | 60 characters maximum, INCLUDING the Hyper theme brand suffix |
+| Meta Description | SERP snippet | 160 characters maximum |
+| URL handle (slug after `/products/`) | URL | 70 characters maximum |
+
+Description (body_html) length tiers by product complexity:
+
+- **Simple (~125 to 200 words):** single-use accessories and basic merchandise. Keychains, lapel pins, magnets, decals, stickers, mini balls, basic flags, simple practice cones.
+- **Standard (~200 to 300 words):** single-tier products without pack/series complexity. Training and match balls, bags, backpacks, apparel with basic variants, shin guards, single-tier goalkeeper gloves.
+- **Complex (~300 to 400 words):** multi-tier or multi-variant products that require buyer comparison. Soccer cleats (tier / plate / colorway / generation matrix), authentic jerseys (player versions, kit details), tournament-edition products with a collectibility narrative, technical goalkeeper gloves, anything that needs sizing / fit / surface guidance.
+
+**Complexity classification test:** if a buyer needs more than 2 minutes to choose between sibling products in the same family, the product is complex. If they grab and go, it is simple.
+
+FAIL if exceeded; SCRIBE revises. **Short Description** is a brief reader-first emotional / value-prop hook (no feature listing); live example from the Nike Superfly 11 Club PDP: "The Superfly 11 Club is designed for fast sprints. Its snug knit cuff helps keep you secure when running the field, while a lightweight plate helps keep you on your toes for bursts in open spaces." (44 words, slightly under the 50-word floor). **Meta Title budget:** the 60-char ceiling includes whatever the Hyper theme auto-appends (approximately 10 to 12 chars, " - ProSoccer" or similar). SCRIBE's Meta Title INPUT must therefore stay under approximately 48 to 50 characters. Never put "ProSoccer" in the field. **Meta Description:** 160 is the hard ceiling; the 150 to 158 desktop target sits within it. **Length architecture note:** the corrected ceilings are grounded in 2026 ecommerce ranking data (top-ranking ecommerce pages average 200 to 310 words; complex products are competitive at 300 to 400). The earlier single "150-word" figure is interpreted as the Short Description metafield, not the Description body. Mexico v5 (collection canonical, 340 words) supports the corrected range.
+
+### Unique titles for pack/series products
+
+Many cleats and footwear ship as a pack or series (e.g., Predator 26 in Elite / Pro / League / Club tiers, each possibly across FG / AG / SG plates). Product Title AND Meta Title must be UNIQUE across every SKU in the same pack or series, differentiated by the specific attribute that distinguishes that SKU from its siblings:
+
+- Tier level (Elite, Pro, League, Club)
+- Plate type (FG / AG / SG / MG / TF / IC / IN)
+- Colorway name when official ("Hora Dorada", "Whiteout Pack", "Made in Japan")
+- Generation or year when relevant (26, 6, IV)
+
+Anti-pattern: all four tier SKUs titled "adidas Predator 26 Firm Ground Soccer Cleats" (no uniqueness, no signal of which tier the buyer is on); two colorways both titled "adidas F50 Elite FG Soccer Cleats". Correct: "adidas Predator 26 Elite Firm Ground Soccer Cleats", "adidas Predator 26 Pro Firm Ground Soccer Cleats", "adidas Predator 26 League Firm Ground Soccer Cleats", "adidas Predator 26 Club Firm Ground Soccer Cleats". When SCRIBE produces multiple PDPs from the same submitted batch, it cross-references all sibling titles for uniqueness in Phase 4; ORIN scans the batch for duplicate or near-duplicate titles across SKUs.
+
+### URL handle constraint
+
+The slug after `/products/` is 70 characters maximum. TOO LONG: `/products/adidas-predator-26-elite-firm-ground-soccer-cleats-mens-2026-world-cup-edition` (88 chars). WITHIN LIMIT: `/products/adidas-predator-26-elite-fg-soccer-cleats` (50 chars). SCRIBE includes a handle suggestion in the brief when it differs from the existing slug and verifies length. If the existing slug exceeds 70 chars and the page is high-traffic, SCRIBE flags it for Mike's review rather than auto-recommending a change, because a slug change requires 301 redirect coordination with Misha.
+
+### Product image alt text
+
+Every PDP product image needs descriptive alt text. Format: `[Brand] [product name] [colorway/edition if applicable] [view angle if specific] soccer cleats`. Examples: "adidas Predator 26 Elite Firm Ground soccer cleats" (primary), "adidas Predator 26 Elite Firm Ground side view" (side angle), "adidas Predator 26 Elite Firm Ground stud configuration" (sole view). Discipline: alt text describes what is in the image (not just the product name), includes the primary keyword naturally (soccer cleats, soccer shoes), is NOT keyword-stuffed (Gate 13 applies, no comma-stacking), and is distinct per image (differentiate by view angle or feature, never repeat the same alt text). SCRIBE includes alt text recommendations in the brief (one per primary product image; additional images noted where SCRIBE has gallery visibility).
+
+### Product image optimization flags (workforce briefing only)
+
+When the Firecrawl scrape reveals image issues, SCRIBE notes them in the workforce briefing audit trail, NOT in the visible brief (image optimization is implementation-side work for Mike and Misha, not editorial content): file dimensions clearly larger than display size (a 4000px image rendering at 800px), suboptimal format (PNG where JPG compresses better; non-WebP where WebP is available), or non-descriptive filenames (`DSC_1234.jpg` instead of `adidas-predator-26-elite.jpg`).
+
+### Product taxonomy category
+
+Every PDP needs a Shopify taxonomy category. For ProSoccer footwear: `Apparel & Accessories > Shoes > Athletic Shoes > Soccer Cleats` (firm / multi / soft ground), `... > Indoor Court Shoes` (indoor), `... > Turf Shoes` (turf). SCRIBE recommends the category in the workforce briefing audit trail; Mike applies it in Shopify admin during implementation (taxonomy is admin-side, not theme content). If the current PDP is missing a taxonomy category, SCRIBE flags it in the workforce briefing as an implementation-side action item.
+
+### Description structure: prose H2 sections + a dedicated "Product Details" bullet H2
+
+The Description (body_html) splits reader-first prose from technical bullets. Prose carries the WHY (why this matters to the buyer); bullets carry the WHAT (the specs). Prose readers get prose; scanner readers get bullets. The cognitive load discipline applies throughout.
+
+**Prose H2 sections (reader-first body copy):** product overview / introduction (emotional or identity hook), use-case scenarios (how players actually use this), identity and belonging anchors (what the section wears, who this is for), heritage and brand narrative, sizing and fit guidance framed by buyer need.
+
+**Dedicated "Product Details" H2 (bullet list).** Use this exact term, "Product Details" -- it matches the pattern ProSoccer already uses on live PDPs (e.g., the Nike Superfly 11 Club PDP). It lives as its own H2 within the Description, 5 to 8 bullets typical, one technical attribute per bullet. Always include it when the product has technical specs worth listing.
+
+- **Bullets (specs, the WHAT):** materials (upper, stud configuration, lining, sole construction), plate type and surface compatibility (FG / AG / SG / MG / TF / IC), tier-specific features (Elite vs Pro vs League differentiation), weight, sizing system, fit notes, care instructions, technology callouts (Heat.RDY, K-leather, traction system, lacing).
+- **Prose (the WHY):** why this matters to the buyer's life, emotional and identity anchors, use-case scenarios, heritage and brand context, sizing guidance framed by buyer need. No feature-selling in prose; specs live in the bullets.
+
+**H2 count, flexible by complexity (SCRIBE decides at brief production):** Simple 2 to 3 H2 sections (overview + Product Details + optional fit); Standard 3 to 4; Complex 4 to 5 (overview + use case + heritage + Product Details + fit / sizing). Each prose paragraph carries one theme, 2 to 4 sentences, with white space for scan-ability. Anti-pattern: technical specs listed in prose sentences instead of the Product Details bullets, or a single undifferentiated block.
+
+### FAQ for PDPs (recommended, net-new-value criterion)
+
+FAQ is RECOMMENDED on PDPs (collection pages keep the conditional rule in `context/page-type-playbooks/collection-page-playbook.md`). The same net-new-value criterion governs both: a FAQ Q-and-A pair earns its place only when it answers a question the description body does not already cover, that real buyers actually ask, and that adds measurable value to the decision. Typical PDP patterns: sizing ("Does the Predator 26 run true to size?"), plate selection ("Should I get the FG or MG plate for mixed surfaces?"), sibling comparison ("What's the difference between Elite and Pro tiers?"), use-case fit ("Are these cleats good for hard ground?"), care or durability ("How do I care for K-leather uppers?"). Skip: questions already answered in the body, marketing fluff as questions ("Why are these the best cleats?"), generic non-product questions ("Where do you ship?"), and schema-stuffing questions. Count: 3 to 5 Q-and-A pairs typical, quality over quantity. Skip FAQ entirely if SCRIBE cannot generate 3 genuinely useful Q-and-As beyond the body.
+
+### Tier time impact
+
+Applying the full PDP discipline (complexity classification, length verification across the six fields, cross-SKU uniqueness checks, prose-vs-bullet Description structure with the Product Details H2, alt text, taxonomy, FAQ net-new-value judgment) adds roughly 3 to 5 minutes to a Tier 2A PDP, shifting the estimate from ~12 to 16 min toward ~15 to 20 min. Tier 1 foundational PDPs already budget for full discipline.
+
+Cross-references: `.claude/agents/on-page-seo/agent.md` Section 9 (PDP Phase 4 self-checks), `.claude/agents/master-strategist/agent.md` Section 9 + Section 11 (ORIN PDP defense-in-depth), `context/workforce-conventions.md` 'PDP optimization discipline (cross-cutting)' (field-length reference table + FAQ reconciliation + architectural learning note).
+
 ## Eligibility verification (Mike-pre-vetted at URL submission, updated 2026-05-29)
 
 _Original codification 2026-05-27 placed eligibility detection in the agent layer via Firecrawl scrape. 2026-05-29 diagnostic on the Mexico Stadium SS kit set confirmed storefront-rendered signals (schema.org availability, Add-to-cart button state, variant selector) are systematically unreliable: three different schema.org value formats across three pages of the same theme, dual-schema injection from apps, persistent variant selector lies on Home and Third (in-stock per Shopify admin, sold-out per storefront render). The "Available in stock (X)" inventory hint was the only reliable signal and had been dismissed as a JSON-extraction artifact. Rather than refine detection rules against an architecturally unreliable rendering layer, eligibility responsibility moves to the human-in-the-loop layer._
@@ -500,6 +592,8 @@ Names the specific product. Brand, model, version. Avatar-search-language preser
 
 The product name appears in this field exactly the way the avatar searches for it. If the avatar searches for "Mexico 2026 home jersey," that's the framing. If the avatar searches for "Mercurial Superfly Elite," that's the framing.
 
+Length: 30 to 100 characters (hard min and max per 'PDP-specific SEO discipline' above). For pack/series products, the Title must be unique across sibling SKUs (tier / plate / colorway / generation differentiator).
+
 ### SEO Meta Title
 
 Product head term first for SERP discovery. Brand and tier qualifiers follow.
@@ -508,7 +602,7 @@ Product head term first for SERP discovery. Brand and tier qualifiers follow.
 - `Mercurial Superfly 9 Elite FG | Nike Pro Soccer Cleats`
 - `Adidas Tiro 23 Training Pants | Slim-Fit Track Pant`
 
-50 to 60 characters. Front-load the product name.
+60 characters maximum INCLUDING the Hyper theme brand suffix, so the INPUT field stays under approximately 48 to 50 characters (per 'PDP-specific SEO discipline' above). Front-load the product name; never put "ProSoccer" in the field. Must be unique across sibling SKUs for pack/series products.
 
 ### SEO Meta Description
 
@@ -525,13 +619,13 @@ Store-anchored CTAs (do not use):
 - `Shop ProSoccer for the lowest price`
 - `Order now for free shipping`
 
-150 to 158 characters. Head term naturally placed in the first 100 characters.
+160 characters maximum (hard ceiling per 'PDP-specific SEO discipline' above); 150 to 158 is the desktop target inside that ceiling. Head term naturally placed in the first 100 characters.
 
 ### Short Description (intro paragraph or product blurb)
 
 Emotion-first lead. The first sentence carries identity, moment, or feeling for the avatar buying this product. Per `context/03-brand-voice.md` 'Emotional Connection Over Feature Selling', features wait until sentence two or three.
 
-40 to 80 words. Lives at the top of the description body. On Shopify, this is what appears above the fold on mobile, before the product variants and add-to-cart.
+50 to 100 words (per 'PDP-specific SEO discipline' above). On ProSoccer's Hyper theme this is the "Short Description" metafield, which renders in the hero block above Add to Cart (NOT the same field as the "Description" body_html that renders in the accordion below the product images). A brief reader-first emotional or value-prop hook; no feature listing.
 
 ### Long Description (body copy)
 
@@ -544,7 +638,7 @@ H2 patterns by product type:
 - **Training apparel:** brand context, fabric and tech detail, where it fits in the avatar's wardrobe (training, travel, casual), fit and sizing, care.
 - **Equipment (balls, bags, gloves):** brand line context, design and tech, who uses it, durability and care.
 
-200 to 400 words across all H2s combined. Product pages run shorter than collection pages because the product variant selector and add-to-cart compete for attention; long body copy buries them.
+This is ProSoccer's "Description" (body_html) field, rendering in the collapsible accordion below the product images. Length is tiered by product complexity (per 'PDP-specific SEO discipline' above): Simple ~125 to 200 words, Standard ~200 to 300, Complex ~300 to 400 (cleats, authentic jerseys, technical gloves, tournament editions). This tiered range supersedes the older flat "200 to 400 words" target and is grounded in 2026 ecommerce ranking data. Split reader-first prose H2 sections from a dedicated "Product Details" bullet H2 per 'Description structure: prose H2 sections + a dedicated "Product Details" bullet H2' below: prose carries the WHY, bullets carry the WHAT (specs). Never list technical specs in prose.
 
 Each H2 passes the lift test from `.claude/agents/on-page-seo/agent.md` Section 11 Gate 9.
 

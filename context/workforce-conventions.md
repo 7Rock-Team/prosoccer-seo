@@ -281,6 +281,53 @@ Copy evokes the positive emotions associated with the purchase: anticipation, id
 
 Cross-references: both page-type playbooks 'Editorial philosophy disciplines (Phase 4 self-checks, added 2026-06-02)', `.claude/agents/on-page-seo/agent.md` Section 9 'Editorial philosophy disciplines' + Section 11, `.claude/agents/master-strategist/agent.md` Section 9 trust-but-verify + Section 11 Gate 12. Related ephemeral-data-avoidance patterns: 'Content evergreen-ness' (Gate 13 pricing) and 'Unsupported specific counts (Gate 14, cross-cutting)'.
 
+## PDP optimization discipline (cross-cutting)
+
+PDPs and collection pages now have meaningfully differentiated optimization disciplines. PDPs serve product-specific search intent (a buyer searching for one cleat in one tier) rather than the category intent collections serve, which drives field-length constraints by field, cross-SKU title uniqueness, image and taxonomy requirements, and a body structure that splits reader-first prose from technical bullets. The nine PDP-specific disciplines are canonical in `context/page-type-playbooks/product-page-playbook.md` 'PDP-specific SEO discipline (added 2026-06-02)'; they apply to Day 3+ PDP production and sit on top of all shared discipline (Gate 13, Gate 14, the Phase 4 editorial disciplines, brand IP, year-specificity, keyword distribution). The governing operational principle is reader-first: write to the buyer's needs and desires, not Google's algorithm; specs in bullets, never prose; positive emotion, no manipulation; human-written, not AI-generated (per 'Editorial philosophy (added 2026-06-02)' above).
+
+### ProSoccer Shopify field naming (Hyper theme)
+
+ProSoccer's Hyper theme exposes three distinct description-related fields, and they are NOT interchangeable:
+
+- **Title:** the product title field.
+- **Short Description (metafield):** renders in the hero block above Add to Cart. A brief reader-first emotional / value-prop hook.
+- **Description (body_html):** renders in the collapsible accordion below the product images. The full body content (prose H2 sections + the "Product Details" bullet H2).
+
+(A "Sub Title" metafield also appears in admin with content like "Multi-Color/Black"; whether the theme renders it visibly is unverified, flagged for Mike in `work-log/follow-ups.md`.)
+
+### PDP field length reference (hard limits)
+
+| Field (ProSoccer admin name) | Limit |
+|---|---|
+| Title | 30 to 100 characters (min AND max) |
+| Short Description (metafield, hero block) | 50 to 100 words |
+| Description (body_html, accordion) | tiered by complexity: Simple ~125 to 200 / Standard ~200 to 300 / Complex ~300 to 400 words |
+| Meta Title | 60 characters maximum, INCLUDING the Hyper theme brand suffix (so the input field stays under approximately 48 to 50 chars) |
+| Meta Description | 160 characters maximum |
+| URL handle (slug after `/products/`) | 70 characters maximum |
+
+These are hard limits (FAIL if exceeded), not targets. The tiered Description range supersedes the earlier single "150-word" figure, which is now interpreted as the Short Description metafield, not the Description body. SCRIBE verifies each in Phase 4; ORIN re-checks at the orchestrator layer (Section 11 Gate 13).
+
+### Product complexity classification
+
+Description length is set by product complexity. Classification test: if a buyer needs more than 2 minutes to choose between sibling products in the same family, the product is complex; if they grab and go, it is simple.
+
+- **Simple (~125 to 200 words):** keychains, lapel pins, magnets, decals, stickers, mini balls, basic flags, simple practice cones.
+- **Standard (~200 to 300 words):** training and match balls, bags, backpacks, apparel with basic variants, shin guards, single-tier goalkeeper gloves.
+- **Complex (~300 to 400 words):** soccer cleats (tier / plate / colorway / generation matrix), authentic jerseys (player versions, kit details), tournament-edition products with a collectibility narrative, technical goalkeeper gloves, anything needing sizing / fit / surface guidance.
+
+### Description structure: prose H2 + "Product Details" bullet H2
+
+The Description splits reader-first prose from technical bullets. Prose H2 sections (overview, use case, identity / belonging, heritage, sizing / fit) carry the WHY; a dedicated "Product Details" H2 bullet list (the exact ProSoccer-native term, per live PDPs like the Nike Superfly 11 Club) carries the WHAT (materials, plate / surface, tier features, weight, care, technology). Never list technical specs in prose. H2 count flexes by complexity (Simple 2 to 3, Standard 3 to 4, Complex 4 to 5); always include "Product Details" when there are specs worth listing.
+
+### FAQ reconciliation across page types
+
+Collection pages keep the conditional FAQ rule (skip unless the FAQ adds net-new value beyond the Long Description, per `context/page-type-playbooks/collection-page-playbook.md`). PDPs RECOMMEND a FAQ, governed by the SAME net-new-value criterion: 3 to 5 Q-and-A pairs that the Description body does not already cover, that real buyers ask (sizing, plate selection, sibling comparison, use-case fit, care / durability), and that add measurable decision value. Skip entirely if fewer than 3 genuinely useful Q-and-As exist. The criterion is identical across page types; only the default posture differs (collections lean skip, PDPs lean include).
+
+**Architectural learning note.** PDP optimization discipline codification (added 2026-06-02, corrected 2026-06-02): TinySEO PDP analysis surfaced PDP-specific SEO requirements not previously codified. PDPs serve different search intent than collections (product-specific vs category queries) and need different field-length constraints, schema considerations, and content structures. The first codification used a single "Product Description 150 words max" figure; on review this conflated Shopify's two description fields and contradicted 2026 ecommerce ranking data (top-ranking ecommerce pages average 200 to 310 words; complex products competitive at 300 to 400), the playbook's own worked examples (250 to 350 words), and the Mexico v5 canonical (340 words). Corrected: Short Description metafield (hero block) 50 to 100 words; Description body_html (accordion) tiered Simple ~125 to 200 / Standard ~200 to 300 / Complex ~300 to 400. The "150" is interpreted as the Short Description metafield. Nine additions codified: (1) field length constraints split by field using ProSoccer's admin field names, (2) unique titles for pack/series products (tier / plate / colorway / generation), (3) URL handle 70-char constraint, (4) image alt text format, (5) image optimization flags in the workforce briefing, (6) taxonomy category requirement, (7) Description structure with prose H2 sections plus a dedicated "Product Details" bullet H2 (prose = WHY, bullets = WHAT), (8) FAQ recommended with net-new-value criterion, (9) reader-first operational principle reinforced as the governing principle for all PDP copy. FAQ reconciliation: collections stay conditional, PDPs recommended with the same criterion. Collection-page Long Description ceiling unchanged at 500. PDPs and collections now have meaningfully differentiated disciplines. Day 3 PDP batch will be the first production batch under full PDP discipline. Optional script-level length checks in `voice_check.py` deferred to Mike's decision (field-specific length limits do not fit the whole-file regex model the `\bAdidas\b` check uses).
+
+Cross-references: `context/page-type-playbooks/product-page-playbook.md` 'PDP-specific SEO discipline (added 2026-06-02)' (canonical, all 9 additions with examples + reader-first principle), `.claude/agents/on-page-seo/agent.md` Section 9 'PDP-specific Phase 4 self-checks' + Section 11, `.claude/agents/master-strategist/agent.md` Section 9 trust-but-verify + Section 11 Gate 13.
+
 ## Brief content requirements (data-backed)
 
 Both PDP and collection-page briefs must surface a minimal data-backed keyword research block and respect the product-page link policy. These are hard requirements, not optional.
