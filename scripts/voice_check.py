@@ -66,6 +66,16 @@ BOOT_NON_SOCCER = re.compile(
     re.IGNORECASE,
 )
 
+# Internal link format: link suggestions in deliverables and briefings must be full
+# HTTPS URLs on the canonical domain (https://www.prosoccer.com/...). These two
+# patterns catch the two failure modes seen in production: an insecure http://
+# ProSoccer URL, and a mangled link that lost its domain segment (http:///path).
+# These checks run ONLY when the file path is inside deliverables/ or briefings/;
+# the playbooks carry these strings as pedagogical INCORRECT examples and are out of
+# scope. Backtick/fenced content and pedagogical lines are exempt, same as above.
+LINK_INSECURE_PATTERN = re.compile(r"http://[^/\s]*prosoccer\.com", re.IGNORECASE)
+LINK_MANGLED_PATTERN = re.compile(r"http:/{3,}[a-z]", re.IGNORECASE)
+
 # Lines demonstrating what NOT to do are exempt from the Adidas check; the
 # capitalized form on these lines is intentional teaching content.
 PEDAGOGICAL_MARKERS = (
@@ -142,11 +152,18 @@ def find_line_contexts(
     return hits
 
 
-def check(text: str) -> int:
-    """Run the voice check against the text. Return 0 if clean, 1 if violations found."""
+def check(text: str, path: Path | None = None) -> int:
+    """Run the voice check against the text. Return 0 if clean, 1 if violations found.
+
+    When `path` is inside deliverables/ or briefings/, also enforce the internal-link
+    URL-format checks (full HTTPS canonical-domain links; no insecure or mangled URLs).
+    """
     violations: list[str] = []
     display_lines = text.splitlines()
     scan_lines = strip_backticks(text).splitlines()
+    link_scope = path is not None and bool(
+        re.search(r"deliverables|briefings", str(path), re.IGNORECASE)
+    )
 
     for em in EM_DASHES:
         pattern = re.compile(re.escape(em))
@@ -229,6 +246,33 @@ def check(text: str) -> int:
         if len(boot_hits) > 5:
             violations.append(f"    ... and {len(boot_hits) - 5} more")
 
+    # Internal link format check (deliverables/ and briefings/ only): link
+    # suggestions must be full HTTPS canonical-domain URLs. Flag insecure http://
+    # ProSoccer URLs and mangled missing-domain links. Skip pedagogical lines;
+    # backtick/fenced content is already blanked in scan_lines.
+    if link_scope:
+        for label, pattern, detail in (
+            ("INSECURE LINK", LINK_INSECURE_PATTERN,
+             "ProSoccer links must be https:// (insecure http:// found; "
+             "use https://www.prosoccer.com/...):"),
+            ("MANGLED LINK", LINK_MANGLED_PATTERN,
+             "link is missing its domain (e.g. http:///path); "
+             "use the full https://www.prosoccer.com/... form:"),
+        ):
+            link_hits: list[tuple[int, str]] = []
+            for idx, (sline, dline) in enumerate(zip(scan_lines, display_lines), start=1):
+                lowered = sline.lower()
+                if any(marker in lowered for marker in PEDAGOGICAL_MARKERS):
+                    continue
+                if pattern.search(sline):
+                    link_hits.append((idx, dline.strip()))
+            if link_hits:
+                violations.append(f"{label}: {detail}")
+                for ln, ctx in link_hits[:5]:
+                    violations.append(f"    line {ln}: {ctx[:120]}")
+                if len(link_hits) > 5:
+                    violations.append(f"    ... and {len(link_hits) - 5} more")
+
     if violations:
         print("VOICE CHECK FAILED")
         for line in violations:
@@ -260,7 +304,7 @@ def main() -> int:
 
     text = extract_text(path)
     print(f"Checking: {path}")
-    return check(text)
+    return check(text, path)
 
 
 if __name__ == "__main__":

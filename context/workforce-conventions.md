@@ -234,6 +234,39 @@ Regex implementation note (`scripts/voice_check.py`): the `\bboots?\b` check bla
 
 Cross-references: `.claude/agents/on-page-seo/agent.md` Section 9 + Section 11 (SCRIBE Phase 4 US-market self-check), `.claude/agents/master-strategist/agent.md` Section 11 (ORIN defense-in-depth re-check), `scripts/voice_check.py` (`\bboots?\b` regex), both page-type playbooks (worked examples fix-forwarded). Related: 'Editorial philosophy (added 2026-06-02)', 'Brand styling conventions'.
 
+## Internal Link Format Discipline (added 2026-06-03)
+
+Every internal link suggestion in a PDP or collection brief must be a full HTTPS URL on the canonical domain. The canonical domain is `https://www.prosoccer.com` (with the `www` subdomain). Never a relative path, never `http://`, never a mangled or partial URL. The rule applies to the brief's `Internal links` sub-section, the brief-format template, and any inline link reference in modeled brief output.
+
+Correct format:
+
+- `https://www.prosoccer.com/collections/firm-ground`
+- `https://www.prosoccer.com/collections/adidas-copa`
+- `https://www.prosoccer.com/products/<handle>`
+
+Incorrect formats (forbidden):
+
+- `/collections/firm-ground` (relative path, no domain)
+- `http://www.prosoccer.com/collections/firm-ground` (insecure protocol; ProSoccer is HTTPS-only)
+- `http:///collections/firm-ground` (mangled, missing domain segment)
+- `www.prosoccer.com/collections/firm-ground` (missing protocol)
+- `prosoccer.com/collections/firm-ground` (missing `www` subdomain)
+
+Why it matters:
+
+1. Copy-paste implementation: full URLs paste cleanly into the Shopify rich-text editor when Mike adds cross-page links during implementation; a relative path pastes as a broken link.
+2. SEO clarity: a full URL unambiguously documents exactly which page to link to.
+3. Audit trail: future readers see precisely what was recommended without reconstructing context.
+4. Protocol correctness: ProSoccer is HTTPS-only, so any `http://` reference is wrong on principle, and a relative path can render mangled (the surfacing case rendered `/collections/firm-ground` as `http:///collections/firm-ground`).
+
+Enforcement (defense-in-depth): SCRIBE builds every internal link as a full HTTPS canonical URL during Phase 4 and expands any relative or partial path before brief output; ORIN's orchestrator re-check scans every internal link suggestion for relative paths, missing protocols, missing `www`, and mangled patterns; `scripts/voice_check.py` adds belt-and-suspenders regex coverage for the two worst failure modes (insecure `http://` ProSoccer URLs and mangled `http:///` missing-domain links), scoped to `deliverables/` and `briefings/` files only. The playbooks carry the forbidden patterns as pedagogical INCORRECT examples, so they are out of the script's link-check scope; backtick, fenced, and pedagogical-marker exemptions apply as elsewhere.
+
+Surfacing case: the KI0662 PDP brief (commit 68664ca, in main) used relative paths in its internal links, which rendered as `http:///collections/firm-ground` during Mike's review. Per Mike's decision the KI0662 brief was NOT fix-forwarded (he edits the links manually during Shopify implementation); the rule applies forward only to new briefs. Same forward-only policy as the brand-styling and US-market codifications.
+
+Architectural learning note: the format for internal link suggestions was never explicitly codified, so SCRIBE produced relative or partial URLs and ORIN had no rule to catch them. Codifying the full-HTTPS-canonical form removes the ambiguity and gives all three enforcement layers a concrete pattern to check. Related disciplines: 'US Market Language Discipline (added 2026-06-03)' (commit 499f1e5) and 'Editorial philosophy (added 2026-06-02)' (commit dcfe6da) are the other recent forward-only, defense-in-depth codifications.
+
+Cross-references: `.claude/agents/on-page-seo/agent.md` Section 9 + Section 11 (SCRIBE Phase 4 link-format self-check), `.claude/agents/master-strategist/agent.md` Section 11 (ORIN defense-in-depth re-check), `scripts/voice_check.py` (insecure + mangled URL regex, deliverables/briefings scope), both page-type playbooks 'Internal link strategy'.
+
 ## Unsupported specific counts (Gate 14, cross-cutting)
 
 Gate 14 is a separate gate after Gate 13; the workforce gates suite runs 14 gates as of 2026-06-02 (previously 13). It is the same ephemeral-data family as the Gate 13 pricing discipline (see 'Content evergreen-ness' above): body copy must not contain specific counts of catalog items (federations, brands, products, styles, designs, tiers) that are unverified, decay as inventory shifts, or read as SEO ornamentation. Collection pages are most prone to it (a collection aggregates inventory by definition).

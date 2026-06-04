@@ -956,6 +956,8 @@ This policy is product-page-specific. Collection pages may include external link
 
 Same architecture as the collection-page playbook ('Internal link strategy' in `context/page-type-playbooks/collection-page-playbook.md`), adapted for product-page content. 1 to 2 internal links maximum in the long description body.
 
+Link format: every internal link suggestion is a full HTTPS URL on the canonical domain `https://www.prosoccer.com` (with the `www` subdomain), never a relative path or `http://`. Full rule and examples: `context/workforce-conventions.md` 'Internal Link Format Discipline (added 2026-06-03)'.
+
 ### Selection rules
 
 - Links derive from body content (the product's brand, the parent collection it sits in, related products in the same lineup, signature players the product is associated with).
@@ -975,18 +977,18 @@ Same rules as the collection-page playbook. 2 to 5 words, descriptive of destina
 
 For team kit products (e.g., 2026 Mexico Home Authentic Jersey by adidas):
 
-- **Collection link:** the team's collection page. E.g., `/collections/mexico` (or `/collections/mexico-soccer-jersey` post-rename), anchor `the Mexico collection` or `the full El Tri lineup`.
-- **Brand link:** the brand's national-team-kit collection if relevant. E.g., `/collections/adidas-soccer-jerseys`, anchor `Adidas's national team kits`.
+- **Collection link:** the team's collection page. E.g., `https://www.prosoccer.com/collections/mexico` (or `https://www.prosoccer.com/collections/mexico-soccer-jersey` post-rename), anchor `the Mexico collection` or `the full El Tri lineup`.
+- **Brand link:** the brand's national-team-kit collection if relevant. E.g., `https://www.prosoccer.com/collections/adidas-soccer-jerseys`, anchor `Adidas's national team kits`.
 
 For performance cleat products (e.g., Nike Mercurial Superfly 9 Elite FG):
 
-- **Brand line collection:** the cleat's lineup. E.g., `/collections/nike-mercurial`, anchor `the Mercurial lineup`.
-- **Surface-type collection:** matched to the cleat's plate. E.g., `/collections/firm-ground-cleats`, anchor `firm-ground cleats`.
+- **Brand line collection:** the cleat's lineup. E.g., `https://www.prosoccer.com/collections/nike-mercurial`, anchor `the Mercurial lineup`.
+- **Surface-type collection:** matched to the cleat's plate. E.g., `https://www.prosoccer.com/collections/firm-ground-cleats`, anchor `firm-ground cleats`.
 
 For training apparel products (e.g., adidas Tiro 23 Training Pants):
 
-- **Brand training collection:** E.g., `/collections/adidas-training-apparel`, anchor `Adidas's training kit`.
-- **Use-case collection:** E.g., `/collections/training-pants`, anchor `the full training-pant lineup`.
+- **Brand training collection:** E.g., `https://www.prosoccer.com/collections/adidas-training-apparel`, anchor `Adidas's training kit`.
+- **Use-case collection:** E.g., `https://www.prosoccer.com/collections/training-pants`, anchor `the full training-pant lineup`.
 
 ### Brief format for surfacing link selections
 

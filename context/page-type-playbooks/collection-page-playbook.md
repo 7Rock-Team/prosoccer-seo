@@ -458,6 +458,10 @@ The catalyst section is the place to name the current tournament, the current ki
 
 The long description supports 1 to 2 internal links maximum. More than that turns the body into a navigation menu and dilutes topical authority. Fewer than that leaves the page orphaned in the site's link graph.
 
+### Link format (full HTTPS canonical URLs)
+
+Every internal link suggestion in the brief is a full HTTPS URL on the canonical domain `https://www.prosoccer.com` (with the `www` subdomain). Never a relative path (`/collections/firm-ground`), never `http://`, never a partial or mangled URL. Full URLs paste cleanly into the Shopify editor and document the exact destination. Full rule, INCORRECT and CORRECT examples, and enforcement: `context/workforce-conventions.md` 'Internal Link Format Discipline (added 2026-06-03)'.
+
 ### Selection rules
 
 - Link candidates derive from body content (named entities, brands, players, related teams mentioned naturally in the topic substance). The link should serve a reader who's already engaged with the topic, not a reader the page is trying to redirect.
@@ -509,9 +513,9 @@ Good anchor text:
 
 For team collection pages (Mexico, Argentina, Brazil):
 
-- **Brand link:** kit supplier's collection if mentioned in body. E.g., `/collections/adidas-soccer-jerseys`, anchor `Adidas's national team kits` or `Adidas's federation roster`.
-- **Adjacent topic link:** parent national-teams collection (`/collections/national-teams`) or a mentioned related team.
-- **Player link:** if a specific player with their own collection is featured prominently in the body. E.g., `/collections/hirving-lozano` from a Mexico body that names Lozano in the Players sub-section.
+- **Brand link:** kit supplier's collection if mentioned in body. E.g., `https://www.prosoccer.com/collections/adidas-soccer-jerseys`, anchor `Adidas's national team kits` or `Adidas's federation roster`.
+- **Adjacent topic link:** parent national-teams collection (`https://www.prosoccer.com/collections/national-teams`) or a mentioned related team.
+- **Player link:** if a specific player with their own collection is featured prominently in the body. E.g., `https://www.prosoccer.com/collections/hirving-lozano` from a Mexico body that names Lozano in the Players sub-section.
 
 For player collection pages (Messi, Ronaldo):
 
@@ -532,13 +536,13 @@ Embed each validated link inline in the body at its natural anchor point. Below 
 ```
 ## Internal links (1-2 max)
 
-1. **URL:** /collections/<slug>
+1. **URL:** https://www.prosoccer.com/collections/<slug>
    - **Anchor text:** <exact phrase used in body>
    - **Body location:** <section name where the link appears>
    - **Validation:** 200 OK / fetched <date> / content confirmed (<H1 of destination> / <product count> / <other observed signal>)
    - **Reasoning:** <why this link, why this anchor>
 
-2. **URL:** /collections/<slug>
+2. **URL:** https://www.prosoccer.com/collections/<slug>
    - **Anchor text:** <exact phrase used in body>
    - **Body location:** <section name>
    - **Validation:** 200 OK / fetched <date> / content confirmed
@@ -550,7 +554,7 @@ If a candidate failed validation, document the failure inline so the audit trail
 ```
 ## Skipped link (validation failure)
 
-- **URL:** /collections/<slug>
+- **URL:** https://www.prosoccer.com/collections/<slug>
 - **Failure:** 404 Not Found / 301 redirect to /collections/<other> / soft-404 returns homepage / <other>
 - **Alternative selected:** <URL of the link that took its place>, OR none (skipped to keep total at 1-2)
 ```
