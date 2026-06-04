@@ -358,7 +358,37 @@ Copy evokes the positive emotions associated with the purchase: anticipation, id
 - **HYPERBOLE:** "the greatest scarf ever made", "the perfect kit", "unmatched quality".
 - **FALSE URGENCY:** "limited time", "won't last", "while supplies last".
 
+### 5. Outcome-based copywriting (added 2026-06-03, extends dcfe6da)
+
+Buyers don't buy products. They buy outcomes. The cleat isn't the product. The Saturday morning where their kid plays with confidence is the product. The jersey isn't the product. Wearing their nation's colors during the tournament is the product. Short Description and Description prose paint a concrete picture of the buyer's life AFTER they own the product, showing the desired outcome they are really buying, not the features that produce it. This sub-discipline is the operational technique that delivers on sub-disciplines 1 through 4: it IS reader-first (the outcome is what serves the reader), it uses low-load concrete sentences, it sequences the outcome first and specs after, and it anchors in belonging, identity, ritual, anticipation, heritage, and place. Sub-disciplines 1 to 4 are what to BE; sub-discipline 5 is what to DO.
+
+**Three techniques:**
+
+1. **Future-pacing.** Use sensory description to place the buyer in the moment of using the product. Outcome: "Saturday morning. Your kid's first kick of the day. The grass is still wet, and they're already grinning." Feature (avoid): "Soft padding and easy step-in design."
+2. **Show the transformation.** Position the buyer as moving from one state to another: the kid who was uncertain becomes the kid who's confident; the midfielder who couldn't see the field becomes the one who controls it; the parent worried about quality becomes the parent who trusts the gear.
+3. **Concrete over abstract.** Outcomes are specific scenes, not abstract claims. Concrete: "The moment you see the gap and take it." Abstract (avoid): "Built for fast sprints." Concrete: "Their first goal in the new cleats. The way they look back at you on the sideline." Abstract (avoid): "Premium comfort and performance."
+
+**What to avoid (translate, don't list):**
+
+- Feature-listing in prose ("Synthetic upper for durability"). Specs belong in the Product Details bullets.
+- Spec-recital in prose ("170 grams, FlyWeave Ultra, ZoomX foam"). Specs belong in the bullets.
+- Abstract benefit claims ("premium comfort", "built for performance"). Show the comfort or the performance through an outcome scene instead.
+- Manufacturer marketing language verbatim. Translate it into buyer-outcome terms.
+- Manipulation outcomes (fear, exclusion, status anxiety, FOMO). Forbidden per sub-discipline 4.
+
+**Application by field:**
+
+- **Short Description (50 to 100 words on PDPs, the hero-block equivalent on collections):** entirely outcome-based, no feature mention. The full hook paints the scene the buyer is moving toward. This is the most aggressive application, because the Short Description is the emotional hook above Add to Cart.
+- **Description prose H2 sections (PDPs and collections):** each prose H2 opens with the outcome (the scene, the moment, the identity), then connects to the product where natural. The heritage section can use heritage as the outcome ("the cleat family worn on World Cup pitches since 1979"). The use-case section uses the use case as the outcome ("the kid who lives in open space, the runner"). The fit section can frame fit as the outcome ("easy from the first session, broken in by the second").
+- **Description Product Details bullet H2:** bullets carry the WHAT (specs). The outcome rule does NOT apply to bullets; they stay technical and scannable.
+- **Collection-page prose:** the same principle at the collection level. Not "shop the adidas Copa Pure IV collection" but "the cleat family that lives where touch meets the moment: every tier from Elite to Junior League, every level of player who plays the Copa way."
+- **FAQ answers:** apply where the question is about a buyer outcome ("how does this fit", "is this right for my kid"). Do not apply where the question is purely technical ("what's the difference between the Elite and Pro tiers").
+
+Judgment-dependent, not script-enforceable (no regex can tell outcome prose from feature prose). It lives at SCRIBE Phase 4 application plus ORIN orchestrator sanity scan. This extends the editorial philosophy commit dcfe6da; it does not replace it.
+
 **Architectural learning note.** Editorial philosophy discipline (added 2026-06-02 after Gate 14 codification): Gate 13 anti-stuffing and Gate 14 specific counts catch structural manifestations of a deeper editorial philosophy gap. SCRIBE was producing structurally-correct copy meeting all gates but lacking emotional resonance, reader-focused clarity, and value-first orientation. Four sub-disciplines codified as Phase 4 self-checks plus workforce-conventions philosophy: (1) Reader-first copy orientation, body copy serves buyer's emotional connection, not algorithm. (2) Cognitive load reduction, sentence length variance, one concept per sentence, concrete over abstract, scan-ability. (3) Value-first sequencing, each H2 follows hook -> connection -> specifics -> action arc. (4) Positive emotional anchoring, use belonging / identity / ritual / anticipation / heritage / place anchors; avoid scarcity / FOMO / status anxiety / hyperbole / false urgency manipulation patterns. These are judgment-dependent disciplines, not pattern-matchable structural rules. They live at SCRIBE Phase 4 application plus ORIN orchestrator sanity scan plus workforce-conventions cross-cutting philosophy. NOT codified as new gates (gates govern structural patterns; editorial philosophy is judgment). NOT script-level enforced (too judgment-dependent for regex). Surfaced from Day 2 batch #1 review where briefs met all 14 gates and the 4 prior Phase 4 disciplines but lacked the editorial layer that drives buyer connection.
+
+**Extension note (2026-06-03).** A fifth sub-discipline, '### 5. Outcome-based copywriting' (above), was added 2026-06-03 as the operational technique that delivers on the original four: paint the buyer's life after they own the product; show the outcome they are really buying, not the features that produce it. Same judgment-dependent, non-script-enforced, forward-only treatment as the original four. KI0662 PDP brief in main (68664ca) not fix-forwarded per Mike's decision.
 
 Cross-references: both page-type playbooks 'Editorial philosophy disciplines (Phase 4 self-checks, added 2026-06-02)', `.claude/agents/on-page-seo/agent.md` Section 9 'Editorial philosophy disciplines' + Section 11, `.claude/agents/master-strategist/agent.md` Section 9 trust-but-verify + Section 11 Gate 12. Related ephemeral-data-avoidance patterns: 'Content evergreen-ness' (Gate 13 pricing) and 'Unsupported specific counts (Gate 14, cross-cutting)'.
 

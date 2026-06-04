@@ -113,6 +113,18 @@ Three rules:
 
 What this is NOT: hyperbolic emotion-injection (`YOU WILL FEEL UNSTOPPABLE!`). The emotional connection is specific, observable, and grounded in the avatar's actual life. Walking through Pasadena in the kit is a feeling. Backing your son before his first varsity match is a feeling. Getting flagged on every Liga MX drop is a feeling. None of these are abstract.
 
+## Outcome-Based Copywriting (added 2026-06-03)
+
+Buyers don't buy products. They buy outcomes. The cleat isn't the product. The Saturday morning where their kid plays with confidence is the product. The jersey isn't the product. Wearing their nation's colors during the tournament is the product. Write Short Description and Description prose to the outcome, not the object: paint a concrete picture of the buyer's life after they own the product.
+
+Three techniques:
+
+1. **Future-pacing.** Use sensory description to place the buyer in the moment of using the product. Yes: "Saturday morning. Your kid's first kick of the day. The grass is still wet, and they're already grinning." Not: "Soft padding and easy step-in design."
+2. **Show the transformation.** Position the buyer as moving from one state to another. The kid who was uncertain becomes the kid who's confident. The midfielder who couldn't see the field becomes the one who controls it.
+3. **Concrete over abstract.** Outcomes are specific scenes, not abstract claims. Yes: "The moment you see the gap and take it." Not: "Built for fast sprints." Yes: "Their first goal in the new cleats. The way they look back at you on the sideline." Not: "Premium comfort and performance."
+
+Keep feature-listing and spec-recital out of prose; those live in the Product Details bullets. Translate manufacturer marketing language into buyer-outcome terms. Manipulation outcomes (fear, exclusion, status anxiety, FOMO) stay forbidden. This is the fifth sub-discipline of the editorial philosophy codified in `context/workforce-conventions.md` 'Editorial philosophy (added 2026-06-02)', an extension of commit dcfe6da.
+
 ## Tone by Audience
 
 - **Coaches:** direct, practical, saves their time. Fewer adjectives.
