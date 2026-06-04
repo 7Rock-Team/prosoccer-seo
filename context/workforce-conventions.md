@@ -124,7 +124,7 @@ Seven anti-patterns flagged (1 through 5 apply in any field; 6 and 7 are body-co
 
 1. **Comma-stacked keyword lists** (`[Topic]: keyword1, keyword2, keyword3 & keyword4` or `[Topic] - A, B, C, D`). Any field with 3+ comma-separated keywords fails.
 2. **Ampersand-terminated lists** (trailing `& [final keyword]` on a comma list).
-3. **Synonym stacking** (jerseys / shirts / kits / tops; cleats / boots / shoes). One canonical term per field.
+3. **Synonym stacking** (jerseys / shirts / kits / tops; cleats / `boots` / shoes). One canonical term per field.
 4. **Modifier stacking** (audience: Men's / Boys' / Youth / Kids'; product: Authentic / Replica / Stadium / Match-Worn).
 5. **Brand stacking in titles** (adidas, Nike, Puma listed in one title when only one or two are relevant).
 6. **Price stacking in body copy.** Specific dollar amounts in collection or product page body copy. Surfaced in Day 2 batch #1 URL #1 Long Description pricing block (6 specific dollar amounts: "Caps run around $34.99... Scarves run $24 to $44. Flags run $44.99; Mimi Imports country flags run $19.99... Bags land between $30 and $80."). Use tier / positioning language instead; see 'Content evergreen-ness' below.
@@ -185,6 +185,54 @@ Known follow-up (no proactive sweep): the other repo files that contain capitali
 **Brand styling discipline (added 2026-06-02 with Gate 13 extension):** Some brands have non-standard capitalization as part of their official trademark identity. adidas is the canonical example, always lowercase, including sentence-start. Workforce discipline: SCRIBE never auto-capitalizes adidas; if sentence-start would feel awkward, restructure the sentence rather than capitalize. ORIN defense-in-depth re-check flags any `Adidas` (capitalized) in output fields. voice_check.py regex check enforces at script level. As other brand styling rules surface, add to this section.
 
 **Content evergreen-ness (added 2026-06-02 with Gate 13 extension):** Body copy on collection and product pages should not contain specific prices, specific inventory levels, or other ephemeral data points that decay quickly. Pricing information belongs in PDPs, product cards, and schema markup where Shopify automatically maintains accuracy. Body copy should use tier/positioning language ("entry-level," "mid-tier," "premium," "collector") that remains accurate as catalog prices shift. Same principle applies to brand breadth: brand stacking in body sentences belongs in faceted filters and product cards, not body prose. Body copy mentions individual brands only when narrative justifies (one or two per sentence, with role-specific context).
+
+## US Market Language Discipline (added 2026-06-03)
+
+ProSoccer's customer base is predominantly USA, then Canada, then global. Body copy must use US-market soccer language, not UK or global equivalents. This is a market-localization extension of the reader-first principle: the avatar searches with US-market terms (`soccer cleats`, not `football boots`), reads with US-market expectations, and responds to US-market emotional anchors (the Saturday morning club game, the high school season, college recruitment, an MLS aspiration). UK or global conventions in body copy create subtle dissonance that undermines the reader-first orientation codified in commit dcfe6da (see 'Editorial philosophy (added 2026-06-02)' above).
+
+### The footwear-term rule (priority codification)
+
+In body copy on ProSoccer pages, `cleat` / `cleats` is the primary term for soccer footwear. `shoe` / `shoes` is an acceptable secondary term for variation. `boot` / `boots` is FORBIDDEN in body copy when referring to soccer footwear.
+
+The rule applies to every output field: Title, Meta Title, Meta Description, Short Description, Body Description (H2s, H3s, body prose), internal link anchor text, and FAQ questions and answers.
+
+Incorrect (UK/global, do not use):
+
+- `the boot family adidas players wear`
+- `the fastest boot Nike has ever built`
+- `Nike's flagship boot`
+- `football boot`
+- `soccer boot`
+
+Correct (US market):
+
+- `the cleat family adidas players wear`
+- `the fastest soccer cleat Nike has ever built`
+- `Nike's flagship cleat`
+- `soccer cleat`
+- `soccer shoe` (acceptable for variation)
+
+### Broader US/UK distinctions (codify as encountered, not preemptively)
+
+The footwear term is the priority codification. Other US/UK distinctions may surface in production; codify each as a real instance appears rather than preemptively:
+
+- `field` (US) vs `pitch` (UK): US prefers `field`, though `pitch` is sometimes used in soccer-specific contexts. No strict rule yet.
+- `game` (US) vs `match` (UK): both are used in US soccer. No strict rule.
+- `jersey` (US) vs `kit` (UK): both are widely understood in US soccer. No strict rule.
+- `tournament` (US) vs `competition` (UK): both acceptable.
+- Spelling: US English throughout (`color` not `colour`, `organize` not `organise`). Already implicit; formalized here.
+
+### Enforcement (defense-in-depth)
+
+SCRIBE scans output for `boot` / `boots` in a soccer-footwear context during Phase 4 drafting and substitutes `cleat` / `cleats` (primary) or `shoe` / `shoes` (variation). ORIN's orchestrator-layer re-check flags any soccer-context `boot` / `boots` in any output field and routes it back to SCRIBE. `scripts/voice_check.py` enforces a `\bboots?\b` = FAIL regex at script level (case-insensitive), the first line of defense, alongside the em-dash, forbidden-word, and `\bAdidas\b` checks.
+
+Regex implementation note (`scripts/voice_check.py`): the `\bboots?\b` check blanks non-soccer phrases (`boot up`, `boot camp`, `boot loader`, `boot sector`, `to boot`, `das boot`, `boots on the ground`) before matching, and `bootstrap` / `reboot` never match because the word boundary requirement excludes them. Backtick and fenced content and pedagogical anti-pattern lines (markers INCORRECT, FORBIDDEN, UK CONVENTION, DO NOT USE, anti-pattern, wrong:, bad example) are exempt, the same exemption pattern the `\bAdidas\b` check uses.
+
+### Architectural learning note
+
+**US market language discipline (added 2026-06-03):** Mike flagged the gap after reviewing chat-sketch work where `boot` was used several times (UK/global convention) when `cleat` is the US-market term. Reader-first orientation extends to market localization: the US/Canadian avatar searches and reads in US-market terms, so UK conventions read as subtle dissonance even when technically correct. Discipline is forward-only: worked examples in the playbooks are fix-forwarded to model the correct term (worked examples must demonstrate the rule so SCRIBE learns the right pattern), and in-flight uncommitted work is fix-forwarded at gate, but shipped briefs are NOT retroactively swept (same standing forward-only policy as the brand-styling codification). Related discipline: 'Editorial philosophy (added 2026-06-02)' (reader-first orientation) and 'Brand styling conventions' (the other script-enforced language-styling rule).
+
+Cross-references: `.claude/agents/on-page-seo/agent.md` Section 9 + Section 11 (SCRIBE Phase 4 US-market self-check), `.claude/agents/master-strategist/agent.md` Section 11 (ORIN defense-in-depth re-check), `scripts/voice_check.py` (`\bboots?\b` regex), both page-type playbooks (worked examples fix-forwarded). Related: 'Editorial philosophy (added 2026-06-02)', 'Brand styling conventions'.
 
 ## Unsupported specific counts (Gate 14, cross-cutting)
 

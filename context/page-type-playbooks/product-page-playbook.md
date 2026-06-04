@@ -328,7 +328,7 @@ The quality issue that surfaced this gate: a Title field reading `National Team 
 
 1. **Comma-stacked keyword lists.** The format `[Topic]: keyword1, keyword2, keyword3 & keyword4` or `[Topic] - A, B, C, D` reads as stuffing regardless of relevance. Any field carrying 3+ comma-separated keywords fails.
 2. **Ampersand-terminated lists.** A trailing `& [final keyword]` at the end of a comma list compounds the spam signal.
-3. **Synonym stacking.** Treating synonyms (jerseys / shirts / kits / tops; cleats / boots / shoes) as variations to stack rather than picking one canonical term per field.
+3. **Synonym stacking.** Treating synonyms (jerseys / shirts / kits / tops; cleats / `boots` / shoes) as variations to stack rather than picking one canonical term per field.
 4. **Modifier stacking.** Stacking audience modifiers (Men's / Boys' / Youth / Kids') or product modifiers (Authentic / Replica / Stadium / Match-Worn) in a single field.
 5. **Brand stacking (titles).** Listing multiple brands (adidas, Nike, Puma) in a title when only one or two are relevant to the page.
 6. **Price stacking (body copy).** Specific dollar amounts in product-page body copy (added 2026-06-02). Prices decay; they belong in the PDP variant selector, product cards, and schema, not the body prose.
@@ -741,17 +741,17 @@ Nike launched the Mercurial in 1998 for Ronaldo R9 at the World Cup in France. T
 
 ## What's New in the Superfly 9 Elite
 
-Flyknit upper, lighter than the previous generation by about ten grams per boot. Air Zoom plate underneath for the energy return on the toe-off. Knit collar for ankle lock-in (the Superfly cut, vs the Vapor's lower collar). Heat-mapped traction stud pattern for cuts and turns.
+Flyknit upper, lighter than the previous generation by about ten grams per cleat. Air Zoom plate underneath for the energy return on the toe-off. Knit collar for ankle lock-in (the Superfly cut, vs the Vapor's lower collar). Heat-mapped traction stud pattern for cuts and turns.
 
 ## Superfly vs Vapor
 
-Same upper, same plate, different collar. The Superfly's knit collar adds ankle support and locks the foot at the heel. The Vapor (sold separately) skips the collar for a couple of grams of weight savings and a lower-cut feel. Superfly for the player who wants the lock; Vapor for the player who wants the boot to feel barely there.
+Same upper, same plate, different collar. The Superfly's knit collar adds ankle support and locks the foot at the heel. The Vapor (sold separately) skips the collar for a couple of grams of weight savings and a lower-cut feel. Superfly for the player who wants the lock; Vapor for the player who wants the cleat to feel barely there.
 
 ## Surface and Fit
 
 Firm-ground plate. Natural grass and most well-maintained turf. For artificial grass, see the Superfly 9 Elite AG (sold separately); for older astroturf, the Superfly 9 Pro TF. The Elite tier runs narrow at the forefoot. Wide-foot players usually find the Tiempo or the Predator a better fit.
 
-Sizes run true. Order your standard US cleat size if you've worn Mercurials before; if you're crossing over from a wider boot, consider half a size up.
+Sizes run true. Order your standard US cleat size if you've worn Mercurials before; if you're crossing over from a wider cleat, consider half a size up.
 ```
 
 Annotation:

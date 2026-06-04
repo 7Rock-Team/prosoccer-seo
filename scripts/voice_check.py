@@ -49,6 +49,23 @@ EM_DASHES = ["—", "–"]  # — and –
 #   - on a line carrying a pedagogical anti-pattern marker (see PEDAGOGICAL_MARKERS)
 ADIDAS_PATTERN = re.compile(r"(?<![-`])\bAdidas\b(?!-\w)")
 
+# US market language: soccer footwear is "cleats" (US market) not "boots"
+# (UK/global convention). Flag standalone "boot"/"boots" in body copy; the US
+# market term is "cleat(s)" (primary), "shoe(s)" (acceptable secondary variation).
+# Non-soccer technical and idiom uses ("boot up", "boot camp", "boot loader",
+# "to boot", "das boot") are blanked before the check so they do not false-flag;
+# "bootstrap" and "reboot" never match because \b requires a word boundary.
+# Backtick/fenced content and pedagogical anti-pattern lines are exempt, same as
+# the Adidas check above.
+BOOT_PATTERN = re.compile(r"\bboots?\b", re.IGNORECASE)
+BOOT_NON_SOCCER = re.compile(
+    r"\bboots?\s+(?:up|camp|loader|sector|disk|drive|menu|partition|record|screen)\b"
+    r"|\bto\s+boot\b"
+    r"|\bdas\s+boot\b"
+    r"|\bboots?\s+on\s+the\s+ground\b",
+    re.IGNORECASE,
+)
+
 # Lines demonstrating what NOT to do are exempt from the Adidas check; the
 # capitalized form on these lines is intentional teaching content.
 PEDAGOGICAL_MARKERS = (
@@ -58,6 +75,10 @@ PEDAGOGICAL_MARKERS = (
     "stuffed:",
     "wrong:",
     "bad example",
+    "forbidden",
+    "uk convention",
+    "uk-convention",
+    "uk/global",
 )
 
 SUPPORTED_EXTS = {".md", ".txt", ".docx"}
@@ -186,13 +207,35 @@ def check(text: str) -> int:
         if len(adidas_hits) > 5:
             violations.append(f"    ... and {len(adidas_hits) - 5} more")
 
+    # US market language check: soccer footwear is "cleats" (US market), not
+    # "boots" (UK/global). Skip pedagogical lines; blank non-soccer "boot" phrases
+    # before matching. Mirrors the Adidas check (scan_lines already have backtick
+    # and fenced content blanked).
+    boot_hits: list[tuple[int, str]] = []
+    for idx, (sline, dline) in enumerate(zip(scan_lines, display_lines), start=1):
+        lowered = sline.lower()
+        if any(marker in lowered for marker in PEDAGOGICAL_MARKERS):
+            continue
+        cleaned = BOOT_NON_SOCCER.sub(lambda m: " " * len(m.group(0)), sline)
+        if BOOT_PATTERN.search(cleaned):
+            boot_hits.append((idx, dline.strip()))
+    if boot_hits:
+        violations.append(
+            f"UK/GLOBAL 'boot(s)' found on {len(boot_hits)} line(s) "
+            "(US market term is 'cleat(s)'; 'shoe(s)' acceptable for variation):"
+        )
+        for ln, ctx in boot_hits[:5]:
+            violations.append(f"    line {ln}: {ctx[:120]}")
+        if len(boot_hits) > 5:
+            violations.append(f"    ... and {len(boot_hits) - 5} more")
+
     if violations:
         print("VOICE CHECK FAILED")
         for line in violations:
             print(f"  {line}")
         return 1
 
-    print("VOICE CHECK PASSED: no em-dashes, no en-dashes, no forbidden words/phrases/openers, no capitalized Adidas.")
+    print("VOICE CHECK PASSED: no em-dashes, no en-dashes, no forbidden words/phrases/openers, no capitalized Adidas, no UK 'boots'.")
     return 0
 
 

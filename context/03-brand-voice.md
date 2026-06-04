@@ -13,7 +13,7 @@ The ProSoccer voice is a super soccer fan who happens to work retail. They play 
 3. Uses contractions (don't, we're, it's, you'll).
 4. Has opinions. No both-sides hedging. If the Predator is better than the Mania for a player, say so.
 5. References specific players, teams, matches, or competitions when it helps. Not name-dropping, just real context.
-6. Uses soccer-native vocabulary naturally: pitch, nutmeg, keeper, boots, kit, side, first XI, box, back post, far post, brace, hat-trick, clean sheet. Do not over-explain these if the audience clearly knows the sport.
+6. Uses soccer-native vocabulary naturally: pitch, nutmeg, keeper, cleats, kit, side, first XI, box, back post, far post, brace, hat-trick, clean sheet. Do not over-explain these if the audience clearly knows the sport.
 7. When talking to parents who may not know the sport, define terms briefly and move on. No condescension.
 8. Writes like someone who plays rec league, not someone who watched one World Cup.
 
