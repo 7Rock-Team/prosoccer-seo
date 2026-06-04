@@ -143,7 +143,7 @@ The quality issue that surfaced this gate was a collection Title: `National Team
 
 1. **Comma-stacked keyword lists.** The format `[Topic]: keyword1, keyword2, keyword3 & keyword4` or `[Topic] - A, B, C, D` reads as stuffing regardless of relevance. Any field carrying 3+ comma-separated keywords fails.
 2. **Ampersand-terminated lists.** A trailing `& [final keyword]` at the end of a comma list compounds the spam signal.
-3. **Synonym stacking.** Treating synonyms (jerseys / shirts / kits / tops; cleats / boots / shoes) as variations to stack rather than picking one canonical term per field.
+3. **Synonym stacking.** Treating synonyms (jerseys / shirts / kits / tops; cleats / `boots` / shoes) as variations to stack rather than picking one canonical term per field.
 4. **Modifier stacking.** Stacking audience modifiers (Men's / Boys' / Youth / Kids') or product modifiers (Authentic / Replica / Stadium / Match-Worn) in a single field.
 5. **Brand stacking (titles).** Listing multiple brands (adidas, Nike, Puma) in a title when only one or two are relevant to the collection.
 6. **Price stacking (body copy).** Specific dollar amounts in collection-page body copy (added 2026-06-02). Collections are especially prone to this because they aggregate many products at many price points; the temptation is to enumerate them. Prices decay and belong in product cards and schema, not body prose.
@@ -358,7 +358,7 @@ The visible H1 on the live collection page. Names the topic specifically. Avatar
 
 - Mexico: `Mexico National Team Jerseys & El Tri Fan Gear`. Differentiates from Liga MX club content.
 - Argentina: `Argentina National Team Jerseys & La Albiceleste Gear`. Differentiates from Argentine club content.
-- adidas Predator: `Adidas Predator Boots, Cleats & Pro Edition Lineup`. Differentiates from generic "soccer cleats" browsing.
+- adidas Predator: `Adidas Predator Cleats & Pro Edition Lineup`. Differentiates from generic "soccer cleats" browsing.
 
 Per `.claude/agents/on-page-seo/agent.md` Section 9 'Keyword placement per field', the head keyword sits in the first three words. Brand prefix only when it adds trust.
 
@@ -408,7 +408,7 @@ Four to six H2 sections about the TOPIC, not the store. The topic research from 
 H2 patterns by collection type (these are starting frames, not rigid templates; topic research dictates the actual H2s):
 
 - **National team:** team history, current squad, kit history and design, cultural significance to fans, what the next major tournament means, key players to watch.
-- **Player:** biography, career arc, signature moments, current season, what their gear means to fans, kit and boot lineage.
+- **Player:** biography, career arc, signature moments, current season, what their gear means to fans, kit and cleat lineage.
 - **Brand category (e.g., adidas Predator):** brand heritage, signature design elements, who wears them and why, model lineage (gen-by-gen evolution), current top model, who the line is for.
 - **Product category (e.g., goalkeeper gloves):** what the category is and isn't, how to choose, who plays in this category, signature brands and models, fit and care basics.
 
@@ -516,7 +516,7 @@ For team collection pages (Mexico, Argentina, Brazil):
 For player collection pages (Messi, Ronaldo):
 
 - **Team link:** the player's national team collection.
-- **Brand link:** the player's signature boot or kit brand collection.
+- **Brand link:** the player's signature cleat or kit brand collection.
 - **Era / tournament link:** relevant historical context collection if one exists.
 
 For brand category collection pages (adidas Predator, Nike Mercurial):
@@ -651,7 +651,7 @@ Messi joined La Masia at 13. He debuted for the first team in 2004. By 2009 he w
 
 Number 10 on the back. The name in the federation or club font. For Argentina that's the AFA blocky font; for Inter Miami it's the cleaner sans-serif Adidas designed for the league. The crest matters: AFA with the three stars, Inter Miami with the heron silhouette, Barcelona with the cross of Saint George. Authentic kits carry the Adidas climacool or Heat.RDY tech (Argentina, Barcelona) or the league-issued tech (Inter Miami).
 
-## The Boots He Wore
+## The Cleats He Wore
 
 Adidas across his career. The F50 era in his early Barcelona run. The Nemeziz he was the face of from 2017 to 2023. The Adizero F50 since the 2024 relaunch. Each generation tied to a chapter of his career; collectors usually pick by chapter, not by what's current.
 ```
@@ -659,8 +659,8 @@ Adidas across his career. The F50 era in his early Barcelona run. The Nemeziz he
 Annotation:
 
 - Every H2 is about Messi, not about the store.
-- Topic-research outputs are visible throughout: the 2022 final detail, the Inter Miami move detail, the boot-generation history.
-- Avatar (Carlos primary) anchors the diaspora and matchday emotional language; Tyler shows up in the boot-generation H2 because that's where performance-kit buyers think.
+- Topic-research outputs are visible throughout: the 2022 final detail, the Inter Miami move detail, the cleat-generation history.
+- Avatar (Carlos primary) anchors the diaspora and matchday emotional language; Tyler shows up in the cleat-generation H2 because that's where performance-kit buyers think.
 - The body works for Argentina, Barcelona, and Inter Miami fans simultaneously without diluting any of them.
 - Lift test passes: the specifics (Lusail 2022, the Saudi-offer detail, the Heat.RDY vs league-tech distinction) commit to angles a generic retailer would avoid.
 
@@ -673,14 +673,14 @@ Topic-research outputs: Predator launched 1994 by Craig Johnston; Beckham era; Z
 
 ```
 Title (Collection Title)
-Adidas Predator Boots, Cleats & Pro Edition Lineup
+Adidas Predator Cleats & Pro Edition Lineup
 
 SEO Meta Title
 Adidas Predator Cleats | Pro Edition, Elite & 24 Models
 [55 chars]
 
 Short Description
-The Predator is the boot Beckham wore for England, Zidane wore for the Real treble, Rice wears for Arsenal now. Thirty years of controlled-shot rubber, redesigned every generation, still the boot for the player who wants the ball to do exactly what they tell it to.
+The Predator is the cleat Beckham wore for England, Zidane wore for the Real treble, Rice wears for Arsenal now. Thirty years of controlled-shot rubber, redesigned every generation, still the cleat for the player who wants the ball to do exactly what they tell it to.
 
 Long Description:
 
@@ -690,7 +690,7 @@ Craig Johnston, the former Liverpool winger, designed the original in 1994 with 
 
 ## Who Wears Them Now
 
-Jude Bellingham at Real Madrid. Declan Rice at Arsenal. Pedri at Barcelona. Trent Alexander-Arnold for the long-range crossfield ball that bends like a Predator boot is supposed to make it bend. The Predator is the boot for the midfielder who runs the game with the ball more than the leg.
+Jude Bellingham at Real Madrid. Declan Rice at Arsenal. Pedri at Barcelona. Trent Alexander-Arnold for the long-range crossfield ball that bends like a Predator cleat is supposed to make it bend. The Predator is the cleat for the midfielder who runs the game with the ball more than the leg.
 
 ## Predator 24 Elite vs Predator 24 League
 
@@ -698,7 +698,7 @@ Elite is the pro tier: K-leather upper, knit collar, lighter chassis, stiffer pl
 
 ## Why the Rubber Elements Matter
 
-The rubber strips on the front of the boot grip the ball at impact. More grip means more spin on a struck ball, which means more curve. It's not magic; it's friction. Free-kick takers love them. Long-range passers love them. Strikers who want a controlled-finish over a power-finish prefer them to the F50 or the Mania.
+The rubber strips on the front of the cleat grip the ball at impact. More grip means more spin on a struck ball, which means more curve. It's not magic; it's friction. Free-kick takers love them. Long-range passers love them. Strikers who want a controlled-finish over a power-finish prefer them to the F50 or the Mania.
 
 ## The Predator at Different Surfaces
 
@@ -707,11 +707,11 @@ Firm ground for natural grass. Artificial grass for the green-plastic surface. T
 
 Annotation:
 
-- Body copy is about Predator the boot line, not about ProSoccer the store.
+- Body copy is about Predator the cleat line, not about ProSoccer the store.
 - Topic-research outputs visible: launch year, designer, signature pros, generation history, current models.
 - Tyler primary: performance specifics, plate-and-surface detail, pro-tier vs league-tier comparison.
 - Carlos secondary lands at the generation history (collectors care about which generation a player wore).
-- Lift test passes: a Soccer.com page on Predator would avoid the Craig Johnston detail and stay closer to "the Predator is a great boot for control." This page commits.
+- Lift test passes: a Soccer.com page on Predator would avoid the Craig Johnston detail and stay closer to "the Predator is a great cleat for control." This page commits.
 
 ## Brand IP Constraints
 
