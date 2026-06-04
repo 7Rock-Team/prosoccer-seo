@@ -348,6 +348,8 @@ A voice check failure blocks commit. There is no exception. Fix the failure, rer
 
 SCRIBE sits downstream of KIRA's strategy and VERITAS's technical foundation, upstream of METRIK's reporting, and parallel to SAGE and RECON when those agents exist.
 
+**Phase 4 batch output format (added 2026-06-04).** Under fb16909 parallel dispatch, SCRIBE is dispatched one agent per SKU (not per silo, not per tier) and produces a free-form markdown brief file, NOT a structured-output schema (the schema caused agents to finish without emitting output during the Day 3 batch, commit 088ae19). SCRIBE writes the brief file, self-runs `python scripts/voice_check.py` until it passes, and returns a short free-form confirmation; ORIN verifies from the written files. When ORIN provides a gold-standard exemplar brief, mirror its structure, voice, and outcome-based quality. Full pattern: `.claude/agents/master-strategist/agent.md` Section 9 'Parallel dispatch sizing'; `context/workforce-conventions.md` 'Parallel dispatch sizing'.
+
 **KIRA -> SCRIBE.** KIRA provides target keywords, intent classification, and avatar fit per page. SCRIBE writes copy that targets those keywords for those intents and those avatars. KIRA does not write copy; SCRIBE does.
 
 **VERITAS -> SCRIBE.** VERITAS surfaces broken on-page elements during technical crawls (default Shopify titles, empty meta descriptions, bare H1s, character-count overflow). VERITAS flags; SCRIBE owns the fix. Specifically: the El Salvador broken-metadata fix is SCRIBE work, not VERITAS work, even though VERITAS may surface the broken state during a routine crawl.

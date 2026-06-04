@@ -300,6 +300,17 @@ Production workflow shifts from per-brief sequential to batch parallel as of 202
 
 Cross-references: `context/workforce-conventions.md` 'Batch parallel dispatch' + 'Single daily batch commit' (cross-cutting patterns); `.claude/agents/on-page-seo/agent.md` Section 9 'Tiered workflow variants' (per-tier scope SCRIBE applies regardless of dispatch pattern).
 
+### Parallel dispatch sizing: one SKU per agent + gold-standard exemplar anchor (added 2026-06-04)
+
+Production lesson from the Day 3 PDP batch (10 Nike SU26 Breakout Pack SKUs, commit 088ae19): per-silo dispatch (2 to 4 briefs per SCRIBE agent) overloaded the agent and only 1 of 10 briefs finished the first round. The reliable shape, now standing for fb16909 PDP batches:
+
+1. **One SCRIBE agent per SKU.** Not per silo, not per tier. Each agent drafts exactly one brief. The lighter atomic load completes reliably; heavier multi-brief agents stall before finishing.
+2. **Free-form markdown briefs, no structured-output schema.** Requiring SCRIBE Phase 4 to return a validation schema caused agents to finish without emitting output. SCRIBE writes the brief file and returns a short free-form confirmation; ORIN verifies from the written files, not from a structured return.
+3. **Gold-standard exemplar anchor.** ORIN selects one representative SKU, has SCRIBE produce a full brief, validates it (voice check plus all gates), then dispatches the remaining SKUs instructing each to mirror the exemplar's structure, voice, and outcome-based quality. The exemplar proves the pattern and anchors batch consistency.
+4. **Re-dispatch on transient server-side rate limiting.** Batch dispatch can hit transient server-side rate limiting ("temporarily limiting requests", not usage-based). ORIN re-dispatches the failed SKUs as a FRESH dispatch (a cached resume returns the cached failures); briefs already written to disk are not re-run.
+
+Cross-reference: `context/workforce-conventions.md` 'Parallel dispatch sizing (one SKU per agent + exemplar anchor)'; SCRIBE Phase 4 free-form output note in `.claude/agents/on-page-seo/agent.md` Section 9. Production source: Day 3 batch commit 088ae19.
+
 ### Tier classification at candidate dispatch (added 2026-05-28)
 
 Before dispatching SCRIBE for any per-page brief, ORIN classifies the page into a tier and names the tier in the dispatch prompt. Tier classification adjusts SCRIBE's research depth, brief drafting depth, and field count without changing the underlying quality discipline (voice check, 11 gates plus Gate 12 keyword distribution plus Gate 13 anti-stuffing plus Gate 14 unsupported specific counts, brand IP, year-specificity, eligibility verification, keyword distribution all preserved across tiers).
