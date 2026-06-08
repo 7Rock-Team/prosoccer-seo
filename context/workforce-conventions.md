@@ -743,6 +743,51 @@ Cross-references: `.claude/agents/master-strategist/agent.md` Section 9 'Batch p
 
 The fb16909 batch parallel dispatch pattern (above) is refined by a Day 3 PDP batch production lesson (10 Nike SU26 Breakout Pack SKUs, commit 088ae19): per-silo dispatch (2 to 4 briefs per agent) overloaded SCRIBE and only 1 of 10 finished round one. Standing dispatch shape for PDP batches: (1) one SCRIBE agent per SKU, not per silo or per tier; (2) free-form markdown brief output, NOT a structured-output schema (the schema made agents finish without emitting output), and ORIN verifies from the written files; (3) gold-standard exemplar anchor: ORIN has SCRIBE produce and validate one representative brief first, then the remaining SKUs mirror its structure, voice, and outcome-based quality; (4) re-dispatch protocol for transient server-side rate limiting (not usage-based): ORIN re-dispatches failed SKUs as a fresh dispatch (a cached resume returns the cached failures), and briefs already written are not re-run. Production source: Day 3 batch commit 088ae19. Cross-references: `.claude/agents/master-strategist/agent.md` Section 9 'Parallel dispatch sizing'; `.claude/agents/on-page-seo/agent.md` Section 9 (SCRIBE free-form Phase 4 output).
 
+**Clarification (added 2026-06-08): "mirror the exemplar" means STRUCTURAL mirroring only, never prose mirroring.** The Day 3 batch (commit 088ae19) shipped with 70 to 80% prose duplication across pack siblings because the exemplar-anchor instruction was read too literally: SCRIBE mirrored the exemplar's language, not just its shape. Four Phantom 6 SKUs shared identical opening hooks, identical closing lines, identical H2 titles, identical metaphor structures, and near-identical FAQ questions and answers. That outcome is forbidden. Mirror the exemplar's STRUCTURE: same H2 count, same H2 order categories (overview, use case, fit, Product Details), same Product Details bullet structure, same FAQ count, same field-length tiers. Do NOT mirror the exemplar's PROSE: each SKU carries its own opening hook, its own H2 titles (topically related but not identical), its own metaphors and scene framings, and its own FAQ questions and answers (questions may overlap topically across siblings, but every answer is uniquely written). This is a refinement of the exemplar-anchor pattern, not a reversal: the exemplar still proves the structure and anchors batch consistency; it does not license shared language. The three disciplines below operationalize this clarification. Production source: Day 3 batch commit 088ae19 review.
+
+### Cross-brief prose uniqueness discipline (added 2026-06-08)
+
+Every brief in a pack or series carries UNIQUE prose. Mirror structure across siblings, never language. This discipline exists for three concrete reasons: Google applies duplicate-content treatment to near-identical sibling pages (filters the duplicates from the index, picks one canonical, demotes the rest); shared prose makes sibling SKUs semantically indistinguishable and feeds keyword cannibalization; and a buyer comparing two siblings who reads the same paragraph twice loses trust in both pages.
+
+Forbidden across any batch of pack/series siblings:
+
+- identical opening hooks (the first sentence of the Short Description or the Description's lead H2)
+- identical closing lines
+- identical H2 titles repeated across multiple briefs
+- identical opening fragments inside prose H2 sections
+- identical metaphors or scene structures
+- identical FAQ answers (FAQ questions may overlap topically; answers are uniquely written per SKU)
+
+What sibling briefs SHARE by design: H2 count, H2 order categories, Product Details bullet structure, FAQ count, field-length tiers, voice, and the outcome-based editorial quality bar. Technical-bullet overlap is expected and acceptable (siblings genuinely share specs). The uniqueness bar applies to PROSE: hooks, narrative framings, metaphors, transitions, and FAQ answers.
+
+Cross-references: 'Pack/series coordination discipline' (below, ORIN's pre-dispatch differentiation pass that supplies the per-SKU angles), 'Keyword cannibalization discipline' (below), and `context/page-type-playbooks/product-page-playbook.md` 'Unique prose for pack/series products'. Production source: Day 3 batch commit 088ae19 review.
+
+### Pack/series coordination discipline (added 2026-06-08)
+
+Before dispatching SCRIBE for a multi-SKU batch whose SKUs belong to the same pack or series, ORIN runs a PRE-DISPATCH DIFFERENTIATION PASS. ORIN reads all SKUs in the pack first, then drafts a differentiation spec that pre-assigns each SKU a distinct editorial lane, so the briefs come back unique by construction rather than being de-duplicated after the fact.
+
+Per SKU, the differentiation spec assigns:
+
+- a unique angle of emphasis (what this SKU's copy foregrounds)
+- a unique opening-hook approach (the framing device the Short Description and lead H2 open on)
+- a unique heritage or positioning angle
+- a unique use-case scenario (the concrete buyer moment the prose paints)
+- a unique primary metaphor or scene framing
+
+SCRIBE produces from ORIN's per-SKU differentiation spec, NOT from the exemplar's prose. The exemplar supplies structure; the differentiation spec supplies each SKU's distinct editorial content. This pass is judgment-based, not script-enforceable: ORIN reads the SKUs, drafts the spec, then dispatches one SCRIBE agent per SKU with that SKU's lane named in the dispatch prompt.
+
+Cross-references: `.claude/agents/master-strategist/agent.md` Section 9 'Pre-dispatch differentiation pass for pack/series batches'; `.claude/agents/on-page-seo/agent.md` Section 9 (SCRIBE produces from the differentiation lane). Production source: Day 3 batch commit 088ae19 review.
+
+### Keyword cannibalization discipline (added 2026-06-08)
+
+Pack/series siblings competing for the same query split their own ranking signal. Three rules keep siblings out of each other's way:
+
+- **Primary keyword unique per SKU within the batch.** Already standing under the keyword-distribution discipline; restated here as the first line of cannibalization defense.
+- **Supporting keyword varied within the pack where possible.** When siblings can carry distinct supporting terms, they should. Four Phantom 6 SKUs all targeting `nike phantom 6` as the supporting term is the cannibalization failure mode this rule prevents.
+- **Shared supporting keyword requires distinct semantic territory.** When a supporting keyword is necessarily shared (a high-volume brand or silo term every sibling legitimately targets), the surrounding prose must establish a distinct semantic territory per SKU, so the pages read as covering different buyer intents rather than competing for the same one. The pack/series coordination differentiation pass (above) supplies that distinct territory.
+
+Cross-references: 'Supporting keyword selection (cross-cutting)' (the standing one-supporting-keyword-per-body rule) and 'Pack/series coordination discipline' (above). Production source: Day 3 batch commit 088ae19 review.
+
 ### Tiered workflow architecture (cross-cutting pattern, added 2026-05-28)
 
 Per-page brief production runs at one of four tiers depending on page type and strategic role. Tier is named at dispatch by ORIN (Section 9 'Tier classification at candidate dispatch'); SCRIBE adapts research depth, brief drafting depth, and field count accordingly (Section 9 'Tiered workflow variants'). Quality discipline preserved universally across all tiers.
