@@ -788,6 +788,36 @@ Pack/series siblings competing for the same query split their own ranking signal
 
 Cross-references: 'Supporting keyword selection (cross-cutting)' (the standing one-supporting-keyword-per-body rule) and 'Pack/series coordination discipline' (above). Production source: Day 3 batch commit 088ae19 review.
 
+### Dual Registry Architecture for Cross-Batch Coordination (added 2026-06-08)
+
+The three disciplines above (cross-brief prose uniqueness, pack/series coordination, keyword cannibalization) stop duplication WITHIN a batch. Two registries extend that coordination ACROSS batches, both feeding ORIN's pre-dispatch differentiation pass. They have different owners, different update cadences, and different transport.
+
+**Registry 1: white-label keyword sheet (external, source of truth; ORIN reads, white-label team writes).** A Google Sheet maintained by Mike's white-label team, the authoritative record of keyword status across all ProSoccer SEO work (not just workforce batches), at https://docs.google.com/spreadsheets/d/1H-4Ax8C6IbfqCx2SToVidD4p9GR_rn16PePuvGMSA6Q/edit. Two tabs:
+
+- **Collections tab** columns: Page URL (completed metatags), Complete/In Progress, Meta Title, Meta Description, Long Description, Short Description, Primary KW, Mike H.
+- **PDPs tab** columns: PDP SKUs, Page URL (completed metatags), Status, Primary KW, Date.
+
+ORIN reads the sheet during the differentiation pass to check, per SKU, whether a primary keyword is already claimed for another URL (cross-batch cannibalization defense). After the batch commits, ORIN surfaces the primary keyword assigned to each new brief for entry in the Primary KW column; write ownership stays with the white-label team (see 'Division of ownership' below).
+
+**Access pattern: parent-fetches-and-passes.** The sheet is reached through the claude.ai Google Drive connector, a Category B (OAuth-bearer) MCP. Per the documented OAuth-token inheritance gap ('Architectural notes' below), the OAuth token does not propagate to sub-agents, so SCRIBE instances cannot read Drive directly. ORIN (the parent) reads the sheet, parses it, filters to the silo-relevant and exact-URL-matching rows, and injects those rows into each SCRIBE dispatch context. SCRIBE never calls Drive.
+
+**Division of ownership (ORIN reads, the white-label team writes; the handoff is permanent by design).** ORIN reads the sheet directly (read path validated 2026-06-08, structure and access confirmed). ORIN does NOT write to the sheet. The Registry 1 write-back is a MANUAL HANDOFF and that is the standing architecture, not a workaround awaiting tooling: the sheet is owned and maintained by Mike's white-label team (`ppcreporting@gmail.com`), and write ownership stays with them. ORIN surfaces the per-SKU primary keyword assignments in the end-of-batch summary; the white-label team enters them in the sheet. This keeps a single human-owned source of truth for keyword status and avoids two systems writing the same cells. (Mechanically, the claude.ai Drive connector also exposes no granular Sheets cell-update or row-append tool, only whole-file create / copy, so ORIN could not write cells even if asked; but the operational reason the handoff is permanent is ownership, not tooling.)
+
+**Registry 2: silo-positioning files (internal, repo, append-only).** `context/silo-positioning/` holds one file per product silo (`phantom.md`, `mercurial.md`, `tiempo.md`, `copa.md`, `predator.md`, `f50.md`, others as silos see work). Each logs the prose patterns USED in shipped briefs per SKU: opening hook approach, primary metaphor, use-case scenario, angle of emphasis, heritage angle. Workforce-owned, version-controlled, append-only. ORIN reads the relevant silo file during the differentiation pass to avoid reusing a hook or metaphor that already shipped in a prior batch, and appends new entries after each batch commits. Full format and protocol: `context/silo-positioning/README.md`.
+
+**Integration into the pre-dispatch differentiation pass (six steps):**
+
+1. **ORIN reads Registry 1** via the parent-level Drive connector. For each SKU in the batch, find its row (PDPs tab for products, Collections tab for collections) and capture current status, any existing primary-keyword assignment, and date. If the sheet is large, filter to silo-relevant rows (Phantom, Mercurial, Tiempo, and so on) plus exact URL matches.
+2. **ORIN reads Registry 2** (the relevant silo-positioning file). Identify each SKU's silo (Phantom 6 to `phantom.md`; Mercurial Superfly and Vapor to `mercurial.md`; Tiempo to `tiempo.md`; Copa to `copa.md`; and so on) and read the claimed hooks, metaphors, use-case scenarios, and angles from prior batches.
+3. **ORIN drafts the per-SKU differentiation lane spec.** Unique angle of emphasis, opening-hook approach, heritage/positioning angle, use-case scenario, and primary metaphor, each distinct from both the current-batch siblings AND the prior-batch silo log. Plus a primary-keyword candidate cross-checked against the sheet (avoid keywords already claimed for other URLs), and a reference list of sibling SKUs and recent prior silo work this SKU must differentiate against.
+4. **SCRIBE produces the brief from the lane spec.** Unique prose per the spec; mirrors the exemplar's STRUCTURE (per the ae42964 clarification), not its prose or any sibling's prose.
+5. **ORIN defense-in-depth at gate.** Pairwise prose comparison across the batch; flag any pair exceeding ~40% prose similarity (per ae42964).
+6. **After Mike approves and the batch commits, ORIN updates Registry 2 and hands off Registry 1.** Append per-SKU prose-pattern entries to the silo-positioning file(s) directly (workforce-owned). For the sheet, surface the assigned primary keyword per SKU in the end-of-batch summary for the white-label team to enter in the Primary KW column (manual handoff by design, see 'Division of ownership' above); flag any SKU lacking a PDPs-tab row as a new-row addition for the team.
+
+Both registry writes happen AFTER the batch commits, never before: proposed keywords and patterns can change at gate review, so the registries record only shipped, validated assignments.
+
+Cross-references: `.claude/agents/master-strategist/agent.md` Section 9 'Pre-dispatch differentiation pass for pack/series batches' (the read/write procedure); `context/silo-positioning/README.md` (Registry 2 format); 'Architectural notes' below (the OAuth-token inheritance gap that dictates parent-fetches-and-passes); 'Cross-brief prose uniqueness discipline', 'Pack/series coordination discipline', and 'Keyword cannibalization discipline' above (the disciplines these registries operationalize across batches). Production source: Day 3 batch commit 088ae19 (the cross-batch coordination need); intra-batch coordination commit ae42964.
+
 ### Tiered workflow architecture (cross-cutting pattern, added 2026-05-28)
 
 Per-page brief production runs at one of four tiers depending on page type and strategic role. Tier is named at dispatch by ORIN (Section 9 'Tier classification at candidate dispatch'); SCRIBE adapts research depth, brief drafting depth, and field count accordingly (Section 9 'Tiered workflow variants'). Quality discipline preserved universally across all tiers.

@@ -102,6 +102,8 @@ Why it matters: Google applies duplicate-content treatment to near-identical sib
 
 Production mechanism: ORIN runs a pre-dispatch differentiation pass for pack/series batches, pre-assigning each SKU a distinct editorial lane (angle of emphasis, opening-hook approach, heritage / positioning angle, use-case scenario, primary metaphor); SCRIBE produces from its assigned lane, not from the exemplar's prose. Full rule: `context/workforce-conventions.md` 'Cross-brief prose uniqueness discipline', 'Pack/series coordination discipline', and 'Keyword cannibalization discipline'; ORIN procedure: `.claude/agents/master-strategist/agent.md` Section 9 'Pre-dispatch differentiation pass for pack/series batches'.
 
+Cross-batch consultation: for pack/series PDPs, the differentiation pass also consults the dual registry. ORIN reads the white-label keyword sheet (Registry 1) for a primary-keyword cannibalization check across all SEO work, and the silo-positioning file for the SKU's silo (Registry 2, `context/silo-positioning/<silo>.md`) for prior-batch prose patterns this SKU must differentiate against. The lane spec SCRIBE receives reflects both. Full architecture: `context/workforce-conventions.md` 'Dual Registry Architecture for Cross-Batch Coordination'.
+
 **Worked example flag (queued for refresh):** a real cross-brief uniqueness worked example (two or three sibling SKUs showing identical structure with fully distinct prose) would model this pattern for SCRIBE. Queued as a standing follow-up alongside the outcome-based plus Product Details bullet-split worked-example refresh; not produced in this codification pass.
 
 ### URL handle constraint
