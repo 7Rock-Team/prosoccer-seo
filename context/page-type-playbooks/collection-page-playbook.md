@@ -85,6 +85,8 @@ The cross-brief prose uniqueness discipline codified for PDP pack/series sibling
 
 Cross-batch consultation: ORIN's differentiation pass for sibling collection pages consults the dual registry. Registry 1 is the white-label keyword sheet's Collections tab (columns: Page URL, Complete/In Progress, Meta Title, Meta Description, Long Description, Short Description, Primary KW, Mike H), checked for collection-level keyword cannibalization across all SEO work; Registry 2 is the relevant silo-positioning file when the collections map to a product silo. ORIN reads at the parent level (the Drive connector is Category B, parent-only) and injects the relevant rows into each SCRIBE dispatch. Full architecture: `context/workforce-conventions.md` 'Dual Registry Architecture for Cross-Batch Coordination'.
 
+Exemplar handoff (added 2026-06-08): when a campaign or pack ships multiple sibling collection pages in one batch, ORIN hands each sibling SCRIBE a structure skeleton (the six-field shape plus the H2 categories) plus a forbidden-phrasings list (the exemplar collection's H2 titles, shared-concept definitional sentences, primary metaphor, opening hook, closing line), NOT the exemplar's full prose, so the exemplar's scaffolding does not propagate. Full mechanism: `context/workforce-conventions.md` 'Parallel dispatch sizing'; production source of the lesson: the Day 3 PDP re-run, commit 957dc3c.
+
 ## Tier 2B canonical workflow (added 2026-05-28)
 
 Collection-page optimization runs as Tier 2B per the tiered workflow architecture (`context/workforce-conventions.md` 'Tiered workflow architecture (cross-cutting pattern)'). Tier 2B is full agent workflow scoped to six collection-specific fields, target ~15 to 20 min per page.
