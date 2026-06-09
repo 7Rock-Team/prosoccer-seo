@@ -150,12 +150,12 @@ Every SCRIBE deliverable carries explicit confidence labels, severity labels, an
 - claude_ai_Google_Drive (Category B; parent-mediated)
 - dfs-mcp (Category A; direct call)
 - firecrawl-mcp (Category A; direct call)
-- gsc-server (install pending; expected Category A)
+- gsc-server (Category A; installed 2026-06-09, sub-agent inheritance verified via Phase C commit f3b179a; direct call)
 - tavily-mcp (Category A; direct call, stdio variant)
 
 Playwright is intentionally omitted (RECON owns mobile-vs-desktop SERP validation; SCRIBE's CTR ceiling diagnostic does not require browser automation). The OAuth `claude_ai_Tavily` is intentionally omitted from SCRIBE's block; OAuth tokens do not propagate to sub-agents, so the stdio `tavily-mcp` is the operational surface for SCRIBE's topic research. When ORIN dispatches SCRIBE via the Agent tool, the sub-agent inherits this scope; per-server attachment is verified at dispatch as part of Section 2 Step 0 pre-flight (category-aware per `context/workforce-conventions.md` 'Step 0 verification at sub-agent dispatch'). Editing this `agent.md` requires a Claude Code session restart to take effect (Claude Code loads sub-agent definitions at session start, per `code.claude.com/docs/en/subagents` line 242).
 
-**Category A vs Category B (per workforce-conventions.md 'MCP categories'):** SCRIBE calls Category A servers (dfs-mcp, firecrawl-mcp, tavily-mcp) directly. For the Category B server (claude_ai_Google_Drive), SCRIBE expects audit-folder content to be pre-fetched by ORIN and passed via task context; SCRIBE does NOT attempt direct calls to `mcp__claude_ai_Google_Drive__*` from sub-agent dispatch context (OAuth tokens do not propagate). If a session needs Drive content not in the task context, surface to ORIN with the specific file and reason.
+**Category A vs Category B (per workforce-conventions.md 'MCP categories'):** SCRIBE calls Category A servers (dfs-mcp, firecrawl-mcp, tavily-mcp, gsc-server) directly. For the Category B server (claude_ai_Google_Drive), SCRIBE expects audit-folder content to be pre-fetched by ORIN and passed via task context; SCRIBE does NOT attempt direct calls to `mcp__claude_ai_Google_Drive__*` from sub-agent dispatch context (OAuth tokens do not propagate). If a session needs Drive content not in the task context, surface to ORIN with the specific file and reason.
 
 Five MCP servers plus local file system. Two of them (Firecrawl, DataForSEO) are shared budgets across the workforce.
 

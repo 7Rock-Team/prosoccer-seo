@@ -39,7 +39,7 @@ _ORIN uses this template for every per-page optimization brief. File the populat
 
 | Metric | Value | Source |
 |---|---|---|
-| Baseline impressions (12mo) | N | [GSC MCP get_search_analytics YYYY-MM-DD] |
+| Baseline impressions (12mo) | N | [GSC MCP search_analytics YYYY-MM-DD] |
 | Baseline clicks (12mo) | N | [same source] |
 | Baseline avg position | N.N | [same source] |
 | Baseline CTR | N.NN% | [same source] |

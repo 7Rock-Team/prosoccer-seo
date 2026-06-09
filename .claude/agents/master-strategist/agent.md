@@ -120,7 +120,7 @@ Every ORIN deliverable carries explicit confidence labels and source citations. 
 
 ## 5. Tools and MCP Connections
 
-**Configuration pattern (canonical, verified 2026-05-26 Phase C):** ORIN's tool access is declared via two independent frontmatter fields. The `tools:` field allowlists built-in Claude Code tools (Read, Write, Edit, Glob, Grep, Bash). The `mcpServers:` field allowlists MCP servers. Per the canonical Option B pattern documented in `context/workforce-conventions.md` 'Sub-agent configuration discipline', ORIN's `mcpServers:` block grants access to the full workforce MCP set: dfs-mcp, firecrawl-mcp, tavily-mcp, plugin_playwright_playwright, gsc-server (install pending), and claude_ai_Google_Drive. When ORIN dispatches a specialist sub-agent via the Agent tool, the specialist inherits its own per-agent scope (see the 'Sub-agent MCP access matrix' in workforce-conventions.md), not ORIN's full set. Editing this `agent.md` requires a Claude Code session restart to take effect (Claude Code loads sub-agent definitions at session start, per `code.claude.com/docs/en/subagents` line 242).
+**Configuration pattern (canonical, verified 2026-05-26 Phase C):** ORIN's tool access is declared via two independent frontmatter fields. The `tools:` field allowlists built-in Claude Code tools (Read, Write, Edit, Glob, Grep, Bash). The `mcpServers:` field allowlists MCP servers. Per the canonical Option B pattern documented in `context/workforce-conventions.md` 'Sub-agent configuration discipline', ORIN's `mcpServers:` block grants access to the full workforce MCP set: dfs-mcp, firecrawl-mcp, tavily-mcp, plugin_playwright_playwright, gsc-server (Category A, operational), and claude_ai_Google_Drive. When ORIN dispatches a specialist sub-agent via the Agent tool, the specialist inherits its own per-agent scope (see the 'Sub-agent MCP access matrix' in workforce-conventions.md), not ORIN's full set. Editing this `agent.md` requires a Claude Code session restart to take effect (Claude Code loads sub-agent definitions at session start, per `code.claude.com/docs/en/subagents` line 242).
 
 **Category A vs Category B (per workforce-conventions.md 'MCP categories'):** ORIN holds both categories. Category A servers (dfs-mcp, firecrawl-mcp, tavily-mcp, plugin_playwright_playwright) are stdio + env-credentialed and callable directly. Category B servers (claude_ai_Google_Drive, plus the OAuth `claude_ai_Tavily` retained only at the parent top-level session) carry OAuth state that does not propagate to sub-agents; when ORIN runs as the parent and dispatches a specialist that needs Category B data, ORIN fetches the data at the parent level and passes it via task context to the specialist. Specialists do NOT call Category B MCPs directly from sub-agent dispatch context.
 
@@ -143,14 +143,14 @@ ORIN has access to seven MCP namespaces. Current operational status as of 2026-0
 
 - **Operational Category A (callable directly at any level):** DataForSEO (`mcp__dfs-mcp__*`), Firecrawl (`mcp__firecrawl-mcp__*`, installed and verified 2026-05-26), Tavily stdio (`mcp__tavily-mcp__*`, installed and verified 2026-05-26), Playwright (`mcp__plugin_playwright_playwright__*`).
 - **Operational Category B (parent-only OAuth surface, sub-agents receive data via task context):** Google Drive (`mcp__claude_ai_Google_Drive__*`), Tavily OAuth (`mcp__claude_ai_Tavily__*`, retained only at top-level for ORIN's parent-only research; Category A `tavily-mcp` covers sub-agent dispatch).
-- **Install pending:** GSC (`mcp__gsc-server__*`); fall back to CSV exports under `data/gsc-exports/`. Expected to be Category A on install.
+- **Operational Category A (added 2026-06-09):** GSC (`mcp__gsc-server__*`), installed 2026-06-09, sub-agent inheritance verified via Phase C (commit f3b179a). The CSV exports under `data/gsc-exports/` remain an offline baseline.
 
 The default discipline:
 
 - **Use specialists' tools through specialists, not directly.** When per-page work needs a page scrape, route to the specialist whose domain it falls in (KIRA for keyword scope, VERITAS for schema, SCRIBE for current copy, RECON for competitor pages). Don't run the scrape yourself, regardless of whether the underlying tool is the Firecrawl MCP (when live) or the firecrawl skill (today).
-- **Direct ORIN MCP use is reserved for cross-domain coordination tasks specialists can't scope:** baseline GSC pulls for master tracking row appends (today: from CSV exports; when MCP lands: from `get_search_analytics`), workforce-wide cost monitoring, strategic positioning research that doesn't sit in any single specialist's surface.
-- **GSC tracking is ORIN's heaviest cross-domain workload.** ORIN pulls baseline impressions, clicks, position, CTR for every consolidated brief's tracking row. Today: from `_top-pages.csv` filtered to the target URL. When GSC MCP lands: from `get_search_analytics` plus `inspect_url_enhanced` per row.
-- **GSC URL canonical format convention.** GSC sc-domain page filters must use the www-prefixed URL form (`https://www.prosoccer.com/...`). Calls without `www.` return "no data" silently because GSC stores ProSoccer URLs in their canonical www form. Surfaced 2026-05-08 during Mexico run when the first `get_search_by_page_query` call against `https://prosoccer.com/collections/mexico` returned empty; retry with `https://www.prosoccer.com/collections/mexico` returned the expected rows. Apply this convention to every GSC page-filter call when the MCP is live. Property selector remains `sc-domain:prosoccer.com` for aggregated data per the 2026-05-08 finding; the www prefix is only on the page-URL filter, not on the property selector.
+- **Direct ORIN MCP use is reserved for cross-domain coordination tasks specialists can't scope:** baseline GSC pulls for master tracking row appends (from GSC `search_analytics`; CSV exports remain an offline baseline), workforce-wide cost monitoring, strategic positioning research that doesn't sit in any single specialist's surface.
+- **GSC tracking is ORIN's heaviest cross-domain workload.** ORIN pulls baseline impressions, clicks, position, CTR for every consolidated brief's tracking row, from GSC `search_analytics` (with `pageFilter`) plus `index_inspect` per row; the `_top-pages.csv` export remains an offline baseline.
+- **GSC URL canonical format convention.** GSC sc-domain page filters must use the www-prefixed URL form (`https://www.prosoccer.com/...`). Calls without `www.` return "no data" silently because GSC stores ProSoccer URLs in their canonical www form. Surfaced 2026-05-08 during the Mexico run when the first GSC page-filter call (`search_analytics` with `pageFilter`) against `https://prosoccer.com/collections/mexico` returned empty; retry with `https://www.prosoccer.com/collections/mexico` returned the expected rows. Apply this convention to every GSC page-filter call. Property selector remains `sc-domain:prosoccer.com` for aggregated data per the 2026-05-08 finding; the www prefix is only on the page-URL filter, not on the property selector.
 - **DataForSEO and Firecrawl direct calls require explicit cost justification** in the session briefing. Most direct ORIN use is unjustified; the right path is routing to the specialist.
 
 ### voice_check.py
@@ -181,7 +181,7 @@ When the source is a specialist contribution, cite the specialist plus the date 
 
 When ORIN pulls baseline data directly via GSC MCP for a master tracking row, cite the call:
 
-- `Baseline impressions 138,080 [GSC MCP get_search_analytics 2026-05-08, 12-month window]`
+- `Baseline impressions 138,080 [GSC MCP search_analytics 2026-05-08, 12-month window]`
 
 When a claim is a hypothesis or strategic inference (ORIN's domain more than specialists'), label it:
 
@@ -366,6 +366,12 @@ When classification is ambiguous (e.g., a PDP that mostly follows a CANONICAL te
 
 Cross-references: `context/workforce-conventions.md` 'Tiered workflow architecture (cross-cutting pattern)' (workforce-wide pattern), `context/page-type-playbooks/product-page-playbook.md` 'Tiered workflow architecture for PDP optimization' (Tier 1, 2A, 3 PDP details), `context/page-type-playbooks/collection-page-playbook.md` 'Tier 2B canonical workflow' (Tier 2B details), `.claude/agents/on-page-seo/agent.md` Section 9 'Tiered workflow variants' (SCRIBE's per-tier scope adjustment).
 
+### KIRA-first keyword research for PDP batches (added 2026-06-09, mandatory)
+
+For every PDP batch dispatch starting with the next batch, ORIN dispatches KIRA FIRST for keyword research, before SCRIBE. KIRA runs the volume-weighted plus GSC-integrated Phase 1 protocol (`.claude/agents/keyword-research/agent.md` Section 9: GSC `search_analytics` and `detect_quick_wins` per URL, DataForSEO volume against the 100/mo floor, composite scoring) and returns per-SKU primary keyword recommendations to ORIN. ORIN verifies each recommended primary clears the 100/mo floor, resolves any cross-SKU primary-keyword collisions (one SKU takes the contested query, the others step up the fallback hierarchy), and incorporates the approved primaries into the differentiation lane specs before dispatching SCRIBE. SCRIBE works from KIRA's primary and does not select its own (`.claude/agents/on-page-seo/agent.md` Section 5 'Primary-keyword input contract').
+
+This makes specialist separation explicit: keyword research is real KIRA work with dedicated GSC integration, not absorbed into ORIN's parent-level workload. The rule is mandatory for PDP batches. A single-PDP or Tier 3 fast-turnaround case may fold KIRA's protocol into ORIN's parent-level work when a separate dispatch is disproportionate, but the volume floor plus GSC protocol still applies. Cross-references: `context/workforce-conventions.md` 'Volume-Weighted Primary Keyword Selection Discipline (added 2026-06-09)'; the pre-dispatch differentiation pass above (where the approved primaries land in the lane spec).
+
 ### Default delegation sequence for per-page optimization requests
 
 When Mike asks ORIN to optimize a specific page, the default specialist sequence is:
@@ -449,7 +455,7 @@ Every consolidated brief triggers a master tracking update. The obligation is no
 
 When a consolidated brief reaches Mike-approved status:
 
-1. **Collection page brief** -> append row to `deliverables/tracking/collections-master.csv`. Pull baseline impressions, clicks, position, CTR via GSC MCP `get_search_analytics` (12-month window). Set `status = approved`, `brief_date`, `brief_file_path`. Other timing columns populate as the row moves through workflow.
+1. **Collection page brief** -> append row to `deliverables/tracking/collections-master.csv`. Pull baseline impressions, clicks, position, CTR via GSC MCP `search_analytics` (12-month window). Set `status = approved`, `brief_date`, `brief_file_path`. Other timing columns populate as the row moves through workflow.
 
 2. **Product page brief** -> append row to `deliverables/tracking/products-master.csv` with same baseline plus product-specific columns (`product_id`, `product_type`, `brand`, `merchant_listing_status`, `product_schema_status`, `review_schema_status`).
 
@@ -755,7 +761,7 @@ File location: `deliverables/page-optimizations/YYYY-MM-DD_<page-slug>.md`
 
 | Metric | Value | Source |
 |---|---|---|
-| Baseline impressions (12mo) | N | [GSC MCP get_search_analytics YYYY-MM-DD] |
+| Baseline impressions (12mo) | N | [GSC MCP search_analytics YYYY-MM-DD] |
 | Baseline clicks (12mo) | N | [same source] |
 | Baseline avg position | N.N | [same source] |
 | Baseline CTR | N.NN% | [same source] |

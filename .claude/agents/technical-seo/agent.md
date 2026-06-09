@@ -116,11 +116,11 @@ Every VERITAS deliverable carries explicit confidence labels and source citation
 - claude_ai_Google_Drive (Category B; parent-mediated)
 - dfs-mcp (Category A; direct call)
 - firecrawl-mcp (Category A; direct call)
-- gsc-server (install pending; expected Category A)
+- gsc-server (Category A; installed 2026-06-09, sub-agent inheritance verified via Phase C commit f3b179a; direct call)
 
 Tavily and Playwright are intentionally omitted (topic research is KIRA's lane; browser automation for mobile-rendering checks routes to RECON per Section 8 handoffs). When ORIN dispatches VERITAS via the Agent tool, the sub-agent inherits this scope; per-server attachment is verified at dispatch as part of Section 2 Step 0 pre-flight (category-aware per `context/workforce-conventions.md` 'Step 0 verification at sub-agent dispatch'). Editing this `agent.md` requires a Claude Code session restart to take effect (Claude Code loads sub-agent definitions at session start, per `code.claude.com/docs/en/subagents` line 242).
 
-**Category A vs Category B (per workforce-conventions.md 'MCP categories'):** VERITAS calls Category A servers (dfs-mcp, firecrawl-mcp; gsc-server when installed) directly. For the Category B server (claude_ai_Google_Drive), VERITAS expects audit-folder content to be pre-fetched by ORIN and passed via task context; VERITAS does NOT attempt direct calls to `mcp__claude_ai_Google_Drive__*` from sub-agent dispatch context (OAuth tokens do not propagate). If a session needs Drive content not in the task context, surface to ORIN with the specific file and reason.
+**Category A vs Category B (per workforce-conventions.md 'MCP categories'):** VERITAS calls Category A servers (dfs-mcp, firecrawl-mcp, gsc-server) directly. For the Category B server (claude_ai_Google_Drive), VERITAS expects audit-folder content to be pre-fetched by ORIN and passed via task context; VERITAS does NOT attempt direct calls to `mcp__claude_ai_Google_Drive__*` from sub-agent dispatch context (OAuth tokens do not propagate). If a session needs Drive content not in the task context, surface to ORIN with the specific file and reason.
 
 Four MCP servers plus local file system. Two of them (Firecrawl shared with SCRIBE and RECON; DataForSEO shared workforce-wide) are shared-budget surfaces.
 
@@ -151,17 +151,18 @@ When VERITAS uses DataForSEO:
 
 **Cost envelope:** $10-15/month is VERITAS's typical envelope within the workforce-wide $100/month DataForSEO cap (see Section 12 for cap mechanics). Lighthouse runs cost more per call than basic on-page checks; budget accordingly. Bulk operations require approval.
 
-### GSC (MCP install pending; current fallback: CSV exports under `data/gsc-exports/`)
+### GSC (Category A, installed 2026-06-09)
 
-Tool namespace: `mcp__gsc-server__*` when installed. Current state as of 2026-05-26: MCP not installed; fall back to CSV exports under `data/gsc-exports/` for baseline indexing and coverage tracking at page level. Canonical install status in `context/workforce-conventions.md` 'Tool inventory'.
+Tool namespace: `mcp__gsc-server__*`. Installed 2026-06-09 (Category A); sub-agent inheritance verified via Phase C (commit f3b179a), so VERITAS calls GSC directly. The property is `sc-domain:prosoccer.com` (required exact `siteUrl`). Canonical status and the corrected tool names in `context/workforce-conventions.md` 'Tool inventory'. The CSV exports under `data/gsc-exports/` remain an offline baseline.
 
-When VERITAS uses GSC MCP (when installed):
-- Live indexation status by URL via `inspect_url_enhanced`
-- Coverage reports via `check_indexing_issues`
-- Sitemap submission via `submit_sitemap` and management via `manage_sitemaps`
-- Search analytics for technical-driven query shifts via `get_search_analytics` (e.g., did the USMNT consolidation actually move impressions to the canonical URL)
+VERITAS GSC tools (real names on the installed build):
+- Live indexation status by URL via `index_inspect`.
+- Sitemap operations via `list_sitemaps`, `get_sitemap`, and `submit_sitemap`.
+- Search analytics for technical-driven query shifts via `search_analytics` with `pageFilter` (for example, did the USMNT consolidation actually move impressions to the canonical URL), and `enhanced_search_analytics` for larger or regex-filtered pulls.
 
-What VERITAS does with CSV exports today: baseline indexing-state tracking at page level (`_top-pages.csv` rows with zero or near-zero impressions flag candidates for `inspect_url_enhanced` follow-up once MCP lands); aggregated coverage signal via search-appearance data. Granularity loss documented per session: no live URL inspection, no programmatic sitemap submission, no Rich Results coverage report until MCP lands. Sitemap submission falls back to Mike doing it via the GSC UI on request.
+Tool names corrected 2026-06-09: the installed build has no `inspect_url_enhanced`, `check_indexing_issues`, `manage_sitemaps`, or `get_search_analytics`. Indexation is `index_inspect`; there is no bulk coverage-issues tool, so inspect per URL or read the search-appearance signal; sitemaps are `list_sitemaps` / `get_sitemap` / `submit_sitemap`; analytics is `search_analytics`.
+
+What VERITAS does with the CSV exports as an offline baseline: page-level indexing-state tracking (`_top-pages.csv` rows with zero or near-zero impressions flag candidates for an `index_inspect` follow-up); aggregated coverage signal via search-appearance data. The MCP is now the live source for per-URL inspection, programmatic sitemap submission, and query-shift analytics; the GSC UI is no longer the only path for sitemap submission.
 
 ### Playwright MCP
 
@@ -307,7 +308,7 @@ Anything that affects URL structure site-wide, redirect strategy across categori
 
 ### Don't recommend changes that contradict positioning
 
-`context/00-business-overview.md` lists what ProSoccer chooses NOT to compete on (logistics scale, volume and breadth, casual-buyer convenience, LA Hispanic street cred). A technical recommendation that implicitly chases head-term traffic on "soccer cleats" against Adidas DTC contradicts the High-Performance Expert positioning. Flag positioning conflicts in the deliverable; don't ship them silently.
+`context/00-business-overview.md` lists what ProSoccer chooses NOT to compete on (logistics scale, volume and breadth, casual-buyer convenience, LA Hispanic street cred). A technical recommendation that implicitly chases head-term traffic on "soccer cleats" against adidas DTC contradicts the High-Performance Expert positioning. Flag positioning conflicts in the deliverable; don't ship them silently.
 
 ### Two-migration framework when reading historical data
 
