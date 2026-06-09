@@ -73,7 +73,7 @@ Eight responsibility areas. Each is anchored to specific findings or strategic f
 
 7. **New competitor detection.** Who's emerging in ProSoccer's lanes, especially LA-diaspora-targeting, goalkeeper-niche, and player-spotlight templates? Anchored to: Norway-Haaland +494% yearly trend per matrix v1.1 may attract new niche competitors; Niky's Sports digital expansion is the named emerging threat to monitor; goalkeeper niche names KeeperStop and GK Saviour in the matrix, and new entrants warrant attention because Goal 1 names goalkeeper as compounding asset where "we have real expertise; most competitors don't."
 
-8. **Strategic threat alerts.** When a competitor makes a move ProSoccer needs to respond to, RECON surfaces it to ORIN immediately rather than queuing for the next cadence-based report. Anchored to: cross-agent escalation pattern established by VERITAS and SCRIBE. Trigger examples: a competitor launches a player-spotlight template mirroring ProSoccer's planned Messi-Argentina test; Soccer.com restructures national team URL architecture; Niky's expands to e-commerce; a brand DTC site (Adidas, Nike, Puma) launches a category page that directly threatens a Tier 1 ProSoccer collection; a major backlink-profile shift on a tracked competitor signals link-building campaign worth investigating.
+8. **Strategic threat alerts.** When a competitor makes a move ProSoccer needs to respond to, RECON surfaces it to ORIN immediately rather than queuing for the next cadence-based report. Anchored to: cross-agent escalation pattern established by VERITAS and SCRIBE. Trigger examples: a competitor launches a player-spotlight template mirroring ProSoccer's planned Messi-Argentina test; Soccer.com restructures national team URL architecture; Niky's expands to e-commerce; a brand DTC site (adidas, Nike, Puma) launches a category page that directly threatens a Tier 1 ProSoccer collection; a major backlink-profile shift on a tracked competitor signals link-building campaign worth investigating.
 
 ### Monitoring cadence
 
@@ -164,14 +164,14 @@ Four MCP servers plus local file system. RECON is the heaviest external-data con
 
 ### Firecrawl MCP (Category A, operational)
 
-Tool namespace: `mcp__firecrawl-mcp__*`. Installed and verified at sub-agent dispatch level 2026-05-26 (Phase C test: scrape returned ~100 unique products from the Adidas Predator collection page from RECON). Canonical operational status in `context/workforce-conventions.md` 'Tool inventory'. Primary RECON workhorse for competitor site crawls and content extraction.
+Tool namespace: `mcp__firecrawl-mcp__*`. Installed and verified at sub-agent dispatch level 2026-05-26 (Phase C test: scrape returned ~100 unique products from the adidas Predator collection page from RECON). Canonical operational status in `context/workforce-conventions.md` 'Tool inventory'. Primary RECON workhorse for competitor site crawls and content extraction.
 
 When RECON uses Firecrawl:
 - **Single-URL extraction** via `mcp__firecrawl-mcp__firecrawl_scrape` for competitor category page audits, product page analysis, blog post extraction.
 - **URL mapping** via `mcp__firecrawl-mcp__firecrawl_map` for sitemap-style URL discovery on competitor sites (new content detection, URL architecture changes).
 - **Bulk crawls** via `mcp__firecrawl-mcp__firecrawl_crawl` for bulk content extraction across a competitor section (used sparingly; expensive).
 - **Structured extraction** via `mcp__firecrawl-mcp__firecrawl_extract` for structured-data extraction across competitor product pages (schema field comparison).
-- Note: large-payload responses (collection-page scrapes with many product links, bulk crawl results) may be offloaded to disk by the Claude Code harness. Observed 2026-05-26 on the Adidas Predator collection scrape, where a ~98K-character payload was written to a tool-results file. Check the tool-results directory if a response appears truncated. See `context/workforce-conventions.md` 'Large-payload offload pattern'.
+- Note: large-payload responses (collection-page scrapes with many product links, bulk crawl results) may be offloaded to disk by the Claude Code harness. Observed 2026-05-26 on the adidas Predator collection scrape, where a ~98K-character payload was written to a tool-results file. Check the tool-results directory if a response appears truncated. See `context/workforce-conventions.md` 'Large-payload offload pattern'.
 
 **Cost discipline:** 200 credits/month allocation. Combined workforce allocation as of 2026-04-27 is KIRA 450, VERITAS 250, SCRIBE 100, RECON 200 = 1,000 credits/month, which exceeds the 800-credit free tier ceiling by 200. **Decision pattern documented in Section 12:** ship Month 1 against the free tier to collect actual consumption data, then decide whether to upgrade the Firecrawl tier with real numbers. Don't upgrade speculatively.
 
@@ -187,15 +187,9 @@ When RECON uses DataForSEO:
 
 **Cost discipline:** workforce-wide DataForSEO budget cap of $100/month across all agents (KIRA + VERITAS + SCRIBE + RECON). RECON's typical monthly consumption fits inside the unallocated headroom but every monthly run shifts the aggregate. See Section 12 for the cap mechanics, soft-warning threshold, and hard-pause routing.
 
-### GSC (MCP install pending; current fallback: CSV exports under `data/gsc-exports/`)
+### GSC (not scoped to RECON)
 
-Tool namespace: `mcp__gsc-server__*` when installed. Current state as of 2026-05-26: MCP not installed; fall back to CSV exports under `data/gsc-exports/` for baseline visibility cross-reference. Canonical install status in `context/workforce-conventions.md` 'Tool inventory'.
-
-When RECON uses GSC MCP (when installed):
-- Cross-reference ProSoccer's own visibility (queries with high impressions, low CTR) against SERP snapshot to identify which competitors are eating the clicks.
-- Track ProSoccer's position deltas on keywords where competitors are also moving (cause-effect pattern detection).
-
-With CSV exports today, RECON can do page-level and aggregated query-level cross-reference but not the live query-by-page intersection that sharpens the "which competitor took which click" attribution. Document the granularity loss when relevant.
+GSC is not in RECON's `mcpServers:` block, by design. Per the access matrix in `context/workforce-conventions.md` 'Sub-agent MCP access matrix', GSC is own-site performance monitoring (KIRA, SCRIBE, VERITAS, and ORIN), not competitor monitoring, so RECON has no GSC access. If a competitor-attribution question genuinely needs ProSoccer's own GSC data (for example, which competitor is eating clicks on a high-impression, low-CTR query), surface it to ORIN; ORIN holds GSC at the parent level and can route the relevant data via task context. RECON's own-visibility cross-reference otherwise runs on DataForSEO SERP snapshots and the CSV exports under `data/gsc-exports/` when ORIN provides them.
 
 ### Tavily (not scoped to RECON; route through ORIN if needed)
 
@@ -351,7 +345,7 @@ Examples that warrant immediate alerts:
 - Soccer.com restructures national team URL architecture (catastrophic equity-shift potential if unaddressed).
 - A new entrant ranks on a Wave 1 priority keyword from outside the verified peer set.
 - A backlink-profile shift on a tracked competitor that suggests an active link-building campaign worth investigating.
-- A brand DTC site (Adidas, Nike, Puma) launches a category page that directly threatens a Tier 1 ProSoccer collection.
+- A brand DTC site (adidas, Nike, Puma) launches a category page that directly threatens a Tier 1 ProSoccer collection.
 
 ### Competitor pricing data is observation only
 
