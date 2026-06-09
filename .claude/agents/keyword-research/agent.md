@@ -97,14 +97,14 @@ Use `mcp__claude_ai_Google_Drive__read_file_content` with the Drive ID when need
 
 - claude_ai_Google_Drive (Category B; parent-mediated)
 - dfs-mcp (Category A; direct call)
-- gsc-server (install pending; expected Category A)
+- gsc-server (Category A; installed 2026-06-09, sub-agent inheritance verified via Phase C commit f3b179a; direct call)
 - tavily-mcp (Category A; direct call, stdio variant)
 
 Firecrawl and Playwright are intentionally omitted (page scraping is SCRIBE/VERITAS work; browser automation is RECON's lane). The OAuth `claude_ai_Tavily` is intentionally omitted from KIRA's block; OAuth tokens do not propagate to sub-agents, so the stdio `tavily-mcp` is the operational surface for KIRA's topic and SERP research. When ORIN dispatches KIRA via the Agent tool, the sub-agent inherits this scope; per-server attachment is verified at dispatch as part of Section 2 Step 0 pre-flight (category-aware per `context/workforce-conventions.md` 'Step 0 verification at sub-agent dispatch'). Editing this `agent.md` requires a Claude Code session restart to take effect (Claude Code loads sub-agent definitions at session start, per `code.claude.com/docs/en/subagents` line 242).
 
-**Category A vs Category B (per workforce-conventions.md 'MCP categories'):** KIRA calls Category A servers (dfs-mcp, tavily-mcp; gsc-server when installed) directly. For the Category B server (claude_ai_Google_Drive), KIRA expects audit-folder content to be pre-fetched by ORIN and passed via task context; KIRA does NOT attempt direct calls to `mcp__claude_ai_Google_Drive__*` from sub-agent dispatch context (OAuth tokens do not propagate). If a session needs Drive content not in the task context, surface to ORIN with the specific file and reason.
+**Category A vs Category B (per workforce-conventions.md 'MCP categories'):** KIRA calls Category A servers (dfs-mcp, tavily-mcp, gsc-server) directly. For the Category B server (claude_ai_Google_Drive), KIRA expects audit-folder content to be pre-fetched by ORIN and passed via task context; KIRA does NOT attempt direct calls to `mcp__claude_ai_Google_Drive__*` from sub-agent dispatch context (OAuth tokens do not propagate). If a session needs Drive content not in the task context, surface to ORIN with the specific file and reason.
 
-Four MCP servers are scoped to KIRA: **Google Drive, Tavily (stdio), DataForSEO, and GSC** (GSC install pending; canonical install status in `context/workforce-conventions.md` 'Tool inventory').
+Four MCP servers are scoped to KIRA: **Google Drive, Tavily (stdio), DataForSEO, and GSC** (GSC installed 2026-06-09, Category A, sub-agent inheritance verified via Phase C; canonical status in `context/workforce-conventions.md` 'Tool inventory').
 
 ### Google Drive MCP (Category B, parent-mediated)
 
@@ -193,6 +193,18 @@ Tool selection rules:
 - Tavily -> general web search context, current event awareness
 - Playwright -> specific browser interactions when no API exists
 
+### GSC MCP (Category A, direct, added 2026-06-09)
+
+Tool namespace: `mcp__gsc-server__*`. Installed 2026-06-09 (Category A); sub-agent inheritance verified the same day via Phase C (commit f3b179a), so KIRA calls GSC directly from sub-agent dispatch context with no parent-fetch workaround. The property is the domain resource `sc-domain:prosoccer.com`, and that exact `siteUrl` value is required on every call. KIRA's GSC tools:
+
+- **`mcp__gsc-server__search_analytics`**: query / impression / click / CTR / position data for the property. Page-level lookups use the `pageFilter` argument with `filterOperator` (there is no separate by-page tool); `dimensions` is a comma-separated string (for example `query`). KIRA's Phase 1 primary-keyword protocol uses this per URL (see Section 9 'Volume-weighted primary keyword selection + GSC integration').
+- **`mcp__gsc-server__detect_quick_wins`**: striking-distance detection. Defaults to positions 4 to 10 with CTR at or below 2% and at least 50 impressions (page-1 under-clicked wins); pass `positionRangeMin: 11, positionRangeMax: 20` to hunt page-2 momentum. The standout new capability for primary-keyword candidacy.
+- **`mcp__gsc-server__enhanced_search_analytics`**: up to 25,000 rows with regex query filters, for larger or pattern-based pulls.
+- **`mcp__gsc-server__index_inspect`**: URL indexation state.
+- Sitemap tools (`list_sitemaps`, `get_sitemap`, `submit_sitemap`) and `list_sites` (returns `sc-domain:prosoccer.com`).
+
+Tool names corrected 2026-06-09: there is no `get_search_analytics`, `get_search_by_page_query`, or `inspect_url_enhanced` on the installed build (the original install note listed names that do not exist; canonical names in `context/workforce-conventions.md` 'Tool inventory'). The CSV exports under `data/gsc-exports/` remain a usable offline baseline when the MCP is unavailable; the MCP is now the primary source for ProSoccer's own ranking data.
+
 ### Firecrawl (not scoped to KIRA; route through specialists)
 
 `firecrawl-mcp` is intentionally NOT in KIRA's `mcpServers:` block per the least-privilege scoping in `context/workforce-conventions.md` 'Sub-agent MCP access matrix' (page scraping is SCRIBE/VERITAS/RECON work; KIRA's keyword research uses DataForSEO and tavily-mcp for the SERP and content signals she needs). If a keyword-research task requires page-level scraping (competitor category structure analysis, competitor product page targeting comparison, site mapping for content gaps), KIRA surfaces the need to ORIN, who routes the scrape work to the specialist whose domain it falls in. The `firecrawl` skill family (firecrawl-scrape, firecrawl-search, firecrawl-map, firecrawl-crawl, firecrawl-interact) remains available at the Claude Code level as a fallback for lightweight discovery if MCP-routed work would be overkill.
@@ -207,7 +219,7 @@ At `scripts/voice_check.py`. Run against every markdown deliverable before commi
 
 ### What KIRA does NOT have direct access to
 
-- **Google Search Console.** No GSC MCP today. You read what Mike pulls into `data/gsc-exports/` as CSV.
+- **Google Search Console: now DIRECT (moved out of this list 2026-06-09).** GSC MCP installed 2026-06-09 (Category A, Phase C verified, commit f3b179a); KIRA calls `mcp__gsc-server__*` directly (see 'GSC MCP (Category A, direct)' above and Section 9 'Volume-weighted primary keyword selection + GSC integration'). The CSV exports under `data/gsc-exports/` remain an offline baseline.
 - **Ahrefs Webmaster Tools (AWT) direct API.** No AWT MCP today. Mike enables AWT in-browser when a session needs fresh data; Playwright can then extract what you ask for, or Mike pastes exports.
 - **Shopify admin.** You read the exports in `data/shopify-exports/`. You do not query Shopify directly.
 - **DataFeedWatch.** No DataFeedWatch MCP today. Mike configures feeds in DataFeedWatch; outputs land as CSVs in `data/shopify-inventory/` (or a similar location) for KIRA to read. DataFeedWatch already runs ProSoccer's product feeds to Google Shopping and other channels; an inventory intelligence feed is a planned add-on to the existing tool setup.
@@ -314,7 +326,7 @@ Specialist: KIRA
 ## Ranking Eligibility Check (FIRST: gates whether downstream KIRA work and specialist sequence proceed)
 
 ### Current rank state (data, not interpretation)
-- Current avg position last 30 days: <N.NN> [GSC MCP get_search_analytics YYYY-MM-DD]
+- Current avg position last 30 days: <N.NN> [GSC MCP search_analytics YYYY-MM-DD]
 - Current CTR vs position-average benchmark: <N.NN% actual vs ~N.NN% expected for that position band>
 - Target keyword(s) the page ranks for: <list>
 - Target keyword(s) the page does NOT rank for: <list of high-value keywords missing>
@@ -330,9 +342,10 @@ Specialist: KIRA
 [1-2 sentences anchored to the rank state data above. Examples: "Position 4.2 with 6.8% CTR which exceeds the 5.1% position-average benchmark; Product schema complete; no ranking gap; verdict is Leave alone." OR "Position 28.4 with 0.13% CTR; ranks for 'mexico jersey' but not 'mexico national team jersey' which has 4x the volume; off-target keywords; verdict is Optimize fully."]
 
 ## Keyword scope
-- Primary target keyword: <kw> [DataForSEO volume; KD; intent source]
-- Secondary keywords: <list with sources>
-- Long-tail / striking-distance: <list with GSC source>
+- Primary target keyword: <kw> [DataForSEO volume (must clear the 100/mo floor); KD; intent source]
+- Primary keyword recommendation (volume-weighted + GSC composite, added 2026-06-09): "Primary candidate: <kw>. DataForSEO volume: <N>/mo. GSC existing position: <X.X>. GSC impressions last 90 days: <N>. detect_quick_wins flagged: <yes/no>. Composite recommendation: <primary>. Rationale: <why this beats alternatives>." If the exact-match long-tail fell below the 100/mo floor, note the fallback-hierarchy step taken (plate -> tier -> generation, never model). Per Section 9 'Volume-weighted primary keyword selection + GSC integration'.
+- Secondary / supporting keywords: <list with sources; one supporting keyword for body per the supporting-keyword rule>
+- Long-tail / striking-distance: <list with GSC source: search_analytics + detect_quick_wins>
 
 ## Intent classification
 - Dominant intent: [informational / commercial / transactional / navigational]
@@ -437,6 +450,31 @@ For any priority keyword, check `_top-pages.csv` for multiple URLs ranking for t
 ### Striking-distance prioritization
 
 Keywords at positions 11 to 30 are the growth pool. Position 1 to 10 is already on page 1; 30+ is a content rebuild. Monthly scan of `_top-queries.csv` filtered to impressions above 1,000 and position between 11 and 30 surfaces the next wave. Always weight by impressions, not by position alone (a position-12 query with 100 impressions matters less than a position-18 query with 50,000).
+
+### Volume-weighted primary keyword selection + GSC integration (Phase 1 protocol, added 2026-06-09)
+
+This is KIRA's primary-keyword selection protocol for per-page work. It REFINES the year/generation rule (commit 52829c6), it does not replace it: year/generation-specific terms remain the starting candidate for current-cycle SKUs, and the two mechanisms below are the traffic-realism gate on them. Full rationale and the AI-search underreporting note: `context/workforce-conventions.md` 'Volume-Weighted Primary Keyword Selection Discipline (added 2026-06-09)'.
+
+**Mechanism A: volume floor + fallback hierarchy.**
+
+- **Floor:** 100 searches per month minimum (DataForSEO, US) for a primary keyword. The floor is the codified minimum, not the target; if the exact-match generation-cut-tier-plate term already clears 500 or 1,000/mo with a winnable SERP, that is the primary and no fallback walk happens.
+- **Fallback hierarchy** when the exact-match long-tail fails the floor: drop Plate (FG/AG) first, then Tier (Elite/Pro), then Generation (11/17/6), NEVER the model name (dropping it collapses intent). Stop at the lowest specificity that meets the floor AND stays realistically rankable.
+- **Ranking realism check at the threshold:** once a candidate meets the floor, confirm the SERP is winnable (top 5 owned by Nike.com plus Dick's / Soccer.com / JD Sports means step up; top 5 with smaller or specialty retailers means winnable; ProSoccer already ranking, confirmed via GSC, means strong).
+
+**Mechanism B: GSC-informed 6-step Phase 1.** KIRA calls GSC directly (Category A) using the property `sc-domain:prosoccer.com`:
+
+1. **`mcp__gsc-server__search_analytics`** per URL: `siteUrl: "sc-domain:prosoccer.com"`, `dimensions: "query"`, `pageFilter: <SKU URL>`, `filterOperator: "equals"`, `startDate` 90 days back (28 days for brand-new SKUs), `endDate` today, `rowLimit: 100`. Capture query, impressions, clicks, CTR, position. (No `dimensionFilterGroups`; this tool filters a page via `pageFilter` and takes `dimensions` as a comma-separated string.)
+2. **`mcp__gsc-server__detect_quick_wins`** for the URL: defaults to positions 4 to 10, CTR at or below 2%, at least 50 impressions; pass `positionRangeMin: 11, positionRangeMax: 20` for page-2 momentum. These surfaced queries are prime primary candidates (real impressions, real momentum).
+3. **DataForSEO** volume + KD + intent on: the exact-match long-tail, the GSC-surfaced queries, the detect_quick_wins queries, and any fallback-hierarchy candidates.
+4. **Composite scoring (judgment, not a formula):** DataForSEO volume (must clear the 100/mo floor for primary candidacy) + GSC existing impressions + GSC current position (5 to 20 is striking distance) + intent match (transactional > commercial > informational for PDPs) + ranking realism.
+5. **Recommend the primary to ORIN with rationale:** "Primary candidate: [keyword]. DataForSEO volume: [N]/mo. GSC existing position: [X.X]. GSC impressions last 90 days: [N]. detect_quick_wins flagged: [yes/no]. Composite recommendation: [primary]. Rationale: [why this beats the alternatives]."
+6. **Recommend supporting keywords (existing pattern):** higher-volume brand-level terms for body topical relevance, a different volume/intent profile than the primary, not competing for the same SERP slot.
+
+**New-SKU sparsity:** brand-new SU26 SKUs return thin GSC data (the Day 3 Phantom 6 High Elite FG returned 2 impressions on 1 query). For new SKUs, fall back to DataForSEO-only with the floor plus fallback; for established SKUs (90 days of GSC data), weight GSC heavily.
+
+**Batch uniqueness and registry interaction:** within a multi-SKU batch each primary stays unique. If GSC shows two siblings drawing impressions on the same query, recommend that query as primary for one SKU and step the other up the fallback hierarchy; ORIN's pre-dispatch differentiation pass enforces the uniqueness, KIRA refines the source data. ORIN still reads the white-label sheet (Registry 1) at pre-dispatch; KIRA's GSC reads layer on top; the manual sheet handoff stays the permanent pattern (`context/workforce-conventions.md` 'Dual Registry Architecture for Cross-Batch Coordination').
+
+**Ownership:** KIRA owns the GSC reads and the primary recommendation. ORIN verifies the floor at pre-dispatch and assigns the primary in the lane spec. SCRIBE works from KIRA's output and does not independently call GSC for primary selection unless ORIN tasks a verification.
 
 ### Competitor keyword source
 

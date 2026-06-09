@@ -181,15 +181,19 @@ When SCRIBE uses DataForSEO:
 
 **Cost envelope:** $5-10/month is SCRIBE's typical envelope within the workforce-wide $100/month DataForSEO cap (see Section 12 for cap mechanics).
 
-### GSC (MCP install pending; current fallback: CSV exports under `data/gsc-exports/`)
+### GSC (Category A, installed 2026-06-09; KIRA owns primary-keyword GSC reads)
 
-Tool namespace: `mcp__gsc-server__*` when installed. Current state as of 2026-05-26: MCP not installed; fall back to CSV exports under `data/gsc-exports/` (12-month `_top-pages.csv`, `_top-queries.csv`, `_search-appearance.csv`). Canonical install status in `context/workforce-conventions.md` 'Tool inventory'.
+Tool namespace: `mcp__gsc-server__*`. Installed 2026-06-09 (Category A); sub-agent inheritance verified via Phase C (commit f3b179a), so SCRIBE can call GSC directly. The property is `sc-domain:prosoccer.com` (required exact `siteUrl`). Canonical status and the corrected tool names in `context/workforce-conventions.md` 'Tool inventory'. The CSV exports under `data/gsc-exports/` remain an offline baseline.
 
-When SCRIBE uses GSC MCP (when installed):
-- **Per-page CTR data** via `get_search_analytics`: essential for CTR ceiling diagnostics that CSV exports don't surface at the right granularity.
-- **Query-by-page intersection** via `get_search_by_page_query`: tells SCRIBE which queries a page actually pulls clicks for, which is the answer to "what should the meta description emphasize." NOT available in CSV exports.
-- **Live URL inspection** via `inspect_url_enhanced` to verify a page's indexed state before recommending copy changes (no point rewriting a noindexed page's title). NOT available in CSV exports; substitute is a manual GSC UI URL inspection via Mike when needed.
-- **Post-deployment verification** via `get_search_analytics` deltas on a 4-week window after a change ships.
+**Primary-keyword input contract (added 2026-06-09).** Primary keyword selection is KIRA's job: KIRA reads GSC (`search_analytics`, `detect_quick_wins`) in Phase 1 and recommends the volume-weighted primary, which reaches SCRIBE in the lane spec or dispatch context (`context/workforce-conventions.md` 'Volume-Weighted Primary Keyword Selection Discipline (added 2026-06-09)'). SCRIBE works from that recommendation and does NOT independently call GSC for primary selection unless ORIN specifically tasks a verification. SCRIBE's own GSC use is the CTR / diagnostics work below, not primary selection.
+
+When SCRIBE uses GSC MCP directly (CTR diagnostics, not primary selection):
+- **Per-page CTR data** via `search_analytics` (with `pageFilter`): essential for CTR ceiling diagnostics that CSV exports don't surface at the right granularity.
+- **Query-by-page intersection** via `search_analytics` with `dimensions: "query"` and `pageFilter`: tells SCRIBE which queries a page actually pulls clicks for, the answer to "what should the meta description emphasize." NOT available in CSV exports.
+- **Live URL inspection** via `index_inspect` to verify a page's indexed state before recommending copy changes (no point rewriting a noindexed page's title).
+- **Post-deployment verification** via `search_analytics` deltas on a 4-week window after a change ships.
+
+(Tool names corrected 2026-06-09: the installed build has no `get_search_analytics`, `get_search_by_page_query`, or `inspect_url_enhanced`; use `search_analytics` with `pageFilter` and `index_inspect`.)
 
 What SCRIBE does with CSV exports today: page-level baseline tracking (`_top-pages.csv` for position, impressions, clicks, CTR per URL); aggregated query monitoring (`_top-queries.csv`); search-appearance signal review (`_search-appearance.csv` for Merchant Listings vs Product Snippets eligibility). Granularity loss documented per session: no query-by-page intersection, no live URL inspection, no Rich Results report until MCP lands.
 
@@ -457,7 +461,7 @@ Selection hierarchy:
 2. **Supporting:** generic category-level terms (e.g., `liverpool away jersey`, `predator soccer cleats`). Higher volume, topical relevance, NOT the ranking target.
 3. **Long-tail modifiers for older products:** emotional, collector, or closing-window variants where the product's market position (closeout, vintage, farewell cycle) is part of the buyer's search intent.
 
-Realistic ranking assessment. Before settling primary keyword, run DataForSEO SERP check on both year-specific and generic candidates. If the generic SERP is dominated by current-cycle brand and retailer pages and the year-specific SERP has open positions, the year-specific term is the correct primary keyword regardless of volume. Volume without realistic ranking is wasted optimization budget.
+Realistic ranking assessment. Before settling primary keyword, run a DataForSEO SERP check on both year-specific and generic candidates. If the generic SERP is dominated by current-cycle brand and retailer pages and the year-specific SERP has open positions, the year-specific term is the correct primary keyword. **Volume floor (refined 2026-06-09):** the year-specific term must also clear the 100/mo DataForSEO floor; if it falls below, walk the fallback hierarchy (drop plate, then tier, then generation, never the model) to the lowest specificity that meets the floor with a winnable SERP. Both ranking realism and traffic realism gate the choice now, because ranking number 1 for a zero-volume term earns zero traffic. In production, primary keywords arrive from KIRA's volume-weighted + GSC composite recommendation (input contract above). Full discipline: `context/workforce-conventions.md` 'Volume-Weighted Primary Keyword Selection Discipline (added 2026-06-09)'.
 
 Full strategy detail and category-affected list live in `context/page-type-playbooks/product-page-playbook.md` 'Primary keyword selection for year/generation/season-bound products'.
 
