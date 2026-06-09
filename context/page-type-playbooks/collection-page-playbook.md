@@ -466,6 +466,10 @@ Approximate structure: 5 evergreen H2 sections + 1 contained catalyst section pe
 
 The catalyst section is the place to name the current tournament, the current kit drop, the current squad-naming cycle, the current friendly schedule. Everything else (kit design tradition, color identity, players past-and-present, brand-supplier sequence, cultural diaspora context) holds across cycles.
 
+## Brief output structure (added 2026-06-09)
+
+Batch collection briefs use the same two-artifact structure as PDP briefs (`context/page-type-playbooks/product-page-playbook.md` 'Brief output structure (added 2026-06-09)'), adapted to the collection field set. The brief file (`<slug>_brief.md`) carries ONLY implementer-facing content in copy-paste order: a Quick Reference block (Current live collection Title from the Phase 0 scrape so Mike searches admin by title rather than by handle, plus the full URL) and the SEO Details for the in-scope collection fields (Title, Short Description / hero block, body Description, Meta Title, Meta Description, URL Handle, FAQ when it earns inclusion, Taxonomy Category). The template heading reads 'Collection Optimization' rather than 'PDP Optimization'. All audit content (keyword research with volumes, brand-IP classification, internal-link validation evidence, defense-in-depth gate notes, handle-length flags) moves to the per-batch `_audit-trail.md` at the session-folder root, one file for the whole batch. Internal links live ONLY in the body Description, never the Short Description / hero block (see 'Internal link strategy' below). Surfaced from Mike's first 10-PDP Shopify implementation pass on the Day 3 re-run batch (commit 957dc3c); forward-only from the next batch dispatch onward. Full templates and rationale: `context/workforce-conventions.md` 'Brief Output Structure (added 2026-06-09)'.
+
 ## Internal link strategy
 
 The long description supports 1 to 2 internal links maximum. More than that turns the body into a navigation menu and dilutes topical authority. Fewer than that leaves the page orphaned in the site's link graph.
@@ -473,6 +477,8 @@ The long description supports 1 to 2 internal links maximum. More than that turn
 ### Link format (full HTTPS canonical URLs)
 
 Every internal link suggestion in the brief is a full HTTPS URL on the canonical domain `https://www.prosoccer.com` (with the `www` subdomain). Never a relative path (`/collections/firm-ground`), never `http://`, never a partial or mangled URL. Full URLs paste cleanly into the Shopify editor and document the exact destination. Full rule, INCORRECT and CORRECT examples, and enforcement: `context/workforce-conventions.md` 'Internal Link Format Discipline (added 2026-06-03)'.
+
+Link placement (added 2026-06-09): internal links appear ONLY in the body Description, never in the Short Description / hero block. The hero block is conversion-critical real estate; a link there distracts the reader from the primary action. Cross-discovery navigation belongs in the body Description, after the reader has engaged with the topic substance. Full rule: `context/workforce-conventions.md` 'Internal Link Format Discipline (added 2026-06-03)' placement rule.
 
 ### Selection rules
 

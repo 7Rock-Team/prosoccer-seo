@@ -519,6 +519,8 @@ Operational placement: run the Gate 13 self-check during Phase 4 (brief drafting
 
 **Registry context arrives through the lane spec, not direct access (added 2026-06-08).** For pack/series batches, ORIN's differentiation lane spec already carries the cross-batch context SCRIBE needs: the primary-keyword assignment cross-checked against the white-label keyword sheet (Registry 1), and the prior-batch prose patterns to avoid from the silo-positioning file (Registry 2). SCRIBE does NOT read either registry directly. The white-label sheet is a Category B Drive resource whose OAuth token does not propagate to sub-agents (parent-fetches-and-passes only), and the silo-positioning files are an orchestrator-level concern. Work from the lane spec: if it names a hook, metaphor, use-case, angle, or keyword to avoid (claimed by a sibling or a prior silo brief), honor it. Self-check before the Phase 5 voice check: the produced opening hook, primary metaphor, use-case scenario, angle of emphasis, and heritage angle match the lane spec's assigned uniqueness and collide with no 'avoid' item it lists. Full architecture: `context/workforce-conventions.md` 'Dual Registry Architecture for Cross-Batch Coordination'.
 
+**Brief output structure plus Short Description no-link (Phase 4 self-checks, added 2026-06-09).** SCRIBE writes two artifacts per brief, separating implementer content from audit content. (1) The brief file (`<slug>_brief.md` in the session folder) carries ONLY implementer-facing content in copy-paste order: Quick Reference (Current live Title from the Phase 0 scrape, SKU, URL), then SEO Details (Title, Short Description, Description, Meta Title, Meta Description, URL Handle, Image Alt Text, FAQ, Taxonomy Category). No keyword rationale, brand-IP reasoning, sibling differentiation lane, or defense-in-depth notes belong in the brief file. (2) All audit content goes to the per-batch `_audit-trail.md` (one file per batch at the session-folder root) under this SKU's heading. (3) Internal links live ONLY in the Description body, never the Short Description metafield: the hero block above Add to Cart is conversion-critical real estate, and a link there pulls the buyer off the Add to Cart action. Self-check before the Phase 5 voice check: confirm the brief file contains no audit content, confirm the Quick Reference Current live Title field is populated from the Phase 0 Firecrawl scrape, and confirm the Short Description carries zero internal links (links appear in the Description body only). Surfaced from Mike's first 10-PDP Shopify implementation pass on the Day 3 re-run batch (commit 957dc3c). Full structure and templates: `context/workforce-conventions.md` 'Brief Output Structure (added 2026-06-09)' and Section 13 below; link placement rule: `context/workforce-conventions.md` 'Internal Link Format Discipline (added 2026-06-03)'; ORIN side `.claude/agents/master-strategist/agent.md` Section 9 + Section 11.
+
 **Schema-aware keyword usage.** When VERITAS ships Product schema, keyword choices in the product description must align with the DataFeedWatch feed values (no contradictions between feed text and on-page text). When VERITAS ships FAQ schema, question-format H3 subheadings carry the question-form keyword ("What size Argentina jersey should I order?", not "Argentina jersey sizing").
 
 **Anti-pattern reminder.** Per `context/03-brand-voice.md`, sentences that exist only to hit a keyword are forbidden. Density targets above are guides, not floors. If a target density would force a keyword-stuffing sentence, take the lower density.
@@ -736,7 +738,55 @@ Open items flagged before proceeding:
 Ready for task.
 ```
 
-### Per-URL on-page recommendation brief template (every per-page deliverable)
+### Implementer-facing brief structure plus per-batch audit trail (added 2026-06-09, canonical for batch PDP and collection production)
+
+As of 2026-06-09, batch PDP and collection briefs use a two-artifact structure that separates implementer-facing content from workforce-internal audit content. This is the production output format for all batch dispatches going forward; the per-URL recommendation-brief template that follows is retained for standalone non-batch diagnostic work and historical reference. Full rationale, the per-batch audit-trail template, and the forward-only inflection note live in `context/workforce-conventions.md` 'Brief Output Structure (added 2026-06-09)'.
+
+The brief file (`deliverables/page-optimizations/YYYY-MM-DD_session-NN/<slug>_brief.md`) carries implementer content only, in copy-paste order:
+
+```
+# [Product Name] -- PDP Optimization
+
+## Quick Reference
+- Current live Title (for Shopify admin search): [exact current title from Phase 0 Firecrawl scrape]
+- SKU: [code]
+- URL: [full URL]
+
+## SEO Details (copy-paste into Shopify)
+
+### Title (Shopify "Title" field)
+[recommended new title]
+
+### Short Description (metafield, hero block above Add to Cart)
+[short description prose -- NO internal links here]
+
+### Description (body_html, accordion below product images)
+[full description with H2s, prose, Product Details bullets, internal links -- links live ONLY here]
+
+### Meta Title (Search engine listing)
+[meta title]
+
+### Meta Description (Search engine listing)
+[meta description]
+
+### URL Handle
+[current handle, OR recommended new handle with 301 redirect flag]
+
+### Image Alt Text (apply per gallery image)
+- [alt text]
+- [alt text]
+- ...
+
+### FAQ (paste into Description body or theme FAQ section)
+[3-5 Q&A pairs]
+
+### Taxonomy Category (Shopify admin)
+[category path]
+```
+
+Audit content does NOT go in the brief file: product-complexity classification reasoning, keyword research with volumes, brand-IP classification, the sibling-SKU title uniqueness check, internal-link validation evidence, the ORIN differentiation lane, defense-in-depth gate notes, and URL-handle flags all go to the per-batch `_audit-trail.md` at the session-folder root, one file for the whole batch, under a `### SKU [code] -- [product name]` heading per SKU. That template lives in `context/workforce-conventions.md` 'Brief Output Structure (added 2026-06-09)'. The Quick Reference Current live Title field is the exact live PDP title from the Phase 0 Firecrawl scrape, so Mike searches Shopify admin by title rather than by SKU. Phase 4 self-check (Section 9): no audit content in the brief file, Current live Title populated, no internal link in the Short Description.
+
+### Per-URL on-page recommendation brief template (standalone / non-batch diagnostic briefs; superseded for batch production by the implementer-facing structure above)
 
 ```
 # On-Page Recommendation Brief: [URL]

@@ -234,9 +234,97 @@ Regex implementation note (`scripts/voice_check.py`): the `\bboots?\b` check bla
 
 Cross-references: `.claude/agents/on-page-seo/agent.md` Section 9 + Section 11 (SCRIBE Phase 4 US-market self-check), `.claude/agents/master-strategist/agent.md` Section 11 (ORIN defense-in-depth re-check), `scripts/voice_check.py` (`\bboots?\b` regex), both page-type playbooks (worked examples fix-forwarded). Related: 'Editorial philosophy (added 2026-06-02)', 'Brand styling conventions'.
 
+## Brief Output Structure (added 2026-06-09)
+
+Surfaced from Mike's first production Shopify implementation pass: he implemented 10 PDPs by hand in Shopify admin using the Day 3 re-run briefs (commit 957dc3c) and hit real copy-paste friction. The SEO deliverables (Title, Short Description, Description body, Meta Title, Meta Description, URL handle, image alt text, FAQ, taxonomy) were scattered through each brief and interleaved with workforce-internal audit content; the live product Title was nowhere in the brief, which forced a SKU search in admin instead of a fast title lookup; and audit reasoning the implementer never needs added noise to the paste workflow. The fix splits the two audiences into two artifacts.
+
+**Two artifacts per brief, two audiences.**
+
+1. **The brief file** (`deliverables/page-optimizations/[YYYY-MM-DD_session-XX]/<slug>_brief.md`) carries ONLY implementer-facing content, ordered for top-to-bottom copy-paste into Shopify admin. No keyword rationale, no brand-IP reasoning, no sibling differentiation lane, no defense-in-depth notes.
+2. **The per-batch audit file** (`deliverables/page-optimizations/[YYYY-MM-DD_session-XX]/_audit-trail.md`) carries the workforce-internal audit content for every SKU in the batch, in one navigable document. One audit file per batch, not per SKU (easier to maintain than scattered per-SKU files).
+
+**Brief file structure (implementer-facing only):**
+
+```
+# [Product Name] -- PDP Optimization
+
+## Quick Reference
+- Current live Title (for Shopify admin search): [exact current title from Phase 0 Firecrawl scrape]
+- SKU: [code]
+- URL: [full URL]
+
+## SEO Details (copy-paste into Shopify)
+
+### Title (Shopify "Title" field)
+[recommended new title]
+
+### Short Description (metafield, hero block above Add to Cart)
+[short description prose -- NO internal links here]
+
+### Description (body_html, accordion below product images)
+[full description with H2s, prose, Product Details bullets, internal links -- links live ONLY here]
+
+### Meta Title (Search engine listing)
+[meta title]
+
+### Meta Description (Search engine listing)
+[meta description]
+
+### URL Handle
+[current handle, OR recommended new handle with 301 redirect flag]
+
+### Image Alt Text (apply per gallery image)
+- [alt text]
+- [alt text]
+- ...
+
+### FAQ (paste into Description body or theme FAQ section)
+[3-5 Q&A pairs]
+
+### Taxonomy Category (Shopify admin)
+[category path]
+```
+
+**Per-batch audit file structure:**
+
+```
+# Audit Trail -- [Batch Date / Session ID]
+
+## Batch Metadata
+- Total SKUs: N
+- Brand IP classifications: [summary]
+- Dispatch architecture: [parallel/sequential]
+- Commit hash: [if known]
+
+## Per-SKU Audit Notes
+
+### SKU [code 1] -- [product name]
+- Product complexity classification: [Complex/Standard/Simple, reasoning]
+- Keyword research: [primary keyword + volume, supporting keywords + volumes, fallback notes]
+- Brand IP classification: [FIFA permitted yes/no, lowercase adidas, etc.]
+- Sibling-SKU title uniqueness check: [differentiation analysis]
+- Internal links -- validation details: [anchor text + validation evidence + path of file checked]
+- Differentiation lane (from ORIN pre-dispatch): [angle, hook, heritage, use case, metaphor]
+- Defense-in-depth gate notes: [flags caught + resolutions, if any]
+- URL handle flags: [over 70-char flag for Jorge/Misha, if applicable]
+
+### SKU [code 2] -- [product name]
+[same structure]
+```
+
+**Quick Reference: the Current live Title field.** The brief's Quick Reference block surfaces the exact current product Title as it renders on the live PDP, captured during the Phase 0 Firecrawl scrape, so Mike searches Shopify admin by title rather than by SKU. The data is already captured in Phase 0; this surfaces it in the brief output.
+
+Enforcement (defense-in-depth): SCRIBE produces the brief file with implementer content only and writes audit content to the batch `_audit-trail.md`; its Phase 4 self-check confirms no audit content leaked into the brief and no internal link sits in the Short Description. ORIN's pre-dispatch pass produces both files, and the Section 11 re-check verifies the brief carries only implementer content, the `_audit-trail.md` exists with per-SKU notes, and no brief's Short Description contains a link.
+
+FORWARD-ONLY: the Day 3 re-run briefs (commit 957dc3c) stay in the old combined structure per Mike's standing forward-only principle. The new structure applies to the next batch dispatch onward. This is the architectural inflection point, auditable by commit hash. The next worked-example refresh in the playbooks should model both the new brief structure and the audit-trail structure (standing follow-up; not written in this pass).
+
+Cross-references: `.claude/agents/on-page-seo/agent.md` Section 13 (SCRIBE output template) + Section 9 (Phase 4 self-check), `.claude/agents/master-strategist/agent.md` Section 9 (ORIN produces both files) + Section 11 (structure re-check), both page-type playbooks 'Brief output structure (added 2026-06-09)'. Internal link placement: 'Internal Link Format Discipline' below. Production source: Mike's first 10-PDP Shopify implementation pass on the Day 3 re-run batch (commit 957dc3c).
+
 ## Internal Link Format Discipline (added 2026-06-03)
 
 Every internal link suggestion in a PDP or collection brief must be a full HTTPS URL on the canonical domain. The canonical domain is `https://www.prosoccer.com` (with the `www` subdomain). Never a relative path, never `http://`, never a mangled or partial URL. The rule applies to the brief's `Internal links` sub-section, the brief-format template, and any inline link reference in modeled brief output.
+
+**Placement rule (added 2026-06-09): internal links live ONLY in the Description body, never the Short Description metafield.** Internal links appear ONLY in the Description body (long description / body_html). They do NOT appear in the Short Description metafield (hero block above Add to Cart). The hero block is conversion-critical real estate; links would distract the buyer from the Add to Cart action. Description body is the natural location for cross-discovery navigation, after the buyer has read the editorial prose and is exploring whether the product is right for them. Surfaced from Mike's first 10-PDP Shopify implementation pass (Day 3 re-run batch, commit 957dc3c); see 'Brief Output Structure (added 2026-06-09)' above. SCRIBE's Phase 4 self-check confirms no link sits in the Short Description; ORIN's Section 11 re-check backstops it.
 
 Correct format:
 
