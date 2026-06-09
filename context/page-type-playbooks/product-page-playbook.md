@@ -135,7 +135,7 @@ The Description (body_html) splits reader-first prose from technical bullets. Pr
 - **Bullets (specs, the WHAT):** materials (upper, stud configuration, lining, sole construction), plate type and surface compatibility (FG / AG / SG / MG / TF / IC), tier-specific features (Elite vs Pro vs League differentiation), weight, sizing system, fit notes, care instructions, technology callouts (Heat.RDY, K-leather, traction system, lacing).
 - **Prose (the WHY):** why this matters to the buyer's life, emotional and identity anchors, use-case scenarios, heritage and brand context, sizing guidance framed by buyer need. No feature-selling in prose; specs live in the bullets.
 
-**H2 count, flexible by complexity (SCRIBE decides at brief production):** Simple 2 to 3 H2 sections (overview + Product Details + optional fit); Standard 3 to 4 plus the Care and Maintenance H2 when the category triggers it; Complex 4 to 5 (overview + use case + heritage + Product Details + Fit Notes) plus the Care and Maintenance H2. Full reading order for a triggering Complex SKU: overview -> heritage -> use case -> Product Details bullets -> Fit Notes -> Care and Maintenance bullets. Each prose paragraph carries one theme, 2 to 4 sentences, with white space for scan-ability. Anti-pattern: technical specs listed in prose sentences instead of the Product Details bullets, or a single undifferentiated block. The Description body now carries two bullet H2s (Product Details and Care and Maintenance) framing the narrative prose H2s; see 'Care and Maintenance H2 discipline (added 2026-06-09)' below.
+**H2 count, flexible by complexity (SCRIBE decides at brief production):** Simple 2 to 3 H2 sections (overview + Product Details + optional fit); Standard 3 to 4 plus the Care and Maintenance H2 when the category triggers it; Complex 4 to 5 (overview + use case + heritage + Product Details + Fit Notes) plus the Care and Maintenance H2. Full reading order for a triggering Complex SKU: overview -> heritage -> use case -> Product Details bullets -> Fit Notes -> Care and Maintenance bullets -> Frequently Asked Questions (when the FAQ earns inclusion; see 'FAQ heading hierarchy discipline (added 2026-06-09)'). Each prose paragraph carries one theme, 2 to 4 sentences, with white space for scan-ability. Anti-pattern: technical specs listed in prose sentences instead of the Product Details bullets, or a single undifferentiated block. The Description body now carries two bullet H2s (Product Details and Care and Maintenance) framing the narrative prose H2s; see 'Care and Maintenance H2 discipline (added 2026-06-09)' below.
 
 ### Care and Maintenance H2 discipline (added 2026-06-09)
 
@@ -204,6 +204,44 @@ Cross-references: `context/workforce-conventions.md` 'PDP field length reference
 ### FAQ for PDPs (recommended, net-new-value criterion)
 
 FAQ is RECOMMENDED on PDPs (collection pages keep the conditional rule in `context/page-type-playbooks/collection-page-playbook.md`). The same net-new-value criterion governs both: a FAQ Q-and-A pair earns its place only when it answers a question the description body does not already cover, that real buyers actually ask, and that adds measurable value to the decision. Typical PDP patterns: sizing ("Does the Predator 26 run true to size?"), plate selection ("Should I get the FG or MG plate for mixed surfaces?"), sibling comparison ("What's the difference between Elite and Pro tiers?"), use-case fit ("Are these cleats good for hard ground?"), care or durability ("How do I care for K-leather uppers?"). Skip: questions already answered in the body, marketing fluff as questions ("Why are these the best cleats?"), generic non-product questions ("Where do you ship?"), and schema-stuffing questions. Count: 3 to 5 Q-and-A pairs typical, quality over quantity. Skip FAQ entirely if SCRIBE cannot generate 3 genuinely useful Q-and-As beyond the body.
+
+### FAQ heading hierarchy discipline (added 2026-06-09)
+
+Surfaced from Mike's first 10-PDP Shopify implementation pass on the Day 3 re-run batch (commit 957dc3c), where he applied heading structure to the FAQ sections by hand during admin work. The prior FAQ format was bold question text plus paragraph answers with no section heading, which rendered inconsistently in the Hyper theme accordion and weakened the semantic foundation for FAQ schema. When a FAQ earns inclusion (per the net-new-value criterion above), it follows a fixed heading hierarchy. The FAQ serves two purposes, both better served by consistent hierarchy: reader navigation (scannable question-and-answer structure for buyers comparing products or seeking a specific detail) and SEO (question-formatted content can surface in Google's People Also Ask features and FAQ rich results).
+
+**The hierarchy:**
+
+- **H2: the section title "Frequently Asked Questions".** A single H2 introduces the FAQ block, marking it as a distinct section parallel to the other Description body H2s (overview, heritage, use case, Product Details, Fit Notes, Care and Maintenance). It also lets the Hyper theme accordion (or any FAQ-specific theme rendering) identify the section.
+- **H3: each individual question.** Every question gets its own H3. This lets Google identify question-answer pairs for FAQ schema, gives each question an anchor-link target, and keeps questions visually distinct from answer text without inline bold (which renders inconsistently across themes).
+- **Paragraph text: each answer (no heading).** A plain paragraph below each H3 question. It may carry inline formatting (bold, italics, or links per the Internal Link Format Discipline). Length varies by question complexity, typically 1 to 3 sentences for scannability.
+
+**Forbidden patterns:**
+
+- Do NOT use H2 for individual questions (breaks the semantic hierarchy).
+- Do NOT use bold question text without an H3 wrapper (loses semantic meaning and makes FAQ schema harder to generate).
+- Do NOT write product-specific FAQ H2 wording (for example "Frequently Asked Questions about the Phantom 6", "Phantom 6 FAQ", "Common Questions About This Cleat"). Use the consistent "Frequently Asked Questions" H2 across every PDP and collection page. Consistent wording aids Google's FAQ schema detection and gives buyers and reviewers a predictable section to find.
+
+**Placement.** The FAQ section sits at the end of the Description body, after the Care and Maintenance H2 when present. Full reading order: overview -> heritage -> use case -> Product Details -> Fit Notes -> Care and Maintenance -> Frequently Asked Questions.
+
+**Markdown-to-theme mapping.** In the brief (markdown), the section title is `## Frequently Asked Questions` and each question is `### <question>`; Mike maps these to the Shopify HTML / Hyper theme equivalents during implementation.
+
+**Example structure:**
+
+```
+## Frequently Asked Questions
+
+### Does the Phantom 6 High Elite FG run true to size?
+
+The Phantom 6 runs true to size for most players. If you prefer a snug fit or have a narrow foot, consider going down half a size. For wider feet, the standard size fits well without break-in.
+
+### Can I use these cleats on artificial grass?
+
+The FG (firm ground) version is designed for natural grass and well-maintained synthetic turf. For dedicated artificial grass surfaces, the AG variant is the better choice; it carries shorter, more numerous studs that distribute pressure across the synthetic surface.
+```
+
+**Out of scope (theme-level).** Actual FAQ JSON-LD schema generation for rich results is theme-level structured-data work (VERITAS / Misha coordination), not workforce copy. The H2 / H3 / paragraph hierarchy provides the semantic foundation; if Misha builds FAQ schema rendering into the theme, that is a future opportunity surfaced separately. Any Hyper-theme accordion rendering issue with the hierarchy is likewise a Misha coordination item, not a copy adjustment.
+
+Cross-references: `context/page-type-playbooks/collection-page-playbook.md` 'FAQ heading hierarchy discipline (added 2026-06-09)'; `.claude/agents/on-page-seo/agent.md` Section 9 (SCRIBE Phase 4 FAQ hierarchy self-check) + Section 13 (brief FAQ template); `.claude/agents/master-strategist/agent.md` Section 11 Gate 15 (FAQ hierarchy re-check); `context/workforce-conventions.md` 'Brief Output Structure (added 2026-06-09)'. Forward-only: Day 3 re-run briefs (commit 957dc3c) and prior briefs keep the old bold-paragraph FAQ format; the discipline applies from the next batch dispatch onward.
 
 ### Tier time impact
 

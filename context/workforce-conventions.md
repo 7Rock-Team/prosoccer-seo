@@ -278,8 +278,13 @@ Surfaced from Mike's first production Shopify implementation pass: he implemente
 - [alt text]
 - ...
 
-### FAQ (paste into Description body or theme FAQ section)
-[3-5 Q&A pairs]
+### FAQ (paste into Description body; H2 "Frequently Asked Questions", H3 per question, paragraph answers)
+## Frequently Asked Questions
+### [question 1]
+[answer paragraph, 1 to 3 sentences; inline links allowed here, never in Short Description]
+### [question 2]
+[answer paragraph]
+[3 to 5 Q&A pairs total when the FAQ earns inclusion]
 
 ### Taxonomy Category (Shopify admin)
 [category path]
@@ -523,7 +528,7 @@ The Description splits reader-first prose from technical bullets. Prose H2 secti
 
 ### FAQ reconciliation across page types
 
-Collection pages keep the conditional FAQ rule (skip unless the FAQ adds net-new value beyond the Long Description, per `context/page-type-playbooks/collection-page-playbook.md`). PDPs RECOMMEND a FAQ, governed by the SAME net-new-value criterion: 3 to 5 Q-and-A pairs that the Description body does not already cover, that real buyers ask (sizing, plate selection, sibling comparison, use-case fit, care / durability), and that add measurable decision value. Skip entirely if fewer than 3 genuinely useful Q-and-As exist. The criterion is identical across page types; only the default posture differs (collections lean skip, PDPs lean include).
+Collection pages keep the conditional FAQ rule (skip unless the FAQ adds net-new value beyond the Long Description, per `context/page-type-playbooks/collection-page-playbook.md`). PDPs RECOMMEND a FAQ, governed by the SAME net-new-value criterion: 3 to 5 Q-and-A pairs that the Description body does not already cover, that real buyers ask (sizing, plate selection, sibling comparison, use-case fit, care / durability), and that add measurable decision value. Skip entirely if fewer than 3 genuinely useful Q-and-As exist. The criterion is identical across page types; only the default posture differs (collections lean skip, PDPs lean include). FAQ heading hierarchy (added 2026-06-09): when a FAQ is included, it uses a single H2 "Frequently Asked Questions", an H3 per question, and paragraph answers, with no product- or collection-specific section wording. Codified at the playbook level: `context/page-type-playbooks/product-page-playbook.md` 'FAQ heading hierarchy discipline (added 2026-06-09)' and the matching `context/page-type-playbooks/collection-page-playbook.md` section; SCRIBE Phase 4 self-check and ORIN Section 11 Gate 15 enforce it.
 
 **Architectural learning note.** PDP optimization discipline codification (added 2026-06-02, corrected 2026-06-02): TinySEO PDP analysis surfaced PDP-specific SEO requirements not previously codified. PDPs serve different search intent than collections (product-specific vs category queries) and need different field-length constraints, schema considerations, and content structures. The first codification used a single "Product Description 150 words max" figure; on review this conflated Shopify's two description fields and contradicted 2026 ecommerce ranking data (top-ranking ecommerce pages average 200 to 310 words; complex products competitive at 300 to 400), the playbook's own worked examples (250 to 350 words), and the Mexico v5 canonical (340 words). Corrected: Short Description metafield (hero block) 50 to 100 words; Description body_html (accordion) tiered Simple ~125 to 200 / Standard ~200 to 300 / Complex ~300 to 400. The "150" is interpreted as the Short Description metafield. Nine additions codified: (1) field length constraints split by field using ProSoccer's admin field names, (2) unique titles for pack/series products (tier / plate / colorway / generation), (3) URL handle 70-char constraint, (4) image alt text format, (5) image optimization flags in the workforce briefing, (6) taxonomy category requirement, (7) Description structure with prose H2 sections plus a dedicated "Product Details" bullet H2 (prose = WHY, bullets = WHAT), (8) FAQ recommended with net-new-value criterion, (9) reader-first operational principle reinforced as the governing principle for all PDP copy. FAQ reconciliation: collections stay conditional, PDPs recommended with the same criterion. Collection-page Long Description ceiling unchanged at 500. PDPs and collections now have meaningfully differentiated disciplines. Day 3 PDP batch will be the first production batch under full PDP discipline. Optional script-level length checks in `voice_check.py` deferred to Mike's decision (field-specific length limits do not fit the whole-file regex model the `\bAdidas\b` check uses).
 

@@ -456,6 +456,20 @@ Per `.claude/agents/on-page-seo/agent.md` Section 9 'Keyword placement per field
 - "Do you have a fitting room?"
 - "Can I exchange a jersey?"
 
+#### FAQ heading hierarchy discipline (added 2026-06-09)
+
+When a collection FAQ earns inclusion (per the three criteria above), it follows the same heading hierarchy as PDP FAQs. Canonical rule and rationale: `context/page-type-playbooks/product-page-playbook.md` 'FAQ heading hierarchy discipline (added 2026-06-09)'.
+
+- **H2: "Frequently Asked Questions".** A single H2 introduces the FAQ block, consistent wording across every collection page and PDP (never a collection-specific title like "Mexico Collection FAQ").
+- **H3: each individual question.** One H3 per question, for FAQ schema detection, anchor targets, and clean visual separation without inline bold.
+- **Paragraph text: each answer (no heading).** Plain paragraph below each H3, inline links permitted per the Internal Link Format Discipline, typically 1 to 3 sentences (collection answers may run to the 2-to-4-sentence range noted above when the question warrants).
+
+Forbidden: H2 for individual questions, bold-paragraph questions without an H3 wrapper, and collection-specific FAQ H2 wording.
+
+**Placement.** The FAQ section sits at the end of the collection Description, after the editorial prose and any collection-specific (catalyst) content. Same H2 / H3 / paragraph pattern as PDPs.
+
+Forward-only: prior collection briefs keep the old bold-paragraph FAQ format; the discipline applies from the next batch dispatch onward.
+
 ## Evergreen body, contained catalyst
 
 Long description body must be predominantly evergreen: topic identity, history, kit lineage, cultural significance, player eras across history, brand-supplier history. Evergreen content survives across catalyst cycles (World Cup, season transitions, kit drops) without requiring page rewrites.
