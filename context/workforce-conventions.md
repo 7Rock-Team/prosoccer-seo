@@ -500,7 +500,7 @@ ProSoccer's Hyper theme exposes three distinct description-related fields, and t
 |---|---|
 | Title | 30 to 100 characters (min AND max) |
 | Short Description (metafield, hero block) | 50 to 100 words |
-| Description (body_html, accordion) | tiered by complexity: Simple ~125 to 200 / Standard ~200 to 300 / Complex ~300 to 400 words |
+| Description (body_html, accordion) | tiered by complexity: Simple ~125 to 200 / Standard ~220 to 360 / Complex ~320 to 450 words (Standard and Complex raised 2026-06-09 for the Care and Maintenance H2) |
 | Meta Title | 60 characters maximum, INCLUDING the Hyper theme brand suffix (so the input field stays under approximately 48 to 50 chars) |
 | Meta Description | 160 characters maximum |
 | URL handle (slug after `/products/`) | 70 characters maximum |
@@ -512,12 +512,14 @@ These are hard limits (FAIL if exceeded), not targets. The tiered Description ra
 Description length is set by product complexity. Classification test: if a buyer needs more than 2 minutes to choose between sibling products in the same family, the product is complex; if they grab and go, it is simple.
 
 - **Simple (~125 to 200 words):** keychains, lapel pins, magnets, decals, stickers, mini balls, basic flags, simple practice cones.
-- **Standard (~200 to 300 words):** training and match balls, bags, backpacks, apparel with basic variants, shin guards, single-tier goalkeeper gloves.
-- **Complex (~300 to 400 words):** soccer cleats (tier / plate / colorway / generation matrix), authentic jerseys (player versions, kit details), tournament-edition products with a collectibility narrative, technical goalkeeper gloves, anything needing sizing / fit / surface guidance.
+- **Standard (~220 to 360 words):** training and match balls, bags, backpacks, apparel with basic variants, shin guards, single-tier goalkeeper gloves.
+- **Complex (~320 to 450 words):** soccer cleats (tier / plate / colorway / generation matrix), authentic jerseys (player versions, kit details), tournament-edition products with a collectibility narrative, technical goalkeeper gloves, anything needing sizing / fit / surface guidance.
+
+(Standard and Complex ceilings raised 2026-06-09 from ~200 to 300 and ~300 to 400 respectively to accommodate the Care and Maintenance H2, which adds ~40 to 60 words of procedural bullets. Simple unchanged. Canonical: `context/page-type-playbooks/product-page-playbook.md` 'Care and Maintenance H2 discipline (added 2026-06-09)'.)
 
 ### Description structure: prose H2 + "Product Details" bullet H2
 
-The Description splits reader-first prose from technical bullets. Prose H2 sections (overview, use case, identity / belonging, heritage, sizing / fit) carry the WHY; a dedicated "Product Details" H2 bullet list (the exact ProSoccer-native term, per live PDPs like the Nike Superfly 11 Club) carries the WHAT (materials, plate / surface, tier features, weight, care, technology). Never list technical specs in prose. H2 count flexes by complexity (Simple 2 to 3, Standard 3 to 4, Complex 4 to 5); always include "Product Details" when there are specs worth listing.
+The Description splits reader-first prose from technical bullets. Prose H2 sections (overview, use case, identity / belonging, heritage, sizing / fit) carry the WHY; a dedicated "Product Details" H2 bullet list (the exact ProSoccer-native term, per live PDPs like the Nike Superfly 11 Club) carries the WHAT (materials, plate / surface, tier features, weight, technology). Never list technical specs in prose. H2 count flexes by complexity (Simple 2 to 3, Standard 3 to 4, Complex 4 to 5); always include "Product Details" when there are specs worth listing. For triggering categories (footwear, jerseys, apparel, goalkeeper gloves, soccer balls) a second bullet H2, "Care and Maintenance", follows Fit Notes and carries procedural care bullets; care content lives there rather than as a Product Details bullet. Excluded categories (accessories, flags, small merchandise, trading cards, standalone stickers and patches) carry no Care H2. Canonical: `context/page-type-playbooks/product-page-playbook.md` 'Care and Maintenance H2 discipline (added 2026-06-09)'.
 
 ### FAQ reconciliation across page types
 

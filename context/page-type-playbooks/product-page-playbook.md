@@ -76,12 +76,12 @@ ProSoccer's Hyper theme exposes three distinct description-related fields in Sho
 Description (body_html) length tiers by product complexity:
 
 - **Simple (~125 to 200 words):** single-use accessories and basic merchandise. Keychains, lapel pins, magnets, decals, stickers, mini balls, basic flags, simple practice cones.
-- **Standard (~200 to 300 words):** single-tier products without pack/series complexity. Training and match balls, bags, backpacks, apparel with basic variants, shin guards, single-tier goalkeeper gloves.
-- **Complex (~300 to 400 words):** multi-tier or multi-variant products that require buyer comparison. Soccer cleats (tier / plate / colorway / generation matrix), authentic jerseys (player versions, kit details), tournament-edition products with a collectibility narrative, technical goalkeeper gloves, anything that needs sizing / fit / surface guidance.
+- **Standard (~220 to 360 words):** single-tier products without pack/series complexity. Training and match balls, bags, backpacks, apparel with basic variants, shin guards, single-tier goalkeeper gloves. (Raised 2026-06-09 from ~200 to 300 to accommodate the Care and Maintenance H2; see 'Care and Maintenance H2 discipline (added 2026-06-09)'.)
+- **Complex (~320 to 450 words):** multi-tier or multi-variant products that require buyer comparison. Soccer cleats (tier / plate / colorway / generation matrix), authentic jerseys (player versions, kit details), tournament-edition products with a collectibility narrative, technical goalkeeper gloves, anything that needs sizing / fit / surface guidance. (Raised 2026-06-09 from ~300 to 400 to accommodate the Care and Maintenance H2.)
 
 **Complexity classification test:** if a buyer needs more than 2 minutes to choose between sibling products in the same family, the product is complex. If they grab and go, it is simple.
 
-FAIL if exceeded; SCRIBE revises. **Short Description** is a brief reader-first emotional / value-prop hook (no feature listing); live example from the Nike Superfly 11 Club PDP: "The Superfly 11 Club is designed for fast sprints. Its snug knit cuff helps keep you secure when running the field, while a lightweight plate helps keep you on your toes for bursts in open spaces." (44 words, slightly under the 50-word floor). **Meta Title budget:** the 60-char ceiling includes whatever the Hyper theme auto-appends (approximately 10 to 12 chars, " - ProSoccer" or similar). SCRIBE's Meta Title INPUT must therefore stay under approximately 48 to 50 characters. Never put "ProSoccer" in the field. **Meta Description:** 160 is the hard ceiling; the 150 to 158 desktop target sits within it. **Length architecture note:** the corrected ceilings are grounded in 2026 ecommerce ranking data (top-ranking ecommerce pages average 200 to 310 words; complex products are competitive at 300 to 400). The earlier single "150-word" figure is interpreted as the Short Description metafield, not the Description body. Mexico v5 (collection canonical, 340 words) supports the corrected range.
+FAIL if exceeded; SCRIBE revises. **Short Description** is a brief reader-first emotional / value-prop hook (no feature listing); live example from the Nike Superfly 11 Club PDP: "The Superfly 11 Club is designed for fast sprints. Its snug knit cuff helps keep you secure when running the field, while a lightweight plate helps keep you on your toes for bursts in open spaces." (44 words, slightly under the 50-word floor). **Meta Title budget:** the 60-char ceiling includes whatever the Hyper theme auto-appends (approximately 10 to 12 chars, " - ProSoccer" or similar). SCRIBE's Meta Title INPUT must therefore stay under approximately 48 to 50 characters. Never put "ProSoccer" in the field. **Meta Description:** 160 is the hard ceiling; the 150 to 158 desktop target sits within it. **Length architecture note:** the ceilings are grounded in 2026 ecommerce ranking data (top-ranking ecommerce pages average 200 to 310 words; complex products are competitive at 300 to 400 of editorial prose). The earlier single "150-word" figure is interpreted as the Short Description metafield, not the Description body. Mexico v5 (collection canonical, 340 words) supports the range. The Standard and Complex ceilings were raised 2026-06-09 (Standard to ~220 to 360, Complex to ~320 to 450) to fit the Care and Maintenance H2; the editorial-prose budget is unchanged, with the added words allocated to the procedural Care bullets.
 
 ### Unique titles for pack/series products
 
@@ -135,7 +135,71 @@ The Description (body_html) splits reader-first prose from technical bullets. Pr
 - **Bullets (specs, the WHAT):** materials (upper, stud configuration, lining, sole construction), plate type and surface compatibility (FG / AG / SG / MG / TF / IC), tier-specific features (Elite vs Pro vs League differentiation), weight, sizing system, fit notes, care instructions, technology callouts (Heat.RDY, K-leather, traction system, lacing).
 - **Prose (the WHY):** why this matters to the buyer's life, emotional and identity anchors, use-case scenarios, heritage and brand context, sizing guidance framed by buyer need. No feature-selling in prose; specs live in the bullets.
 
-**H2 count, flexible by complexity (SCRIBE decides at brief production):** Simple 2 to 3 H2 sections (overview + Product Details + optional fit); Standard 3 to 4; Complex 4 to 5 (overview + use case + heritage + Product Details + fit / sizing). Each prose paragraph carries one theme, 2 to 4 sentences, with white space for scan-ability. Anti-pattern: technical specs listed in prose sentences instead of the Product Details bullets, or a single undifferentiated block.
+**H2 count, flexible by complexity (SCRIBE decides at brief production):** Simple 2 to 3 H2 sections (overview + Product Details + optional fit); Standard 3 to 4 plus the Care and Maintenance H2 when the category triggers it; Complex 4 to 5 (overview + use case + heritage + Product Details + Fit Notes) plus the Care and Maintenance H2. Full reading order for a triggering Complex SKU: overview -> heritage -> use case -> Product Details bullets -> Fit Notes -> Care and Maintenance bullets. Each prose paragraph carries one theme, 2 to 4 sentences, with white space for scan-ability. Anti-pattern: technical specs listed in prose sentences instead of the Product Details bullets, or a single undifferentiated block. The Description body now carries two bullet H2s (Product Details and Care and Maintenance) framing the narrative prose H2s; see 'Care and Maintenance H2 discipline (added 2026-06-09)' below.
+
+### Care and Maintenance H2 discipline (added 2026-06-09)
+
+Surfaced from Mike's editorial review of the Day 3 re-run briefs and a reflection on real buyer needs for footwear and jersey products. Cleats and jerseys carry specific care knowledge (drying procedure, surface-appropriate cleaning, leather conditioning, wash temperature, fabric-softener avoidance, inside-out washing for printed elements, badge care) that buyers genuinely want. A Care and Maintenance H2 supplies it, which reduces returns, raises satisfaction, and serves the reader-first operational principle as genuine help rather than feature-selling. It also captures real care-related search demand ("how to clean soccer cleats", "how to wash a soccer jersey", "do you wash an authentic jersey inside out") across both the pre-purchase and post-purchase intent windows, without keyword stuffing.
+
+**Format: bullets, not prose.** Care content is procedural and instructional, which is naturally bullet-shaped and scannable. A buyer asking "how do I take care of these" wants a quick reference, not narrative. This is the Description body's second bullet H2 alongside Product Details, and the two bullet H2s frame the narrative prose H2s (overview, heritage, use case, Fit Notes) above. For a triggering category, care content lives in this H2, not as a Product Details bullet.
+
+**Position: after Fit Notes, before any closing prose or call-to-action.** Reading order: what the product is (overview) -> how it is built (heritage) -> who it is for (use case) -> specs (Product Details bullets) -> how it fits (Fit Notes) -> how to care for it (Care and Maintenance bullets).
+
+**Category triggers (Care H2 required when the SKU falls in any of these):**
+- Footwear (all cleats: FG, AG, indoor, turf, multi-ground; all tiers)
+- Jerseys (authentic, replica, retro, fan versions)
+- Apparel (warm-ups, training tops, jackets, hoodies, full kits)
+- Goalkeeper gloves
+- Soccer balls (less critical but useful: inflation, storage, surface considerations)
+
+**Category exclusions (Care H2 not needed):**
+- Accessories (keychains, pins, decals, stickers, lanyards)
+- Flags (national team, club team)
+- Small merchandise (mugs, water bottles, simple gear)
+- Trading cards
+- Stickers and patches sold standalone
+
+**Word-count impact.** The Care H2 adds roughly 40 to 60 words, which is why the Standard and Complex ceilings were raised 2026-06-09 (Standard ~220 to 360, Complex ~320 to 450; Simple unchanged). Simple-tier SKUs carry no Care H2 by default; apply one only when the SKU genuinely benefits from care notes. Forcing tighter prose elsewhere to fit Care within the prior ceilings would degrade the other H2s; raising the ceilings preserves editorial quality across all sections.
+
+**Content guidance by category (reference for SCRIBE, not a script).** SCRIBE writes Care content in its own voice for the SKU's specifics (leather uppers get a conditioning note; synthetic uppers do not). The bullets below are source material to draw from, not text to paste.
+
+Footwear (cleats, indoor shoes, turf shoes):
+- Air-dry naturally after every match; stuff with newspaper to absorb moisture and hold shape
+- Avoid direct heat, sunlight, and dryers (breaks down upper materials, warps the plate)
+- Brush off dried grass and dirt with a soft brush before storing
+- Leather uppers: condition every few weeks during the season to keep the material supple
+- Surface-specific: synthetic uppers (Gripknit, AtomKnit, and similar) usually need only soft brushing; k-leather or Techleather may need conditioner
+
+Jerseys (authentic, replica, retro, fan):
+- Cold-water wash (max 30C / 85F)
+- Turn inside-out before washing (protects printed numbers, names, sponsor logos)
+- No fabric softener (damages moisture-wicking treatments)
+- Air-dry preferred; tumble dry low if needed
+- Badge and patch care: avoid direct heat on embroidered or sublimated badges
+- Retro / vintage: gentler cycle, hand wash if delicate; store flat or hanging
+
+Apparel (warm-ups, training tops, jackets):
+- Cold-water wash
+- Air-dry or tumble dry low
+- Avoid bleach
+- Print care: turn inside-out if the garment has prints or sublimated graphics
+- Zip jackets and hoodies: zip up before washing (prevents zipper damage to other garments)
+
+Goalkeeper gloves:
+- Hand wash with lukewarm water and mild soap (NOT detergent)
+- Pre-match: dampen palms slightly for grip activation
+- Post-match: rinse palms, air-dry away from direct heat
+- Short-term storage: store palms-to-palms with a damp cloth between them
+- Replace when the latex starts cracking or losing grip
+
+Soccer balls:
+- Inflate to the recommended PSI (usually printed on the ball or in the product details)
+- Avoid kicking against rough surfaces (concrete, brick), which wears the panels
+- Clean with a damp cloth and mild soap; air-dry
+- Store inflated at room temperature (extreme cold or heat affects pressure)
+- Deflate slightly for long-term storage to preserve the bladder
+
+Cross-references: `context/workforce-conventions.md` 'PDP field length reference' (raised ceilings) + 'Description structure'; `.claude/agents/on-page-seo/agent.md` Section 9 (SCRIBE Phase 4 Care H2 self-check); `.claude/agents/master-strategist/agent.md` Section 9 (category classification in the pre-dispatch lane spec) + Section 11 Gate 13 (Care H2 re-check). Forward-only: Day 3 re-run briefs (commit 957dc3c) and prior briefs carry no Care H2; the discipline applies from the next batch dispatch onward. A worked example with both footwear and jersey Care patterns is queued for the next worked-example refresh, not produced in this pass.
 
 ### FAQ for PDPs (recommended, net-new-value criterion)
 
