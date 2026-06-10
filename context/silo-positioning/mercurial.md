@@ -39,3 +39,12 @@ Per-SKU prose patterns claimed in shipped briefs for the Nike Mercurial silo (th
 - Use case scenario: the dribbler or attacking midfielder who plays and trains on artificial grass and beats players in tight areas
 - Angle of emphasis: quick-twitch cuts and close control tuned for artificial grass; the AG-Pro plate's grip and quick release
 - Heritage angle: the Vapor agility lineage (the lightest Mercurial via AtomKnit plus FlyLite) with the AG-Pro plate for grip on artificial grass
+
+### SKU IO8225-900 (Mercurial Vapor 17 Pro FG)
+- Brief: `deliverables/page-optimizations/2026-06-10_session-01/nike-vapor-17-pro-firm-ground-soccer-cleats-breakout-pack-su26_brief.md` (Batch 2, first Pro-tier Mercurial entry)
+- Date: 2026-06-10
+- Opening hook approach: receiving with a defender on your shoulder in a crowded pocket, one touch-and-turn into the seam
+- Primary metaphor: a pickpocket's sleight of hand (quick, deceptive, close-quarters)
+- Use case scenario: the attacking midfielder or winger winning in tight space on dry natural grass, at Pro-tier value
+- Angle of emphasis: the Vapor close-control agility game (change of direction in tight space) at the Pro tier, not straight-line speed
+- Heritage angle: the Vapor agility lineage within Nike's Mercurial line; the Pro build a step below the Elite's stripped-back AtomKnit/FlyLite package
