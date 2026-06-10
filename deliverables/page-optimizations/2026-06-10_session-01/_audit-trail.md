@@ -36,7 +36,7 @@ Sharp differentiation required: the 8 F50 SKUs share one model (F50 Hyperfast, R
 ### #3 JR5386 -- F50 Hyperfast Elite FG (EXEMPLAR)
 - Angle: the pinnacle speed build; pure top-end velocity, the flagship of the line
 - Hook: the moment of breaking the last line -- ball played through, the Elite player gone before the defense turns
-- Heritage: F50 as adidas' speed lineage (the boot of the fastest attackers); Elite = the pro-level build, lightest plate, full speed package; Road to Glory = the 2026 cycle pack (World Cup terms PERMITTED)
+- Heritage: F50 as adidas' speed lineage (the footwear of the fastest attackers); Elite = the pro-level build, lightest plate, full speed package; Road to Glory = the 2026 cycle pack (World Cup terms PERMITTED)
 - Use case: the elite-level attacker on dry natural grass in top competition who wins with raw pace
 - Metaphor direction: a thoroughbred at full gallop on the open straight (bred for one thing -- speed). SCRIBE writes its own; this is the seed.
 
@@ -45,7 +45,7 @@ Sharp differentiation required: the 8 F50 SKUs share one model (F50 Hyperfast, R
 - Hook: the first-touch / strike moment where nothing sits between foot and ball
 - Heritage: adidas laceless engineering lineage; Elite-tier laceless = the purest connection adidas builds
 - Use case: the elite striker/playmaker who values a flush strike surface and a locked, sock-like fit on grass
-- Metaphor direction: a seamless/frictionless surface -- a stone skipping clean water (no notch, no catch). Distinct from #3's velocity framing.
+- Metaphor direction: a smooth, frictionless surface -- a stone skipping clean water (no notch, no catch). Distinct from #3's velocity framing.
 
 ### #5 IH9375 -- F50 Hyperfast Club FG/MG
 - Angle: accessible F50 speed + multi-surface versatility; one cleat for wherever the game is
@@ -87,7 +87,7 @@ Sharp differentiation required: the 8 F50 SKUs share one model (F50 Hyperfast, R
 - Hook: the locked-in feel through a hard sprint -- the collar holding the ankle as the player accelerates
 - Heritage: F50 speed at League tier with the mid-cut collar; the supported-ankle build
 - Use case: the player who wants ankle containment / the sock-collar feel through fast direction changes on firm ground
-- Metaphor direction: a climber's high-cut boot / a gauntlet securing the joint (lockdown + support). Distinct from low-cut speed framings.
+- Metaphor direction: a climber's high-cut footwear / a gauntlet securing the joint (lockdown + support). Distinct from low-cut speed framings.
 
 ### #1 IO8225-900 -- Nike Mercurial Vapor 17 Pro FG (BRAND IP: FIFA FORBIDDEN)
 - Angle: the Vapor agility game (close-control burst, change of direction in tight space) at the Pro tier -- near-Elite agility for the committed player
@@ -198,3 +198,7 @@ og:image http:// (implementation-side, route to VERITAS/Misha; same class as the
 1. Concern A (reserved-opener blocklist): add a proactive silo-signature opener blocklist to ORIN's exemplar handoff (F50: "F50 speed", "Speed that"; Phantom: "Some players are quick"; etc.). ~15-20 min.
 2. Concern B (full-body word-count rule): make explicit in product-page-playbook + collection-page-playbook + workforce-conventions. ~10 min.
 3. Concern C (jersey playbook gaps): already on standing follow-ups; next session.
+
+## Misha Coordination Handoff (standing follow-up)
+
+**og:image served over `http://` (insecure protocol) -- batch-wide, not isolated.** Confirmed during Phase 0 scrapes on 5 of the 10 Batch 2 PDPs (IH9375 Club, IH4582 League Turf, KJ6714 League Mid, IO8225 Vapor 17 Pro, J000693 Croatia), and previously on the Phantom 6 High Elite FG PDP (prior standing follow-up). The pattern indicates a theme-level og:image URL is emitted over `http://` rather than the `https://` canonical (the `og:image:secure_url` appears present in at least one case). This is theme/structured-data work, NOT workforce copy. Route to VERITAS for a theme-template fix recommendation and Misha for implementation on the Shopify theme repo. Scope is likely all PDPs, not just the 6 observed; VERITAS should confirm breadth. Added to standing follow-ups 2026-06-10.

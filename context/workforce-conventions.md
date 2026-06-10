@@ -562,7 +562,7 @@ ProSoccer's Hyper theme exposes three distinct description-related fields, and t
 | Meta Description | 160 characters maximum |
 | URL handle (slug after `/products/`) | 70 characters maximum |
 
-These are hard limits (FAIL if exceeded), not targets. The tiered Description range supersedes the earlier single "150-word" figure, which is now interpreted as the Short Description metafield, not the Description body. SCRIBE verifies each in Phase 4; ORIN re-checks at the orchestrator layer (Section 11 Gate 13).
+These are hard limits, not targets. The Description body carries a +15-word tolerance band before FAIL (codified 2026-06-10): Simple 215, Standard 375, Complex 465, counted full-body (editorial prose + Product Details bullets + Fit Notes + Care bullets; FAQ separate). SCRIBE drafts toward the base ceiling (200 / 360 / 450); the band only absorbs a few-word overage at the gate so single-digit counts do not trigger a prose rewrite, and it is not a license to creep past the tolerance line. The tiered Description range supersedes the earlier single "150-word" figure, which is now interpreted as the Short Description metafield, not the Description body. SCRIBE verifies each in Phase 4; ORIN re-checks at the orchestrator layer (Section 11 Gate 13).
 
 ### Product complexity classification
 
