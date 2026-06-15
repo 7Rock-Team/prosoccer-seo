@@ -16,7 +16,7 @@ deliverables/page-optimizations/
       <slug-2>_audit-and-regen.md
       ...
   YYYY-MM-DD_session-NN/
-    <slug>_brief.md
+    <SKU>_<slug>_brief.md
     ...
 ```
 
@@ -28,6 +28,7 @@ deliverables/page-optimizations/
   - `deliverables/page-optimizations/whitelabel-audit/2026-05-16_session-01/` (whitelabel audit pilot, session 1)
   - `deliverables/page-optimizations/whitelabel-audit/2026-05-17_session-02/` (whitelabel audit pilot, session 2)
   - `deliverables/page-optimizations/2026-06-01_session-01/` (a non-whitelabel batch of per-page briefs)
+- **Brief filename pattern (SKU-first, added 2026-06-15):** `[SKU]_[descriptive-handle]_brief.md`. The SKU LEADS the filename because SKU is the operationally relevant identifier when Mike looks products up in Shopify admin; the descriptive handle is secondary. Example: `IO8225-900_nike-vapor-17-pro-firm-ground-soccer-cleats-breakout-pack-su26_brief.md`. Separator: a single underscore between SKU and handle (matching the existing `_brief.md` suffix convention). SKU formatting: use the SKU exactly as it appears in the white-label sheet / Shopify admin, preserving hyphens, dashes, and suffix variants (`IO8225-900`, `J000693-CRFT`, `JR5386`, `IH4571`); no case conversion, no character substitution. Forward-only: the existing 20 brief files (Day 3 + Batch 2, at `2026-06-08_session-01/` and `2026-06-10_session-01/`) keep their current handle-first filenames; Batch 3 onward complies.
 
 ### Session folder creation
 
@@ -276,7 +277,7 @@ Surfaced from Mike's first production Shopify implementation pass: he implemente
 
 **Two artifacts per brief, two audiences.**
 
-1. **The brief file** (`deliverables/page-optimizations/[YYYY-MM-DD_session-XX]/<slug>_brief.md`) carries ONLY implementer-facing content, ordered for top-to-bottom copy-paste into Shopify admin (plus the clean Keywords table for Mike's at-a-glance tracking). No keyword rationale, no brand-IP reasoning, no sibling differentiation lane, no defense-in-depth notes. The Keywords table (added 2026-06-15) is the one keyword-related element that lives in the brief: it carries Volume and Difficulty only, never the selection rationale, GSC analysis, or "why this keyword" justification, which stay in the audit file.
+1. **The brief file** (`deliverables/page-optimizations/[YYYY-MM-DD_session-XX]/<SKU>_<slug>_brief.md`, SKU-first per 'Naming convention' above, added 2026-06-15) carries ONLY implementer-facing content, ordered for top-to-bottom copy-paste into Shopify admin (plus the clean Keywords table for Mike's at-a-glance tracking). No keyword rationale, no brand-IP reasoning, no sibling differentiation lane, no defense-in-depth notes. The Keywords table (added 2026-06-15) is the one keyword-related element that lives in the brief: it carries Volume and Difficulty only, never the selection rationale, GSC analysis, or "why this keyword" justification, which stay in the audit file.
 2. **The per-batch audit file** (`deliverables/page-optimizations/[YYYY-MM-DD_session-XX]/_audit-trail.md`) carries the workforce-internal audit content for every SKU in the batch, in one navigable document. One audit file per batch, not per SKU (easier to maintain than scattered per-SKU files).
 
 **Brief file structure (implementer-facing only):**
@@ -285,8 +286,8 @@ Surfaced from Mike's first production Shopify implementation pass: he implemente
 # [Product Name] -- PDP Optimization
 
 ## Quick Reference
-- Current live Title (for Shopify admin search): [exact current title from Phase 0 Firecrawl scrape]
 - SKU: [code]
+- Current live Title (for Shopify admin search): [exact current title from Phase 0 Firecrawl scrape]
 - URL: [full URL]
 
 ## SEO Details (copy-paste into Shopify)
@@ -361,7 +362,7 @@ Surfaced from Mike's first production Shopify implementation pass: he implemente
 [same structure]
 ```
 
-**Quick Reference: the Current live Title field.** The brief's Quick Reference block surfaces the exact current product Title as it renders on the live PDP, captured during the Phase 0 Firecrawl scrape, so Mike searches Shopify admin by title rather than by SKU. The data is already captured in Phase 0; this surfaces it in the brief output.
+**Quick Reference: field order (SKU first, added 2026-06-15).** The Quick Reference block leads with SKU, then the Current live Title, then the URL. SKU is the first field because it is the operationally relevant identifier (and now also leads the brief filename). The Current live Title still surfaces the exact product Title as it renders on the live PDP, captured during the Phase 0 Firecrawl scrape, so Mike can also search Shopify admin by title; the data is already captured in Phase 0. SCRIBE verifies SKU is the first Quick Reference field and reorders if it is not.
 
 **Keywords table (added 2026-06-15).** SEO Details opens with a Keywords table, the first sub-section under SEO Details, before the Title field. It is a clean operational table only (Type, Keyword, Volume, Difficulty): no research rationale, no GSC detail beyond the override flag, no "why this keyword" justification. Purpose: Mike's manual Shopify and Google-sheet tracking needs the targets at a glance, and pulling from the audit trail or KIRA output adds friction. Volume is monthly search volume; Difficulty is the DataForSEO difficulty score (0 to 100). Special cases: (a) sub-floor primary keywords selected on a GSC position override carry a Volume-column flag `[N]* (GSC override, pos [X])`, e.g. `10* (GSC pos 8)`; (b) for any secondary keyword KIRA did not return a difficulty score, leave the Difficulty cell blank, never fabricate one. The keyword selection rationale, GSC analysis, and fallback notes still live in `_audit-trail.md`.
 

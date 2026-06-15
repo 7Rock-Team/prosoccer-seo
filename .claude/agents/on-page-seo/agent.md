@@ -374,7 +374,7 @@ SCRIBE sits downstream of KIRA's strategy and VERITAS's technical foundation, up
 
 ### Contribution to Consolidated Briefs (refined 2026-05-26, minimal format)
 
-When ORIN requests a per-page contribution for a consolidated brief, SCRIBE produces a structured findings block, not a standalone deliverable file. The findings block follows the wrapper format in ORIN agent.md Section 13. ORIN merges SCRIBE's contribution into `deliverables/page-optimizations/YYYY-MM-DD_session-NN/<slug>_brief.md` per the minimal brief template at `templates/consolidated-page-brief-template.md`. Per-page SCRIBE contribution template lives in Section 13 of this file.
+When ORIN requests a per-page contribution for a consolidated brief, SCRIBE produces a structured findings block, not a standalone deliverable file. The findings block follows the wrapper format in ORIN agent.md Section 13. ORIN merges SCRIBE's contribution into `deliverables/page-optimizations/YYYY-MM-DD_session-NN/<SKU>_<slug>_brief.md` (SKU-first filename, added 2026-06-15) per the minimal brief template at `templates/consolidated-page-brief-template.md`. Per-page SCRIBE contribution template lives in Section 13 of this file.
 
 **Five canonical brief-craft rules govern every brief SCRIBE produces.** Rules are canonical in both page-type playbooks: `context/page-type-playbooks/product-page-playbook.md` 'Five canonical brief-craft rules' and `context/page-type-playbooks/collection-page-playbook.md` 'Five canonical brief-craft rules'. The five rules sit alongside the prior canonical policies (PDP external link policy, internal-links 1 to 2 target) which remain in force in their existing playbook sections. Quick index:
 
@@ -714,7 +714,7 @@ Estimate cost before running any batch of DataForSEO calls. Report actual spend 
 Per the workforce convention documented in `context/workforce-conventions.md`, all page-optimization deliverables produced during a session land in a date-stamped session folder under `deliverables/page-optimizations/`:
 
 - **Whitelabel audit + regen briefs:** `deliverables/page-optimizations/whitelabel-audit/YYYY-MM-DD_session-NN/<slug>_audit-and-regen.md`
-- **Standard per-page briefs:** `deliverables/page-optimizations/YYYY-MM-DD_session-NN/<slug>_brief.md`
+- **Standard per-page briefs:** `deliverables/page-optimizations/YYYY-MM-DD_session-NN/<SKU>_<slug>_brief.md` (SKU-first filename, added 2026-06-15; pre-2026-06-15 batches keep handle-first names)
 - **Workforce-internal briefings (SCRIBE classification reasoning, topic-research notes, voice-rule decisions):** `.claude/agents/on-page-seo/briefings/YYYY-MM-DD_<slug>.md` (agent-internal; not in the page-optimization session folder).
 
 The session folder is created at session start if it does not already exist. ORIN orchestrates the folder creation on the first file write of the session; SCRIBE writes into the established folder. Historical pre-convention deliverables in flat directories are not retroactively moved.
@@ -752,14 +752,14 @@ Ready for task.
 
 As of 2026-06-09, batch PDP and collection briefs use a two-artifact structure that separates implementer-facing content from workforce-internal audit content. This is the production output format for all batch dispatches going forward; the per-URL recommendation-brief template that follows is retained for standalone non-batch diagnostic work and historical reference. Full rationale, the per-batch audit-trail template, and the forward-only inflection note live in `context/workforce-conventions.md` 'Brief Output Structure (added 2026-06-09)'.
 
-The brief file (`deliverables/page-optimizations/YYYY-MM-DD_session-NN/<slug>_brief.md`) carries implementer content only, in copy-paste order:
+The brief file (`deliverables/page-optimizations/YYYY-MM-DD_session-NN/<SKU>_<slug>_brief.md`, SKU-first filename per `context/workforce-conventions.md` 'Naming convention', added 2026-06-15) carries implementer content only, in copy-paste order:
 
 ```
 # [Product Name] -- PDP Optimization
 
 ## Quick Reference
-- Current live Title (for Shopify admin search): [exact current title from Phase 0 Firecrawl scrape]
 - SKU: [code]
+- Current live Title (for Shopify admin search): [exact current title from Phase 0 Firecrawl scrape]
 - URL: [full URL]
 
 ## SEO Details (copy-paste into Shopify)
@@ -809,7 +809,7 @@ The brief file (`deliverables/page-optimizations/YYYY-MM-DD_session-NN/<slug>_br
 
 The Keywords table (added 2026-06-15) is the first sub-section under SEO Details, before the Title field. It is the one keyword-related element that belongs in the brief: a clean operational table (Type, Keyword, Volume, Difficulty) for Mike's at-a-glance tracking, with NO selection rationale. Volume is monthly search volume; Difficulty is the DataForSEO difficulty score (0 to 100). When the SKU carries a pack, colorway, or named release, the pack/colorway/release-specific long-tail from KIRA is the FIRST secondary row, tagged `Secondary (pack-specific)` in the Type column (these terms are floor-exempt and inherently long-tail, so their Volume/Difficulty cells are often blank). Sub-floor primary on a GSC override: flag it in the Volume column as `[N]* (GSC override, pos [X])`, e.g. `10* (GSC pos 8)`. For any secondary KIRA returned no data for, leave the cell blank, never fabricate a score and never use an em-dash or en-dash placeholder (the voice check forbids both).
 
-Audit content does NOT go in the brief file: product-complexity classification reasoning, keyword research rationale (selection reasoning, GSC analysis, fallback notes; the clean Volume/Difficulty table is the exception and lives in the brief), brand-IP classification, the sibling-SKU title uniqueness check, internal-link validation evidence, the ORIN differentiation lane, defense-in-depth gate notes, and URL-handle flags all go to the per-batch `_audit-trail.md` at the session-folder root, one file for the whole batch, under a `### SKU [code] -- [product name]` heading per SKU. That template lives in `context/workforce-conventions.md` 'Brief Output Structure (added 2026-06-09)'. The Quick Reference Current live Title field is the exact live PDP title from the Phase 0 Firecrawl scrape, so Mike searches Shopify admin by title rather than by SKU. Phase 4 self-check (Section 9): Keywords table present and populated (clean, no rationale), no other audit content in the brief file, Current live Title populated, no internal link in the Short Description.
+Audit content does NOT go in the brief file: product-complexity classification reasoning, keyword research rationale (selection reasoning, GSC analysis, fallback notes; the clean Volume/Difficulty table is the exception and lives in the brief), brand-IP classification, the sibling-SKU title uniqueness check, internal-link validation evidence, the ORIN differentiation lane, defense-in-depth gate notes, and URL-handle flags all go to the per-batch `_audit-trail.md` at the session-folder root, one file for the whole batch, under a `### SKU [code] -- [product name]` heading per SKU. That template lives in `context/workforce-conventions.md` 'Brief Output Structure (added 2026-06-09)'. The Quick Reference Current live Title field is the exact live PDP title from the Phase 0 Firecrawl scrape, so Mike searches Shopify admin by title rather than by SKU. Brief filename (SKU-first, added 2026-06-15): name the brief file `[SKU]_[descriptive-handle]_brief.md`, SKU leading, single underscore separator, SKU exactly as it appears in the white-label sheet / Shopify admin (preserve hyphens and suffix variants like `IO8225-900` or `J000693-CRFT`, no case conversion, no character substitution). Example: `IO8225-900_nike-vapor-17-pro-firm-ground-soccer-cleats-breakout-pack-su26_brief.md`. The Quick Reference block leads with SKU as its first field. Phase 4 self-check (Section 9): brief filename is SKU-first, SKU is the first Quick Reference field, Keywords table present and populated (clean, no rationale), no other audit content in the brief file, Current live Title populated, no internal link in the Short Description.
 
 ### Per-URL on-page recommendation brief template (standalone / non-batch diagnostic briefs; superseded for batch production by the implementer-facing structure above)
 
