@@ -263,15 +263,29 @@ Every brief opens its SEO Details with a Keywords table, the first sub-section u
 | Type | Keyword | Volume | Difficulty |
 |---|---|---|---|
 | Primary | [primary kw] | [vol/mo] | [DataForSEO difficulty score 0-100] |
-| Secondary | [kw 2] | [vol] | [diff] |
+| Secondary (pack-specific) | [pack/colorway/release long-tail] | [vol or blank] | [diff or blank] |
 | Secondary | [kw 3] | [vol] | [diff] |
 | Secondary | [kw 4] | [vol] | [diff] |
 ```
 
+Worked example:
+
+```
+### Keywords
+
+| Type | Keyword | Volume | Difficulty |
+|---|---|---|---|
+| Primary | adidas f50 turf | 720 | 45 |
+| Secondary (pack-specific) | adidas f50 hyperfast turf road to glory |  |  |
+| Secondary | adidas f50 pro turf | 110 | 38 |
+| Secondary | f50 turf cleats | 320 | 41 |
+```
+
 Special cases:
 
+- **Pack/colorway/release-specific secondary (added 2026-06-15).** When the SKU carries a pack, colorway, or named release, the pack-specific long-tail (per `context/workforce-conventions.md` 'Mechanism C: pack/colorway/release-specific secondary keyword discipline') is the FIRST secondary row, tagged `Secondary (pack-specific)` in the Type column. The `(pack-specific)` notation surfaces the long-tail at a glance. These terms are inherently long-tail and floor-exempt, so their Volume and Difficulty cells are often blank. SCRIBE also weaves this long-tail into the Description prose at least once.
 - **Sub-floor primary keywords (GSC override).** When the primary is a sub-floor keyword selected on a GSC position override, note it in the Volume column as `[N]* (GSC override, pos [X])`, for example `10* (GSC pos 8)`. The selection reasoning still lives in the audit trail; only the flag travels into the table.
-- **Difficulty KIRA did not return.** For a secondary keyword KIRA did not return a difficulty score for, leave the Difficulty cell blank. Do not fabricate a score.
+- **Difficulty or volume KIRA did not return.** For a secondary keyword (including a pack-specific long-tail) KIRA did not return data for, leave the cell blank. Do not fabricate a score, and do not use an em-dash or en-dash placeholder (the voice check forbids both); an empty cell is correct.
 
 The table carries only Volume and Difficulty data; the keyword SELECTION rationale, GSC analysis, and fallback notes stay in `_audit-trail.md`. Forward-only: the existing 20 PDP briefs in the Day 3 batch and Batch 2 carry no Keywords table; Batch 3 onward complies.
 

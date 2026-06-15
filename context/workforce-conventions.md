@@ -259,7 +259,7 @@ Surfaced from Mike's first production Shopify implementation pass: he implemente
 | Type | Keyword | Volume | Difficulty |
 |---|---|---|---|
 | Primary | [primary kw] | [vol/mo] | [DataForSEO difficulty 0-100] |
-| Secondary | [kw 2] | [vol] | [diff] |
+| Secondary (pack-specific) | [pack/colorway/release long-tail] | [vol or blank] | [diff or blank] |
 | Secondary | [kw 3] | [vol] | [diff] |
 | Secondary | [kw 4] | [vol] | [diff] |
 
@@ -328,6 +328,21 @@ Surfaced from Mike's first production Shopify implementation pass: he implemente
 **Quick Reference: the Current live Title field.** The brief's Quick Reference block surfaces the exact current product Title as it renders on the live PDP, captured during the Phase 0 Firecrawl scrape, so Mike searches Shopify admin by title rather than by SKU. The data is already captured in Phase 0; this surfaces it in the brief output.
 
 **Keywords table (added 2026-06-15).** SEO Details opens with a Keywords table, the first sub-section under SEO Details, before the Title field. It is a clean operational table only (Type, Keyword, Volume, Difficulty): no research rationale, no GSC detail beyond the override flag, no "why this keyword" justification. Purpose: Mike's manual Shopify and Google-sheet tracking needs the targets at a glance, and pulling from the audit trail or KIRA output adds friction. Volume is monthly search volume; Difficulty is the DataForSEO difficulty score (0 to 100). Special cases: (a) sub-floor primary keywords selected on a GSC position override carry a Volume-column flag `[N]* (GSC override, pos [X])`, e.g. `10* (GSC pos 8)`; (b) for any secondary keyword KIRA did not return a difficulty score, leave the Difficulty cell blank, never fabricate one. The keyword selection rationale, GSC analysis, and fallback notes still live in `_audit-trail.md`.
+
+**Pack-specific secondary row (extended 2026-06-15).** When the SKU carries a pack, colorway, or named release, the pack/colorway/release-specific long-tail (per 'Mechanism C: pack/colorway/release-specific secondary keyword discipline') appears as the FIRST secondary row, tagged `Secondary (pack-specific)` in the Type column, so it is visible at a glance during implementation. The `(pack-specific)` notation surfaces the long-tail strategically. Because these terms are inherently long-tail and floor-exempt, their Volume and Difficulty cells are often blank. Worked example:
+
+```
+### Keywords
+
+| Type | Keyword | Volume | Difficulty |
+|---|---|---|---|
+| Primary | adidas f50 turf | 720 | 45 |
+| Secondary (pack-specific) | adidas f50 hyperfast turf road to glory |  |  |
+| Secondary | adidas f50 pro turf | 110 | 38 |
+| Secondary | f50 turf cleats | 320 | 41 |
+```
+
+(Blank Volume / Difficulty cells mean KIRA could not retrieve tool data; they are left empty, never filled with a fabricated number or an em-dash.)
 
 **FAQ H2 wording (revised 2026-06-15).** On PDP briefs the FAQ section H2 follows `FAQs about [short product name]` (for example "FAQs about the F50 Elite FG", "FAQs about the Croatia Jersey 2026"), carrying the product reference for topical signal and snippet eligibility, using the natural short name rather than the full awkward primary keyword. Collection-page briefs keep the bare "Frequently Asked Questions" H2. The H3 question format and paragraph answers are unchanged. Full rule: `context/page-type-playbooks/product-page-playbook.md` 'FAQ heading hierarchy discipline (added 2026-06-09)'.
 
@@ -402,7 +417,7 @@ Cross-references: both page-type playbooks 'Parallel construction discipline', `
 
 ## Supporting keyword selection (cross-cutting)
 
-A keyword-strategy discipline applied at SCRIBE Phase 2 (research) and Phase 4 (drafting). SCRIBE selects ONE supporting keyword for body-copy use, criterion = highest search volume among the Phase 2 supporting candidates. The selected keyword is woven into the Short Description (1 to 2 mentions) and the Long / body Description (3 to 5 mentions). Other supporting candidates stay in the workforce briefing audit trail (full candidate list with volumes, selected keyword + rationale, placement) but are NOT used in body copy. Primary keyword usage follows Gate 12 unchanged. Exception: two supporting keywords within 10% volume AND semantically distinct (not synonyms) -> include the second minimally (1 to 2 body mentions). Gate 12 sub-criterion (d) verifies ONE supporting keyword at 3 to 5 body mentions, not multiple at shallow density; ORIN sanity-scans at the orchestrator layer.
+A keyword-strategy discipline applied at SCRIBE Phase 2 (research) and Phase 4 (drafting). SCRIBE selects ONE supporting keyword for body-copy use, criterion = highest search volume among the Phase 2 supporting candidates. The selected keyword is woven into the Short Description (1 to 2 mentions) and the Long / body Description (3 to 5 mentions). Other supporting candidates stay in the workforce briefing audit trail (full candidate list with volumes, selected keyword + rationale, placement) but are NOT used in body copy. Primary keyword usage follows Gate 12 unchanged. Exception: two supporting keywords within 10% volume AND semantically distinct (not synonyms) -> include the second minimally (1 to 2 body mentions). Second carve-out (added 2026-06-15): the pack/colorway/release-specific long-tail (see 'Mechanism C: pack/colorway/release-specific secondary keyword discipline') earns at least ONE natural Description-prose mention IN ADDITION to the volume-selected supporting keyword; it is a deliberate exception, not a 'multiple supporting keywords' violation. Gate 12 sub-criterion (d) verifies ONE volume-selected supporting keyword at 3 to 5 body mentions, not multiple at shallow density; the pack-specific long-tail's single mention is exempt from that count. ORIN sanity-scans at the orchestrator layer.
 
 **Architectural learning note.** Supporting keyword selection discipline (added 2026-06-02): SCRIBE was including multiple supporting keywords throughout Short and Long Descriptions, treating each as coverage opportunity. Result: keyword-targeted copy rather than reader-focused copy, dilute signal for any single supporting term. New rule: SCRIBE selects ONE supporting keyword (highest search volume among candidates) for body copy use (1-2 Short Description mentions, 3-5 Long Description mentions). Other supporting candidates preserved in workforce briefing audit trail but not used in output. Exception: two supporting keywords within 10% volume AND semantically distinct permitted minimally.
 
@@ -440,9 +455,29 @@ The 2026-06-09 GSC install (Category A, sub-agent inheritance verified via Phase
 3. **KIRA queries DataForSEO** for volume, KD, and intent on the exact-match long-tail term, the GSC-surfaced queries, the detect_quick_wins queries, and any fallback-hierarchy candidates.
 4. **KIRA assembles a candidate set with composite scoring (judgment-based, not a formula):** DataForSEO volume (must clear the 100/mo floor for primary candidacy), GSC existing impressions (real demand even when DataForSEO underreports), GSC current position (positions 5 to 20 are striking distance), intent match (transactional > commercial > informational for PDPs), and ranking realism (winnable SERP).
 5. **KIRA recommends a primary keyword to ORIN with rationale:** "Primary candidate: [keyword]. DataForSEO volume: [N]/mo. GSC existing position: [X.X]. GSC impressions last 90 days: [N]. detect_quick_wins flagged: [yes/no]. Composite recommendation: [primary]. Rationale: [why this beats the alternatives]."
-6. **KIRA recommends supporting keywords (existing pattern unchanged):** higher-volume brand-level terms for body topical relevance, a different volume/intent profile than the primary, not competing for the same SERP slot.
+6. **KIRA recommends supporting keywords:** higher-volume brand-level terms for body topical relevance, a different volume/intent profile than the primary, not competing for the same SERP slot. Plus (new requirement, added 2026-06-15): at least ONE pack/colorway/release-specific long-tail as the first secondary when the SKU carries a pack, colorway, or named release, exempt from the 100/mo floor (see Mechanism C below).
 
 **New-SKU sparsity.** GSC data for brand-new SU26 SKUs is thin (the Day 3 Phantom 6 High Elite FG returned 2 impressions on 1 query). For new SKUs KIRA falls back to DataForSEO-only with the floor plus fallback hierarchy; for established SKUs (90 days of GSC data) composite scoring weights GSC heavily.
+
+### Mechanism C: pack/colorway/release-specific secondary keyword discipline (added 2026-06-15)
+
+Surfaced from a real-world observation: volume-weighted primary selection (Mechanism A) sometimes lands a primary that reads as tier-level or surface-level, not specific to the exact pack, colorway, or release. Example: "adidas f50 turf" as the primary on the Pro Turf Road to Glory SP26 PDP, accurate for tier-plus-surface but not specific to this pack. The primary correctly carries head-term SEO weight; the gap is that nothing on the page targets the buyer searching for the specific pack or colorway.
+
+**Rule: KIRA's secondary keyword recommendations MUST include at least ONE pack/colorway/release-specific long-tail keyword per SKU, whenever the SKU carries a pack, colorway, or named release.** The pattern:
+
+- **Primary:** unchanged, per Mechanism A (volume-weighted + GSC override, head-term weight).
+- **Secondary 1 (new requirement):** the pack/colorway/release-specific long-tail. Examples: "adidas f50 hyperfast turf road to glory", "nike phantom 6 breakout pack su26", "croatia jersey 2026 away".
+- **Secondary 2 to N:** semantic variants, intent-aligned long-tails, sibling-differentiation terms (current behavior, unchanged).
+
+**Volume floor exemption.** Pack/colorway/release-specific secondaries are EXEMPT from the 100/mo volume floor; they are inherently long-tail and rarely register measurable tool volume. The floor governs PRIMARY candidacy only (Mechanism A, Step 1); this makes the exemption explicit for the pack-specific term so it is never dropped for thin volume. Document volume and difficulty when KIRA can retrieve them; leave them blank when KIRA cannot (never fabricate).
+
+**Body copy.** SCRIBE weaves the pack/colorway-specific long-tail into the Description prose at least once, naturally. This gives the page topical relevance for both head-term searchers (via the primary) and pack-specific searchers (via the long-tail) without keyword stuffing. This one mention is permitted ALONGSIDE the single volume-selected supporting keyword (see 'Supporting keyword selection (cross-cutting)'); it is a deliberate carve-out, not a Gate 12 'multiple supporting keywords' violation.
+
+**Keywords table.** The pack/colorway-specific long-tail surfaces as the FIRST secondary row in the brief's Keywords table, tagged `Secondary (pack-specific)` in the Type column, so it is visible at a glance during implementation (see 'Brief Output Structure (added 2026-06-09)' plus the 'Keywords table (added 2026-06-15)' note).
+
+When a SKU genuinely has no pack, colorway, or named release (a plain staple product), the requirement does not apply; KIRA notes its absence rather than inventing one.
+
+Cross-references: `.claude/agents/keyword-research/agent.md` Section 9 'Volume-weighted primary keyword selection + GSC integration' (Phase 1 pack-specific research step + supporting-keyword output); `.claude/agents/on-page-seo/agent.md` Section 9 (body-weave self-check) + Section 13 (Keywords table); `.claude/agents/master-strategist/agent.md` Section 9 (lane spec carries the pack-specific secondary) + Section 11 Gate 12 (carve-out) + Gate 15 (Keywords table re-check); `context/page-type-playbooks/product-page-playbook.md` 'Keywords table (added 2026-06-15)'. Forward-only: the existing 20 PDPs (Day 3 batch + Batch 2) keep their current keyword strategy; Batch 3 onward complies.
 
 ### Integration with existing disciplines
 
