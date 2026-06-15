@@ -240,7 +240,7 @@ Surfaced from Mike's first production Shopify implementation pass: he implemente
 
 **Two artifacts per brief, two audiences.**
 
-1. **The brief file** (`deliverables/page-optimizations/[YYYY-MM-DD_session-XX]/<slug>_brief.md`) carries ONLY implementer-facing content, ordered for top-to-bottom copy-paste into Shopify admin. No keyword rationale, no brand-IP reasoning, no sibling differentiation lane, no defense-in-depth notes.
+1. **The brief file** (`deliverables/page-optimizations/[YYYY-MM-DD_session-XX]/<slug>_brief.md`) carries ONLY implementer-facing content, ordered for top-to-bottom copy-paste into Shopify admin (plus the clean Keywords table for Mike's at-a-glance tracking). No keyword rationale, no brand-IP reasoning, no sibling differentiation lane, no defense-in-depth notes. The Keywords table (added 2026-06-15) is the one keyword-related element that lives in the brief: it carries Volume and Difficulty only, never the selection rationale, GSC analysis, or "why this keyword" justification, which stay in the audit file.
 2. **The per-batch audit file** (`deliverables/page-optimizations/[YYYY-MM-DD_session-XX]/_audit-trail.md`) carries the workforce-internal audit content for every SKU in the batch, in one navigable document. One audit file per batch, not per SKU (easier to maintain than scattered per-SKU files).
 
 **Brief file structure (implementer-facing only):**
@@ -254,6 +254,14 @@ Surfaced from Mike's first production Shopify implementation pass: he implemente
 - URL: [full URL]
 
 ## SEO Details (copy-paste into Shopify)
+
+### Keywords
+| Type | Keyword | Volume | Difficulty |
+|---|---|---|---|
+| Primary | [primary kw] | [vol/mo] | [DataForSEO difficulty 0-100] |
+| Secondary | [kw 2] | [vol] | [diff] |
+| Secondary | [kw 3] | [vol] | [diff] |
+| Secondary | [kw 4] | [vol] | [diff] |
 
 ### Title (Shopify "Title" field)
 [recommended new title]
@@ -278,8 +286,8 @@ Surfaced from Mike's first production Shopify implementation pass: he implemente
 - [alt text]
 - ...
 
-### FAQ (paste into Description body; H2 "Frequently Asked Questions", H3 per question, paragraph answers)
-## Frequently Asked Questions
+### FAQ (paste into Description body; H2 "FAQs about [short product name]", H3 per question, paragraph answers)
+## FAQs about [short product name]
 ### [question 1]
 [answer paragraph, 1 to 3 sentences; inline links allowed here, never in Short Description]
 ### [question 2]
@@ -319,9 +327,13 @@ Surfaced from Mike's first production Shopify implementation pass: he implemente
 
 **Quick Reference: the Current live Title field.** The brief's Quick Reference block surfaces the exact current product Title as it renders on the live PDP, captured during the Phase 0 Firecrawl scrape, so Mike searches Shopify admin by title rather than by SKU. The data is already captured in Phase 0; this surfaces it in the brief output.
 
+**Keywords table (added 2026-06-15).** SEO Details opens with a Keywords table, the first sub-section under SEO Details, before the Title field. It is a clean operational table only (Type, Keyword, Volume, Difficulty): no research rationale, no GSC detail beyond the override flag, no "why this keyword" justification. Purpose: Mike's manual Shopify and Google-sheet tracking needs the targets at a glance, and pulling from the audit trail or KIRA output adds friction. Volume is monthly search volume; Difficulty is the DataForSEO difficulty score (0 to 100). Special cases: (a) sub-floor primary keywords selected on a GSC position override carry a Volume-column flag `[N]* (GSC override, pos [X])`, e.g. `10* (GSC pos 8)`; (b) for any secondary keyword KIRA did not return a difficulty score, leave the Difficulty cell blank, never fabricate one. The keyword selection rationale, GSC analysis, and fallback notes still live in `_audit-trail.md`.
+
+**FAQ H2 wording (revised 2026-06-15).** On PDP briefs the FAQ section H2 follows `FAQs about [short product name]` (for example "FAQs about the F50 Elite FG", "FAQs about the Croatia Jersey 2026"), carrying the product reference for topical signal and snippet eligibility, using the natural short name rather than the full awkward primary keyword. Collection-page briefs keep the bare "Frequently Asked Questions" H2. The H3 question format and paragraph answers are unchanged. Full rule: `context/page-type-playbooks/product-page-playbook.md` 'FAQ heading hierarchy discipline (added 2026-06-09)'.
+
 Enforcement (defense-in-depth): SCRIBE produces the brief file with implementer content only and writes audit content to the batch `_audit-trail.md`; its Phase 4 self-check confirms no audit content leaked into the brief and no internal link sits in the Short Description. ORIN's pre-dispatch pass produces both files, and the Section 11 re-check verifies the brief carries only implementer content, the `_audit-trail.md` exists with per-SKU notes, and no brief's Short Description contains a link.
 
-FORWARD-ONLY: the Day 3 re-run briefs (commit 957dc3c) stay in the old combined structure per Mike's standing forward-only principle. The new structure applies to the next batch dispatch onward. This is the architectural inflection point, auditable by commit hash. The next worked-example refresh in the playbooks should model both the new brief structure and the audit-trail structure (standing follow-up; not written in this pass).
+FORWARD-ONLY: the Day 3 re-run briefs (commit 957dc3c) stay in the old combined structure per Mike's standing forward-only principle. The new structure applies to the next batch dispatch onward. This is the architectural inflection point, auditable by commit hash. The 2026-06-15 additions (Keywords table at the top of SEO Details, `FAQs about [product]` FAQ H2 on PDPs) are likewise forward-only: the existing 20 PDP briefs in the Day 3 batch and Batch 2 keep their current FAQ H2 and carry no Keywords table; Batch 3 onward complies. The next worked-example refresh in the playbooks should model both the new brief structure and the audit-trail structure (standing follow-up; not written in this pass).
 
 Cross-references: `.claude/agents/on-page-seo/agent.md` Section 13 (SCRIBE output template) + Section 9 (Phase 4 self-check), `.claude/agents/master-strategist/agent.md` Section 9 (ORIN produces both files) + Section 11 (structure re-check), both page-type playbooks 'Brief output structure (added 2026-06-09)'. Internal link placement: 'Internal Link Format Discipline' below. Production source: Mike's first 10-PDP Shopify implementation pass on the Day 3 re-run batch (commit 957dc3c).
 

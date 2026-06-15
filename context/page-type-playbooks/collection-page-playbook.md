@@ -462,9 +462,9 @@ Per `.claude/agents/on-page-seo/agent.md` Section 9 'Keyword placement per field
 
 #### FAQ heading hierarchy discipline (added 2026-06-09)
 
-When a collection FAQ earns inclusion (per the three criteria above), it follows the same heading hierarchy as PDP FAQs. Canonical rule and rationale: `context/page-type-playbooks/product-page-playbook.md` 'FAQ heading hierarchy discipline (added 2026-06-09)'.
+When a collection FAQ earns inclusion (per the three criteria above), it follows the same H2 / H3 / paragraph heading hierarchy as PDP FAQs. The one difference (revised 2026-06-15): collection pages keep the bare "Frequently Asked Questions" H2, while PDPs moved to the `FAQs about [short product name]` pattern. Canonical rule and rationale: `context/page-type-playbooks/product-page-playbook.md` 'FAQ heading hierarchy discipline (added 2026-06-09)'.
 
-- **H2: "Frequently Asked Questions".** A single H2 introduces the FAQ block, consistent wording across every collection page and PDP (never a collection-specific title like "Mexico Collection FAQ").
+- **H2: "Frequently Asked Questions".** A single H2 introduces the FAQ block, consistent wording across every collection page (never a collection-specific title like "Mexico Collection FAQ"). Note: PDPs use `FAQs about [product]` instead; collection pages retain the bare wording.
 - **H3: each individual question.** One H3 per question, for FAQ schema detection, anchor targets, and clean visual separation without inline bold.
 - **Paragraph text: each answer (no heading).** Plain paragraph below each H3, inline links permitted per the Internal Link Format Discipline, typically 1 to 3 sentences (collection answers may run to the 2-to-4-sentence range noted above when the question warrants).
 

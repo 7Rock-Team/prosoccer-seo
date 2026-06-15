@@ -135,7 +135,7 @@ The Description (body_html) splits reader-first prose from technical bullets. Pr
 - **Bullets (specs, the WHAT):** materials (upper, stud configuration, lining, sole construction), plate type and surface compatibility (FG / AG / SG / MG / TF / IC), tier-specific features (Elite vs Pro vs League differentiation), weight, sizing system, fit notes, care instructions, technology callouts (Heat.RDY, K-leather, traction system, lacing).
 - **Prose (the WHY):** why this matters to the buyer's life, emotional and identity anchors, use-case scenarios, heritage and brand context, sizing guidance framed by buyer need. No feature-selling in prose; specs live in the bullets.
 
-**H2 count, flexible by complexity (SCRIBE decides at brief production):** Simple 2 to 3 H2 sections (overview + Product Details + optional fit); Standard 3 to 4 plus the Care and Maintenance H2 when the category triggers it; Complex 4 to 5 (overview + use case + heritage + Product Details + Fit Notes) plus the Care and Maintenance H2. Full reading order for a triggering Complex SKU: overview -> heritage -> use case -> Product Details bullets -> Fit Notes -> Care and Maintenance bullets -> Frequently Asked Questions (when the FAQ earns inclusion; see 'FAQ heading hierarchy discipline (added 2026-06-09)'). Each prose paragraph carries one theme, 2 to 4 sentences, with white space for scan-ability. Anti-pattern: technical specs listed in prose sentences instead of the Product Details bullets, or a single undifferentiated block. The Description body now carries two bullet H2s (Product Details and Care and Maintenance) framing the narrative prose H2s; see 'Care and Maintenance H2 discipline (added 2026-06-09)' below.
+**H2 count, flexible by complexity (SCRIBE decides at brief production):** Simple 2 to 3 H2 sections (overview + Product Details + optional fit); Standard 3 to 4 plus the Care and Maintenance H2 when the category triggers it; Complex 4 to 5 (overview + use case + heritage + Product Details + Fit Notes) plus the Care and Maintenance H2. Full reading order for a triggering Complex SKU: overview -> heritage -> use case -> Product Details bullets -> Fit Notes -> Care and Maintenance bullets -> FAQs about [product] (when the FAQ earns inclusion; see 'FAQ heading hierarchy discipline (added 2026-06-09)', revised 2026-06-15 for the H2 wording). Each prose paragraph carries one theme, 2 to 4 sentences, with white space for scan-ability. Anti-pattern: technical specs listed in prose sentences instead of the Product Details bullets, or a single undifferentiated block. The Description body now carries two bullet H2s (Product Details and Care and Maintenance) framing the narrative prose H2s; see 'Care and Maintenance H2 discipline (added 2026-06-09)' below.
 
 ### Care and Maintenance H2 discipline (added 2026-06-09)
 
@@ -211,7 +211,7 @@ Surfaced from Mike's first 10-PDP Shopify implementation pass on the Day 3 re-ru
 
 **The hierarchy:**
 
-- **H2: the section title "Frequently Asked Questions".** A single H2 introduces the FAQ block, marking it as a distinct section parallel to the other Description body H2s (overview, heritage, use case, Product Details, Fit Notes, Care and Maintenance). It also lets the Hyper theme accordion (or any FAQ-specific theme rendering) identify the section.
+- **H2: the section title, `FAQs about [short product name]` (revised 2026-06-15).** A single H2 introduces the FAQ block, marking it as a distinct section parallel to the other Description body H2s (overview, heritage, use case, Product Details, Fit Notes, Care and Maintenance), and it also lets the Hyper theme accordion (or any FAQ-specific theme rendering) identify the section. The H2 now carries the primary product reference for topical signal and featured-snippet eligibility, using the natural SHORT product name rather than the full primary keyword when the keyword reads awkwardly. Good: "FAQs about the F50 Elite FG", "FAQs about Nike Mercurial Vapor 17 Pro" (direct keyword), "FAQs about the Croatia Jersey 2026" (natural keyword inclusion). Avoid: "FAQs about adidas f50 elite firm ground soccer cleats" (too long, awkward). This revises the prior fixed "Frequently Asked Questions" wording for PDPs; collection pages keep the bare "Frequently Asked Questions" per `context/page-type-playbooks/collection-page-playbook.md`. Forward-only: see the note at the end of this section.
 - **H3: each individual question.** Every question gets its own H3. This lets Google identify question-answer pairs for FAQ schema, gives each question an anchor-link target, and keeps questions visually distinct from answer text without inline bold (which renders inconsistently across themes).
 - **Paragraph text: each answer (no heading).** A plain paragraph below each H3 question. It may carry inline formatting (bold, italics, or links per the Internal Link Format Discipline). Length varies by question complexity, typically 1 to 3 sentences for scannability.
 
@@ -219,16 +219,16 @@ Surfaced from Mike's first 10-PDP Shopify implementation pass on the Day 3 re-ru
 
 - Do NOT use H2 for individual questions (breaks the semantic hierarchy).
 - Do NOT use bold question text without an H3 wrapper (loses semantic meaning and makes FAQ schema harder to generate).
-- Do NOT write product-specific FAQ H2 wording (for example "Frequently Asked Questions about the Phantom 6", "Phantom 6 FAQ", "Common Questions About This Cleat"). Use the consistent "Frequently Asked Questions" H2 across every PDP and collection page. Consistent wording aids Google's FAQ schema detection and gives buyers and reviewers a predictable section to find.
+- Do NOT use ad-hoc FAQ H2 wording outside the `FAQs about [short product name]` pattern (for example "Frequently Asked Questions about the Phantom 6", "Phantom 6 FAQ", "Common Questions About This Cleat", or the bare "Frequently Asked Questions" on a PDP). The `FAQs about [product]` form is the consistent PDP pattern: it carries the product reference for topical signal and snippet eligibility while staying predictable for buyers, reviewers, and Google's FAQ schema detection. Keep it to the natural short product name, never the full awkward primary keyword. (Collection pages keep the bare "Frequently Asked Questions" per `context/page-type-playbooks/collection-page-playbook.md`.)
 
-**Placement.** The FAQ section sits at the end of the Description body, after the Care and Maintenance H2 when present. Full reading order: overview -> heritage -> use case -> Product Details -> Fit Notes -> Care and Maintenance -> Frequently Asked Questions.
+**Placement.** The FAQ section sits at the end of the Description body, after the Care and Maintenance H2 when present. Full reading order: overview -> heritage -> use case -> Product Details -> Fit Notes -> Care and Maintenance -> FAQs about [product].
 
-**Markdown-to-theme mapping.** In the brief (markdown), the section title is `## Frequently Asked Questions` and each question is `### <question>`; Mike maps these to the Shopify HTML / Hyper theme equivalents during implementation.
+**Markdown-to-theme mapping.** In the brief (markdown), the section title is `## FAQs about [short product name]` and each question is `### <question>`; Mike maps these to the Shopify HTML / Hyper theme equivalents during implementation.
 
 **Example structure:**
 
 ```
-## Frequently Asked Questions
+## FAQs about the Phantom 6 High Elite FG
 
 ### Does the Phantom 6 High Elite FG run true to size?
 
@@ -241,7 +241,7 @@ The FG (firm ground) version is designed for natural grass and well-maintained s
 
 **Out of scope (theme-level).** Actual FAQ JSON-LD schema generation for rich results is theme-level structured-data work (VERITAS / Misha coordination), not workforce copy. The H2 / H3 / paragraph hierarchy provides the semantic foundation; if Misha builds FAQ schema rendering into the theme, that is a future opportunity surfaced separately. Any Hyper-theme accordion rendering issue with the hierarchy is likewise a Misha coordination item, not a copy adjustment.
 
-Cross-references: `context/page-type-playbooks/collection-page-playbook.md` 'FAQ heading hierarchy discipline (added 2026-06-09)'; `.claude/agents/on-page-seo/agent.md` Section 9 (SCRIBE Phase 4 FAQ hierarchy self-check) + Section 13 (brief FAQ template); `.claude/agents/master-strategist/agent.md` Section 11 Gate 15 (FAQ hierarchy re-check); `context/workforce-conventions.md` 'Brief Output Structure (added 2026-06-09)'. Forward-only: Day 3 re-run briefs (commit 957dc3c) and prior briefs keep the old bold-paragraph FAQ format; the discipline applies from the next batch dispatch onward.
+Cross-references: `context/page-type-playbooks/collection-page-playbook.md` 'FAQ heading hierarchy discipline (added 2026-06-09)'; `.claude/agents/on-page-seo/agent.md` Section 9 (SCRIBE Phase 4 FAQ hierarchy self-check) + Section 13 (brief FAQ template); `.claude/agents/master-strategist/agent.md` Section 11 Gate 15 (FAQ hierarchy re-check); `context/workforce-conventions.md` 'Brief Output Structure (added 2026-06-09)'. Forward-only: Day 3 re-run briefs (commit 957dc3c) and prior briefs keep the old bold-paragraph FAQ format; the discipline applies from the next batch dispatch onward. The `FAQs about [product]` H2 wording (revised 2026-06-15) is likewise forward-only: the existing 20 PDP briefs in the Day 3 batch and Batch 2 keep their "Frequently Asked Questions" H2; Batch 3 onward complies.
 
 ### Tier time impact
 
@@ -251,7 +251,29 @@ Cross-references: `.claude/agents/on-page-seo/agent.md` Section 9 (PDP Phase 4 s
 
 ## Brief output structure (added 2026-06-09)
 
-Batch PDP briefs use a two-artifact structure that separates implementer-facing content from workforce-internal audit content. The brief file (`<slug>_brief.md`) carries ONLY what Mike pastes into Shopify admin, in copy-paste order: a Quick Reference block (Current live Title from the Phase 0 scrape so Mike searches admin by title rather than by SKU, plus SKU and full URL), then SEO Details (Title, Short Description, Description, Meta Title, Meta Description, URL Handle, Image Alt Text, FAQ, Taxonomy Category). All audit content (complexity-classification reasoning, keyword research with volumes, brand-IP classification, sibling-title uniqueness, internal-link validation evidence, the ORIN differentiation lane, defense-in-depth gate notes, handle-length flags) moves to the per-batch `_audit-trail.md` at the session-folder root, one file for the whole batch. Internal links live ONLY in the Description body, never the Short Description metafield (see 'Internal link strategy' below). Surfaced from Mike's first 10-PDP Shopify implementation pass on the Day 3 re-run batch (commit 957dc3c). Forward-only: the Day 3 re-run briefs stay in the old combined structure; the new structure applies from the next batch dispatch onward. Full templates and rationale: `context/workforce-conventions.md` 'Brief Output Structure (added 2026-06-09)'; SCRIBE output template in `.claude/agents/on-page-seo/agent.md` Section 13.
+Batch PDP briefs use a two-artifact structure that separates implementer-facing content from workforce-internal audit content. The brief file (`<slug>_brief.md`) carries ONLY what Mike pastes into Shopify admin or tracks at a glance, in copy-paste order: a Quick Reference block (Current live Title from the Phase 0 scrape so Mike searches admin by title rather than by SKU, plus SKU and full URL), then SEO Details, which opens with a Keywords table (added 2026-06-15; first sub-section, before the Title field) and then Title, Short Description, Description, Meta Title, Meta Description, URL Handle, Image Alt Text, FAQ, Taxonomy Category. The Keywords table is a clean operational table only (Type, Keyword, Volume, Difficulty), no research rationale, no GSC detail, no "why this keyword" justification: it feeds Mike's manual Shopify and Google-sheet tracking at a glance. The keyword RESEARCH (selection rationale, GSC override reasoning, fallback notes) stays in the audit trail. All audit content (complexity-classification reasoning, keyword research rationale with volumes, brand-IP classification, sibling-title uniqueness, internal-link validation evidence, the ORIN differentiation lane, defense-in-depth gate notes, handle-length flags) moves to the per-batch `_audit-trail.md` at the session-folder root, one file for the whole batch. Internal links live ONLY in the Description body, never the Short Description metafield (see 'Internal link strategy' below). Surfaced from Mike's first 10-PDP Shopify implementation pass on the Day 3 re-run batch (commit 957dc3c). Forward-only: the Day 3 re-run briefs stay in the old combined structure; the new structure applies from the next batch dispatch onward. Full templates and rationale: `context/workforce-conventions.md` 'Brief Output Structure (added 2026-06-09)'; SCRIBE output template in `.claude/agents/on-page-seo/agent.md` Section 13.
+
+### Keywords table (added 2026-06-15)
+
+Every brief opens its SEO Details with a Keywords table, the first sub-section under SEO Details, before the Title field. It exists so Mike's manual Shopify and Google-sheet tracking has the keyword targets at a glance without digging into the audit trail or KIRA's research. It is a clean operational table ONLY: no research rationale, no GSC detail beyond the override note below, no "why this keyword" justification. Format:
+
+```
+### Keywords
+
+| Type | Keyword | Volume | Difficulty |
+|---|---|---|---|
+| Primary | [primary kw] | [vol/mo] | [DataForSEO difficulty score 0-100] |
+| Secondary | [kw 2] | [vol] | [diff] |
+| Secondary | [kw 3] | [vol] | [diff] |
+| Secondary | [kw 4] | [vol] | [diff] |
+```
+
+Special cases:
+
+- **Sub-floor primary keywords (GSC override).** When the primary is a sub-floor keyword selected on a GSC position override, note it in the Volume column as `[N]* (GSC override, pos [X])`, for example `10* (GSC pos 8)`. The selection reasoning still lives in the audit trail; only the flag travels into the table.
+- **Difficulty KIRA did not return.** For a secondary keyword KIRA did not return a difficulty score for, leave the Difficulty cell blank. Do not fabricate a score.
+
+The table carries only Volume and Difficulty data; the keyword SELECTION rationale, GSC analysis, and fallback notes stay in `_audit-trail.md`. Forward-only: the existing 20 PDP briefs in the Day 3 batch and Batch 2 carry no Keywords table; Batch 3 onward complies.
 
 ## Eligibility verification (Mike-pre-vetted at URL submission, updated 2026-05-29)
 
