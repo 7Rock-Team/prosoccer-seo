@@ -234,6 +234,42 @@ Regex implementation note (`scripts/voice_check.py`): the `\bboots?\b` check bla
 
 Cross-references: `.claude/agents/on-page-seo/agent.md` Section 9 + Section 11 (SCRIBE Phase 4 US-market self-check), `.claude/agents/master-strategist/agent.md` Section 11 (ORIN defense-in-depth re-check), `scripts/voice_check.py` (`\bboots?\b` regex), both page-type playbooks (worked examples fix-forwarded). Related: 'Editorial philosophy (added 2026-06-02)', 'Brand styling conventions'.
 
+## Measurement Unit Discipline: US-first dual notation (added 2026-06-15)
+
+ProSoccer is a US-market retailer (Pasadena / Irwindale, US shipping). A companion to the US Market Language Discipline above: where that rule governs vocabulary (`cleat`, not `boot`), this one governs units. Any measurement that appears in PDP body copy must LEAD with US imperial units and carry the metric value in parentheses, so the US/Canadian avatar reads in familiar units while the metric stays available.
+
+**Format pattern:** `[US value] ([metric value])`, for example `86°F (30°C)`, or in prose `[US value], or [metric value]`.
+
+**Applications:**
+
+- **Temperature (Care bullets primarily).** Wash: "Wash cold, 86°F (30°C) or below". Tumble dry: "Tumble dry low, 105°F (40°C)". Iron: "Iron warm, 230°F (110°C)". Never the bare metric ("30°C").
+- **Weight (Product Details bullets, cleats / footwear primarily).** Cleat weight: "6.3 oz (180g)". Jersey weight (rare): "5.5 oz (155g)". Never the bare metric ("180g").
+- **Dimensions (rare, spec bullets).** "11 in (28 cm)" or "11 inches (28 cm)".
+
+**Conversion accuracy.** Round the US value to a sensible whole number or one decimal; do not carry false precision. Common conversions:
+
+| Metric | US (rounded) | Context |
+|---|---|---|
+| 30°C | 86°F | cold wash |
+| 40°C | 105°F | warm wash |
+| 60°C | 140°F | hot wash |
+| 110°C | 230°F | iron, warm |
+| 150°C | 300°F | iron, hot |
+| 180g | 6.3 oz | typical FG cleat |
+| 220g | 7.8 oz | heavier cleat |
+| 150g | 5.3 oz | lightweight cleat |
+
+**Exceptions (sizing, no conversion in body copy):**
+
+- **Shoe sizes:** US sizing convention only (US Men's 9, US Women's 8), no UK / EU conversion in body copy. The size chart handles conversion separately.
+- **Jersey / apparel sizes:** US apparel sizing only (S, M, L, XL), no EU equivalent in body copy. The size chart handles conversion.
+
+**Fields this applies to:** Description body prose (when numeric measurements appear), Product Details bullets, Care and Maintenance bullets, and FAQ answers. NOT in Meta Title, Meta Description, or the Short Description hero block: those fields are too brief for dual notation, so use US-only there.
+
+**Voice-check and formatting notes.** The degree symbol `°` is acceptable (it is not an em-dash or en-dash, which the voice check forbids). Use the tight `value°F` / `value°C` pattern: `86°F (30°C)`, never `86 °F` or `86F`. Weight keeps a space before `oz` and may run tight on `g` to match manufacturer spec convention: `6.3 oz (180g)`. The parenthetical metric immediately follows the US value with a single space: `86°F (30°C)`, not `86°F  (30°C)`.
+
+**Enforcement (defense-in-depth).** SCRIBE verifies every temperature, weight, and dimension in the four applicable fields uses US-first dual notation during Phase 4 (`.claude/agents/on-page-seo/agent.md` Section 9). ORIN scans for a solitary metric value with no imperial pairing at Gate 15 and routes it back to SCRIBE (`.claude/agents/master-strategist/agent.md` Section 11). Forward-only: the existing 20 PDPs (Day 3 batch + Batch 2) keep their current units; Batch 3 onward complies. Canonical applications: `context/page-type-playbooks/product-page-playbook.md` 'Measurement unit discipline: US-first dual notation (added 2026-06-15)'. Related: 'US Market Language Discipline (added 2026-06-03)'.
+
 ## Brief Output Structure (added 2026-06-09)
 
 Surfaced from Mike's first production Shopify implementation pass: he implemented 10 PDPs by hand in Shopify admin using the Day 3 re-run briefs (commit 957dc3c) and hit real copy-paste friction. The SEO deliverables (Title, Short Description, Description body, Meta Title, Meta Description, URL handle, image alt text, FAQ, taxonomy) were scattered through each brief and interleaved with workforce-internal audit content; the live product Title was nowhere in the brief, which forced a SKU search in admin instead of a fast title lookup; and audit reasoning the implementer never needs added noise to the paste workflow. The fix splits the two audiences into two artifacts.

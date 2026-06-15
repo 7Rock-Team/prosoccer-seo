@@ -132,7 +132,7 @@ The Description (body_html) splits reader-first prose from technical bullets. Pr
 
 **Dedicated "Product Details" H2 (bullet list).** Use this exact term, "Product Details" -- it matches the pattern ProSoccer already uses on live PDPs (e.g., the Nike Superfly 11 Club PDP). It lives as its own H2 within the Description, 5 to 8 bullets typical, one technical attribute per bullet. Always include it when the product has technical specs worth listing.
 
-- **Bullets (specs, the WHAT):** materials (upper, stud configuration, lining, sole construction), plate type and surface compatibility (FG / AG / SG / MG / TF / IC), tier-specific features (Elite vs Pro vs League differentiation), weight, sizing system, fit notes, care instructions, technology callouts (Heat.RDY, K-leather, traction system, lacing).
+- **Bullets (specs, the WHAT):** materials (upper, stud configuration, lining, sole construction), plate type and surface compatibility (FG / AG / SG / MG / TF / IC), tier-specific features (Elite vs Pro vs League differentiation), weight (US-first dual notation, e.g. "6.3 oz (180g)", per 'Measurement unit discipline: US-first dual notation'), sizing system, fit notes, care instructions, technology callouts (Heat.RDY, K-leather, traction system, lacing).
 - **Prose (the WHY):** why this matters to the buyer's life, emotional and identity anchors, use-case scenarios, heritage and brand context, sizing guidance framed by buyer need. No feature-selling in prose; specs live in the bullets.
 
 **H2 count, flexible by complexity (SCRIBE decides at brief production):** Simple 2 to 3 H2 sections (overview + Product Details + optional fit); Standard 3 to 4 plus the Care and Maintenance H2 when the category triggers it; Complex 4 to 5 (overview + use case + heritage + Product Details + Fit Notes) plus the Care and Maintenance H2. Full reading order for a triggering Complex SKU: overview -> heritage -> use case -> Product Details bullets -> Fit Notes -> Care and Maintenance bullets -> FAQs about [product] (when the FAQ earns inclusion; see 'FAQ heading hierarchy discipline (added 2026-06-09)', revised 2026-06-15 for the H2 wording). Each prose paragraph carries one theme, 2 to 4 sentences, with white space for scan-ability. Anti-pattern: technical specs listed in prose sentences instead of the Product Details bullets, or a single undifferentiated block. The Description body now carries two bullet H2s (Product Details and Care and Maintenance) framing the narrative prose H2s; see 'Care and Maintenance H2 discipline (added 2026-06-09)' below.
@@ -171,7 +171,7 @@ Footwear (cleats, indoor shoes, turf shoes):
 - Surface-specific: synthetic uppers (Gripknit, AtomKnit, and similar) usually need only soft brushing; k-leather or Techleather may need conditioner
 
 Jerseys (authentic, replica, retro, fan):
-- Cold-water wash (max 30C / 85F)
+- Cold-water wash, 86°F (30°C) or below (US-first dual notation; see 'Measurement unit discipline' below)
 - Turn inside-out before washing (protects printed numbers, names, sponsor logos)
 - No fabric softener (damages moisture-wicking treatments)
 - Air-dry preferred; tumble dry low if needed
@@ -200,6 +200,19 @@ Soccer balls:
 - Deflate slightly for long-term storage to preserve the bladder
 
 Cross-references: `context/workforce-conventions.md` 'PDP field length reference' (raised ceilings) + 'Description structure'; `.claude/agents/on-page-seo/agent.md` Section 9 (SCRIBE Phase 4 Care H2 self-check); `.claude/agents/master-strategist/agent.md` Section 9 (category classification in the pre-dispatch lane spec) + Section 11 Gate 13 (Care H2 re-check). Forward-only: Day 3 re-run briefs (commit 957dc3c) and prior briefs carry no Care H2; the discipline applies from the next batch dispatch onward. A worked example with both footwear and jersey Care patterns is queued for the next worked-example refresh, not produced in this pass.
+
+### Measurement unit discipline: US-first dual notation (added 2026-06-15)
+
+ProSoccer is a US-market retailer (Pasadena / Irwindale, US shipping), so any measurement in PDP body copy LEADS with US imperial units and carries the metric value in parentheses. The Care bullets above and the Product Details bullets are where this surfaces most. Companion to the US Market Language Discipline (`cleat`, not `boot`): that rule governs vocabulary, this one governs units. Full rule, conversion table, and exceptions: `context/workforce-conventions.md` 'Measurement Unit Discipline: US-first dual notation (added 2026-06-15)'.
+
+**Format:** `[US value] ([metric value])`, e.g. `86°F (30°C)`.
+
+- **Temperature (Care bullets):** "Wash cold, 86°F (30°C) or below", "Tumble dry low, 105°F (40°C)", "Iron warm, 230°F (110°C)". Never the bare metric.
+- **Weight (Product Details bullets, footwear):** "6.3 oz (180g)", "7.8 oz (220g)", "5.3 oz (150g)". Never the bare metric.
+- **Dimensions (rare):** "11 in (28 cm)".
+- **Sizing exceptions (no conversion in body copy):** shoe sizes stay US convention (US Men's 9, US Women's 8); apparel stays US sizing (S, M, L, XL). The size chart handles conversion separately.
+
+**Fields:** Description body prose, Product Details bullets, Care and Maintenance bullets, FAQ answers. NOT Meta Title, Meta Description, or the Short Description hero block (too brief for dual notation; US-only there). Round the US value sensibly (whole number or one decimal), no false precision. The degree symbol `°` is voice-check safe; use the tight `86°F (30°C)` pattern (no space before `°F`, single space before the parenthetical). SCRIBE self-checks this in Phase 4; ORIN re-checks at Gate 15. Forward-only: the existing 20 PDPs keep their current units; Batch 3 onward complies.
 
 ### FAQ for PDPs (recommended, net-new-value criterion)
 
