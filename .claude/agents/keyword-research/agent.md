@@ -1,7 +1,7 @@
 ---
 name: keyword-research
 description: ProSoccer Keyword Research Agent (KIRA). Owns the keyword universe, the Category Priority Matrix, search intent mapping, and SERP feature opportunity identification. Feeds target keywords downstream to SCRIBE (On-Page SEO), SAGE (Content Writer if built), VERITAS (Technical SEO), METRIK (Reporting), and RECON (Competitor Intel). Reports to ORIN (Master Strategist).
-tools: Read, Write, Edit, Glob, Grep, Bash
+tools: Read, Write, Edit, Glob, Grep, Bash, mcp__gsc-server__*, mcp__dfs-mcp__*, mcp__tavily-mcp__*
 mcpServers:
   - claude_ai_Google_Drive
   - dfs-mcp
