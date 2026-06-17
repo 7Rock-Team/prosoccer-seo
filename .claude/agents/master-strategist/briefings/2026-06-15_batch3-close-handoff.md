@@ -6,9 +6,15 @@ Batch 3 (10 adidas Road to Glory PDP briefs, 5 F50 + 5 Predator) shipped and pus
 
 ## Standing follow-ups for next session opening
 
-### HIGH PRIORITY
-- **KIRA MCP inheritance fix + token-efficiency audit.** Sub-agents carry no MCP tools and OAuth does not propagate (Category B gap), so ORIN ran Phase 0/1/4 at the parent level for Batch 3, raising parent token spend above the Batch 2 pattern. Fix the inheritance path (or formalize the parent-level pattern) and audit token efficiency.
-- **SCRIBE self-gating dispatch-prompt tweak.** A SCRIBE agent self-denied a draft-folder Write under APPROVE-EVERY-ACTION and could not be resumed (SendMessage unavailable), wasting ~244k tokens on a full re-dispatch. Tweak the SCRIBE dispatch prompt so SCRIBE self-gates only on commit-stage / publish actions, never on writing a draft brief into the deliverables folder.
+### RESOLVED 2026-06-17 (MCP architecture + gating)
+- **MCP sub-agent access -- FIXED + verified, all 5 agents.** Root cause was NOT OAuth propagation; it was the `tools:` allowlist. Commit `0c6dbb3` (2026-05-26) moved MCP tokens out of `tools:` into `mcpServers:` on a wrong premise, with a same-commit verification that covered the pre-refactor config (tested config != shipped config). Restored `mcp__<server>__*` wildcards to each agent's `tools:` (KIRA `be7ee36`; SCRIBE/VERITAS/RECON/ORIN `70adb8e`). Phase-C verified live: firecrawl / gsc / dfs / tavily all callable at sub-agent level. Architectural record corrected (`f7fe8bb`) and a verification-discipline convention added (verified claims need method + output excerpt + artifact).
+- **SCRIBE self-gating -- FIXED (Fix 2, commit `7eddda1`).** Codified draft-write vs commit-stage gating across all 4 sub-agents: draft writes to `deliverables/` are auto-approved; self-gate only on commit-stage shared-state actions (silo / conventions / audit-trail / git). Eliminates the dispatch-prompt boilerplate.
+
+### HIGH PRIORITY remaining
+- **Fix 3: token-efficiency audit -- DEFERRED to post-Batch-4.** Baseline must come from sub-agents doing their own MCP work (now enabled), not the Batch 2-3 parent-level-workaround data. Run after Batch 4 dispatches under the corrected architecture.
+
+### Batch 4 dispatch-pattern change (consequence of the MCP fix)
+Sub-agents now call MCP directly, so ORIN no longer pre-runs Phase 0/1/4 at the parent level and injects data. KIRA runs its own GSC + DataForSEO Phase 1; SCRIBE runs its own Phase 0 Firecrawl scrape; VERITAS / RECON run their own scans. ORIN dispatches the task + lane spec, not pre-fetched MCP payloads. (Drive stays parent-read by design: ORIN reads the white-label sheet and injects rows; KIRA / SCRIBE do not need Drive.) Apply this shift when Batch 4 dispatches; it also reshapes what the Fix 3 audit will measure.
 
 ### OBSERVATIONS to watch in Batch 4
 - **Fabrication mode.** Observed twice in Batch 3 (fabricated KD scores on HP9973; invented "Pasadena fitting room" retail detail on KK1307), both caught at the ORIN gate. If either recurs, codify the SCRIBE Phase 4 self-check: "No fabricated specifics: KD blank if not retrieved; no store / retail / policy details unless in source data."
