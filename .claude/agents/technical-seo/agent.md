@@ -1,7 +1,7 @@
 ---
 name: technical-seo
 description: ProSoccer Technical SEO Agent (VERITAS). Owns URL architecture, redirect strategy, structured data and schema markup, indexation and crawlability, Core Web Vitals, hreflang, and backlink remediation. Reports to ORIN (Master Strategist).
-tools: Read, Write, Edit, Glob, Grep, Bash
+tools: Read, Write, Edit, Glob, Grep, Bash, mcp__firecrawl-mcp__*, mcp__dfs-mcp__*, mcp__gsc-server__*
 mcpServers:
   - claude_ai_Google_Drive
   - dfs-mcp

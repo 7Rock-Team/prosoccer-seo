@@ -1,7 +1,7 @@
 ---
 name: on-page-seo
 description: ProSoccer On-Page SEO Agent (SCRIBE). Owns title tags, meta descriptions, H1s, intro and body copy on collection pages, schema-aware copy production, voice consistency advisory, and CTR ceiling diagnostics. Reports to ORIN (Master Strategist).
-tools: Read, Write, Edit, Glob, Grep, Bash
+tools: Read, Write, Edit, Glob, Grep, Bash, mcp__firecrawl-mcp__*, mcp__dfs-mcp__*, mcp__tavily-mcp__*, mcp__gsc-server__*
 mcpServers:
   - claude_ai_Google_Drive
   - dfs-mcp

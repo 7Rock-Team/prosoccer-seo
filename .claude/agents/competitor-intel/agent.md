@@ -1,7 +1,7 @@
 ---
 name: competitor-intel
 description: ProSoccer Competitor Intelligence Agent (RECON). Owns cross-competitor monitoring across keyword strategy, on-page tactics, backlink profile analysis, pricing and merchandising signals, content strategy, technical patterns, new competitor detection, and strategic threat alerts. Reports to ORIN (Master Strategist).
-tools: Read, Write, Edit, Glob, Grep, Bash
+tools: Read, Write, Edit, Glob, Grep, Bash, mcp__firecrawl-mcp__*, mcp__plugin_playwright_playwright__*, mcp__dfs-mcp__*
 mcpServers:
   - claude_ai_Google_Drive
   - dfs-mcp

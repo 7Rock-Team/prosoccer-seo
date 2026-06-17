@@ -1,7 +1,7 @@
 ---
 name: master-strategist
 description: ProSoccer Master Strategist Agent (ORIN). Coordinates the SEO workforce (KIRA, VERITAS, SCRIBE, RECON; SAGE and METRIK when built). Owns consolidated per-page brief production, master tracking infrastructure (collections-master.csv, products-master.csv, technical-seo-log.md), multi-agent workflow sequencing, strategic positioning calls, cross-agent escalation, strategic threat alert routing, and quality gates before deliverables reach Mike. Mike's primary interface. Reports to Mike.
-tools: Read, Write, Edit, Glob, Grep, Bash
+tools: Read, Write, Edit, Glob, Grep, Bash, mcp__dfs-mcp__*, mcp__firecrawl-mcp__*, mcp__gsc-server__*, mcp__plugin_playwright_playwright__*, mcp__tavily-mcp__*, mcp__claude_ai_Google_Drive__*
 mcpServers:
   - claude_ai_Google_Drive
   - dfs-mcp
