@@ -213,6 +213,14 @@ Correct (US market):
 - `soccer cleat`
 - `soccer shoe` (acceptable for variation)
 
+### H2 title casing and Product Details H2 format (split discipline, added 2026-06-17)
+
+Body Description H2 casing splits by H2 function. **Editorial body H2s (overview/hook, tech-build/heritage, use-case/who-it's-for) use SENTENCE case** -- first word and proper nouns capitalized, "adidas" lowercase even at H2 start, brand abbreviations as-is (FG, AG, MG, IC), everything else lowercase. This is the deliberate editorial voice (Batch 2 house style), restored as standard after Batch 3 drifted to Title Case; it reads as real human writing and aligns with the reader-first principle. **Structural / navigational H2s use Title Case** -- "FAQs about [Short Product Name]", "Product Details: [Short Product Name]", "Care and Maintenance" -- because these are wayfinding landmarks buyers scan for. Title Case lowercases short articles / prepositions / conjunctions mid-title (about, and, the, for, of, to, in, on, by); "adidas" stays lowercase always; abbreviations as-is.
+
+**Product Details H2 format (added 2026-06-17):** `Product Details: [Short Product Name]`. "Product Details" leads as the UX-scannable label; the natural short product name (NOT the full primary keyword, to avoid awkward lowercase brand casing) is appended after a colon for light topical reinforcement (e.g. "Product Details: F50 Elite FG"). H3 bullet structure unchanged.
+
+The split reflects function: editorial prose H2s carry voice (sentence case), structural label H2s carry wayfinding (Title Case). Forward-only from Batch 4. Enforcement: SCRIBE Phase 4 self-check and ORIN Gate 15; voice-check casing detection is a deferred enhancement (false-positive risk on brand tokens). Full rule and examples: `context/page-type-playbooks/product-page-playbook.md` 'H2 title casing: split discipline (added 2026-06-17)' and 'Description structure'.
+
 ### Broader US/UK distinctions (codify as encountered, not preemptively)
 
 The footwear term is the priority codification. Other US/UK distinctions may surface in production; codify each as a real instance appears rather than preemptively:
@@ -392,6 +400,8 @@ Cross-references: `.claude/agents/on-page-seo/agent.md` Section 13 (SCRIBE outpu
 ## Internal Link Format Discipline (added 2026-06-03)
 
 Every internal link suggestion in a PDP or collection brief must be a full HTTPS URL on the canonical domain. The canonical domain is `https://www.prosoccer.com` (with the `www` subdomain). Never a relative path, never `http://`, never a mangled or partial URL. The rule applies to the brief's `Internal links` sub-section, the brief-format template, and any inline link reference in modeled brief output.
+
+**Link placement varies by contextual fit (added 2026-06-17).** Beyond the body-only placement rule, the 1 to 2 internal links go WHERE the prose authentically references the target, NOT at fixed structural H2 positions. Valid placements: both in one H2, in different H2s, one in the body and one in a FAQ answer, one in the intro and one in the close, or clustered early / late by context. ORIN's exemplar skeleton extraction does NOT carry link-position metadata, and ORIN's pairwise sibling comparison flags identical link positions across siblings as a templating footprint (same severity as identical hook phrasings). Gate 15 verifies link count, validation, body-only placement, and contextual fit, NOT position. Full rule: `context/page-type-playbooks/product-page-playbook.md` 'Internal link strategy' (Link placement varies by contextual fit, added 2026-06-17).
 
 **Placement rule (added 2026-06-09): internal links live ONLY in the Description body, never the Short Description metafield.** Internal links appear ONLY in the Description body (long description / body_html). They do NOT appear in the Short Description metafield (hero block above Add to Cart). The hero block is conversion-critical real estate; links would distract the buyer from the Add to Cart action. Description body is the natural location for cross-discovery navigation, after the buyer has read the editorial prose and is exploring whether the product is right for them. Surfaced from Mike's first 10-PDP Shopify implementation pass (Day 3 re-run batch, commit 957dc3c); see 'Brief Output Structure (added 2026-06-09)' above. SCRIBE's Phase 4 self-check confirms no link sits in the Short Description; ORIN's Section 11 re-check backstops it.
 
