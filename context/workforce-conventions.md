@@ -219,7 +219,7 @@ Body Description H2 casing splits by H2 function. **Editorial body H2s (overview
 
 **Product Details H2 format (added 2026-06-17):** `Product Details: [Short Product Name]`. "Product Details" leads as the UX-scannable label; the natural short product name (NOT the full primary keyword, to avoid awkward lowercase brand casing) is appended after a colon for light topical reinforcement (e.g. "Product Details: F50 Elite FG"). H3 bullet structure unchanged.
 
-The split reflects function: editorial prose H2s carry voice (sentence case), structural label H2s carry wayfinding (Title Case). Forward-only from Batch 4. Enforcement: SCRIBE Phase 4 self-check and ORIN Gate 15; voice-check casing detection is a deferred enhancement (false-positive risk on brand tokens). Full rule and examples: `context/page-type-playbooks/product-page-playbook.md` 'H2 title casing: split discipline (added 2026-06-17)' and 'Description structure'.
+The split reflects function: editorial prose H2s carry voice (sentence case), structural label H2s carry wayfinding (Title Case). Forward-only from Batch 4. Enforcement: SCRIBE Phase 4 self-check and ORIN Gate 15; voice-check casing detection is a deferred enhancement (false-positive risk on brand tokens), to be revisited only if casing violations recur as a Gate 15 issue across 3 or more consecutive batches (the "if recurs, codify" threshold, set 2026-06-17). Full rule and examples: `context/page-type-playbooks/product-page-playbook.md` 'H2 title casing: split discipline (added 2026-06-17)' and 'Description structure'.
 
 ### Broader US/UK distinctions (codify as encountered, not preemptively)
 
