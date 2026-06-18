@@ -30,9 +30,11 @@ Batch 4 (10 PDPs: 8 adidas Predator Road to Glory SP26 + 2 Nike Croatia 2026 jer
 
 Run as a focused 2-SKU pair AFTER Batch 4 closes: Women's Away (existing SKU with a live GSC signal, pos 6.0 on `women's croatia jersey`) + Youth Home (J000692-CRFT, on the sheet, not yet batched). Do NOT fold these into a larger generic batch; reserve them for coherent home/away + gender/age matrix completion. Current matrix: men's-away `croatia jersey 2026` (J000693, done); women's-home (J000691, Batch 4); youth-away (J000695, Batch 4); women's-away + youth-home pending.
 
-### Workforce-internal briefings (Batch 4)
+### Workforce briefing artifacts discipline (NEW codification for a future session)
 
-The KIRA Phase 1 briefing (`.claude/agents/keyword-research/briefings/2026-06-17_batch4-phase1.md`) is on disk and passes voice check. The 2 exemplar SCRIBE briefings (`2026-06-17_JP6237.md`, `2026-06-17_J000691-CRFT.md`) are on disk but carry the documentation-quote voice-check pattern (they quote the live-copy violations they caught). They were NOT committed with the batch; delint the quoted tokens (backtick or reword) before version-controlling if desired.
+All 3 Batch 4 briefings are now committed: KIRA Phase 1 (`.claude/agents/keyword-research/briefings/2026-06-17_batch4-phase1.md`) and the 2 exemplar SCRIBE briefings (`2026-06-17_JP6237.md`, `2026-06-17_J000691-CRFT.md`, delinted -- verbatim quotes of live-page violations rewritten as descriptive references; the J000691 briefing also records the ORIN Fix-A evergreen decision).
+
+CODIFY (small, future session): Phase 1 keyword-research briefings (KIRA), exemplar SCRIBE briefings, and gate-review briefings that document architectural decisions are committed alongside the batch they support. Delint quoted-violation references descriptively (per the 2026-06-17 exemplar-briefing pattern); never weaken voice_check to accommodate documentation-quotes. Apply uniformly going forward. Rationale: working-notes-vs-committed-artifacts ambiguity is exactly the architectural drift the verification-discipline convention is meant to prevent -- uncommitted connective tissue disappears, and the batch handoff already references these files.
 
 ## Carry-forward from Batch 3 close (still open)
 
