@@ -1,0 +1,59 @@
+# Session-close handoff -- Batch 4 (2026-06-17)
+
+Batch 4 (10 PDPs: 8 adidas Predator Road to Glory SP26 + 2 Nike Croatia 2026 jerseys) shipped and pushed to origin/main: commit `3d73894` (10 briefs + consolidated `_audit-trail.md` + Registry 2 silo appends). Full per-SKU detail in `deliverables/page-optimizations/2026-06-17_session-01/_audit-trail.md`.
+
+**First batch under the fully corrected sub-agent MCP architecture.** All 11 sub-agent dispatches (1 KIRA Phase 1 + 10 SCRIBE) ran their own MCP work at the sub-agent level; every call succeeded. ORIN orchestrated without pre-fetching payloads; Drive stayed parent-read. Fix 2 held (zero self-denial across 10 draft writes). Architectural validation: confirmed in production.
+
+## Standing follow-ups for next session opening
+
+### HIGH PRIORITY -- post-Batch-4 codification commits
+
+- **Fabrication-mode SCRIBE Phase 4 self-check codification (URGENCY CONFIRMED -- 4th pattern instance).** Single coherent commit after Batch 4. The trigger from the Batch 3 close is ACTIVATED. Four case studies now: (1) HP9973 fabricated KD scores [Batch 3]; (2) KK1307 invented retail/store detail [Batch 3]; (3) J000691 unverified current-events / squad / qualifying claims [Batch 4, caught at gate]; (4) KJ6746 closure hypothesis [Batch 4, PREVENTED at SCRIBE level by Phase 0 scrape verification]. Codification scope:
+  - No fabricated KD scores (blank if not retrieved) -- existing rule, formalize.
+  - No fabricated retail / store / operational / policy specifics unless in source data.
+  - No fabricated current-events / squad / qualifying / tournament-status claims; prefer evergreen (verifiable historical results, established product specs, documented heritage).
+  - **Dispatch-hypothesis verification (the KJ6746 lesson):** ORIN dispatch hypotheses (closure type, weight, construction, features) are starting points, NOT facts. SCRIBE MUST verify against Phase 0 scrape data before writing. If scrape contradicts the hypothesis, scrape wins and SCRIBE rewrites accordingly.
+  - Tournament-status subtype: forbidden patterns for active-tournament progression / "best run ever" superlatives / present-tense squad claims (preventive for future tournament-relevant national-team batches).
+  - Mechanism: SCRIBE Phase 4 self-check + ORIN gate clause; consider whether any of this is script-enforceable (most is not -- it is a judgment discipline).
+
+- **Fix 3: token-efficiency audit -- baseline NOW AVAILABLE (first clean sub-agent run).** Run the audit using Batch 4 data (below). Specific targets surfaced:
+  - DataForSEO `keyword_overview` returns far more per-keyword detail than a floor check needs; a lighter call pattern (or post-filter) would cut KIRA spend materially.
+  - `detect_quick_wins` must be called page-targeted; site-wide it dumps ~1M chars (2,508 rows). Offload-to-disk already works correctly.
+  - Parallel sub-agent dispatch trades token efficiency for wall-clock + architectural correctness: each of the 10 SCRIBE agents independently re-loaded playbooks + exemplar + ran its own Phase 0 scrape (no shared context across parallel sub-agents). Quantify the redundant-context-load cost vs the old parent-level approach.
+
+### Misha / VERITAS coordination (EXPANDED from flag to audit-request)
+
+- **og:image `http://` -- theme-level pattern CONFIRMED across 6+ PDPs:** Phantom 6 High Elite (Day 3) + HQ2254 + JP6271 + HQ2273 + HQ0007 + J000691 (Batch 4). Theme code for og:image protocol handling needs an audit; likely affects significantly more PDPs not yet checked. Request a Misha theme-level audit + fix rather than per-PDP correction. (Supersedes the prior "only Phantom 6 og:image open" note.)
+- **NEW theme bug: `<title>` truncation (HQ2254).** Live storefront `<title>` cuts mid-parenthesis at "Pack ("; og:title + twitter:title affected. Theme template likely truncates without escape handling. Recommend Misha audit the theme template `<title>` rendering.
+
+### Croatia jersey matrix completion mini-batch (NOTED for backlog)
+
+Run as a focused 2-SKU pair AFTER Batch 4 closes: Women's Away (existing SKU with a live GSC signal, pos 6.0 on `women's croatia jersey`) + Youth Home (J000692-CRFT, on the sheet, not yet batched). Do NOT fold these into a larger generic batch; reserve them for coherent home/away + gender/age matrix completion. Current matrix: men's-away `croatia jersey 2026` (J000693, done); women's-home (J000691, Batch 4); youth-away (J000695, Batch 4); women's-away + youth-home pending.
+
+### Workforce-internal briefings (Batch 4)
+
+The KIRA Phase 1 briefing (`.claude/agents/keyword-research/briefings/2026-06-17_batch4-phase1.md`) is on disk and passes voice check. The 2 exemplar SCRIBE briefings (`2026-06-17_JP6237.md`, `2026-06-17_J000691-CRFT.md`) are on disk but carry the documentation-quote voice-check pattern (they quote the live-copy violations they caught). They were NOT committed with the batch; delint the quoted tokens (backtick or reword) before version-controlling if desired.
+
+## Carry-forward from Batch 3 close (still open)
+
+### CODIFICATIONS pending
+- Jersey playbook (fit-tier / home-away / club-vs-national taxonomy) -- partially advanced by the Batch 4 women's-cut + youth-away + home/away precedents now in `national-team-jerseys.md`.
+- Mizuno silo.
+- Kelme FIFA research.
+- Reserved-opener blocklist.
+- Full-body word-count rule made explicit.
+- Worked-example refresh (model the new brief + audit-trail structure).
+- voice_check.py casing detection -- still DEFERRED (false-positive risk on brand tokens); revisit only if casing recurs as a Gate 15 issue across 3+ consecutive batches. Batch 4 H2 casing was clean, so no movement.
+
+### PRODUCTION
+- Mike's 20-PDP Shopify implementation queue (now +10 from Batch 4 = pending implementation).
+- White-label PDPs-tab keyword entries: Batch 2 + Batch 3 + Batch 4 primaries are surfaced in their respective `_audit-trail.md` files for Mike's manual entry (ORIN reads, white-label team writes -- permanent handoff by design).
+
+## Token / architecture baseline (Batch 4 -- Fix 3 input)
+
+Sub-agent tokens (harness-measured, incl. reasoning + tool I/O):
+- KIRA Phase 1: 160,752 (13 MCP calls: 9 GSC + 4 DataForSEO).
+- SCRIBE exemplars: JP6237 250,361; J000691 286,329.
+- SCRIBE siblings: HQ2254 186,326; JP6271 178,310; IH7212 226,004; HQ2273 263,189; HQ0007 195,799; KK3725 242,342; KJ6746 281,300; J000695 208,600.
+- 11 dispatches total ~2.48M sub-agent tokens; ~225k avg per SCRIBE. DataForSEO MTD cost ~$0.02-0.04 (KIRA only; SCRIBEs made 0 DataForSEO calls).
+- Load distribution shifted decisively to sub-agents (vs the Batch 2-3 parent-level workaround), which is the architecturally correct posture and the real Fix 3 baseline.
