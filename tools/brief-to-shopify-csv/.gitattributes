@@ -1,0 +1,12 @@
+# Tool-scoped line-ending control.
+#
+# The repo runs with core.autocrlf=true (Git's Windows default). Without this
+# file, the golden-test fixtures under tests/golden/ would be checked out with
+# CRLF on Windows, while the markdown->HTML converter always emits LF. The
+# byte-for-byte golden tests would then FAIL on a fresh clone even though the
+# production code is correct. Pin text to LF in the working tree on every
+# platform so the byte-exact tests are reproducible everywhere.
+* text=auto eol=lf
+
+# The build spec is a binary document; never line-ending-process it.
+*.docx binary

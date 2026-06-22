@@ -1,0 +1,1 @@
+Browse the [adidas Predator range](https://www.prosoccer.com/collections/adidas-predator) for plates, or grab the [Road to Glory Pack](https://www.prosoccer.com/collections/adidas-road-to-glory-pack) for the colorway.

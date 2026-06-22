@@ -1,0 +1,10 @@
+# Generated CSVs and transaction logs are operational artifacts, not source.
+output/
+*.log
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Operator preview artifacts
+preview/

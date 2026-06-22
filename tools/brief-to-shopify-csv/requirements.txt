@@ -1,0 +1,11 @@
+# brief_to_shopify_csv.py has NO third-party dependencies.
+#
+# It runs on the Python standard library ONLY (csv, argparse, glob, os, re,
+# datetime, unittest). This is a deliberate safety decision: stdlib `csv` gives
+# exact RFC-4180 round-trip fidelity, and the markdown->HTML converter is a small
+# hand-rolled subset pinned by golden-file tests, so output is fully
+# deterministic with no library version drift to worry about.
+#
+# Requirement: Python 3.10 or newer.
+#
+# Install: nothing to install. Just run with python 3.10+.
