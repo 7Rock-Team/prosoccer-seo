@@ -37,6 +37,19 @@ STANDING ITEMS surfaced (carry to next Tony sync):
 - **Bosnia-specific collection** `/collections/bosnia-and-herzegovina-national-soccer-team-jerseys-apparel` validated live (H1 + 3 products); now the internal-link target for the Bosnia briefs (applied to the Home exemplar; Wave 2 Away sibling to use it).
 - **White-label sheet rows pending (Mike-side):** J000694-CRFT Croatia Women's Away; men's Bosnia Home PDP.
 
+### Batch 5 close (2026-06-30) -- escalations + standing items
+
+**ESCALATION (Tony + Misha) -- theme-level brand-IP exposure.** Found during Batch 5 SEO production; 4 separate SCRIBE quality gates flagged it. The live storefront renders sitewide chrome banners "ROAD TO THE '26 WORLD CUP" / "IT'S WORLD CUP TIME, BABY!" on NON-FIFA-licensed brand PDPs (Nike, Kelme). Brand-license restrictions follow the BRAND, not the storefront: ProSoccer is not FIFA-licensed, so Nike/Kelme pages cannot display World Cup promotional chrome any more than the body copy can use FIFA terms. This is real legal-compliance exposure (FIFA enforcement watches exactly this), and it NEGATES the brief-copy discipline we codified (no FIFA/WC on non-adidas pages) at the theme layer. **Frame for Tony:** brief copy discipline is being undermined by sitewide chrome on those same pages; needs theme-level conditional logic preventing tournament chrome on non-FIFA-licensed vendor pages, regardless of WC timing. **Misha:** implementation. **Standing convention (permanent, codify regardless of cycle):** tournament/WC chrome renders ONLY when the product vendor is FIFA-licensed (adidas family for current tournaments), NEVER on Nike/Kelme/other non-FIFA-licensed vendor pages. Misha audit-request stack is now: og:image `http://`, `<title>` truncation, AND this theme-level brand-IP conditional logic.
+
+**Bosnia men's PDP gap (sharpened, Tony sync):** men's Bosnia Home/Away PDPs EXIST (the Bosnia collection shows 3 live men's products), are in stock, and are NOT tracked in the white-label sheet; they currently absorb the 1,600-9,900/mo Bosnia head-term demand unoptimized. Add a men's Bosnia jersey to a future SEO batch + add the sheet rows.
+
+**Closed this batch (codification maturation):**
+- Copa silo guardrail refined to the tier x surface matrix (calfskin FG Elite/Pro only; Fusionfeel synthetic on Pro Turf + both League; Comfort Frame vs Comfort Plate TPU vs rubber turf; tongue tier-variable). Scrape-wins applied at the guardrail layer, same pattern as the Wave 1 Solar Red -> Solar Turbo correction.
+- Croatia jersey word-count tension closed: national-team-jersey length precedent codified in the product-page-playbook (jerseys measured full-body, run above the generic Complex 465 ceiling, hold sibling parity within a nation set). J000692 accepted at 534.
+
+**White-label sheet rows to add (Mike-side):** J000694-CRFT Croatia Women's Away; men's Bosnia Home PDP.
+**Implementation notes (Mike-side):** J000694 gallery image mislabel ("Croatia Men's Away (Modric)" on the women's-away page) -- apply the brief's corrected alt text. URL handles over 70 on KI0586 (75) + KI0653 (75) -- 301 equity risk, Misha coordination only if Mike opts in.
+
 ### HIGH PRIORITY -- post-Batch-4 codification commits
 
 - **Fabrication-mode SCRIBE Phase 4 self-check codification.** **RESOLVED 2026-06-29** (folded into the Batch 5 pre-dispatch commit; see 'RESOLVED 2026-06-29 (B)' above). Original urgency note (4th pattern instance; trigger from Batch 3 close ACTIVATED): Four case studies now: (1) HP9973 fabricated KD scores [Batch 3]; (2) KK1307 invented retail/store detail [Batch 3]; (3) J000691 unverified current-events / squad / qualifying claims [Batch 4, caught at gate]; (4) KJ6746 closure hypothesis [Batch 4, PREVENTED at SCRIBE level by Phase 0 scrape verification]. Codification scope:
