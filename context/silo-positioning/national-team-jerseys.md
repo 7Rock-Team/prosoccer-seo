@@ -4,6 +4,19 @@ Per-SKU prose patterns claimed in shipped briefs for national-team jersey PDPs. 
 
 Note: club-team jerseys (Real Madrid, Barcelona, etc.) sit in a distinct prose lane (club identity vs national pride) and will get their own silo file (`club-team-jerseys.md`) when that work first batches.
 
+## Pre-dispatch reference / guardrails
+
+Reference notes ORIN reads at the pre-dispatch differentiation pass. Separate from the append-only per-SKU log below.
+
+### Bosnia and Herzegovina (added 2026-06-29, from ORIN research for Batch 5 youth Home + Away)
+- **Identity:** "Zmajevi" (The Dragons), applied to the national teams generally, gender-neutral in practice. NO documented women's-specific nickname; do NOT coin "Zmajice." Secondary heritage name: "Zlatni Ljiljani" (Golden Lilies, the fleur-de-lis / golden-lily crest). Kid-friendly dragon imagery is a clean youth hook.
+- **Evergreen heritage anchor:** "2014 World Cup debut" (Brazil; first World Cup win 3-1 over Iran). **Do NOT use "first/only World Cup"**: Bosnia qualified for 2026, so "only" is now false. Never appeared at a UEFA Euro through 2024 (evergreen).
+- **Colors / motif:** royal/cobalt blue primary + yellow/gold; diagonal row of white stars (flag-derived); golden-lily heritage emblem. Home = blue dominant; away base varies by cycle.
+- **Federation:** Football Association of Bosnia and Herzegovina (N/FSBiH); FIFA code BIH; FIFA + UEFA member.
+- **Brand / IP:** kit supplier is **Kelme**, TIME-SENSITIVE (not a permanent identity, do not state as evergreen). Kelme is a non-adidas brand, so FIFA / World Cup terminology is FORBIDDEN on these PDPs (federation / cycle language only, mirrors the Nike-Croatia discipline). See `context/brand-ip-constraints.md`.
+- **Youth/parent angle:** Bosnian-diaspora heritage pride (large US communities); the jersey as homeland connection, not results-fandom. Keeps framing evergreen.
+- Player associations (Dzeko, Pjanic, Begovic) are historical; any active/retired status is TIME-SENSITIVE, avoid current-squad claims.
+
 ## Claimed patterns log
 
 ### SKU J000693-CRFT (Nike Croatia Men's Stadium Away 2026)

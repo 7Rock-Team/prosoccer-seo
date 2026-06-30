@@ -73,6 +73,7 @@ Common as of 2026 (verify each during research, not from this list):
 - Nike: USMNT, Brazil, France, England, Netherlands, Portugal, Canada, Australia (verify)
 - Puma: Czech Republic, Switzerland, Senegal, Ghana, Morocco, Serbia (verify)
 - Hummel: Denmark (verify)
+- Kelme: Bosnia and Herzegovina, Jordan (verify)
 - Castore and others: smaller federations
 
 Treat this list as a starting reference, not authoritative. Verify per team during topic research.

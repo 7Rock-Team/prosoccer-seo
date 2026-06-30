@@ -15,9 +15,19 @@ Triggered by KK3725: Batch 4's standard-construction Junior League Turf brief sh
 - **KK3725 brief CORRECTED** in `deliverables/page-optimizations/2026-06-17_session-01/` (3 H2 capitalizations + 2026-06-29 `_audit-trail.md` entry). Audit confirmed KK3725 was the SOLE violator across all 10 Batch 4 briefs; the other 9 were already clean.
 - **Live PDP corrections: Mike-owned.** Mike is fixing all Batch 4 implementations directly in Shopify admin. Not a script-side concern.
 
+### RESOLVED 2026-06-29 (B) -- Batch 5 pre-dispatch codification + silo guardrails
+
+Batch 5 (11 URLs: 5 Copa Pure IV senior, 1 Superfly 11 Pro FG, 1 Tiempo Maestro Academy Turf, 4 jerseys [Croatia Youth Home J000692-CRFT, Croatia Women's Away J000694-CRFT, Bosnia youth Home 7651TX3926, Bosnia youth Away 7651TX3927]) prepared. Pre-flight triage corrected three "firsts" framings (Superfly / Maestro / Copa silos already exist) and pre-empted three fabrication traps before any brief was written. Pre-dispatch single commit shipped:
+- **Fabrication-mode codification (the standing HIGH-PRIORITY item below): DONE.** SCRIBE Phase 4 self-check (scrape-data-wins + tournament-status forbidden patterns) + ORIN Gate 15 clause (m) + `context/workforce-conventions.md` 'Fabrication guard and tournament-status discipline'. Six case studies incl. two Batch 5 pre-empts (Bosnia "only WC", Copa "leather"/"Sprintframe").
+- **Nike tier nomenclature** codified (Elite > Pro > Academy > Club; Nike Academy maps to adidas League; Academy uses the League/Club word band).
+- **Non-FIFA brand language discipline** codified (Kelme, like Nike, runs cycle-language-only; FIFA terms key on the adidas license). Kelme added to `brand-ip-constraints.md` affiliation reference.
+- **Silo guardrails (NOT per-SKU log entries):** new "Pre-dispatch reference / guardrails" sections added to copa.md, national-team-jerseys.md (Bosnia), mercurial.md (Superfly Pro), tiempo.md (Maestro Academy Turf). The append-only per-SKU log stays pure and gets Batch 5 entries post-ship per protocol. KI0662 Bernardo Silva entry left untouched (historical record).
+- Croatia Women's Away SKU J000694-CRFT verified via Shopify Admin API; still missing from the white-label sheet (Mike to add the row).
+- NEXT: dispatch KIRA Phase 1 on the 11 URLs; hold at Checkpoint 1.
+
 ### HIGH PRIORITY -- post-Batch-4 codification commits
 
-- **Fabrication-mode SCRIBE Phase 4 self-check codification (URGENCY CONFIRMED -- 4th pattern instance).** Single coherent commit after Batch 4. The trigger from the Batch 3 close is ACTIVATED. Four case studies now: (1) HP9973 fabricated KD scores [Batch 3]; (2) KK1307 invented retail/store detail [Batch 3]; (3) J000691 unverified current-events / squad / qualifying claims [Batch 4, caught at gate]; (4) KJ6746 closure hypothesis [Batch 4, PREVENTED at SCRIBE level by Phase 0 scrape verification]. Codification scope:
+- **Fabrication-mode SCRIBE Phase 4 self-check codification.** **RESOLVED 2026-06-29** (folded into the Batch 5 pre-dispatch commit; see 'RESOLVED 2026-06-29 (B)' above). Original urgency note (4th pattern instance; trigger from Batch 3 close ACTIVATED): Four case studies now: (1) HP9973 fabricated KD scores [Batch 3]; (2) KK1307 invented retail/store detail [Batch 3]; (3) J000691 unverified current-events / squad / qualifying claims [Batch 4, caught at gate]; (4) KJ6746 closure hypothesis [Batch 4, PREVENTED at SCRIBE level by Phase 0 scrape verification]. Codification scope:
   - No fabricated KD scores (blank if not retrieved) -- existing rule, formalize.
   - No fabricated retail / store / operational / policy specifics unless in source data.
   - No fabricated current-events / squad / qualifying / tournament-status claims; prefer evergreen (verifiable historical results, established product specs, documented heritage).

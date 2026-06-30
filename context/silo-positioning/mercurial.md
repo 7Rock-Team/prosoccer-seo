@@ -2,6 +2,14 @@
 
 Per-SKU prose patterns claimed in shipped briefs for the Nike Mercurial silo (the speed line; the Superfly high-cut and the Vapor low-cut both belong to Mercurial). Format and append protocol: see `README.md` in this directory. ORIN reads this file during the pre-dispatch differentiation pass and appends after each batch commits.
 
+## Pre-dispatch reference / guardrails
+
+Reference notes ORIN reads at the pre-dispatch differentiation pass. Separate from the append-only per-SKU log below.
+
+### Superfly 11 Pro FG (IO8224-900) (added 2026-06-29, Batch 5)
+- Superfly is NOT new to this silo: Superfly 11 Elite FG (IO8219-900) and Elite AG (IO8221-900) already shipped. IO8224-900 is the first **Pro-tier** Superfly, a tier step-down, not a new model. Mirror the Pro-tier handling already used for the Vapor 17 Pro (IO8225-900): the speed lineage at Pro value, a step below the Elite's stripped-back AtomKnit/FlyLite package.
+- Differentiation holds: **Superfly = high-cut, straight-line speed** (vs Vapor = low-cut agility / close control). Keep the Pro entry's hook distinct from the Elite Superfly entries already in the log.
+
 ## Claimed patterns log
 
 ### SKU IO8219-900 (Mercurial Superfly 11 Elite FG)

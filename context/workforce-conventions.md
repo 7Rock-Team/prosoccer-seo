@@ -231,6 +231,31 @@ The split reflects function: editorial prose H2s carry voice (sentence case), st
 
 Rationale: Mike's 2026-06-29 request to standardize the H2 format across PDPs and collection page copy so the same enforcement gap cannot recur in a different content type. One unified house style reduces ambiguity and simplifies enforcement.
 
+### Brand tier nomenclature (added 2026-06-29)
+
+Nike cleats: Elite > Pro > Academy > Club.
+adidas cleats: Elite > Pro > League > Club.
+
+Cross-map: **Nike Academy ≈ adidas League** (the accessible mid/entry tier above the cheapest Club).
+
+Application: the tier-band word counts (Elite 400 to 450, Pro 340 to 390, League/Club 280 to 340; see the SCRIBE Phase 4 self-check and `context/page-type-playbooks/product-page-playbook.md` 'Tier-appropriate length within Complex') apply by tier-EQUIVALENCE regardless of brand. A Nike Academy brief uses the League/Club word band, not the Elite/Pro band. Codified Batch 5 onward.
+
+### Non-FIFA brand language discipline (added 2026-06-29)
+
+FIFA / World Cup terminology keys on the BRAND's adidas FIFA license, not on the nation's FIFA membership. adidas is the FIFA commercial licensee; adidas pages may use the FIFA / World Cup family. **Every non-adidas kit brand (Nike, Kelme, Puma, Umbro, Hummel, and others) is FORBIDDEN from FIFA / "World Cup" / "FIFA World Cup [year]" / "WC" terminology** and uses federation / cycle language only ("2026 cycle", "championship summer", "this cycle", the bare year "2026", verifiable historical results). This is why the Nike-Croatia and Kelme-Bosnia jerseys run cycle-language-only even though Croatia and Bosnia are FIFA members. Canonical rule and substitution table: `context/brand-ip-constraints.md` 'FIFA World Cup Terminology'.
+
+### Fabrication guard and tournament-status discipline (added 2026-06-29)
+
+Surfaced across Batches 3 to 5. Dispatch hypotheses (closure, weight, construction, materials, supplier, player associations) are STARTING POINTS, not facts: SCRIBE verifies every such claim against the SKU's Phase 0 scrape before writing it, and scrape data wins over hypothesis. Never invent a value the scrape did not supply (KD/volume scores, weights, materials, retail/store/operational detail, player names); leave it out rather than guess.
+
+**Tournament-status subtype (evergreen default).** Tournament-cycle products (national-team jerseys especially) default to EVERGREEN framing: verifiable historical results, established heritage, documented specs. Forbidden patterns and variations: "chases the trophy this summer", "still alive in the bracket", "title defense", "group stage form", "heads into the knockout rounds", "best/first/only [tournament] ever" where not verifiable-forever. Two non-default framings exist when a time-sensitive angle is genuinely warranted, each requiring ORIN sign-off: date-stamped copy with an audit-trail note, or explicit pre-tournament framing.
+
+**Scope:** PDP body copy and collection page copy. Time-sensitive marketing channels (Klaviyo, social, paid ads) run a separate discipline and are out of scope here.
+
+**Case studies:** HP9973 (fabricated KD scores), KK1307 (invented retail/store detail), J000691 (unverified Croatia current-cycle/squad claims, caught at gate), KJ6746 (closure hypothesis overridden by scrape at SCRIBE level, the target behavior), Bosnia "only World Cup" (pre-empted at ORIN research 2026-06-29; qualified for 2026, use "2014 World Cup debut"), Copa Pure IV "leather"/"Sprintframe" (pre-empted at ORIN research 2026-06-29; League is synthetic Fusionfeel, plate is Comfort Frame).
+
+**Enforcement:** SCRIBE Phase 4 self-check (`.claude/agents/on-page-seo/agent.md`) + ORIN Gate 15 clause (m) (`.claude/agents/master-strategist/agent.md`). A voice_check.py deterministic detector is not attempted here: legitimate heritage references and historical results would false-positive; enforcement is the self-check plus the gate.
+
 ### Broader US/UK distinctions (codify as encountered, not preemptively)
 
 The footwear term is the priority codification. Other US/UK distinctions may surface in production; codify each as a real instance appears rather than preemptively:
