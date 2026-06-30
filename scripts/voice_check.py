@@ -91,6 +91,23 @@ PEDAGOGICAL_MARKERS = (
     "uk/global",
 )
 
+# Editorial body H2 casing (codified 2026-06-17, e6bdec9; voice-check enforcement
+# added 2026-06-29 after Batch 4 / KK3725 surfaced the gap). Editorial body H2s --
+# the H2 sections between the "### Description" marker and the "## Product Details"
+# marker -- use SENTENCE case: the first word is capitalized. This is a
+# scope-limited check: it flags only LOWERCASE-INITIAL body H2s. It does NOT
+# attempt reverse Title-Case-drift detection (that stays at SCRIBE Phase 4 + ORIN
+# Gate 15 per honest scope discipline). Because the sole permitted lowercase
+# opener is the explicit "adidas" brand exception, the check cannot false-positive
+# on other brand tokens (F50, Nike, FG, Gripknit) -- those are capitalized or
+# uppercase and pass. Only PDP/collection briefs carry both region markers, so
+# playbooks and briefings never form a region and never match. Canonical rule:
+# context/page-type-playbooks/product-page-playbook.md 'H2 title casing: split discipline'.
+BODY_H2_REGION_START = re.compile(r"^###\s+Description\b", re.IGNORECASE)
+BODY_H2_REGION_END = re.compile(r"^##\s+Product\s+Details\b", re.IGNORECASE)
+BODY_H2_PATTERN = re.compile(r"^##\s+(\S+)")
+ADIDAS_H2_EXCEPTION = "adidas"
+
 SUPPORTED_EXTS = {".md", ".txt", ".docx"}
 
 
@@ -149,6 +166,42 @@ def find_line_contexts(
     for idx, (sline, dline) in enumerate(zip(scan_lines, display_lines), start=1):
         if pattern.search(sline):
             hits.append((idx, dline.strip()))
+    return hits
+
+
+def find_lowercase_body_h2s(lines: list[str]) -> list[tuple[int, str]]:
+    """Return (line_number, line_text) for editorial body H2s whose first word is
+    lowercase, the "adidas" brand exception aside.
+
+    The editorial body region is bounded by the "### Description" marker (start)
+    and the first following "## Product Details" marker (end). Only product /
+    collection briefs carry both markers, so other files never form a region and
+    never produce a hit. Pedagogical anti-pattern lines are skipped, consistent
+    with the other checks. Structural H2s ("Product Details:", "Care and
+    Maintenance", "FAQs about ...") and FAQ H3 questions sit outside the region or
+    are already Title/sentence case starting uppercase, so they never match here.
+    """
+    hits: list[tuple[int, str]] = []
+    in_region = False
+    for idx, line in enumerate(lines, start=1):
+        if not in_region:
+            if BODY_H2_REGION_START.search(line):
+                in_region = True
+            continue
+        if BODY_H2_REGION_END.search(line):
+            break
+        lowered = line.lower()
+        if any(marker in lowered for marker in PEDAGOGICAL_MARKERS):
+            continue
+        m = BODY_H2_PATTERN.match(line)
+        if not m:
+            continue
+        first_word = m.group(1)
+        if first_word == ADIDAS_H2_EXCEPTION:
+            continue
+        first_char = first_word[0]
+        if first_char.isalpha() and first_char.islower():
+            hits.append((idx, line.strip()))
     return hits
 
 
@@ -246,6 +299,22 @@ def check(text: str, path: Path | None = None) -> int:
         if len(boot_hits) > 5:
             violations.append(f"    ... and {len(boot_hits) - 5} more")
 
+    # Editorial body H2 casing check: editorial body H2s use sentence case (first
+    # word capitalized; "adidas" the sole lowercase-start exception). Scope-limited
+    # to the "### Description" -> "## Product Details" region, so it runs on every
+    # file but only ever matches inside a real brief.
+    body_h2_hits = find_lowercase_body_h2s(display_lines)
+    if body_h2_hits:
+        violations.append(
+            f"LOWERCASE EDITORIAL BODY H2 found on {len(body_h2_hits)} line(s) "
+            "(editorial body H2s use sentence case: capitalize the first word; "
+            "'adidas' is the only lowercase-start exception):"
+        )
+        for ln, ctx in body_h2_hits[:5]:
+            violations.append(f"    line {ln}: {ctx[:120]}")
+        if len(body_h2_hits) > 5:
+            violations.append(f"    ... and {len(body_h2_hits) - 5} more")
+
     # Internal link format check (deliverables/ and briefings/ only): link
     # suggestions must be full HTTPS canonical-domain URLs. Flag insecure http://
     # ProSoccer URLs and mangled missing-domain links. Skip pedagogical lines;
@@ -279,7 +348,7 @@ def check(text: str, path: Path | None = None) -> int:
             print(f"  {line}")
         return 1
 
-    print("VOICE CHECK PASSED: no em-dashes, no en-dashes, no forbidden words/phrases/openers, no capitalized Adidas, no UK 'boots'.")
+    print("VOICE CHECK PASSED: no em-dashes, no en-dashes, no forbidden words/phrases/openers, no capitalized Adidas, no UK 'boots', no lowercase editorial body H2s.")
     return 0
 
 

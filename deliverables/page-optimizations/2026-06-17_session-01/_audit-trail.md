@@ -59,6 +59,16 @@ All KD/Difficulty cells left blank where DataForSEO returned no value (no fabric
 - SCRIBE (each of 10): ~3 Firecrawl scrapes (1 PDP Phase 0 + ~2 link validations), large collection scrapes offloaded to disk; ~60-95k tokens consumed each (scrape payloads + playbook reads). 0 DataForSEO (keywords pre-approved by KIRA), minimal Tavily.
 - Efficiency findings for the Fix 3 audit: (a) DataForSEO `keyword_overview` returns far more than a floor check needs -- lighter call pattern would cut spend; (b) `detect_quick_wins` must be called page-targeted, not site-wide (offload-to-disk already works correctly).
 
+## Post-batch correction -- 2026-06-29: KK3725 body H2 casing
+
+3 violations of the 6/17 codified sentence-case rule (commit `e6bdec9`) corrected in the KK3725 brief: lowercase-initial first words on all 3 editorial body H2s (the/what/who -> The/What/Who). The brief's FAQ H3s and structural H2s ("Product Details:", "Fit Notes", "Care and Maintenance", "FAQs about...") were already correct and unchanged.
+
+Detected during Mike's 6/29 Shopify implementation when manually verifying brief content against codified house style. A full audit of all 10 Batch 4 briefs confirmed KK3725 was the SOLE violator: the other 9 briefs' editorial body H2s are clean sentence case, all FAQ H3 first words are uppercase batch-wide, and no editorial H2 carries reverse Title-Case drift.
+
+Enforcement gap analysis: SCRIBE Phase 4 self-check + ORIN Gate 15 both passed the brief despite the violation (hypothesis: gates checked against Title-Case drift / all-caps rather than an explicit first-character-uppercase test, so a lowercase first word read as sentence-case-adjacent and slipped through). voice_check.py casing detection was deliberately deferred at codification time (`e6bdec9`) citing brand-token false-positive risk; this batch's drift surfaced the gap. Codification reinforcement (collection-page scope) and a scope-limited voice_check.py addition (flag lowercase-initial editorial body H2s, "adidas" excepted -- cannot false-positive on brand tokens because the exception is explicit) follow in the same commit.
+
+Live PDP corrections are operator-driven: Mike is fixing all Batch 4 implementations directly in Shopify admin. No script-side live changes.
+
 ## Per-SKU audit notes
 
 ### SKU JP6237 -- adidas Predator Elite Fold-Over Tongue FG (PREDATOR EXEMPLAR)

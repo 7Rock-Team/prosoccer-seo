@@ -219,7 +219,17 @@ Body Description H2 casing splits by H2 function. **Editorial body H2s (overview
 
 **Product Details H2 format (added 2026-06-17):** `Product Details: [Short Product Name]`. "Product Details" leads as the UX-scannable label; the natural short product name (NOT the full primary keyword, to avoid awkward lowercase brand casing) is appended after a colon for light topical reinforcement (e.g. "Product Details: F50 Elite FG"). H3 bullet structure unchanged.
 
-The split reflects function: editorial prose H2s carry voice (sentence case), structural label H2s carry wayfinding (Title Case). Forward-only from Batch 4. Enforcement: SCRIBE Phase 4 self-check and ORIN Gate 15; voice-check casing detection is a deferred enhancement (false-positive risk on brand tokens), to be revisited only if casing violations recur as a Gate 15 issue across 3 or more consecutive batches (the "if recurs, codify" threshold, set 2026-06-17). Full rule and examples: `context/page-type-playbooks/product-page-playbook.md` 'H2 title casing: split discipline (added 2026-06-17)' and 'Description structure'.
+The split reflects function: editorial prose H2s carry voice (sentence case), structural label H2s carry wayfinding (Title Case). Forward-only from Batch 4. Full rule and examples: `context/page-type-playbooks/product-page-playbook.md` 'H2 title casing: split discipline (added 2026-06-17)' and 'Description structure'.
+
+**Enforcement (three layers, updated 2026-06-29).** (1) SCRIBE Phase 4 self-check and (2) ORIN Gate 15 cover BOTH directions of drift: Title-Case drift in editorial body H2s and sentence-case drift in structural H2s. (3) `scripts/voice_check.py` adds a deterministic backstop for the one direction that surfaced in production: it flags lowercase-initial editorial body H2s (the region between the `### Description` and `## Product Details` markers), with "adidas" the sole exception. The scope limit (lowercase-initial only, "adidas" excepted) is what makes the check brand-safe: it cannot false-positive on brand tokens (F50, Nike, FG, Gripknit), which resolves the original deferral concern. Reverse Title-Case-drift detection stays with the two human-style gates, not the script. Origin: Batch 4 KK3725 shipped 3 lowercase editorial body H2s past both gates while the script backstop was still deferred; see `deliverables/page-optimizations/2026-06-17_session-01/_audit-trail.md` (2026-06-29 entry).
+
+**Scope (added 2026-06-29): applies to PDP body copy AND collection page copy.** Effective Batch 5 onward, any workforce-generated content for collection pages follows the same split rule:
+
+- **Editorial body H2s:** sentence case, first word capitalized ("adidas" exception).
+- **Structural H2s** (`Product Details: [name]` where used, "Care and Maintenance", and the FAQ section H2 -- "FAQs about [name]" on PDPs, the bare "Frequently Asked Questions" on collection pages): Title Case.
+- **FAQ H3 questions** (where used on collection pages): sentence case, first word capitalized.
+
+Rationale: Mike's 2026-06-29 request to standardize the H2 format across PDPs and collection page copy so the same enforcement gap cannot recur in a different content type. One unified house style reduces ambiguity and simplifies enforcement.
 
 ### Broader US/UK distinctions (codify as encountered, not preemptively)
 

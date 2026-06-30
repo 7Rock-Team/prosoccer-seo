@@ -24,17 +24,17 @@ Two practices, a Saturday match, then back at it Monday. Your kid lives on turf,
 
 ### Description (body_html, accordion below product images)
 
-## the everyday turf shoe that keeps up with a busy kid
+## The everyday turf shoe that keeps up with a busy kid
 
 Some kids play soccer on the weekend. Yours plays soccer. Tuesday training, Thursday training, a game Saturday, then a kickaround in the driveway because they can't sit still. For a kid who lives on turf, you don't need the flashiest shoe on the rack. You need one that shows up every day and lasts the season.
 
 That's where the adidas Junior Predator League turf shoe lands. It's the dependable workhorse of the Predator line, built for the kid who's out there constantly and the parent who'd rather not buy a second pair in March.
 
-## what your kid actually gets on the turf
+## What your kid actually gets on the turf
 
 The Predator name has meant control for thirty years, and this junior League build carries that idea at a price that makes sense for a growing foot. A Nanostrike mesh upper stays light and soft, with a haptic overlay so every touch feels true. Underneath, a rubber turf outsole grips the short artificial blades and the older astroturf kids actually train on, which is the whole point of a real turf shoe over a hand-me-down cleat that slides.
 
-## who the Junior Predator League turf is for
+## Who the Junior Predator League turf is for
 
 This is a turf shoe (TF), made for artificial turf and hard, dry surfaces, not the natural grass that calls for studs. It fits the 9-to-14 crowd putting in real reps: the kid who trains most nights and shouldn't outgrow the shoes before they wear them out. The Road to Glory colorway carries the look into the 2026 season.
 

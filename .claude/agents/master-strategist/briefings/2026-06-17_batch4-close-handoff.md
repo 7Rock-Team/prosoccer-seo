@@ -6,6 +6,15 @@ Batch 4 (10 PDPs: 8 adidas Predator Road to Glory SP26 + 2 Nike Croatia 2026 jer
 
 ## Standing follow-ups for next session opening
 
+### RESOLVED 2026-06-29 -- Sentence-case H2 enforcement gap closed + collection-page scope added
+
+Triggered by KK3725: Batch 4's standard-construction Junior League Turf brief shipped 3 lowercase-initial editorial body H2s, violating the 6/17 sentence-case codification (`e6bdec9`), and passed BOTH SCRIBE Phase 4 and ORIN Gate 15. Surfaced during Mike's 6/29 Shopify implementation. Closed in a single coherent codification commit (2026-06-29):
+
+- **Enforcement gap CLOSED.** `scripts/voice_check.py` now flags lowercase-initial editorial body H2s (region between `### Description` and `## Product Details`, "adidas" excepted). Scope-limited so it cannot false-positive on brand tokens, which retires the original deferral concern; reverse Title-Case drift stays with the two human-style gates. Unit tests: `scripts/test_voice_check.py` (4 spec cases + 2 scoping guards, all green). All 10 Batch 4 briefs pass under the new check.
+- **Collection page copy scope ADDED.** The split-casing discipline now explicitly covers collection page copy (editorial body H2s sentence case, structural H2s Title Case, FAQ H3 questions sentence case), effective Batch 5 onward, per Mike's 6/29 request. Codified in `context/workforce-conventions.md` 'H2 title casing and Product Details H2 format'.
+- **KK3725 brief CORRECTED** in `deliverables/page-optimizations/2026-06-17_session-01/` (3 H2 capitalizations + 2026-06-29 `_audit-trail.md` entry). Audit confirmed KK3725 was the SOLE violator across all 10 Batch 4 briefs; the other 9 were already clean.
+- **Live PDP corrections: Mike-owned.** Mike is fixing all Batch 4 implementations directly in Shopify admin. Not a script-side concern.
+
 ### HIGH PRIORITY -- post-Batch-4 codification commits
 
 - **Fabrication-mode SCRIBE Phase 4 self-check codification (URGENCY CONFIRMED -- 4th pattern instance).** Single coherent commit after Batch 4. The trigger from the Batch 3 close is ACTIVATED. Four case studies now: (1) HP9973 fabricated KD scores [Batch 3]; (2) KK1307 invented retail/store detail [Batch 3]; (3) J000691 unverified current-events / squad / qualifying claims [Batch 4, caught at gate]; (4) KJ6746 closure hypothesis [Batch 4, PREVENTED at SCRIBE level by Phase 0 scrape verification]. Codification scope:
@@ -45,7 +54,7 @@ CODIFY (small, future session): Phase 1 keyword-research briefings (KIRA), exemp
 - Reserved-opener blocklist.
 - Full-body word-count rule made explicit.
 - Worked-example refresh (model the new brief + audit-trail structure).
-- voice_check.py casing detection -- still DEFERRED (false-positive risk on brand tokens); revisit only if casing recurs as a Gate 15 issue across 3+ consecutive batches. Batch 4 H2 casing was clean, so no movement.
+- voice_check.py casing detection -- RESOLVED 2026-06-29 (scope-limited backstop shipped; see 'RESOLVED 2026-06-29' under Standing follow-ups above). Correction to this note as originally written: Batch 4 H2 casing was NOT clean -- KK3725 carried 3 lowercase editorial body H2s, surfaced during Mike's 6/29 implementation, and that drift is exactly what closed the deferral.
 
 ### PRODUCTION
 - Mike's 20-PDP Shopify implementation queue (now +10 from Batch 4 = pending implementation).
