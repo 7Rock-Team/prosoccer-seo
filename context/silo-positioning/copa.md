@@ -13,7 +13,7 @@ Reference notes ORIN reads at the pre-dispatch differentiation pass. This sectio
 - Turf (TF) variants (Pro Turf, League Turf): rubber turf outsole for artificial turf; do not claim a specific stud count.
 - **Positioning lane (already canonical in the log below):** Copa = TOUCH / clean first touch / comfort. Distinct from Predator (control/strike) and F50 (speed). Safe Copa framing: "touch / clean first touch / calfskin-soft feel (Elite/Pro only)."
 - **Signature face: do NOT assert a current signature face.** Declan Rice is the current Copa face (TIME-SENSITIVE); prefer evergreen / no-face framing. NOTE: the KI0662 log entry below records "Bernardo Silva" as a historical Copa association at that brief's write time; that entry stays as historical record and is NOT a forward directive for this batch.
-- Pack-secondary keyword "adidas copa pure road to glory" is JUSTIFIED: Copa Pure IV is confirmed in the adidas Road to Glory pack (Solar Red colorway).
+- Pack-secondary keyword "adidas copa pure road to glory" is JUSTIFIED: Copa Pure IV is confirmed in the adidas Road to Glory pack (Solar Turbo / Ivory / Core Black colorway; Phase 0 scrape-verified 2026-06-30 on KI0586, supersedes the earlier research "Solar Red" note).
 
 ## Claimed patterns log
 

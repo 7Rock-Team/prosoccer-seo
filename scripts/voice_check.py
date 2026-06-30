@@ -103,9 +103,17 @@ PEDAGOGICAL_MARKERS = (
 # uppercase and pass. Only PDP/collection briefs carry both region markers, so
 # playbooks and briefings never form a region and never match. Canonical rule:
 # context/page-type-playbooks/product-page-playbook.md 'H2 title casing: split discipline'.
-BODY_H2_REGION_START = re.compile(r"^###\s+Description\b", re.IGNORECASE)
-BODY_H2_REGION_END = re.compile(r"^##\s+Product\s+Details\b", re.IGNORECASE)
-BODY_H2_PATTERN = re.compile(r"^##\s+(\S+)")
+#
+# Heading-level-agnostic (added 2026-06-30 after the KI0586 Copa Elite exemplar
+# surfaced a blind spot): the markers and the body-header pattern match heading
+# levels 2 through 5 (## .. #####), not just ##. KI0586 used #### body sections
+# (one level too deep) with lowercase first words and slipped past the original
+# ##-only check. The Description -> Product Details region and the editorial body
+# headers are now detected regardless of heading depth. Regression: see
+# scripts/test_voice_check.py test_5_ki0586_h4_level_headers_regression.
+BODY_H2_REGION_START = re.compile(r"^#{2,4}\s+Description\b", re.IGNORECASE)
+BODY_H2_REGION_END = re.compile(r"^#{2,5}\s+Product\s+Details\b", re.IGNORECASE)
+BODY_H2_PATTERN = re.compile(r"^#{2,5}\s+(\S+)")
 ADIDAS_H2_EXCEPTION = "adidas"
 
 SUPPORTED_EXTS = {".md", ".txt", ".docx"}

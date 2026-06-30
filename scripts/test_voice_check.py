@@ -111,6 +111,54 @@ class TestLowercaseBodyH2s(unittest.TestCase):
         hits = vc.find_lowercase_body_h2s(text.splitlines())
         self.assertEqual(hits, [], "FAQ H3 is out of scope for this check")
 
+    def test_5_ki0586_h4_level_headers_regression(self):
+        # Regression for the 2026-06-30 KI0586 gap: the Copa Pure IV Elite exemplar
+        # used #### body-section headers (one heading level too deep) with lowercase
+        # first words ("the first touch...", "built for..."). The original ##-only
+        # check missed them and voice_check PASSED a real sentence-case violation.
+        # Built from KI0586's exact original headers. This MUST fail on the pre-patch
+        # ##-only implementation (that failure is the evidence the gap existed) and
+        # pass after the heading-level-agnostic patch. It stays in the suite forever
+        # to prevent re-regression.
+        text = "\n".join([
+            "# adidas Copa Pure IV Elite (Road to Glory Pack)",
+            "",
+            "### Description (body_html, accordion below product images)",
+            "",
+            "#### the first touch that buys you a half-second",   # lowercase -> violation
+            "Some players win games with pace.",
+            "",
+            "#### adidas went back to the classic look",          # adidas opener -> excepted
+            "The fourth-generation Copa Pure drops the knit collar.",
+            "",
+            "#### built for the player who runs the tempo",       # lowercase -> violation
+            "This is a number 8 or a number 10's cleat.",
+            "",
+            "#### Product Details: Copa Pure IV Elite",
+            "- Fusionskin upper",
+        ])
+        hits = vc.find_lowercase_body_h2s(text.splitlines())
+        self.assertEqual(len(hits), 2, f"both lowercase #### headers must be detected, got {hits}")
+        self.assertTrue(any(t.startswith("#### the first touch") for _, t in hits))
+        self.assertTrue(any(t.startswith("#### built for the player") for _, t in hits))
+        self.assertFalse(any("adidas" in t for _, t in hits), "the adidas opener is excepted")
+        self.assertEqual(vc.check(text), 1, "an H4-level lowercase body header must FAIL the check")
+
+    def test_6_h3_level_body_header_detected(self):
+        # A ### body header (between ### Description and ### Product Details) with a
+        # lowercase first word must also be caught.
+        text = "\n".join([
+            "# Title",
+            "### Description (body_html, accordion below product images)",
+            "### lowercase three-hash body header",
+            "prose",
+            "### Product Details: Example",
+            "- bullet",
+        ])
+        hits = vc.find_lowercase_body_h2s(text.splitlines())
+        self.assertEqual(len(hits), 1, f"a ### body header must be detected, got {hits}")
+        self.assertEqual(vc.check(text), 1)
+
     def test_no_region_no_match(self):
         # A non-brief file (no Description -> Product Details region) never matches,
         # even if it contains a lowercase "## " heading somewhere.

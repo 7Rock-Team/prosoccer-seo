@@ -25,6 +25,18 @@ Batch 5 (11 URLs: 5 Copa Pure IV senior, 1 Superfly 11 Pro FG, 1 Tiempo Maestro 
 - Croatia Women's Away SKU J000694-CRFT verified via Shopify Admin API; still missing from the white-label sheet (Mike to add the row).
 - NEXT: dispatch KIRA Phase 1 on the 11 URLs; hold at Checkpoint 1.
 
+### Wave 1 gate / Checkpoint 2b (2026-06-30) -- exemplars + codification maturation
+
+Wave 1 exemplars: KI0586 Copa Pure IV Elite (Copa-family) + 7651TX3926 Bosnia Youth Home. The ORIN gate caught a real defect in KI0586 before skeleton extraction (prevented 5-brief propagation):
+- **Casing codification maturation cycle:** 6/17 sentence-case rule (`e6bdec9`) -> 6/29 voice_check.py `##`-level deterministic backstop (`ea39bcf`) -> 6/30 heading-level-agnostic backstop. KI0586 used `####` body headers (one level too deep) with lowercase first words, which the `##`-only check missed; voice_check.py now detects lowercase editorial body headers at ANY heading level (`##` .. `#####`), with a TDD regression test built from KI0586's exact original headers (fails pre-patch = gap proof, passes post-patch, stays in suite forever). Same maturation pattern as the original KK3725 surface: the rule gets stronger under production load.
+- Fabrication discipline validated on first live test: KI0586 SCRIBE caught the copa.md "Solar Red" guardrail error against the live scrape ("Solar Turbo / Ivory / Core Black") and applied scrape-wins; copa.md guardrail corrected.
+- Bosnia exemplar passed clean (2014 WC debut anchor, Zmajevi gender-neutral, Kelme TIME-SENSITIVE, cycle-language-only, identity prose).
+
+STANDING ITEMS surfaced (carry to next Tony sync):
+- **Bosnia men's jersey PDP gap (sharpened from Checkpoint 1):** the men's Bosnia Home jersey PDP EXISTS, is in stock, and is NOT tracked in the white-label sheet; it currently absorbs the 1,600-9,900/mo Bosnia head-term demand unoptimized. Recommendation: add a men's Bosnia jersey to a future SEO batch + add the sheet row. Actionable, not speculative.
+- **Bosnia-specific collection** `/collections/bosnia-and-herzegovina-national-soccer-team-jerseys-apparel` validated live (H1 + 3 products); now the internal-link target for the Bosnia briefs (applied to the Home exemplar; Wave 2 Away sibling to use it).
+- **White-label sheet rows pending (Mike-side):** J000694-CRFT Croatia Women's Away; men's Bosnia Home PDP.
+
 ### HIGH PRIORITY -- post-Batch-4 codification commits
 
 - **Fabrication-mode SCRIBE Phase 4 self-check codification.** **RESOLVED 2026-06-29** (folded into the Batch 5 pre-dispatch commit; see 'RESOLVED 2026-06-29 (B)' above). Original urgency note (4th pattern instance; trigger from Batch 3 close ACTIVATED): Four case studies now: (1) HP9973 fabricated KD scores [Batch 3]; (2) KK1307 invented retail/store detail [Batch 3]; (3) J000691 unverified current-events / squad / qualifying claims [Batch 4, caught at gate]; (4) KJ6746 closure hypothesis [Batch 4, PREVENTED at SCRIBE level by Phase 0 scrape verification]. Codification scope:
