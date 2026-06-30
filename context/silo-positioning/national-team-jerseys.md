@@ -45,3 +45,39 @@ Reference notes ORIN reads at the pre-dispatch differentiation pass. Separate fr
 - Use case scenario: the parent shopping the away kit for a young supporter or youth player; youth sizing YXS-YXL with growth allowance
 - Angle of emphasis: youth sizing + growth + durability; the AWAY deep-royal-blue colorway (shares the away color with J000693 men's away, differentiated by the parent/youth lens and age); evergreen and team-neutral; NON-FIFA cycle language (Nike)
 - Heritage angle: the sahovnica checkerboard rendered in away royal blue; Nike as Croatia's 2026 (and final) kit supplier before adidas takes over
+
+### SKU J000692-CRFT (Nike Croatia Youth Stadium Home 2026)
+- Brief: `deliverables/page-optimizations/2026-06-30_session-01/J000692-CRFT_..._brief.md` (commit a34c7d6, Batch 5; youth-home precedent)
+- Date: 2026-06-30
+- Opening hook approach: the one your kid points at first; parent / young-fan, the HOME shirt
+- Primary metaphor: parent / young-fan identity, the look the world knows Croatia by (NOT J000695's away "flip it to blue" lens)
+- Use case scenario: parent buying the HOME youth jersey for a young Croatia fan; on-page Modric 10 customization option
+- Angle of emphasis: youth HOME red-and-white sahovnica; Stadium tier; the Modric 10 customization angle (sibling pages did not use); evergreen, team-neutral; Nike non-FIFA cycle language only
+- Heritage angle: red-and-white sahovnica from the national coat of arms (evergreen; "Vatreni"/"Kockasti" avoided)
+
+### SKU J000694-CRFT (Nike Croatia Women's Stadium Away 2026)
+- Brief: `deliverables/page-optimizations/2026-06-30_session-01/J000694-CRFT_..._brief.md` (commit a34c7d6, Batch 5; women's-cut away precedent)
+- Date: 2026-06-30
+- Opening hook approach: reach past the red-and-white, the away crowd, on the road
+- Primary metaphor: women's-fan away identity through the gender umbrella (NOT J000691's "cut for her, not borrowed off the men's rack" home lens)
+- Use case scenario: female Croatia supporter or player buying the women's-cut AWAY shirt for the 2026 cycle
+- Angle of emphasis: women's-cut AWAY royal-blue; gender-umbrella primary `women's croatia jersey`; Stadium tier; evergreen, gender/team-neutral
+- Heritage angle: the sahovnica checkerboard in away royal blue (evergreen; "Vatreni"/"Lavice" avoided per the women's-cut-replica precedent)
+
+### SKU 7651TX3926 (Kelme Bosnia and Herzegovina Youth Stadium Home 2026) [Batch 5, first Bosnia / first Kelme, exemplar]
+- Brief: `deliverables/page-optimizations/2026-06-30_session-01/7651TX3926_..._brief.md` (commit 812b613, Batch 5 Wave 1 exemplar)
+- Date: 2026-06-30
+- Opening hook approach: there's a kid in your house who claims Bosnia as their own and wants the shirt to prove it
+- Primary metaphor: parent / young-fan homeland-heritage identity (diaspora pride), the kid-friendly Dragons hook
+- Use case scenario: parent buying the HOME youth jersey for a young Bosnian-diaspora fan
+- Angle of emphasis: youth HOME blue; Zmajevi (The Dragons) gender-neutral; golden lily; Kelme (non-FIFA) cycle language only; evergreen
+- Heritage angle: Zlatni Ljiljani golden lily / fleur-de-lis, blue + flag white stars, the 2014 World Cup debut (3-1 over Iran) as the evergreen anchor (never "first/only WC")
+
+### SKU 7651TX3927 (Kelme Bosnia and Herzegovina Youth Stadium Away 2026) [Batch 5, youth-away sibling]
+- Brief: `deliverables/page-optimizations/2026-06-30_session-01/7651TX3927_..._brief.md` (commit a34c7d6, Batch 5)
+- Date: 2026-06-30
+- Opening hook approach: the kid who wants the other one, the away shirt
+- Primary metaphor: parent / young-fan away-shirt identity (distinct from the Home exemplar's "claims Bosnia as their own")
+- Use case scenario: parent buying the AWAY youth jersey for a young Bosnia fan (sizing YL and YXL only per scrape)
+- Angle of emphasis: youth AWAY White/Navy (scrape-confirmed, not blue); Zmajevi (The Dragons); Kelme (non-FIFA) cycle language only; evergreen
+- Heritage angle: Zlatni Ljiljani golden lily heritage emblem, away white/navy, the 2014 World Cup debut as the evergreen anchor

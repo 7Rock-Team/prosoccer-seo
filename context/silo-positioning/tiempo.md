@@ -31,3 +31,12 @@ Reference notes ORIN reads at the pre-dispatch differentiation pass. Separate fr
 - Use case scenario: the deep-lying playmaker who plays and trains on artificial grass (turf clubs, weeknight 3G) and wants leather feel on synthetic
 - Angle of emphasis: leather touch and control engineered for AG; the AG-Pro conical plate keeping the touch player gripping where a firm-ground sole catches
 - Heritage angle: the Tiempo leather lineage carried into the Maestro silo via TECHLEATHER, with the AG-Pro plate so touch survives the move to turf
+
+### SKU IQ2388-901 (Tiempo Maestro Academy Turf)
+- Brief: `deliverables/page-optimizations/2026-06-30_session-01/IQ2388-901_..._brief.md` (commit a34c7d6, Batch 5; first Academy tier + first Tiempo Turf)
+- Date: 2026-06-30
+- Opening hook approach: soft leather, real touch, made for turf, settle the ball rather than blast it
+- Primary metaphor: leather that feels broken in on day one
+- Use case scenario: entry-tier turf and rec player on artificial turf (Jennifer parent + Tyler rec player)
+- Angle of emphasis: entry Academy tier (League/Club word band), soft FlyTouch-leather touch on turf at value; rubber turf outsole
+- Heritage angle: Tiempo leather-touch lineage carried to the Academy entry tier; FlyTouch leather (scrape; NOT Techleather/Maestro360, NOT the k-leather Legend)

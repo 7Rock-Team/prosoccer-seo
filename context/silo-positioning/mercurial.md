@@ -56,3 +56,12 @@ Reference notes ORIN reads at the pre-dispatch differentiation pass. Separate fr
 - Use case scenario: the attacking midfielder or winger winning in tight space on dry natural grass, at Pro-tier value
 - Angle of emphasis: the Vapor close-control agility game (change of direction in tight space) at the Pro tier, not straight-line speed
 - Heritage angle: the Vapor agility lineage within Nike's Mercurial line; the Pro build a step below the Elite's stripped-back AtomKnit/FlyLite package
+
+### SKU IO8224-900 (Mercurial Superfly 11 Pro FG)
+- Brief: `deliverables/page-optimizations/2026-06-30_session-01/IO8224-900_..._brief.md` (commit a34c7d6, Batch 5; first Pro-tier Superfly)
+- Date: 2026-06-30
+- Opening hook approach: the back half of the thirty-yard chase, pulling clear at top speed (the sustain, not the start out of the blocks)
+- Primary metaphor: the breakaway sustained, straight-line top-end speed
+- Use case scenario: winger or striker pulling clear on dry natural grass at Pro-tier value
+- Angle of emphasis: high-cut straight-line speed at Pro value, a step below the Elite's stripped-back package; FlyWeave upper + Air Zoom forefoot (no ZoomX)
+- Heritage angle: Mercurial speed lineage; the Superfly high-cut identity (vs the Vapor low-cut agility line)

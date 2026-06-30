@@ -26,3 +26,48 @@ Reference notes ORIN reads at the pre-dispatch differentiation pass. This sectio
 - Use case scenario: a parent (the Jennifer avatar) buying for a developing or rec youth player on firm ground, Saturday league and school matches, growing feet
 - Angle of emphasis: the League value tier as most of the pro Copa feel at a price that fits a still-growing foot, comfort and clean first touch over speed
 - Heritage angle: the Copa Pure IV return to the classic look (low floating tongue plus the adiPure pinline heel to toe), the Copa touch worn across the line by players like Bernardo Silva and Sam Coffey, sized down for younger feet
+
+### SKU KI0586 (Copa Pure IV Elite FG, senior exemplar)
+- Brief: `deliverables/page-optimizations/2026-06-30_session-01/KI0586_..._brief.md` (commit 812b613, Batch 5 Wave 1 exemplar)
+- Date: 2026-06-30
+- Opening hook approach: the half-second after the ball arrives, the first touch that buys you time before the defender reads the move
+- Primary metaphor: the tempo-running playmaker who reads the game a beat early (No.8 / No.10), touch over pace
+- Use case scenario: senior playmaker dictating tempo on firm natural grass and well-kept pitches
+- Angle of emphasis: premium Elite calfskin touch that makes your best touch repeatable; flagship tier
+- Heritage angle: gen-IV return to the classic look (floating tongue + adiPure pinline), Fusionskin calfskin forefoot, Comfort Frame; evergreen, no current face
+
+### SKU KI0625 (Copa Pure IV Pro FG)
+- Brief: `deliverables/page-optimizations/2026-06-30_session-01/KI0625_..._brief.md` (commit a34c7d6)
+- Date: 2026-06-30
+- Opening hook approach: take the ball on the half-turn and it stops right where you wanted, the first touch that decides whether the move lives
+- Primary metaphor: the decisive first-touch in tight space, close-quarters control
+- Use case scenario: serious player on firm natural grass at Pro-tier value
+- Angle of emphasis: most of the Elite's touch without flagship money; Fusionskin calfskin + Primeknit tongue (scrape override vs floating)
+- Heritage angle: Copa touch lineage, adiPure pinline, gen-IV classic look
+
+### SKU KI0630 (Copa Pure IV Pro Turf)
+- Brief: `deliverables/page-optimizations/2026-06-30_session-01/KI0630_..._brief.md` (commit a34c7d6)
+- Date: 2026-06-30
+- Opening hook approach: weeknight five-a-side, tight pocket, a defender on your shoulder before the ball lands
+- Primary metaphor: the small-sided game decided in tight turf spaces
+- Use case scenario: Pro-tier turf and small-sided regular on artificial turf
+- Angle of emphasis: Copa touch rebuilt for turf; Fusionfeel 2.0 synthetic + Touchprint grip + rubber turf outsole (NOT calfskin)
+- Heritage angle: Copa heritage carried onto turf
+
+### SKU KI0645 (Copa Pure IV League Turf)
+- Brief: `deliverables/page-optimizations/2026-06-30_session-01/KI0645_..._brief.md` (commit a34c7d6)
+- Date: 2026-06-30
+- Opening hook approach: most of a young player's soccer happens on turf, and the ball has to behave
+- Primary metaphor: entry-tier Copa feel made for the turf player
+- Use case scenario: value / youth / rec player on artificial turf (Jennifer + Mike the Coach)
+- Angle of emphasis: most of the Copa feel for less; synthetic Fusionfeel soft touch; rubber turf outsole; entry tier
+- Heritage angle: Copa touch at the entry tier
+
+### SKU KI0653 (Copa Pure IV League FG)
+- Brief: `deliverables/page-optimizations/2026-06-30_session-01/KI0653_..._brief.md` (commit a34c7d6)
+- Date: 2026-06-30
+- Opening hook approach: most cleats make you earn the comfort with blisters first, this one plays soft from the box
+- Primary metaphor: comfort-from-day-one, no break-in (gear a developing player forgets they are wearing)
+- Use case scenario: developing / rec value player on firm natural grass (Jennifer)
+- Angle of emphasis: most of the Copa feel and comfort at a friendlier price; synthetic Fusionfeel (NOT leather, explicit FAQ); Comfort Plate TPU; senior clean term vs junior KI0662
+- Heritage angle: Copa touch lineage, the accessible League build
