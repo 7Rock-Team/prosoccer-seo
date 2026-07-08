@@ -10,6 +10,11 @@ Reference notes ORIN reads at the pre-dispatch differentiation pass. Separate fr
 - Superfly is NOT new to this silo: Superfly 11 Elite FG (IO8219-900) and Elite AG (IO8221-900) already shipped. IO8224-900 is the first **Pro-tier** Superfly, a tier step-down, not a new model. Mirror the Pro-tier handling already used for the Vapor 17 Pro (IO8225-900): the speed lineage at Pro value, a step below the Elite's stripped-back AtomKnit/FlyLite package.
 - Differentiation holds: **Superfly = high-cut, straight-line speed** (vs Vapor = low-cut agility / close control). Keep the Pro entry's hook distinct from the Elite Superfly entries already in the log.
 
+### Vapor 17 Pro FG Shadow Pack (IF8512-001) (added 2026-07-08, Batch 6)
+- IF8512-001 (Vapor 17 Pro FG, Shadow Pack) is a same-model / same-tier / same-surface COLORWAY re-run of the shipped IO8225-900 (Vapor 17 Pro FG, Breakout Pack). It MUST differentiate against IO8225's log entry below: forbidden carry-forward of the "pickpocket's sleight of hand" metaphor and the "receiving with a defender on your shoulder, touch-and-turn into the seam" hook.
+- Keep the Vapor low-cut agility / close-control lane (vs Superfly high-cut speed), but with a fresh hook, metaphor, and scene.
+- Pack-secondary keyword ("nike shadow pack" / a Vapor Shadow term) pending KIRA Phase 1. Shadow colorway pending Phase 0 scrape (Firecrawl-dependent; see `work-log/follow-ups.md` 2026-07-08).
+
 ## Claimed patterns log
 
 ### SKU IO8219-900 (Mercurial Superfly 11 Elite FG)

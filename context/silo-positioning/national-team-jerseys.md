@@ -17,6 +17,30 @@ Reference notes ORIN reads at the pre-dispatch differentiation pass. Separate fr
 - **Youth/parent angle:** Bosnian-diaspora heritage pride (large US communities); the jersey as homeland connection, not results-fandom. Keeps framing evergreen.
 - Player associations (Dzeko, Pjanic, Begovic) are historical; any active/retired status is TIME-SENSITIVE, avoid current-squad claims.
 
+### Jamaica (added 2026-07-08, from ORIN research for Batch 6 adidas Authentic Away)
+- **Identity:** "Reggae Boyz" is the MEN's team nickname (picked up on a 1995 Zambia visit). The women's team is "Reggae Girlz." Use Reggae Boyz for this men's kit; do not apply it to the women's team.
+- **Colors / motif:** green, black, gold, drawn from the Jamaican flag (green = land and hope, gold = sunlight and natural wealth, black = the strength and creativity of the people). Evergreen flavor anchor: Jamaica's is one of only two national flags with no red, white, or blue (the other is Mauritania).
+- **Federation:** Jamaica Football Federation (JFF, est. 1910); CONCACAF (Caribbean Football Union); FIFA code JAM.
+- **Evergreen heritage anchor:** the France 1998 DEBUT (first English-speaking Caribbean nation to qualify) and the 2-1 win over Japan on 26 June 1998 in Lyon, Theodore Whitmore scoring both goals. Gold Cup runner-up in 2015 and 2017.
+- **FORBIDDEN: "only World Cup" / "only appearance."** Jamaica did NOT directly qualify for 2026 and sits in the inter-confederation playoff (unresolved), so "only" is falsifiable. Use "debut" / "their first World Cup appearance, at France 1998."
+- **Brand / IP:** adidas is the CURRENT supplier (January 2023 through the 2026 cycle, replacing Umbro). TIME-SENSITIVE. adidas is the FIFA commercial licensee, so FIFA / World Cup terminology IS permitted on this PDP. The tournament-status evergreen discipline still applies: no "chasing the trophy," no "qualified for 2026," no live-bracket framing.
+- **Tier:** this SKU is Authentic (match-spec). adidas Authentic = HEAT.RDY, tighter player fit, heat-pressed badges; Stadium (replica) = AEROREADY doubleknit, regular fan fit, embroidered badges. Do not combine tier words ("Authentic Stadium"). Verify the specific spec from the SKU's Phase 0 scrape (scrape-wins).
+
+### DR Congo (added 2026-07-08, from ORIN research for Batch 6 Umbro Authentic Home + Away)
+- **Identity:** "Les Léopards" (The Leopards), applied to the team generally. The women's team is "Léopards dames" -- do NOT coin a new women's variant. Lower-confidence secondary men's names exist ("La Céleste" / The Skyblue, "Guerriers de l'Équateur"); use with care.
+- **Colors / motif:** sky-blue field with gold and red flag accents (the DRC flag is sky blue with a red diagonal stripe bordered yellow and a yellow star). The sky-blue/gold/red palette is evergreen; a specific kit's design is cycle-dependent, so verify the SKU's design from its Phase 0 scrape (scrape-wins).
+- **Federation:** Fédération Congolaise de Football-Association (FECOFA); CAF; FIFA code COD (FIFA displays the team as "Congo DR").
+- **Evergreen heritage anchors:** two AFCON titles, 1968 (as Congo-Kinshasa, 1-0 over Ghana) and 1974 (as Zaire); and the 1974 finals appearance as Zaire.
+- **Brand / IP:** Umbro is the CURRENT supplier (documented back to the 2022/24 cycle; exact contract start not verified, so use "current Umbro kits," not a hard start year). TIME-SENSITIVE. Umbro is non-adidas, so FIFA / "World Cup" terminology is FORBIDDEN (cycle language only), the same discipline as Kelme and Nike. Even historical "World Cup" references use substitution: write "the 1974 finals as Zaire," not "1974 World Cup," on this Umbro page.
+- **Tournament note:** DR Congo qualified for the 2026 finals (beat Jamaica 1-0 after extra time on 31 March 2026, a settled fact). On an Umbro page this may surface ONLY via neutral substitution ("sealed their place in the 2026 international tournament," "the 2026 cycle"), never "World Cup." Evergreen-default framing still applies; do not manufacture live-bracket chrome.
+
+### Korea (South Korea / Korea Republic) (added 2026-07-08, from ORIN research for Batch 6 Nike Stadium Home)
+- **Identity:** "Taegeuk Warriors" (태극전사), also "the Reds" and "Tigers of Asia," applied to the team generally. No verified women's-specific nickname, so do NOT assert one. FIFA registers the team as "Korea Republic."
+- **Colors:** red primary heritage (source of "the Reds"); white and blue secondary (away and crest). The taegeuk (the red-and-blue flag symbol of balance and harmony) is the identity anchor.
+- **Federation:** Korea Football Association (KFA); AFC (and the regional EAFF); FIFA code KOR.
+- **Evergreen heritage anchors:** the 2002 fourth-place semi-final run on home soil (beat Italy and Spain en route; first team from outside Europe and the Americas to reach that stage); and back-to-back AFC Asian Cup titles in 1956 and 1960 (do not imply a recent Asian Cup title; there has been none since 1960). For consistency, phrase as "one of Asia's most consistent qualifiers" or "a decades-long run of appearances"; do NOT hard-code a consecutive-appearance count (it changes).
+- **Brand / IP:** Nike is the CURRENT supplier (listed since 1996). TIME-SENSITIVE (frame as a "long-standing Nike partnership," not an evergreen fact). Nike is non-adidas, so FIFA / "World Cup" terminology is FORBIDDEN (cycle language only). The 2002 result is a historical anchor described without the FIFA / "World Cup" wordmark: write "the 2002 tournament on home soil" or "their semi-final run," not "2002 World Cup," on this Nike page.
+
 ## Claimed patterns log
 
 ### SKU J000693-CRFT (Nike Croatia Men's Stadium Away 2026)

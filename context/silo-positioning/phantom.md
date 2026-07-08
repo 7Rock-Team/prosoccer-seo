@@ -2,6 +2,27 @@
 
 Per-SKU prose patterns claimed in shipped briefs for the Nike Phantom silo (the touch-and-control line). Format and append protocol: see `README.md` in this directory. ORIN reads this file during the pre-dispatch differentiation pass and appends after each batch commits.
 
+## Pre-dispatch reference / guardrails
+
+Reference notes ORIN reads at the pre-dispatch differentiation pass. Separate from the append-only per-SKU log below.
+
+### Junior tier (added 2026-07-08, Batch 6, first junior in this silo)
+- IR4192-661 (Jr Phantom 6 Low Pro FMG) is the FIRST junior entry in the Phantom silo. The senior log below is all Elite / Pro adult SKUs.
+- "Low Pro" is the Pro tier in junior sizing (Nike tier ladder: Elite > Pro > Academy > Club). Junior Pro is the junior equivalent of the senior Pro tier. Confirm the tier and spec from the SKU's Phase 0 scrape (scrape-wins); do not assert tier from the product name alone.
+- **Avatar lane:** parent / developing-young-player milestone framing, NOT the senior performance lane. Mirror `copa.md` KI0662 (the Jennifer-parent lane: the child's real cleats framed as a reward earned, sized for growing feet), adapted to the Phantom control DNA rather than Copa touch.
+- **Word-count band:** by tier-equivalence, the Pro band (340 to 390) applies unless the SKU's scrape and complexity say otherwise.
+
+### FMG surface (added 2026-07-08, Batch 6, first in this silo)
+- FMG = firm-multi-ground: a hybrid stud plate built for firm natural grass plus harder and some artificial surfaces. It is the versatile across-surfaces option, distinct from the silo's dedicated FG (firm natural grass) and AG (artificial-grass-specific) plates already logged below.
+- Do not claim a specific stud count; confirm the plate description from the SKU's Phase 0 scrape (scrape-wins).
+
+### Shadow Pack anti-convergence (added 2026-07-08, Batch 6)
+The Batch 6 Phantom Shadow SKUs are same-model / same-tier / same-surface COLORWAY re-runs of shipped Batch 1 (2026-06-08) Breakout Pack SKUs, so they MUST differentiate against the prior-batch log below, not just against current-batch siblings:
+- **HJ2147-001 (High Elite FG Shadow) vs IH1779-900 (High Elite FG Breakout):** forbidden carry-forward of IH1779's marksman / rehearsed-aim metaphor and its "moment of the strike" hook. Fresh hook, metaphor, and scene.
+- **HQ2329-001 (High Elite AG Shadow) vs IQ1869-900 (High Elite AG Breakout):** forbidden carry-forward of IQ1869's "armor at the ankle / fortress at the joint" metaphor and its "week on the turf" hook. Fresh hook, metaphor, and scene.
+- **HJ2146-001 (Low Elite FG Shadow):** a new tier-by-surface combo in this silo. Differentiate against IQ1870-900 (Low Elite AG, "surface-matched specialist") and IQ1886-900 (Low Pro FG, "dependable workhorse").
+- Pack-secondary keyword ("nike phantom 6 shadow" / "nike shadow pack") pending KIRA Phase 1. Shadow colorway pending Phase 0 scrape (Firecrawl-dependent; see `work-log/follow-ups.md` 2026-07-08).
+
 ## Claimed patterns log
 
 ### SKU IH1779-900 (Phantom 6 High Elite FG)
