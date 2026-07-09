@@ -45,3 +45,12 @@ The Club Jersey template is **CANONICAL** (validated on Liverpool 2024-25 Nike A
 - Use case scenario: the Liverpool supporter buying the Stadium (replica) away shirt to wear on the road, in the away end, and on the high street
 - Angle of emphasis: the Stadium (replica) tier versus Authentic; the away Night Forest colorway; the season-record narrative (the title-winning debut campaign); and the Hillsborough eternal-flames tribute detail
 - Heritage angle: the Liver Bird crest; the Hillsborough 97 eternal-flames tribute (crossed torches, the 97 numerals); the debut-season title that equaled the all-time English league-title record; and Nike's farewell as supplier before the club moved to adidas from 2025-26
+
+### SKU II1663-453 (Nike Chelsea Youth Stadium Home 2026-27) [Batch 6, first club under Registry 2]
+- Brief: `deliverables/page-optimizations/2026-07-08_session-01/II1663-453_nike-2026-27-chelsea-youth-stadium-home_brief.md` (commit f6c3f76)
+- Date: 2026-07-08
+- Opening hook approach: parent / young-fan; the kid who chose Chelsea (passed down or through their own hero) getting the home blue that makes it official
+- Primary metaphor: club belonging claimed or passed down (the young Blue); distinct from national-pride jersey lanes AND from Liverpool's "title kit" away lens
+- Use case scenario: a parent buying the youth home Stadium shirt for a young Chelsea fan; youth sizing with growth; watch party and wearing to play
+- Angle of emphasis: youth club loyalty plus the Stadium (replica) tier; Premier League named directly, Champions League as generic "two-time European champions"
+- Heritage angle: The Blues; Stamford Bridge (Fulham, west London), founded 1905; royal blue; five Premier League titles; Nike supplier; Cole Palmer player-spotlight internal link

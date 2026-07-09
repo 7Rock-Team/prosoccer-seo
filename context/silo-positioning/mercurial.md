@@ -70,3 +70,12 @@ Reference notes ORIN reads at the pre-dispatch differentiation pass. Separate fr
 - Use case scenario: winger or striker pulling clear on dry natural grass at Pro-tier value
 - Angle of emphasis: high-cut straight-line speed at Pro value, a step below the Elite's stripped-back package; FlyWeave upper + Air Zoom forefoot (no ZoomX)
 - Heritage angle: Mercurial speed lineage; the Superfly high-cut identity (vs the Vapor low-cut agility line)
+
+### SKU IF8512-001 (Mercurial Vapor 17 Pro FG Shadow) [Batch 6, Shadow pack; cedes generic to shipped IO8225]
+- Brief: `deliverables/page-optimizations/2026-07-08_session-01/IF8512-001_nike-vapor-17-pro-fg-shadow_brief.md` (commit 496ed06)
+- Date: 2026-07-08
+- Opening hook approach: the run the fullback never saw start; drifting wide and past his shoulder before he turns his head
+- Primary metaphor: the ghosted run, arriving unseen (Vapor low-cut agility and close-control burst, NOT straight-line speed)
+- Use case scenario: the winger or attacking mid winning in tight space on dry firm natural grass at Pro value
+- Angle of emphasis: Vapor agility and close control at the Pro tier for arriving unseen (distinct from IO8225's pickpocket close-quarters framing)
+- Heritage angle: the Vapor low-cut agility lineage within the Mercurial line (vs Superfly straight-line speed); Flyknit + thin plate + chevron studs; Shadow Pack

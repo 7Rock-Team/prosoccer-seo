@@ -105,3 +105,39 @@ Reference notes ORIN reads at the pre-dispatch differentiation pass. Separate fr
 - Use case scenario: parent buying the AWAY youth jersey for a young Bosnia fan (sizing YL and YXL only per scrape)
 - Angle of emphasis: youth AWAY White/Navy (scrape-confirmed, not blue); Zmajevi (The Dragons); Kelme (non-FIFA) cycle language only; evergreen
 - Heritage angle: Zlatni Ljiljani golden lily heritage emblem, away white/navy, the 2014 World Cup debut as the evergreen anchor
+
+### SKU KB7474 (adidas Jamaica Men's Authentic Away 2026) [Batch 6, first Jamaica, first adidas Authentic]
+- Brief: `deliverables/page-optimizations/2026-07-08_session-01/KB7474_adidas-2026-jamaica-mens-authentic-away_brief.md` (commit 496ed06)
+- Date: 2026-07-08
+- Opening hook approach: the Reggae Boyz identity through the unmistakable Jamaican colors read across a room; the Authentic away shirt as a cultural statement
+- Primary metaphor: national and cultural pride carried in the flag's green, black, and gold (deliberately not athletic performance)
+- Use case scenario: the Jamaica supporter or diaspora fan buying the Authentic away shirt for the 2026 cycle (watch party, culture, matchday)
+- Angle of emphasis: the Authentic (match-spec) tier plus the cultural away identity; adidas is FIFA-permitted but the copy stays evergreen
+- Heritage angle: the France 1998 debut and the 2-1 over Japan (Whitmore); green/black/gold from the flag; adidas Authentic (Climacool+, heat-pressed badges); the black-based Bob Marley away
+
+### SKU IU3861-679 (Nike Korea Men's Stadium Home 2026) [Batch 6, first Korea]
+- Brief: `deliverables/page-optimizations/2026-07-08_session-01/IU3861-679_nike-2026-korea-mens-stadium-home_brief.md` (commit 496ed06)
+- Date: 2026-07-08
+- Opening hook approach: pull on the red and you're one of the Taegeuk Warriors; the red that speaks for you before you say a word
+- Primary metaphor: national pride through the red heritage and the taegeuk (balance and harmony) symbolism
+- Use case scenario: the Korea supporter or Korean-American fan buying the red home Stadium shirt for the 2026 cycle
+- Angle of emphasis: the Taegeuk Warriors red home identity at the Stadium (replica) tier; Nike non-FIFA cycle language
+- Heritage angle: the 2002 semi-final run on home soil (no World Cup wordmark on a Nike page); back-to-back Asian Cup 1956 + 1960; KFA / AFC; taegeuk red; the long-standing Nike partnership
+
+### SKU DRCHRM25 (Umbro DR Congo Men's Authentic Home 2026) [Batch 6, first DR Congo + first Umbro, NT exemplar]
+- Brief: `deliverables/page-optimizations/2026-07-08_session-01/DRCHRM25_umbro-2026-dr-congo-mens-authentic-home_brief.md` (commit f6c3f76)
+- Date: 2026-07-08
+- Opening hook approach: pull on the sky blue and you carry the colors of one of African football's proudest names; the home anthem-moment identity
+- Primary metaphor: the Leopards as national identity and heritage pride (home heritage-pride lens; evergreen, not athletic performance)
+- Use case scenario: the DR Congo supporter or diaspora fan buying the Authentic home shirt for the 2026 cycle
+- Angle of emphasis: Les Léopards home sky-blue heritage at the Authentic (match-spec) tier; Umbro non-FIFA cycle language plus substitution
+- Heritage angle: AFCON titles 1968 (as Congo-Kinshasa) and 1974 (as Zaire), the finals as Zaire; FECOFA / CAF; sky blue / gold / red; Umbro
+
+### SKU DRCARM25 (Umbro DR Congo Men's Authentic Away 2026) [Batch 6, DR Congo away sibling]
+- Brief: `deliverables/page-optimizations/2026-07-08_session-01/DRCARM25_umbro-2026-dr-congo-mens-authentic-away_brief.md` (commit 496ed06)
+- Date: 2026-07-08
+- Opening hook approach: the Leopards wherever the game takes them; the white change strip carried into someone else's stadium (away-day / roaming lens)
+- Primary metaphor: the away-day / roaming identity, the change strip on the road (distinct from Home's anthem-moment heritage-pride)
+- Use case scenario: the DR Congo supporter buying the Authentic away shirt for the 2026 cycle
+- Angle of emphasis: the away White/Light-Blue colorway plus the roaming / away-support lens at the Authentic tier; Umbro non-FIFA plus substitution
+- Heritage angle: the same evergreen anchors as Home (AFCON 1968 and 1974, the finals as Zaire, FECOFA / CAF, Les Léopards) foregrounded through the away lens

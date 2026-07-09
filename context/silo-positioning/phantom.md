@@ -60,3 +60,39 @@ The Batch 6 Phantom Shadow SKUs are same-model / same-tier / same-surface COLORW
 - Use case scenario: the finisher who plays and trains on artificial grass and wants maximum ankle lockdown, weeknight 3G under lights
 - Angle of emphasis: the locked-in finisher on artificial grass; ankle support plus a surface-matched plate
 - Heritage angle: high-cut Phantom heritage; the Dynamic Fit collar paired with the AG-Pro plate for confidence on demanding artificial pitches
+
+### SKU IR4192-661 (Jr Phantom 6 Low Pro FMG) [Batch 6, first junior + first FMG]
+- Brief: `deliverables/page-optimizations/2026-07-08_session-01/IR4192-661_nike-jr-phantom-6-low-pro-fmg_brief.md` (commit f6c3f76)
+- Date: 2026-07-08
+- Opening hook approach: parent milestone; the season a young player starts shaping real passes and earns the step up
+- Primary metaphor: the do-it-all first serious cleat, one pair for whatever surface the weekend brings (NOT a senior single-surface specialist)
+- Use case scenario: the developing youth player (Jennifer parent avatar) on mixed firm and artificial surfaces, Saturday club and school, growing feet, low cut
+- Angle of emphasis: Phantom control sized for junior feet at the Pro tier without the flagship price; FMG multi-surface versatility
+- Heritage angle: Phantom control DNA (VNMSkin + Flyknit, Cyclone 360) at Junior Pro; the FMG plate as the versatile across-surfaces option
+
+### SKU HJ2147-001 (Phantom 6 High Elite FG Shadow) [Batch 6, Shadow-pack exemplar]
+- Brief: `deliverables/page-optimizations/2026-07-08_session-01/HJ2147-001_nike-phantom-6-high-elite-fg-shadow_brief.md` (commit f6c3f76)
+- Date: 2026-07-08
+- Opening hook approach: the creator who shapes one way and plays the other, gone from the defender's picture for the half-second that decides the move
+- Primary metaphor: the shadow the defense loses on the blind side; disguise of the pass
+- Use case scenario: the creative forward or number ten on dry firm natural grass who wins with disguise and weight of pass, top tier, high collar
+- Angle of emphasis: disguise and vision in the final third at the top tier on firm ground (the Shadow-pack pass-disguise facet)
+- Heritage angle: Phantom accuracy line; Gripknit across the upper; the Shadow Pack (Black/Black/Illusion Green)
+
+### SKU HJ2146-001 (Phantom 6 Low Elite FG Shadow) [Batch 6, Shadow mirror]
+- Brief: `deliverables/page-optimizations/2026-07-08_session-01/HJ2146-001_nike-phantom-6-low-elite-fg-shadow_brief.md` (commit 496ed06)
+- Date: 2026-07-08
+- Opening hook approach: the low-cut playmaker who takes it on the half-turn, into the space the set defender was guarding before he can shift his weight
+- Primary metaphor: disguise of the first step, the movement before the pass; the half-turn a set defender can't read
+- Use case scenario: the low-cut playmaker on dry firm natural grass who wins with quickness of release, Elite control
+- Angle of emphasis: Elite control in a low cut for the quick first step and release on firm ground (distinct from HJ2147's pass-disguise)
+- Heritage angle: Phantom control DNA at the Elite tier in a low cut; Gripknit + Cyclone 360; Shadow Pack colorway
+
+### SKU HQ2329-001 (Phantom 6 High Elite AG Shadow) [Batch 6, Shadow mirror; cedes generic to shipped IQ1869]
+- Brief: `deliverables/page-optimizations/2026-07-08_session-01/HQ2329-001_nike-phantom-6-high-elite-ag-shadow_brief.md` (commit 496ed06)
+- Date: 2026-07-08
+- Opening hook approach: the turn the defender never tracks; the plant-and-go on synthetic under lights, finished before he resets his feet
+- Primary metaphor: the elusive cut on the turf, slipping the marker on artificial grass (elusiveness, NOT IQ1869's lockdown/support)
+- Use case scenario: the finisher or playmaker who lives on artificial grass (weeknight 3G) and wins by slipping markers, high collar
+- Angle of emphasis: elusiveness and disguise on artificial grass at the High Elite tier (distinct from IQ1869's ankle-lockdown framing)
+- Heritage angle: high-cut Phantom control on the AG-Pro plate tuned for synthetic; Gripknit; Shadow Pack colorway
