@@ -475,6 +475,20 @@ Mechanism B (the forbidden-phrasings backstop for pack/series batches) used to c
 
 Cross-references: `.claude/agents/master-strategist/agent.md` Section 9 'Exemplar handoff' (Mechanism A/B, three-tier extraction), `.claude/agents/on-page-seo/agent.md` Section 9 'Exemplar handoff' (SCRIBE write-around self-check), `scripts/batch_gate.py` + `scripts/test_batch_gate.py` (checks #6/#7/#8 and the Shadow-convergence regression tests), Batch 6 audit-trail Shadow-set convergence note (`deliverables/page-optimizations/2026-07-08_session-01/_audit-trail.md`).
 
+## Wave collapse: parallel-default dispatch (v2, added 2026-07-10)
+
+v1 dispatched in sequential waves: Wave 1 (exemplars) -> ORIN manual gate -> Wave 2 (siblings). That barrier is pure wall-clock, and under v2 it is mostly unnecessary: the pre-dispatch differentiation spec plus the per-SKU input files (lane, structure skeleton, three-tier forbidden phrasings, tier band) ALREADY carry everything a sibling needs. There is no live exemplar extraction to wait on for a silo the workforce has shipped before.
+
+**Default: single parallel wave.** For any SKU whose silo already has at least one shipped entry with an established lane (recorded in `context/silo-positioning/` Registry 2), ORIN dispatches all such SCRIBEs in parallel in a single wave. Each SCRIBE pulls its lane from the differentiation spec and its silo's existing patterns via the input file. The structure skeleton comes from the silo's established pattern, not from a freshly-extracted live exemplar.
+
+**Exception (narrow): exemplar-first for a genuinely new lane only.** Keep a small exemplar-first sub-wave ONLY when a lane has ZERO precedent: the first-ever club team, the first-ever brand with a new licensing posture, a new product-class needing a new silo. In that case ORIN runs ONE exemplar for the new lane first, gates it, and its skeleton feeds ONLY the siblings in that same new lane. All OTHER SKUs in the batch (established silos) parallelize immediately alongside it; they do NOT wait for the new-lane exemplar.
+
+**ORIN decision rule, per SKU:** "Does this SKU's silo have >= 1 shipped entry with an established lane (Registry 2)? Yes -> parallel now. No -> exemplar-first for that lane only." A batch mixing established and new lanes runs the established SKUs in the parallel wave and the new lane exemplar-first, concurrently.
+
+Safety is preserved by Change 4: the deterministic `scripts/batch_gate.py` runs over the whole session after dispatch and catches the mechanical defect classes (casing, headings, FIFA, forbidden phrasings, cross-brief convergence, word band, cannibalization, price, hedge) that the manual per-wave gate used to catch by eye. Collapsing the human wave-gate is safe because the deterministic gate exists.
+
+Cross-references: `.claude/agents/master-strategist/agent.md` Section 9 'Wave collapse: parallel-default dispatch (v2)', `context/silo-positioning/README.md` (Registry 2, the established-lane record), `scripts/batch_gate.py` (the safety net that replaces the manual wave-gate). Supersedes the sequential Wave 1 -> gate -> Wave 2 default in 'Batch parallel dispatch + single daily batch commit' for silos with established lanes.
+
 ## Internal Link Format Discipline (added 2026-06-03)
 
 Every internal link suggestion in a PDP or collection brief must be a full HTTPS URL on the canonical domain. The canonical domain is `https://www.prosoccer.com` (with the `www` subdomain). Never a relative path, never `http://`, never a mangled or partial URL. The rule applies to the brief's `Internal links` sub-section, the brief-format template, and any inline link reference in modeled brief output.

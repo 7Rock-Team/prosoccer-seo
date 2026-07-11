@@ -325,6 +325,18 @@ At pre-dispatch, after locking primaries and building the differentiation spec, 
 
 The word band written into each SKU's input file is SKU-specific from that SKU's own tier (Elite 400-450, Pro 340-390, League/Club 280-340), NEVER inherited from the exemplar (the IF8512 Elite-band-on-a-Pro-SKU defect). Cross-references: `.claude/agents/on-page-seo/agent.md` Section 2 'v2 input-driven flow' (SCRIBE side); `scripts/batch_gate.py` (gate-meta consumer); Change 4 deterministic gate.
 
+### Wave collapse: parallel-default dispatch (v2, added 2026-07-10)
+
+v1 dispatched sequential waves (Wave 1 exemplars -> ORIN manual gate -> Wave 2 siblings). v2 collapses this to a single parallel wave by default, because the differentiation spec plus the per-SKU input files already carry the lane, the structure skeleton, the three-tier forbidden phrasings, and the SKU-own tier band, so there is no live exemplar extraction to wait on for a silo the workforce has shipped before. Full convention: `context/workforce-conventions.md` 'Wave collapse: parallel-default dispatch (v2)'.
+
+**Per-SKU decision rule ORIN applies at dispatch:** "Does this SKU's silo have >= 1 shipped entry with an established lane in Registry 2 (`context/silo-positioning/`)? **Yes -> dispatch in the parallel wave now.** **No -> exemplar-first for that lane only.**"
+
+- **Established-lane SKUs** (the common case): all dispatched in one parallel wave. Each SCRIBE pulls its lane and skeleton from its input file; the structure comes from the silo's established pattern, not a freshly extracted live exemplar. No wait, no per-wave manual gate.
+- **Zero-precedent lane** (narrow exception: first-ever club team, first-ever brand with a new licensing posture, new product-class needing a new silo): ORIN runs ONE exemplar for that new lane first, gates it, and extracts its Mechanism A skeleton + three-tier Mechanism B forbidden list for the siblings IN THAT SAME NEW LANE only. Every other SKU in the batch (established silos) parallelizes immediately alongside the new-lane exemplar; they do NOT wait for it.
+- A mixed batch runs both concurrently: established SKUs in the parallel wave, the one new-lane exemplar first with its lane-siblings gated behind only it.
+
+**This is safe because Change 4 exists.** Collapsing the human per-wave gate does not drop defect coverage: `scripts/batch_gate.py` runs deterministically over the whole session after dispatch and catches every mechanical defect class the manual wave-gate caught (casing, heading levels, FIFA, forbidden phrasings, cross-brief convergence, word band, cannibalization, price-in-body, fabrication hedges). ORIN reasons only about the gate's FAILURES and genuine judgment calls. Do NOT collapse waves without the deterministic gate in place. Cross-references: `scripts/batch_gate.py`, `context/silo-positioning/README.md` (Registry 2 established-lane record), Change 1 escalate-on-exception (the gate is also what makes autonomous end-to-end runs safe).
+
 ### Pre-dispatch differentiation pass for pack/series batches (added 2026-06-08)
 
 Surfaced from the Day 3 PDP batch (commit 088ae19) review: the gold-standard exemplar anchor, read too literally, produced 70 to 80% prose duplication across the four Phantom 6 siblings (identical opening hooks, closing lines, H2 titles, metaphors, and FAQ Q-and-A). The exemplar anchor mirrors STRUCTURE, never PROSE. To enforce that at dispatch, ORIN runs a pre-dispatch differentiation pass before dispatching SCRIBE for any multi-SKU batch whose SKUs share a pack or series.
