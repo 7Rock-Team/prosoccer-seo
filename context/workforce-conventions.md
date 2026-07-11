@@ -457,6 +457,24 @@ The v2 architecture moves the upstream work SCRIBE used to repeat per dispatch (
 
 Cross-references: `templates/per-sku-input-template.md` (schema), `scripts/batch_gate.py` (gate-meta consumer), `.claude/agents/master-strategist/agent.md` Section 9 (ORIN pre-dispatch batched pre-scrape + input-file production), `.claude/agents/on-page-seo/agent.md` Section 2 + Section 9 (SCRIBE v2 input-driven flow + tool cap). Forbidden-phrasings three-tier extraction: 'Forbidden-phrasings three-tier scope (v2, added 2026-07-10)' below.
 
+## Forbidden-phrasings three-tier scope (v2, added 2026-07-10)
+
+Mechanism B (the forbidden-phrasings backstop for pack/series batches) used to carry VERBATIM H2 titles and closing lines only. The Batch 6 Shadow set proved that scope too narrow: four independent SCRIBEs, handed only verbatim strings, re-derived a shared "gone" payoff word across all four openers and reused the exemplar's "The pass no one sees coming" H2 as the FRAME "The first step nobody sees coming" (noun-swapped). Neither the motif nor the frame was a verbatim string, so Mechanism B missed both and the convergence surfaced at ORIN's manual gate. This codification widens the scope to three tiers so the workforce stops re-litigating the same convergence class every batch.
+
+**The three tiers (all literal strings; ORIN extracts all three from the validated exemplar into each sibling's input file `gate-meta.forbidden_phrasings`):**
+
+- **Verbatim** (existing): exact hooks, H2 titles, definitional sentences for shared concepts (the FG/AG/tier/plate definitions), opening hook, closing line. Enforced by substring match.
+- **Motifs** (new): recurring payoff / register words the exemplar leans on, for example `gone`, `invisible`, `elusive`, `ghost`. Siblings must not reuse them. Enforced by word-boundary match. ORIN extracts a motif when a distinctive, non-generic word carries the exemplar's emotional payoff and would read as convergence if a sibling reused it (skip ordinary connective words; a motif is a claimed register word, not a stopword).
+- **Title-frames** (new): the structural template of the exemplar's H2s reduced to its distinctive invariant fragment, for example `sees coming` from "The [noun] [nobody] sees coming". Siblings must not mirror the frame with swapped nouns. Enforced by substring match on the invariant fragment (store the fragment that survives noun-swapping, not the full H2, which is already covered verbatim).
+
+**One source of truth.** The three lists live once, in each SKU's input file `gate-meta` block (`context/workforce-conventions.md` 'Per-SKU input file + batched pre-scrape (v2)'). Three consumers read that one copy: ORIN writes it, SCRIBE is told to write AROUND all three tiers, and `scripts/batch_gate.py` enforces them (check #6 flags a brief reusing its OWN barred phrasing at any tier; check #7 flags a barred motif or title-frame recurring across sibling briefs and near-identical openings/closings via lexical trigram overlap). No separate hardcoded motif dictionary; a dictionary would drift from the per-SKU lists.
+
+**Deterministic vs judgment split.** The lexical checks (verbatim / motif / title-frame greps, opening/closing n-gram overlap) are deterministic and offline, and belong in the script. Conceptual convergence that shares no tokens (two siblings expressing the same idea in fully different words) is a genuine judgment call and escalates to ORIN, by design; it is not forced into the script.
+
+**Companion codification: SKU-own tier-band in the skeleton handoff.** Mechanism A (the structure skeleton) carries the SKU's OWN tier-band, never the exemplar's (the IF8512 Elite-band-on-a-Pro-SKU defect: a Pro SKU inheriting the exemplar's Elite 400-450 band and shipping ~446 words). The band is written per SKU into the input file `gate-meta.word_band` from that SKU's own tier (Elite 400-450, Pro 340-390, League/Club 280-340) and enforced by `batch_gate.py` check #8. See 'Per-SKU input file + batched pre-scrape (v2)' above.
+
+Cross-references: `.claude/agents/master-strategist/agent.md` Section 9 'Exemplar handoff' (Mechanism A/B, three-tier extraction), `.claude/agents/on-page-seo/agent.md` Section 9 'Exemplar handoff' (SCRIBE write-around self-check), `scripts/batch_gate.py` + `scripts/test_batch_gate.py` (checks #6/#7/#8 and the Shadow-convergence regression tests), Batch 6 audit-trail Shadow-set convergence note (`deliverables/page-optimizations/2026-07-08_session-01/_audit-trail.md`).
+
 ## Internal Link Format Discipline (added 2026-06-03)
 
 Every internal link suggestion in a PDP or collection brief must be a full HTTPS URL on the canonical domain. The canonical domain is `https://www.prosoccer.com` (with the `www` subdomain). Never a relative path, never `http://`, never a mangled or partial URL. The rule applies to the brief's `Internal links` sub-section, the brief-format template, and any inline link reference in modeled brief output.
