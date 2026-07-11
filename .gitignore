@@ -54,6 +54,9 @@ scripts/build/
 !package.json
 !package-lock.json
 !tsconfig.json
+# Shared workforce config (permissions allowlist, no secrets). The personal
+# .claude/settings.local.json stays ignored via the "Claude Code local overrides" rule above.
+!.claude/settings.json
 .gcp/
 credentials/
 .env

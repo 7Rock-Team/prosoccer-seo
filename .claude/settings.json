@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add*)",
+      "Bash(git commit*)",
+      "Bash(git push*)",
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git show*)",
+      "Bash(git stash*)",
+      "Bash(node*)",
+      "Bash(python*)",
+      "Bash(python3*)",
+      "Bash(npx*)",
+      "Bash(npm run*)",
+      "Bash(cat*)",
+      "Bash(ls*)",
+      "Bash(grep*)",
+      "Bash(rg*)",
+      "Bash(cd*)",
+      "Bash(echo*)",
+      "Bash(head*)",
+      "Bash(tail*)",
+      "Bash(wc*)",
+      "Bash(find*)",
+      "Read(*)",
+      "Write(*)",
+      "Edit(*)",
+      "mcp__firecrawl*",
+      "mcp__tavily*",
+      "mcp__dfs*",
+      "mcp__gsc*"
+    ],
+    "deny": [
+      "Bash(rm -rf*)",
+      "Bash(git reset --hard*)",
+      "Bash(git push --force*)",
+      "Bash(curl*)",
+      "Bash(wget*)"
+    ]
+  }
+}
