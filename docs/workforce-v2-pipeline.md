@@ -56,8 +56,8 @@ Output: PASS, or FAILURES + REVIEW findings with SKU, line number, and check. Ex
 ### Stage 4. ORIN acts on findings (autonomous, Change 1)
 ORIN fixes the FAIL classes it can resolve from codified rules (casing, headings, word-band trims, keyword-table dupes, motif / frame re-voices, price-in-body removals), surgically or by a targeted SCRIBE re-dispatch, and re-runs the gate to green. It reviews the REVIEW findings (cross-brief convergence, fabrication hedges) and either resolves them or, if genuinely unresolvable, escalates (Stage 6). It does NOT ask Mike for the mechanical fixes; it decides, applies, and logs.
 
-### Stage 5. Commit + registries
-Single batch commit + push. Registry 2 (silo files) appended with each SKU's shipped prose patterns. Registry 1 (white-label sheet) handoff surfaced for Mike's team's manual entry (write ownership stays with them by design).
+### Stage 5. Commit + registries (local, no push)
+Single batch commit LOCALLY. Registry 2 (silo files) appended with each SKU's shipped prose patterns at commit. Registry 1 (white-label sheet) handoff surfaced for Mike's team's manual entry (write ownership stays with them by design). Nothing is pushed at this stage: the commit is autonomous, the push is NOT. The push waits for Mike (Stage 7).
 
 ### Stage 6. The one end-of-batch report to Mike (Change 1)
 Mike reviews ONE report, not four checkpoints. It carries:
@@ -65,8 +65,11 @@ Mike reviews ONE report, not four checkpoints. It carries:
 2. Gate-caught defects auto-fixed.
 3. Any exceptions escalated (should be rare).
 4. The Registry 1 handoff block.
-5. Commit hashes.
+5. Commit hashes (local, not yet pushed).
 6. Publish-priority notes (sold-out SKUs ship evergreen copy, flagged for implementation ordering; live-page findings).
+
+### Stage 7. Push on Mike's go
+ORIN pushes ONLY after Mike reads the end-of-batch report (Stage 6) and clears it. The report is Mike's gate on the push; nothing reaches origin until he says go, and auto-push is never assumed. This protects the whole safety model: the ONE report is the human review point, so puncturing it with an automatic push would defeat the purpose. The real sequence is: gate green -> commit locally -> surface the report -> Mike reviews -> Mike says go -> push. Registry appends happen at the local commit (Stage 5); the push is the only step that waits for Mike.
 
 ## The only mid-batch stop-points (the four exception criteria)
 
