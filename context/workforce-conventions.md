@@ -432,6 +432,31 @@ FORWARD-ONLY: the Day 3 re-run briefs (commit 957dc3c) stay in the old combined 
 
 Cross-references: `.claude/agents/on-page-seo/agent.md` Section 13 (SCRIBE output template) + Section 9 (Phase 4 self-check), `.claude/agents/master-strategist/agent.md` Section 9 (ORIN produces both files) + Section 11 (structure re-check), both page-type playbooks 'Brief output structure (added 2026-06-09)'. Internal link placement: 'Internal Link Format Discipline' below. Production source: Mike's first 10-PDP Shopify implementation pass on the Day 3 re-run batch (commit 957dc3c).
 
+## Per-SKU input file + batched pre-scrape (v2, added 2026-07-10)
+
+The v2 architecture moves the upstream work SCRIBE used to repeat per dispatch (live PDP scrape, keyword lookup, internal-link validation) UP to ORIN, run ONCE per batch, and writes the results into a per-SKU input file SCRIBE reads. This is the single biggest token cut in v2: under v1 each of ~10 parallel SCRIBEs independently scraped its PDP, re-read the full context set, re-derived keywords ORIN had already locked, and re-validated links, at roughly 270 to 300k tokens and 40+ tool uses each. Under v2 SCRIBE reads one pre-built input file and writes the brief.
+
+### Three parts
+
+**3a. Batched pre-scrape (ORIN, pre-dispatch).** ORIN Firecrawl-scrapes ALL batch URLs once at pre-dispatch and writes each SKU's scrape data (specs, colorway, materials, plate/surface, weight, price, existing copy, sibling colorways) into that SKU's input file under `## Phase 0 scrape data`. One scrape per URL for the whole batch, not one scrape per SCRIBE. Scrape-wins discipline is unchanged: the scrape is the source of truth over any dispatch hypothesis, and a value the scrape did not supply is marked "not in scrape" and left out, never invented.
+
+**3b. Pre-resolved keywords + links (ORIN, from KIRA + ORIN link-check).** KIRA's validated keyword table (primary + secondaries + pack-secondary) and ORIN's validated internal links (already confirmed 200 + content-signal) are written into the same input file. SCRIBE receives them as INPUTS and does not re-derive keywords or re-validate links.
+
+**3c. SCRIBE tool cap.** With inputs pre-loaded, SCRIBE's job is: read its input file, read its silo lane + the differentiation spec, write the brief, run the self-check, write the brief file. Target **<= 10 tool uses**. SCRIBE no longer scrapes, looks up keywords, or validates links; those are ORIN's upstream responsibilities. See `.claude/agents/on-page-seo/agent.md` Section 2 / Section 9 (v2 input-driven flow) and Section 5 (Firecrawl/DataForSEO/GSC now used by ORIN upstream, not per-SCRIBE).
+
+### Input file location, schema, and one source of truth
+
+- **Location:** `deliverables/page-optimizations/[session]/inputs/[SKU]_input.md`. ORIN creates the `inputs/` subfolder at pre-dispatch.
+- **Schema / template:** `templates/per-sku-input-template.md`. Sections: Identity (SKU, URL, handle, brand, brand-IP posture, product category, tier, word band), Phase 0 scrape data, Keywords, Validated internal links, Differentiation lane, Structure skeleton (Mechanism A), Forbidden phrasings (three tiers), and a fenced `gate-meta` JSON block.
+- **One source of truth:** the fenced ```` ```gate-meta ```` JSON block is the machine-readable AUTHORITATIVE source for brand, brand-IP posture, tier, word band, primary keyword, and the three-tier forbidden-phrasings lists (verbatim / motifs / title-frames). `scripts/batch_gate.py` parses this block; SCRIBE reads it for the barred lists, the tier band, and the brand-IP posture; ORIN writes it. Three consumers, one list, no drift. The human-readable sections above the block echo the same values for reading convenience, written in the same pass so they stay in sync.
+- **Tier + word band are SKU-specific, never inherited from the exemplar** (the IF8512 Elite-band-on-a-Pro-SKU defect). The word band comes from the SKU's own tier: Elite 400-450, Pro 340-390, League/Club 280-340 (+15 tolerance).
+
+### Where the deterministic gate reads it
+
+`batch_gate.py` (see 'Voice check discipline' cross-ref and `scripts/batch_gate.py`) reads each SKU's `gate-meta` block for the brand-aware FIFA check (#5), the per-SKU forbidden-phrasings check (#6), the cross-brief motif/title-frame vocabulary (#7), the word-band check (#8), and cannibalization (#9). If an input file is absent, the gate honestly reports which input-dependent checks it skipped for that SKU and still runs FIFA provisionally (a missing input can never hide a leak).
+
+Cross-references: `templates/per-sku-input-template.md` (schema), `scripts/batch_gate.py` (gate-meta consumer), `.claude/agents/master-strategist/agent.md` Section 9 (ORIN pre-dispatch batched pre-scrape + input-file production), `.claude/agents/on-page-seo/agent.md` Section 2 + Section 9 (SCRIBE v2 input-driven flow + tool cap). Forbidden-phrasings three-tier extraction: 'Forbidden-phrasings three-tier scope (v2, added 2026-07-10)' below.
+
 ## Internal Link Format Discipline (added 2026-06-03)
 
 Every internal link suggestion in a PDP or collection brief must be a full HTTPS URL on the canonical domain. The canonical domain is `https://www.prosoccer.com` (with the `www` subdomain). Never a relative path, never `http://`, never a mangled or partial URL. The rule applies to the brief's `Internal links` sub-section, the brief-format template, and any inline link reference in modeled brief output.
