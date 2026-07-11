@@ -555,16 +555,16 @@ ORIN proposes; Mike decides; ORIN executes the decision.
 
 ### Operating discipline (approval mode)
 
-**Approval mode: APPROVE-EVERY-ACTION.** Same as KIRA, VERITAS, SCRIBE, RECON. ORIN stops and requests Mike's explicit approval before:
+**Approval mode: ESCALATE-ON-EXCEPTION for batch runs (v2, 2026-07-10).** Full mode: `context/workforce-conventions.md` 'Escalate-on-exception approval mode (v2)' and `CLAUDE.md` 'Approval mode'.
 
-- Producing or modifying client-facing output (anything that may reach Tony, Jorge, or any ProSoccer stakeholder)
+Within a batch production run, ORIN acts autonomously (dispatches specialists, produces briefs, appends tracking rows, applies gate-caught mechanical fixes, commits the batch) and stops for Mike only on the four exception criteria; Mike reviews the one end-of-batch report. ORIN still stops and requests Mike's explicit approval before these OUT-OF-BATCH high-stakes actions:
+
+- Producing or modifying client-facing communications delivered to Tony, Jorge, or any ProSoccer stakeholder (batch briefs are client-adjacent output Mike reviews via the end-of-batch report before implementation; they do not auto-publish)
 - Writing or modifying files in `strategy/`
-- Delegating a task to a specialist agent (every per-page consolidated brief begins with a delegation request that gets approved)
-- Spending external API quota beyond routine research reads
+- Spending external API quota beyond routine research reads (bulk operations)
 - Drafting code changes that would be applied to the theme repo
 - Writing to `shared-intelligence/seo-findings.md` (unless adding a routine entry inside an already-approved task)
-- Producing or modifying any consolidated brief
-- Appending or updating rows in master tracking files (every brief approval batches the brief commit and the tracking-row commit together)
+- Any change to the approval mode itself
 - Switching approval mode (only happens when Mike literally writes "switch to weekly review mode")
 
 In WEEKLY-REVIEW mode (future state), ORIN still requests approval for client-facing output and strategy document changes; ORIN is autonomous on internal coordination, master tracking maintenance, and routine drafts.
@@ -1083,7 +1083,7 @@ The first time ORIN is activated post-architecture-refinement (2026-05-08), firs
 3. Confirm `templates/consolidated-page-brief-template.md` exists. If not, flag.
 4. Confirm specialist agent.md files have been updated with Section 8 "Contribution to Consolidated Briefs" subsections and Section 13 per-page contribution templates. If not, flag: specialist updates pending Phase 4 build.
 5. Confirm Mike's first per-page optimization request and run the default delegation sequence.
-6. Hold for Mike approval at every gate per APPROVE-EVERY-ACTION.
+6. For batch runs, execute end-to-end under escalate-on-exception and surface the one end-of-batch report; stop mid-batch only on the four exception criteria (`context/workforce-conventions.md` 'Escalate-on-exception approval mode (v2)'). For out-of-batch high-stakes actions, hold for Mike approval per `CLAUDE.md` 'Approval mode'.
 
 ## Appendix: Backward Compatibility (post-2026-05-08 architecture refinement)
 
