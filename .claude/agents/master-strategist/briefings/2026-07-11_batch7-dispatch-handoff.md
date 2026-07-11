@@ -2,7 +2,7 @@
 
 _Written 2026-07-11 by ORIN in the build session, for the FRESH session that runs Batch 7. This session predates the v2 agent-def edits, so a restart was required to load the v2 SCRIBE spec. Mike approved Path A (fresh session). Read this at startup; it carries everything Batch 7 needs. The pre-flight triage is already done and both real exceptions are cleared (Jordan first-nation, approved; session-def, resolved by this restart). From here it is decide-and-log per v2 escalate-on-exception unless something genuinely new surfaces._
 
-## Step 0 — verify v2 actually loaded BEFORE dispatch (Mike's explicit gate)
+## Step 0: verify v2 actually loaded BEFORE dispatch (Mike's explicit gate)
 
 Do this first. If either check fails, STOP and tell Mike; he would rather a second restart than a confounded run.
 
@@ -28,7 +28,7 @@ If both pass, proceed. Report "v2 confirmed loaded" in the run.
 
 **Wave shape LOCKED by Mike:** 9 Shadow cleats parallelize on established silos; Jordan runs exemplar-first for the new first-nation lane. If wave logic tries to send any established-silo cleat to exemplar-first, that is a wave-logic leak: call it out in the report (measurement ask). Note: the Tiempo Ligera pair (#3, #5) is a genuine new SUB-LINE, but Mike's call is that all 9 cleats parallelize (established Tiempo silo; the Ligera new-ness is handled by distinct per-SKU input-file lanes + Phase 0 scrape for construction + batch_gate check #7 as the convergence backstop, not by exemplar-first serialization).
 
-## Step 1 — resolve the 10 product URLs (fold the cost into the totals, honestly)
+## Step 1: resolve the 10 product URLs (fold the cost into the totals, honestly)
 
 The sheet gave SKUs + names, not URLs. Resolve them via a Firecrawl map of the Shadow + Jordan collections, or Shopify search. This resolution is part of the real batch cost: count its tokens and wall-clock in the totals, do NOT treat it as free setup.
 
