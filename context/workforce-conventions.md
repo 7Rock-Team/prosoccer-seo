@@ -314,6 +314,14 @@ ProSoccer is a US-market retailer (Pasadena / Irwindale, US shipping). A compani
 
 **Enforcement (defense-in-depth).** SCRIBE verifies every temperature, weight, and dimension in the four applicable fields uses US-first dual notation during Phase 4 (`.claude/agents/on-page-seo/agent.md` Section 9). ORIN scans for a solitary metric value with no imperial pairing at Gate 15 and routes it back to SCRIBE (`.claude/agents/master-strategist/agent.md` Section 11). Forward-only: the existing 20 PDPs (Day 3 batch + Batch 2) keep their current units; Batch 3 onward complies. Canonical applications: `context/page-type-playbooks/product-page-playbook.md` 'Measurement unit discipline: US-first dual notation (added 2026-06-15)'. Related: 'US Market Language Discipline (added 2026-06-03)'.
 
+## Jersey taxonomy node (canonical, added 2026-07-11)
+
+The Shopify taxonomy category for every jersey PDP (national-team and club, authentic / replica / stadium / fan) is canonically:
+
+**`Apparel & Accessories > Clothing > Shirts & Tops`**
+
+Mike's call (2026-07-11), closing the Batch 6 jersey-taxonomy-inconsistency follow-up. Chosen over `Apparel & Accessories > Clothing > Activewear` because Shirts & Tops is the more specific node and maps cleanly to the Google product taxonomy. Applies forward to all jersey briefs (the Bosnia / Croatia / DR Congo / Jamaica / Korea set already shipped is not retro-swept; forward-only from Batch 7, starting with the Kelme Jordan jersey). The live "Type" field reading "Apparel" is a separate Shopify field and is not the taxonomy node. Footwear keeps its own node (`Apparel & Accessories > Shoes > Athletic Shoes > Soccer Cleats`). ORIN writes the jersey node into the jersey SKU's input file `Taxonomy Category` and `batch_gate.py` / SCRIBE surface it in the brief.
+
 ## Brief Output Structure (added 2026-06-09)
 
 Surfaced from Mike's first production Shopify implementation pass: he implemented 10 PDPs by hand in Shopify admin using the Day 3 re-run briefs (commit 957dc3c) and hit real copy-paste friction. The SEO deliverables (Title, Short Description, Description body, Meta Title, Meta Description, URL handle, image alt text, FAQ, taxonomy) were scattered through each brief and interleaved with workforce-internal audit content; the live product Title was nowhere in the brief, which forced a SKU search in admin instead of a fast title lookup; and audit reasoning the implementer never needs added noise to the paste workflow. The fix splits the two audiences into two artifacts.
