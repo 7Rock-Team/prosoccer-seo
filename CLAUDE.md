@@ -70,7 +70,9 @@ No exceptions. Stale context is the root cause of bad SEO recommendations.
 
 ### Approval mode
 
-Currently set to **APPROVE-EVERY-ACTION**. The Master Strategist stops and asks before any action that produces client-facing output, modifies strategy files, spends external API quota beyond research reads, or drafts changes to the theme repo. This stays in place until Mike explicitly writes "switch to weekly review mode."
+**ESCALATE-ON-EXCEPTION for batch production runs (updated 2026-07-10, v2 refactor).** For batch page-optimization runs, the Master Strategist executes end-to-end autonomously (keyword selection within codified floors, exemplar and dispatch-shape choices, differentiation lanes, gate-caught mechanical fixes, per-batch commit) and surfaces ONE end-of-batch report for Mike, rather than holding at per-checkpoint gates. ORIN stops mid-batch only on a genuine exception it cannot resolve from codified rules (the four-criteria test in `context/workforce-conventions.md` 'Escalate-on-exception approval mode (v2)'). This mode is safe only because the deterministic gate `scripts/batch_gate.py` catches the mechanical defect classes the human checkpoints used to catch; it must not run without the gate.
+
+Outside batch runs, the Master Strategist still stops and asks before: client-facing communications delivered to Tony or the client, strategy-file rewrites, drafts of changes to the theme repo, and bulk external API spend beyond research reads. Batch briefs remain client-adjacent output Mike reviews (via the one end-of-batch report) before implementation; nothing auto-publishes. This replaces the prior APPROVE-EVERY-ACTION mode per Mike's v2 refactor authorization; the earlier "switch to weekly review mode" trigger is superseded by this codification.
 
 ### Prompt injection guard
 

@@ -489,6 +489,44 @@ Safety is preserved by Change 4: the deterministic `scripts/batch_gate.py` runs 
 
 Cross-references: `.claude/agents/master-strategist/agent.md` Section 9 'Wave collapse: parallel-default dispatch (v2)', `context/silo-positioning/README.md` (Registry 2, the established-lane record), `scripts/batch_gate.py` (the safety net that replaces the manual wave-gate). Supersedes the sequential Wave 1 -> gate -> Wave 2 default in 'Batch parallel dispatch + single daily batch commit' for silos with established lanes.
 
+## Escalate-on-exception approval mode (v2, added 2026-07-10)
+
+For batch page-optimization runs, the v1 per-checkpoint approval mode (ORIN holds for Mike at Checkpoint 1 keywords, Checkpoint 2 exemplar plan, Checkpoint 2b exemplar review, Checkpoint 3 final review, plus every "surface decision" hold) is replaced by escalate-on-exception: ORIN runs the batch autonomously end-to-end and surfaces ONE end-of-batch report for Mike. This is safe ONLY because the deterministic gate (`scripts/batch_gate.py`, Change 4) catches the mechanical defect classes the human checkpoints used to catch; do not run this mode without the gate.
+
+### What ORIN decides, applies, and logs (does NOT ask)
+
+Everything that resolves from codified rules:
+
+- **Keyword selection** within the codified volume floors + fallback hierarchy + GSC-override rules (`context/workforce-conventions.md` 'Volume-Weighted Primary Keyword Selection Discipline').
+- **Exemplar selection and dispatch shape** (parallel-default per 'Wave collapse'; exemplar-first only for a zero-precedent lane).
+- **Differentiation lanes** (the pre-dispatch differentiation pass).
+- **Gate-caught MECHANICAL fixes**: casing, heading levels, word-count-band trims, keyword-table duplicate rows, motif / title-frame re-voices, price-in-body removals, and the other deterministic `batch_gate.py` FAIL classes. ORIN fixes them (surgically or by a targeted SCRIBE re-dispatch), re-runs the gate to green, and logs the fix.
+- **Per-batch commit** and the Registry 2 append.
+
+### The deterministic "is this an exception?" test (ORIN STOPS for Mike only on these four)
+
+ORIN escalates mid-batch ONLY when a decision cannot be resolved from codified rules and falls into one of these four:
+
+1. **A true architectural first with NO silo precedent**: a new brand licensing status, a new product-class requiring a new silo, or a new competition-IP question with no codified answer in `context/brand-ip-constraints.md` or the silo files.
+2. **A fabrication trap unresolvable from the Phase 0 scrape**: the scrape contradicts itself, OR a required spec is absent AND load-bearing (the copy cannot be written honestly without it). A merely-absent non-load-bearing spec is not an exception; ORIN omits it per scrape-wins and proceeds.
+3. **A cannibalization collision with no clean resolution** under the codified cannibalization discipline (no fallback-hierarchy primary clears the floor with a winnable SERP without colliding).
+4. **A cross-brief convergence `batch_gate.py` check #7 flags that ORIN cannot auto-resolve** by a surgical re-voice (a genuine conceptual convergence, not a mechanical motif/frame reuse).
+
+If a situation is not one of these four, it is not an exception: ORIN decides from the codified rule, applies, and logs it for the end-of-batch report. Escalations should be rare.
+
+### The one end-of-batch report to Mike
+
+ORIN produces a single report at batch close containing:
+
+1. **Autonomous decisions** with one-line rationale each: the keyword table (primary + secondaries per SKU), exemplar / dispatch-shape choices, and the differentiation lanes.
+2. **Gate-caught defects auto-fixed**: each `batch_gate.py` FAIL and the fix applied.
+3. **Exceptions escalated** (should be rare): any of the four criteria that fired, with the specific decision ORIN needs from Mike.
+4. **Registry 1 handoff block**: the per-SKU primary-keyword assignments for the white-label team's manual PDPs-tab entry (write ownership stays with them by design).
+5. **Commit hashes**.
+6. **Publish-priority notes**: sold-out SKUs (evergreen copy ships regardless; flag for Mike's implementation ordering) and any live-page findings.
+
+Mike reviews the ONE report, not every checkpoint. Cross-references: `.claude/agents/master-strategist/agent.md` Section 9 'Escalate-on-exception approval mode (v2)', `scripts/batch_gate.py` (the deterministic gate this mode depends on), `CLAUDE.md` 'Approval mode'.
+
 ## Internal Link Format Discipline (added 2026-06-03)
 
 Every internal link suggestion in a PDP or collection brief must be a full HTTPS URL on the canonical domain. The canonical domain is `https://www.prosoccer.com` (with the `www` subdomain). Never a relative path, never `http://`, never a mangled or partial URL. The rule applies to the brief's `Internal links` sub-section, the brief-format template, and any inline link reference in modeled brief output.
