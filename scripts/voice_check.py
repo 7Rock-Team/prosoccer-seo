@@ -213,8 +213,15 @@ def find_lowercase_body_h2s(lines: list[str]) -> list[tuple[int, str]]:
     return hits
 
 
-def check(text: str, path: Path | None = None) -> int:
-    """Run the voice check against the text. Return 0 if clean, 1 if violations found.
+def collect_violations(text: str, path: Path | None = None) -> list[str]:
+    """Return the list of voice-check violation strings (empty list if clean).
+
+    This is the reusable core of the voice check: it performs every detection and
+    returns the human-readable violation lines without printing or exiting. `check()`
+    wraps it for CLI use; `scripts/batch_gate.py` imports it to fold the voice checks
+    (em-dash, forbidden words/phrases/openers, capitalized Adidas, UK boots, lowercase
+    editorial body H2s, internal-link URL format) into the batch gate report without
+    duplicating any of that logic.
 
     When `path` is inside deliverables/ or briefings/, also enforce the internal-link
     URL-format checks (full HTTPS canonical-domain links; no insecure or mangled URLs).
@@ -350,6 +357,16 @@ def check(text: str, path: Path | None = None) -> int:
                 if len(link_hits) > 5:
                     violations.append(f"    ... and {len(link_hits) - 5} more")
 
+    return violations
+
+
+def check(text: str, path: Path | None = None) -> int:
+    """Run the voice check against the text. Return 0 if clean, 1 if violations found.
+
+    Thin CLI wrapper over `collect_violations`: same detection, plus the pass/fail
+    print output the command-line and existing tests expect.
+    """
+    violations = collect_violations(text, path)
     if violations:
         print("VOICE CHECK FAILED")
         for line in violations:
