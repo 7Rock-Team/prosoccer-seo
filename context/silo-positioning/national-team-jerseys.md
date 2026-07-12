@@ -149,3 +149,13 @@ Reference notes ORIN reads at the pre-dispatch differentiation pass. Separate fr
 - Use case scenario: the DR Congo supporter buying the Authentic away shirt for the 2026 cycle
 - Angle of emphasis: the away White/Light-Blue colorway plus the roaming / away-support lens at the Authentic tier; Umbro non-FIFA plus substitution
 - Heritage angle: the same evergreen anchors as Home (AFCON 1968 and 1974, the finals as Zaire, FECOFA / CAF, Les Léopards) foregrounded through the away lens
+
+### SKU 7651TX1919 (Kelme Jordan Men's Authentic Away 2026) [Batch 7, first-ever first-nation entry, exemplar-first]
+- Brief: `deliverables/page-optimizations/2026-07-11_session-01/7651TX1919_kelme-2026-jordan-mens-authentic-away_brief.md`
+- Date: 2026-07-11
+- Opening hook approach: the away red for the debut cycle; the Jordan supporter or diaspora fan pulling on Al-Nashama for the first time on the sport's biggest stage
+- Primary metaphor: national and cultural pride carried in the flag colors and the debut milestone (evergreen, not athletic performance)
+- Use case scenario: the Jordan supporter or diaspora fan buying the Authentic away shirt for the 2026 cycle (watch party, matchday, cultural pride)
+- Angle of emphasis: debut-cycle national pride at the Authentic (match-spec) tier; the away red
+- Heritage angle: Al-Nashama (glossed "the chivalrous ones", gender-neutral, no feminine variant); qualification sealed 3-0 over Oman; 2023 AFC Asian Cup runners-up (FIFA-free anchor); JFA / AFC; flag palette red/black/white/green, away red-based (the kufiya-diamond is a HOME feature, omitted here)
+- Brand-IP: Kelme is non-adidas, so FIFA / "World Cup" terminology is FORBIDDEN (cycle language only). The debut carried as "the sport's biggest international stage for the first time," never "first World Cup." Kelme supplier is time-sensitive. Gate check #5 clean.

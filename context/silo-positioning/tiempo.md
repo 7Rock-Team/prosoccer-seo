@@ -40,3 +40,43 @@ Reference notes ORIN reads at the pre-dispatch differentiation pass. Separate fr
 - Use case scenario: entry-tier turf and rec player on artificial turf (Jennifer parent + Tyler rec player)
 - Angle of emphasis: entry Academy tier (League/Club word band), soft FlyTouch-leather touch on turf at value; rubber turf outsole
 - Heritage angle: Tiempo leather-touch lineage carried to the Academy entry tier; FlyTouch leather (scrape; NOT Techleather/Maestro360, NOT the k-leather Legend)
+
+### Ligera sub-line (added 2026-07-11, Batch 7, first Ligera in this silo)
+- Ligera is a NEW Tiempo sub-line, distinct from Maestro and Legend: all-new stitched TECHLEATHER on a TRADITIONAL FULL-PLATE (NOT the Maestro's Maestro360 split plate, NOT the Legend's k-leather). Confirmed from the Phase 0 scrape (Nike family framing: "all-new TECHLEATHER and a traditional full-plate"; "lose the weight without losing your touch").
+- Positioning: the lighter, value-minded corner of the Tiempo family; Pro tier (word band 340-390). Frame lightness qualitatively ("Ligera" = light in Spanish); no gram figure in scrape.
+
+### SKU HQ3157-001 (Tiempo Maestro Elite FG Shadow) [Batch 7, Shadow pack; cedes generic to shipped IH1776]
+- Brief: `deliverables/page-optimizations/2026-07-11_session-01/HQ3157-001_nike-tiempo-maestro-elite-fg-shadow_brief.md`
+- Date: 2026-07-11
+- Opening hook approach: the driven pass that should skip and roll but just stops dead at your feet
+- Primary metaphor: soft hands for your feet, the TECHLEATHER deadening a hard pass the way a keeper's palms take the sting out of a shot (distinct from IH1776 Breakout's conductor / orchestra register)
+- Use case scenario: the central playmaker or deep-lying midfielder on dry firm natural grass, feel over speed, Elite tier
+- Angle of emphasis: leather touch-and-control on firm ground (distinct from the AG sibling IB4469)
+- Heritage angle: the Tiempo touch line on TECHLEATHER + the Maestro360 split plate; Shadow Pack
+
+### SKU IB4469-001 (Tiempo Maestro Elite AG Shadow) [Batch 7, Shadow pack; cedes generic to shipped IQ2383]
+- Brief: `deliverables/page-optimizations/2026-07-11_session-01/IB4469-001_nike-tiempo-maestro-elite-ag-shadow_brief.md`
+- Date: 2026-07-11
+- Opening hook approach: the touch playmaker whose home pitch is the 3G, keeping a clean first touch where the synthetic usually flattens it
+- Primary metaphor: soft suspension over a rough road, the TECHLEATHER absorbing the synthetic's harshness (distinct from IQ2383 Breakout's pianist and from the FG sibling's soft-hands)
+- Use case scenario: the deep-lying or central playmaker on artificial grass, Elite tier
+- Angle of emphasis: Maestro leather touch tuned for AG via the hollowed plate
+- Heritage angle: the Tiempo leather lineage in the Maestro silo (TECHLEATHER) + the AG-Pro plate; Shadow Pack
+
+### SKU HQ3158-002 (Tiempo Ligera Pro FG Shadow) [Batch 7, Shadow pack; first Ligera, FG]
+- Brief: `deliverables/page-optimizations/2026-07-11_session-01/HQ3158-002_nike-tiempo-ligera-pro-fg-shadow_brief.md`
+- Date: 2026-07-11
+- Opening hook approach: the player who wants the leather touch but not the leather weight
+- Primary metaphor: a leather jacket cut down to a windbreaker, the feel kept and the bulk dropped
+- Use case scenario: the touch-oriented midfielder on dry firm natural grass at Pro value, a lighter boot
+- Angle of emphasis: the lightweight value Tiempo; TECHLEATHER + a traditional full-plate (vs the Maestro360 split plate)
+- Heritage angle: the new Ligera sub-line at the Pro tier; Shadow Pack
+
+### SKU IB4477-002 (Tiempo Ligera Pro Turf Shadow) [Batch 7, Shadow pack; first Ligera turf, surface-split from HQ3158]
+- Brief: `deliverables/page-optimizations/2026-07-11_session-01/IB4477-002_nike-tiempo-ligera-pro-turf-shadow_brief.md`
+- Date: 2026-07-11
+- Opening hook approach: the plastic-turf-shoe feeling flipped; a real leather touch on the rubber court where you would expect a hard shell
+- Primary metaphor: velvet on concrete, a soft touch on a hard surface (distinct from the FG sibling HQ3158's windbreaker)
+- Use case scenario: the small-sided or turf player (cages, weeknight 5s) at Pro value on a rubber turf outsole
+- Angle of emphasis: the Ligera TECHLEATHER touch tuned for turf; small-sided / weeknight scene (vs the FG sibling's grass, 11-a-side)
+- Heritage angle: the Ligera sub-line; TECHLEATHER + a traditional full-plate + a rubber turf outsole; Shadow Pack

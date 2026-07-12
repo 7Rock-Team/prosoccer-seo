@@ -1,0 +1,20 @@
+# Registry 1 (white-label sheet) claimed primaries as of Batch 7 pre-dispatch (2026-07-11).
+# One primary per line, lowercase. batch_gate.py check #9 flags any Batch 7 SKU whose
+# primary exactly matches a line here (already-claimed collision) or another Batch 7 SKU.
+# Batch 7 Shadow SKUs deliberately CEDE these generic model-tier-surface terms to the
+# shipped Breakout twins / Batch 6 Shadow entries and take pack-specific "...shadow" primaries,
+# so none should collide. This file proves the three-way cannibalization discipline held.
+
+# Breakout twins (Batch 1/2, shipped) -- generic model-tier-surface terms ceded to
+nike vapor 17 elite fg
+nike vapor 17 elite ag
+nike vapor 17 pro
+nike zoom superfly 11 elite ag
+nike tiempo maestro elite fg
+nike tiempo maestro elite ag
+
+# Batch 6 Shadow entries (shipped 2026-07-08) -- distinct pack primaries already claimed
+nike vapor 17 pro shadow
+nike phantom 6 high elite fg shadow
+nike phantom 6 low elite fg
+nike phantom 6 high elite ag shadow

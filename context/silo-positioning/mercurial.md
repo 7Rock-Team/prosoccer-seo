@@ -79,3 +79,39 @@ Reference notes ORIN reads at the pre-dispatch differentiation pass. Separate fr
 - Use case scenario: the winger or attacking mid winning in tight space on dry firm natural grass at Pro value
 - Angle of emphasis: Vapor agility and close control at the Pro tier for arriving unseen (distinct from IO8225's pickpocket close-quarters framing)
 - Heritage angle: the Vapor low-cut agility lineage within the Mercurial line (vs Superfly straight-line speed); Flyknit + thin plate + chevron studs; Shadow Pack
+
+### SKU IF8508-001 (Mercurial Vapor 17 Elite FG Shadow) [Batch 7, Shadow pack; cedes generic to shipped IO1560]
+- Brief: `deliverables/page-optimizations/2026-07-11_session-01/IF8508-001_nike-vapor-17-elite-fg-shadow_brief.md`
+- Date: 2026-07-11
+- Opening hook approach: the winger plants and the fullback's weight is already wrong; the cut is finished before he can answer, on dry firm natural grass
+- Primary metaphor: quicksilver, a bead of mercury darting sideways (Vapor low-cut agility, NOT straight-line speed); distinct from IO1560 Breakout's boxer / slip-a-punch and from IF8512's ghosted run
+- Use case scenario: top-tier winger or attacking mid on dry firm natural grass, featherweight Atomknit + FlyLite
+- Angle of emphasis: the Elite featherlight lightness as the differentiator (vs the Pro's Flyknit build)
+- Heritage angle: the Vapor low-cut agility line within the Mercurial family; Atomknit + FlyLite plate + chevron studs; Shadow Pack
+
+### SKU IO4252-001 (Mercurial Vapor 17 Elite AG Shadow) [Batch 7, Shadow pack; cedes generic to shipped IM5806]
+- Brief: `deliverables/page-optimizations/2026-07-11_session-01/IO4252-001_nike-vapor-17-elite-ag-shadow_brief.md`
+- Date: 2026-07-11
+- Opening hook approach: the winger on the weeknight 3G cutting inside where the synthetic usually makes you slip; Elite lightness that still bites on turf
+- Primary metaphor: a race car's downforce gripping a slick corner, the hollowed studs biting synthetic like cleated tires on a track (distinct from IM5806 Breakout's slalom-skier and from the FG sibling's quicksilver)
+- Use case scenario: winger or attacking mid on artificial grass, Elite tier, quick inside cuts on 3G
+- Angle of emphasis: Elite Vapor agility engineered for AG via the hollowed AG-Pro stud pattern
+- Heritage angle: Vapor low-cut agility line; the AG-Pro hollowed plate that keeps the Atomknit player planted on synthetic; Shadow Pack
+
+### SKU IM5811-001 (Mercurial Vapor 17 Pro Turf Shadow) [Batch 7, Shadow pack; surface-split from Batch 6 IF8512 FG]
+- Brief: `deliverables/page-optimizations/2026-07-11_session-01/IM5811-001_nike-vapor-17-pro-turf-shadow_brief.md`
+- Date: 2026-07-11
+- Opening hook approach: the tight-court turf regular (cage, weeknight 5s), the quick angle that opens a yard on the rubber
+- Primary metaphor: a squash player working the walls, sharp angles in a small space (distinct from IO8225 Breakout's pickpocket and from IF8512's ghosted run)
+- Use case scenario: the tight-space turf player (small-sided, cages, weeknight 5s) at Pro value on a rubber turf outsole
+- Angle of emphasis: Vapor low-cut close-control agility tuned for turf / small-sided at Pro value, NOT straight-line speed
+- Heritage angle: the Vapor agility lineage; the Pro Flyknit build (a step below the Elite's Atomknit); rubber turf outsole; Shadow Pack
+
+### SKU IM2513-001 (Mercurial Superfly 11 Elite AG Shadow) [Batch 7, Shadow pack; cedes generic to shipped IO8221]
+- Brief: `deliverables/page-optimizations/2026-07-11_session-01/IM2513-001_nike-superfly-11-elite-ag-shadow_brief.md`
+- Date: 2026-07-11
+- Opening hook approach: the flat-out sprint down the synthetic channel; the breakaway on 3G where the collar locks the ankle and the ZoomX fires you clear
+- Primary metaphor: an afterburner kicking in, the ZoomX energy return as a second gear at full stride (distinct from IO8221 Breakout's sprinter-track-switch)
+- Use case scenario: the out-and-out speed winger or striker on artificial grass, high collar, Elite tier
+- Angle of emphasis: Superfly HIGH-CUT straight-line speed on AG (vs the Vapor low-cut agility siblings)
+- Heritage angle: the Superfly high-cut identity in the Mercurial speed line; ZoomX + Air Zoom; the AG-Pro hollowed plate; Shadow Pack

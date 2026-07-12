@@ -96,3 +96,12 @@ The Batch 6 Phantom Shadow SKUs are same-model / same-tier / same-surface COLORW
 - Use case scenario: the finisher or playmaker who lives on artificial grass (weeknight 3G) and wins by slipping markers, high collar
 - Angle of emphasis: elusiveness and disguise on artificial grass at the High Elite tier (distinct from IQ1869's ankle-lockdown framing)
 - Heritage angle: high-cut Phantom control on the AG-Pro plate tuned for synthetic; Gripknit; Shadow Pack colorway
+
+### SKU HJ4123-001 (ReactX Phantom 6 Low Pro Turf Shadow) [Batch 7, Shadow pack; first adult Low Pro Turf + first ReactX in this silo]
+- Brief: `deliverables/page-optimizations/2026-07-11_session-01/HJ4123-001_nike-reactx-phantom-6-low-pro-turf-shadow_brief.md`
+- Date: 2026-07-11
+- Opening hook approach: turf beats up your legs; the Phantom answers with a springboard of ReactX bounce underfoot while the clean strike still comes first
+- Primary metaphor: a springboard underfoot, the ReactX foam returning some of the energy the hard court takes (deliberately NOT the Batch 6 Phantom Shadow disguise / elusiveness register)
+- Use case scenario: the Pro-tier turf or small-sided player (cages, weeknight) wanting Phantom striking touch plus ReactX cushioning
+- Angle of emphasis: ReactX responsiveness (scrape-confirmed) + VNMSkin touch at Pro on turf; distinct from IQ1886 FG "workhorse" and from the Batch 6 Elite Shadow disguise lane. "Shadow" used only as the pack name, never as a disguise metaphor.
+- Heritage angle: Phantom control at the Pro tier (VNMSkin + Flyknit, NOT the Elite's Gripknit); ReactX foam; rubber turf outsole; Shadow Pack
