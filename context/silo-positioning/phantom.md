@@ -105,3 +105,19 @@ The Batch 6 Phantom Shadow SKUs are same-model / same-tier / same-surface COLORW
 - Use case scenario: the Pro-tier turf or small-sided player (cages, weeknight) wanting Phantom striking touch plus ReactX cushioning
 - Angle of emphasis: ReactX responsiveness (scrape-confirmed) + VNMSkin touch at Pro on turf; distinct from IQ1886 FG "workhorse" and from the Batch 6 Elite Shadow disguise lane. "Shadow" used only as the pack name, never as a disguise metaphor.
 - Heritage angle: Phantom control at the Pro tier (VNMSkin + Flyknit, NOT the Elite's Gripknit); ReactX foam; rubber turf outsole; Shadow Pack
+
+### SKU HJ4122-001 (Phantom 6 Low Pro FG Shadow) [Batch 8, Shadow pack; cedes generic to shipped IQ1886 Breakout]
+- Brief: `deliverables/page-optimizations/2026-07-13_session-01/HJ4122_nike-phantom-6-low-pro-fg-shadow_brief.md`
+- Date: 2026-07-13
+- Opening hook approach: the clean strike that lands where aimed; the creator/number 10 on dry natural grass
+- Primary metaphor: the pure striking touch / clean contact on firm ground (VNMSkin grip on the ball). Deliberately NOT IQ1886's "workhorse" step-up, NOT HJ4123's turf springboard/ReactX (this SKU has NO ReactX), NOT the Batch 6 Elite Shadow disguise/elusiveness
+- Use case: Pro-tier control player on dry natural grass wanting Phantom touch + Cyclone 360 at a reachable tier
+- Angle: primary `nike phantom 6 low pro fg shadow` (blank vol, ceded generic to IQ1886); VNMSkin + Flyknit + Cyclone 360; blackout Shadow (Black/Black/Illusion Green). "Shadow" = pack name only
+
+### SKU HQ2325-001 (Phantom 6 Low Academy Turf Shadow) [Batch 8, Shadow pack; FIRST Academy tier in this silo]
+- Brief: `deliverables/page-optimizations/2026-07-13_session-01/HQ2325_nike-phantom-6-low-academy-turf-shadow_brief.md`
+- Date: 2026-07-13
+- Tier note: FIRST Academy-tier entry in the Phantom silo. Academy ~= adidas League by tier-equivalence -> League/Club word band (280-340), NOT Pro/Elite. NikeSkin engineered mesh (NOT the Pro's VNMSkin+Flyknit).
+- Opening hook approach: the Phantom touch made reachable for the turf player (weeknight cage, school field, small-sided)
+- Primary metaphor: accessible control/touch on turf at the entry tier (NikeSkin mesh); value + surface-fit. Deliberately NOT HJ4123's Pro-turf springboard/ReactX, NOT the disguise register
+- Angle: primary `nike phantom 6 academy turf shadow` (blank vol); NikeSkin mesh + rubber turf outsole; entry tier; blackout Shadow. "Shadow" = pack name only

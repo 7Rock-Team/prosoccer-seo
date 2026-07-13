@@ -35,6 +35,17 @@ The Club Jersey template is **CANONICAL** (validated on Liverpool 2024-25 Nike A
 - **Brand / IP:** Nike is the CURRENT kit supplier, from 2017-18. TIME-SENSITIVE (do not state as evergreen). Nike is non-adidas, so FIFA / "World Cup" terminology is forbidden by the brand rule, but this is moot for club framing (no national-tournament chrome belongs on a club page anyway).
 - **This SKU (II1663-453) is Youth Stadium Home:** replica tier for young fans; parent / young-fan avatar lane (family-passed-down Chelsea loyalty, the young supporter's first real shirt), youth sizing with growth allowance. Stadium (replica) versus Authentic distinction applies as on other Nike Stadium jerseys.
 
+### Manchester United FC (added 2026-07-13, Batch 8; FIRST United entry, Mike-approved criterion-1 escalation; guardrail approved as-is)
+
+- **Identity:** "The Red Devils" (current / primary; on the crest since 1970). "The Heathens" (historical only, Newton Heath era). "Busby Babes" -- MEMORIAL-SENSITIVE (1958 Munich air disaster); do NOT use decoratively.
+- **Anchors (evergreen):** founded 1878 as Newton Heath, renamed Manchester United in 1902; home at Old Trafford (Greater Manchester / Trafford), opened 1910. Write "home at Old Trafford since 1910" or "roots dating to 1878," NEVER "at Old Trafford since 1878" (club predates the ground).
+- **Crest / colours:** United red home identity; crest = red devil with a trident + the sailing ship above (Manchester's maritime / trade heritage), safe to describe factually.
+- **Rivalries (heritage framing, not current-form):** Liverpool (the North West Derby, principal; inter-city rivalry predating football); Manchester City (the Manchester derby -- usable as heritage, NO current-form given City's recent dominance); Leeds (cross-Pennine Roses rivalry, optional / lower-profile).
+- **Honours (evergreen, per the competition-naming policy above):** 13 Premier League titles (Premier League nameable directly). 20 English top-flight titles total = 13 PL + 7 pre-1992 First Division -- keep SEPARATE, do not call all 20 "Premier League." Three-time winner of Europe's premier club competition (1968, 1999, 2008) -- GENERIC only, never name it. FA Cup nameable directly.
+- **LOAD-BEARING fabrication bar:** NO "most successful club" / "most titles" / "more than any other" -- Liverpool EQUALLED United at 20 English league titles (2024-25), so it is a JOINT record. Use "one of England's most successful clubs" / "a record 20 English league titles, shared with Liverpool." This bar binds the Liverpool pages symmetrically.
+- **Brand / IP:** adidas is the CURRENT supplier (returned 2015-16; TIME-SENSITIVE, not "longtime partner"); 2026-27 is an adidas cycle. No deal figures in copy. Club-IP posture (no FIFA / World Cup chrome on a club page).
+- **Internal links:** no live United CURRENT-player collection (the live player collections -- Ronaldo, Pogba, Pique -- are all former players). Use /collections/epl + retired-legend body mentions (Charlton, Best, Cantona, Beckham, Rooney), NOT a current-player link.
+
 ## Claimed patterns log
 
 ### SKU (not recorded; pre-SKU-first naming) Nike Liverpool Men's Stadium Away 2024-25 [backfilled 2026-07-08; the club silo's first shipment]
@@ -54,3 +65,54 @@ The Club Jersey template is **CANONICAL** (validated on Liverpool 2024-25 Nike A
 - Use case scenario: a parent buying the youth home Stadium shirt for a young Chelsea fan; youth sizing with growth; watch party and wearing to play
 - Angle of emphasis: youth club loyalty plus the Stadium (replica) tier; Premier League named directly, Champions League as generic "two-time European champions"
 - Heritage angle: The Blues; Stamford Bridge (Fulham, west London), founded 1905; royal blue; five Premier League titles; Nike supplier; Cole Palmer player-spotlight internal link
+
+### SKU KA6852 (adidas Liverpool Men's Stadium Home 2026-27) [Batch 8; Liverpool adidas-HOME lane, avatar-split set 1 of 4]
+- Brief: `deliverables/page-optimizations/2026-07-13_session-01/KA6852_adidas-2026-27-liverpool-mens-stadium-home-soccer-jersey_brief.md`
+- Date: 2026-07-13
+- Avatar / lane: flagship ADULT supporter (own your own home red)
+- Opening hook: "Some shirts you wear. This one you belong to" -- adult belonging, the Kop, matchday
+- Primary metaphor: the home shirt as the supporter's own colors; the '80s-inspired Shankly-red graphic threading eras
+- Angle: primary `liverpool home jersey`; slim/crew; scrape-confirmed Shankly-red '80s graphic; internal link /collections/epl
+- Heritage: Anfield since 1892, the Kop, Liver Bird, YNWA, Shankly (all-red 1964), Gerrard/Dalglish; joint-20 (not asserted); European = generic; adidas reunion 2025-26; Hillsborough respectfully omitted
+
+### SKU KB8255 (adidas Liverpool Youth Stadium Home 2026-27) [Batch 8, set 2 of 4]
+- Brief: `deliverables/page-optimizations/2026-07-13_session-01/KB8255_adidas-2026-27-liverpool-youth-stadium-home-soccer-jersey_brief.md`
+- Date: 2026-07-13
+- Avatar / lane: parent-buys-for-kid ("first proper Reds shirt," handed-down loyalty, grow-into-it)
+- Primary metaphor: loyalty passed a generation; the shirt as inheritance and beginning
+- Angle: primary `liverpool youth jersey`; regular youth fit; name/number customization (scrape-confirmed for LFC youth); /collections/epl
+- Heritage: same LFC anchors, parent-facing; Hillsborough fully out of the warm copy
+
+### SKU KB8256 (adidas Liverpool Women's Stadium Home 2026-27) [Batch 8, set 3 of 4]
+- Brief: `deliverables/page-optimizations/2026-07-13_session-01/KB8256_adidas-2026-27-liverpool-womens-stadium-home-soccer-jersey_brief.md`
+- Date: 2026-07-13
+- Avatar / lane: women's-cut supporter ("cut for her," tailored fit, "you're a Red, full stop"); Croatia-women's split pattern
+- Primary metaphor: the tailored fit that belongs to her; the '80s Shankly-red graphic + sleeve print
+- Angle: primary `liverpool women's jersey`; women's regular/crew; safe honours claim used ("England's most successful side in Europe's premier competition"); /collections/epl. NEAR-SOLD-OUT (1 left)
+
+### SKU KB8268 (adidas Liverpool Men's Home Long-Sleeve 2026-27) [Batch 8, set 4 of 4]
+- Brief: `deliverables/page-optimizations/2026-07-13_session-01/KB8268_adidas-2026-27-liverpool-mens-home-long-sleeve-soccer-jersey_brief.md`
+- Date: 2026-07-13
+- Avatar / lane: long-sleeve supporter (full-sleeve, V-neck, cold-terrace/winter, "some supporters wait for the long sleeve")
+- Primary metaphor: the long-sleeve as the season-spanning cut; V-neck classic silhouette
+- Angle: primary `liverpool long sleeve jersey` (strongest LFC term, 1,300/mo); slim/V-neck; joint-20 stated correctly ("level with Manchester United"); European = "six European crowns" generic; /collections/epl
+
+### SKU KA6871 (adidas Manchester United Men's Stadium Home 2026-27) [Batch 8; United-lane EXEMPLAR, avatar-split set 1 of 3]
+- Brief: `deliverables/page-optimizations/2026-07-13_session-01/KA6871_adidas-2026-27-manchester-united-mens-home-soccer-jersey_brief.md`
+- Date: 2026-07-13
+- Avatar / lane: flagship ADULT supporter; "the red you wear to say which side you're on" (United owns this open; siblings differ)
+- Primary metaphor: the home red as belonging; striped red/white/black design + devil-and-ship crest
+- Angle: primary `manchester united home jersey`; slim/striped polo collar; scrape-confirmed striped red/white/black; /collections/epl
+- Heritage: Old Trafford 1910/roots 1878, Red Devils, devil-and-ship; "among England's most successful," record 20 shared with Liverpool; European = generic "European nights"; FA Cup named; adidas current; retired legends Charlton/Best/Cantona/Beckham/Rooney (no current-player link)
+
+### SKU KC4796 (adidas Manchester United Youth Stadium Home 2026-27) [Batch 8, set 2 of 3]
+- Brief: `deliverables/page-optimizations/2026-07-13_session-01/KC4796_adidas-2026-27-manchester-united-youth-home-soccer-jersey_brief.md`
+- Date: 2026-07-13
+- Avatar / lane: parent-buys-for-kid ("first proper Red Devils shirt," handed-down); DIFFERENT anchor than the exemplar
+- Angle: primary `manchester united youth jersey`; regular youth fit; NO name/number customization (not scrape-confirmed for this SKU); joint-20 shared with Liverpool; /collections/epl
+
+### SKU KC4773 (adidas Manchester United Men's Home Long-Sleeve 2026-27) [Batch 8, set 3 of 3]
+- Brief: `deliverables/page-optimizations/2026-07-13_session-01/KC4773_adidas-2026-27-manchester-united-mens-home-ls-soccer-jersey_brief.md`
+- Date: 2026-07-13
+- Avatar / lane: long-sleeve + the scrape-confirmed 1976/77 FA Cup 50th-anniversary striped-collar tribute; plain "Mufc Red" base (contrast vs the SS striped body)
+- Angle: primary `manchester united long sleeve jersey` (880/mo, strongest United term); slim/LS; FA Cup named directly (opponent not foregrounded); joint-20; /collections/epl
