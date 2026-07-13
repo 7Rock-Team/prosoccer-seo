@@ -22,6 +22,10 @@ Club body copy may reference competition names under these rules. This is a lega
 - **Forward-only:** if a licensing-enforcement issue surfaces later, adjust future briefs; do not retro-edit shipped club copy.
 - **Optional upgrade path:** a one-time ProSoccer-counsel sign-off on direct Champions League naming would let future club briefs name it directly; tracked in `work-log/follow-ups.md` (2026-07-08).
 
+### Heritage honours default to qualitative (added 2026-07-13, claims gate)
+
+Specific league / title / trophy counts and outright "most" / "record" superlatives in club body copy AGE and are CONTESTED (Liverpool drew level with Manchester United at 20 English league titles in 2024-25, breaking the "record 20" / "most successful" claims KA6871 shipped in its first draft). Default to qualitative honours ("one of England's most decorated clubs", "a European pedigree few can match"); a specific count ships only with a durable cited source, otherwise it is cut. Enforced deterministically by `scripts/batch_gate.py` `check_heritage_counts` (regression fixture: `TestKA6871HeritageCounts`) and codified in `context/workforce-conventions.md` 'Claims verification: heritage honours default to qualitative'.
+
 ### Tier posture for club jerseys (added 2026-07-08)
 
 The Club Jersey template is **CANONICAL** (validated on Liverpool 2024-25 Nike Away, commit b7159dc). Subsequent club-jersey work is **Tier 2A** (pattern-follow, currency-check Tavily, template-fill), not a foundational Tier 1 build. Youth club jerseys add the parent / young-fan sizing-and-growth dimension on top of the canonical structure, framed through club allegiance (family loyalty passed down, city identity), not national pride.

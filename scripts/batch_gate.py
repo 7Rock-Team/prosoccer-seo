@@ -24,7 +24,8 @@ Design: EXTENDS scripts/voice_check.py, does not duplicate it. The voice checks
 voice_check.collect_violations. This file adds only the net-new batch checks:
 heading levels, FIFA/WC brand-aware grep, per-SKU forbidden-phrasings (verbatim +
 motifs + title-frames), cross-brief lexical similarity, word-count band,
-cannibalization, price-in-body, and fabrication-hedge markers.
+cannibalization, price-in-body, fabrication-hedge markers, and heritage-honour
+claims (specific title/trophy counts + "most"/"record" superlatives).
 
 Single source of truth: the motif and title-frame lists this script checks are
 the SAME per-SKU lists ORIN writes into each SKU's input file
@@ -421,6 +422,63 @@ def check_price_in_body(sku, lines) -> list[Finding]:
 
 
 # --------------------------------------------------------------------------- #
+# Heritage honour claims: specific title/trophy counts + "most"/"record" superlatives
+# (added 2026-07-13, claims gate). Heritage honours DEFAULT TO QUALITATIVE: specific
+# league/title/trophy counts and outright "most"/"record" superlatives age and are
+# contested. Origin: KA6871's first draft shipped "among England's most successful
+# clubs: 13 Premier League titles, a record 20 English league titles (shared with
+# Liverpool)"; Liverpool drew level with Manchester United at 20 English league titles
+# in 2024-25, breaking both the "record 20" count and the "most successful" superlative.
+# A count ships ONLY with a durable cited source (scrape / club site); otherwise it is
+# cut to qualitative. This check flags the count/superlative so it can never bare-PASS.
+# NOTE: the approved qualitative language ("one of England's most decorated clubs",
+# "a European pedigree few can match") is deliberately NOT matched.
+# --------------------------------------------------------------------------- #
+HERITAGE_COUNT = re.compile(
+    r"\b(?:\d{1,3}|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|"
+    r"thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty)\s+"
+    r"(?:\S+\s+){0,3}?"
+    r"(?:league|top[\s-]?flight|premier\s+league|european|continental|champions)\s+"
+    r"(?:titles?|crowns?|cups?|trophy|trophies)\b",
+    re.IGNORECASE,
+)
+HERITAGE_SUPERLATIVE = re.compile(
+    r"\b(?:most\s+successful\s+(?:club|side|team|english)|"
+    r"most\s+(?:titles|trophies|league\s+titles)|"
+    r"more\s+than\s+any\s+other\s+(?:club|side|team|english)|"
+    r"record[\s-]+(?:\d|holders?|number))",
+    re.IGNORECASE,
+)
+
+
+def check_heritage_counts(sku, lines) -> list[Finding]:
+    """FAIL: a specific honour count ("13 Premier League titles", "20 English league
+    titles", "six European crowns") or an outright "most"/"record" superlative in
+    customer-facing copy. Heritage honours default to qualitative; counts age and are
+    contested. Cut to qualitative or attach a durable cited source. Regression fixture:
+    KA6871's "a record 20 English league titles" (see test_batch_gate.py)."""
+    findings = []
+    for ln, text in blanked_prose(lines, prose_field_lines(lines)):
+        for m in HERITAGE_COUNT.finditer(text):
+            findings.append(Finding(
+                sku, "heritage-count", FAIL,
+                f"specific honour count '{m.group(0).strip()}' in body copy; heritage "
+                f"honours default to qualitative (counts age and are contested) -- cut "
+                f"to qualitative or attach a durable cited source (claims gate)",
+                line=ln,
+            ))
+        for m in HERITAGE_SUPERLATIVE.finditer(text):
+            findings.append(Finding(
+                sku, "heritage-superlative", FAIL,
+                f"outright honour superlative '{m.group(0).strip()}' in body copy; use "
+                f"qualitative honours ('one of England's most decorated clubs') -- no "
+                f"unsourced 'most'/'record' claim (claims gate)",
+                line=ln,
+            ))
+    return findings
+
+
+# --------------------------------------------------------------------------- #
 # Check 11: fabrication-hedge markers near specs (weight / dimensions)
 # --------------------------------------------------------------------------- #
 HEDGE_WORDS = re.compile(r"\b(approximately|around|about|roughly|circa)\b", re.IGNORECASE)
@@ -645,6 +703,8 @@ def gate_brief(sku, path, meta) -> tuple[list[Finding], list[str]]:
     findings += check_heading_levels(sku, lines)
     # Check 10: price in body.
     findings += check_price_in_body(sku, lines)
+    # Heritage honour claims (specific counts / "most"-"record" superlatives) -- claims gate.
+    findings += check_heritage_counts(sku, lines)
     # Check 11: fabrication hedges (REVIEW).
     findings += check_fabrication_hedge(sku, lines)
 

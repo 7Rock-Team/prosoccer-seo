@@ -393,5 +393,65 @@ class TestCleanAndSkips(GateTestBase):
         self.assertIn("input-file", self.checks_present())
 
 
+class TestKA6871HeritageCounts(GateTestBase):
+    """2026-07-13 claims gate: KA6871's first draft shipped 'among England's most
+    successful clubs: 13 Premier League titles, a record 20 English league titles
+    (shared with Liverpool)'. Liverpool drew level with Manchester United at 20 English
+    league titles in 2024-25, breaking both the 'record 20' count and the 'most
+    successful' superlative. The gate that this claim motivated MUST catch this claim."""
+
+    _CLUB_META = {
+        "brand": "adidas",
+        "brand_ip_posture": "club-kit-premier-league-fa-cup-direct-european-generic",
+        "tier": "Stadium", "word_band": [450, 520],
+        "primary_keyword": "manchester united home jersey",
+    }
+    KA6871_CLAIM = ("United sit among England's most successful clubs: 13 Premier League "
+                    "titles, a record 20 English league titles overall (shared with "
+                    "Liverpool), and European nights the city remembers.")
+    QUALITATIVE_FIX = ("United rank among England's most decorated clubs, with FA Cup "
+                       "runs the fans still replay and European nights the city remembers.")
+
+    def test_ka6871_original_claim_is_caught(self):
+        self.write_brief("KA6871", make_brief(body_sections=[
+            ("## Who it's for, and the history in the red",
+             self.KA6871_CLAIM + " " + _para(430)),
+        ]))
+        self.write_input("KA6871", dict(self._CLUB_META))
+        checks = self.checks_present()
+        self.assertIn("heritage-count", checks,
+                      "the '13 Premier League titles' / '20 English league titles' counts "
+                      "must be caught -- a claims gate that misses the claim that "
+                      "motivated it is not done")
+        self.assertIn("heritage-superlative", checks,
+                      "'most successful' + 'record 20' superlatives must be caught")
+        self.assertEqual(self.exit_code(), 2, "unsourced heritage counts are a hard defect -> exit 2")
+
+    def test_qualitative_fix_passes(self):
+        self.write_brief("KA6871", make_brief(body_sections=[
+            ("## Who it's for, and the history in the red",
+             self.QUALITATIVE_FIX + " " + _para(430)),
+        ]))
+        self.write_input("KA6871", dict(self._CLUB_META))
+        checks = self.checks_present()
+        self.assertNotIn("heritage-count", checks,
+                         "qualitative honours must not trip the count check")
+        self.assertNotIn("heritage-superlative", checks,
+                         "'most decorated' is the approved qualitative language and must pass")
+
+    def test_liverpool_analog_counts_caught(self):
+        """The identical class on the Liverpool side: '20 English league titles' and
+        'six European crowns'."""
+        self.write_brief("KB8268", make_brief(body_sections=[
+            ("## For the supporter who follows through winter",
+             "The Reds hold 20 English league titles, level with Manchester United, plus "
+             "six European crowns won on the biggest nights. " + _para(420)),
+        ]))
+        self.write_input("KB8268", dict(self._CLUB_META,
+                                        primary_keyword="liverpool long sleeve jersey"))
+        self.assertIn("heritage-count", self.checks_present(),
+                      "Liverpool '20 English league titles' + 'six European crowns' must be caught")
+
+
 if __name__ == "__main__":
     unittest.main()

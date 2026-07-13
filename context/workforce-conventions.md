@@ -535,6 +535,24 @@ ORIN produces a single report at batch close containing:
 
 Mike reviews the ONE report, not every checkpoint. Cross-references: `.claude/agents/master-strategist/agent.md` Section 9 'Escalate-on-exception approval mode (v2)', `scripts/batch_gate.py` (the deterministic gate this mode depends on), `CLAUDE.md` 'Approval mode'.
 
+## Claims verification: heritage honours default to qualitative + source-or-cut (added 2026-07-13)
+
+Every checkable factual claim in a brief (specific numbers -- title/trophy counts, dates, weights, years; superlatives -- "most successful", "record", "first-ever"; named honours) must carry a cited source or be cut. No bare PASS: "ORIN thinks it's fine" is not verification. Three layers enforce this so Batch 9 onward is automatic.
+
+### Layer 1 -- default-to-qualitative (playbook rule)
+
+Heritage honours in jersey body copy DEFAULT TO QUALITATIVE. Specific league/title/trophy counts ("13 Premier League titles", "20 English league titles", "six European crowns") and outright "most"/"record" superlatives ("most successful club", "a record 20", "more than any other") AGE and are CONTESTED, so they must not ship. Use qualitative honours language instead ("one of England's most decorated clubs", "a European pedigree few can match", "a trophy history the fans still replay"). A specific count ships ONLY when it carries a durable cited source (the product's Phase 0 scrape, or a club-site / web citation recorded in the audit trail); absent that, it is cut. Origin: KA6871 (Batch 8) shipped "among England's most successful clubs: 13 Premier League titles, a record 20 English league titles (shared with Liverpool)" in its first draft; Liverpool drew level with Manchester United at 20 English league titles in 2024-25, breaking both the count and the superlative. The same trap hit all six club briefs (United + Liverpool) and was fixed to qualitative before the Batch 8 push. This is the club-jersey analogue of the existing 'Fabrication guard and tournament-status discipline' for national-team jerseys.
+
+### Layer 2 -- deterministic gate check (`scripts/batch_gate.py`)
+
+`check_heritage_counts` flags `heritage-count` (specific league/title/trophy counts) and `heritage-superlative` ("most successful", "most titles", "more than any other", "record N") as FAIL in customer-facing copy. The approved qualitative language ("most decorated", "a European pedigree few can match") is deliberately NOT matched. Regression fixture: `scripts/test_batch_gate.py` `TestKA6871HeritageCounts` proves the KA6871 claim is caught (both counts + both superlatives) AND the qualitative fix passes -- the gate that this claim motivated catches this claim. A shipped brief with a legitimately-sourced count is an explicit ORIN override recorded in the audit trail, not a silent pass.
+
+### Layer 3 -- ORIN claims-extraction pipeline (pre-push verification)
+
+Before the push, ORIN runs a claims-extraction pass over every brief: list every checkable assertion and classify each as PASS-WITH-SOURCE (name the source: SCRAPE field / club-site / web-check), FIX (cut to qualitative or correct), or ESCALATE (cannot source -> surface to Mike, never bare-PASS). Product specs, colorways, weights, and design tributes trace to the per-SKU Phase 0 scrape; founding / stadium / heritage dates trace to a named web / identity-research verification; anything that traces to neither is escalated. Rule: "I'd rather see three escalations than one confident-but-unsourced PASS." Origin: three times in the Batch 8 session a fact got ahead of the files (a fabricated wall-clock figure; an assumed F50 scrape-verify; an assumed United-count propagation) and the claims pass caught each.
+
+Cross-references: `scripts/batch_gate.py` (`check_heritage_counts`), `scripts/test_batch_gate.py` (`TestKA6871HeritageCounts` regression fixture), `context/silo-positioning/club-team-jerseys.md` (competition-naming policy + the United/Liverpool honours guardrails), Batch 8 audit trail (`deliverables/page-optimizations/2026-07-13_session-01/_audit-trail.md` 'Claims-verification pass'). Related: 'Fabrication guard and tournament-status discipline (added 2026-06-29)' above (the national-team analogue).
+
 ## Internal Link Format Discipline (added 2026-06-03)
 
 Every internal link suggestion in a PDP or collection brief must be a full HTTPS URL on the canonical domain. The canonical domain is `https://www.prosoccer.com` (with the `www` subdomain). Never a relative path, never `http://`, never a mangled or partial URL. The rule applies to the brief's `Internal links` sub-section, the brief-format template, and any inline link reference in modeled brief output.
