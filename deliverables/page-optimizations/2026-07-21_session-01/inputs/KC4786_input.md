@@ -5,10 +5,10 @@
 **Phase 0 (2026-07-22):** $89.99, ONLY 1 LEFT (near-sold-out). Youth YS-YXL. Regular fit, tricot, 100% recycled poly, CLIMACOOL, laid-on 3-Stripes, embroidered logo, woven crest; 1970s/FA Cup tribute striped collar. Long sleeve.
 
 **Avatar:** Jennifer/Mom (parent-buyer) + young-fan belonging. Excluded Tyler/Carlos (named).
-**Keywords:** primary `manchester united youth jersey` 210 (DFS 2026-07-12); supporting `manchester united long sleeve jersey` 880.
+**Keywords:** primary `manchester united youth long sleeve jersey` 10 (DFS 2026-07-27, SUB-FLOOR); supporting `manchester united youth jersey` 210 (KC4796's primary; secondary here only).
 **Links:** /collections/manchester-united (lean).
 **Claims:** 1970s/FA-Cup tribute + youth specs PASS-WITH-SOURCE (scrape); "among England's most decorated" qualitative; no counts.
 
 ```gate-meta
-{"sku":"KC4786","tier":"stadium","word_band":[450,520],"word_band_tolerance":15,"brand":"adidas","brand_ip_posture":"adidas-club","silo":"club-team-jerseys","primary_keyword":"manchester united youth jersey","forbidden_phrasings":{"verbatim":[],"motifs":["fifty years since a famous FA Cup run","were there for the November fixtures","swimming in a men's small"],"title_frames":[]}}
+{"sku":"KC4786","tier":"stadium","word_band":[450,520],"word_band_tolerance":15,"brand":"adidas","brand_ip_posture":"adidas-club","silo":"club-team-jerseys","primary_keyword":"manchester united youth long sleeve jersey","forbidden_phrasings":{"verbatim":[],"motifs":["fifty years since a famous FA Cup run","were there for the November fixtures","swimming in a men's small"],"title_frames":[]}}
 ```

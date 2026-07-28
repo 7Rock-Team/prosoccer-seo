@@ -11,8 +11,7 @@
 
 | Type | Keyword | Volume | Difficulty |
 |---|---|---|---|
-| Primary | real madrid jersey | 60500 |  |
-| Secondary | real madrid home jersey | 880 |  |
+| Primary | real madrid home jersey | 880 |  |
 
 ### Title (Shopify "Title" field)
 adidas 2026-27 Real Madrid Men's Stadium Home Soccer Jersey
@@ -71,7 +70,7 @@ Yes. adidas is Real Madrid's kit supplier, and this is the official 2026-27 home
 Real Madrid Home Jersey 2026-27 (Stadium)
 
 ### Meta Description
-Wear the white of Madrid. The adidas 2026-27 Real Madrid home jersey in the Stadium fan cut, with crown-inspired detailing and CLIMACOOL. Official and licensed.
+Real Madrid home jersey, 2026-27 Stadium fan cut by adidas. Wear the white of Madrid, with crown-inspired detailing and CLIMACOOL. Official and licensed.
 
 ### URL Handle
 adidas-2026-27-real-madrid-mens-stadium-home-soccer-jersey (no change)

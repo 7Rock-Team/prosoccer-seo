@@ -8,10 +8,10 @@
 ## SEO Details
 
 ### Keywords
+
 | Type | Keyword | Volume | Difficulty |
 |---|---|---|---|
-| Primary | manchester united jersey | 22,200 | |
-| Secondary | manchester united authentic jersey | 320 | |
+| Primary | manchester united authentic jersey | 320 |  |
 
 ### Title
 adidas 2026-27 Manchester United Men's Authentic Home Soccer Jersey
@@ -69,10 +69,10 @@ Yes. adidas is United's current kit supplier, and this is the official licensed 
 The flat-knit red, white, and black collar and cuffs nod to United's 1970s teams, a "50 years of silverware and stripes" tribute marking half a century since the club's FA Cup run.
 
 ### Meta Title
-Man United 2026-27 Authentic Home Jersey | adidas
+Manchester United Authentic Jersey 2026-27 | adidas
 
 ### Meta Description
-The player-grade Manchester United jersey for 2026-27: the Authentic cut in Red Devils red, with the flat-knit striped collar that nods to United's 1970s teams.
+Manchester United authentic jersey for 2026-27: player-grade Authentic cut in Red Devils red, with the flat-knit striped collar from United's 1970s teams.
 
 ### URL Handle
 /products/adidas-2026-27-man-united-mens-authentic-home-soccer-jersey (no change)

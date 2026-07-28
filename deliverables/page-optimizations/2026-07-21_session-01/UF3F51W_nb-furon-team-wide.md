@@ -11,8 +11,10 @@
 
 | Type | Keyword | Volume | Difficulty |
 |---|---|---|---|
-| Primary | new balance soccer cleats | 8100 |  |
+| Primary | new balance furon team |  |  |
 | Secondary | wide soccer cleats | 2900 |  |
+
+_Primary has no measurable DataForSEO volume (SUB-FLOOR); the exact Team-tier term, kept distinct from UF1F7R4 (Furon Elite) and clear of the collection head term `new balance soccer cleats` (8,100) and UT3FL7NF's `wide soccer cleats`. Volume never overrides hierarchy. `wide soccer cleats` secondary only, never promoted. Retarget 2026-07-27._
 
 ### Title
 New Balance Furon Team V9 2E Wide Firm Ground Soccer Cleats - Neon Tide Pack (FA26)
@@ -62,7 +64,7 @@ The Team is the accessible everyday build; the Elite is the top-tier Furon.
 New Balance Furon Team 2E Wide FG Cleats
 
 ### Meta Description
-New Balance soccer cleats built for speed and cut for wide feet: the Furon Team in a genuine 2E wide, a lightweight firm-ground cleat for the quick player.
+The New Balance Furon Team is a genuine 2E wide speed cleat: a light 7.9 oz mesh upper, T-shaped firm-ground studs, and real width at the accessible tier.
 
 ### URL Handle
 new-balance-furon-team-v9-2e-wide-fg-soccer-cleats-neon-tide (no change)

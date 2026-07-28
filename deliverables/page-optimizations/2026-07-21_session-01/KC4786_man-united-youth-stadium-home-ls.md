@@ -11,8 +11,10 @@
 
 | Type | Keyword | Volume | Difficulty |
 |---|---|---|---|
-| Primary | manchester united youth jersey | 210 |  |
-| Secondary | manchester united long sleeve jersey | 880 |  |
+| Primary | manchester united youth long sleeve jersey | 10 |  |
+| Secondary | manchester united youth jersey | 210 |  |
+
+_Primary is SUB-FLOOR (below the 100/mo DataForSEO floor), chosen deliberately: the exact tier/width/cut-qualified term per the hierarchy rule (a PDP may not hold a collection or sibling term). Volume never overrides hierarchy. Secondary is another page's primary, carried here as support only. Retarget 2026-07-27._
 
 ### Title (Shopify "Title" field)
 adidas 2026-27 Manchester United Youth Stadium Home Long-Sleeve Soccer Jersey
@@ -68,10 +70,10 @@ Yes. This is the long-sleeve youth home jersey, which adds coverage for cooler f
 Yes. adidas is Manchester United's current kit supplier, and this is the 2026-27 youth home shirt.
 
 ### Meta Title
-Manchester United Youth Jersey 2026-27
+Manchester United Youth Long Sleeve Jersey 2026-27
 
 ### Meta Description
-The 2026-27 Manchester United youth home jersey in long sleeve. Real United red, the 1970s striped collar, and adidas CLIMACOOL to keep young supporters dry.
+The 2026-27 Manchester United youth long sleeve jersey in real United red, with the 1970s striped collar and adidas CLIMACOOL to keep young supporters dry.
 
 ### URL Handle
 adidas-2026-27-man-united-youth-stadium-home-ls-soccer-jersey (no change)

@@ -5,10 +5,10 @@
 **Phase 0 (2026-07-22):** $224.99, ONLY 1 LEFT (near-sold-out). Colorway "Metallic Blue with Alkaline Green and Team Navy" (Neon Tide Pack). 209.1 g. TouchTech microfiber PU upper, Hypoknit collar, elite nylon FG outsole, conical+bladed studs, anatomical heel. Worn by Endrick, Harvey Elliott, Jordyn Huitema. FG, 2E Wide. Non-FIFA licensee.
 
 **Avatar:** Tyler/Athlete (serious wide-footed playmaker, control lane); Jennifer 2nd. Excluded Carlos/Mike (named).
-**Keywords:** primary `new balance tekela` 1,300 (DFS 2026-07-12); supporting `wide soccer cleats` 2,900.
+**Keywords:** primary `new balance tekela elite` 90 (DFS 2026-07-27, SUB-FLOOR); supporting `wide soccer cleats` 2,900 (secondary only). Candidate `new balance tekela v5` 720 logged to /collections/new-balance-tekela.
 **Links:** Tekela Team sibling + /collections/wide-soccer-cleats.
 **Claims:** 209.1 g / TouchTech / Hypoknit / studs PASS-WITH-SOURCE (scrape); Endrick + Harvey Elliott PASS-WITH-SOURCE (scrape); no FIFA/WC language.
 
 ```gate-meta
-{"sku":"UT1FL4GK","tier":"elite","word_band":[400,450],"word_band_tolerance":15,"brand":"new balance","brand_ip_posture":"non-fifa-licensee","silo":"tekela","primary_keyword":"new balance tekela","forbidden_phrasings":{"verbatim":[],"motifs":["comfort at top speed"],"title_frames":[]}}
+{"sku":"UT1FL4GK","tier":"elite","word_band":[400,450],"word_band_tolerance":15,"brand":"new balance","brand_ip_posture":"non-fifa-licensee","silo":"tekela","primary_keyword":"new balance tekela elite","forbidden_phrasings":{"verbatim":[],"motifs":["comfort at top speed"],"title_frames":[]}}
 ```

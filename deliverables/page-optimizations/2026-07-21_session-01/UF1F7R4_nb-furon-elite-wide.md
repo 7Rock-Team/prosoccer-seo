@@ -11,8 +11,10 @@
 
 | Type | Keyword | Volume | Difficulty |
 |---|---|---|---|
-| Primary | new balance furon | 1300 |  |
+| Primary | new balance furon elite | 90 |  |
 | Secondary | wide soccer cleats | 2900 |  |
+
+_Primary is SUB-FLOOR on 12-mo avg (90/mo DataForSEO); recent 3 months 110-140 and +250% yearly (rising through the floor). Tier+width-qualified per the hierarchy rule. `wide soccer cleats` is UT3FL7NF's primary, carried here as secondary only. Retarget 2026-07-27._
 
 ### Title
 New Balance Furon Elite V9 2E Wide Firm Ground Soccer Cleats - Neon Tide Pack (FA26)

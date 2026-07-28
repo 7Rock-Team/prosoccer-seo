@@ -5,10 +5,10 @@
 **Phase 0 (2026-07-22):** $224.99, ONLY 1 LEFT (near-sold-out). Colorway "White with Alkaline Green" (Neon Tide Pack). 176 g. One-piece mesh + TPU film, nylon plate, T-shaped studs, Speed Ctrl Stud, central lacing + knitted collar. Worn by Bukayo Saka, Eberechi Eze, Sadio Mane, Michelle Cooper. FG, 2E Wide. Non-FIFA licensee.
 
 **Avatar:** Tyler/Athlete (serious wide-footed speed player); Jennifer 2nd. Excluded Carlos/Mike (named).
-**Keywords:** primary `new balance furon` 1,300 (DFS 2026-07-11); supporting `wide soccer cleats` 2,900.
+**Keywords:** primary `new balance furon elite` 90 (DFS 2026-07-27, SUB-FLOOR 12-mo avg; recent 3 mo 110-140, +250% yearly rising); supporting `wide soccer cleats` 2,900 (secondary only, UT3FL7NF primary).
 **Links:** Furon Team sibling + /collections/wide-soccer-cleats.
 **Claims:** 176 g / mesh+TPU / T-studs PASS-WITH-SOURCE (scrape); Saka/Eze/Mane PASS-WITH-SOURCE (scrape); Mercurial named as market reference only; no FIFA/WC.
 
 ```gate-meta
-{"sku":"UF1F7R4","tier":"elite","word_band":[400,450],"word_band_tolerance":15,"brand":"new balance","brand_ip_posture":"non-fifa-licensee","silo":"furon","primary_keyword":"new balance furon","forbidden_phrasings":{"verbatim":[],"motifs":["half-yard of space you make out of nothing"],"title_frames":[]}}
+{"sku":"UF1F7R4","tier":"elite","word_band":[400,450],"word_band_tolerance":15,"brand":"new balance","brand_ip_posture":"non-fifa-licensee","silo":"furon","primary_keyword":"new balance furon elite","forbidden_phrasings":{"verbatim":[],"motifs":["half-yard of space you make out of nothing"],"title_frames":[]}}
 ```

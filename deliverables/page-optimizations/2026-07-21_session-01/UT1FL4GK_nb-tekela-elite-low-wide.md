@@ -11,8 +11,10 @@
 
 | Type | Keyword | Volume | Difficulty |
 |---|---|---|---|
-| Primary | new balance tekela | 1300 |  |
+| Primary | new balance tekela elite | 90 |  |
 | Secondary | wide soccer cleats | 2900 |  |
+
+_Primary is SUB-FLOOR (90/mo DataForSEO), the tier+width-qualified term per the hierarchy rule. `wide soccer cleats` is UT3FL7NF's primary (secondary only). `new balance tekela v5` (720) is logged as a candidate primary for /collections/new-balance-tekela, not this PDP (it spans Elite+Team). Retarget 2026-07-27._
 
 ### Title (Shopify "Title" field)
 New Balance Tekela Elite Low Laced V5 2E Wide Firm Ground Soccer Cleats - Neon Tide Pack (FA26)

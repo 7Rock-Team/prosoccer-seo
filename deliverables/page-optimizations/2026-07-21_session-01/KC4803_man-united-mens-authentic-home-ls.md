@@ -11,8 +11,10 @@
 
 | Type | Keyword | Volume | Difficulty |
 |---|---|---|---|
-| Primary | manchester united long sleeve jersey | 880 |  |
-| Secondary | manchester united jersey | 22200 |  |
+| Primary | manchester united authentic long sleeve jersey | 10 |  |
+| Secondary | manchester united long sleeve jersey | 880 |  |
+
+_Primary is SUB-FLOOR (below the 100/mo DataForSEO floor), chosen deliberately: the exact tier/width/cut-qualified term per the hierarchy rule (a PDP may not hold a collection or sibling term). Volume never overrides hierarchy. Secondary is another page's primary, carried here as support only. Retarget 2026-07-27._
 
 ### Title (Shopify "Title" field)
 adidas 2026-27 Manchester United Men's Authentic Home Long-Sleeve Soccer Jersey
@@ -66,10 +68,10 @@ It shows up in the flat-knit striped collar and cuffs, a nod to that era of Unit
 Yes. adidas is Manchester United's current kit supplier, and this is the 2026-27 Authentic home long sleeve.
 
 ### Meta Title
-Man United Authentic Long-Sleeve Jersey
+Manchester United Authentic Long-Sleeve Jersey
 
 ### Meta Description
-The 2026-27 Manchester United long-sleeve home jersey, player-grade Authentic build in MUFC Red with a 1970s FA Cup collar and heat-applied club details.
+The Manchester United Authentic long-sleeve jersey, player-grade home build in MUFC Red with a 1970s FA Cup tribute collar and heat-applied club details.
 
 ### URL Handle
 adidas-2026-27-man-united-mens-authentic-home-ls-soccer-jersey (no change)
