@@ -242,6 +242,8 @@ Surfaced from Mike's first 10-PDP Shopify implementation pass on the Day 3 re-ru
 - Do NOT use bold question text without an H3 wrapper (loses semantic meaning and makes FAQ schema harder to generate).
 - Do NOT use ad-hoc FAQ H2 wording outside the `FAQs about [short product name]` pattern (for example "Frequently Asked Questions about the Phantom 6", "Phantom 6 FAQ", "Common Questions About This Cleat", or the bare "Frequently Asked Questions" on a PDP). The `FAQs about [product]` form is the consistent PDP pattern: it carries the product reference for topical signal and snippet eligibility while staying predictable for buyers, reviewers, and Google's FAQ schema detection. Keep it to the natural short product name, never the full awkward primary keyword. (Collection pages keep the bare "Frequently Asked Questions" per `context/page-type-playbooks/collection-page-playbook.md`.)
 
+**Why the product-name H2 is canonical for PDPs (rationale, added 2026-07-27; do not revert).** FAQ rich-result schema is generated from each H3 question and its answer-paragraph pair, NOT from the wrapper H2, so naming the product in the H2 costs nothing structurally and reads better for anyone who lands mid-page. `FAQs about [short product name]` is therefore the REQUIRED FAQ H2 on PDPs; the bare "Frequently Asked Questions" is reserved for collection pages. Do not reintroduce a clause forbidding a product-specific PDP FAQ H2, and do not revert a PDP FAQ H2 to the bare string. The rest of the hierarchy is unchanged: a single H2 for the block, one H3 per question, plain paragraph answers (never bold-only questions), and the FAQ block placed last in the Description body after Care and Maintenance.
+
 **Placement.** The FAQ section sits at the end of the Description body, after the Care and Maintenance H2 when present. Full reading order: overview -> heritage -> use case -> Product Details -> Fit Notes -> Care and Maintenance -> FAQs about [product].
 
 **Markdown-to-theme mapping.** In the brief (markdown), the section title is `## FAQs about [short product name]` and each question is `### <question>`; Mike maps these to the Shopify HTML / Hyper theme equivalents during implementation.
@@ -827,7 +829,7 @@ Each H2 passes the lift test from `.claude/agents/on-page-seo/agent.md` Section 
 
 ### FAQ section (optional)
 
-For high-consideration products (premium kits, flagship cleats, technical equipment), three to five product-specific Q-and-A pairs help close the sale. Sizing, surface guidance, care, authenticity, customization. Schema attaches via VERITAS's FAQPage injection.
+For high-consideration products (premium kits, flagship cleats, technical equipment), three to five product-specific Q-and-A pairs help close the sale. Sizing, surface guidance, care, authenticity, customization. Schema attaches via VERITAS's FAQPage injection. Heading hierarchy for this section follows 'FAQ heading hierarchy discipline (added 2026-06-09)' above: a single `FAQs about [short product name]` H2 (the required PDP pattern, NOT the bare "Frequently Asked Questions"), one H3 per question, and plain paragraph answers, placed last after Care and Maintenance.
 
 Forbidden FAQs (these belong on store-policy pages):
 

@@ -50,6 +50,17 @@ The Club Jersey template is **CANONICAL** (validated on Liverpool 2024-25 Nike A
 - **Brand / IP:** adidas is the CURRENT supplier (returned 2015-16; TIME-SENSITIVE, not "longtime partner"); 2026-27 is an adidas cycle. No deal figures in copy. Club-IP posture (no FIFA / World Cup chrome on a club page).
 - **Internal links:** no live United CURRENT-player collection (the live player collections -- Ronaldo, Pogba, Pique -- are all former players). Use /collections/epl + retired-legend body mentions (Charlton, Best, Cantona, Beckham, Rooney), NOT a current-player link.
 
+### Real Madrid CF (added 2026-07-22, Batch 9; FIRST Real Madrid entry, Mike-approved criterion-1 escalation; first live heritage-jersey run through the claims gate)
+
+- **Identity:** "Los Blancos" (the whites, primary; the all-white home kit is the club's core identity). "the white of Madrid" is approved qualitative shorthand. "Galacticos" usable as a historical-era reference, not current-squad framing.
+- **Anchors (evergreen):** founded 1902; home at the Santiago Bernabeu, Madrid, the Spanish capital. Founding date 1902 traces to web/identity verification (Layer 3), not bare-asserted; omit if not load-bearing.
+- **Crest / colours:** all-white home identity; the 2026-27 adidas kit draws detailing from the "diamonds and pearls of the crown" with a darker green on sleeves/collar (scrape-sourced design tribute; safe to describe factually).
+- **LOAD-BEARING claims bar (the RM trap):** NO European Cup / continental count ("15 European Cups", "15-time European champions") -- overtakeable, hits `heritage-count` FAIL. NO "most successful club" / "most decorated" / "more than any other" -- hits `heritage-superlative` FAIL. NO La Liga title count (e.g. "36 La Liga titles"). Default to QUALITATIVE: "Europe's most storied club", "a European pedigree few can rival", "the white of Madrid", "a fixture at the sharp end of La Liga", "a regular on Europe's biggest nights."
+- **Competition naming:** La Liga NAMEABLE directly (plain descriptive fact, same basis as Premier League). European Cup / Champions League -> GENERIC only ("Europe's biggest nights", "the continental stage"), never named. PDP sells a "Champions League Patch Set" add-on -- a site product option, NOT license to name the competition in copy.
+- **Brand / IP:** adidas is the CURRENT supplier; 2026-27 is an adidas cycle (time-sensitive). Club-IP posture: no FIFA / World Cup chrome on a club page even though adidas is FIFA-licensed. No deal figures.
+- **Internal links:** /collections/real-madrid (live, map-confirmed) + Stadium-vs-Authentic sibling cross-links.
+- **Avatar:** Stadium = replica = Carlos/Fan (city + Bernabeu heritage, passed-down loyalty). Authentic tier is the on-pitch upsell.
+
 ## Claimed patterns log
 
 ### SKU (not recorded; pre-SKU-first naming) Nike Liverpool Men's Stadium Away 2024-25 [backfilled 2026-07-08; the club silo's first shipment]
