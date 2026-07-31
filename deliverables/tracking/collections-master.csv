@@ -83,7 +83,7 @@ url,page_type,phase,target_keywords,brief_date,brief_file_path,implementer,imple
 /collections/trading-cards,collection,,,,,,,,,,,,,,,,,,,,not_started,white-label meta status: in_progress,,,,,,,,trading-cards
 /collections/ac-milan,collection,,,,,,,,,,,,,,,,,,,,not_started,white-label meta status: in_progress,,,,,,,,ac-milan
 /collections/arsenal,collection,,,,,,,,,,,,,,,,,,,,not_started,white-label meta status: in_progress,,,,,,,,arsenal
-/collections/barcelona,collection,,,,,,,,,,,,,,,,,,,,not_started,white-label meta status: in_progress,,,,,,,,barcelona
+/collections/barcelona,collection,,,,,,,,,,,,,,,,,,,,not_started,white-label meta status: in_progress,,,,,barcelona jersey; barcelona soccer jersey,,,barcelona
 /collections/bayern-munich,collection,,,,,,,,,,,,,,,,,,,,not_started,white-label meta status: in_progress,,,,,,,,bayern-munich
 /collections/chelsea,collection,,,,,,,,,,,,,,,,,,,,not_started,white-label meta status: in_progress,,,,,,,,chelsea
 /collections/chivas,collection,,,,,,,,,,,,,,,,,,,,not_started,white-label meta status: in_progress,,,,,,,,chivas
@@ -93,8 +93,8 @@ url,page_type,phase,target_keywords,brief_date,brief_file_path,implementer,imple
 /collections/juventus,collection,,,,,,,,,,,,,,,,,,,,not_started,white-label meta status: in_progress,,,,,,,,juventus
 /collections/liverpool,collection,,,,,,,,,,,,,,,,,,,,not_started,white-label meta status: in_progress,,,,,,,,liverpool
 /collections/manchester-city,collection,,,,,,,,,,,,,,,,,,,,not_started,white-label meta status: in_progress,,,,,,,,manchester-city
-/collections/manchester-united,collection,,,,,,,,,,,,,,,,,,,,not_started,white-label meta status: in_progress,,,,,,,,manchester-united
-/collections/real-madrid,collection,,,,,,,,,,,,,,,,,,,,not_started,white-label meta status: in_progress,,,,,,,,real-madrid
+/collections/manchester-united,collection,,,,,,,,,,,,,,,,,,,,not_started,white-label meta status: in_progress,,,,,manchester united jersey; manchester united soccer jersey; man united jersey,,,manchester-united
+/collections/real-madrid,collection,,,,,,,,,,,,,,,,,,,,not_started,white-label meta status: in_progress,,,,,real madrid jersey; real madrid soccer jersey,,,real-madrid
 /collections/tottenham,collection,,,,,,,,,,,,,,,,,,,,not_started,white-label meta status: in_progress,,,,,,,,tottenham
 /collections/soccer-gift-ideas,collection,,,,,,,,,,,,,,,,,,,,not_started,white-label meta status: in_progress,,,,,,,,soccer-gift-ideas
 /collections/soccer-player-gifts,collection,,,,,,,,,,,,,,,,,,,,not_started,white-label meta status: in_progress,,,,,,,,soccer-player-gifts

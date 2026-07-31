@@ -117,6 +117,10 @@ Compliant Meta Description exemplars:
 - Cleat: `The Nike Phantom 6 High Elite FG is the precision cleat for players who pick the corner. Gripknit touch, locked-in ankle. Lace up for the season.` (145)
 - Jersey: `The adidas 2026-27 Manchester United home jersey in striped red, with the woven club crest and CLIMACOOL fabric. Pull on the red and back the Devils.` (149)
 
+### Gender-qualified keyword form (added 2026-07-31)
+
+Gender-qualified jersey primary and target keywords use the possessive apostrophe form: `women's jersey`, `men's jersey`, not `womens` / `mens`. Stored keyword strings stay grammatically correct and consistent across the registry (`real madrid women's jersey`, `liverpool women's jersey`). Normalization strips the apostrophe before the cannibalization check, so the check is unaffected either way; this convention governs the stored string only. Pre-convention outlier: Batch 9 KC4794 shipped `manchester united womens jersey` (no apostrophe); forward-only, not retro-changed unless a re-run touches it.
+
 ### Unique titles for pack/series products
 
 Many cleats and footwear ship as a pack or series (e.g., Predator 26 in Elite / Pro / League / Club tiers, each possibly across FG / AG / SG plates). Product Title AND Meta Title must be UNIQUE across every SKU in the same pack or series, differentiated by the specific attribute that distinguishes that SKU from its siblings:

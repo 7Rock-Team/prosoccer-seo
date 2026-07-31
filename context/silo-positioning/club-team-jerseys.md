@@ -39,6 +39,17 @@ The Club Jersey template is **CANONICAL** (validated on Liverpool 2024-25 Nike A
 - **Brand / IP:** Nike is the CURRENT kit supplier, from 2017-18. TIME-SENSITIVE (do not state as evergreen). Nike is non-adidas, so FIFA / "World Cup" terminology is forbidden by the brand rule, but this is moot for club framing (no national-tournament chrome belongs on a club page anyway).
 - **This SKU (II1663-453) is Youth Stadium Home:** replica tier for young fans; parent / young-fan avatar lane (family-passed-down Chelsea loyalty, the young supporter's first real shirt), youth sizing with growth allowance. Stadium (replica) versus Authentic distinction applies as on other Nike Stadium jerseys.
 
+### Club head-term cede policy (added 2026-07-31, Batch 10)
+
+Bare club head terms belong to the club's `/collections/<club>` page, not to any PDP: a searcher on "real madrid jersey" wants the club's full kit range, which is a collection intent by the hierarchy rule, so no PDP takes it. PDPs take model + tier + cut + gender + age qualified terms only. Ceded head terms, recorded in `deliverables/tracking/ceded-terms.csv` and on each collection row's `ceded_from` in `deliverables/tracking/collections-master.csv`:
+
+- **Real Madrid:** `real madrid jersey`, `real madrid soccer jersey` to `/collections/real-madrid`
+- **Barcelona:** `barcelona jersey`, `barcelona soccer jersey` to `/collections/barcelona`
+- **Liverpool:** `liverpool jersey`, `liverpool soccer jersey` to `/collections/liverpool`
+- **Manchester United:** `manchester united jersey`, `manchester united soccer jersey`, `man united jersey` to `/collections/manchester-united`
+
+Add a club's cede here and to both registry files before its first PDP is assigned a primary, so no PDP reaches for the head term. Real Madrid and Barcelona entered as new lanes in Batch 10; their cedes were written before assignment for exactly this reason.
+
 ### Manchester United FC (added 2026-07-13, Batch 8; FIRST United entry, Mike-approved criterion-1 escalation; guardrail approved as-is)
 
 - **Identity:** "The Red Devils" (current / primary; on the crest since 1970). "The Heathens" (historical only, Newton Heath era). "Busby Babes" -- MEMORIAL-SENSITIVE (1958 Munich air disaster); do NOT use decoratively.
