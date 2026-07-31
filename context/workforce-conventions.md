@@ -1318,7 +1318,8 @@ The SEO workforce does not build the Matrixify export filter or the import file.
 
 ## Cross-references
 
-- `context/matrixify-import-template.md` is the canonical shape for Matrixify product-import files (headers, XLSX + `Products` sheet, MERGE, IDs-as-text, filename convention, silent-ignore failure class).
+- `context/matrixify-import-template.md` is the reference shape for Matrixify product-import files (two valid forms, XLSX default vs handle-keyed CSV; scope note that Step 2 owns the build).
+- `context/page-type-playbooks/product-page-playbook.md` 'Meta Title and Meta Description compliance (added 2026-07-31)' is the canonical rule for Meta Title (48-char written ceiling, no store-name or manufacturer-brand pipe suffix, brand-front) and Meta Description (120 to 160, full sentences, no colon-fragment opener, light CTA), with cleat and jersey exemplars. The theme suffix is the literal `` ` – ProSoccer` `` (en-dash, verified 2026-07-31).
 - `context/brand-ip-constraints.md` documents the FIFA terminology constraint that applies to all page-optimization deliverables produced under this folder structure.
 - `.claude/agents/on-page-seo/agent.md` Section 8 ("Handoff Patterns") and Section 13 ("Output Templates") reference this convention for the Fresh Optimization workflow, per-page brief file placement, and the mandatory keyword research block.
 - `.claude/agents/on-page-seo/agent.md` Section 2 Step 0 is the canonical SCRIBE pre-flight tool verification protocol referenced under the Tool inventory section above; other agents may adopt the same pattern as added.

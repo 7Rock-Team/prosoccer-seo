@@ -81,13 +81,41 @@ Description (body_html) length tiers by product complexity:
 
 **Complexity classification test:** if a buyer needs more than 2 minutes to choose between sibling products in the same family, the product is complex. If they grab and go, it is simple.
 
-FAIL if exceeded; SCRIBE revises. **Tolerance band (codified 2026-06-10).** The Description-body ceilings carry a +15-word tolerance before FAIL: Simple 215, Standard 375, Complex 465. The count is full-body content (editorial prose + Product Details bullets + Fit Notes + Care bullets; FAQ counted separately). The band absorbs a few-word overage so the gate is not spent rewriting prose to shed single-digit word counts; it is not a license to creep past the band, and SCRIBE still drafts toward the base ceiling (200 / 360 / 450), not the tolerance line. **Short Description** is a brief reader-first emotional / value-prop hook (no feature listing); live example from the Nike Superfly 11 Club PDP: "The Superfly 11 Club is designed for fast sprints. Its snug knit cuff helps keep you secure when running the field, while a lightweight plate helps keep you on your toes for bursts in open spaces." (44 words, slightly under the 50-word floor). **Meta Title budget:** the 60-char ceiling includes whatever the Hyper theme auto-appends (approximately 10 to 12 chars, " - ProSoccer" or similar). SCRIBE's Meta Title INPUT must therefore stay under approximately 48 to 50 characters. Never put "ProSoccer" in the field. **Meta Description:** 160 is the hard ceiling; the 150 to 158 desktop target sits within it. **Length architecture note:** the ceilings are grounded in 2026 ecommerce ranking data (top-ranking ecommerce pages average 200 to 310 words; complex products are competitive at 300 to 400 of editorial prose). The earlier single "150-word" figure is interpreted as the Short Description metafield, not the Description body. Mexico v5 (collection canonical, 340 words) supports the range. The Standard and Complex ceilings were raised 2026-06-09 (Standard to ~220 to 360, Complex to ~320 to 450) to fit the Care and Maintenance H2; the editorial-prose budget is unchanged, with the added words allocated to the procedural Care bullets.
+FAIL if exceeded; SCRIBE revises. **Tolerance band (codified 2026-06-10).** The Description-body ceilings carry a +15-word tolerance before FAIL: Simple 215, Standard 375, Complex 465. The count is full-body content (editorial prose + Product Details bullets + Fit Notes + Care bullets; FAQ counted separately). The band absorbs a few-word overage so the gate is not spent rewriting prose to shed single-digit word counts; it is not a license to creep past the band, and SCRIBE still drafts toward the base ceiling (200 / 360 / 450), not the tolerance line. **Short Description** is a brief reader-first emotional / value-prop hook (no feature listing); live example from the Nike Superfly 11 Club PDP: "The Superfly 11 Club is designed for fast sprints. Its snug knit cuff helps keep you secure when running the field, while a lightweight plate helps keep you on your toes for bursts in open spaces." (44 words, slightly under the 50-word floor). **Meta Title budget:** the 60-char ceiling includes the 12-char store suffix the Hyper theme auto-appends (the literal `` ` – ProSoccer` ``, en-dash verified 2026-07-31). SCRIBE's Meta Title INPUT is therefore 48 characters maximum (hard). Never put "ProSoccer" or a manufacturer-brand pipe suffix in the field; see 'Meta Title and Meta Description compliance'. **Meta Description:** 120 to 160 (120 floor, 160 hard ceiling); the 150 to 158 desktop target sits within it. Full sentences, never a "Product Name: fragment" colon opener. **Length architecture note:** the ceilings are grounded in 2026 ecommerce ranking data (top-ranking ecommerce pages average 200 to 310 words; complex products are competitive at 300 to 400 of editorial prose). The earlier single "150-word" figure is interpreted as the Short Description metafield, not the Description body. Mexico v5 (collection canonical, 340 words) supports the range. The Standard and Complex ceilings were raised 2026-06-09 (Standard to ~220 to 360, Complex to ~320 to 450) to fit the Care and Maintenance H2; the editorial-prose budget is unchanged, with the added words allocated to the procedural Care bullets.
 
 **Tier-appropriate length within Complex (added 2026-06-15).** The Complex band is a ceiling, not a target, and within a multi-tier footwear family the body scales to the product's tier rather than defaulting to the ceiling. Target bands by tier: **Elite / flagship 400 to 450**, **Pro / mid 340 to 390**, **League / Club / entry 280 to 340**. A $79.99 entry League cleat does not earn the same prose budget as a $260 Elite cleat. The +15-word tolerance band absorbs genuine substance overflow on a brief that needs the room; it is not the default operating mode. A batch where multiple lower-tier SKUs land at the 465 ceiling signals write-to-ceiling behavior, not content need. Batch 3 (2026-06-15) surfaced this: three League-tier briefs (IH4577, KK1315, HP9998) over-wrote to ~457 to 465 and were re-trimmed to band. Trim order when over (Path A precedent): spec-bullet redundancy first (collapse decorative or duplicative Product Details bullets, keep the buyer-decision specs), prose padding second (tighten metaphor/elaboration that runs past its point); preserve the opening hook, the differentiation lane, the FAQ substance, and the full Care and Maintenance scope. SCRIBE Phase 4 self-checks tier-appropriate length; ORIN Gate 15 flags lower-tier SKUs that land at or near the Complex ceiling.
 
 **National-team jersey length (clarified 2026-06-30).** Jersey body length is measured full-body per the rule above (editorial prose + Product Details bullets + Fit Notes + Care bullets + the H2 heading labels; FAQ counted separately). National-team jerseys are a deliberate exception to the generic Complex 465 ceiling: the shipped set runs higher and sets the jersey-specific precedent (J000691 Croatia Women's Home ~507, J000693 / J000695 ~534). New jersey briefs hold sibling parity within a nation/cycle set rather than trimming to the cleat ceiling, so a parent comparing the home and away pages of the same nation sees consistent length (Batch 5: J000692 Croatia Youth Home held at 534 to match the shipped J000695, not trimmed to the Standard band). This is NOT write-to-ceiling drift; it is a jersey-class length norm. A dedicated national-team-jersey word band is a future codification; until then, match the shipped nation set. This exception applies to national-team jerseys only, not to footwear, where the tier bands above govern.
 
 **Word band is full-body INCLUDING the FAQ; SCRIBE self-runs the gate before returning (added 2026-07-11, Batch 7, Mike's call). SUPERSEDES the earlier "FAQ counted separately" phrasing above.** The deterministic gate (`scripts/batch_gate.py` `body_word_count`) counts the entire Description body region, from the `### Description` marker through the FAQ, up to the first trailing field marker (`### Meta Title`). So the tier word band (Elite 400-450, Pro 340-390, League/Club 280-340; jersey per the shipped-nation precedent) is the FULL body INCLUDING the FAQ, not editorial-only and not FAQ-excluded. Batch 7 (the first live v2 run) proved why this must be unambiguous: SCRIBEs drafted editorial prose to the band, the full body (plus Product Details, Fit Notes, Care, and a 3-4 question FAQ) then ran ~150-230 words over, and the gate flagged word-band on 6 of 10 briefs, which triggered iterative ORIN-to-SCRIBE trim round-trips that blew the token and tool-use targets. The fix is two-part: **(1)** SCRIBE drafts the FULL body toward the band on the first pass (a useful heuristic: editorial prose lean, roughly 200-250 words, plus a TIGHT FAQ with 1-2 sentence answers, so the full body lands in the tier band, not the editorial prose alone at the band), and **(2)** SCRIBE runs `python scripts/batch_gate.py <session-dir>` (or on its own SKU) and trims to green BEFORE returning to ORIN, so any word-band trimming happens ONCE internally, never as gate ping-pong between ORIN and SCRIBE. ORIN's dispatch prompt must state the band is full-body-incl-FAQ and require the self-run-gate step. Trim order when over is unchanged (Path A: spec-bullet redundancy first, prose padding second; preserve the hook, the differentiation lane, the FAQ substance, and the full Care scope).
+
+### Meta Title and Meta Description compliance (added 2026-07-31)
+
+A 2026-07-31 audit of 109 shipped briefs found a manufacturer-brand pipe suffix in 20 Meta Titles and a "Product Name: fragment" colon opener in 26 Meta Descriptions. Nothing in the playbook forbade either pattern, and the SEO Meta Title examples further down modeled the brand-suffix one, so SCRIBE reproduced it batch after batch. The rules below are hard; the deterministic gate checks them (see `work-log/follow-ups.md`, gate-hardening entries dated 2026-07-31).
+
+**Meta Title**
+
+- **48 characters maximum for the written part (hard ceiling, not a target).** The Hyper theme auto-appends its store suffix, the literal string `` ` – ProSoccer` `` (a space, an en-dash, a space, then the store name), which is 12 characters, for a 60-character SERP total. Google truncates past 60. The suffix character is an en-dash (U+2013), verified against the live rendered `<title>` on 2026-07-31; earlier docs that wrote it with a hyphen were wrong.
+- **Never type the store name in the field.** The theme adds the suffix itself. Typing "ProSoccer" (or any store-name variant) double-brands the result.
+- **Never end with a manufacturer brand as a pipe suffix.** Forbidden: a final pipe segment that begins with a manufacturer brand, for example `| adidas`, `| Nike Stadium`, `| Kelme Youth`, `| Umbro Authentic`. It renders as `` `... | adidas – ProSoccer` ``, which reads like the manufacturer's own page rather than ProSoccer's, and burns budget the written part needs.
+- **A pipe to a PACK or PRODUCT-LINE descriptor is allowed.** `| Breakout`, `| Road to Glory`, `| Shadow Pack` are campaign or colorway names, not manufacturer brands. The test is brand versus campaign: a brand name after the final pipe is forbidden; a pack, colorway, or product-line descriptor is fine.
+- **Brand at the FRONT is correct and encouraged.** Lead with the brand (`adidas Copa Pure IV League Jr`, `New Balance Furon Elite 2E Wide FG Cleats`); do not trail it after a pipe.
+
+Compliant Meta Title exemplars (both under 48, brand-front, no brand suffix):
+
+- Cleat: `adidas Copa Pure IV Elite FG Soccer Cleats` (42)
+- Jersey: `Manchester United Home Jersey 2026-27` (37)
+
+**Meta Description**
+
+- **120 to 160 characters.**
+- **Full sentences. Never the "Product Name: fragment" colon opener.** Forbidden: a capitalized product name or short benefit phrase, then a colon, then a fragment, for example `The New Balance Furon Elite: a 176 g speed cleat in a true 2E wide fit.` Write it as a sentence: `The New Balance Furon Elite is a 176 g speed cleat in a true 2E wide fit.`
+- **Structure: what the product is, then the key benefit, then a light call to action.** The CTA is product-anchored, never store-anchored (see the SEO Meta Description section below for the CTA rule and examples).
+
+Compliant Meta Description exemplars:
+
+- Cleat: `The Nike Phantom 6 High Elite FG is the precision cleat for players who pick the corner. Gripknit touch, locked-in ankle. Lace up for the season.` (145)
+- Jersey: `The adidas 2026-27 Manchester United home jersey in striped red, with the woven club crest and CLIMACOOL fabric. Pull on the red and back the Devils.` (149)
 
 ### Unique titles for pack/series products
 
@@ -456,7 +484,7 @@ Keyword SELECTION ('Primary keyword selection for year/generation/season-bound p
 **Primary keyword placement (mandatory across all required fields):**
 
 - **Title / H1:** exact match or close natural variant.
-- **Meta Title:** exact match in field; under 60 chars accounting for Hyper theme auto-append of " - ProSoccer" suffix (codified 2026-05-28, theme verified to append across all page types); NEVER include "ProSoccer" or any brand variant in the Meta Title field itself.
+- **Meta Title:** exact match in field; 48 chars maximum for the written part, accounting for the Hyper theme auto-append of the `` ` – ProSoccer` `` suffix (12 chars, en-dash verified 2026-07-31; theme appends across all page types); NEVER include "ProSoccer", any store-name variant, or a manufacturer-brand pipe suffix in the field (see 'Meta Title and Meta Description compliance').
 - **Meta Description:** exact match or natural variant early in description (within first 100 chars where Google bolds the match).
 - **Short Description:** exact match or natural variant in first sentence.
 - **Slug:** exact match if creating new; preserve existing slug if optimizing existing page unless clearly suboptimal (slug changes trigger redirect-cost risk).
@@ -781,13 +809,13 @@ Length: 30 to 100 characters (hard min and max per 'PDP-specific SEO discipline'
 
 ### SEO Meta Title
 
-Product head term first for SERP discovery. Brand and tier qualifiers follow.
+Product head term first for SERP discovery. Brand leads the front; tier and cut qualifiers follow. Never trail a manufacturer brand after a pipe (see 'Meta Title and Meta Description compliance' above).
 
-- `Mexico 2026 Home Authentic Jersey | Adidas Player Edition`
-- `Mercurial Superfly 9 Elite FG | Nike Pro Soccer Cleats`
-- `Adidas Tiro 23 Training Pants | Slim-Fit Track Pant`
+- `adidas Mexico 2026 Home Jersey`
+- `Nike Mercurial Superfly 9 Elite FG Cleats`
+- `adidas Tiro 23 Slim-Fit Training Pants`
 
-60 characters maximum INCLUDING the Hyper theme brand suffix, so the INPUT field stays under approximately 48 to 50 characters (per 'PDP-specific SEO discipline' above). Front-load the product name; never put "ProSoccer" in the field. Must be unique across sibling SKUs for pack/series products.
+48 characters maximum for the written INPUT field (hard ceiling). The Hyper theme appends its 12-character store suffix `` ` – ProSoccer` `` for a 60-character SERP total; Google truncates past 60. Front-load the product name; never put "ProSoccer" or a manufacturer-brand pipe suffix in the field (full rule and the brand-versus-campaign test: 'Meta Title and Meta Description compliance' above). Must be unique across sibling SKUs for pack/series products.
 
 ### SEO Meta Description
 
@@ -804,7 +832,7 @@ Store-anchored CTAs (do not use):
 - `Shop ProSoccer for the lowest price`
 - `Order now for free shipping`
 
-160 characters maximum (hard ceiling per 'PDP-specific SEO discipline' above); 150 to 158 is the desktop target inside that ceiling. Head term naturally placed in the first 100 characters.
+120 to 160 characters (120 floor, 160 hard ceiling); 150 to 158 is the desktop target inside that range. Full sentences only; never the "Product Name: fragment" colon opener (see 'Meta Title and Meta Description compliance' above). Head term naturally placed in the first 100 characters.
 
 ### Short Description (intro paragraph or product blurb)
 
