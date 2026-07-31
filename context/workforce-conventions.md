@@ -1314,7 +1314,7 @@ Scope: every file the agent modifies in a session gets voice-checked before comm
 
 ## Matrixify import file
 
-Any Matrixify product-import file the workforce builds (batch SEO title, meta description, short description, body updates) must follow `context/matrixify-import-template.md` exactly: XLSX with a sheet named `Products`, the seven canonical column headers byte for byte, `Command` = `MERGE`, numeric Shopify IDs stored as text, filename `ProSoccer_SEO_Batch{N}_{count}_Products.xlsx`. Build every import file by copying the last file that imported cleanly, never from a remembered column list. Bare metafield names (`title_tag` instead of `Metafield: title_tag [string]`) are silently ignored by Matrixify, not rejected, so a wrong header half-imports while reporting success. See the template file for the full rule, the why, and the pre-import validation checklist.
+The SEO workforce does not build the Matrixify export filter or the import file. A separate "Step 2" process owns both, working from the briefs and Mike's export; the workforce handoff is the briefs plus the handle list when asked. For reference on the file's shape, see `context/matrixify-import-template.md`: both the seven-column XLSX form (sheet named `Products`, numeric `ID`) and the six-column CSV form (bare metafield names, handle-keyed) import correctly, verified against Batch 9's live pages. XLSX is the documented default because the sheet name auto-resolves the entity and the numeric ID is a stronger match key; the CSV form only differs in that it shows a "Sheets require entity selection" prompt, resolved by picking Products.
 
 ## Cross-references
 

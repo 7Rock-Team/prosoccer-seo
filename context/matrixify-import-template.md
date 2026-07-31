@@ -1,16 +1,23 @@
-# Matrixify Import File Template (canonical)
+# Matrixify Import File Template (reference)
 
-This is the required shape for any Matrixify product-import file the workforce builds (SEO title, meta description, short description, and body updates for a batch of PDPs). **Build every import file by copying the committed blank template `data/templates/ProSoccer_Matrixify_Template.xlsx` and filling it in. Never construct the header by hand, and never copy a previous batch's populated file.** A description of the format is not the format, and a populated old file invites someone carrying stale IDs and stale copy into a new batch. Batch 9's first import file was built from a remembered column list and would have silently half-failed; this document plus the blank template exist so that cannot recur.
+Reference for the shape of a Matrixify product-import file (batch SEO title, meta description, short description, and body updates for a set of PDPs).
 
-## Why this matters: the silent-ignore failure class
+## Scope: who owns this
 
-Matrixify does not reject unrecognized column headers. It ignores them and reports the import as successful. So an import file with the wrong headers looks like it worked: the rows Matrixify does recognize (Body HTML) apply, and everything keyed to an unrecognized header (the SEO title, meta description, short description) silently does not import. There is no error at import time. The failure is invisible until someone checks the live pages field by field and finds the SEO fields never changed.
+The SEO workforce (ORIN and the specialists) does **not** build the Matrixify export filter or the import file. A separate process (the "Step 2" Claude.ai chat) owns both, working from the briefs and Mike's export. The workforce handoff to that process is the **briefs themselves, plus the handle list when asked**. Everything downstream of that handoff, including the import file, belongs to Step 2. This document is reference for that build step, not a workflow the workforce runs.
 
-That is why the header has to match this template exactly, and why a mismatch is not a cosmetic issue. Bare metafield names are not "close enough." They are ignored.
+## Two valid forms (both import correctly)
 
-## The canonical seven columns (byte for byte)
+Matrixify accepts more than one shape, and both of these import correctly. This was verified against Batch 9: the live UF3F51W page had its body, meta title, meta description, and short description all applied from the imported file.
 
-These are the seven headers, spelled and cased exactly as below. Do not type them; they already sit in row 1 of `data/templates/ProSoccer_Matrixify_Template.xlsx`, so copy that file rather than re-creating the header. The list here is for reference and validation. Matrixify requires its own metafield syntax (`Metafield: <namespace.>key [type]`); the bare key alone is not a column Matrixify recognizes.
+1. **Seven-column XLSX (documented default).** A workbook with a sheet named exactly `Products`, carrying `ID` plus the metafield-syntax headers. Preferred because the sheet name auto-resolves the entity and the numeric `ID` is a stronger match key than the handle.
+2. **Six-column CSV (also works).** The same columns minus `ID`, with bare metafield names (`title_tag`, `description_tag`, `new_short_description`). Bare metafield names are **accepted**, not ignored. The only difference from the XLSX form is that a CSV carrying `Handle` and `Command` (columns shared by the Products and Collections entities) makes the target entity ambiguous, so Matrixify shows a "Sheets require entity selection" prompt. Resolve it by picking **Products** and the import proceeds. Batch 9 imported successfully from exactly this CSV form.
+
+Use the XLSX form by default for the two reasons above (entity auto-resolves, numeric ID is the stronger key). Reach for the CSV form when a numeric-ID export is not on hand; keying on `Handle` alone is sufficient, as Batch 9 proved.
+
+## The seven columns (XLSX default form)
+
+Spelled and cased exactly as below. Matrixify's metafield syntax is `Metafield: <namespace.>key [type]`.
 
 ```
 ID
@@ -24,22 +31,22 @@ Metafield: products.new_short_description [multi_line_text_field]
 
 Column-by-column:
 
-- **ID**: the real Shopify numeric product ID, stored as a TEXT string (see "The ID column" below). Not the SKU.
-- **Handle**: the product URL handle, live-verified.
-- **Command**: `MERGE` on every row. MERGE updates the named fields on the existing product and leaves everything else untouched. No other command value for an SEO field update.
+- **ID**: the Shopify numeric product ID, stored as a TEXT string (see "The ID column" below). Not the SKU. Omit this column in the six-column CSV form.
+- **Handle**: the product URL handle, live-verified. This is the match key when `ID` is absent.
+- **Command**: `MERGE` on every row. MERGE updates the named fields on the existing product and leaves everything else untouched.
 - **Body HTML**: the product description body (`body_html`), the accordion content below the images.
-- **Metafield: title_tag [string]**: the SEO / browser title (Shopify's "title tag").
-- **Metafield: description_tag [string]**: the meta description.
-- **Metafield: products.new_short_description [multi_line_text_field]**: the hero-block short description above Add to Cart. Note the `products.` namespace prefix and the `multi_line_text_field` type; both are part of the header and both are required.
+- **Metafield: title_tag [string]**: the SEO / browser title. (Bare `title_tag` in the CSV form.)
+- **Metafield: description_tag [string]**: the meta description. (Bare `description_tag` in the CSV form.)
+- **Metafield: products.new_short_description [multi_line_text_field]**: the hero-block short description above Add to Cart. (Bare `new_short_description` in the CSV form.)
 
-No **Title** column. Title here would mean the product's storefront name (`title`), which the workforce does not change in an SEO batch; including it risks overwriting the product name. The SEO title lives in `Metafield: title_tag [string]`, not in `Title`.
+No **Title** column. Title here would mean the product's storefront name (`title`), which an SEO batch does not change; including it risks overwriting the product name. The SEO title lives in `title_tag`, not in `Title`.
 
 ## File format: XLSX with a sheet named "Products"
 
-- Format: **XLSX**, not CSV.
+- Format: **XLSX** (the default form).
 - Sheet name: exactly **`Products`**.
 
-The sheet name is how Matrixify auto-detects which entity the file targets. `Handle` and `Command` are columns on both the Products and the Collections entity, so a bare CSV carrying only those shared columns is ambiguous, and Matrixify stops with "Sheets require entity selection" instead of importing. A sheet named `Products` removes the ambiguity. This is the specific error Batch 9's CSV would have triggered.
+The sheet name is how Matrixify auto-detects which entity the file targets, so the XLSX form never shows the entity-selection prompt. The CSV form does (see "Two valid forms" above); pick Products to resolve it.
 
 ## Filename convention
 
@@ -47,61 +54,36 @@ The sheet name is how Matrixify auto-detects which entity the file targets. `Han
 ProSoccer_SEO_Batch{N}_{ProductCount}_Products.xlsx
 ```
 
-Example: `ProSoccer_SEO_Batch9_10_Products.xlsx` for the 10-product Batch 9 file. Match the pattern of the proven prior batch file.
+Example: `ProSoccer_SEO_Batch9_10_Products.xlsx` for the 10-product Batch 9 file.
 
-## The ID column: numeric Shopify IDs, stored as text, never invented
+## The ID column: numeric Shopify IDs, stored as text
 
 - The value is the Shopify **numeric product ID** (for example `9553887625471`), not the SKU.
 - Store it as a **TEXT string** in the cell, not a number. As a number, the spreadsheet can reformat it into scientific notation or drop precision, which breaks the match.
-- The numeric IDs are **not on disk anywhere in this repo**. `deliverables/tracking/products-master.csv` holds the SKU in its `product_id` column, not the numeric ID (that column is misnamed; see `work-log/follow-ups.md` entry dated 2026-07-28).
-- **Never invent, guess, or derive an ID.** Source it from a Matrixify export filtered to the batch's handles, which returns the ID-to-handle mapping. Wait for that export before finalizing the file.
+- The numeric IDs are **not on disk in this repo**. `deliverables/tracking/products-master.csv` holds the SKU in its `product_id` column, not the numeric ID (that column is misnamed; see `work-log/follow-ups.md` entry dated 2026-07-28). Source numeric IDs from a Matrixify export filtered to the batch's handles, and do not invent or derive them.
+- The numeric ID is a **preference, not a requirement**. Handle-keyed matching (no `ID` column) imports correctly, as Batch 9 did. Use the numeric ID when an export is on hand because it is the stronger match key.
 
-Handle-keyed matching (ID column absent) technically works, because Handle is a valid match key. But every batch that has imported cleanly carried the numeric ID, and there is no benefit to dropping it. Keep the ID column and populate it from an export.
+## Canonical blank template (copy this for the XLSX form)
 
-## Canonical template file (copy this)
-
-The source of truth is the committed blank template **`data/templates/ProSoccer_Matrixify_Template.xlsx`**:
+A committed blank template for the XLSX default form lives at **`data/templates/ProSoccer_Matrixify_Template.xlsx`**:
 
 - one sheet, named exactly `Products`
 - the seven headers in row 1, byte for byte
 - zero data rows
 - the `ID` column pre-formatted as TEXT, so a pasted numeric ID stays text and does not turn into scientific notation
 
-Copy this file, rename it per the filename convention, and fill in the rows. The template is deliberately **blank, not a copy of a past batch**. A populated old file (like Batch 8's) would invite someone carrying stale IDs and stale live copy into a new batch, which is a different silent failure than the header one. Copy the blank; bring in this batch's own IDs and copy.
+Copy it, rename it per the filename convention, and fill in the rows. It is deliberately **blank, not a copy of a past batch**, so no stale IDs or stale live copy get carried into a new batch. If it is ever lost, rebuild it from the seven-header list above (one `Products` sheet, no data rows, `ID` column set to text format).
 
-If the template is ever lost, rebuild it from the seven-header list above, one `Products` sheet, no data rows, `ID` column set to text format.
+## Pre-import checklist (for the build step)
 
-## What a wrong file looks like (Batch 9, before fix)
-
-The rejected Batch 9 CSV header was:
-
-```
-Handle,Command,Body HTML,title_tag,description_tag,new_short_description
-```
-
-Three defects, all silent at import time:
-
-1. **Bare metafield names.** `title_tag`, `description_tag`, `new_short_description` are not columns Matrixify recognizes. They would have been ignored: Body HTML applies, the three SEO fields silently do not.
-2. **CSV, no `Products` sheet.** Entity ambiguous (Handle and Command exist on Products and Collections), triggering "Sheets require entity selection."
-3. **No ID column.** Dropped because products-master holds SKUs, not numeric IDs.
-
-## Pre-import validation checklist
-
-Before handing an import file to Mike, confirm:
-
-- [ ] Built by copying `data/templates/ProSoccer_Matrixify_Template.xlsx`, not hand-constructed and not a copy of a past batch's populated file.
-- [ ] Format is XLSX, sheet named exactly `Products`.
-- [ ] Header row is the seven canonical columns above, byte for byte (it already is if you copied the template).
 - [ ] `Command` is `MERGE` on every row.
 - [ ] No `Title` column.
-- [ ] `ID` populated with numeric Shopify IDs sourced from a Matrixify export, stored as text.
+- [ ] XLSX form: sheet named exactly `Products`; `ID` populated with numeric IDs stored as text (or omitted for the handle-keyed CSV form).
+- [ ] CSV form: expect the entity-selection prompt and pick **Products**.
 - [ ] Filename follows `ProSoccer_SEO_Batch{N}_{count}_Products.xlsx`.
-
-A deterministic validator that fails when the header does not match this template exactly is on the gate-hardening backlog (`work-log/follow-ups.md`, 2026-07-28). It matters because this error class is invisible at import time: Matrixify reports success while ignoring columns, so a human or gate check before import is the only place to catch it.
 
 ## Cross-references
 
-- `data/templates/ProSoccer_Matrixify_Template.xlsx`: the committed blank template to copy for every import file.
-- `work-log/follow-ups.md`: the `product_id`-holds-SKU registry item (2026-07-28) and the import-file-validator gate-hardening item (2026-07-28).
+- `data/templates/ProSoccer_Matrixify_Template.xlsx`: the committed blank template for the XLSX form.
+- `work-log/follow-ups.md`: the `product_id`-holds-SKU registry item (2026-07-28).
 - `context/workforce-conventions.md` "Matrixify import file" cross-reference.
-- `deliverables/tracking/products-master.csv`: where numeric Shopify IDs land once exported (in a new `shopify_product_id` column; `product_id` stays the SKU).
