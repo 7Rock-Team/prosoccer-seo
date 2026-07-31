@@ -1312,8 +1312,13 @@ The rationale: voice violations enter the codebase through editorial drift (an e
 
 Scope: every file the agent modifies in a session gets voice-checked before commit. Pass results are not surfaced in the visible session output; only failures surface to Mike or ORIN. Voice check failures on non-customer-facing files (YAML, configs, internal docs) are still resolved before commit, same as failures on customer-facing copy.
 
+## Matrixify import file
+
+Any Matrixify product-import file the workforce builds (batch SEO title, meta description, short description, body updates) must follow `context/matrixify-import-template.md` exactly: XLSX with a sheet named `Products`, the seven canonical column headers byte for byte, `Command` = `MERGE`, numeric Shopify IDs stored as text, filename `ProSoccer_SEO_Batch{N}_{count}_Products.xlsx`. Build every import file by copying the last file that imported cleanly, never from a remembered column list. Bare metafield names (`title_tag` instead of `Metafield: title_tag [string]`) are silently ignored by Matrixify, not rejected, so a wrong header half-imports while reporting success. See the template file for the full rule, the why, and the pre-import validation checklist.
+
 ## Cross-references
 
+- `context/matrixify-import-template.md` is the canonical shape for Matrixify product-import files (headers, XLSX + `Products` sheet, MERGE, IDs-as-text, filename convention, silent-ignore failure class).
 - `context/brand-ip-constraints.md` documents the FIFA terminology constraint that applies to all page-optimization deliverables produced under this folder structure.
 - `.claude/agents/on-page-seo/agent.md` Section 8 ("Handoff Patterns") and Section 13 ("Output Templates") reference this convention for the Fresh Optimization workflow, per-page brief file placement, and the mandatory keyword research block.
 - `.claude/agents/on-page-seo/agent.md` Section 2 Step 0 is the canonical SCRIBE pre-flight tool verification protocol referenced under the Tool inventory section above; other agents may adopt the same pattern as added.
