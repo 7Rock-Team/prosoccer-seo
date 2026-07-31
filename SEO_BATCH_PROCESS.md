@@ -54,7 +54,7 @@ Runs in Cursor against `C:\Dev-Projects\marketing\prosoccer-seo`.
 ### 1.4 Mike — decisions and everything irreversible
 
 **Owns:**
-- Every git commit and push. This is the deliberate gate before anything reaches origin.
+- Every git commit and push. Commits are Mike's by default; **push is the hard gate.** Nothing reaches origin without Mike running it. If the workforce commits locally, those commits stay unpushed until Mike reviews the diff.
 - The Matrixify export from Shopify
 - The Matrixify import to Shopify
 - Verification in the Shopify admin after import
@@ -162,7 +162,7 @@ The XLSX form stays the default because the sheet name auto-resolves the entity 
 ## 6. Open at last update
 
 - Gate hardening spec: checks queued, to be built before Batch 10
-- 19 meta title brand-suffix violations across earlier batches, live, awaiting fix-forward
+- 20 meta title brand-suffix violations found across all batches. KA6868 fixed manually 2026-07-28; 19 remain live, awaiting fix-forward.
 - Meta title and meta description format rules being codified into the playbook
 - Collection page workstream, pending audit of the 61 inherited white-label primaries
 - `products-master.csv` `product_id` column holds the SKU, not the Shopify numeric ID

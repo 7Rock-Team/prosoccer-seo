@@ -69,8 +69,8 @@ ProSoccer's Hyper theme exposes three distinct description-related fields in Sho
 | Title | product title | 30 to 100 characters (min AND max) |
 | Short Description (metafield) | hero block above Add to Cart | 50 to 100 words |
 | Description (body_html) | collapsible accordion below the product images | tiered by product complexity (see below) |
-| Meta Title | SERP title | 60 characters maximum, INCLUDING the Hyper theme brand suffix |
-| Meta Description | SERP snippet | 160 characters maximum |
+| Meta Title | SERP title | 48 characters for the written part (theme appends the 12-char store suffix for a 60-char total) |
+| Meta Description | SERP snippet | 120 to 160 characters |
 | URL handle (slug after `/products/`) | URL | 70 characters maximum |
 
 Description (body_html) length tiers by product complexity:
@@ -880,11 +880,11 @@ Topic-research outputs: adidas El Tri kit supplier since 1999; Heat.RDY weave on
 
 ```
 Title (Product Title)
-Mexico 2026 Home Authentic Jersey by Adidas
+Mexico 2026 Home Authentic Jersey by adidas
 
 SEO Meta Title
-Mexico 2026 Home Authentic Jersey | Adidas Player Edition
-[58 chars]
+adidas Mexico 2026 Home Authentic Jersey
+[40 chars, under the 48 written ceiling; brand front, no brand pipe suffix]
 
 SEO Meta Description
 The 2026 El Tri home kit, player edition. Adidas Heat.RDY weave, the close cut the squad wears, the official FMF crest and federation tags. Lock it in.
@@ -936,8 +936,8 @@ Title (Product Title)
 Nike Mercurial Superfly 9 Elite FG Soccer Cleats
 
 SEO Meta Title
-Mercurial Superfly 9 Elite FG | Nike Speed Cleat with Air Zoom
-[60 chars]
+Nike Mercurial Superfly 9 Elite FG Cleats
+[41 chars, under the 48 written ceiling; brand front, no brand pipe suffix]
 
 SEO Meta Description
 The cleat Mbappé and Vinicius wear. Nike Mercurial Superfly 9 Elite, Flyknit upper, Air Zoom plate, the speed cleat for the player who wants to break the line.

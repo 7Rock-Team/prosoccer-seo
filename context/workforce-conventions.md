@@ -1316,6 +1316,17 @@ Scope: every file the agent modifies in a session gets voice-checked before comm
 
 The SEO workforce does not build the Matrixify export filter or the import file. A separate "Step 2" process owns both, working from the briefs and Mike's export; the workforce handoff is the briefs plus the handle list when asked. For reference on the file's shape, see `context/matrixify-import-template.md`: both the seven-column XLSX form (sheet named `Products`, numeric `ID`) and the six-column CSV form (bare metafield names, handle-keyed) import correctly, verified against Batch 9's live pages. XLSX is the documented default because the sheet name auto-resolves the entity and the numeric ID is a stronger match key; the CSV form only differs in that it shows a "Sheets require entity selection" prompt, resolved by picking Products.
 
+## Codification checklist (added 2026-07-31)
+
+When you write or change a rule in a canonical file (a playbook, this conventions file, an agent definition), run this before the change is done. It exists because rules and their examples drift apart, and drift ships.
+
+1. **Audit the examples in that file for consistency with the rule.** When an exemplar and a rule disagree, the exemplar wins: the reader copies what they see, not what they are told. The 20 Meta Title brand-suffix violations across 8 batches happened because the playbook's own Meta Title examples modeled the brand suffix while the rule beside them forbade it. Fix every example the new or changed rule touches, including examples inside fenced code blocks (worked-example templates), which `scripts/voice_check.py` skips and therefore never flags.
+2. **Codify at the point of discovery, not at batch close.** A rule that lives outside the repo does not exist; if SCRIBE cannot read it, SCRIBE will not follow it.
+3. **Update every place the old rule was stated,** not just the primary one. Search the file and its cross-referenced files for the superseded number, phrasing, or example, so no stale copy contradicts the new rule.
+4. **Run the voice check** on every changed file, and remember it does not see inside backticks or fenced blocks, so example blocks need a manual read.
+
+Reference: `SEO_BATCH_PROCESS.md` section 5 ("What must never happen"), rules 4 and 5.
+
 ## Cross-references
 
 - `context/matrixify-import-template.md` is the reference shape for Matrixify product-import files (two valid forms, XLSX default vs handle-keyed CSV; scope note that Step 2 owns the build).
