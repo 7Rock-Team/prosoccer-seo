@@ -25,7 +25,7 @@ _Workforce-internal. ORIN wrote this at Batch 10 pre-dispatch (2026-07-31). SCRI
 | Secondary | new balance kids furon |  |  |
 
 ## Primary assignment note
-SUB-FLOOR (no measurable volume). Takes exact qualified 'kids soccer cleats wide' as primary (flagged sub-floor). Carries 'youth soccer cleats wide' (1300, the Junior YF3F3V9's term) as a SECONDARY only. Does NOT take 'kids soccer cleats' (18,100, a category head with NO owning collection, an unclaimed head term) or 'wide soccer cleats' (UT3FL7NF). WATCH: semantically overlaps the Junior; differentiate on SIZE RANGE in copy.
+SUB-FLOOR (no measurable volume). Takes exact qualified 'kids soccer cleats wide' as primary (flagged sub-floor). Carries 'youth soccer cleats wide' (1300, the Junior YF3F3V9's term) as a SECONDARY only. Does NOT take 'kids soccer cleats' (18,100) which is a category head term OWNED by /collections/youth-soccer-shoes (ceded there, verified 2026-07-31; the sub-floor primary is correct BECAUSE the head term belongs to an existing collection, not because no owner exists) or 'wide soccer cleats' (UT3FL7NF). WATCH: semantically overlaps the Junior; differentiate on SIZE RANGE in copy.
 
 ## Differentiation lane (produce prose from THIS, not from any sibling exemplar)
 - Angle of emphasis: little-kid first wide cleat; the SIZE distinction carries the page
