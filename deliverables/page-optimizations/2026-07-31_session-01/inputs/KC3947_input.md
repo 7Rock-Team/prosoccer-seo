@@ -20,7 +20,7 @@ _Workforce-internal. ORIN wrote this at Batch 10 pre-dispatch (2026-07-31). SCRI
 ## Keywords (from KIRA; validated, do NOT re-derive)
 | Type | Keyword | Volume | Difficulty |
 |---|---|---|---|
-| Primary | real madrid youth long sleeve jersey | 0  [SUB-FLOOR] |  |
+| Primary | real madrid youth long sleeve jersey | 20  [SUB-FLOOR] |  |
 | Secondary | real madrid youth jersey | 590 |  |
 | Secondary | real madrid long sleeve jersey | 1600 |  |
 

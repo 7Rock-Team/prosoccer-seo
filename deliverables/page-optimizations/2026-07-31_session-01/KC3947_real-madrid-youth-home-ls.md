@@ -11,7 +11,7 @@
 
 | Type | Keyword | Volume | Difficulty |
 |---|---|---|---|
-| Primary | real madrid youth long sleeve jersey | 0 [sub-floor] |  |
+| Primary | real madrid youth long sleeve jersey | 20 [sub-floor] |  |
 | Secondary | real madrid long sleeve jersey | 1600 |  |
 | Secondary | real madrid youth jersey | 590 |  |
 
