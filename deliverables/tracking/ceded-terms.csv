@@ -1,4 +1,25 @@
 term,normalized_term,ceded_to_url,source_file,date
+barcelona jersey,barcelona jersey,/collections/barcelona,collections-master.csv (derived),2026-07-31
+barcelona soccer jersey,barcelona soccer jersey,/collections/barcelona,collections-master.csv (derived),2026-07-31
+liverpool jersey,liverpool jersey,/collections/liverpool,collections-master.csv (derived),2026-07-31
+liverpool soccer jersey,liverpool soccer jersey,/collections/liverpool,collections-master.csv (derived),2026-07-31
+manchester united jersey,manchester united jersey,/collections/manchester-united,collections-master.csv (derived),2026-07-31
+manchester united soccer jersey,manchester united soccer jersey,/collections/manchester-united,collections-master.csv (derived),2026-07-31
+man united jersey,man united jersey,/collections/manchester-united,collections-master.csv (derived),2026-07-31
+real madrid jersey,real madrid jersey,/collections/real-madrid,collections-master.csv (derived),2026-07-31
+real madrid soccer jersey,real madrid soccer jersey,/collections/real-madrid,collections-master.csv (derived),2026-07-31
+kids soccer cleats,kids soccer cleats,/collections/youth-soccer-shoes,collections-master.csv (derived),2026-07-31
+youth soccer cleats,youth soccer cleats,/collections/youth-soccer-shoes,collections-master.csv (derived),2026-07-31
+junior soccer cleats,junior soccer cleats,/collections/youth-soccer-shoes,collections-master.csv (derived),2026-07-31
+kids soccer shoes,kids soccer shoes,/collections/youth-soccer-shoes,collections-master.csv (derived),2026-07-31
+youth soccer shoes,youth soccer shoes,/collections/youth-soccer-shoes,collections-master.csv (derived),2026-07-31
+"Breakout twins (Batch 1/2, shipped)","breakout twins (batch 1/2, shipped)",/products/nike-tiempo-maestro-elite-artificial-grass-pro-soccer-cleats-breakout-pack-su26,products-master.csv (derived),2026-07-31
+"Breakout twins (Batch 1/2, shipped)","breakout twins (batch 1/2, shipped)",/products/nike-tiempo-maestro-elite-firm-ground-soccer-cleats-breakout-pack-su26,products-master.csv (derived),2026-07-31
+Batch 6 Shadow entries (shipped 2026-07-08),batch 6 shadow entries (shipped 2026-07-08),https://www.prosoccer.com/products/nike-phantom-6-high-elite-ag-pro-soccer-cleats-shadow-fa26,products-master.csv (derived),2026-07-31
+Batch 6 Shadow entries (shipped 2026-07-08),batch 6 shadow entries (shipped 2026-07-08),https://www.prosoccer.com/products/nike-phantom-6-high-elite-firm-ground-soccer-cleats-shadow-fa26,products-master.csv (derived),2026-07-31
+Batch 6 Shadow entries (shipped 2026-07-08),batch 6 shadow entries (shipped 2026-07-08),https://www.prosoccer.com/products/nike-phantom-6-low-elite-firm-ground-soccer-cleats-shadow-fa26,products-master.csv (derived),2026-07-31
+Batch 6 Shadow entries (shipped 2026-07-08),batch 6 shadow entries (shipped 2026-07-08),https://www.prosoccer.com/products/nike-vapor-17-pro-firm-ground-soccer-cleats-shadow-pack-fa26,products-master.csv (derived),2026-07-31
+/collections/manchester-united,/collections/manchester-united,https://www.prosoccer.com/products/adidas-2026-27-man-united-mens-authentic-home-soccer-jersey,products-master.csv (derived),2026-07-31
 nike vapor 17 elite fg,nike vapor 17 elite fg,"Breakout twins (Batch 1/2, shipped)",deliverables/page-optimizations/2026-07-11_session-01/inputs/_registry1_primaries.txt,2026-07-11
 nike vapor 17 elite ag,nike vapor 17 elite ag,"Breakout twins (Batch 1/2, shipped)",deliverables/page-optimizations/2026-07-11_session-01/inputs/_registry1_primaries.txt,2026-07-11
 nike vapor 17 pro,nike vapor 17 pro,"Breakout twins (Batch 1/2, shipped)",deliverables/page-optimizations/2026-07-11_session-01/inputs/_registry1_primaries.txt,2026-07-11
@@ -14,17 +35,3 @@ adidas f50 messi,adidas f50 messi,the SENIOR F50 Messi Elite El Ultimo Tango PDP
 nike phantom 6 low pro,nike phantom 6 low pro,shipped Breakout / model-level pages,deliverables/page-optimizations/2026-07-13_session-01/inputs/_registry1_primaries.txt,2026-07-13
 nike phantom 6 low pro fg,nike phantom 6 low pro fg,shipped Breakout / model-level pages,deliverables/page-optimizations/2026-07-13_session-01/inputs/_registry1_primaries.txt,2026-07-13
 nike phantom 6 academy,nike phantom 6 academy,shipped Breakout / model-level pages,deliverables/page-optimizations/2026-07-13_session-01/inputs/_registry1_primaries.txt,2026-07-13
-barcelona jersey,barcelona jersey,/collections/barcelona,collections-master.csv (derived),2026-07-31
-barcelona soccer jersey,barcelona soccer jersey,/collections/barcelona,collections-master.csv (derived),2026-07-31
-liverpool jersey,liverpool jersey,/collections/liverpool,collections-master.csv (derived),2026-07-31
-liverpool soccer jersey,liverpool soccer jersey,/collections/liverpool,collections-master.csv (derived),2026-07-31
-manchester united jersey,manchester united jersey,/collections/manchester-united,collections-master.csv (derived),2026-07-31
-manchester united soccer jersey,manchester united soccer jersey,/collections/manchester-united,collections-master.csv (derived),2026-07-31
-man united jersey,man united jersey,/collections/manchester-united,collections-master.csv (derived),2026-07-31
-real madrid jersey,real madrid jersey,/collections/real-madrid,collections-master.csv (derived),2026-07-31
-real madrid soccer jersey,real madrid soccer jersey,/collections/real-madrid,collections-master.csv (derived),2026-07-31
-kids soccer cleats,kids soccer cleats,/collections/youth-soccer-shoes,collections-master.csv (derived),2026-07-31
-youth soccer cleats,youth soccer cleats,/collections/youth-soccer-shoes,collections-master.csv (derived),2026-07-31
-junior soccer cleats,junior soccer cleats,/collections/youth-soccer-shoes,collections-master.csv (derived),2026-07-31
-kids soccer shoes,kids soccer shoes,/collections/youth-soccer-shoes,collections-master.csv (derived),2026-07-31
-youth soccer shoes,youth soccer shoes,/collections/youth-soccer-shoes,collections-master.csv (derived),2026-07-31
