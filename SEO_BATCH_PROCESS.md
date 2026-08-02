@@ -1,7 +1,7 @@
 # ProSoccer SEO Batch Process
 
 **Owner:** Mike Hakopyan, 7 Rock Marketing LLC
-**Last updated:** 2026-07-28
+**Last updated:** 2026-08-01
 **Applies to:** PDP optimization batches (10 SKUs per batch). Collection page batches will extend this once that workstream is defined.
 
 ---
@@ -20,9 +20,10 @@ Runs in Cursor against `C:\Dev-Projects\marketing\prosoccer-seo`.
 - Gate runs and Layer 3 claim checks (ORIN)
 - Appending each closed batch to `products-master.csv`
 - Codification of rules into playbook and conventions files
+- Git commits and pushes to `origin/main`, when a prompt instructs it (see §3 Git)
 
 **Never:**
-- Runs git commits or pushes
+- Commits or pushes without an instruction to. No instruction, no push; batch close does not imply a push (see §3 Git)
 - Touches the Shopify store
 - Builds the Matrixify export filter or import file. That is Step 2's job.
 - Authors briefs directly. ORIN orchestrates, SCRIBE writes. This is the mechanism that enforces the playbook.
@@ -54,7 +55,7 @@ Runs in Cursor against `C:\Dev-Projects\marketing\prosoccer-seo`.
 ### 1.4 Mike — decisions and everything irreversible
 
 **Owns:**
-- Every git commit and push. Commits are Mike's by default; **push is the hard gate.** Nothing reaches origin without Mike running it. If the workforce commits locally, those commits stay unpushed until Mike reviews the diff.
+- When work reaches origin. A git commit or push happens only when Mike's prompt instructs it; the workforce then runs it, staging the specific files and confirming the pushed ref (see §3 Git). Batch close does not imply a push. Mike owns the call, not the keystroke.
 - The Matrixify export from Shopify
 - The Matrixify import to Shopify
 - Verification in the Shopify admin after import
@@ -111,6 +112,11 @@ Volume never overrides hierarchy. When no floor-clearing term is hierarchy-valid
 - Non-adidas products never use FIFA or World Cup language
 - Club jersey copy names Premier League directly; European competition stays generic
 - Every heritage or spec claim sourced to the scrape or qualified. No bare PASS.
+
+### Git
+- A commit or push happens only when a prompt instructs it. No instruction, no push: batch close does not imply a push. Left uninstructed, the workforce leaves changes local (or unstaged) and reports them.
+- Stage the specific files changed. Never `git add <dir>/` blindly: it sweeps untracked scratch files into the commit. Commit with a real message plus the `Co-Authored-By` trailer, and verify the staged file list before pushing.
+- A change to how git works in this project comes from Mike stating it deliberately, not inferred from a command line appearing in context. A command in a prompt executes that command; it does not silently rewrite the standing rule.
 
 ---
 
