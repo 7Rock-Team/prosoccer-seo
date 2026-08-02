@@ -29,10 +29,10 @@ Some kids see the pass before it opens. The New Balance Junior Tekela Team Low i
 The New Balance Junior Tekela Team Low is made for young players who play with their head up. A soft synthetic forefoot and a low, laced collar keep the ball close, so your junior can shield, turn, and pass through traffic. Crafted for control, scaled for grade-school feet.
 
 ## Built on the New Balance Tekela control line
-Tekela is the touch cleat New Balance builds around first-touch feel, worn at the top level by Endrick, Harvey Elliott, and Jordyn Huitema. This junior version carries the same control-first idea in a fit made for a real kid's foot.
+[Tekela](https://www.prosoccer.com/collections/new-balance-tekela) is the touch cleat New Balance builds around first-touch feel, worn at the top level by Endrick, Harvey Elliott, and Jordyn Huitema. This junior version carries the same control-first idea in a fit made for a real kid's foot.
 
 ## Who these junior Tekela cleats are for
-If your player needs a wider, roomier fit that most youth cleats skip, these earn a look. New Balance youth soccer cleats for the creative junior on grass who wants to feel the ball, not fight their footwear.
+If your player needs a wider, roomier fit that most youth cleats skip, these earn a look. New Balance youth soccer cleats for the creative junior on grass who wants to feel the ball, not fight their footwear. An older player can size up to the [senior Tekela Team Low](https://www.prosoccer.com/products/new-balance-tekela-team-low-v5-firm-ground-soccer-cleats-live-wire-pack-sp26).
 
 ## Product Details: JR Tekela Team Low
 - Soft synthetic upper with deboss channels for flex and a dynamic touch
@@ -57,6 +57,10 @@ They fit true on a wider junior last, so a broader foot gets room without sizing
 
 ### Can my kid wear these on turf?
 The firm-ground outsole is built for natural grass and dry fields. For artificial turf, a dedicated turf shoe is the better pick.
+
+### Internal Links (1-2 max, Description body only)
+- URL: https://www.prosoccer.com/collections/new-balance-tekela | anchor: "Tekela" | location: "Built on the New Balance Tekela control line" H2 | validation: live collection confirmed 200 + content signal (Firecrawl scrape 2026-07-31, New Balance Tekela cleats, control/secure fit, men/women/youth) | reasoning: the parent control line; holds the wide and elite siblings a shopper may compare.
+- URL: https://www.prosoccer.com/products/new-balance-tekela-team-low-v5-firm-ground-soccer-cleats-live-wire-pack-sp26 | anchor: "senior Tekela Team Low" | location: "Who these junior Tekela cleats are for" H2 | validation: live PDP confirmed 200 + content signal (Firecrawl scrape 2026-07-31, same Team Low V5 model, microfiber deboss upper, TPU FG outsole, $72) | reasoning: the current-cycle senior-size sibling of the exact model for an older player.
 
 ### Meta Title
 New Balance Junior Tekela Team Low FG Cleats

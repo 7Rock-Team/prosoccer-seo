@@ -54,10 +54,18 @@ def make_brief(
     body_sections=None,
     meta_title="Nike Test Cleat FG Soccer Cleats",
     meta_desc="A clean first touch, a locked-in fit, firm-ground grip. Shop the pack.",
+    complete=False,
 ):
     """Build a minimal but structurally real PDP brief. body_sections is a list of
     (h2_line, prose_line) tuples for the Description body; defaults to one clean
-    sentence-case section."""
+    sentence-case section.
+
+    complete=False (default) keeps the historical minimal shape so the existing
+    word-band / voice / claims fixtures are byte-for-byte unchanged. complete=True adds
+    the full required PDP section set (Fit Notes, Care and Maintenance, a FAQ whose
+    answer carries the required internal link, and an Image Alt Text field) so a brief
+    can genuinely PASS check_section_presence. The link lives in the FAQ answer, after
+    the editorial region, so it never becomes the cross-brief 'closing' line."""
     if body_sections is None:
         # Default body is realistically sized (~360 words) so a default brief is
         # genuinely in-band; explicit word-band tests override body_sections. The
@@ -98,6 +106,23 @@ def make_brief(
         "- Synthetic upper with a lightweight mesh midfoot",
         "- Firm-ground plate with conical studs",
         "",
+    ]
+    if complete:
+        lines += [
+            "## Fit Notes",
+            "Runs true to size with a snug midfoot; size up for a wider foot.",
+            "",
+            "## Care and Maintenance",
+            "- Wipe the upper with a damp cloth after play",
+            "- Air-dry away from direct heat, never in the dryer",
+            "",
+            "## FAQs about Test Cleat",
+            "### Do these run true to size?",
+            "Yes, true to size for most players. Compare the "
+            "[test collection](https://www.prosoccer.com/collections/test-collection) for other widths.",
+            "",
+        ]
+    lines += [
         "### Meta Title (Search engine listing)",
         meta_title,
         "",
@@ -107,6 +132,15 @@ def make_brief(
         "### URL Handle",
         "nike-test-cleat-fg-soccer-cleats",
         "",
+    ]
+    if complete:
+        lines += [
+            "### Image Alt Text",
+            "- Nike Test Cleat firm ground soccer cleats front view",
+            "- Nike Test Cleat side profile on grass",
+            "",
+        ]
+    lines += [
         "### Taxonomy Category (Shopify admin)",
         "Apparel & Accessories > Shoes > Athletic Shoes > Soccer Cleats",
     ]
@@ -357,18 +391,22 @@ class TestCannibalizationAndPrice(GateTestBase):
 
 class TestCleanAndSkips(GateTestBase):
     def test_fully_clean_batch_passes(self):
-        # Two distinct, in-band, defect-free briefs -> zero findings, exit 0.
+        # Two distinct, in-band, defect-free, structurally COMPLETE briefs -> zero
+        # findings, exit 0. complete=True so the section-presence check is satisfied
+        # too; _para is retuned so the fuller body stays inside the default band.
         self.write_brief("HJ2146", make_brief(
             short_desc="The ball settles under your foot before the defender can set.",
             body_sections=[("## Built for the player who reads the game",
-                            "This cleat rewards the player who reads the game a beat early. " + _para(330, "touch"))],
+                            "This cleat rewards the player who reads the game a beat early. " + _para(250, "touch"))],
+            complete=True,
         ), slug="a")
         self.write_brief("KB7474", make_brief(
             short_desc="The Reggae Boyz identity, in a match-spec away kit for the road.",
             body_sections=[("## Reggae Boyz on the road",
-                            "The away kit carries the black-based identity onto foreign turf. " + _para(330, "speed"))],
+                            "The away kit carries the black-based identity onto foreign turf. " + _para(250, "speed"))],
             meta_title="Jamaica Authentic Away Jersey 2026",
-            meta_desc="The Reggae Boyz away kit, match-spec and ready for the cycle."), slug="b")
+            meta_desc="The Reggae Boyz away kit, match-spec and ready for the cycle.",
+            complete=True), slug="b")
         self.write_input("HJ2146", {"primary_keyword": "nike phantom low elite fg"})
         self.write_input("KB7474", {"brand": "adidas", "brand_ip_posture": "fifa-permitted",
                                     "primary_keyword": "jamaica soccer jersey 2026"})
@@ -451,6 +489,114 @@ class TestKA6871HeritageCounts(GateTestBase):
                                         primary_keyword="liverpool long sleeve jersey"))
         self.assertIn("heritage-count", self.checks_present(),
                       "Liverpool '20 English league titles' + 'six European crowns' must be caught")
+
+
+class TestSectionPresence(GateTestBase):
+    """2026-08-01, codification candidate 4. Two production origins:
+      - Batch 9 shipped briefs missing Product Details / Fit Notes / Care / FAQ, caught
+        only by accident (the absent prose dragged the word count under band).
+      - Batch 10 shipped KC3952 / KB8251 / YT3FL1NM with ZERO internal links; nothing in
+        the pipeline checked section presence, so four green reports missed it.
+    The gate must now look directly, unconditionally, and hard-fail."""
+
+    _BODY = [("## Built for the player who reads the game",
+              "This cleat rewards the player who reads the game a beat early. " + _para(250, "grip"))]
+
+    def _complete(self, **kw):
+        kw.setdefault("body_sections", list(self._BODY))
+        return make_brief(complete=True, **kw)
+
+    def _section_msgs(self):
+        return [f.message for f in self.findings() if f.check == "section-presence"]
+
+    def test_complete_brief_passes(self):
+        self.write_brief("HJ2146", self._complete())
+        self.write_input("HJ2146", {})
+        self.assertEqual([], self._section_msgs(),
+                         "a structurally complete PDP brief must raise no section finding")
+        self.assertEqual(self.exit_code(), 0)
+
+    def test_missing_internal_link_flagged(self):
+        # The exact Batch 10 defect: every section present, zero internal links.
+        brief = self._complete().replace(
+            "[test collection](https://www.prosoccer.com/collections/test-collection)",
+            "our other widths")
+        self.write_brief("KC3952", brief)
+        self.write_input("KC3952", {})
+        msgs = self._section_msgs()
+        self.assertTrue(any("internal link" in m for m in msgs),
+                        f"a brief with no internal link must be flagged; got {msgs}")
+        self.assertEqual(self.exit_code(), 2, "missing internal link is a hard defect -> exit 2")
+
+    def test_missing_fit_notes_flagged(self):
+        brief = self._complete().replace(
+            "## Fit Notes\nRuns true to size with a snug midfoot; size up for a wider foot.\n\n", "")
+        self.write_brief("HJ2146", brief)
+        self.write_input("HJ2146", {})
+        self.assertTrue(any("Fit Notes" in m for m in self._section_msgs()))
+        self.assertEqual(self.exit_code(), 2)
+
+    def test_missing_care_flagged(self):
+        brief = self._complete().replace(
+            "## Care and Maintenance\n- Wipe the upper with a damp cloth after play\n"
+            "- Air-dry away from direct heat, never in the dryer\n\n", "")
+        self.write_brief("HJ2146", brief)
+        self.write_input("HJ2146", {})
+        self.assertTrue(any("Care and Maintenance" in m for m in self._section_msgs()))
+
+    def test_missing_faq_flagged(self):
+        brief = self._complete().replace(
+            "## FAQs about Test Cleat\n### Do these run true to size?\n"
+            "Yes, true to size for most players. Compare the "
+            "[test collection](https://www.prosoccer.com/collections/test-collection) for other widths.\n\n", "")
+        self.write_brief("HJ2146", brief)
+        self.write_input("HJ2146", {})
+        msgs = self._section_msgs()
+        # FAQ gone takes the only internal link with it: both must fire.
+        self.assertTrue(any("FAQ" in m for m in msgs), f"missing FAQ must fire; got {msgs}")
+        self.assertEqual(self.exit_code(), 2)
+
+    def test_missing_image_alt_flagged(self):
+        brief = self._complete().replace(
+            "### Image Alt Text\n- Nike Test Cleat firm ground soccer cleats front view\n"
+            "- Nike Test Cleat side profile on grass\n\n", "")
+        self.write_brief("HJ2146", brief)
+        self.write_input("HJ2146", {})
+        self.assertTrue(any("Image Alt Text" in m for m in self._section_msgs()))
+
+    def test_empty_heading_counts_as_missing(self):
+        # Fit Notes heading present but no content beneath -> missing, not present.
+        brief = self._complete().replace(
+            "## Fit Notes\nRuns true to size with a snug midfoot; size up for a wider foot.\n",
+            "## Fit Notes\n")
+        self.write_brief("HJ2146", brief)
+        self.write_input("HJ2146", {})
+        msgs = self._section_msgs()
+        self.assertTrue(any("Fit Notes" in m and "no content" in m for m in msgs),
+                        f"an empty Fit Notes heading must count as missing; got {msgs}")
+
+    def test_missing_editorial_region_flagged(self):
+        # Body jumps straight from Description to Product Details: no lead copy.
+        self.write_brief("HJ2146", self._complete(body_sections=[]))
+        self.write_input("HJ2146", {})
+        self.assertTrue(any("editorial" in m for m in self._section_msgs()))
+        self.assertEqual(self.exit_code(), 2)
+
+    def test_no_description_body_flagged(self):
+        # A file with no '### Description' field at all is maximally broken.
+        self.write_brief("HJ2146", "# Broken\n\n## Quick Reference\n- SKU: HJ2146\n")
+        self.write_input("HJ2146", {})
+        self.assertTrue(any("Description" in m for m in self._section_msgs()))
+
+    def test_runs_without_input_file(self):
+        # Unconditional: the check must fire even when the input file is absent (the
+        # Batch 10 root cause was an unmet input contract that nothing verified).
+        brief = self._complete().replace(
+            "[test collection](https://www.prosoccer.com/collections/test-collection)",
+            "our other widths")
+        self.write_brief("KC3952", brief)  # no input file written
+        self.assertTrue(any("internal link" in m for m in self._section_msgs()),
+                        "section presence must not depend on the per-SKU input file")
 
 
 if __name__ == "__main__":

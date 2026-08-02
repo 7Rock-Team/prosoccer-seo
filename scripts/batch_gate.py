@@ -22,10 +22,11 @@ Design: EXTENDS scripts/voice_check.py, does not duplicate it. The voice checks
 (em-dash / en-dash, forbidden words / phrases / openers, capitalized Adidas, UK
 'boots', lowercase editorial body H2 casing, internal-link URL format) run via
 voice_check.collect_violations. This file adds only the net-new batch checks:
-heading levels, FIFA/WC brand-aware grep, per-SKU forbidden-phrasings (verbatim +
-motifs + title-frames), cross-brief lexical similarity, word-count band,
-cannibalization, price-in-body, fabrication-hedge markers, and heritage-honour
-claims (specific title/trophy counts + "most"/"record" superlatives).
+heading levels, section presence (required PDP sections present WITH content, incl. at
+least one internal link -- unconditional, never input-gated), FIFA/WC brand-aware grep,
+per-SKU forbidden-phrasings (verbatim + motifs + title-frames), cross-brief lexical
+similarity, word-count band, cannibalization, price-in-body, fabrication-hedge markers,
+and heritage-honour claims (specific title/trophy counts + "most"/"record" superlatives).
 
 Single source of truth: the motif and title-frame lists this script checks are
 the SAME per-SKU lists ORIN writes into each SKU's input file
@@ -399,6 +400,143 @@ def check_word_band(sku, lines, meta) -> list[Finding]:
 
 
 # --------------------------------------------------------------------------- #
+# Section presence: every required PDP section present WITH real content beneath
+# (added 2026-08-01, codification candidate 4 from Batch 9, deferred twice).
+#
+# A heading with nothing under it counts as missing. Two production origins:
+#   - Batch 9 shipped briefs missing Product Details / Fit Notes / Care / FAQ. That
+#     was caught ONLY because the absent prose dragged the word count under band and
+#     the gate does check word band -- an accident of a different check, not a section
+#     check. Internal links are too short to move the count, so an omitted link fires
+#     nothing.
+#   - Batch 10 shipped three briefs (KC3952, KB8251, YT3FL1NM) with ZERO internal
+#     links. batch_gate ran nine mechanical checks, none of them section presence;
+#     Layer 3 checks claims; the voice check checks language. Four green reports, none
+#     looking at whether a required section exists. This check is that missing look.
+#
+# It runs UNCONDITIONALLY -- never gated on the per-SKU input file -- because the
+# Batch 10 root cause was exactly that the input contract (ORIN's template calls for a
+# pre-validated 1-2 internal links block per SKU) went unmet batch-wide and nothing
+# verified the OUTPUT. A check that trusts the input cannot catch an input that lied by
+# omission. Hard FAIL, so a missing section can never bare-PASS.
+# --------------------------------------------------------------------------- #
+_ANY_HEADING = re.compile(r"^#{1,6}\s+\S")
+_ANY_H2 = re.compile(r"^#{2}\s+\S")
+_ANY_H3 = re.compile(r"^#{3}\s+\S")
+SEC_PRODUCT_DETAILS = re.compile(r"^#{2}\s+Product\s+Details\b", re.IGNORECASE)
+SEC_FIT_NOTES = re.compile(r"^#{2}\s+Fit\s+Notes\b", re.IGNORECASE)
+SEC_CARE = re.compile(r"^#{2}\s+Care\s+(?:and|&)\s+Maintenance\b", re.IGNORECASE)
+SEC_FAQ = re.compile(r"^#{2}\s+FAQs?\b", re.IGNORECASE)
+FIELD_IMAGE_ALT = re.compile(r"^#{3}\s+Image\s+Alt(\s+Text)?\b", re.IGNORECASE)
+# An internal link is a markdown link whose target is a ProSoccer collection or product
+# PATH. Presence only -- canonical-URL FORMAT (https + www) is voice_check's job, so a
+# relative or bare-domain path still counts as PRESENT here and gets flagged for format
+# there. This split keeps the two failure modes (absent vs malformed) independent.
+INTERNAL_LINK = re.compile(r"\]\(\s*[^)]*?/(?:collections|products)/[^)\s]")
+
+
+def _has_content_below(lines: list[str], i: int, end: int) -> bool:
+    """True if a non-blank, non-heading line appears after heading line i and before the
+    next heading (any level) or `end`. A heading immediately followed by another heading
+    (nothing but blanks between) is an empty section -> False."""
+    for j in range(i + 1, end):
+        s = lines[j].strip()
+        if not s:
+            continue
+        return not bool(_ANY_HEADING.match(lines[j]))
+    return False
+
+
+def _faq_has_qa(lines: list[str], faq_idx: int, end: int) -> bool:
+    """True if the FAQ H2 at faq_idx has >=1 '### question' with a non-empty answer line
+    beneath it, before the next H2 or `end`. A bare '## FAQs' with no Q&A, or questions
+    with empty answers, is missing content."""
+    for j in range(faq_idx + 1, end):
+        if _ANY_H2.match(lines[j]):
+            break
+        if _ANY_H3.match(lines[j]) and _has_content_below(lines, j, end):
+            return True
+    return False
+
+
+def check_section_presence(sku, lines) -> list[Finding]:
+    """FAIL for each required PDP section that is absent, or present as a heading with no
+    content beneath it. Required PDP set: an editorial narrative region (overview,
+    heritage/build, use-case -- the skeleton calls for three; the deterministic floor is
+    at least one editorial H2 with prose, since the titles are creative and unbounded),
+    Product Details, Fit Notes, Care and Maintenance, FAQs about [product], Image Alt
+    Text, and at least one internal link in the Description body."""
+    findings: list[Finding] = []
+    start, end = body_region(lines)
+    if start == -1:
+        return [Finding(sku, "section-presence", FAIL,
+                        "no Description body ('### Description' field missing)")]
+
+    # Locate the named structural H2 sections inside the Description body.
+    idx = {"Product Details": None, "Fit Notes": None,
+           "Care and Maintenance": None, "FAQ": None}
+    for i in range(start, end):
+        if idx["Product Details"] is None and SEC_PRODUCT_DETAILS.match(lines[i]):
+            idx["Product Details"] = i
+        elif idx["Fit Notes"] is None and SEC_FIT_NOTES.match(lines[i]):
+            idx["Fit Notes"] = i
+        elif idx["Care and Maintenance"] is None and SEC_CARE.match(lines[i]):
+            idx["Care and Maintenance"] = i
+        elif idx["FAQ"] is None and SEC_FAQ.match(lines[i]):
+            idx["FAQ"] = i
+
+    # Editorial narrative region: >=1 H2 with content before the first structural section.
+    struct_positions = [i for i in idx.values() if i is not None]
+    first_struct = min(struct_positions) if struct_positions else end
+    editorial = [i for i in range(start, first_struct) if _ANY_H2.match(lines[i])
+                 and _has_content_below(lines, i, end)]
+    if not editorial:
+        findings.append(Finding(
+            sku, "section-presence", FAIL,
+            "no editorial narrative section (overview / heritage / use-case) with content "
+            "before the spec sections; the body is missing its lead copy"))
+
+    # Named spec sections: present AND non-empty.
+    for label in ("Product Details", "Fit Notes", "Care and Maintenance"):
+        i = idx[label]
+        if i is None:
+            findings.append(Finding(sku, "section-presence", FAIL,
+                                    f"required PDP section '{label}' is missing"))
+        elif not _has_content_below(lines, i, end):
+            findings.append(Finding(sku, "section-presence", FAIL,
+                                    f"section '{label}' is a heading with no content beneath it",
+                                    line=i + 1))
+
+    # FAQ: present AND carries at least one question with an answer.
+    if idx["FAQ"] is None:
+        findings.append(Finding(sku, "section-presence", FAIL,
+                                "required PDP section 'FAQs about [product]' is missing"))
+    elif not _faq_has_qa(lines, idx["FAQ"], end):
+        findings.append(Finding(sku, "section-presence", FAIL,
+                                "FAQ section has no question with an answer beneath it",
+                                line=idx["FAQ"] + 1))
+
+    # Image Alt Text: a field (### level) after the body, present AND non-empty.
+    alt_idx = next((i for i, ln in enumerate(lines) if FIELD_IMAGE_ALT.match(ln)), None)
+    if alt_idx is None:
+        findings.append(Finding(sku, "section-presence", FAIL,
+                                "required field 'Image Alt Text' is missing"))
+    elif not _has_content_below(lines, alt_idx, len(lines)):
+        findings.append(Finding(sku, "section-presence", FAIL,
+                                "'Image Alt Text' has a heading but no alt lines beneath it",
+                                line=alt_idx + 1))
+
+    # At least one internal link in the Description body (the Batch 10 defect class).
+    if not any(INTERNAL_LINK.search(lines[i]) for i in range(start, end)):
+        findings.append(Finding(
+            sku, "section-presence", FAIL,
+            "no internal link in the Description body; at least one link to a ProSoccer "
+            "collection or product page is required (Batch 10 KC3952/KB8251/YT3FL1NM class)"))
+
+    return findings
+
+
+# --------------------------------------------------------------------------- #
 # Check 10: price in body copy (evergreen discipline)
 # --------------------------------------------------------------------------- #
 PRICE_RE = re.compile(r"\$\s?\d")
@@ -701,6 +839,9 @@ def gate_brief(sku, path, meta) -> tuple[list[Finding], list[str]]:
 
     # Check 2: heading levels.
     findings += check_heading_levels(sku, lines)
+    # Section presence: required sections present with content (unconditional, never
+    # input-gated). Catches the Batch 9 missing-spec-section and Batch 10 missing-link classes.
+    findings += check_section_presence(sku, lines)
     # Check 10: price in body.
     findings += check_price_in_body(sku, lines)
     # Heritage honour claims (specific counts / "most"-"record" superlatives) -- claims gate.

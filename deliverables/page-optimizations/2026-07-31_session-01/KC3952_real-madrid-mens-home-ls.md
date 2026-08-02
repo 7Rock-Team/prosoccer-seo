@@ -29,11 +29,11 @@ adidas 2026-27 Real Madrid Men's Home Long-Sleeve Soccer Jersey
 
 ## The cold-night shift
 
-The long sleeve is the cover you reach for when the fixtures move under the lights and the night turns cold. Same white of Madrid, same crest over the heart as the short-sleeve home shirt, only cut for the months when a short sleeve leaves you cold on the terrace. This is the shirt a lot of supporters wait all year for.
+The long sleeve is the cover you reach for when the fixtures move under the lights and the night turns cold. Same white of Madrid, same crest over the heart as [the short-sleeve home shirt](https://www.prosoccer.com/products/adidas-2026-27-real-madrid-mens-stadium-home-soccer-jersey), only cut for the months when a short sleeve leaves you cold on the terrace. This is the shirt a lot of supporters wait all year for.
 
 ## The white of Madrid, sleeve to cuff
 
-Real Madrid built its identity on that all-white home kit, and Los Blancos have carried it through Europe's biggest nights and a long run at the sharp end of La Liga. This season adidas draws the detailing from the diamonds and pearls of the crown: a darker green on the sleeves and collar, with a pop of color on the 3-Stripes. On the long sleeve, that green runs the full length of the arm.
+Real Madrid built its identity on that all-white home kit, and Los Blancos have carried it through Europe's biggest nights and a long run at the sharp end of La Liga. This season adidas draws the detailing from the diamonds and pearls of the crown: a darker green on the sleeves and collar, with a pop of color on the 3-Stripes. On the long sleeve, that green runs the full length of the arm. Explore the full [Real Madrid collection](https://www.prosoccer.com/collections/real-madrid) for matching home kit.
 
 ## For the supporter who plays through winter
 
@@ -73,6 +73,10 @@ This Stadium long sleeve is the replica tier, made for everyday supporter wear. 
 ### Can I add a name and number?
 
 Yes. Name and number customization is available at checkout, along with La Liga and European competition patch add-ons. Customized shirts need an extra one to two weeks before they ship.
+
+### Internal Links (1-2 max, Description body only)
+- URL: https://www.prosoccer.com/products/adidas-2026-27-real-madrid-mens-stadium-home-soccer-jersey | anchor: "the short-sleeve home shirt" | location: "The cold-night shift" H2 | validation: live PDP confirmed 200 + content signal (Firecrawl scrape 2026-07-31, fan replica, white/green CLIMACOOL, $99.99) | reasoning: the natural short-sleeve sibling the copy already contrasts against.
+- URL: https://www.prosoccer.com/collections/real-madrid | anchor: "Real Madrid collection" | location: "The white of Madrid, sleeve to cuff" H2 | validation: live collection confirmed 200 + content signal (Firecrawl scrape 2026-07-31, official Real Madrid jerseys/gear) | reasoning: parent collection for matching home kit and the rest of the range.
 
 ### Meta Title
 adidas Real Madrid Home Long Sleeve Jersey

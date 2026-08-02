@@ -24,10 +24,10 @@ Some supporters wait for the authentic version, and some wait for the long sleev
 ### Description
 
 ## The match-grade shirt, cut in full sleeve
-This is the authentic Liverpool home jersey, the player-version build worn on the pitch, made in the long-sleeve cut. It sits slim through the body with a clean crew neck, so it moves the way a match shirt should. adidas engineers it with Climacool+ fabric that stays cool and dry as the pace lifts. If you want the exact kit rather than the everyday replica, this is the one.
+This is the authentic Liverpool home jersey, the player-version build worn on the pitch, made in the long-sleeve cut. It sits slim through the body with a clean crew neck, so it moves the way a match shirt should. adidas engineers it with Climacool+ fabric that stays cool and dry as the pace lifts. If you want the exact kit rather than [the everyday replica](https://www.prosoccer.com/products/adidas-2026-27-liverpool-mens-home-long-sleeve-soccer-jersey), this is the one.
 
 ## Shankly-red, an '80s graphic reborn
-It lands on a bold Shankly-red, the shade Liverpool has worn since Bill Shankly took the club all red, and it reimagines a legendary '80s graphic for today's game, carried down onto a sleeve print. Pull it on and you carry Anfield with you: the Kop in full voice, the Liver Bird on the chest, You'll Never Walk Alone before kickoff. Liverpool is one of England's most decorated clubs, with a European pedigree few can rival.
+It lands on a bold Shankly-red, the shade Liverpool has worn since Bill Shankly took the club all red, and it reimagines a legendary '80s graphic for today's game, carried down onto a sleeve print. Pull it on and you carry Anfield with you: the Kop in full voice, the Liver Bird on the chest, You'll Never Walk Alone before kickoff. Liverpool is one of England's most decorated clubs, with a European pedigree few can rival. See the full [Liverpool collection](https://www.prosoccer.com/collections/liverpool) for the rest of the home range.
 
 ## For the supporter who wants the exact kit
 Some supporters wait for the authentic version, and some wait for the long sleeve. This is both. Add a current name and number, Virgil 4 or Szoboszlai 8, and you are wearing the same league-play kit as the squad. It backs the Reds on a cold terrace, in the stands, and anywhere the season takes you.
@@ -58,6 +58,10 @@ This is the authentic player-version jersey, the match-grade build Liverpool wea
 The authentic cut is slim and athletic. Most supporters find it true to size; size up for a looser fit or to layer underneath.
 ### Can I add a player name and number?
 Yes. Add one at checkout, such as Virgil 4 or Gakpo 18. Name and number jerseys ship with the league-play version.
+
+### Internal Links (1-2 max, Description body only)
+- URL: https://www.prosoccer.com/products/adidas-2026-27-liverpool-mens-home-long-sleeve-soccer-jersey | anchor: "the everyday replica" | location: "The match-grade shirt, cut in full sleeve" H2 | validation: live PDP confirmed 200 + content signal (Firecrawl scrape 2026-07-31, replica home LS, V-neck CLIMACOOL, $109.99) | reasoning: the replica long-sleeve sibling (KB8268) the copy already contrasts against on the authentic-vs-replica axis.
+- URL: https://www.prosoccer.com/collections/liverpool | anchor: "Liverpool collection" | location: "Shankly-red, an '80s graphic reborn" H2 | validation: live collection confirmed 200 + content signal (Firecrawl scrape 2026-07-31, official LFC jerseys/apparel/gear) | reasoning: parent collection for the rest of the home range.
 
 ### Meta Title
 adidas Liverpool Authentic Home LS Jersey
