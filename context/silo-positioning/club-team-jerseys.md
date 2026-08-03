@@ -47,8 +47,10 @@ Bare club head terms belong to the club's `/collections/<club>` page, not to any
 - **Barcelona:** `barcelona jersey`, `barcelona soccer jersey` to `/collections/barcelona`
 - **Liverpool:** `liverpool jersey`, `liverpool soccer jersey` to `/collections/liverpool`
 - **Manchester United:** `manchester united jersey`, `manchester united soccer jersey`, `man united jersey` to `/collections/manchester-united`
+- **Arsenal:** `arsenal jersey`, `arsenal soccer jersey` to `/collections/arsenal` (added 2026-08-03, Batch 11; `/collections/arsenal` live-verified, 44 products, smart collection on tag `comp_club-team_arsenal`)
+- **Bayern Munich:** `bayern munich jersey`, `bayern jersey` to `/collections/bayern-munich` (added 2026-08-03, Batch 11; `/collections/bayern-munich` live-verified, 38 products. Bundesliga club, so the term pair is `bayern munich jersey` + the short-form `bayern jersey`, not the `<club> soccer jersey` shape used for the La Liga / Premier League clubs above.)
 
-Add a club's cede here and to both registry files before its first PDP is assigned a primary, so no PDP reaches for the head term. Real Madrid and Barcelona entered as new lanes in Batch 10; their cedes were written before assignment for exactly this reason.
+Add a club's cede here and to both registry files before its first PDP is assigned a primary, so no PDP reaches for the head term. Real Madrid and Barcelona entered as new lanes in Batch 10; their cedes were written before assignment for exactly this reason. Arsenal and Bayern Munich entered as new lanes in Batch 11, cedes written before assignment.
 
 ### Manchester United FC (added 2026-07-13, Batch 8; FIRST United entry, Mike-approved criterion-1 escalation; guardrail approved as-is)
 
