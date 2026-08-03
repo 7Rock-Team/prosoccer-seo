@@ -1,7 +1,7 @@
 # ProSoccer SEO Batch Process
 
 **Owner:** Mike Hakopyan, 7 Rock Marketing LLC
-**Last updated:** 2026-08-01
+**Last updated:** 2026-08-03
 **Applies to:** PDP optimization batches (10 SKUs per batch). Collection page batches will extend this once that workstream is defined.
 
 ---
@@ -85,6 +85,8 @@ Runs in Cursor against `C:\Dev-Projects\marketing\prosoccer-seo`.
 
 **Steps 3 and 14 are the pair that keeps the registry honest.** Step 3 is worthless if step 14 stops happening. If a batch ships without being appended, the next batch's check goes blind.
 
+**The gate (step 5).** `scripts/batch_gate.py` runs 10 mechanical checks over the session folder, including `check_section_presence` (added 2026-07-31): every required PDP section must be present with content, and the Description body must carry at least one internal link, an unconditional hard fail. Exit 0 only when nothing fires. The gate replaces the human per-brief review for mechanical defect classes; the escalate-on-exception batch mode (CLAUDE.md 'Approval mode') is safe only because it runs.
+
 Handles always come from the briefs (step 9). Never reconstruct them from product titles. ProSoccer handles abbreviate in ways titles do not: `man-united` not `manchester-united`, `ls` not `long-sleeve`, `fg` not `firm-ground`.
 
 ---
@@ -125,6 +127,9 @@ Authoritative facts: `context/shipping-customization-facts.md` (source: ProSocce
 - Keep the processing tiers distinct: Standard 1-2 business days; Customized name/number 2-3 business days; Personalized jerseys 5-10 business days; Team/club orders up to 4 weeks. A name/number add is not a personalized jersey; do not conflate the tiers.
 - CORRECT: "Add your name and number right on this page. Name and number orders ship in about 2 to 3 business days." INCORRECT: "Customize at checkout. Personalized jerseys take an extra 1 to 2 weeks."
 - Enforced by `scripts/batch_gate.py` `check_customization_claims` (see §7 pattern 1).
+
+### Forbidden-phrasing lists
+A forbidden verbatim (or title-frame) entry must never be a substring of an approved phrasing. `scripts/batch_gate.py` matches those tiers by substring, so a bare form embedded inside an approved phrase false-FAILs the approved copy (Batch 11: the barred `germany's most storied club` fired on the approved `one of Germany's most storied clubs`). Before adding a verbatim or title-frame bar, confirm it is not a substring of any phrasing the claims bar approves. Full rule and worked example: `context/workforce-conventions.md` 'Forbidden-phrasings three-tier scope (v2)'.
 
 ---
 
@@ -175,7 +180,8 @@ The XLSX form stays the default because the sheet name auto-resolves the entity 
 
 ## 6. Open at last update
 
-- Gate hardening spec: checks queued, to be built before Batch 10
+- Batch 11 (10 SKUs: Barcelona men's/women's home, Arsenal home/LS/youth, Bayern Munich authentic/LS, 3 Nike Shadow cleats) authored, gate-green, Layer 3 clean, committed and pushed 2026-08-03 (commit e68a999). Awaiting Step 2 handle list + Matrixify import; registry append (step 14) pending post-import.
+- Gate: `check_section_presence` BUILT (added 2026-07-31); the gate now runs 10 mechanical checks. Remaining hardening still to build: (a) cannibalization check (#9) is exact-match only, with no containment or token-subset detection, so that class is caught only by ORIN's manual pre-dispatch pass, never the gate; (b) `voice_check.py` skips fenced code blocks, so worked examples inside canonical files are invisible to it; (c) meta-title length (48-char cap) and meta-description length/format are not gated, enforced by SCRIBE plus Layer 3 only.
 - 20 meta title brand-suffix violations found across all batches. KA6868 fixed manually 2026-07-28; 19 remain live, awaiting fix-forward.
 - Meta title and meta description format rules being codified into the playbook
 - Collection page workstream, pending audit of the 61 inherited white-label primaries
