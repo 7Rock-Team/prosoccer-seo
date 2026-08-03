@@ -599,5 +599,72 @@ class TestSectionPresence(GateTestBase):
                         "section presence must not depend on the per-SKU input file")
 
 
+class TestCustomizationClaims(GateTestBase):
+    """2026-08-03, failure pattern 1 (SEO_BATCH_PROCESS.md §7). Two customer-facing facts
+    shipped wrong across Batch 10 briefs: name/number customization is a PRODUCT-PAGE
+    option (briefs said 'at checkout') and it adds BUSINESS DAYS (briefs said '1 to 2
+    weeks'). Authoritative: context/shipping-customization-facts.md. Hard FAIL."""
+
+    def _cust_msgs(self):
+        return [f.message for f in self.findings() if f.check == "customization-claim"]
+
+    def _brief(self, prose):
+        return make_brief(body_sections=[("## Make it yours", prose)])
+
+    def test_at_checkout_flagged(self):
+        self.write_brief("KB8251", self._brief(
+            "Add a name and number at checkout, such as Virgil 4 or Gakpo 18."))
+        self.write_input("KB8251", {})
+        msgs = self._cust_msgs()
+        self.assertTrue(any("checkout" in m for m in msgs),
+                        f"'name and number ... at checkout' must be flagged; got {msgs}")
+        self.assertEqual(self.exit_code(), 2, "wrong customization location is a hard defect -> exit 2")
+
+    def test_weeks_duration_flagged(self):
+        self.write_brief("KC3947", self._brief(
+            "The jersey is customizable with a name and number. Customized orders need an "
+            "extra 1 to 2 weeks before they ship."))
+        self.write_input("KC3947", {})
+        msgs = self._cust_msgs()
+        self.assertTrue(any("weeks" in m for m in msgs),
+                        f"name/number customization timed in weeks must be flagged; got {msgs}")
+        self.assertEqual(self.exit_code(), 2)
+
+    def test_both_errors_in_one_answer_both_fire(self):
+        # The exact KC3952 defect: location AND duration wrong in one FAQ answer.
+        self.write_brief("KC3952", self._brief(
+            "Name and number customization is available at checkout. Customized shirts "
+            "need an extra one to two weeks before they ship."))
+        self.write_input("KC3952", {})
+        msgs = self._cust_msgs()
+        self.assertTrue(any("checkout" in m for m in msgs), f"location error missing; {msgs}")
+        self.assertTrue(any("weeks" in m for m in msgs), f"duration error missing; {msgs}")
+
+    def test_correct_copy_passes(self):
+        # The codified CORRECT line: product page + business days.
+        self.write_brief("KC3952", self._brief(
+            "Add your name and number right on this page. Name and number orders ship in "
+            "about 2 to 3 business days."))
+        self.write_input("KC3952", {})
+        self.assertEqual([], self._cust_msgs(),
+                         "product-page + business-days copy must not be flagged")
+
+    def test_care_line_customized_no_false_positive(self):
+        # 'customized name and number' in a care instruction, with no checkout/weeks, is clean.
+        self.write_brief("KC3993", self._brief(
+            "Wash a customized name and number inside-out and keep it away from direct heat "
+            "to protect the print."))
+        self.write_input("KC3993", {})
+        self.assertEqual([], self._cust_msgs(),
+                         "a care-instruction mention of 'customized' must not false-positive")
+
+    def test_runs_without_input_file(self):
+        # Unconditional: fires even when the per-SKU input file is absent.
+        self.write_brief("KC3952", self._brief(
+            "Name and number customization is available at checkout."))  # no input written
+        self.assertTrue(any("checkout" in m for m in self._cust_msgs()),
+                        "customization check must not depend on the per-SKU input file")
+
+
 if __name__ == "__main__":
     unittest.main()

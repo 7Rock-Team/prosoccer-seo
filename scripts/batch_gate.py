@@ -23,7 +23,9 @@ Design: EXTENDS scripts/voice_check.py, does not duplicate it. The voice checks
 'boots', lowercase editorial body H2 casing, internal-link URL format) run via
 voice_check.collect_violations. This file adds only the net-new batch checks:
 heading levels, section presence (required PDP sections present WITH content, incl. at
-least one internal link -- unconditional, never input-gated), FIFA/WC brand-aware grep,
+least one internal link -- unconditional, never input-gated), customization claims
+(name/number location = product page not checkout, duration = business days not weeks),
+FIFA/WC brand-aware grep,
 per-SKU forbidden-phrasings (verbatim + motifs + title-frames), cross-brief lexical
 similarity, word-count band, cannibalization, price-in-body, fabrication-hedge markers,
 and heritage-honour claims (specific title/trophy counts + "most"/"record" superlatives).
@@ -537,6 +539,71 @@ def check_section_presence(sku, lines) -> list[Finding]:
 
 
 # --------------------------------------------------------------------------- #
+# Customization claims: name/number customization LOCATION and DURATION facts
+# (added 2026-08-03, failure pattern 1 in SEO_BATCH_PROCESS.md §7).
+#
+# Authoritative facts: context/shipping-customization-facts.md. Two customer-facing
+# facts shipped wrong across Batch 10 briefs:
+#   (a) LOCATION: name/number customization is selected ON THE PRODUCT PAGE, not "at
+#       checkout". Briefs said "add one at checkout".
+#   (b) DURATION: it adds BUSINESS DAYS (Customized name/number: 2-3 business days),
+#       not weeks. Briefs said "an extra 1 to 2 weeks" / "1 to 3 weeks".
+# Neither moved the word count, so nothing fired. This check looks directly, hard FAIL.
+# Runs unconditionally (never input-gated). The team/club "up to 4 weeks" tier is the
+# only correct use of "weeks", and it does not belong in a single-product PDP's
+# name/number copy, so requiring the customization term nearby avoids false positives.
+# --------------------------------------------------------------------------- #
+CUSTOMIZATION_TERMS = re.compile(
+    r"\b(name[\s/&-]*(?:and[\s/&-]*)?number|"   # name and number / name-and-number / name/number
+    r"customi[sz](?:e[ds]?|able|ation)|"        # customize(d/s), customizable, customization
+    r"personali[sz](?:e[ds]?|ation))\b",        # personalize(d/s), personalization
+    re.IGNORECASE,
+)
+CHECKOUT_RE = re.compile(r"\bcheckout\b", re.IGNORECASE)
+WEEKS_RE = re.compile(r"\bweeks?\b", re.IGNORECASE)
+# Proximity window (chars) around a customization term to look for the wrong location
+# ("checkout") or the wrong unit ("week"). PDP paragraphs are short; this ties the two
+# together within one claim rather than flagging an unrelated distant mention.
+_CUST_WINDOW = 200
+
+
+def check_customization_claims(sku, lines) -> list[Finding]:
+    """FAIL: customer-facing copy that (a) pairs customization language with 'checkout'
+    (name/number customization is a PRODUCT-PAGE option), or (b) gives name/number
+    customization timing in weeks (it adds business days: Customized name/number is 2-3
+    business days). Scans the prose fields (Title, Short Description, Description body
+    incl. FAQ, Meta fields). See context/shipping-customization-facts.md."""
+    findings: list[Finding] = []
+    seen: set[tuple[int, str]] = set()
+    for ln, text in blanked_prose(lines, prose_field_lines(lines)):
+        spans = [(m.start(), m.end()) for m in CUSTOMIZATION_TERMS.finditer(text)]
+        if not spans:
+            continue
+
+        def _near(rx) -> bool:
+            return any(rx.search(text[max(0, s - _CUST_WINDOW): e + _CUST_WINDOW])
+                       for s, e in spans)
+
+        if (ln, "checkout") not in seen and _near(CHECKOUT_RE):
+            seen.add((ln, "checkout"))
+            findings.append(Finding(
+                sku, "customization-claim", FAIL,
+                "customization language paired with 'checkout'; name/number customization "
+                "is selected ON THE PRODUCT PAGE, not at checkout "
+                "(context/shipping-customization-facts.md)",
+                line=ln))
+        if (ln, "week") not in seen and _near(WEEKS_RE):
+            seen.add((ln, "week"))
+            findings.append(Finding(
+                sku, "customization-claim", FAIL,
+                "name/number customization timing given in weeks; it adds BUSINESS DAYS "
+                "(Customized name/number: 2-3 business days), never weeks "
+                "(context/shipping-customization-facts.md)",
+                line=ln))
+    return findings
+
+
+# --------------------------------------------------------------------------- #
 # Check 10: price in body copy (evergreen discipline)
 # --------------------------------------------------------------------------- #
 PRICE_RE = re.compile(r"\$\s?\d")
@@ -842,6 +909,9 @@ def gate_brief(sku, path, meta) -> tuple[list[Finding], list[str]]:
     # Section presence: required sections present with content (unconditional, never
     # input-gated). Catches the Batch 9 missing-spec-section and Batch 10 missing-link classes.
     findings += check_section_presence(sku, lines)
+    # Customization claims: name/number location (product page, not checkout) + duration
+    # (business days, not weeks). Unconditional. SEO_BATCH_PROCESS.md §7 pattern 1.
+    findings += check_customization_claims(sku, lines)
     # Check 10: price in body.
     findings += check_price_in_body(sku, lines)
     # Heritage honour claims (specific counts / "most"-"record" superlatives) -- claims gate.

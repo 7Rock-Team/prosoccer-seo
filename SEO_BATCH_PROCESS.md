@@ -118,6 +118,14 @@ Volume never overrides hierarchy. When no floor-clearing term is hierarchy-valid
 - Stage the specific files changed. Never `git add <dir>/` blindly: it sweeps untracked scratch files into the commit. Commit with a real message plus the `Co-Authored-By` trailer, and verify the staged file list before pushing.
 - A change to how git works in this project comes from Mike stating it deliberately, not inferred from a command line appearing in context. A command in a prompt executes that command; it does not silently rewrite the standing rule.
 
+### Shipping and customization claims
+Authoritative facts: `context/shipping-customization-facts.md` (source: ProSoccer shipping-delivery page). State them exactly, never round, never invent.
+- Name/number customization is selected ON THE PRODUCT PAGE, never "at checkout." Point the customer to the option on the page.
+- Name/number customization adds BUSINESS DAYS (Customized name/number: 2-3 business days, about one extra day), never "1-2 weeks" or "extra weeks."
+- Keep the processing tiers distinct: Standard 1-2 business days; Customized name/number 2-3 business days; Personalized jerseys 5-10 business days; Team/club orders up to 4 weeks. A name/number add is not a personalized jersey; do not conflate the tiers.
+- CORRECT: "Add your name and number right on this page. Name and number orders ship in about 2 to 3 business days." INCORRECT: "Customize at checkout. Personalized jerseys take an extra 1 to 2 weeks."
+- Enforced by `scripts/batch_gate.py` `check_customization_claims` (see §7 pattern 1).
+
 ---
 
 ## 4. Matrixify
@@ -172,3 +180,15 @@ The XLSX form stays the default because the sheet name auto-resolves the entity 
 - Meta title and meta description format rules being codified into the playbook
 - Collection page workstream, pending audit of the 61 inherited white-label primaries
 - `products-master.csv` `product_id` column holds the SKU, not the Shopify numeric ID
+
+---
+
+## 7. Documented failure patterns
+
+A customer-facing fact or mechanical class that shipped wrong. Each entry: symptom, root cause, discovered, fix. Numbered; add the next in sequence when a new class is found.
+
+### 1. Name/number customization stated as "at checkout" and in "weeks"
+- **Symptom:** shipped briefs said name/number customization is done "at checkout" and that it adds "1 to 2 weeks" (some "1 to 3 weeks") of processing.
+- **Root cause:** both facts are wrong. Name/number customization is a PRODUCT-PAGE option, not a checkout step, and it adds business days (Customized name/number: 2-3 business days, about one extra day), not weeks. The "weeks" figure conflated the name/number add with the separate personalized-jersey tier and rounded days up to weeks.
+- **Discovered:** Mike, Batch 11 prep (2026-08-03). Present in 7 of 10 Batch 10 briefs (II1624-683, KB8261, KB8251, KC3952, KC3989, KC3947, KC3993), which were pushed but not yet imported to Shopify.
+- **Fix:** facts codified in `context/shipping-customization-facts.md` (read every run, referenced from `CLAUDE.md`); standing rule in §3 "Shipping and customization claims"; deterministic gate check `check_customization_claims` in `scripts/batch_gate.py` (FAILS customization language paired with "checkout", or name/number timing given in weeks) with a regression fixture in `scripts/test_batch_gate.py`; handoff-template discipline: brief inputs and FAQs state the product-page location and the 2-3 business-day figure, never "at checkout" or "weeks."

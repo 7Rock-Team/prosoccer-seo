@@ -30,7 +30,7 @@ Only the Master Strategist is built today. Specialists will be added in the orde
 
 Before executing any task, every agent must, in order:
 
-1. Read all relevant files in `context/`.
+1. Read all relevant files in `context/`. This includes `context/shipping-customization-facts.md` (authoritative customer-facing shipping and name/number customization facts): read it before writing or reviewing any brief. Name/number customization is selected ON THE PRODUCT PAGE (never "at checkout") and adds BUSINESS DAYS (2-3, never "weeks").
 2. Read its own `learnings.md`.
 3. Check `shared-intelligence/` for anything dated within the last 14 days.
 4. Read `strategy/master-strategy.md` if it exists.
