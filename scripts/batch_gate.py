@@ -253,10 +253,12 @@ def check_heading_levels(sku, lines) -> list[Finding]:
 
 
 # --------------------------------------------------------------------------- #
-# Check 5: FIFA / World Cup terminology on non-adidas (non-licensed) pages
+# Check 5: FIFA / World Cup terminology on non-adidas pages
 # --------------------------------------------------------------------------- #
-# adidas is the FIFA commercial licensee; adidas pages MAY use the family. Every
-# non-adidas brand (Nike, Umbro, Kelme, Puma, Hummel, ...) is forbidden from it.
+# adidas holds a specific FIFA license for the 2026 World Cup, so adidas 2026 World
+# Cup pages MAY use the FIFA / World Cup family (past tense, that event). It is not a
+# standing partnership and does not extend to future tournaments. Every non-adidas
+# brand (Nike, Umbro, Kelme, Puma, Hummel, ...) holds no FIFA license and is forbidden.
 FIFA_TOKENS = re.compile(
     r"\b(FIFA|World\s+Cup|World\s+Cup\s+20\d\d|WC\s?20\d\d)\b",
     re.IGNORECASE,
@@ -277,7 +279,7 @@ def check_fifa_terms(sku, lines, meta) -> list[Finding]:
     if meta:
         posture = (meta.get("brand_ip_posture") or "").lower()
         brand = (meta.get("brand") or "").lower()
-    # adidas / fifa-permitted pages: the family is licensed, skip the check.
+    # adidas / fifa-permitted pages: permitted under the 2026 World Cup license, skip the check.
     if posture == "fifa-permitted" or brand == "adidas":
         return []
 
@@ -290,7 +292,7 @@ def check_fifa_terms(sku, lines, meta) -> list[Finding]:
             findings.append(Finding(
                 sku, "fifa-terms", FAIL,
                 f"FIFA/World Cup term '{m.group(0)}' in body copy on a non-adidas "
-                f"(non-licensed) page; use federation / cycle language{note}",
+                f"page (no FIFA license); use federation / cycle language{note}",
                 line=ln,
             ))
     return findings

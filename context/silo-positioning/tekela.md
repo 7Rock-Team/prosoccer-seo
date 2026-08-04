@@ -5,7 +5,7 @@ Per-SKU prose patterns for the New Balance Tekela boot line (control / touch). C
 ## Pre-dispatch reference / guardrails
 
 ### Brand-IP posture (New Balance)
-- Non-FIFA licensee: FIFA / "World Cup" terminology FORBIDDEN in every field (same rule as Nike / Kelme / Umbro). No deal figures. Endorsements (Endrick, Harvey Elliott, Jordyn Huitema) are scrape-sourced "worn by" facts.
+- New Balance holds no FIFA license: FIFA / "World Cup" terminology FORBIDDEN in every field (same rule as Nike / Kelme / Umbro). No deal figures. Endorsements (Endrick, Harvey Elliott, Jordyn Huitema) are scrape-sourced "worn by" facts.
 
 ### Model positioning
 - Tekela = CONTROL / TOUCH. Frame on first touch, boot-to-ball feel, close control, the space a playmaker creates. "Dynamic TouchTech" microfiber upper + deboss channels are the signature. Do NOT frame Tekela as a speed boot (that is Furon's lane) — this is the cross-model differentiation axis. Tagline in NB's own copy: "Crafted for Control."

@@ -163,7 +163,7 @@ Correct:
 
 - "adidas snapback caps span the federation roster"
 - "Federation gear from adidas, Wincraft, and Mimi Imports anchors the lineup"
-- "The 2026 home kits are produced by adidas under FIFA license"
+- "The 2026 home kits are produced by adidas"
 - Sentence-start: "adidas covers the cap and bag categories."
 
 Incorrect (do not use):
@@ -248,7 +248,7 @@ Application: the tier-band word counts (Elite 400 to 450, Pro 340 to 390, League
 
 ### Non-FIFA brand language discipline (added 2026-06-29)
 
-FIFA / World Cup terminology keys on the BRAND's adidas FIFA license, not on the nation's FIFA membership. adidas is the FIFA commercial licensee; adidas pages may use the FIFA / World Cup family. **Every non-adidas kit brand (Nike, Kelme, Puma, Umbro, Hummel, and others) is FORBIDDEN from FIFA / "World Cup" / "FIFA World Cup [year]" / "WC" terminology** and uses federation / cycle language only ("2026 cycle", "championship summer", "this cycle", the bare year "2026", verifiable historical results). This is why the Nike-Croatia and Kelme-Bosnia jerseys run cycle-language-only even though Croatia and Bosnia are FIFA members. Canonical rule and substitution table: `context/brand-ip-constraints.md` 'FIFA World Cup Terminology'.
+FIFA / World Cup terminology keys on the BRAND's FIFA license, not on the nation's FIFA membership. adidas holds a specific FIFA license for the 2026 World Cup, so adidas 2026 World Cup pages may use the FIFA / World Cup family in the past tense for that event; it is not a standing partnership and does not extend to any future tournament without a new license. **Every non-adidas kit brand (Nike, Kelme, Puma, Umbro, Hummel, and others) holds no FIFA license and is FORBIDDEN from FIFA / "World Cup" / "FIFA World Cup [year]" / "WC" terminology** and uses federation / cycle language only ("2026 cycle", "championship summer", "this cycle", the bare year "2026", verifiable historical results). This is why the Nike-Croatia and Kelme-Bosnia jerseys run cycle-language-only even though Croatia and Bosnia are FIFA members. Canonical rule and substitution table: `context/brand-ip-constraints.md` 'FIFA World Cup Terminology'.
 
 ### Fabrication guard and tournament-status discipline (added 2026-06-29)
 

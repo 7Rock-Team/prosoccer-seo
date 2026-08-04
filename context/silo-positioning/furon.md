@@ -5,7 +5,7 @@ Per-SKU prose patterns for the New Balance Furon boot line (speed / strike). Cre
 ## Pre-dispatch reference / guardrails
 
 ### Brand-IP posture (New Balance)
-- New Balance is a NON-FIFA licensee. FIFA / "World Cup" terminology is FORBIDDEN in every field, same rule as Nike / Kelme / Umbro (`context/brand-ip-constraints.md`). Moot on a boot page, but enforced; neutral cycle language only.
+- New Balance holds no FIFA license. FIFA / "World Cup" terminology is FORBIDDEN in every field, same rule as Nike / Kelme / Umbro (`context/brand-ip-constraints.md`). Moot on a boot page, but enforced; neutral cycle language only.
 - No deal figures. Endorsements (Saka, Eze, Mane, Cooper) are scrape-sourced feature-list facts, phrase as "worn by," never "sponsored/endorsed by" implying an official arrangement in copy.
 
 ### Model positioning

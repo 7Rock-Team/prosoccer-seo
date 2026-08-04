@@ -1217,7 +1217,7 @@ Identical structure to the collection-page playbook. Embed inline; document belo
 
 ## Brand IP Constraints
 
-Hard legal constraint from `context/brand-ip-constraints.md` applies on every brief: FIFA-trademarked terminology family ("World Cup", "FIFA World Cup", "WC", "FIFA" in commercial contexts) is restricted to Adidas-licensed page contexts only.
+Hard legal constraint from `context/brand-ip-constraints.md` applies on every brief: the FIFA-trademarked terminology family ("World Cup", "FIFA World Cup", "WC", "FIFA" in commercial contexts) is permitted only under adidas's specific 2026 World Cup license, on adidas 2026 World Cup pages in the past tense. It is not a standing partnership and does not extend to future tournaments. Every non-adidas brand holds no FIFA license and uses federation / cycle language.
 
 Before writing copy:
 

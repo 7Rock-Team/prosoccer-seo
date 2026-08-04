@@ -14,7 +14,7 @@ there is one source of truth and no drift._
 - URL: [full https URL]
 - Handle: [current slug]
 - Brand: [nike | adidas | umbro | kelme | puma | hummel | ...]
-- Brand-IP posture: [fifa-permitted (adidas only) | cycle-language-only (every non-adidas brand)]
+- Brand-IP posture: [fifa-permitted (adidas 2026 World Cup pages only, past tense; specific event license, not standing) | cycle-language-only (every non-adidas brand; no FIFA license)]
 - Product category: [footwear | jersey | apparel | goalkeeper-gloves | soccer-ball | accessory | flag | small-merch]
 - Care H2 required: [yes (footwear/jersey/apparel/gloves/ball) | no (accessory/flag/small-merch)]
 - Tier: [elite | pro | league | club  (Nike: Elite>Pro>Academy>Club; adidas: Elite>Pro>League>Club; Nike Academy ~ adidas League)]

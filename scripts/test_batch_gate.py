@@ -242,7 +242,7 @@ class TestKI0586Headings(GateTestBase):
 
 class TestDRCongoFIFA(GateTestBase):
     """Batch 6: live DR Congo Umbro PDP body read 'worn at the FIFA World Cup 2026' --
-    a FIFA-family term on a non-adidas (non-licensed) page."""
+    a FIFA-family term on a non-adidas page."""
 
     def test_fifa_in_body_on_non_adidas_flagged(self):
         self.write_brief("DRCHRM25", make_brief(body_sections=[
@@ -255,14 +255,14 @@ class TestDRCongoFIFA(GateTestBase):
         self.assertTrue(all(f.severity == bg.FAIL for f in fs))
 
     def test_adidas_page_fifa_permitted(self):
-        """Negative: the exact same body on an adidas (FIFA-licensee) page is allowed."""
+        """Negative: the exact same body on an adidas 2026 World Cup page is allowed."""
         self.write_brief("KB7474", make_brief(body_sections=[
             ("## Reggae Boyz and the road to the tournament",
              "This is the kit worn at the FIFA World Cup 2026 by the national side."),
         ]))
         self.write_input("KB7474", {"brand": "adidas", "brand_ip_posture": "fifa-permitted"})
         fs = [f for f in self.findings() if f.check == "fifa-terms"]
-        self.assertEqual(fs, [], "adidas is the FIFA licensee; the family is permitted")
+        self.assertEqual(fs, [], "adidas holds the 2026 World Cup license; the family is permitted here")
 
     def test_fifa_runs_provisional_without_input(self):
         """A missing input file must NOT let a FIFA leak hide: FIFA still runs, flagged

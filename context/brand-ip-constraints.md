@@ -4,7 +4,9 @@ This file documents hard constraints on language and terminology that arise from
 
 ## FIFA World Cup Terminology
 
-Adidas is the official sponsor and commercial licensee for FIFA-related terminology in soccer retail contexts.
+adidas obtained a specific license from FIFA covering the 2026 World Cup. That license permits FIFA and World Cup terminology on adidas 2026 World Cup product pages, in the past tense, referring to the event. It is a license for that one event, not a standing FIFA partnership and not a general commercial-licensee relationship, and it does not extend to any future tournament without a new license. Nike, Puma, New Balance, Mizuno, Kelme, Umbro, Hummel, and every other kit brand hold no FIFA license and carry no FIFA or World Cup language.
+
+This permission is tied to the 2026 World Cup cycle and expires with it. Do not assume it carries forward: re-verify against a current source before applying FIFA or World Cup terminology to any later tournament.
 
 ### Restricted terms (forbidden on non-Adidas pages)
 
@@ -16,6 +18,8 @@ Adidas is the official sponsor and commercial licensee for FIFA-related terminol
 - Any clear variation of the above
 
 ### Where restricted terms ARE allowed
+
+Permitted only under adidas's 2026 World Cup license described above: on adidas 2026 World Cup product and collection pages, in the past tense, referring to the event. This is the scope of that one event license, not a standing, all-pages clearance for the brand.
 
 - Adidas-branded collection pages (e.g., `/collections/adidas-2026-fifa-world-cup-soccer-jerseys-gear`)
 - Adidas product pages
