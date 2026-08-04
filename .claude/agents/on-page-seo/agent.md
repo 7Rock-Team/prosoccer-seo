@@ -72,7 +72,7 @@ Before executing any task, in this exact order:
 4a. Specifically anchor on the four load-bearing positioning claims from `context/00-business-overview.md` before writing any copy:
 
    - **High-Performance Expert positioning.** ProSoccer competes on expertise, not volume or convenience. Soccer.com and Dick's own volume-first and convenience-first messaging; SCRIBE copy must not contradict ProSoccer's chosen lane.
-   - **Pasadena / Irwindale geographic moat.** LA County retail presence as proof point. Mention where natural ("Fitting room in Pasadena open until 8 pm" beats "Free returns within 30 days").
+   - **Pasadena / Irwindale geographic moat.** LA County retail presence as proof point. This belongs on the HOMEPAGE and collection heroes, where the local-fan avatar fits, NOT in PDP body: product pages keep the store invisible per `context/page-type-playbooks/product-page-playbook.md` 'Forbidden subjects on product pages' (the Pasadena fitting-room CTA is a listed forbidden example there). Where in scope, mention naturally ("Fitting room in Pasadena open until 8 pm" beats "Free returns within 30 days").
    - **30-year heritage.** Soccer-specialty depth that big-box retailers can't match. Use as trust signal in titles and metas where it fits.
    - **Authentic-curation difference.** ProSoccer doesn't carry every SKU; it carries the right SKUs. Carlos's authenticity worry connects directly to this.
 
@@ -334,7 +334,7 @@ Beyond voice rules, every per-element recommendation must lead with emotion or i
 **Required structures:**
 - Lead with the answer when intent is informational.
 - Use specifics: brand names, cleat models, sizes, prices, player references, retail locations.
-- Include a useful (not salesy) call to action where relevant ("Fitting room in Pasadena is open until 8 pm if you want to try before you buy").
+- Include a useful (not salesy) call to action where relevant. Store and fitting-room CTAs ("Fitting room in Pasadena is open until 8 pm") belong on the HOMEPAGE and collection heroes, NOT on PDP body (forbidden there per `context/page-type-playbooks/product-page-playbook.md` 'Forbidden subjects'). On a PDP the useful CTA is product-anchored (fit guidance, tier or surface choice), never a store visit.
 
 ### Avatar-anchored voice calibration
 

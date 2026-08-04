@@ -67,7 +67,7 @@ Do not use any of the following in any written output. This is a hard rule.
 - Lead with the answer when the intent is informational.
 - Use specifics: brand names, cleat models, sizes, prices, player references, retail locations.
 - Include a real photo or diagram when sizing is involved.
-- Include a call to action that is useful, not salesy (e.g., "Fitting room in Pasadena is open until 8 pm if you want to try before you buy").
+- Include a call to action that is useful, not salesy. Store and fitting-room CTAs ("Fitting room in Pasadena is open until 8 pm") belong on the homepage and collection heroes, NOT on product-page body (forbidden there per `context/page-type-playbooks/product-page-playbook.md` 'Forbidden subjects on product pages'); a PDP CTA stays product-anchored.
 
 ## Cognitive Load Minimization
 

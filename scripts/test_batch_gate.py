@@ -666,5 +666,31 @@ class TestCustomizationClaims(GateTestBase):
                         "customization check must not depend on the per-SKU input file")
 
 
+class TestBrandCasing(GateTestBase):
+    """Lowercase non-adidas brand in customer prose must FAIL; capitalized brands and
+    lowercase adidas must not. Added 2026-08-04 (Batch 12 HQ2277 lowercase 'nike')."""
+
+    def _lines(self, **kw):
+        return make_brief(**kw).splitlines()
+
+    def test_lowercase_nike_in_short_desc_flagged(self):
+        fs = bg.check_brand_casing("S", self._lines(
+            short_desc="The nike cleat settles the ball before the defender sets."))
+        self.assertTrue([f for f in fs if f.check == "brand-casing"],
+                        "lowercase 'nike' in customer prose must be flagged")
+
+    def test_capitalized_brand_and_lowercase_adidas_pass(self):
+        fs = bg.check_brand_casing("S", self._lines(
+            short_desc="The Nike cleat rivals adidas and Puma for a clean first touch."))
+        self.assertEqual([f for f in fs if f.check == "brand-casing"], [],
+                         "capitalized Nike/Puma and intentionally lowercase adidas must not fire")
+
+    def test_slug_and_backtick_never_fire(self):
+        fs = bg.check_brand_casing("S", self._lines(
+            short_desc="See the nike-phantom-6 build and the `nike phantom 6` search term."))
+        self.assertEqual([f for f in fs if f.check == "brand-casing"], [],
+                         "a hyphenated slug and a backtick keyword citation must not fire")
+
+
 if __name__ == "__main__":
     unittest.main()

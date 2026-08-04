@@ -299,6 +299,36 @@ def check_fifa_terms(sku, lines, meta) -> list[Finding]:
 
 
 # --------------------------------------------------------------------------- #
+# Check: brand-name casing in customer-facing prose (added 2026-08-04, Batch 12)
+# --------------------------------------------------------------------------- #
+# Only adidas is lowercase (registered trademark); every other kit brand must be
+# capitalized in customer copy. voice_check catches a capitalized "Adidas"; this
+# catches the inverse for the other brands. Scoped to prose fields via
+# prose_field_lines + blanked_prose, and backtick spans are stripped, so keyword
+# citations, slugs, and keyword-table rows never fire. Standalone-word match with a
+# hyphen/slash adjacency guard so slugs like "nike-phantom" never trip it.
+_LOWERCASE_BRANDS = re.compile(
+    r"(?<![\w/-])(nike|puma|mizuno|kelme|umbro|hummel|new\s+balance)(?![\w/-])"
+)
+
+
+def check_brand_casing(sku, lines) -> list[Finding]:
+    """Flag a lowercase non-adidas brand token as a standalone word in customer-facing
+    prose. adidas is intentionally lowercase and is deliberately not in the pattern."""
+    findings = []
+    for ln, text in blanked_prose(lines, prose_field_lines(lines)):
+        text = re.sub(r"`[^`]*`", " ", text)   # never fire on a backtick keyword citation
+        for m in _LOWERCASE_BRANDS.finditer(text):
+            findings.append(Finding(
+                sku, "brand-casing", FAIL,
+                f"lowercase brand '{m.group(0)}' in customer-facing copy; capitalize the "
+                f"brand name (only adidas is lowercase)",
+                line=ln,
+            ))
+    return findings
+
+
+# --------------------------------------------------------------------------- #
 # Checks 6 & 7 helpers: per-SKU forbidden lists (verbatim / motifs / title-frames)
 # --------------------------------------------------------------------------- #
 def _forbidden_lists(meta) -> tuple[list[str], list[str], list[str]]:
@@ -966,6 +996,10 @@ def run(session_dir: Path) -> int:
             "sku": sku, "lines": lines, "meta": meta,
             "opening": brief_opening(lines), "closing": brief_closing(lines),
         })
+
+    # Per-brief brand-name casing (lowercase non-adidas brand in customer prose).
+    for bd in briefs_data:
+        all_findings += check_brand_casing(bd["sku"], bd["lines"])
 
     # Cross-brief checks (7, 9).
     all_findings += check_cannibalization(briefs_meta, registry1)
