@@ -109,7 +109,13 @@ Five rules govern every brief SCRIBE produces under the Fresh Optimization workf
 4. **Named entities in body copy serve LLM search discoverability** (5 to 10 specific named entities per page where natural: players, federations, tournaments, signature product lines, signature features, locations, managers).
 5. **Short Description structure** (primary keyword in sentence 1 or 2; avatar identity hook in first half; 2 to 3 differentiating specifics; CTA close distinct from Meta Description; 200 to 300 chars target).
 
-Worked example for all five rules: UAE 2026 PDP v3 brief at `deliverables/page-optimizations/2026-05-26_session-01/uae-2026-home-stadium_brief-v3.md`.
+Worked example (inline, so it cannot drift): compliant fields from the Batch 11 Barcelona men's home PDP (II1872-683, gate-green under the current rules).
+- **Meta Title** (max 48 chars; brand at the FRONT; NEVER a manufacturer-brand pipe suffix; the store name is never typed): `Nike Barcelona Home Jersey 2026-27 Stadium` (42 chars). Forbidden shape, for contrast: `... | adidas Stadium Home Kit`.
+- **Meta Description** (rule 3; 120 to 160 chars, commercial intent + trust signal + CTA, no combined tier words like "Authentic Stadium"): `Barcelona's 2026-27 home jersey in garnet and blue by Nike, with sweat-wicking Dri-FIT and a comfortable Stadium fit. Add your name and number, sizes S-3XL.`
+- **Short Description** (rule 5; primary in the first sentences, avatar hook, CTA close distinct from the Meta Description): `The garnet and blue, Barcelona's 2026-27 home shirt. The one you pull on for the early kickoff and keep on long after the final whistle.`
+- **Body** (rules 2, 4): primary `barcelona home jersey` appears in a section H2 (the FAQ H2, natural integration); named entities (Barcelona, Nike, Dri-FIT, garnet and blue, Blue Void, Mineral Yellow) carry LLM discoverability. Supporting variants stay in the Keywords table and are woven as natural semantic reads, not forced exact-match (rule 1 favors skipping a variant over stuffing it).
+
+Full brief: `deliverables/page-optimizations/2026-08-03_session-01/II1872-683_barcelona-mens-stadium-home.md` (Batch 11, gate-green). Retired 2026-08-03: the former UAE 2026 v3 pointer. Its meta title ended `| adidas Stadium Home Kit`, a manufacturer-brand pipe suffix, the exact violation the meta rule forbids, so it must not be an exemplar. The UAE v3 brief remains a shipped historical artifact and is left unedited.
 
 **Category-specific H2 templates** for 15 product categories ProSoccer sells live in `context/page-type-playbooks/product-page-playbook.md` 'Category-specific H2 templates'. National-team-jersey template is CANONICAL, four-time validated within the 2026 World Cup cycle (UAE 2026 Home + Mexico 2026 Home / Away / Third per commits `e56a7d6`, `85dd1f0`, `f2c2c34`); remaining categories are at various validation stages from DRAFT v1 to CANONICAL per the playbook.
 

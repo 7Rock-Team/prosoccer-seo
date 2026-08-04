@@ -20,10 +20,10 @@ Runs in Cursor against `C:\Dev-Projects\marketing\prosoccer-seo`.
 - Gate runs and Layer 3 claim checks (ORIN)
 - Appending each closed batch to `products-master.csv`
 - Codification of rules into playbook and conventions files
-- Git commits and pushes to `origin/main`, when a prompt instructs it (see §3 Git)
+- Git commit at batch close, autonomously as a single atomic commit (see §3 Git). Push to `origin/main` only when a prompt instructs it.
 
 **Never:**
-- Commits or pushes without an instruction to. No instruction, no push; batch close does not imply a push (see §3 Git)
+- Pushes to origin without an instruction to. No push instruction, no push: batch close does not imply a push (the local commit does; see §3 Git)
 - Touches the Shopify store
 - Builds the Matrixify export filter or import file. That is Step 2's job.
 - Authors briefs directly. ORIN orchestrates, SCRIBE writes. This is the mechanism that enforces the playbook.
@@ -55,7 +55,7 @@ Runs in Cursor against `C:\Dev-Projects\marketing\prosoccer-seo`.
 ### 1.4 Mike — decisions and everything irreversible
 
 **Owns:**
-- When work reaches origin. A git commit or push happens only when Mike's prompt instructs it; the workforce then runs it, staging the specific files and confirming the pushed ref (see §3 Git). Batch close does not imply a push. Mike owns the call, not the keystroke.
+- When work reaches origin. ORIN commits locally at batch close without being asked; the push to origin happens only when Mike's prompt instructs it, and the workforce then stages the specific files and confirms the pushed ref (see §3 Git). Batch close does not imply a push. Mike owns the push call, not the keystroke.
 - The Matrixify export from Shopify
 - The Matrixify import to Shopify
 - Verification in the Shopify admin after import
@@ -116,9 +116,10 @@ Volume never overrides hierarchy. When no floor-clearing term is hierarchy-valid
 - Every heritage or spec claim sourced to the scrape or qualified. No bare PASS.
 
 ### Git
-- A commit or push happens only when a prompt instructs it. No instruction, no push: batch close does not imply a push. Left uninstructed, the workforce leaves changes local (or unstaged) and reports them.
-- Stage the specific files changed. Never `git add <dir>/` blindly: it sweeps untracked scratch files into the commit. Commit with a real message plus the `Co-Authored-By` trailer, and verify the staged file list before pushing.
-- A change to how git works in this project comes from Mike stating it deliberately, not inferred from a command line appearing in context. A command in a prompt executes that command; it does not silently rewrite the standing rule.
+- ORIN commits locally at batch close as a single atomic commit, without being asked. This is autonomous and expected. Commit with a real message plus the `Co-Authored-By` trailer.
+- Push is instruction-gated. Nothing reaches origin without Mike instructing it. Batch close does not imply a push. Left uninstructed, the workforce commits locally and reports the unpushed ref.
+- Stage the specific files changed. Never `git add <dir>/` blindly: it sweeps untracked scratch files into the commit. Verify the staged file list before committing.
+- A change to how git works comes from Mike stating it deliberately, not inferred from a command line appearing in context. A command in a prompt executes that command; it does not silently rewrite the standing rule.
 
 ### Shipping and customization claims
 Authoritative facts: `context/shipping-customization-facts.md` (source: ProSoccer shipping-delivery page). State them exactly, never round, never invent.

@@ -295,7 +295,7 @@ These five rules govern every brief SCRIBE produces under the Fresh Optimization
 
 Each supporting keyword from the brief's Keyword research block appears 1 to 2 times in the Long Description, woven naturally as a semantic variant. The goal is topic depth signal, not keyword stuffing or exact-match density. A variant must read as natural English in its sentence; if a variant cannot land naturally, skip it rather than force the appearance. The primary keyword maintains 2 to 4 exact-match appearances across the body per the keyword-density guidance in `.claude/agents/on-page-seo/agent.md` Section 9 'Keyword placement per field'.
 
-Worked example: UAE 2026 PDP v3 at `deliverables/page-optimizations/2026-05-26_session-01/uae-2026-home-stadium_brief-v3.md` distributes `uae football jersey`, `uae fa jersey`, `uae national team jersey`, and `uae football kit` across the body, each variant once or twice in natural reads. The same principle applies to collection-page bodies; the worked example is PDP-side because that's where the rule was codified, but it transfers cleanly to collection-page H2s.
+Worked example: the canonical inline example in `context/workforce-conventions.md` 'Five canonical brief-craft rules' (Batch 11 II1872-683, gate-green). The same principle applies to collection-page bodies; the worked example is PDP-side because that's where the rule was codified, but it transfers cleanly to collection-page H2s. (The former UAE v3 pointer was retired 2026-08-03; do not point at pre-2026-07-28 briefs.)
 
 ### Rule 2: Primary keyword appears in at least one H2 header
 

@@ -687,7 +687,7 @@ These five rules govern every brief SCRIBE produces under the Fresh Optimization
 
 Each supporting keyword from the brief's Keyword research block appears 1 to 2 times in the Long Description, woven naturally as a semantic variant. The goal is topic depth signal, not keyword stuffing or exact-match density. A variant must read as natural English in its sentence; if a variant cannot land naturally, skip it rather than force the appearance. The primary keyword maintains 2 to 4 exact-match appearances across the body per the keyword-density guidance in `.claude/agents/on-page-seo/agent.md` Section 9 'Keyword placement per field'.
 
-Worked example: UAE 2026 PDP v3 at `deliverables/page-optimizations/2026-05-26_session-01/uae-2026-home-stadium_brief-v3.md` distributes `uae football jersey`, `uae fa jersey`, `uae national team jersey`, and `uae football kit` across the body, each variant once or twice in natural reads.
+Worked example: the canonical inline example in `context/workforce-conventions.md` 'Five canonical brief-craft rules' (Batch 11 II1872-683, gate-green). The former UAE v3 pointer was retired 2026-08-03; do not point at pre-2026-07-28 briefs as exemplars.
 
 ### Rule 2: Primary keyword appears in at least one H2 header
 
@@ -1043,7 +1043,7 @@ Notes that apply to all categories:
 
 **Validation history:**
 
-- UAE 2026 Home Stadium Jersey v3 (foundational, 2026-05-26 era at `deliverables/page-optimizations/2026-05-26_session-01/uae-2026-home-stadium_brief-v3.md`): template structure proven against a smaller-federation kit with federation-identity focus.
+- UAE 2026 Home Stadium Jersey v3 (foundational, 2026-05-26 era): template structure proven against a smaller-federation kit with federation-identity focus. (Historical validation record, not a copy-me exemplar: the UAE v3 brief predates the 2026-07-28 meta-title fix and must not be opened as a field-level model. Current worked example: the inline example in `context/workforce-conventions.md` 'Five canonical brief-craft rules'.)
 - Mexico 2026 Home Stadium SS Jersey (commit `e56a7d6`, 2026-05-28): template validated against a co-host federation with Aztec heritage design depth + Estadio Azteca opener narrative.
 - Mexico 2026 Away Stadium SS Jersey (commit `85dd1f0`, 2026-05-28): template validated with travel / road-match angle on H2 4 and pre-Hispanic Mesoamerican design depth on H2 1.
 - Mexico 2026 Third Stadium SS Jersey (commit `f2c2c34`, 2026-05-28): template validated with special-edition / wardrobe-completionist angle on H2 4 and adidas x Someone Somewhere artisan collaboration depth on H2 1.
@@ -1052,7 +1052,7 @@ Promotion to CANONICAL on 2026-05-28 after four-time validation across two feder
 
 ### 2. Club jersey (CANONICAL as of 2026-05-26)
 
-Validated by: Nike 2024-25 Liverpool Men's Stadium Away Jersey brief at `deliverables/page-optimizations/2026-05-26_session-01/nike-2024-25-liverpool-mens-stadium-away-jersey_brief.md`. Template applied clean without flex; topic depth from Slot title + Klopp farewell + Nike-to-adidas transition + Hillsborough tribute filled the framework substantively.
+Validated by: Nike 2024-25 Liverpool Men's Stadium Away Jersey (2026-05-26). Template applied clean without flex; topic depth from Slot title + Klopp farewell + Nike-to-adidas transition + Hillsborough tribute filled the framework substantively. (Historical validation record, not a copy-me exemplar: that brief predates the 2026-07-28 meta-title fix and its meta title carries a manufacturer-brand pipe suffix. Current worked example: the inline example in `context/workforce-conventions.md` 'Five canonical brief-craft rules'.)
 
 - H2 1: Brand + design + club crest / identity ("The [Year] [Club] [Home / Away / Third] Jersey")
 - H2 2: Edition tier or player personalization options

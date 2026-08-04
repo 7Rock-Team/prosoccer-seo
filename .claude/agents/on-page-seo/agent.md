@@ -423,7 +423,7 @@ When ORIN requests a per-page contribution for a consolidated brief, SCRIBE prod
 4. **Named entities in body copy serve LLM search discoverability** (5 to 10 specific named entities per page where natural: players, federations, tournaments, signature product lines, signature features, locations, managers).
 5. **Short Description structure** (primary keyword in sentence 1 or 2; avatar identity hook in first half; 2 to 3 differentiating specifics; CTA close distinct from Meta Description; 200 to 300 chars).
 
-Worked example for all five rules: UAE 2026 PDP v3 brief at `deliverables/page-optimizations/2026-05-26_session-01/uae-2026-home-stadium_brief-v3.md`.
+Worked example for all five rules: the inline compliant example in `context/workforce-conventions.md` 'Five canonical brief-craft rules' (Batch 11 II1872-683, gate-green under the current meta rules). Do not use a pre-2026-07-28 brief as the exemplar: the retired UAE v3 meta title carried a manufacturer-brand pipe suffix.
 
 **Category-specific H2 templates** for 15 product categories ProSoccer sells live in `context/page-type-playbooks/product-page-playbook.md` 'Category-specific H2 templates'. The national-team-jersey template is CANONICAL, four-time validated within the 2026 World Cup cycle (UAE 2026 Home + Mexico 2026 Home / Away / Third per commits `e56a7d6`, `85dd1f0`, `f2c2c34`); remaining categories are at various validation stages from DRAFT v1 to CANONICAL per the playbook.
 
