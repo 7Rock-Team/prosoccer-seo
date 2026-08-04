@@ -99,9 +99,11 @@ Handles always come from the briefs (step 9). Never reconstruct them from produc
 - Taxonomy nodes, tags, variants, prices, or any metafield not in the import file.
 
 ### Keyword hierarchy
-Collections own brand, model, club, category, and any term where a searcher would be satisfied by multiple products. PDPs own model + tier + width + colorway, terms that resolve to one product.
+Collections own brand, model, club, category, and any term where a searcher would be satisfied by multiple products. PDPs own model + tier + cut + surface + **pack (when a concurrent live pack sibling exists)** + width + colorway, terms that resolve to one product.
 
 Volume never overrides hierarchy. When no floor-clearing term is hierarchy-valid, the page takes the exact qualified term and is flagged sub-floor. It does not take a collection or sibling term.
+
+**Pack succession (added 2026-08-04, approved by Mike).** A footwear model ships in multiple concurrent packs of the same model + tier + cut + surface, so that unqualified term does not always resolve to one product. Pack-qualification is required only when a concurrent LIVE pack sibling exists (checked against the live sitemap, not the registry alone, since incumbents are often unoptimized). With no live sibling, the PDP keeps the unqualified term. With a live sibling, the incumbent (earliest-shipped live pack by season code) keeps the unqualified term and every newer pack takes a pack-qualified sub-floor primary, which is mandatory, not a fallback failure. The rule applies forward-only; shipped pages are not retargeted on account of it alone. Full rule, including archival succession and the season-code qualifier: `context/workforce-conventions.md` 'Pack succession and PDP keyword ownership (v2)'. This supersedes the Batch 12 shadow-suffix omission rationale.
 
 ### Meta fields
 - **Meta Title:** max 48 characters for the written part. The theme appends the store suffix automatically. Never type the store name. Never end with a manufacturer brand as a pipe suffix (`| adidas`, `| Nike Stadium`). A pack or product-line pipe suffix is fine (`| Breakout`, `| Road to Glory`). Brand at the front is correct.
