@@ -8,7 +8,7 @@
 
 ## 1. The four participants
 
-### 1.1 Claude Code — the workforce (ORIN, SCRIBE, KIRA)
+### 1.1 Claude Code: the workforce (ORIN, SCRIBE, KIRA)
 
 Runs in Cursor against `C:\Dev-Projects\marketing\prosoccer-seo`.
 
@@ -28,7 +28,7 @@ Runs in Cursor against `C:\Dev-Projects\marketing\prosoccer-seo`.
 - Builds the Matrixify export filter or import file. That is Step 2's job.
 - Authors briefs directly. ORIN orchestrates, SCRIBE writes. This is the mechanism that enforces the playbook.
 
-### 1.2 Claude.ai — Workforce chat
+### 1.2 Claude.ai: Workforce chat
 
 **Owns:**
 - Writing the ORIN dispatch prompt for each new batch
@@ -41,7 +41,7 @@ Runs in Cursor against `C:\Dev-Projects\marketing\prosoccer-seo`.
 - Builds the Matrixify export filter or import file. That is Step 2's job.
 - Accepts a report as verification. Reports describe work; the work itself is on disk.
 
-### 1.3 Claude.ai — Step 2 chat
+### 1.3 Claude.ai: Step 2 chat
 
 **Owns:**
 - Reading the 10 briefs and producing the paste-ready handle list for the Matrixify export filter
@@ -52,7 +52,7 @@ Runs in Cursor against `C:\Dev-Projects\marketing\prosoccer-seo`.
 **Never:**
 - Touches the repo or the store
 
-### 1.4 Mike — decisions and everything irreversible
+### 1.4 Mike: decisions and everything irreversible
 
 **Owns:**
 - When work reaches origin. ORIN commits locally at batch close without being asked; the push to origin happens only when Mike's prompt instructs it, and the workforce then stages the specific files and confirms the pushed ref (see §3 Git). Batch close does not imply a push. Mike owns the push call, not the keystroke.
