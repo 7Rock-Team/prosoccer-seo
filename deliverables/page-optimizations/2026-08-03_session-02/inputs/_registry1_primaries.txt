@@ -1,0 +1,216 @@
+# Registry 1 primaries as of Batch 12 pre-dispatch (2026-08-03 session-02).
+# One primary per line, lowercase. Derived from products-master normalized_primary +
+# collections-master normalized_primary + ceded-terms normalized_term. batch_gate check #9
+# flags any Batch 12 primary that exactly matches a line here or another Batch 12 SKU.
+2026 fifa world cup cards and stickers
+2026 fifa world cup mugs
+2026 fifa world cup trophies
+2026 national team soccer jerseys
+2026 national team soccer jerseys on sale
+2026 soccer jerseys
+2026 tournament soccer cleats
+adidas chaos vs control soccer cleats
+adidas copa pure iv elite
+adidas copa pure iv league
+adidas copa pure iv league fg
+adidas copa pure iv league turf
+adidas copa pure iv pro fg
+adidas copa pure iv pro turf
+adidas copa soccer cleats
+adidas f50 club
+adidas f50 elite
+adidas f50 elite laceless
+adidas f50 indoor
+adidas f50 indoor soccer shoes
+adidas f50 league
+adidas f50 league turf
+adidas f50 messi
+adidas f50 pro
+adidas f50 soccer cleats
+adidas f50 turf
+adidas indoor soccer shoes
+adidas junior f50 club
+adidas junior f50 elite fg
+adidas junior f50 league mid
+adidas junior f50 turf
+adidas junior predator elite fg
+adidas junior predator league
+adidas junior predator league turf
+adidas junior predator league turf fold over
+adidas kids predator club
+adidas messi el ultimo tango soccer cleats
+adidas predator accuracy
+adidas predator club
+adidas predator elite ag
+adidas predator elite fg
+adidas predator elite fold over tongue fg
+adidas predator elite laceless
+adidas predator league fg
+adidas predator league turf
+adidas predator pro turf
+adidas predator soccer cleats
+adidas road to glory soccer cleats
+adidas soccer jerseys
+adidas x soccer cleats
+arsenal home jersey
+arsenal jersey
+arsenal long sleeve jersey
+arsenal soccer jersey
+arsenal youth jersey
+artificial grass soccer cleats
+barcelona home jersey
+barcelona jersey
+barcelona soccer jersey
+barcelona women s jersey
+barcelona youth jersey
+bayern jersey
+bayern munich authentic jersey
+bayern munich jersey
+bayern munich long sleeve jersey
+bosnia and herzegovina soccer jersey
+bosnia away jersey 2026
+bosnia jersey 2026
+chelsea youth jersey
+chivas guadalajara jersey
+chivas jersey
+chivas soccer jersey
+congo away kit 2026
+croatia jersey 2026
+croatia womens home jersey 2026
+croatia youth away jersey 2026
+croatia youth home jersey 2026
+dr congo jersey 2026
+dr congo soccer jersey
+f50 messi
+famous soccer players jerseys
+indoor soccer shoes
+infant toddler soccer apparel
+jamaica soccer jersey 2026
+jordan away jersey 2026
+junior f50 messi
+junior soccer cleats
+kids soccer cleats
+kids soccer cleats wide
+kids soccer shoes
+kidsuper x christian pulisic soccer cleats
+lionel messi jerseys
+liverpool authentic jersey
+liverpool away jersey
+liverpool home jersey
+liverpool jersey
+liverpool long sleeve jersey
+liverpool soccer jersey
+liverpool women s jersey
+liverpool youth jersey
+liverpool youth long sleeve jersey
+man united jersey
+manchester united authentic jersey
+manchester united authentic long sleeve jersey
+manchester united home jersey
+manchester united jersey
+manchester united long sleeve jersey
+manchester united soccer jersey
+manchester united women s jersey
+manchester united youth jersey
+manchester united youth long sleeve jersey
+men s soccer cleats
+mexico 2026 away jersey
+mexico 2026 home jersey
+mexico 2026 third jersey
+mexico jersey
+michael olise jersey
+mizuno bright black soccer cleats
+mizuno cleats
+mizuno morelia soccer cleats
+mizuno soccer cleats
+mohamed salah jerseys
+new balance 442 soccer cleats
+new balance black pack soccer cleats
+new balance furon elite
+new balance furon soccer cleats
+new balance furon team
+new balance indoor soccer shoes
+new balance junior tekela
+new balance neon tide soccer cleats
+new balance tekela elite
+new balance tekela soccer cleats
+new balance white pack soccer cleats
+neymar jr jerseys
+nike break em soccer cleats
+nike breakout soccer cleats
+nike chivas jersey
+nike jr phantom 6 low pro
+nike mercurial soccer cleats
+nike mercurial superfly 11 academy
+nike mercurial superfly 11 elite ag
+nike mercurial superfly 11 elite fg
+nike mercurial superfly 11 pro
+nike mercurial vapor 17 academy
+nike mercurial vapor 17 elite
+nike mercurial vapor 17 elite fg
+nike mercurial vapor 17 pro
+nike phantom 6 academy
+nike phantom 6 academy turf shadow
+nike phantom 6 elite ag
+nike phantom 6 elite fg
+nike phantom 6 high elite ag
+nike phantom 6 high elite ag shadow
+nike phantom 6 high elite fg shadow
+nike phantom 6 low elite fg
+nike phantom 6 low pro
+nike phantom 6 low pro fg
+nike phantom 6 low pro fg shadow
+nike phantom 6 low pro turf shadow
+nike phantom 6 pro
+nike phantom soccer cleats
+nike premier soccer cleats
+nike shadow soccer cleats
+nike soccer jerseys
+nike superfly 11 club turf
+nike tiempo ligera pro fg shadow
+nike tiempo ligera pro turf shadow
+nike tiempo maestro academy
+nike tiempo maestro elite ag
+nike tiempo maestro elite ag shadow
+nike tiempo maestro elite fg
+nike tiempo maestro elite fg shadow
+nike vapor 17 elite ag
+nike vapor 17 elite ag shadow
+nike vapor 17 elite fg
+nike vapor 17 elite fg shadow
+nike vapor 17 pro
+nike vapor 17 pro shadow
+nike vapor 17 pro turf shadow
+nike zoom superfly 11 elite ag
+nike zoom superfly 11 elite ag shadow
+ousmane dembele jersey
+puma 2026 27 premier league soccer balls
+puma arrival soccer cleats
+puma future soccer cleats
+puma indoor soccer shoes
+puma king soccer cleats
+puma showtime soccer cleats
+puma soccer jerseys
+puma ultra soccer cleats
+qatar national soccer team jerseys and apparel
+raphinha jersey
+real madrid authentic jersey
+real madrid home jersey
+real madrid jersey
+real madrid long sleeve jersey
+real madrid soccer jersey
+real madrid women s jersey
+real madrid youth jersey
+real madrid youth long sleeve jersey
+saudi arabia national soccer team jerseys and apparel
+south korea soccer jersey 2026
+spain vs argentina world cup final fan gear
+street soccer shoes
+trinity rodman jerseys
+uae soccer jersey
+vinicius junior jerseys
+wide soccer cleats
+women s croatia jersey
+youth soccer cleats
+youth soccer cleats wide
+youth soccer shoes

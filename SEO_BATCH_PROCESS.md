@@ -181,7 +181,7 @@ The XLSX form stays the default because the sheet name auto-resolves the entity 
 
 ## 6. Open at last update
 
-- Batch 11 (10 SKUs: Barcelona men's/women's home, Arsenal home/LS/youth, Bayern Munich authentic/LS, 3 Nike Shadow cleats) authored, gate-green, Layer 3 clean, committed and pushed 2026-08-03 (commit e68a999). Awaiting Step 2 handle list + Matrixify import; registry append (step 14) pending post-import.
+- Batch 11 (10 SKUs: Barcelona men's/women's home, Arsenal home/LS/youth, Bayern Munich authentic/LS, 3 Nike Shadow cleats) closed end to end: briefs (e68a999), process-doc update (25fd986), registry append step 14 COMPLETE (products-master.csv rows 113-122, commit c5edafb). Live on Shopify.
 - Gate: `check_section_presence` BUILT (added 2026-07-31); the gate now runs 10 mechanical checks. Remaining hardening still to build: (a) cannibalization check (#9) is exact-match only, with no containment or token-subset detection, so that class is caught only by ORIN's manual pre-dispatch pass, never the gate; (b) `voice_check.py` skips fenced code blocks, so worked examples inside canonical files are invisible to it; (c) meta-title length (48-char cap) and meta-description length/format are not gated, enforced by SCRIBE plus Layer 3 only.
 - 20 meta title brand-suffix violations found across all batches. KA6868 fixed manually 2026-07-28; 19 remain live, awaiting fix-forward.
 - Meta title and meta description format rules being codified into the playbook

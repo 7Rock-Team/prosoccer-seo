@@ -86,7 +86,7 @@ url,page_type,phase,target_keywords,brief_date,brief_file_path,implementer,imple
 /collections/barcelona,collection,,,,,,,,,,,,,,,,,,,,not_started,white-label meta status: in_progress,,,,,barcelona jersey; barcelona soccer jersey,,,barcelona
 /collections/bayern-munich,collection,,,,,,,,,,,,,,,,,,,,not_started,white-label meta status: in_progress,,,,,bayern munich jersey; bayern jersey,,,bayern-munich
 /collections/chelsea,collection,,,,,,,,,,,,,,,,,,,,not_started,white-label meta status: in_progress,,,,,,,,chelsea
-/collections/chivas,collection,,,,,,,,,,,,,,,,,,,,not_started,white-label meta status: in_progress,,,,,,,,chivas
+/collections/chivas,collection,,,,,,,,,,,,,,,,,,,,not_started,white-label meta status: in_progress,,,,,chivas jersey; chivas soccer jersey; chivas guadalajara jersey; nike chivas jersey,,,chivas
 /collections/club-america,collection,,,,,,,,,,,,,,,,,,,,not_started,white-label meta status: in_progress,,,,,,,,club-america
 /collections/inter-miami,collection,,,,,,,,,,,,,,,,,,,,not_started,white-label meta status: in_progress,,,,,,,,inter-miami
 /collections/inter-milan,collection,,,,,,,,,,,,,,,,,,,,not_started,white-label meta status: in_progress,,,,,,,,inter-milan
@@ -196,3 +196,4 @@ url,page_type,phase,target_keywords,brief_date,brief_file_path,implementer,imple
 /collections/nike-break-em-soccer-cleats,collection,,Nike Break ’Em soccer cleats,,,white-label (Kara),,,,,,,,,,,,,,,inherited,white-label meta status: complete,Nike Break ’Em soccer cleats,nike break em soccer cleats,nike break em soccer cleats,,,white-label sheet 2026-07-27,2026-07-27,nike-break-em-soccer-cleats
 /collections/puma-arrival-soccer-cleats,collection,,Puma Arrival soccer cleats,,,white-label (Kara),,,,,,,,,,,,,,,inherited,white-label meta status: complete,Puma Arrival soccer cleats,puma arrival soccer cleats,puma arrival soccer cleats,,,white-label sheet 2026-07-27,2026-07-27,puma-arrival-soccer-cleats
 /collections/youth-soccer-shoes,collection,,,,,,,2026-07-31,,,,,,,,,,,,,existing-optimized,Real smart collection; handle uses shoes not cleats; H1 Youth Soccer Cleats for Boys and Girls; ~251 products faceted+FAQ; kids-/youth-/junior-soccer-cleats 301 here (fixed 2026-07-31); verified live 2026-07-31 + smart_collections export,kids soccer cleats,kids soccer cleats,,18100,kids soccer cleats; youth soccer cleats; junior soccer cleats; kids soccer shoes; youth soccer shoes,DFS 2026-07-31,2026-07-31,youth-soccer-shoes
+/collections/mizuno-soccer-cleats,collection,,,,,,,,,,,,,,,,,,,,not_started,"new brand lane (Batch 12); cede target for Mizuno brand cleats head terms; live-verified 2026-08-03: 9 products; H1 Mizuno Soccer Cleats for Men, Women, & Youth",,,,,mizuno soccer cleats; mizuno cleats,,,mizuno-soccer-cleats

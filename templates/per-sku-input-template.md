@@ -79,6 +79,10 @@ gate-meta is the machine-readable authoritative block. batch_gate.py parses it.
 brand/posture/tier/word_band/primary_keyword/forbidden_phrasings live HERE once;
 the human-readable sections above echo them for SCRIBE's reading convenience, but
 THIS block governs. Keep the two in sync at write time (ORIN writes both together).
+NEVER put a brand token (adidas, Nike, Mizuno, ...) or any string that is a substring of
+approved copy into forbidden_phrasings: check_forbidden_phrasings matches case-insensitive
+substring, so it fires on correct copy. Capitalized brand tokens are already caught by
+voice_check.py; leave them out of this block.
 -->
 ```gate-meta
 {

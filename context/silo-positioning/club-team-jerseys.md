@@ -49,6 +49,7 @@ Bare club head terms belong to the club's `/collections/<club>` page, not to any
 - **Manchester United:** `manchester united jersey`, `manchester united soccer jersey`, `man united jersey` to `/collections/manchester-united`
 - **Arsenal:** `arsenal jersey`, `arsenal soccer jersey` to `/collections/arsenal` (added 2026-08-03, Batch 11; `/collections/arsenal` live-verified, 44 products, smart collection on tag `comp_club-team_arsenal`)
 - **Bayern Munich:** `bayern munich jersey`, `bayern jersey` to `/collections/bayern-munich` (added 2026-08-03, Batch 11; `/collections/bayern-munich` live-verified, 38 products. Bundesliga club, so the term pair is `bayern munich jersey` + the short-form `bayern jersey`, not the `<club> soccer jersey` shape used for the La Liga / Premier League clubs above.)
+- **Chivas (Guadalajara):** `chivas jersey`, `chivas soccer jersey` to `/collections/chivas` (added 2026-08-03, Batch 12; `/collections/chivas` live-verified, 23 products, H1 "Chivas Soccer Jerseys, Apparel, & Gear". FIRST Liga MX / Mexican club lane. The collection row carried no primary of its own; the cede terms were the first entry on its `ceded_from`.)
 
 Add a club's cede here and to both registry files before its first PDP is assigned a primary, so no PDP reaches for the head term. Real Madrid and Barcelona entered as new lanes in Batch 10; their cedes were written before assignment for exactly this reason. Arsenal and Bayern Munich entered as new lanes in Batch 11, cedes written before assignment.
 
