@@ -92,3 +92,27 @@ Link target validated live 2026-08-13: `adidas-predator-elite-fo-tongue-ag-socce
 Codified from this pass: `context/page-type-playbooks/product-page-playbook.md` 'Brand technology name casing' and 'Pack season-code qualifier', both with worked examples; `context/workforce-conventions.md` pack-succession point 2 tightened to the configuration-scoped form, and a brand-technology entry added to the brand-styling registry.
 
 No product title, URL handle, taxonomy, tag, variant, or price was touched. Registry rows for the changed fields land at step 14 with the rest of the batch.
+
+## Second correction pass (2026-08-13, Step 2 cold re-read)
+
+**Fold-over tongue sibling check: CASE B on BOTH configs. IH4707 and JP6248 are on hold, unedited.**
+
+Question asked: does any live published page exist at adidas Predator Elite Fold-Over Tongue AG, or at Fold-Over Tongue FG, in a pack other than Chaos vs Control? Answer is yes on both, by a wide margin.
+
+| Config | Other live packs at this exact config | Verified live |
+|---|---|---|
+| Fold-Over Tongue AG | Road to Glory SP26, Born for Goals SP26, Finishers Steel SP26, Immortal DNA SP26, Radiant Blaze FA25 | `adidas-predator-elite-fold-over-tongue-artificial-grass-soccer-cleats-road-to-glory-pack-sp26`, 200, H1 "adidas Predator Elite Fold-Over Tongue Artificial Grass Soccer Cleats - Road To Glory Pack (SP26)", $279.99 |
+| Fold-Over Tongue FG | Road to Glory SP26, Immortal DNA SP26, Ice Cold Precision SP26, Icon Takeover SP26, Born for Goals SP26, Beckham Players FA25, Coral Blaze FA25, Electric Stealth FA25, Radiant Blaze FA25, plus an unpacked base handle | `adidas-predator-elite-fold-over-tongue-firm-ground-soccer-cleats-immortal-dna-pack-sp26`, 200, H1 "adidas Predator Elite Fold-Over Tongue Firm Ground Soccer Cleats - Immortal DNA Pack (SP26)", $210.00 |
+
+Registry corroboration (these two are already shipped and optimized, so they are in `products-master.csv`):
+
+- HP9971, row 40, `adidas-predator-elite-fold-over-tongue-artificial-grass-soccer-cleats-road-to-glory-pack-sp26`, primary `adidas predator elite ag` (590).
+- JP6237, row 46, `adidas-predator-elite-fold-over-tongue-firm-ground-soccer-cleats-road-to-glory-pack-sp26`, primary `adidas predator elite fold over tongue fg` (sub-floor, GSC pos 7.9).
+
+**The conflict.** JP6248's current meta title, `adidas Predator Elite Fold-Over Tongue FG`, is JP6237's registered primary keyword verbatim. IH4707's, `adidas Predator Elite Fold-Over Tongue AG`, is the unqualified config term at a config with five live packs. Both are the exact thing pack succession bars: the unqualified term belongs to the earliest live pack, and neither Chaos vs Control page is it. But the full qualified string is 58 chars against a 48-char cap, and "FO Tongue" only gets to 51, so no spelling of config-plus-pack fits. The cap and the pack-qualifier rule genuinely collide here, which is a doctrine decision for Mike, not a copy edit. Both pages left exactly as they were; options with character counts went to Mike in the pass report. Logged as `strategy/sprint-backlog.md` B-PACK-02.
+
+Note for that decision: IH4707's meta DESCRIPTION also opens "The adidas Predator Elite AG Chaos vs Control", and `adidas predator elite ag` is HP9971's registered primary. Same family of problem, description rather than title, and not touched here.
+
+**Applied this pass:** HQ2275 Meta Description only, to `The Nike Phantom 6 High Club in the Shadow Pack (FA26) is a real Phantom control cleat for a growing player, with a molding upper and a secure high collar.` (155 chars, inside the 120 to 160 band). The prior description carried no qualifier at all and would have served the live Shadow FA25 page at the identical config equally well. It drops the closing call to action, which the meta-description structure rule normally asks for; Mike supplied the exact copy.
+
+No primary or secondary keyword changed in this pass, so no registry consequence beyond what step 14 already carries.
