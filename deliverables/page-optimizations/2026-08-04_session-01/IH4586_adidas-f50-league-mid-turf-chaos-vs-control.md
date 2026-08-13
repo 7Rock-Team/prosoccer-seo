@@ -37,7 +37,7 @@ Small-sided is a different sport: tighter space, faster decisions. The mid-cut c
 
 ## Product Details: F50 League Mid Turf
 
-- Upper: HALOSKIN synthetic with a HALOSHELL+ engineered mesh for a light, close touch
+- Upper: Haloskin synthetic with a Haloshell+ engineered mesh for a light, close touch
 - Outsole: turf-specific rubber for grip on short synthetic blades
 - Cut: mid-cut collar for added ankle lockdown
 - Closure: adjustable lacing for a secure, speed-fit hold

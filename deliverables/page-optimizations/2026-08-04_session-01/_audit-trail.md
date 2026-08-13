@@ -62,3 +62,33 @@ Collections: `/collections/adidas-predator`, `/collections/adidas-f50`, `/collec
 
 ## Step 14 note
 The 10 new registry rows are appended to products-master.csv AT STEP 14 (post-import), per SEO_BATCH_PROCESS.md. This commit contains briefs + input files + IQ2388 re-qualification + audit trail + follow-up logs, NOT the 10 new rows.
+
+## Pre-import corrections (2026-08-13, Step 2 cold review, Mike-directed)
+
+Six items came back from Step 2's cold read of the ten briefs. Nothing had been imported, so all of it was fixed in place in the brief files.
+
+**Season-code re-check (live storefront, 2026-08-13).** Rule applied: the primary carries the pack name always, the season code only when a live same-pack sibling from ANOTHER season exists for the same model + tier + cut + surface. Checked HQ2275, IO1486, IO1552, IO1554 against the live Shopify storefront (`/search/suggest.json`, published products only) plus the 2026-08-03 product sitemap chunks. IB4484 was already confirmed and was not re-opened.
+
+| SKU | Cross-season same-pack sibling | Evidence | Season code |
+|---|---|---|---|
+| HQ2275 | YES | `nike-phantom-6-high-club-firm-multi-ground-soccer-cleats-shadow-pack-fa25`, live 200, H1 "Nike Phantom 6 High Club Firm/Multi Ground Soccer Cleats - Shadow Pack (FA25)", $46.00, tagged `footwear-pack_nike-shadow-pack-fa25` | keeps `fa26` |
+| IO1486 | NO | only other live Kids Vapor 17 Club Flex PS FG/MG pack is Break 'Em FA26 (`...-flex-ps-fg-mg-soccer-cleats-break-em`), a different pack | none |
+| IO1552 | NO | other live Junior Superfly 11 Club FG/MG packs are Break 'Em and Breakout SU26, both different packs | none |
+| IO1554 | NO | only other live Junior Superfly 11 Club Turf pack is Break 'Em, a different pack | none |
+
+All four primaries were already correct as written; the season-coding line above this section holds. The defect was confined to HQ2275's meta title.
+
+**Applied fixes.**
+
+1. HQ2275 Meta Title: `Nike Phantom 6 High Club FG/MG Soccer Cleats` to `Nike Phantom 6 High Club FG/MG Shadow FA26` (42 chars). The old title was the bare `nike phantom 6 high club` term this brief's own keyword table marks incumbent-owned, do-not-target. Same defect class as the IQ2388 error, caught pre-import again.
+2. IH4707 Meta Title: `adidas Predator Elite FO AG Chaos vs Control` to `adidas Predator Elite Fold-Over Tongue AG` (41 chars). Matches its own primary and its FG sibling JP6248's title. "FO" is a live-product-title abbreviation, not a search term. Live product title unchanged.
+3. IH4699 third FAQ answer: rewritten to link the AG sibling and to stop calling artificial grass "turf" (the AG plate is for artificial grass; turf is the separate short-pile surface).
+4. JP6248 third FAQ answer, final sentence: same AG-sibling link added. IH4707 already linked back to JP6248, so the Predator trio now cross-links in both directions.
+5. Brand technology name casing normalized to title case: IH4586 HALOSKIN to Haloskin, HALOSHELL+ to Haloshell+; JP6248 PRIMEKNIT to Primeknit (3 instances), STRIKEFRAME to Strikeframe (3 instances). Sweep of the other eight briefs found no further all-caps tech names.
+6. `nike shadow pack` (260/mo) as the secondary on five briefs is NOT a defect; the hierarchy rule governs primaries. Logged as `strategy/sprint-backlog.md` B-COLL-02 (collection-side question) and left alone here.
+
+Link target validated live 2026-08-13: `adidas-predator-elite-fo-tongue-ag-soccer-cleats-chaos-vs-control`, 200, H1 "adidas Predator Elite Fold-Over Tongue Artificial Ground Soccer Cleats - Chaos Vs Control Pack (FA26)", $279.99.
+
+Codified from this pass: `context/page-type-playbooks/product-page-playbook.md` 'Brand technology name casing' and 'Pack season-code qualifier', both with worked examples; `context/workforce-conventions.md` pack-succession point 2 tightened to the configuration-scoped form, and a brand-technology entry added to the brand-styling registry.
+
+No product title, URL handle, taxonomy, tag, variant, or price was touched. Registry rows for the changed fields land at step 14 with the rest of the batch.

@@ -482,6 +482,30 @@ Many products in the ProSoccer catalog are bound to a specific year, generation,
 
 **Reference for SCRIBE operational use.** Selection guidance summary lives in `.claude/agents/on-page-seo/agent.md` Section 9 'Year/generation/season specificity for primary keyword selection'.
 
+## Pack season-code qualifier (added 2026-08-13)
+
+Sits under pack succession (`context/workforce-conventions.md` 'Pack succession and PDP keyword ownership (v2)' point 2), and governs how much of the pack identity the primary keyword carries.
+
+**The rule.** A pack-qualified primary carries the PACK NAME always, and carries the SEASON CODE only when a live same-pack sibling from another season exists for the same model, tier, cut, and surface. The meta title carries whatever qualifier the primary carries: pack name alone when there is no cross-season sibling, pack name plus season code when there is.
+
+**How to check.** Read the live storefront (product sitemap, or a live storefront product search), not `products-master.csv` alone. Incumbent pack siblings are usually unoptimized, so they are absent from the registry and a registry-only check reports clean on a collision it cannot see. Match on model + tier + cut + surface. A sibling in a DIFFERENT pack does not trigger a season code; only the same pack name in a different season does. A check that did not run is not a pass.
+
+**Worked example 1, season code REQUIRED.** HQ2275, Nike Phantom 6 High Club FG/MG, Shadow FA26 (Batch 13). The live store also carries "Nike Phantom 6 High Club Firm/Multi Ground Soccer Cleats, Shadow Pack (FA25)": same model, same tier, same cut, same surface, same Shadow pack, earlier season. Without the season code both pages target one term.
+
+- Primary: `nike phantom 6 high club fg mg shadow fa26`
+- Meta Title: `Nike Phantom 6 High Club FG/MG Shadow FA26` (42 chars)
+
+**Worked example 2, season code NOT used.** IO1552, Nike Junior Superfly 11 Club FG/MG, Shadow FA26 (Batch 13). The only other live Junior Superfly 11 Club FG/MG packs are Break 'Em and Breakout SU26, which are different packs, so "shadow" alone already resolves to one product. Adding "fa26" would qualify against a sibling that does not exist.
+
+- Primary: `nike junior superfly 11 club fg mg shadow`
+- Meta Title: `Nike Junior Superfly 11 Club FG/MG Shadow` (41 chars)
+
+**Worked example 3, the pack name is never dropped.** IQ2388, Nike Tiempo Maestro Academy Turf, Breakout SU26. Breakout does not recur for this configuration, so there is no season code, but the pack name still stays: dropping it would take the unqualified term that belongs to the earliest live pack (the SP26 incumbent).
+
+- Primary: `nike tiempo maestro academy turf breakout`
+
+**The failure mode this prevents.** A meta title that carries the bare unqualified term while the brief's own keyword table marks that term incumbent-owned. HQ2275 shipped into review with the meta title "Nike Phantom 6 High Club FG/MG Soccer Cleats" while its keyword table listed `nike phantom 6 high club` (170/mo) as incumbent-owned, do-not-target. The primary was qualified and the meta title was not, which is the same defect class as the IQ2388 pack-succession error, caught before import both times.
+
 ## Keyword distribution discipline (added 2026-05-28, codifies Refinement 4)
 
 Keyword SELECTION ('Primary keyword selection for year/generation/season-bound products' section above) addresses which keyword becomes primary. Keyword DEPLOYMENT addresses how the chosen primary propagates through the brief's six fields plus the Long Description body.
@@ -625,6 +649,23 @@ Counts are allowed when sourced from a verified authoritative reference and note
 Body copy must not contain specific counts of catalog items (federations, brands, products, styles, designs, tiers, and similar) unless the count is sourced from a verified authoritative reference and noted in the workforce briefing. SCRIBE self-revises during Phase 4 (brief drafting) before the Phase 5 voice check; ORIN re-checks at the orchestrator layer as a sanity scan.
 
 Cross-references: `.claude/agents/on-page-seo/agent.md` Section 11 Gate 14 + Section 9, `.claude/agents/master-strategist/agent.md` Section 9 + Section 11, `context/workforce-conventions.md` 'Unsupported specific counts (Gate 14, cross-cutting)'.
+
+## Brand technology name casing (added 2026-08-13)
+
+Brand technology names are written in TITLE CASE in every output field (Title, Meta Title, Meta Description, Short Description, body prose, H2s and H3s, Product Details bullets, image alt text, FAQ answers), regardless of how the manufacturer styles the name in its own marketing copy. Manufacturers set these names in all caps for display; that is a typographic choice inside their brand system, not the spelling of the name. All caps in body prose reads as shouting, breaks the editorial voice, and makes one page contradict another when only some fields are shouted.
+
+Correct: Haloskin, Haloshell+, Primeknit, Strikeframe, Nanostrike+, Powerspine, FlyTouch, Sprintgrid.
+
+Incorrect: HALOSKIN, HALOSHELL+, PRIMEKNIT, STRIKEFRAME.
+
+The sole all-lowercase exception is the adidas brand name itself, which stays lowercase everywhere (`context/workforce-conventions.md` 'Brand styling conventions'). Genuine acronyms are not affected and stay capitalized: FG, MG, AG, TF, PS, and the season codes (FA26, SP26, SU26).
+
+Worked example (Batch 13, found by Step 2 review before import):
+
+- WRONG: `- Upper: HALOSKIN synthetic with a HALOSHELL+ engineered mesh for a light, close touch` (IH4586 Product Details bullet)
+- RIGHT: `- Upper: Haloskin synthetic with a Haloshell+ engineered mesh for a light, close touch`
+
+Why that one mattered: the same brief already wrote "Haloskin" in its body prose and meta description, so a single page spelled the same upper two ways. In the same batch, JP6248 wrote PRIMEKNIT and STRIKEFRAME while its own AG sibling IH4707 wrote Strikeframe. Title case was already the dominant form across the batch (Nanostrike+, Powerspine, FlyTouch); the all-caps spellings were the outliers, copied from manufacturer marketing copy during the scrape.
 
 ## Image precision discipline (SCRIBE Phase 4 self-check, added 2026-06-02)
 

@@ -70,7 +70,7 @@ Go true to size for a controlled fit, and size up a half for players between siz
 It feels snug around the ankle for the first few wears, then breaks in and reads as support; have them try it on at home first.
 
 ### Meta Title
-Nike Phantom 6 High Club FG/MG Soccer Cleats
+Nike Phantom 6 High Club FG/MG Shadow FA26
 
 ### Meta Description
 The Nike Phantom 6 High Club is a real Phantom control cleat for a growing player, with a molding upper and a secure high collar. Lace up and play.

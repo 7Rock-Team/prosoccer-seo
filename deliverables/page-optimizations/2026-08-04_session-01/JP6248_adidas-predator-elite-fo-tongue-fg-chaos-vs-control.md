@@ -29,17 +29,17 @@ You know the type. The striker who needs one touch, not three. The adidas Predat
 
 ## Why the tongue folds over
 
-The fold-over tongue is the whole point. The collar wraps down over the laces, so nothing sits between your foot and the ball when you shoot. The PRIMEKNIT upper is one piece that hugs the foot like a sock, and Nanostrike+ mesh runs across the forefoot with rubber grip right where you make contact. Prefer your laces open? The [standard-tongue Predator Elite](https://www.prosoccer.com/products/adidas-predator-elite-firm-ground-soccer-cleats-chaos-vs-control) is the same cleat without the collar.
+The fold-over tongue is the whole point. The collar wraps down over the laces, so nothing sits between your foot and the ball when you shoot. The Primeknit upper is one piece that hugs the foot like a sock, and Nanostrike+ mesh runs across the forefoot with rubber grip right where you make contact. Prefer your laces open? The [standard-tongue Predator Elite](https://www.prosoccer.com/products/adidas-predator-elite-firm-ground-soccer-cleats-chaos-vs-control) is the same cleat without the collar.
 
 ## Built for firm grass and the shot on sight
 
-The STRIKEFRAME plate is a full-length firm-ground setup for real grass. Studs bite when you plant to shift a defender, and they hold when you open up to curl one far post. Powerspine keeps the midfoot steady when you load, and at 7.2 oz the cleat swings fast. When the ball sits up in the box, you hit it clean and it goes.
+The Strikeframe plate is a full-length firm-ground setup for real grass. Studs bite when you plant to shift a defender, and they hold when you open up to curl one far post. Powerspine keeps the midfoot steady when you load, and at 7.2 oz the cleat swings fast. When the ball sits up in the box, you hit it clean and it goes.
 
 ## Product Details: Predator Elite Fold-Over Tongue FG
 
-- Upper: PRIMEKNIT one-piece knit wrap, Nanostrike+ mesh forefoot with rubber grip
+- Upper: Primeknit one-piece knit wrap, Nanostrike+ mesh forefoot with rubber grip
 - Tongue: fold-over collar over the laces, regular fit, lace closure
-- Plate: full-length firm-ground STRIKEFRAME, synthetic outsole, non-removable studs
+- Plate: full-length firm-ground Strikeframe, synthetic outsole, non-removable studs
 - Midfoot: Powerspine for stability through plants and turns
 - Weight: 7.2 oz (203 g)
 - Sockliner: synthetic, cushioned
@@ -50,7 +50,7 @@ The Predator Elite runs true to size for most players. Between sizes, or want a 
 
 ## Care and Maintenance
 
-- Wipe the PRIMEKNIT upper with a damp cloth after matches; brush off dried grass first
+- Wipe the Primeknit upper with a damp cloth after matches; brush off dried grass first
 - Air-dry away from heat, sun, and dryers, which warp the plate and break down the mesh
 - Stuff with newspaper to hold shape and pull moisture
 - Synthetic knit upper, so skip the leather conditioner
@@ -67,7 +67,7 @@ Yes, true to size for most players. Want a tighter feel? Drop a half size.
 
 ### Can I wear these on turf or artificial grass?
 
-The firm ground plate is made for natural grass and dry pitches. On artificial grass, the fold-over AG version spreads the studs for that surface.
+The firm ground plate is made for natural grass and dry pitches. On artificial grass, the [fold-over AG version](https://www.prosoccer.com/products/adidas-predator-elite-fo-tongue-ag-soccer-cleats-chaos-vs-control) spreads the studs for that surface.
 
 ### Meta Title
 adidas Predator Elite Fold-Over Tongue FG
@@ -82,7 +82,7 @@ adidas-predator-elite-fo-tongue-fg-soccer-cleats-chaos-vs-control (unchanged)
 - adidas Predator Elite Fold-Over Tongue FG Chaos vs Control soccer cleats
 - adidas Predator Elite Fold-Over Tongue Cloud White side view
 - adidas Predator Elite fold-over tongue collar detail
-- adidas Predator Elite FG STRIKEFRAME stud configuration
+- adidas Predator Elite FG Strikeframe stud configuration
 
 ### Taxonomy Category
 Apparel & Accessories > Shoes > Athletic Shoes > Soccer Cleats

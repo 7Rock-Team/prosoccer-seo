@@ -66,7 +66,7 @@ This standard-tongue Elite keeps the laces exposed. The fold-over version adds a
 
 ### Can I wear these on artificial grass?
 
-The firm ground plate is built for natural grass and dry pitches. For turf, the AG version spreads the studs for that surface.
+The firm ground plate is built for natural grass and dry pitches. For artificial grass, the [fold-over tongue AG version](https://www.prosoccer.com/products/adidas-predator-elite-fo-tongue-ag-soccer-cleats-chaos-vs-control) spreads the studs for that surface.
 
 ### Meta Title
 adidas Predator Elite FG Chaos vs Control
