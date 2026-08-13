@@ -73,7 +73,7 @@ It feels snug around the ankle for the first few wears, then breaks in and reads
 Nike Phantom 6 High Club FG/MG Shadow FA26
 
 ### Meta Description
-The Nike Phantom 6 High Club in the Shadow Pack (FA26) is a real Phantom control cleat for a growing player, with a molding upper and a secure high collar.
+The Nike Phantom 6 High Club in the Shadow Pack (FA26) is a real Phantom control cleat for a growing player, with a molding upper. Lace up and play.
 
 ### URL Handle
 nike-phantom-6-high-club-fg-mg-soccer-cleats-shadow-fa26 (unchanged)

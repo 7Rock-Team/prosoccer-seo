@@ -70,7 +70,7 @@ Yes, true to size for most players. Want a tighter feel? Drop a half size.
 The firm ground plate is made for natural grass and dry pitches. On artificial grass, the [fold-over AG version](https://www.prosoccer.com/products/adidas-predator-elite-fo-tongue-ag-soccer-cleats-chaos-vs-control) spreads the studs for that surface.
 
 ### Meta Title
-adidas Predator Elite Fold-Over Tongue FG
+adidas Predator Elite FO FG Chaos vs Control
 
 ### Meta Description
 The adidas Predator Elite fold-over tongue FG gives finishers a smooth, covered instep with no laces in the strike path. Bury the chance.

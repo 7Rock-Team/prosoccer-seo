@@ -118,6 +118,34 @@ Compliant Meta Description exemplars:
 - Cleat: `The Nike Phantom 6 High Elite FG is the precision cleat for players who pick the corner. Gripknit touch, locked-in ankle. Lace up for the season.` (145)
 - Jersey: `The adidas 2026-27 Manchester United home jersey in striped red, with the woven club crest and CLIMACOOL fabric. Pull on the red and back the Devils.` (149)
 
+### Meta title precedence when the 48-character cap binds (added 2026-08-13, Mike's decision)
+
+When the 48-character written cap cannot hold BOTH a spelled-out configuration name and the pack qualifier, **the pack qualifier wins and the configuration abbreviates.**
+
+Why that way round. The config name aids reader comprehension; the pack qualifier is the only token separating the page from live siblings at the same config. Losing the first costs click-through. Losing the second puts the page on a term another live page already owns, which is the exact failure pack succession exists to prevent (`context/workforce-conventions.md` 'Pack succession and PDP keyword ownership (v2)').
+
+Two corollaries, both binding:
+
+1. **Never truncate a pack name to fit.** "Chaos vs Control" does not become "Chaos". A truncated pack name states a pack that does not exist, which is worse than no pack at all.
+2. **Never drop the brand prefix to fit.** Brand at the front stands ('Meta Title and Meta Description compliance' above).
+
+Which abbreviations are allowed: only ones the store's own LIVE product titles already use, so shoppers meet the form on the store before they meet it in a SERP. Do not invent an abbreviation that appears nowhere on the store to buy characters.
+
+**Worked example (Batch 13, IH4707 and JP6248).** Both are Chaos vs Control fold-over tongue Predator Elites. The live store carries five other packs at the AG config and nine at the FG config, so the pack qualifier is load-bearing: JP6248's config-only title was incumbent JP6237's registered primary `adidas predator elite fold over tongue fg` verbatim.
+
+| Candidate | Chars | Verdict |
+|---|---|---|
+| `adidas Predator Elite Fold-Over Tongue FG Chaos vs Control` | 58 | over cap |
+| `adidas Predator Elite FO Tongue FG Chaos vs Control` | 51 | over cap |
+| `adidas Predator Elite Fold-Over Tongue FG` | 41 | fits, but drops the pack: this is the incumbent's term |
+| `adidas Predator Elite Fold-Over Tongue FG \| Chaos` | 49 | over cap AND truncates the pack name (corollary 1) |
+| `Predator Elite Fold-Over Tongue FG \| Chaos` | 42 | drops the brand (corollary 2) and truncates the pack |
+| `adidas Predator Elite FO FG Chaos vs Control` | 44 | CHOSEN: brand kept, pack whole, config abbreviated |
+
+"Fo Tongue" already appears in the live ProSoccer product titles for both SKUs, which is what licenses "FO" here.
+
+This supersedes the 2026-08-13 pass-1 change that set IH4707's meta title to `adidas Predator Elite Fold-Over Tongue AG`. That change was proposed before the sibling check had run, on the reasoning that "FO" is not a term anyone searches. True but subordinate: a searchable config name that collides with a live sibling loses to an abbreviated one that does not. Run the sibling check BEFORE trading a qualifier away for readability.
+
 ### Gender-qualified keyword form (added 2026-07-31)
 
 Gender-qualified jersey primary and target keywords use the possessive apostrophe form: `women's jersey`, `men's jersey`, not `womens` / `mens`. Stored keyword strings stay grammatically correct and consistent across the registry (`real madrid women's jersey`, `liverpool women's jersey`). Normalization strips the apostrophe before the cannibalization check, so the check is unaffected either way; this convention governs the stored string only. Pre-convention outlier: Batch 9 KC4794 shipped `manchester united womens jersey` (no apostrophe); forward-only, not retro-changed unless a re-run touches it.

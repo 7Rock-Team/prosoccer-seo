@@ -69,10 +69,10 @@ In a pinch, but the shorter AG studs won't bite soft natural grass like firm-gro
 No, the AG studs are molded and non-removable, standard for artificial-ground cleats built for synthetic pitches.
 
 ### Meta Title
-adidas Predator Elite Fold-Over Tongue AG
+adidas Predator Elite FO AG Chaos vs Control
 
 ### Meta Description
-The adidas Predator Elite AG Chaos vs Control grips artificial grass with a denser Strikeframe stud pattern and Nanostrike+ strike tech. Built for 3G nights.
+The adidas Predator Elite AG in the Chaos vs Control pack grips artificial grass with a denser Strikeframe stud pattern. Built for 3G league nights.
 
 ### URL Handle
 adidas-predator-elite-fo-tongue-ag-soccer-cleats-chaos-vs-control (unchanged)
