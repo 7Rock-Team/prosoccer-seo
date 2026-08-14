@@ -18,7 +18,7 @@ Prompts:
 
 _Things that change how we plan SEO for soccer retail. Update this as the industry moves._
 
-- Nike, Adidas, Puma pushing DTC hard on cleats and jerseys.
+- Nike, adidas, Puma pushing DTC hard on cleats and jerseys.
 - Club licensing restrictions on team kits.
 - MLS growth, Messi / Inter Miami effect.
 - USMNT / USWNT and World Cup cycles (2026 co-hosted World Cup in US/Canada/Mexico is a major event).
@@ -50,6 +50,6 @@ Examples to validate:
 ## Constraints Unique to Soccer Retail SEO
 
 - Licensed kits have brand-mandated content rules.
-- Cleat release calendars are dictated by Nike, Adidas, Puma, New Balance, and followed by the whole industry.
+- Cleat release calendars are dictated by Nike, adidas, Puma, New Balance, and followed by the whole industry.
 - Youth product rankings are heavily parent-driven but worn by the player.
 - Goalkeepers are a high-intent, low-volume niche that rewards specificity.

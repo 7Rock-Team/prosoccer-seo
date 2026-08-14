@@ -1,6 +1,6 @@
 # Silo Positioning: Mizuno Morelia
 
-Per-SKU prose patterns for the Mizuno Morelia soccer cleat line. Created 2026-08-03 (Batch 12, FIRST Mizuno entry; brand-first, new brand lane). Keyed by boot MODEL like predator / copa / mercurial / tiempo / phantom / f50 / furon / tekela. Morelia = Mizuno's heritage kangaroo-leather touch boot: the craftsmanship / feel lane, distinct from the speed lanes (Mercurial / F50 / Furon) and the power lanes.
+Per-SKU prose patterns for the Mizuno Morelia soccer cleat line. Created 2026-08-03 (Batch 12, FIRST Mizuno entry; brand-first, new brand lane). Keyed by cleat MODEL like predator / copa / mercurial / tiempo / phantom / f50 / furon / tekela. Morelia = Mizuno's heritage kangaroo-leather touch cleat: the craftsmanship / feel lane, distinct from the speed lanes (Mercurial / F50 / Furon) and the power lanes.
 
 Format and append protocol: see `README.md`. ORIN reads this file during the pre-dispatch differentiation pass and appends per-SKU entries after the batch commits.
 
@@ -35,8 +35,8 @@ The Nike Shadow Pack barred-motif list (`gone`, `vanish`, `disappear`, `blackout
 
 ### Model positioning (PROPOSED, pending Mike approval at the Batch 12 gate)
 
-- Morelia = HERITAGE TOUCH / CRAFTSMANSHIP. Frame on kangaroo-leather feel, barefoot touch, low-profile fit, comfort. Do NOT frame Morelia as a speed or power boot.
-- Claims bar (PROPOSED): the K-leather touch signature is scrape-confirmed for both SKUs (Mizuno Kangaroo Leather upper) and may be stated. "Made in Japan" is a Mizuno flagship signature that does NOT automatically apply to the Beta tier: state it only if that specific SKU's Phase 0 scrape confirms it, otherwise cut it. No superlatives ("best leather boot," "finest touch in the game"). Comparisons to Mercurial / F50 only as market references, never as a superiority claim.
+- Morelia = HERITAGE TOUCH / CRAFTSMANSHIP. Frame on kangaroo-leather feel, barefoot touch, low-profile fit, comfort. Do NOT frame Morelia as a speed or power cleat.
+- Claims bar (PROPOSED): the K-leather touch signature is scrape-confirmed for both SKUs (Mizuno Kangaroo Leather upper) and may be stated. "Made in Japan" is a Mizuno flagship signature that does NOT automatically apply to the Beta tier: state it only if that specific SKU's Phase 0 scrape confirms it, otherwise cut it. No superlatives ("best leather cleat," "finest touch in the game"). Comparisons to Mercurial / F50 only as market references, never as a superiority claim.
 
 ### Tier -> avatar (PROPOSED)
 

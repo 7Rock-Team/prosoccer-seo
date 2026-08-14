@@ -1,6 +1,6 @@
 # Silo Positioning: New Balance Furon
 
-Per-SKU prose patterns for the New Balance Furon boot line (speed / strike). Created 2026-07-22 (Batch 9, FIRST New Balance entry; brand-first, Mike-approved criterion-1 escalation). Keyed by boot MODEL like predator/copa/mercurial/tiempo/phantom/f50. Furon = New Balance's speed boot (acceleration, finishing), the challenger-brand answer to Mercurial / F50.
+Per-SKU prose patterns for the New Balance Furon cleat line (speed / strike). Created 2026-07-22 (Batch 9, FIRST New Balance entry; brand-first, Mike-approved criterion-1 escalation). Keyed by cleat MODEL like predator/copa/mercurial/tiempo/phantom/f50. Furon = New Balance's speed cleat (acceleration, finishing), the challenger-brand answer to Mercurial / F50.
 
 ## Pre-dispatch reference / guardrails
 
@@ -9,11 +9,11 @@ Per-SKU prose patterns for the New Balance Furon boot line (speed / strike). Cre
 - No deal figures. Endorsements (Saka, Eze, Mane, Cooper) are scrape-sourced feature-list facts, phrase as "worn by," never "sponsored/endorsed by" implying an official arrangement in copy.
 
 ### Model positioning
-- Furon = SPEED / STRIKE. Frame on acceleration, lightness, first-time finishing, traction at pace. T-shaped studs + "Speed Ctrl Stud" are the plate signature. Do NOT frame Furon as a control/touch boot (that is Tekela's lane) — this is the cross-model differentiation axis.
+- Furon = SPEED / STRIKE. Frame on acceleration, lightness, first-time finishing, traction at pace. T-shaped studs + "Speed Ctrl Stud" are the plate signature. Do NOT frame Furon as a control/touch cleat (that is Tekela's lane) — this is the cross-model differentiation axis.
 - Mercurial / F50 may be named as market references (comparative fair use), never as a claim of superiority.
 
 ### Wide-fit wedge (the hero angle)
-- The 2E Wide fit is the strategic differentiator: New Balance is one of the only brands making a true wide (2E) speed boot. This is Jennifer/The Mom's "Wide Foot Nightmare" frame from `04-customer-avatars.md` (VoC: "Why does every cool cleat only come in narrow sizes?"). Lead wide-fit copy into Jennifer's actual language, not generic "roomy fit" copy.
+- The 2E Wide fit is the strategic differentiator: New Balance is one of the only brands making a true wide (2E) speed cleat. This is Jennifer/The Mom's "Wide Foot Nightmare" frame from `04-customer-avatars.md` (VoC: "Why does every cool cleat only come in narrow sizes?"). Lead wide-fit copy into Jennifer's actual language, not generic "roomy fit" copy.
 
 ### Tier -> avatar + word band
 - Elite (~$225) -> Tyler/Athlete primary (serious wide-footed speed player), Jennifer secondary. Word band Elite 400-450.

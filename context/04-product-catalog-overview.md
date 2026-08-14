@@ -27,7 +27,7 @@ Example:
 _Which brands matter most to organic revenue._
 
 - Nike
-- Adidas
+- adidas
 - Puma
 - New Balance
 - Mizuno

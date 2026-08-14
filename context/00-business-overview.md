@@ -161,11 +161,11 @@ These are the durable strategic targets that shape priority decisions. Current a
 
 Approximate gross margins by major brand (relatively stable; updated when supplier contracts change):
 
-- **Adidas:** 43.3%
+- **adidas:** 43.3%
 - **Nike:** 39.5%
 - **Joma:** 37.2%
 
-Higher-margin brands (Adidas, smaller specialty brands) are more profitable to drive traffic toward. Lower-margin brands (Nike) require more volume to generate equivalent profit. Agents should consider margin context when evaluating priority categories.
+Higher-margin brands (adidas, smaller specialty brands) are more profitable to drive traffic toward. Lower-margin brands (Nike) require more volume to generate equivalent profit. Agents should consider margin context when evaluating priority categories.
 
 ---
 
@@ -204,7 +204,7 @@ Add direct quotes here as they emerge from client conversations. If quotes are n
 
 ## Competitive Position
 
-ProSoccer sits as a specialty soccer retailer competing in a crowded US market. The dominant player is Soccer.com (broad volume and aggressive discounting). Other authority competitors per January 2026 audit Trust Flow data include SoccerPost, WeGotSoccer, SoccerVillage, SoccerZoneUSA, WorldSoccerShop, PeleSoccer, and SoccerWearhouse. Local Hispanic-market threat in LA is Niky's Sports. Brand-direct sites (Nike.com, Adidas.com, Puma.com) are an indirect competitive layer, especially for new product drops.
+ProSoccer sits as a specialty soccer retailer competing in a crowded US market. The dominant player is Soccer.com (broad volume and aggressive discounting). Other authority competitors per January 2026 audit Trust Flow data include SoccerPost, WeGotSoccer, SoccerVillage, SoccerZoneUSA, WorldSoccerShop, PeleSoccer, and SoccerWearhouse. Local Hispanic-market threat in LA is Niky's Sports. Brand-direct sites (Nike.com, adidas.com, Puma.com) are an indirect competitive layer, especially for new product drops.
 
 ProSoccer's competitive wedge is specialized expertise, authentic curation, geographic presence in LA, and 30-year history. See context/05-competitors.md for full competitor profiles, attack strategies, and monitoring cadence (when populated).
 

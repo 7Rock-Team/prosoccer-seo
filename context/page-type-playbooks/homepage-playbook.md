@@ -79,7 +79,7 @@ Standard frame:
 
 - **Section 1: Catalyst block.** What's most urgent right now on the site. World Cup 2026 in Wave 1 of 2026; summer-club season in late spring; back-to-school in late summer. The catalyst block routes Carlos and Tyler to drops and Jennifer to youth gear depending on the season.
 - **Section 2: National teams entry point.** Carlos's primary route. Names the World Cup and the major federations.
-- **Section 3: Cleats and brand catalogs entry point.** Tyler's primary route. Names the brand-tier categories (Adidas Predator, Nike Mercurial, Puma Future).
+- **Section 3: Cleats and brand catalogs entry point.** Tyler's primary route. Names the brand-tier categories (adidas Predator, Nike Mercurial, Puma Future).
 - **Section 4: Youth and fit entry point.** Jennifer's primary route. Names youth gear, wide-fit cleats, fitting-room access. (This section is the one place the homepage references the Pasadena fitting room as a consumer benefit, because Jennifer's pain frames map directly to in-person fitting.)
 - **Section 5: Team orders entry point.** Mike the Coach's primary route. Names bulk pricing, invoicing, club uniforms.
 - **Section 6: Trust block.** Heritage, retail locations, the team-behind-the-counter framing. Specifics, not platitudes.
@@ -109,13 +109,13 @@ LA's soccer specialty store since the 1990s. The team behind the counter actuall
 Below-fold sections:
 
 ## Section 1: Catalyst (May 2026)
-The 2026 World Cup kicks off June 11 at Estadio Azteca. Mexico, Argentina, Brazil, France, England, USMNT, and every other major federation kit is in stock or on its way. Sign up for the drop list and the kit lands in your inbox the morning Adidas or Nike releases it.
+The 2026 World Cup kicks off June 11 at Estadio Azteca. Mexico, Argentina, Brazil, France, England, USMNT, and every other major federation kit is in stock or on its way. Sign up for the drop list and the kit lands in your inbox the morning adidas or Nike releases it.
 
 ## Section 2: National Teams
 Mexico, Argentina, Brazil, France, England, USMNT, USWNT, Italy, Holland, Spain, Germany, and the rest of the World Cup field. Authentic kits direct from the brand, the player edition and the fan cut, sized and customized for the way you actually wear them.
 
 ## Section 3: Cleats
-Adidas Predator, Nike Mercurial, Puma Future, and the rest of the lineup. Firm ground for natural grass, AG for artificial grass, TF for older astroturf, IC and IN for indoor and futsal. The team behind the counter has played in most of them; ask for the read.
+adidas Predator, Nike Mercurial, Puma Future, and the rest of the lineup. Firm ground for natural grass, AG for artificial grass, TF for older astroturf, IC and IN for indoor and futsal. The team behind the counter has played in most of them; ask for the read.
 
 ## Section 4: Youth & Fit
 Wide-fit cleats, growing-foot sizing, turf-safe plates, and the fitting room in Pasadena that's open until 8 pm on weekdays. Bring the kid. Try the cleat. Walk out knowing it fits before the match.

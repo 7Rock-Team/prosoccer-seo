@@ -72,7 +72,7 @@ Minimal columns are the whole safety model. Tags, variants, prices, taxonomy, an
 
 - Every row is MERGE
 - Meta descriptions 120 to 160 characters. Report exact counts. Trim anything over.
-- Meta titles at most 48 characters for the written part, and none ending in a manufacturer brand as a pipe suffix (`| adidas`, `| Nike Stadium`). The theme appends the store name, so a brand suffix renders as "... | adidas – ProSoccer" and reads like the manufacturer's page. A pack or product-line suffix is fine (`| Breakout`, `| Road to Glory`). Brand at the front is correct.
+- Meta titles at most 48 characters for the written part, and none ending in a manufacturer brand as a pipe suffix (`| adidas`, `| Nike Stadium`). The theme appends the store name, so a brand suffix renders as `... | adidas – ProSoccer` and reads like the manufacturer's page. A pack or product-line suffix is fine (`| Breakout`, `| Road to Glory`). Brand at the front is correct.
 - Body HTML is well-formed and tags are balanced
 - The FAQ block is the last H2, sits after Care and Maintenance, and reads "FAQs about [product name]" with one H3 per question
 - Every brief carries at least one internal link in the body

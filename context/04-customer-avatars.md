@@ -207,7 +207,7 @@ The specific bacterial smell of synthetic cleats. She is looking for "hacks" (ba
 ### Purchasing Behavior
 
 - High price sensitivity, but pays for quality and safety
-- Nike and Adidas for quality, value brands for basics
+- Nike and adidas for quality, value brands for basics
 - $1,000+ per child per year
 - Buys seasonally or when gear is needed
 - Online for research and deals, in-store for fit
@@ -303,7 +303,7 @@ Condensed complement to the 8-stage journey above. The **OUR JOB** row is the ta
 
 | Stage | 1. Awareness (The Trigger) | 2. Consideration (The Search) | 3. Purchase (The Decision) | 4. Retention (The Experience) |
 |---|---|---|---|---|
-| Thinking | "He's limping after practice. He says his heels hurt (Sever's Disease anxiety)." | "I need 'Wide Fit' cleats. Do Adidas fit wider than Nike? I don't trust the size charts." | "Does ProSoccer offer free returns if these don't fit? Can I pick them up in Pasadena today to try them on?" | "Thank god they fit. But now they smell awful. How do I clean these?" |
+| Thinking | "He's limping after practice. He says his heels hurt (Sever's Disease anxiety)." | "I need 'Wide Fit' cleats. Do adidas fit wider than Nike? I don't trust the size charts." | "Does ProSoccer offer free returns if these don't fit? Can I pick them up in Pasadena today to try them on?" | "Thank god they fit. But now they smell awful. How do I clean these?" |
 | Feeling | Worried (Medical anxiety). Frustrated (Another expense). | Confused by acronyms (FG/AG/MG). Skeptical of "Cool" marketing. | Validated (found a deal). Relieved (Safety guaranteed). | Smart (Solved the problem). Heroic (Kid is happy). |
 | Action | Asks in "Soccer Parents" FB Group: "Best cleats for wide feet?" | Googles: "Best wide soccer cleats for 10 year old 2025" or "Nike Phantom vs. Tiempo width" | Adds "Grip Socks" to cart because another mom said they prevent blisters. | Opens email: "How to remove cleat smell naturally." |
 | Touchpoint | Reddit (r/bootroom) / Facebook Group | Blog Post: "The Ultimate Guide to Wide Feet Cleats" | Shopify Bundle: Cleats + Stink Balls + Grip Socks. | SMS: "Feet grow fast! Check our size guide for next season." |
@@ -326,7 +326,7 @@ Condensed complement to the 8-stage journey above. The **OUR JOB** row is the ta
 
 Tyler is a 17-year-old high school junior in Dallas, Texas, where soccer is a way of life for him. He has been playing since age six, started at local rec, and progressed to the city's top select club, earning a spot on the varsity squad as a sophomore. Tyler rises before school for extra training: he'll juggle in the garage, complete skills drills from YouTube, or text clips of his best moves to teammates and his coach.
 
-Obsessed with improvement, Tyler studies pro matches and follows his favorite players, and what gear they use, on social media. His room is plastered with posters of his idols, his shelves lined with worn-out cleats he can't bring himself to throw away. Gear matters to Tyler: the right cleats, compression gear, or tech socks feel like a piece of his identity, and he'll work summer jobs or swap with teammates to afford the latest drop from Nike or Adidas.
+Obsessed with improvement, Tyler studies pro matches and follows his favorite players, and what gear they use, on social media. His room is plastered with posters of his idols, his shelves lined with worn-out cleats he can't bring himself to throw away. Gear matters to Tyler: the right cleats, compression gear, or tech socks feel like a piece of his identity, and he'll work summer jobs or swap with teammates to afford the latest drop from Nike or adidas.
 
 Tyler is motivated by competition. He thrives on his coach's praise, his parents' encouragement, and (most of all) outperforming his rivals. But with ambition comes anxiety: he frets over missing tryouts, losing his edge, or injuries that would keep him sidelined. He is tough on himself but also the first to text encouragement to a struggling teammate. Tyler dreams of a college scholarship, playing at the next level, and building lifelong friendships through the game.
 
@@ -369,7 +369,7 @@ Tyler is motivated by competition. He thrives on his coach's praise, his parents
 ### Purchasing Behavior
 
 - **Price sensitivity:** Varies. Youth buy what parents approve; serious club or adult players will save and spend for performance.
-- **Brands:** Nike, Adidas, Puma; heavily influenced by professional endorsements and what their soccer idols and peers wear
+- **Brands:** Nike, adidas, Puma; heavily influenced by professional endorsements and what their soccer idols and peers wear
 - **Frequency:** Cleats 1 to 2 times per year; apparel, balls, and training gear seasonally or as needed; may impulse-buy for drop releases or pro tie-ins
 - **Spend:** $300 to $1,000+ annually
 - **Where:** Specialty soccer shops, trusted online retailers; recommendations are key
@@ -426,7 +426,7 @@ Tyler is motivated by competition. He thrives on his coach's praise, his parents
 | Internal Monologue | "Bro, look at that colorway. Mbappe is wearing these next week. My current ones are cooked anyway." | "I need to know if these run long. I can't have extra space in the toe or I'll trip. Do I need the Elite or is the Pro good enough?" | "Sold out?! Are you kidding me? I need these by Friday. Who else sells pro-level gear?" |
 | Emotion | Desire & Urgency (I want the edge). | Analytical (Obsessed with specs/weight). | Frustration (Stockouts are his enemy). |
 | Action | Shares the TikTok with his teammates in the group chat. | Searches for "Best Soccer Cleats for Speed" or "Best Soccer Cleats for Strikers" to confirm his choice. | Googles: "Nike Mercurial Superfly 10 Elite size 9.5 in stock." |
-| "To-Do" (Funnel) | Social: "Drop Calendar" posts on IG Stories (Countdowns). | Blog: Publish "Best Soccer Cleats 2025" and "Nike vs Adidas" comparisons. | Google Shopping: High bids on specific SKUs (e.g., "Mercurial Elite 9.5") to capture high-intent searches. |
+| "To-Do" (Funnel) | Social: "Drop Calendar" posts on IG Stories (Countdowns). | Blog: Publish "Best Soccer Cleats 2025" and "Nike vs adidas" comparisons. | Google Shopping: High bids on specific SKUs (e.g., "Mercurial Elite 9.5") to capture high-intent searches. |
 
 **Transaction (Purchase)** — AIDAR: Desire and Action. Goal: Be the reliable source when others are sold out and increase AOV with "Pro" add-ons.
 
@@ -509,7 +509,7 @@ Mike finds fulfillment in seeing quiet kids develop confidence and watching his 
 ### Purchasing Behavior
 
 - Very high price sensitivity, especially in youth and amateur clubs; spends more for must-have durability
-- Prefers brands known for reliability (Kwik Goal for goals, Nike or Adidas for balls, general value for cones and pinnies)
+- Prefers brands known for reliability (Kwik Goal for goals, Nike or adidas for balls, general value for cones and pinnies)
 - Spends $500 to $2,000+ per year for all team equipment needs, mostly before season start or mid-year refresh
 - **Sources:** Wholesale (for cost), online (reviews and selection), and local stores (emergencies and replacement)
 

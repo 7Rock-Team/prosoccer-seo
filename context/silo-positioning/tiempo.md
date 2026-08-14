@@ -68,7 +68,7 @@ Reference notes ORIN reads at the pre-dispatch differentiation pass. Separate fr
 - Date: 2026-07-11
 - Opening hook approach: the player who wants the leather touch but not the leather weight
 - Primary metaphor: a leather jacket cut down to a windbreaker, the feel kept and the bulk dropped
-- Use case scenario: the touch-oriented midfielder on dry firm natural grass at Pro value, a lighter boot
+- Use case scenario: the touch-oriented midfielder on dry firm natural grass at Pro value, a lighter cleat
 - Angle of emphasis: the lightweight value Tiempo; TECHLEATHER + a traditional full-plate (vs the Maestro360 split plate)
 - Heritage angle: the new Ligera sub-line at the Pro tier; Shadow Pack
 

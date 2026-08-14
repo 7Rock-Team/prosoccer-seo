@@ -22,8 +22,8 @@ This permission is tied to the 2026 World Cup cycle and expires with it. Do not 
 Permitted only under adidas's 2026 World Cup license described above: on adidas 2026 World Cup product and collection pages, in the past tense, referring to the event. This is the scope of that one event license, not a standing, all-pages clearance for the brand.
 
 - Adidas-branded collection pages (e.g., `/collections/adidas-2026-fifa-world-cup-soccer-jerseys-gear`)
-- Adidas product pages
-- National team collection pages where the team wears Adidas (Argentina, Mexico, Germany, Spain, Italy, Belgium, Japan, etc., verify per-team during topic research)
+- adidas product pages
+- National team collection pages where the team wears adidas (Argentina, Mexico, Germany, Spain, Italy, Belgium, Japan, etc., verify per-team during topic research)
 - Adidas-only national team kit product pages
 
 ### Where restricted terms are FORBIDDEN
@@ -73,7 +73,7 @@ During Tavily topic research at session start, verify which kit supplier the tea
 
 Common as of 2026 (verify each during research, not from this list):
 
-- Adidas: Argentina, Mexico, Germany, Spain, Italy, Belgium, Japan, Algeria, Wales (verify)
+- adidas: Argentina, Mexico, Germany, Spain, Italy, Belgium, Japan, Algeria, Wales (verify)
 - Nike: USMNT, Brazil, France, England, Netherlands, Portugal, Canada, Australia (verify)
 - Puma: Czech Republic, Switzerland, Senegal, Ghana, Morocco, Serbia (verify)
 - Hummel: Denmark (verify)
