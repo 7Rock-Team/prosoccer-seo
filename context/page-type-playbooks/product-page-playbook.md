@@ -146,6 +146,42 @@ Which abbreviations are allowed: only ones the store's own LIVE product titles a
 
 This supersedes the 2026-08-13 pass-1 change that set IH4707's meta title to `adidas Predator Elite Fold-Over Tongue AG`. That change was proposed before the sibling check had run, on the reasoning that "FO" is not a term anyone searches. True but subordinate: a searchable config name that collides with a live sibling loses to an abbreviated one that does not. Run the sibling check BEFORE trading a qualifier away for readability.
 
+### Meta title priority ordering, and the generation token (added 2026-08-13, Mike's decision)
+
+Extends the precedence rule above to the case where a GENERATION token competes for the same 48 characters. A generation token is the manufacturer's name for the current iteration of a model line, carried in the live product title: `Hyperfast` (adidas F50), `NU3`, `LV8`, `Flex`. It is not a pack and not a colorway.
+
+**Priority ordering for the meta title, highest first:**
+
+1. **Brand** (`adidas`, `Nike`, `Mizuno`)
+2. **Model** (`F50`, `Tiempo Maestro`, `Superfly 11`)
+3. **Generation token** (`Hyperfast`), when the live product title carries one
+4. **Configuration** (tier + cut + surface: `League Indoor`, `Club Mid FG/MG`)
+5. **Pack** (`Chaos vs Control`, `Shadow FA26`)
+
+**The pack yields first when space is tight.** Brand, model, generation and configuration IDENTIFY the product. The pack is a colorway qualifier. When all five cannot fit under 48, drop the pack from the meta title and keep the rest.
+
+**The primary keyword does NOT change.** It keeps its pack qualifier exactly as pack succession assigns it. This is the part that gets re-litigated, so here is the reasoning in full: the primary keyword and the meta title do different jobs. The pack qualifier exists in the primary for REGISTRY BOOKKEEPING, so two live pages never claim one term, and that function is completely untouched by what the meta title says. The meta title's job is SERP matching and human identification. Dropping the pack from the title costs nothing in the registry and buys the tokens searchers actually type.
+
+**Evidence behind the ordering (2026-08-13).** GSC over 88 days: all seven registered adidas F50 incumbents scored ZERO impressions on the term each holds, roughly 4,200/mo of recorded volume earning nothing. Every impression those pages did earn came from queries containing the generation token. IH4567, whose live title tag carries "Hyperfast", took 1,090 impressions and 25 clicks at position 4.4 on `f50 hyperfast pro turf`. DFS the same day: `f50 hyperfast` at 4,400 to 8,100/mo across recent months against 90/mo for `chaos vs control`, the pack head. The generation token outranks the pack on demand by roughly two orders of magnitude.
+
+**Binding corollary: when the pack drops from the meta title, the META DESCRIPTION MUST NAME THE PACK.** Descriptions run 120 to 160 characters and have the room. Two live pack siblings must never present identically in the SERP, and the buyer still needs to see which colorway they are clicking before they click.
+
+**Worked example (Batch 14).** Five adidas Chaos vs Control SKUs, all carrying the Hyperfast generation token in their live titles.
+
+| SKU | Meta title | Chars | Pack in title? |
+|---|---|---|---|
+| IH7094 | `adidas F50 Hyperfast Club Mid Chaos vs Control` | 46 | yes, it fits |
+| KJ3409 | `adidas F50 Hyperfast Club Turf Chaos vs Control` | 47 | yes, it fits |
+| KK1049 | `adidas F50 Hyperfast Pro Indoor Chaos vs Control` | 48 | yes, exactly at cap |
+| KK1061 | `adidas F50 Hyperfast League Indoor` | 34 | **no, pack dropped** |
+| KK1321 | `adidas Junior F50 Hyperfast League Turf` | 39 | **no, pack dropped** |
+
+KK1061 with the pack is `adidas F50 Hyperfast League Indoor Chaos vs Control` at 51, and KK1321 is 56. Neither has a licensed abbreviation available, and truncating "Chaos vs Control" to "Chaos" violates corollary 1 of the precedence rule above. So the pack drops from those two titles, their primaries keep `chaos vs control` unchanged, and both meta descriptions name the Chaos vs Control pack explicitly.
+
+**This does not invert the precedence rule above.** That rule ordered pack over CONFIGURATION and still does. Generation was never contemplated there. Configuration still yields to the pack; the pack now yields to brand, model and generation.
+
+**Reconciliation with 'Unique titles for pack/series products' below.** That rule requires every Meta Title in a pack or series to be unique. Dropping the pack can put two live siblings on the same title string: KK1061's `adidas F50 Hyperfast League Indoor` is also an accurate title for IH4577, the Road to Glory SP26 page at the identical configuration. The uniqueness rule still binds, and the meta-description corollary is what satisfies it: the two pages differ in the description, which names the pack. If a future batch finds two siblings colliding on the TITLE and the description cannot carry the distinction, escalate rather than truncating a pack name to force uniqueness. Examples audited against this ordering 2026-08-13: the Predator Elite worked example in the precedence rule above stays valid, because "Fold-Over Tongue" is a configuration (tongue type), not a generation token, so nothing there reorders. `adidas Copa Pure IV Elite FG Soccer Cleats` also stays valid, since "IV" is carried.
+
 ### Gender-qualified keyword form (added 2026-07-31)
 
 Gender-qualified jersey primary and target keywords use the possessive apostrophe form: `women's jersey`, `men's jersey`, not `womens` / `mens`. Stored keyword strings stay grammatically correct and consistent across the registry (`real madrid women's jersey`, `liverpool women's jersey`). Normalization strips the apostrophe before the cannibalization check, so the check is unaffected either way; this convention governs the stored string only. Pre-convention outlier: Batch 9 KC4794 shipped `manchester united womens jersey` (no apostrophe); forward-only, not retro-changed unless a re-run touches it.
@@ -1259,6 +1295,13 @@ Link placement (added 2026-06-09): internal links appear ONLY in the Description
 ### Live validation requirement
 
 Identical to the collection-page playbook. Use the firecrawl skill (`firecrawl-scrape`) or `WebFetch` (MCP install pending; canonical install status in `context/workforce-conventions.md` 'Tool inventory'). Confirm `metadata.statusCode` is 200, confirm rendered content matches expectations (H1, product count, no soft-404 to homepage). Document failures inline.
+
+**A status code is not a validation. Read the H1 and the product count, every time (hardened 2026-08-13).** A 200 on a wrong-audience collection is WORSE than a 404, because a 404 gets noticed and a wrong-audience 200 ships silently and stays live. Two separate incidents now, both caught only because someone read the rendered H1 instead of trusting the status code:
+
+- **`/collections/youth-soccer-shoes`**, the earlier false-404 case, which looked broken but was not.
+- **`/collections/indoor-soccer-shoes`** (Batch 14, 2026-08-13). Returns 200, has 32 products, and looks like the obvious target for any indoor PDP. Its H1 is **"Kids' Indoor Soccer Shoes"** and its title tag is "Youth Indoor Soccer Shoes for Court & Futsal Play". It is a YOUTH collection. The adult indoor target is `/collections/indoor`, H1 "Indoor Soccer Shoes for Men and Women", 53 products. Three adult Batch 14 indoor SKUs (KK1061, KK1049, IB4486) would have pointed at kids product on the strength of a plausible handle and a 200.
+
+The handle is not the audience. `indoor-soccer-shoes` reads more general than `indoor`, and it is the narrower of the two. Confirm the AUDIENCE (adult, youth, kids, women's) matches the page you are linking FROM, not just that the target exists. Record the H1 and the product count in the input file's validated-links block so the check is auditable after the fact, and so the next batch inherits the answer instead of re-deriving it.
 
 ### Optimal anchor text
 
