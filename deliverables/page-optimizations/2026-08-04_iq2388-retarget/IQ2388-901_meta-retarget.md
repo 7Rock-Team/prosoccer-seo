@@ -31,7 +31,7 @@ Shoes," not cleats). No manufacturer-brand pipe suffix.
 ```
 The Nike Tiempo Maestro Academy Turf in the Breakout pack brings soft FlyTouch leather and a flat rubber outsole for real ball feel on artificial turf.
 ```
-149 characters (in the 120-160 band). Full sentence, no colon-fragment opener. Also corrects the prior live meta
+151 characters (in the 120-160 band). Full sentence, no colon-fragment opener. Also corrects the prior live meta
 description's forbidden "Product Name: fragment" colon opener.
 
 ## For Step 2 (single-row Matrixify import, meta-only)
@@ -48,7 +48,7 @@ Title column). Absence of every other column is the preservation guarantee.
 |---|---|---|---|
 | nike-tiempo-maestro-academy-turf-soccer-shoes-breakout-pack-su26 | MERGE | Nike Tiempo Maestro Academy Turf Breakout | The Nike Tiempo Maestro Academy Turf in the Breakout pack brings soft FlyTouch leather and a flat rubber outsole for real ball feel on artificial turf. |
 
-Validation: title_tag 41 chars (<=48, no brand pipe suffix), description_tag 149 chars (120-160, no colon opener),
+Validation: title_tag 41 chars (<=48, no brand pipe suffix), description_tag 151 chars (120-160, no colon opener),
 no em dashes, MERGE.
 
 ## Do NOT change

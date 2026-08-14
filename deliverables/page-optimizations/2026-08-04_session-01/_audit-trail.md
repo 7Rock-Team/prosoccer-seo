@@ -116,3 +116,25 @@ Note for that decision: IH4707's meta DESCRIPTION also opens "The adidas Predato
 **Applied this pass:** HQ2275 Meta Description only, to `The Nike Phantom 6 High Club in the Shadow Pack (FA26) is a real Phantom control cleat for a growing player, with a molding upper and a secure high collar.` (155 chars, inside the 120 to 160 band). The prior description carried no qualifier at all and would have served the live Shadow FA25 page at the identical config equally well. It drops the closing call to action, which the meta-description structure rule normally asks for; Mike supplied the exact copy.
 
 No primary or secondary keyword changed in this pass, so no registry consequence beyond what step 14 already carries.
+
+## Third correction pass (2026-08-13): the Case B hold is RESOLVED
+
+The section above leaves IH4707 and JP6248 held, unedited, pending a doctrine call. That is no longer where they landed, and this note supersedes it.
+
+**Mike's ruling (2026-08-13).** When the 48-character cap cannot hold both a spelled-out configuration name and the pack qualifier, the PACK QUALIFIER WINS and the configuration abbreviates, to an abbreviation the store's own live titles already use. Two binding corollaries: never truncate a pack name ("Chaos vs Control" does not become "Chaos"), and never drop the brand prefix. Codified with a worked example in `context/page-type-playbooks/product-page-playbook.md` 'Meta title precedence when the 48-character cap binds'.
+
+**Final meta titles for the three corrected SKUs. These, not the pass-1 strings, are what step 14 carries into the registry.**
+
+| SKU | Final Meta Title | Chars | Note |
+|---|---|---|---|
+| HQ2275 | `Nike Phantom 6 High Club FG/MG Shadow FA26` | 42 | set in pass 1, unchanged since |
+| IH4707 | `adidas Predator Elite FO AG Chaos vs Control` | 44 | pass 1 set `adidas Predator Elite Fold-Over Tongue AG`; pass 3 REVERTED it |
+| JP6248 | `adidas Predator Elite FO FG Chaos vs Control` | 44 | pass 1 set `adidas Predator Elite Fold-Over Tongue FG`; pass 3 REVERTED it |
+
+The pass-1 change to IH4707 was made before the sibling check had run, on the reasoning that "FO" is not a term anyone searches. True but subordinate: a searchable config name that collides with a live sibling loses to an abbreviated one that does not. JP6248's pass-1 title was incumbent JP6237's registered primary `adidas predator elite fold over tongue fg` verbatim, which is the sharpest form of the problem.
+
+Collision check on the final JP6248 string: no exact match against the other nine Batch 13 meta titles, and no exact match against any `primary_keyword` or `normalized_primary` in the registry. Only relationship remaining is HP9973's `adidas predator elite fg` as a token subset, which is the correct direction since the new string is strictly more specific.
+
+**Also corrected this pass.** IH4707's meta description was rewritten so the pack reads as an explicit qualifier, and HQ2275's meta description restored its closing call to action (155 chars, then 148 in the final form). Primary keywords were NOT changed in any of the three passes; every correction was confined to meta fields.
+
+Root cause of the cap conflict logged as `deliverables/technical-fixes/theme-backlog.md` T-THEME-01: the theme appends a 12-character store suffix to every title tag, which is what forces the 48-character written ceiling.
