@@ -172,7 +172,7 @@ The XLSX form stays the default because the sheet name auto-resolves the entity 
 
 ## 5. What must never happen
 
-1. **A report is not verification.** Read the artifact, not the summary of it.
+1. **A report is not verification.** Read the artifact, not the summary of it. This extends to SELF-measurement: an agent's report about its own output is not evidence, only the deterministic check is, and any figure or pass claim must trace to a check that ran. Three instances of that class (Batch 9, 12 and 14) and the practical rule for ORIN: `context/workforce-conventions.md` 'Codification checklist' item 6.
 2. **A check that did not run is not a pass.** If the gate prints that it skipped something, that is a failure.
 3. **Nothing self-referential counts as a check.** Verifying a brief against its own recorded value proves nothing. Ground truth means a fresh scrape or a live fetch.
 4. **Rules that live outside the repo do not exist.** If SCRIBE cannot read it, SCRIBE will not follow it. Codify at the point of discovery, not at batch close.
