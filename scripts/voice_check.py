@@ -66,6 +66,38 @@ BOOT_NON_SOCCER = re.compile(
     re.IGNORECASE,
 )
 
+# Quoted-proscription exemption (added 2026-08-13). A rule cannot state itself
+# without naming the term it forbids: SEO_BATCH_PROCESS.md section 3 carries the
+# line `- "cleats" or "shoes", never "boots"`, which the boot check flagged, so
+# that canonical file permanently failed its own voice check. A file that always
+# fails trains readers to skip the check on it, and then a real violation is
+# skipped too (same broken-window problem as a gate printing a skip beside a PASS).
+#
+# The exemption is deliberately NARROW: it requires BOTH conditions on the line.
+#   1. the term appears inside quotation marks, and
+#   2. the line carries a negation marker.
+# So `never "boots"` is exempt, while `never wear boots on turf` still FAILS
+# because the term is unquoted, and `he called them "boots"` still FAILS because
+# there is no negation. Adding "never" to PEDAGOGICAL_MARKERS was rejected as too
+# blunt: "never" is common enough in real copy that a bare marker exemption could
+# mask a genuine violation on the same line.
+NEGATION_MARKERS = ("never", "not ", "instead of", "rather than", "avoid")
+QUOTED_BOOT = re.compile(
+    r"[\"“”'‘’]\s*boots?\s*[\"“”'‘’]",
+    re.IGNORECASE,
+)
+
+
+def blank_quoted_proscription(text: str, quoted_pattern: re.Pattern) -> str:
+    """Blank quoted occurrences of a forbidden term on a line that also negates it.
+
+    Returns text unchanged when the line carries no negation marker, so the
+    exemption cannot fire on a line that merely quotes the term.
+    """
+    if not any(marker in text.lower() for marker in NEGATION_MARKERS):
+        return text
+    return quoted_pattern.sub(lambda m: " " * len(m.group(0)), text)
+
 # Internal link format: link suggestions in deliverables and briefings must be full
 # HTTPS URLs on the canonical domain (https://www.prosoccer.com/...). These two
 # patterns catch the two failure modes seen in production: an insecure http://
@@ -302,6 +334,7 @@ def collect_violations(text: str, path: Path | None = None) -> list[str]:
         if any(marker in lowered for marker in PEDAGOGICAL_MARKERS):
             continue
         cleaned = BOOT_NON_SOCCER.sub(lambda m: " " * len(m.group(0)), sline)
+        cleaned = blank_quoted_proscription(cleaned, QUOTED_BOOT)
         if BOOT_PATTERN.search(cleaned):
             boot_hits.append((idx, dline.strip()))
     if boot_hits:

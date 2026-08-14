@@ -167,5 +167,53 @@ class TestLowercaseBodyH2s(unittest.TestCase):
         self.assertEqual(hits, [], "files without the region markers must not match")
 
 
+class QuotedProscriptionExemptionTests(unittest.TestCase):
+    """The quoted-proscription exemption for the UK 'boots' check (added 2026-08-13).
+
+    A rule cannot state itself without naming the term it forbids. The exemption is
+    narrow on purpose: it fires only when the term is QUOTED and the line NEGATES
+    it. Regression fixture is the real line from SEO_BATCH_PROCESS.md section 3,
+    which made that canonical file permanently fail its own voice check.
+    """
+
+    def test_real_canonical_line_is_exempt(self):
+        text = '# Copy rules\n\n- "cleats" or "shoes", never "boots"\n'
+        self.assertEqual(
+            vc.check(text), 0,
+            "the standing copy rule must not flag itself; it has to name the term",
+        )
+
+    def test_unquoted_boots_after_negation_still_fails(self):
+        # Negation alone must NOT exempt: this is real prose using the UK term.
+        text = "# Brief\n\nNever wear boots on turf, they wreck the surface.\n"
+        self.assertEqual(
+            vc.check(text), 1,
+            "an unquoted UK 'boots' must still fail even after a negation word",
+        )
+
+    def test_quoted_boots_without_negation_still_fails(self):
+        # Quoting alone must NOT exempt: no rule is being stated here.
+        text = '# Brief\n\nHe called them "boots" and laced up.\n'
+        self.assertEqual(
+            vc.check(text), 1,
+            "a quoted UK 'boots' with no negation must still fail",
+        )
+
+    def test_exemption_does_not_leak_to_other_terms_on_the_line(self):
+        # Blanking the quoted term must not blank a genuine violation beside it.
+        text = '# Copy rules\n\n- never say "boots"; these boots are for grass\n'
+        self.assertEqual(
+            vc.check(text), 1,
+            "a real violation on the same line must survive the exemption",
+        )
+
+    def test_curly_quotes_are_covered(self):
+        text = "# Copy rules\n\n- “cleats” not “boots”\n"
+        self.assertEqual(
+            vc.check(text), 0,
+            "curly quotes must be treated the same as straight quotes",
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
