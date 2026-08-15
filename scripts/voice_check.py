@@ -179,17 +179,66 @@ def extract_text(path: Path) -> str:
     raise ValueError(f"Unsupported file type: {suffix}. Supported: {sorted(SUPPORTED_EXTS)}")
 
 
-def strip_backticks(text: str) -> str:
+def is_canonical_instruction(path: Path | None) -> bool:
+    """True when the file is an instruction file agents READ AS RULES.
+
+    Worked examples in these files live inside fenced blocks, and a fenced block
+    was invisible to every check here, so the most-copied text in the repo was
+    the least checked text in the repo. That is the mechanism behind all four
+    exemplar-class failures found on 2026-08-14: the 20 Meta Title brand-suffix
+    violations, the capitalized `Adidas` spread, the UK `boot` in the silo files,
+    and the meta description exemplar that turned out to be pre-workforce copy
+    carrying a wrong shipping fact. Examples teach louder than rules
+    (`SEO_BATCH_PROCESS.md` section 5 rule 5), so in these files an example IS an
+    instruction and gets checked like one.
+
+    In scope: context/**, templates/**, .claude/agents/**, and the root canonical
+    process docs.
+
+    NOT in scope: .claude/agents/*/briefings/**. Those are workforce-internal
+    audit trail, not instruction, and run the pragmatic standard documented in
+    `work-log/follow-ups.md` (2026-05-27 entry). Ordinary deliverables are also
+    out of scope: a fenced block there is genuine code, data, or a verbatim
+    quotation of someone else's copy.
+    """
+    if path is None:
+        return False
+    posix = str(path).replace("\\", "/").lower()
+    if "/briefings/" in posix:
+        return False
+    if re.search(r"(^|/)(context|templates)/", posix):
+        return True
+    if re.search(r"(^|/)\.claude/agents/", posix):
+        return True
+    return bool(
+        re.search(r"(^|/)(seo_batch_process|step_2_briefing|claude)\.md$", posix)
+    )
+
+
+def strip_backticks(text: str, keep_fenced: bool = False) -> str:
     """Blank out content inside fenced code blocks (```...```) and inline backticks (`...`).
 
     Voice rules apply to ProSoccer's own prose, not to verbatim quotations of
     competitor copy, code, or terminal output that get cited inside backticks.
     Replacement preserves newlines so line numbers in violation output stay accurate.
+
+    `keep_fenced=True` (canonical instruction files, see `is_canonical_instruction`)
+    leaves FENCED block content in place so worked examples are checked. Inline
+    backticks are still blanked in that mode, deliberately: a rule cannot state
+    itself without naming the thing it forbids, and every such citation in these
+    files is written inline (`| adidas`, `Adidas-only`, `"boots"`). Blanking
+    fenced worked examples was the bug; blanking inline citations is what lets the
+    rules be written at all.
     """
     def blank_keep_newlines(match: re.Match) -> str:
         return "".join("\n" if c == "\n" else " " for c in match.group(0))
 
-    text = re.sub(r"```.*?```", blank_keep_newlines, text, flags=re.DOTALL)
+    if not keep_fenced:
+        text = re.sub(r"```.*?```", blank_keep_newlines, text, flags=re.DOTALL)
+    else:
+        # Blank only the fence delimiter lines (and any language tag), so the
+        # example body is scanned but the ``` markers never match anything.
+        text = re.sub(r"^[ \t]*```[^\n]*$", lambda m: " " * len(m.group(0)), text, flags=re.MULTILINE)
     text = re.sub(r"`[^`\n]*`", blank_keep_newlines, text)
     return text
 
@@ -260,7 +309,8 @@ def collect_violations(text: str, path: Path | None = None) -> list[str]:
     """
     violations: list[str] = []
     display_lines = text.splitlines()
-    scan_lines = strip_backticks(text).splitlines()
+    keep_fenced = is_canonical_instruction(path)
+    scan_lines = strip_backticks(text, keep_fenced=keep_fenced).splitlines()
     link_scope = path is not None and bool(
         re.search(r"deliverables|briefings", str(path), re.IGNORECASE)
     )

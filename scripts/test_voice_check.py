@@ -17,6 +17,7 @@ Covers the four cases from the 2026-06-29 spec:
 import os
 import sys
 import unittest
+from pathlib import Path
 
 _THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 if _THIS_DIR not in sys.path:
@@ -213,6 +214,149 @@ class QuotedProscriptionExemptionTests(unittest.TestCase):
             vc.check(text), 0,
             "curly quotes must be treated the same as straight quotes",
         )
+
+
+class FencedBlocksInCanonicalFilesTests(unittest.TestCase):
+    """Fenced worked examples in instruction files must be CHECKED, not skipped.
+
+    Origin (2026-08-14): `strip_backticks` blanked fenced blocks before every
+    check, so worked examples, the most-copied text in the repo, were invisible.
+    That is the mechanism behind all four exemplar-class failures: the 20 Meta
+    Title brand-suffix violations, the capitalized `Adidas` spread, the UK `boot`
+    in the silo files, and a meta description exemplar that was pre-workforce copy
+    carrying a wrong shipping fact. `work-log/follow-ups.md` 2026-07-31 item.
+
+    The split: fenced content is scanned in canonical INSTRUCTION files, still
+    stripped everywhere else, and inline backticks stay stripped in both so a rule
+    can still name the thing it forbids.
+    """
+
+    FENCED_VIOLATION = (
+        "# Playbook section\n"
+        "\n"
+        "## Worked example\n"
+        "\n"
+        "```\n"
+        "Meta Title\n"
+        "Adidas Tiro 23 Training Pants\n"
+        "```\n"
+    )
+
+    def test_fenced_violation_is_caught_in_context_playbook(self):
+        v = vc.collect_violations(
+            self.FENCED_VIOLATION,
+            Path("context/page-type-playbooks/product-page-playbook.md"),
+        )
+        self.assertTrue(
+            any("Adidas" in line for line in v),
+            "capitalized Adidas inside a fenced worked example must FAIL in a playbook",
+        )
+
+    def test_fenced_violation_is_caught_in_agent_definition(self):
+        v = vc.collect_violations(
+            self.FENCED_VIOLATION, Path(".claude/agents/on-page-seo/agent.md")
+        )
+        self.assertTrue(any("Adidas" in line for line in v))
+
+    def test_fenced_violation_is_caught_in_root_process_doc(self):
+        v = vc.collect_violations(self.FENCED_VIOLATION, Path("SEO_BATCH_PROCESS.md"))
+        self.assertTrue(any("Adidas" in line for line in v))
+
+    def test_fenced_violation_still_skipped_in_ordinary_deliverable(self):
+        v = vc.collect_violations(
+            self.FENCED_VIOLATION,
+            Path("deliverables/page-optimizations/2026-08-14_x/SKU_brief.md"),
+        )
+        self.assertEqual(
+            v, [], "a fenced block in a deliverable is code or a quotation, not an exemplar"
+        )
+
+    def test_fenced_violation_still_skipped_in_agent_briefings(self):
+        v = vc.collect_violations(
+            self.FENCED_VIOLATION,
+            Path(".claude/agents/on-page-seo/briefings/2026-05-29_adidas-soccer-cleats.md"),
+        )
+        self.assertEqual(
+            v, [], "briefings are workforce-internal audit trail, not instruction"
+        )
+
+    def test_fenced_violation_skipped_when_no_path_given(self):
+        self.assertEqual(vc.collect_violations(self.FENCED_VIOLATION), [])
+
+    def test_inline_backticks_still_stripped_in_canonical_files(self):
+        """A rule must be able to name what it forbids."""
+        text = (
+            "Never end a Meta Title with a manufacturer brand such as `| adidas`.\n"
+            "Taxonomy compounds like `non-Adidas` stay as written.\n"
+            'The footwear term rule reads: `- "cleats" or "shoes", never "boots"`.\n'
+        )
+        self.assertEqual(
+            vc.collect_violations(text, Path("context/workforce-conventions.md")),
+            [],
+            "inline citations must stay exempt or the rules cannot be stated",
+        )
+
+    def test_em_dash_inside_fenced_example_is_caught(self):
+        text = "## Worked example\n\n```\nShort Description\nThe cleat \u2014 built for speed.\n```\n"
+        v = vc.collect_violations(text, Path("context/page-type-playbooks/collection-page-playbook.md"))
+        self.assertTrue(any("EM-DASH" in line for line in v))
+
+    def test_uk_boot_inside_fenced_example_is_caught(self):
+        text = "## Worked example\n\n```\nDescription\nThe fastest boot Nike has ever built.\n```\n"
+        v = vc.collect_violations(text, Path("context/silo-positioning/furon.md"))
+        self.assertTrue(any("boot" in line.lower() for line in v))
+
+    def test_clean_fenced_example_still_passes(self):
+        text = (
+            "## Worked example\n\n```\nMeta Title\nadidas Copa Pure IV Elite FG Soccer Cleats\n"
+            "\nMeta Description\nThe adidas Copa Pure IV Elite turns a clean first touch into your edge.\n```\n"
+        )
+        self.assertEqual(
+            vc.collect_violations(text, Path("context/page-type-playbooks/product-page-playbook.md")),
+            [],
+        )
+
+    def test_pedagogical_marker_still_exempts_inside_a_fence(self):
+        text = "## Worked example\n\n```\nINCORRECT: Adidas Tiro 23 Training Pants\n```\n"
+        self.assertEqual(
+            vc.collect_violations(text, Path("context/page-type-playbooks/product-page-playbook.md")),
+            [],
+            "anti-pattern demonstrations must stay exempt inside fences too",
+        )
+
+    def test_fence_delimiters_do_not_shift_line_numbers(self):
+        text = "line one\n\n```\nAdidas here on line four\n```\n"
+        v = vc.collect_violations(text, Path("context/x.md"))
+        self.assertTrue(any("line 4:" in line for line in v), v)
+
+
+class CanonicalInstructionClassificationTests(unittest.TestCase):
+    def test_in_scope_paths(self):
+        for p in (
+            "context/03-brand-voice.md",
+            "context/page-type-playbooks/homepage-playbook.md",
+            "templates/per-sku-input-template.md",
+            ".claude/agents/master-strategist/agent.md",
+            "SEO_BATCH_PROCESS.md",
+            "STEP_2_BRIEFING.md",
+            "CLAUDE.md",
+            r"C:\Dev-Projects\marketing\prosoccer-seo\context\workforce-conventions.md",
+        ):
+            self.assertTrue(vc.is_canonical_instruction(Path(p)), p)
+
+    def test_out_of_scope_paths(self):
+        for p in (
+            "deliverables/page-optimizations/2026-08-14_x/SKU_brief.md",
+            "deliverables/tracking/sitemap-state.md",
+            ".claude/agents/on-page-seo/briefings/2026-05-29_adidas-soccer-cleats.md",
+            "work-log/follow-ups.md",
+            "strategy/sprint-backlog.md",
+            "README.md",
+        ):
+            self.assertFalse(vc.is_canonical_instruction(Path(p)), p)
+
+    def test_none_path_is_out_of_scope(self):
+        self.assertFalse(vc.is_canonical_instruction(None))
 
 
 if __name__ == "__main__":

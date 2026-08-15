@@ -81,9 +81,17 @@ Runs in Cursor against `C:\Dev-Projects\marketing\prosoccer-seo`.
 | 12 | Import to Shopify | Mike |
 | 13 | Spot-check live PDPs | Mike |
 | 14 | **Append the batch primaries to `products-master.csv`** | ORIN |
-| 15 | Close the SEO work log entry, flip to Verified | Step 2 |
+| 15 | Close the SEO work log entry, flip to Verified. **Report the confirmed-live handle list back; ORIN flips `status` to `shipped` for those rows only** | Step 2 → ORIN |
 
 **Steps 3 and 14 are the pair that keeps the registry honest.** Step 3 is worthless if step 14 stops happening. If a batch ships without being appended, the next batch's check goes blind.
+
+**Step 15 is what keeps the registry TRUTHFUL (added 2026-08-14).** Appending a row (step 14) records that a page was briefed. It does not record that the page is live. Those are different facts and the registry had been conflating them.
+
+- **`status` = `shipped` only after Mike confirms the Shopify import landed.** Never at brief close, never at commit, never because the export matched. Until confirmation the row stays `pending`.
+- Step 2 reports the handle list that actually imported, plus any failures or skips. ORIN flips exactly those rows. A handle not reported stays `pending`.
+- The safe direction is deliberate: a live row wrongly left `pending` costs one re-check; a never-imported row wrongly marked `shipped` hides finished work indefinitely.
+
+Origin: a live audit of all 151 registry rows on 2026-08-14 found **16 statuses wrong in both directions**. Ten `pending` rows were live (the whole Batch 10 set). Six `shipped` rows had never been imported: the three Mexico 2026 Stadium jerseys, the Predator Accuracy Crazyrush page, HP9971 and IH1779-900. Two of those six were about to be touched by a correction batch that assumed their copy was live. The audit is the expensive way to find this; this step is the cheap way to prevent it.
 
 **The gate (step 5).** `scripts/batch_gate.py` runs 10 mechanical checks over the session folder, including `check_section_presence` (added 2026-07-31): every required PDP section must be present with content, and the Description body must carry at least one internal link, an unconditional hard fail. Exit 0 only when nothing fires. The gate replaces the human per-brief review for mechanical defect classes; the escalate-on-exception batch mode (CLAUDE.md 'Approval mode') is safe only because it runs.
 

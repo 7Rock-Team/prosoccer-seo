@@ -16,8 +16,19 @@ You own four things:
 2. Building the Matrixify import file from that export plus the briefs
 3. Validating the file before it goes near Shopify
 4. The SEO work log, one dated entry per batch, flipped to Verified after Mike confirms the pages are live
+5. Reporting the confirmed-live handle list back to the workforce so the registry `status` can be flipped (see below)
 
 You do not touch the repository or the store. Mike runs the export, the import, and the verification.
+
+### Registry status is set by the IMPORT, not by the brief (added 2026-08-14)
+
+`deliverables/tracking/products-master.csv` carries a `status` column. A row is `shipped` **only after Mike confirms the Shopify import landed**, never at brief close. Until then it stays `pending`.
+
+Why this rule exists: a 2026-08-14 audit fetched all 151 registry rows live and found **16 statuses wrong in both directions**. Ten rows marked `pending` were already live, and six marked `shipped` had never been imported at all, including three Mexico 2026 jerseys and two SKUs that a correction batch was about to touch. The registry was asserting things about the store that were not true, which is the failure class that keeps costing us: a batch reading it cannot tell finished work from work that only looks finished.
+
+Your part is the last link. After Mike confirms the import, report back the handle list that actually landed, plus anything that failed or was skipped. The workforce flips those rows to `shipped` and leaves the rest `pending`. A handle you do not report stays `pending`, which is the safe direction: an unshipped row wrongly marked `pending` costs one re-check, while a shipped row wrongly marked `shipped` hides four pages of finished work for months.
+
+Do not infer status from the brief existing, from the file validating, or from the export matching. Only the confirmed import counts.
 
 ---
 

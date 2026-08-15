@@ -102,10 +102,10 @@ A 2026-07-31 audit of 109 shipped briefs found a manufacturer-brand pipe suffix 
 - **A pipe to a PACK or PRODUCT-LINE descriptor is allowed.** `| Breakout`, `| Road to Glory`, `| Shadow Pack` are campaign or colorway names, not manufacturer brands. The test is brand versus campaign: a brand name after the final pipe is forbidden; a pack, colorway, or product-line descriptor is fine.
 - **Brand at the FRONT is correct and encouraged.** Lead with the brand (`adidas Copa Pure IV League Jr`, `New Balance Furon Elite 2E Wide FG Cleats`); do not trail it after a pipe.
 
-Compliant Meta Title exemplars (both under 48, brand-front, no brand suffix):
+Compliant Meta Title exemplars (both under 48, brand-front, no brand suffix). **Provenance verified 2026-08-14: both are SCRIBE-authored, gate-passed, and confirmed live on the store.**
 
-- Cleat: `adidas Copa Pure IV Elite FG Soccer Cleats` (42)
-- Jersey: `Manchester United Home Jersey 2026-27` (37)
+- Cleat: `adidas Copa Pure IV Elite FG Soccer Cleats` (42). Source: KI0586 brief (`2026-06-30_session-01`), live-verified 2026-08-14.
+- Jersey: `Manchester United Home Jersey 2026-27` (37). Source: KA6871 brief (`2026-07-13_session-01`), live-verified 2026-08-14.
 
 **Meta Description**
 
@@ -113,10 +113,17 @@ Compliant Meta Title exemplars (both under 48, brand-front, no brand suffix):
 - **Full sentences. Never the "Product Name: fragment" colon opener.** Forbidden: a capitalized product name or short benefit phrase, then a colon, then a fragment, for example `The New Balance Furon Elite: a 176 g speed cleat in a true 2E wide fit.` Write it as a sentence: `The New Balance Furon Elite is a 176 g speed cleat in a true 2E wide fit.`
 - **Structure: what the product is, then the key benefit, then a light call to action.** The CTA is product-anchored, never store-anchored (see the SEO Meta Description section below for the CTA rule and examples).
 
-Compliant Meta Description exemplars:
+Compliant Meta Description exemplars. **Both replaced 2026-08-14 after a provenance audit; see the warning below.**
 
-- Cleat: `The Nike Phantom 6 High Elite FG is the precision cleat for players who pick the corner. Gripknit touch, locked-in ankle. Lace up for the season.` (145)
-- Jersey: `The adidas 2026-27 Manchester United home jersey in striped red, with the woven club crest and CLIMACOOL fabric. Pull on the red and back the Devils.` (149)
+- Cleat: `The Nike Phantom 6 High Elite AG wraps your ankle and matches the artificial-grass plate to the surface you live on. Lock in, plant, and commit every cut.` (154). Source: IQ1869-900 brief (`2026-06-08_session-01`), SCRIBE-authored, live-verified 2026-08-14.
+- Jersey: `The Croatia women's home jersey for 2026, the red-and-white checkerboard in a tailored women's cut. Nike Stadium replica, Dri-FIT. Back the Kockasti.` (149). Source: J000691-CRFT brief (`2026-06-17_session-01`), SCRIBE-authored, live-verified 2026-08-14. Also models the non-adidas federation-language rule: Nike holds no FIFA licence, so the copy uses cycle language only.
+
+**Why these two were replaced (provenance failure, fourth instance of the exemplar class).** The previous pair were not authored copy.
+
+1. The old cleat exemplar (`The Nike Phantom 6 High Elite FG is the precision cleat for players who pick the corner...`) was **pre-workforce copy lifted off a live page.** Both Phantom 6 High Elite briefs record that exact string as the page's EXISTING meta description, and the AG brief says outright that the live page "currently carries" it. A 2026-08-14 live audit then confirmed IH1779-900 was never implemented at all, so the string came from a page the workforce never optimized. Every SCRIBE reading this section has been calibrating against copy we did not write.
+2. The old jersey exemplar (`...woven club crest and CLIMACOOL fabric. Pull on the red and back the Devils.`) appears **in no brief anywhere in the repo.** It was written straight into the playbook, never produced by SCRIBE and never gate-passed. It also spelled `CLIMACOOL` in all caps, which violates the brand-technology title-case rule added 2026-08-13, so the exemplar taught a rule violation that a later rule in the same repo forbids.
+
+Neither failure was a compliance failure. Both strings satisfied the 48-char, no-brand-suffix, 120-to-160 and no-colon-opener rules. They failed on PROVENANCE, which nothing was checking. See `context/workforce-conventions.md` 'Codification checklist' item 7.
 
 ### Meta title precedence when the 48-character cap binds (added 2026-08-13, Mike's decision)
 
@@ -981,153 +988,150 @@ Required if relevant:
 - `What size should I order if I'm between sizes?` (apparel and footwear)
 - `Is this kit authentic Adidas, or a replica?` (high-counterfeit categories)
 
-## Worked example 1: Premium kit jersey
+## Worked examples: read the provenance line first
 
-URL: `/products/mexico-2026-home-authentic-jersey-adidas`
-Primary avatar: Carlos
-Secondary avatar: Tyler (performance buyer who wants the player cut for training-and-wear)
-Topic-research outputs: adidas El Tri kit supplier since 1999; Heat.RDY weave on the player edition; player-edition tighter cut and heat-bonded badges; fan-edition softer fabric and standard fit; price gap typically $30 to $50; the 2026 home kit features a verde primary with Aztec patterning and FMF crest.
+Both worked examples below are **verbatim customer-facing copy from a shipped brief that passed the gate and is confirmed live on the store.** Each carries a provenance line naming its SKU, its brief path, and the date the live page was verified, per `context/workforce-conventions.md` 'Codification checklist' item 7.
+
+That line is not decoration. On 2026-08-14 a provenance audit of this file found that the three worked examples it used to carry were all invented for the playbook, that one of them named a product the store does not sell (a Mercurial Superfly 9; the live catalogue is Superfly 11), and that one stated a customer-facing shipping fact that was simply wrong. Examples teach louder than rules (`SEO_BATCH_PROCESS.md` section 5 rule 5), so an unsourced example is a liability, not a helper. If you cannot name the source, do not add the example.
+
+## Worked example 1: Club jersey
+
+**Provenance.** SKU II1872-683, Nike 2026-27 Barcelona Men's Stadium Home. Brief: `deliverables/page-optimizations/2026-08-03_session-01/II1872-683_barcelona-mens-stadium-home.md` (Batch 11, gate-green). Live-verified 2026-08-14: the live page carries this exact copy. Primary avatar Carlos; secondary Tyler.
 
 ```
-Title (Product Title)
-Mexico 2026 Home Authentic Jersey by adidas
+Title (Shopify "Title" field)
+Nike 2026-27 Barcelona Men's Stadium Home Soccer Jersey
 
-SEO Meta Title
-adidas Mexico 2026 Home Authentic Jersey
-[40 chars, under the 48 written ceiling; brand front, no brand pipe suffix]
+Meta Title
+Nike Barcelona Home Jersey 2026-27 Stadium
+[41 chars, under the 48 written ceiling; brand front, no manufacturer-brand pipe suffix]
 
-SEO Meta Description
-The 2026 El Tri home kit, player edition. Adidas Heat.RDY weave, the close cut the squad wears, the official FMF crest and federation tags. Lock it in.
-[152 chars]
+Meta Description
+Barcelona's 2026-27 home jersey in garnet and blue by Nike, with sweat-wicking Dri-FIT and a comfortable Stadium fit. Add your name and number, sizes S-3XL.
+[154 chars, inside 120 to 160; full sentences, no colon-fragment opener]
 
 Short Description
-The kit El Tri walks out in at Estadio Azteca on June 11, 2026. Player edition Heat.RDY weave, the close cut the squad wears, the FMF crest heat-bonded the way Adidas does it for the federation. Wear what they wear.
+The garnet and blue, Barcelona's 2026-27 home shirt. The one you pull on for the early kickoff and keep on long after the final whistle.
 
-Long Description:
+Description (body_html)
 
-## Adidas and El Tri
+Barcelona's home shirt has looked like one thing for as long as most fans remember: deep garnet down one side, blue void down the other, the colors that mean this club and no other. For 2026-27 Nike keeps that identity and adds a flash of Mineral Yellow. This is the Stadium version, the replica the crowd wears, cut with a little more room than the on-pitch shirt.
 
-Adidas has supplied the Mexico kit since 1999. The 2026 home keeps verde as the primary, with an Aztec-coded pattern across the chest panel and a darker green shoulder shading. The crest sits centered in the traditional FMF placement.
+## Garnet and blue, worn like it's yours
 
-## Player Edition vs Fan Edition
+You don't pull this one on for 90 minutes and fold it away. It's the shirt for the early kickoff you watch with coffee, the one you're still wearing when the group chat won't quit. Barcelona is one of world football's most storied clubs, and the garnet and blue carry all of that without a word. Grew up on this team or found them later, the home shirt is how you say it out loud.
 
-The player edition uses Adidas Heat.RDY weave, which moves more sweat than standard polyester. The cut runs closer to the body the way pro players prefer, and the badges are heat-bonded rather than stitched. This is the kit the squad wears on the pitch.
+## Where this shirt actually goes
 
-The fan edition (sold separately) uses softer climalite fabric and a regular fit, with stitched badges. Same look from across the room. Different feel up close, and a different price by $30 to $50. Pick the player edition if you want what they wear; pick the fan edition if you want the silhouette without the pro-tier fabric.
+Most of a supporter's football happens off the pitch, and the Stadium cut is built for it. The regular fit sits easy over a long day, and the Nike Dri-FIT fabric pulls sweat off your skin at five-a-side or in the stands. Building out the full setup? The [Barcelona collection](https://www.prosoccer.com/collections/barcelona) has training tops, shorts, and the rest of the kit, and if you're settling on a name for the back, the [Lamine Yamal](https://www.prosoccer.com/collections/lamine-yamal) shirts are a click away.
 
-## Fit and Sizing
+## Product Details
 
-Player edition runs slim. If you wear an athletic-cut shirt or a fitted tee at the chest you measure today, that's your size. If you wear a relaxed-fit tee, size up one. The fabric stretches at the chest and shoulder; it doesn't stretch at the waist hem.
+- Nike 2026-27 Barcelona Stadium home jersey, men's
+- Colorway: Deep Garnet / Blue Void / Mineral Yellow
+- Nike Dri-FIT sweat-wicking fabric
+- Stadium (replica) tier, pairing replica design details with sweat-wicking technology
+- Regular fit, sizes S to 3XL
+- Nike is Barcelona's current kit supplier
 
-Adidas youth sizes run a size smaller than US-standard youth (Adidas YL is closer to a US small). For kids between sizes, size up; the kit has more shrink in the wash than stretch on the body.
+## Fit Notes
 
-## What's Included
+The Stadium jersey runs to a regular fit, not the skin-tight on-pitch shape. Take your normal shirt size for a relaxed match-day drape, or size down if you want it closer to the body. True to size for most supporters, S through 3XL.
 
-The jersey itself. Federation tags inside the collar with the holographic. The Adidas care card. Customization (player name and number) is a separate option through the storefront and adds five to seven business days to ship.
+## Care and Maintenance
+
+- Machine wash cold, 86 F (30 C) or below, inside out
+- Wash with similar colors to protect the deep garnet
+- Tumble dry low or hang dry
+- Skip fabric softener; it coats the Dri-FIT and dulls the sweat-wicking
+
+Add your name and number right on this page. Name and number orders ship in about 2 to 3 business days.
+
+## FAQs about the Barcelona home jersey
+
+### Is this the authentic jersey or a replica?
+
+It's the Stadium version, Barcelona's replica tier: the real home design details in a regular, comfortable fit with Nike Dri-FIT fabric. The authentic match jersey is a separate, tighter cut.
+
+### Can I add a name and number?
+
+Yes. Pick your name and number right on this product page. Customized orders ship in about 2 to 3 business days, roughly one extra day over a standard order.
 ```
 
-Annotation:
+**What to notice.**
 
-- Body copy is about the product and adidas's design choices, not about the store.
-- Topic-research outputs are visible: kit-supplier history, Heat.RDY context, player-vs-fan distinction, the verde-primary detail, the youth-sizing fact.
-- Carlos primary anchors the emotional context (Estadio Azteca, "wear what they wear"). Tyler shows up implicitly in the player-edition framing for performance-minded buyers.
-- The store doesn't appear inside the body copy. Returns, shipping, and retail are not mentioned. Those live in the cart and checkout flow.
-- Voice rules: contractions used, varied sentence rhythm, specifics throughout, no forbidden words, no em-dashes.
+- The heritage claim is QUALITATIVE ("one of world football's most storied clubs"), not a trophy count. Counts age and get contested; see 'Claims verification' in the conventions file.
+- The customization sentences state the two facts exactly right: selected ON THIS PAGE, and 2 to 3 BUSINESS DAYS. Copy this phrasing. It is the shape `batch_gate.check_customization_claims` is built around.
+- Nike is named as kit supplier with no FIFA or World Cup language anywhere, because Nike holds no FIFA licence.
+- Editorial body H2s are sentence case; the structural H2s (Product Details, Fit Notes, Care and Maintenance, FAQs about ...) are Title Case. That split is the rule.
+- Care temperatures carry US-first dual notation.
+- Two internal links, both to collections, woven into a sentence rather than dropped in a list.
 
 ## Worked example 2: Performance cleat
 
-URL: `/products/nike-mercurial-superfly-9-elite-fg`
-Primary avatar: Tyler
-Secondary avatar: Carlos (collector buying because Mbappé wears them)
-Topic-research outputs: Mercurial line launched 1998 with Ronaldo R9; Nike's speed-cleat franchise; Vapor (lighter, less collar) and Superfly (knit collar); Elite tier uses Flyknit and Air Zoom plate; signature pros include Mbappé, Vinicius Junior, Cristiano Ronaldo historically; Superfly 9 generation released for European season; firm-ground plate for natural grass.
+**Provenance.** SKU KI0586, adidas Copa Pure IV Elite Firm Ground, Road to Glory Pack (SP26). Brief: `deliverables/page-optimizations/2026-06-30_session-01/KI0586_adidas-copa-pure-iv-elite-firm-ground-soccer-cleats-road-to-glory-pack-sp26_brief.md`. Live-verified 2026-08-14. Primary avatar Tyler; secondary the adult self-funded craft purchaser.
 
 ```
-Title (Product Title)
-Nike Mercurial Superfly 9 Elite FG Soccer Cleats
+Title (Shopify "Title" field)
+adidas Copa Pure IV Elite Firm Ground Soccer Cleats (Road to Glory Pack)
 
-SEO Meta Title
-Nike Mercurial Superfly 9 Elite FG Cleats
-[41 chars, under the 48 written ceiling; brand front, no brand pipe suffix]
-
-SEO Meta Description
-The cleat Mbappé and Vinicius wear. Nike Mercurial Superfly 9 Elite, Flyknit upper, Air Zoom plate, the speed cleat for the player who wants to break the line.
-[157 chars]
+Meta Title
+adidas Copa Pure IV Elite FG Soccer Cleats
+[42 chars, under the 48 written ceiling; brand front, lowercase adidas, no brand pipe suffix]
 
 Short Description
-You're not asking how fast they are. You're asking how fast they make you. Mbappé chose them, Vinicius chose them, the Mercurial is the cleat for the player whose first move is the run.
+The ball arrives, and before the defender can set, it's already dead under your foot and you're gone. That's what the adidas Copa Pure IV Elite is for. The soft calfskin touch up front means the ball does what you tell it on the first contact, every time. If you're the player who reads the game a beat early and wants a cleat that keeps up with your feet, this is the one you lace up.
 
-Long Description:
+Description (body_html)
 
-## The Mercurial Line, Then and Now
+## The first touch that buys you a half-second
 
-Nike launched the Mercurial in 1998 for Ronaldo R9 at the World Cup in France. Twenty-six years and a dozen generations later, the line still belongs to the fastest player on the pitch. Mbappé wears them at PSG and the next club after. Vinicius Junior wears them for Real and Brazil. Cristiano Ronaldo built half his career in them.
+Some players win games with pace. You win them in the half-second after the ball arrives, before the defender reads where it's going. The adidas Copa Pure IV Elite is built for that touch. The Fusionskin upper puts soft calfskin leather across the forefoot, blended into a lighter synthetic mesh midfoot, so the ball settles under your foot like it was waiting for you. This is the senior, top-tier model in the line.
 
-## What's New in the Superfly 9 Elite
+## adidas went back to the classic look
 
-Flyknit upper, lighter than the previous generation by about ten grams per cleat. Air Zoom plate underneath for the energy return on the toe-off. Knit collar for ankle lock-in (the Superfly cut, vs the Vapor's lower collar). Heat-mapped traction stud pattern for cuts and turns.
+The fourth-generation Copa Pure drops the knit collar and returns to the look that made the line: a low floating tongue, a classic lace closure, and the adiPure pinline running heel to toe. It reads clean, almost old-school. To see where it sits in the rest of the touch line, browse [the full Copa lineup](https://www.prosoccer.com/collections/adidas-copa).
 
-## Superfly vs Vapor
+## Built for the player who runs the tempo
 
-Same upper, same plate, different collar. The Superfly's knit collar adds ankle support and locks the foot at the heel. The Vapor (sold separately) skips the collar for a couple of grams of weight savings and a lower-cut feel. Superfly for the player who wants the lock; Vapor for the player who wants the cleat to feel barely there.
+This is a number 8 or a number 10's cleat, for the playmaker who wants the ball to die under their foot and pop back up exactly where they meant it. The Comfort Frame outsole lets you plant, turn, and spin out of pressure without the plate fighting you. It's at its best on natural grass and well-kept pitches. Lace up the Solar Turbo colorway from the adidas Copa Pure Road to Glory pack and you look the part before you've touched the ball. If you're weighing surfaces, compare it against our [firm-ground cleats](https://www.prosoccer.com/collections/firm-ground-cleats).
 
-## Surface and Fit
+## Product Details: Copa Pure IV Elite
 
-Firm-ground plate. Natural grass and most well-maintained turf. For artificial grass, see the Superfly 9 Elite AG (sold separately); for older astroturf, the Superfly 9 Pro TF. The Elite tier runs narrow at the forefoot. Wide-foot players usually find the Tiempo or the Predator a better fit.
+- Fusionskin upper: soft calfskin forefoot stitched to a synthetic mesh midfoot
+- adiPure pinline heel to toe for the classic Copa finish
+- Lace closure with a low floating tongue (gen IV return to the U-throat)
+- OrthoLite sockliner for step-in comfort
+- Comfort Frame outsole with a soft Pebax frame and conical studs
+- Colorway: Solar Turbo / Ivory / Core Black (Road to Glory pack)
 
-Sizes run true. Order your standard US cleat size if you've worn Mercurials before; if you're crossing over from a wider cleat, consider half a size up.
+## Fit Notes
+
+The Copa Pure IV Elite runs true to size. The calfskin softens and molds over the first few sessions, so a snug fit out of the box is normal. Got a wider forefoot? Calfskin gives more than synthetic, so stick with your normal size.
+
+## Care and Maintenance
+
+- Air-dry after every match and stuff them with paper to hold their shape
+- Keep them away from direct heat and sunlight; dryers warp the Comfort Frame and dry out the calfskin
+- Brush off grass and dirt before storing, and work a little leather conditioner into the calfskin forefoot every few weeks in season
 ```
 
-Annotation:
+**What to notice.**
 
-- Body is about the Mercurial line and this specific generation, not about the store.
-- Topic-research outputs visible: launch year, current pros, Flyknit and Air Zoom detail, Superfly-vs-Vapor distinction, narrow-fit fact.
-- Tyler primary throughout: performance specifics, plate and surface guidance, fit comparison to other lines.
-- Carlos secondary surfaces in the pro-roster opening (collectors care which pros wear them).
-- The wide-foot guidance addresses Jennifer's pain frame even though Jennifer isn't a primary avatar for an Elite-tier $300+ cleat. That's a cross-avatar landing scenario captured cleanly.
+- `adidas` is lowercase everywhere, including at the start of the H2 "adidas went back to the classic look". That H2 is also the sentence-case rule working: only the first word and proper nouns are capitalized, and the brand stays lowercase even in first position.
+- Brand technology names are title case: Fusionskin, adiPure, OrthoLite, Comfort Frame. Never all caps.
+- The Product Details H2 uses the `Product Details: [short product name]` format.
+- The opening H2 sells the OUTCOME (the half-second after the ball arrives), not the feature. Features arrive in supporting sentences and in the bullets.
+- Two internal links, one to the model silo and one to the surface collection, both inside a sentence.
+- No price anywhere in the body, no stock state, no store CTA.
 
-## Worked example 3: Training apparel
+## Worked example 3: removed 2026-08-14, deliberately not replaced
 
-URL: `/products/adidas-tiro-23-training-pants`
-Primary avatar: Tyler (training fit)
-Secondary avatar: Mike the Coach (team kit and travel)
-Topic-research outputs: Tiro line launched in the 2000s as adidas's training-pant franchise; signature three-stripe down the side; tapered slim-fit cut; AEROREADY moisture management; ankle zip; popular as both a training pant and a casual wear item; Tiro 23 is the current generation as of 2026.
+There used to be a training-apparel worked example built around an adidas Tiro 23 training pant. It was invented for this file, it spelled the brand capitalized throughout, and its meta title ran 57 characters against a 48-character cap.
 
-```
-Title (Product Title)
-Adidas Tiro 23 Training Pants
+It was **deleted rather than rewritten, because there is nothing to rewrite it from.** All 148 rows in `deliverables/tracking/products-master.csv` are cleats, jerseys, turf shoes or indoor shoes. The workforce has never produced a training-apparel brief, so no shipped, gate-passed, live-verified apparel copy exists to draw on.
 
-SEO Meta Title
-Adidas Tiro 23 Training Pants | Slim-Fit Soccer Track Pant
-[57 chars]
-
-Short Description
-The pant every player owns four pairs of. Tiro is what you train in, travel in, warm up in, and what you put on after the match because they're the most comfortable pants you own.
-
-Long Description:
-
-## The Tiro Line
-
-Adidas launched the Tiro as a training pant in the early 2000s. It's evolved every couple of years; the current Tiro 23 is the seventh major generation. The three stripes down the side, the tapered slim cut, and the ankle zip have stayed constant. The fabric, the AEROREADY tech, and the cuts get refined each round.
-
-## What the Tiro 23 Adds
-
-AEROREADY moisture management for warm-weather training. A slimmer leg through the knee than the Tiro 21. Ankle zips that open wider for cleats. A redesigned waistband with a flat-front draw cord that doesn't bunch under a jersey.
-
-## Fit and Sizing
-
-Slim through the leg, tapered at the ankle. If you wear a slim-fit pant in jeans, this is your size. If you wear a relaxed cut, size up one. The waistband sits at the natural waist; the inseam runs about 31 inches on a medium.
-
-## Where Players Wear Them
-
-Training. Pre-match warmups. Travel days. Casual wear. Mike the Coach orders them for team-issue because they hold up to repeated wash cycles and they look the same in year three as in year one. Tyler wears them under a jersey when the morning's cold and over the kit on the bus to the away match.
-```
-
-Annotation:
-
-- Body about the Tiro line and this generation, not about the store.
-- Topic-research outputs: launch era, generation count, AEROREADY detail, fit specifics.
-- Tyler primary in the fit guidance and the use-case detail. Mike the Coach surfaces in the durability and team-issue framing.
-- The store doesn't appear in the body. Bulk-order and team-issue routing for Mike the Coach happens via the team-orders page, not via the product-page description.
+Writing a fresh example to fill the gap is exactly the failure this section now warns about. When the first training-apparel PDP ships and is verified live, add worked example 3 back using that brief, with its provenance line.
 
 ## Category-specific H2 templates (DRAFT v1, to be validated through real PDP optimization work)
 
