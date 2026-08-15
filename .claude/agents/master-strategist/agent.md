@@ -883,16 +883,20 @@ Field rules:
 ### Master CSV row format: products-master.csv
 
 ```
-url,product_id,product_type,brand,target_keywords,brief_date,brief_file_path,implementer,implementation_date,crawl_verified_date,baseline_impressions,baseline_clicks,baseline_position,baseline_ctr,merchant_listing_status,product_schema_status,review_schema_status,day_30_impressions,day_30_clicks,day_30_position,day_30_ctr,day_60_impressions,day_60_clicks,day_60_position,day_60_ctr,status,notes
+url,product_id,product_type,brand,target_keywords,brief_date,brief_file_path,implementer,batch,implementation_date,crawl_verified_date,baseline_impressions,baseline_clicks,baseline_position,baseline_ctr,merchant_listing_status,product_schema_status,review_schema_status,day_30_impressions,day_30_clicks,day_30_position,day_30_ctr,day_60_impressions,day_60_clicks,day_60_position,day_60_ctr,status,notes,primary_keyword,normalized_primary,normalized_target_keywords,primary_volume,ceded_from,kw_source,kw_recorded_date
 ```
 
 Field rules: same baseline as collections-master, plus:
-- `product_id`: Shopify product ID (numeric)
+- `product_id`: currently holds the SKU, not the Shopify numeric ID (known defect, see `SEO_BATCH_PROCESS.md` §6)
 - `product_type`: Shopify product type field value (e.g., "Soccer Cleats", "Jerseys")
 - `brand`: adidas / Nike / Puma / Joma / etc.
 - `merchant_listing_status`: [eligible / ineligible / disapproved / not yet evaluated]
 - `product_schema_status`: [present complete / present incomplete / absent]
 - `review_schema_status`: [present / absent / not applicable]
+- `batch`: the batch label the page shipped in, `B5` through `B14` and forward. Blank for the 47 pre-B5 rows, which were manual work with no Matrixify record. Never invent one.
+- `implementation_date`: the date the Shopify import actually landed, written at step 15 alongside the `status` flip, from the same confirmation. **Never infer it from `brief_date`**: Batch 9's gap between brief and import is ten days, and batches 1 to 4 have no import record at all. A row with no confirmed import date stays blank, not guessed.
+
+`batch` and `implementation_date` are what make cohort performance analysis possible at all. Both were added on 2026-08-14 by backfill from a verified Matrixify-session mapping, after a GSC analysis found `implementation_date` populated on 0 of 142 rows and had to reconstruct the cohorts from scratch to run.
 
 ### Technical SEO log entry format
 

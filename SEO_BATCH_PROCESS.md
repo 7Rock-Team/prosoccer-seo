@@ -81,7 +81,7 @@ Runs in Cursor against `C:\Dev-Projects\marketing\prosoccer-seo`.
 | 12 | Import to Shopify | Mike |
 | 13 | Spot-check live PDPs | Mike |
 | 14 | **Append the batch primaries to `products-master.csv`** | ORIN |
-| 15 | Close the SEO work log entry, flip to Verified. **Report the confirmed-live handle list back; ORIN flips `status` to `shipped` for those rows only** | Step 2 → ORIN |
+| 15 | Close the SEO work log entry, flip to Verified. **Report the confirmed-live handle list back; ORIN flips `status` to `shipped` and writes `batch` + `implementation_date` for those rows only** | Step 2 → ORIN |
 
 **Steps 3 and 14 are the pair that keeps the registry honest.** Step 3 is worthless if step 14 stops happening. If a batch ships without being appended, the next batch's check goes blind.
 
@@ -90,6 +90,8 @@ Runs in Cursor against `C:\Dev-Projects\marketing\prosoccer-seo`.
 - **`status` = `shipped` only after Mike confirms the Shopify import landed.** Never at brief close, never at commit, never because the export matched. Until confirmation the row stays `pending`.
 - Step 2 reports the handle list that actually imported, plus any failures or skips. ORIN flips exactly those rows. A handle not reported stays `pending`.
 - The safe direction is deliberate: a live row wrongly left `pending` costs one re-check; a never-imported row wrongly marked `shipped` hides finished work indefinitely.
+- **The same flip writes `batch` and `implementation_date` (added 2026-08-14).** They come from the one confirmation event, so they are recorded in the one step. `implementation_date` is the import date Mike confirms, not the brief date and not the commit date. **Never infer it from `brief_date`:** Batch 9's brief-to-import gap is ten days. A row without a confirmed import leaves both fields blank rather than carrying a guess.
+- Why this was added: the 2026-08-14 GSC cohort analysis found `implementation_date` populated on **0 of 142 rows** and `batch` absent entirely, so every before/after comparison had to reconstruct the cohorts from Matrixify session folders before it could run at all. The 101 shipped rows were backfilled that day from that verified mapping; the 47 pre-B5 rows stay blank permanently. Recording it at step 15 is what stops the next analysis paying that cost again.
 
 Origin: a live audit of all 151 registry rows on 2026-08-14 found **16 statuses wrong in both directions**. Ten `pending` rows were live (the whole Batch 10 set). Six `shipped` rows had never been imported: the three Mexico 2026 Stadium jerseys, the Predator Accuracy Crazyrush page, HP9971 and IH1779-900. Two of those six were about to be touched by a correction batch that assumed their copy was live. The audit is the expensive way to find this; this step is the cheap way to prevent it.
 
