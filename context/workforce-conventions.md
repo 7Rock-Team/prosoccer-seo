@@ -744,6 +744,17 @@ Season-earliest is the FALLBACK, used only where GSC data is absent or below a m
 
 **Scope of the supersession.** This supersedes the season-code tiebreak **for incumbency only**. The season code stays exactly as-is in the QUALIFIER (point 2), where a pack name recurs across seasons at the same configuration. Nothing in point 2 changes.
 
+**Retroactive scope of the v3 change (Mike, 2026-08-18). Re-check pending decisions; do not grandfather them.**
+
+A rule change made on evidence reaches backward into anything **approved but not yet shipped**. Approving something does not freeze it against a later correction. **Shipped stays shipped** (point 9, no retroactive churn, is unchanged and still governs live pages).
+
+The correct posture when a rule changes: sweep the pending queue and re-check every decision that the change could touch, before any of it ships. Two instances inside 24 hours of the v3 ruling, both caught this way and both reversed:
+
+1. **C-FIX Group 1 row 8** (540396.9025, Mizuno Beta Pro Bright Black). The retarget would have stripped the unqualified term from a page earning **1,068 of its configuration's 1,089 impressions, 98%**, and handed it to a sibling earning 21. Approved under season-earliest, backwards under v3. Dropped. Row 4 (IO1494-001) was the same shape.
+2. **C-FIX Group 2 row 11** (IQ1886-900). Written under the old rule to take a pack-qualified term; under v3 it is the measured incumbent at Phantom 6 Low Pro FG (523 impressions) and keeps the unqualified term. Batch 15's row 7 took the pack-qualified form instead. Note the import file needed no change, only the registry row: the shipped meta title read correctly under both rules.
+
+The general lesson is worth more than either instance: **a rule change is not complete when the rule file is edited.** It is complete when the pending queue has been re-checked against it. Add that sweep to the codification checklist whenever a targeting or ownership rule changes.
+
 **Measurement note.** Incumbency is stock-independent (Mike, 2026-08-18). A page out of stock still holds the equity and stays the incumbent. Whether to spend a brief on an out-of-stock page is a separate SELECTION judgment, made per batch; the Batch 15 selection rejected a 1,256-impression page that was out of stock on all 34 variants, and that rejection is about brief allocation, not about who the incumbent is.
 
 **4. Succession when the incumbent is archived (updated 2026-08-18 for the v3 incumbent definition).** Live-as-long-as-stock means an incumbent eventually sells out and is archived while holding the unqualified term. Reassign by the count of live pack siblings remaining at that moment:

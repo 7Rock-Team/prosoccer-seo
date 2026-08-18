@@ -7,14 +7,14 @@
 
 ## 1. Group 2: the three rows that ship now
 
-These unblock Batch 15 rows 4, 9 and 6. Files in this folder:
+These unblock Batch 15 rows 2, 4 and 7 (final numbering, after the Tiempo Ligera reduction). Files in this folder:
 `ProSoccer_SEO_CFIX_Group2_3_Products.xlsx` (primary) and `.csv` (fallback).
 
 | C-FIX row | SKU | Handle | Term released | To Batch 15 row |
 |---|---|---|---|---|
-| 10 | IH1779-900 | `nike-phantom-6-high-elite-firm-soccer-cleats-breakout-pack-su26` | nike phantom 6 elite fg (cut-less) | row 4 takes `nike phantom 6 high elite fg` (210/mo) |
-| 11 | IQ1886-900 | `nike-phantom-6-low-pro-firm-ground-soccer-cleats-breakout-pack-su26` | nike phantom 6 pro (880/mo, cut-less and surface-less) | row 9 takes `nike phantom 6 low pro fg` (70/mo) |
-| 12 | HP9971 | `adidas-predator-elite-fold-over-tongue-artificial-grass-soccer-cleats-road-to-glory-pack-sp26` | adidas predator elite ag (590/mo) | row 6 takes `adidas predator elite ag` |
+| 10 | IH1779-900 | `nike-phantom-6-high-elite-firm-soccer-cleats-breakout-pack-su26` | nike phantom 6 elite fg (cut-less) | **row 2** (HJ2147-003) takes `nike phantom 6 high elite fg` (210/mo) |
+| 11 | IQ1886-900 | `nike-phantom-6-low-pro-firm-ground-soccer-cleats-breakout-pack-su26` | nike phantom 6 pro (880/mo, cut-less and surface-less) | **nobody takes it.** IQ1886-900 KEEPS `nike phantom 6 low pro fg` as the v3 incumbent; see 1a |
+| 12 | HP9971 | `adidas-predator-elite-fold-over-tongue-artificial-grass-soccer-cleats-road-to-glory-pack-sp26` | adidas predator elite ag (590/mo) | **row 4** (JR5899) takes `adidas predator elite ag` (590/mo) |
 
 **Strings are unchanged from the 2026-08-14 C-FIX build.** They were already Layer 3 claim-verified there; nothing was re-authored, so nothing needs re-verifying. Copied verbatim.
 
@@ -33,6 +33,22 @@ These unblock Batch 15 rows 4, 9 and 6. Files in this folder:
 | All three handles live in the sitemap | pass, checked against the 14,402-product fetch |
 
 No Title column, no Body HTML, no short description. Only `title_tag` and `description_tag` ship, which is the preservation guarantee.
+
+## 1a. Row 11's registry outcome, decided 2026-08-18
+
+Mike's ruling: **v3 wins.** IQ1886-900 is the measured incumbent at Phantom 6 Low Pro FG (523 impressions) and **keeps the unqualified `nike phantom 6 low pro fg`** (70/mo). Batch 15 row 7 (IB3094-800, 363 impressions) takes the pack-qualified `nike phantom 6 low pro fg erling haaland` instead.
+
+**The import file is unchanged and imports as built.** Row 11's shipped meta title, "Nike Phantom 6 Low Pro FG Breakout", names model, tier, cut, surface AND pack, so it reads correctly under either primary. Only the registry differs.
+
+**Registry state to write at step 15, on confirmed import** (not before, per the step 15 rule):
+
+| SKU | `primary_keyword` before | after | `primary_volume` |
+|---|---|---|---|
+| IQ1886-900 | nike phantom 6 pro | **nike phantom 6 low pro fg** | 70 |
+| IH1779-900 | nike phantom 6 elite fg | nike phantom 6 high elite fg breakout | none |
+| HP9971 | adidas predator elite ag | adidas predator elite fold over tongue ag road to glory | 10 |
+
+Note that IQ1886-900's row differs from what the 2026-08-14 C-FIX document specified (`nike phantom 6 low pro fg breakout`). That document was written under the old incumbency rule. This supersedes it.
 
 **Note on row 11.** It releases `nike phantom 6 pro` at 880/mo, and no Batch 15 row claims it. It is cut-less and surface-less, so it is not PDP-valid under the keyword hierarchy. It belongs to `/collections/nike-phantom`, which is live. Routed to the collection workstream, not silently dropped.
 
