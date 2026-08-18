@@ -168,6 +168,15 @@ class GateTestBase(unittest.TestCase):
             encoding="utf-8",
         )
 
+    def write_registry1(self, primaries=("some other claimed primary",)):
+        """Write inputs/_registry1_primaries.txt.
+
+        Required by any test that expects exit 0: an absent, empty or unreadable
+        file is a hard fail as of 2026-08-18.
+        """
+        (self.dir / "inputs" / "_registry1_primaries.txt").write_text(
+            "\n".join(primaries) + "\n", encoding="utf-8")
+
     def findings(self):
         """Run the full gate over the session and return the flat Finding list."""
         briefs = bg.discover_briefs(self.dir)
@@ -183,6 +192,7 @@ class GateTestBase(unittest.TestCase):
             briefs_data.append({"sku": sku, "lines": lines, "meta": meta,
                                 "opening": bg.brief_opening(lines),
                                 "closing": bg.brief_closing(lines)})
+        all_findings += bg.check_registry1_present(registry1)
         all_findings += bg.check_cannibalization(briefs_meta, registry1)
         all_findings += bg.check_cross_brief(briefs_data)
         return all_findings
@@ -410,19 +420,30 @@ class TestCleanAndSkips(GateTestBase):
         self.write_input("HJ2146", {"primary_keyword": "nike phantom low elite fg"})
         self.write_input("KB7474", {"brand": "adidas", "brand_ip_posture": "fifa-permitted",
                                     "primary_keyword": "jamaica soccer jersey 2026"})
+        # A clean batch now REQUIRES the Registry 1 file. Without it the cross-batch
+        # cannibalization check cannot run, and the gate hard fails by design.
+        self.write_registry1()
         self.assertEqual(self.exit_code(), 0,
                          f"clean batch must PASS; findings={[f.format() for f in self.findings()]}")
 
-    def test_missing_input_reports_honest_skip(self):
+    def test_missing_input_hard_fails(self):
+        """A missing input file disables word-band and forbidden-phrasings: HARD FAIL.
+
+        Was: reported as an honest skip, and the gate still exited 0.
+        """
         self.write_brief("HJ2146", make_brief())
-        # no input file
+        self.write_registry1()
         briefs = bg.discover_briefs(self.dir)
         sku = bg.sku_from_brief(briefs[0])
         meta = bg.load_input_meta(self.dir, sku)
         self.assertIsNone(meta)
-        _, skipped = bg.gate_brief(sku, briefs[0], meta)
+        found, skipped = bg.gate_brief(sku, briefs[0], meta)
         self.assertTrue(any("no-input" in s for s in skipped),
-                        "a missing input file must be reported as a skip, never silent")
+                        "a missing input file must still be reported as a skip")
+        self.assertTrue(any(f.check == "input-file" and f.severity == bg.FAIL for f in found),
+                        "a missing input file must raise a FAIL, not only a skip note")
+        self.assertNotEqual(self.exit_code(), 0,
+                            "gate must NOT exit 0 when input-dependent checks cannot run")
 
     def test_malformed_gate_meta_flagged(self):
         self.write_brief("HJ2146", make_brief())
@@ -514,6 +535,7 @@ class TestSectionPresence(GateTestBase):
         self.write_input("HJ2146", {})
         self.assertEqual([], self._section_msgs(),
                          "a structurally complete PDP brief must raise no section finding")
+        self.write_registry1()   # required since 2026-08-18: absent file is a hard fail
         self.assertEqual(self.exit_code(), 0)
 
     def test_missing_internal_link_flagged(self):
@@ -691,6 +713,81 @@ class TestBrandCasing(GateTestBase):
         self.assertEqual([f for f in fs if f.check == "brand-casing"], [],
                          "a hyphenated slug and a backtick keyword citation must not fire")
 
+
+
+class TestUnrunnableChecksHardFail(GateTestBase):
+    """Codification candidate 2 (Batch 9, logged 2026-07-27; recurred Batch 14 and 15).
+
+    The gate printed a skip line and still exited 0. A check that cannot run is a
+    failure, not a pass. Mike's ruling 2026-08-18. Both prior catches were luck:
+    these tests replace the luck.
+    """
+
+    def _clean_single_brief(self):
+        self.write_brief("HJ2146", make_brief(
+            short_desc="The ball settles under your foot before the defender can set.",
+            body_sections=[("## Built for the player who reads the game",
+                            "This cleat rewards the player who reads the game a beat early. "
+                            + _para(250, "touch"))],
+            complete=True))
+        self.write_input("HJ2146", {"primary_keyword": "nike phantom low elite fg"})
+
+    def test_absent_registry1_hard_fails(self):
+        self._clean_single_brief()
+        # deliberately NO _registry1_primaries.txt
+        self.assertNotEqual(self.exit_code(), 0,
+                            "absent Registry 1 file must hard fail, never exit 0")
+        self.assertIn("registry1-missing", self.checks_present())
+
+    def test_empty_registry1_hard_fails(self):
+        self._clean_single_brief()
+        (self.dir / "inputs" / "_registry1_primaries.txt").write_text("", encoding="utf-8")
+        self.assertNotEqual(self.exit_code(), 0,
+                            "an empty Registry 1 file cannot detect a collision; must hard fail")
+
+    def test_comments_only_registry1_hard_fails(self):
+        self._clean_single_brief()
+        (self.dir / "inputs" / "_registry1_primaries.txt").write_text(
+            "# nothing here yet", encoding="utf-8")
+        self.assertNotEqual(self.exit_code(), 0,
+                            "a comments-only Registry 1 file carries no primaries; must hard fail")
+
+    def test_present_registry1_restores_pass(self):
+        self._clean_single_brief()
+        self.write_registry1()
+        self.assertEqual(
+            self.exit_code(), 0,
+            "with the file present the same batch must PASS; findings="
+            + str([f.format() for f in self.findings()]))
+
+    def test_gate_meta_without_word_band_hard_fails(self):
+        """Worst shape of the class: silently returned [] with NO skip line at all."""
+        self._clean_single_brief()
+        self.write_registry1()
+        meta = dict(DEFAULT_META)
+        meta["sku"] = "HJ2146"
+        meta.pop("word_band", None)
+        self._write_raw_meta("HJ2146", meta)
+        self.assertNotEqual(self.exit_code(), 0,
+                            "gate-meta with no word_band must hard fail, not silently skip")
+        self.assertIn("word-band", self.checks_present())
+
+    def test_malformed_word_band_hard_fails(self):
+        self._clean_single_brief()
+        self.write_registry1()
+        for bad in ([400], [450, 400], "400-450", [400, "450"]):
+            with self.subTest(band=bad):
+                meta = dict(DEFAULT_META)
+                meta["sku"] = "HJ2146"
+                meta["word_band"] = bad
+                self._write_raw_meta("HJ2146", meta)
+                self.assertNotEqual(self.exit_code(), 0,
+                                    "malformed word_band must hard fail: " + repr(bad))
+
+    def _write_raw_meta(self, sku, meta):
+        block = "```gate-meta" + chr(10) + json.dumps(meta, indent=2) + chr(10) + "```" + chr(10)
+        (self.dir / "inputs" / (sku + "_input.md")).write_text(
+            "# Input" + chr(10) * 2 + block, encoding="utf-8")
 
 if __name__ == "__main__":
     unittest.main()

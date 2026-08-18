@@ -214,16 +214,48 @@ def load_input_meta(session_dir: Path, sku: str) -> dict | None:
 
 def load_registry1_primaries(session_dir: Path) -> list[str] | None:
     """Load claimed Registry 1 (white-label sheet) primaries from
-    inputs/_registry1_primaries.txt (one primary per line) if ORIN wrote it at
-    pre-dispatch. None if absent (cannibalization then checks intra-batch only)."""
+    inputs/_registry1_primaries.txt (one primary per line).
+
+    Returns None if the file is absent, empty, or unreadable. **None is now a HARD
+    FAIL at the batch level**, not a downgrade to intra-batch-only checking: see
+    check_registry1_present(). A check that cannot run is a failure, not a pass.
+    """
     f = session_dir / "inputs" / "_registry1_primaries.txt"
     if not f.exists():
         return None
-    return [
+    try:
+        raw = f.read_text(encoding="utf-8")
+    except (OSError, UnicodeDecodeError):
+        return None
+    out = [
         ln.strip().lower()
-        for ln in f.read_text(encoding="utf-8").splitlines()
+        for ln in raw.splitlines()
         if ln.strip() and not ln.strip().startswith("#")
     ]
+    # An empty or comments-only file cannot detect a cross-batch collision either.
+    return out or None
+
+
+def check_registry1_present(registry1) -> list[Finding]:
+    """Batch-level hard fail when the cross-batch cannibalization check cannot run.
+
+    Origin, and why this is a FAIL rather than a printed note: the gate printed
+    "Registry 1 primaries file absent; cannibalization checked intra-batch only"
+    and still exited 0. That false green shipped three times (codification
+    candidate 2, Batch 9, logged 2026-07-27; recurred Batch 14; recurred Batch 15,
+    where it was caught only because a subagent happened to quote the line back).
+    Both catches were luck. Mike's ruling 2026-08-18: absent, missing, empty or
+    unreadable all hard fail.
+    """
+    if registry1 is None:
+        return [Finding(
+            "BATCH", "registry1-missing", FAIL,
+            "inputs/_registry1_primaries.txt is absent, empty or unreadable, so the "
+            "CROSS-BATCH cannibalization check could not run. A check that cannot run "
+            "is a failure. Write the file at pre-dispatch (one claimed primary per "
+            "line, from products-master.csv) and re-run.",
+        )]
+    return []
 
 
 # --------------------------------------------------------------------------- #
@@ -409,11 +441,27 @@ def check_word_band(sku, lines, meta) -> list[Finding]:
     """Flag a body word count outside the SKU's tier band (+ tolerance). The band is
     SKU-specific from the input file, never inherited from the exemplar (the IF8512
     Elite-band-on-a-Pro-SKU defect)."""
-    if not meta or not meta.get("word_band"):
+    if not meta:
+        # meta is None is already a batch-level FAIL raised in gate_brief; nothing to add.
         return []
+    # A gate-meta block that is PRESENT but carries no usable word_band silently
+    # disabled this check with no skip line at all, which is the worst shape of the
+    # false-green class: no output to notice. It is now a hard fail.
+    if not meta.get("word_band"):
+        return [Finding(
+            sku, "word-band", FAIL,
+            "input file has a gate-meta block but no `word_band`, so the word-band "
+            "check could not run. Set it from the SKU's OWN tier (Elite 400-450, "
+            "Pro 340-390, League/Club/Academy 280-340).",
+        )]
     band = meta["word_band"]
-    if not (isinstance(band, list) and len(band) == 2):
-        return []
+    if not (isinstance(band, list) and len(band) == 2
+            and all(isinstance(b, int) for b in band) and band[0] <= band[1]):
+        return [Finding(
+            sku, "word-band", FAIL,
+            f"gate-meta `word_band` is malformed ({band!r}); expected [low, high] as two "
+            "integers with low <= high. The word-band check could not run.",
+        )]
     lo, hi = band
     tol = meta.get("word_band_tolerance", 15)
     count = body_word_count(lines)
@@ -951,9 +999,18 @@ def gate_brief(sku, path, meta) -> tuple[list[Finding], list[str]]:
     # Check 11: fabrication hedges (REVIEW).
     findings += check_fabrication_hedge(sku, lines)
 
-    # Input-dependent checks (5, 6, 8). Honest skip reporting when no input meta.
+    # Input-dependent checks (5, 6, 8). A missing input file means three checks
+    # CANNOT RUN, including word-band and the full forbidden-phrasings pass. That is
+    # a hard failure, not a skip note: same false-green class as the Registry 1 file
+    # (Mike's ruling 2026-08-18, extended from registry1 to every unrunnable check).
     if meta is None:
         skipped += ["fifa-terms(no-input)", "forbidden-phrasings(no-input)", "word-band(no-input)"]
+        findings.append(Finding(
+            sku, "input-file", FAIL,
+            "no input file at inputs/{}_input.md (or it carries no gate-meta block), so "
+            "word-band, forbidden-phrasings and the branded FIFA check could not run for "
+            "this SKU. A check that cannot run is a failure.".format(sku),
+        ))
         # FIFA still runs best-effort/provisional so a missing input can't hide a leak.
         findings += check_fifa_terms(sku, lines, None)
     elif meta.get("_parse_error"):
@@ -1002,6 +1059,7 @@ def run(session_dir: Path) -> int:
         all_findings += check_brand_casing(bd["sku"], bd["lines"])
 
     # Cross-brief checks (7, 9).
+    all_findings += check_registry1_present(registry1)
     all_findings += check_cannibalization(briefs_meta, registry1)
     all_findings += check_cross_brief(briefs_data)
 
@@ -1014,17 +1072,19 @@ def report(session_dir, briefs, findings, skipped, registry1) -> int:
 
     print(f"BATCH GATE -- {session_dir}")
     print(f"  briefs checked: {len(briefs)}")
-    if registry1 is None:
-        print("  Registry 1 primaries file absent (inputs/_registry1_primaries.txt); "
-              "cannibalization checked intra-batch only")
+    if registry1 is not None:
+        print(f"  cross-batch cannibalization: ON ({len(registry1)} claimed primaries)")
     print()
 
     if not findings:
-        print("PASS: no findings across all mechanical checks.")
+        # Backstop. Any future skip source that does not yet raise its own FAIL must
+        # still never reach exit 0: a check that did not run is not a pass.
         if skipped:
-            print("\nInput-dependent checks skipped (no input file):")
+            print("BLOCKED: checks could not run, so this is not a pass.")
             for s in skipped:
                 print(f"  - {s}")
+            return 2
+        print("PASS: no findings across all mechanical checks.")
         return 0
 
     if fails:

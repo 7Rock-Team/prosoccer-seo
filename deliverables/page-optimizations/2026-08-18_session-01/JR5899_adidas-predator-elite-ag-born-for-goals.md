@@ -30,7 +30,7 @@ You've hit the one where the laces caught it wrong. It slices, it sits up, the k
 
 ## adidas built the grip into the strike zone
 
-Nanostrike is why a wet ball still bends. Mesh and rubber grip elements sit across the strike zone, so Saturday rain doesn't cost you the swerve you found on Tuesday. Powerspine gives the midfoot something to drive against, and the Primeknit upper expands with your foot instead of fighting it. The wider [adidas Predator range](https://www.prosoccer.com/collections/adidas-predator) shows where Elite sits.
+Nanostrike+ is why a wet ball still bends. Mesh and rubber grip elements sit across the strike zone, so Saturday rain doesn't cost you the swerve you found on Tuesday. Powerspine gives the midfoot something to drive against, and the Primeknit upper expands with your foot instead of fighting it. The wider [adidas Predator range](https://www.prosoccer.com/collections/adidas-predator) shows where Elite sits.
 
 ## Made for the green plastic you actually train on
 
@@ -40,7 +40,7 @@ Most of your week happens on 3G. School field, club training, the winter league 
 
 - Primeknit upper, synthetic and textile construction
 - Fold-over tongue for a smooth striking surface
-- Nanostrike mesh with rubber grip elements across the strike zone
+- Nanostrike+ mesh with rubber grip elements across the strike zone
 - Powerspine midfoot support for stronger shots
 - Strikeframe lightweight full-length plate, artificial grass outsole
 - Synthetic lining and synthetic outsole
@@ -70,7 +70,7 @@ It covers the laces with a smooth face, which gives you a clean contact point fo
 
 ### How is Elite different from the lower tiers?
 
-Elite carries the full package: Primeknit, Nanostrike, Powerspine, and the Strikeframe plate. Lower tiers simplify the upper and the stability setup.
+Elite carries the full package: Primeknit, Nanostrike+, Powerspine, and the Strikeframe plate. Lower tiers simplify the upper and the stability setup.
 
 ### Meta Title
 
@@ -78,7 +78,7 @@ adidas Predator Elite AG Born For Goals
 
 ### Meta Description
 
-The adidas Predator Elite AG pairs a fold-over tongue with Nanostrike grip for cleaner striking on 3G. Shop the Born For Goals Pack build.
+The adidas Predator Elite AG pairs a fold-over tongue with Nanostrike+ grip for cleaner striking on 3G. Shop the Born For Goals Pack build.
 
 ### URL Handle
 
@@ -88,7 +88,7 @@ Keep the current handle. `adidas-predator-elite-fold-over-tongue-artificial-gras
 
 - adidas Predator Elite Fold-Over Tongue artificial grass soccer cleats, Born For Goals Pack
 - adidas Predator Elite Fold-Over Tongue AG cleats side profile
-- adidas Predator Elite fold-over tongue and Nanostrike strike zone detail
+- adidas Predator Elite fold-over tongue and Nanostrike+ strike zone detail
 - adidas Predator Elite AG Strikeframe plate and stud configuration
 
 ### Taxonomy Category

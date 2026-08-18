@@ -97,6 +97,13 @@ Origin: a live audit of all 151 registry rows on 2026-08-14 found **16 statuses 
 
 **The gate (step 5).** `scripts/batch_gate.py` runs 10 mechanical checks over the session folder, including `check_section_presence` (added 2026-07-31): every required PDP section must be present with content, and the Description body must carry at least one internal link, an unconditional hard fail. Exit 0 only when nothing fires. The gate replaces the human per-brief review for mechanical defect classes; the escalate-on-exception batch mode (CLAUDE.md 'Approval mode') is safe only because it runs.
 
+**A check that CANNOT run is now a hard failure (changed 2026-08-18, Mike).** The gate used to print a skip line and still exit 0. Three false-green paths existed and all three are closed:
+1. `inputs/_registry1_primaries.txt` absent, empty or unreadable, which silently downgraded cannibalization to intra-batch only. Now `registry1-missing`, a batch-level FAIL.
+2. A missing per-SKU input file, which disabled word-band, forbidden-phrasings and the branded FIFA check for that SKU. Now an `input-file` FAIL.
+3. A gate-meta block PRESENT but carrying no usable `word_band`, which disabled the word-band check with **no output at all**. That was the worst of the three, because there was nothing to notice. Now a `word-band` FAIL.
+
+A backstop in `report()` returns non-zero on any remaining skip, so a future skip source cannot reach exit 0 before someone notices it. **ORIN must write `inputs/_registry1_primaries.txt` at pre-dispatch**, one claimed primary per line from `products-master.csv`, with any pending retargets applied so it reflects post-import truth. Origin: this is codification candidate 2 from Batch 9, logged 2026-07-27. It cost the same false green three times (Batch 9, Batch 14, Batch 15) and both later catches were luck: once because a human read the output, once because a subagent quoted the line back. Six regression tests now assert non-zero exit for each path.
+
 Handles always come from the briefs (step 9). Never reconstruct them from product titles. ProSoccer handles abbreviate in ways titles do not: `man-united` not `manchester-united`, `ls` not `long-sleeve`, `fg` not `firm-ground`.
 
 ---
