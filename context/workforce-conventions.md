@@ -195,6 +195,19 @@ A GENERATION token is the manufacturer's name for the current iteration of a mod
 
 Brand TECHNOLOGY names (the manufacturer's named materials, plates, and construction systems) are written in title case in every output field, regardless of the all-caps styling manufacturers use in their own marketing copy: Haloskin, Haloshell+, Primeknit, Strikeframe, Powerspine, FlyTouch, Sprintgrid. **Nanostrike is TIER-CONDITIONAL and is the one name in this list that is not a single fixed string** (resolved 2026-08-18 against adidas.com, replacing an unconditional `Nanostrike+` that was wrong for two thirds of the catalogue): **Elite tier takes `Nanostrike+`, League and every tier below takes `Nanostrike`.** Source of truth, two adidas.com PDPs carrying the SAME sentence frame with one differing token: Predator Elite Fold-Over Tongue FG (JS0378/JS0380) reads "Soccer cleats with Nanostrike+ tech for precision striking" and labels the feature "Nanostrike+: reimagined synergy between fit and grip tech"; Predator League FG (JR7881) reads "Soccer cleats with Nanostrike technology for precision striking". That is a deliberate product distinction, not adidas being sloppy. **Do not resolve this one by scrape-wins.** ProSoccer's own live pages render it `NANOSTRIKE` in all caps at every tier, which carries the casing defect and destroys the tier signal, so the live page cannot tell you which form is correct. Take the tier from the SKU and apply the rule. Never HALOSKIN, PRIMEKNIT, or STRIKEFRAME. The all-lowercase adidas rule above applies to the BRAND name only and is the sole lowercase exception; genuine acronyms (FG, MG, AG, TF, PS) and season codes (FA26, SP26) stay capitalized. Surfaced by Step 2's Batch 13 pre-import review, where IH4586 spelled the same upper HALOSKIN in a bullet and Haloskin in its body prose. Canonical rule and worked example: `context/page-type-playbooks/product-page-playbook.md` 'Brand technology name casing (added 2026-08-13)'. Not script-enforced yet; SCRIBE self-checks at Phase 4 and ORIN re-checks at the orchestrator layer.
 
+**THE GENERAL EXCEPTION TO SCRAPE-WINS (codified 2026-08-18, Mike). Where the live page DESTROYS a distinction the brand makes, the scrape is not authoritative and the brand source is.**
+
+Scrape-wins exists because the live page is what the customer sees and what we can verify. It assumes the page PRESERVES the facts, just sometimes incompletely. Nanostrike is the case where that assumption breaks: ProSoccer renders the name `NANOSTRIKE` in all caps at every tier, which is simultaneously a casing defect and a destruction of the plus/no-plus signal that carries the tier distinction. No amount of reading our own page can recover a distinction our own page has flattened.
+
+Test for it, and it is narrow on purpose:
+1. The live page presents two or more genuinely different things IDENTICALLY (a casing normalization, a truncation, a dropped qualifier), AND
+2. the manufacturer's own source distinguishes them, AND
+3. the distinction is load-bearing for the copy (it names a technology, a tier, a material, a surface).
+
+When all three hold, take the fact from the brand source and record the source URL in the audit trail. This does NOT reopen scrape-wins generally: a spec merely ABSENT from the page is still absent (omit it, do not go hunting), and a spec that CONTRADICTS the brand source still defers to the page, since the page is what we sell. The exception is only for a distinction the page has collapsed rather than omitted or contradicted.
+
+Expect this to recur wherever ProSoccer's import pipeline normalizes manufacturer copy: all-caps technology names are the known instance, and truncated product titles are a candidate.
+
 ### Architectural learning notes (2026-06-02)
 
 **Brand styling discipline (added 2026-06-02 with Gate 13 extension):** Some brands have non-standard capitalization as part of their official trademark identity. adidas is the canonical example, always lowercase, including sentence-start. Workforce discipline: SCRIBE never auto-capitalizes adidas; if sentence-start would feel awkward, restructure the sentence rather than capitalize. ORIN defense-in-depth re-check flags any `Adidas` (capitalized) in output fields. voice_check.py regex check enforces at script level. As other brand styling rules surface, add to this section.
@@ -1422,6 +1435,18 @@ When you write or change a rule in a canonical file (a playbook, this convention
    **Practical rule: before an exemplar lands, run it against the full rule set as if it were shipping copy.** Length and format, brand styling, brand-technology casing, anti-stuffing, US market language, claims and customer-facing facts, FIFA posture. If it would not pass the gate as a brief, it must not stand as an example. `scripts/voice_check.py` now reads inside fenced blocks in canonical instruction files (`is_canonical_instruction`), which covers the voice rules automatically; the rest is still a human read, and the anti-stuffing and meta-format rules in particular are not script-enforced. Note one remaining blind spot by design: exemplars written inside INLINE backticks stay exempt, because a rule cannot name what it forbids otherwise, so a positive example wrapped in single backticks is still unchecked. Prefer a fenced block for any exemplar you want checked.
 
 Reference: `SEO_BATCH_PROCESS.md` section 5 ("What must never happen"), rules 1, 4 and 5.
+
+9. **A check that can be disabled WITHOUT EMITTING ANYTHING is worse than one that prints a skip, because the human backstop cannot see it. Fail loudly or do not exist (added 2026-08-18, Mike).**
+
+   The gate carried three false-green paths. Two printed a skip line and exited 0; the third disabled the word-band check with **no output at all** when a `gate-meta` block was present but carried no usable `word_band`. Reading the gate output carefully, which is the standing human backstop and the thing that caught the other two, was never sufficient for the third: there was nothing to read. Both catches of the printing paths were luck (a human happened to read the line; a subagent happened to quote it back).
+
+   The rule for any new check: it must either raise a Finding or run. There is no third state. A conditional that returns an empty result because its input is missing must return a FAIL, not `[]`. Legitimate rule EXEMPTIONS are different and stay silent by design (adidas pages skipping the FIFA check; an empty forbidden-phrasings list): the distinction is **cannot run** versus **does not apply**. Encode the first as a failure and the second as a pass.
+
+10. **A test written against what the code DOES cannot catch what the code SHOULD do. Same class as a bad exemplar (added 2026-08-18, Mike).**
+
+    Fixing the gate's false green broke two pre-existing tests that asserted `exit_code() == 0` for batches with no `_registry1_primaries.txt`. Those tests had encoded the buggy behaviour as the expected behaviour, so the suite that existed to catch the defect was asserting the defect was correct. Three sessions ran clean against it.
+
+    This is mechanically identical to the exemplar failures in items 7 and 8: an artifact encoding what was observed rather than what was intended, which then teaches the next reader (or the next test run) the wrong thing. Same fix in both cases: when you write or change a rule, check the artifacts that DEMONSTRATE it (examples, fixtures, assertions), not only the artifacts that STATE it. A test asserting a currently-passing state is worth little unless you can also say what it would fail on.
 
 ## Cross-references
 
