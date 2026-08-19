@@ -81,6 +81,8 @@ The Nike Phantom 6 High Club pairs a knit collar with a firm ground and multi gr
 
 ### URL Handle
 
+`nike-phantom-6-high-club-firm-multi-ground-soccer-cleats-breakout-pack-su26`
+
 No change. The current handle runs 75 characters, past the 70-character guideline, but a rewrite needs a 301 from Misha and this page carries almost no traffic to protect. Not worth the coordination.
 
 ### Image Alt Text

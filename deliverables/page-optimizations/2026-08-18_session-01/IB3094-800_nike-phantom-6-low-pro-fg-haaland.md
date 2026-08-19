@@ -79,6 +79,8 @@ The Nike Phantom 6 Low Pro is a low-cut firm ground cleat with a VNMSkin strike 
 
 ### URL Handle
 
+`nike-phantom-6-low-pro-firm-ground-soccer-cleats-erling-haaland-pack-fa25`
+
 No change. The current handle runs 73 characters, 3 over the 70-character guideline. Flagged for Mike rather than auto-changed: a new handle needs a 301 from Misha, and this page already ranks on the pack-qualified term, so leaving it is the safer call.
 
 ### Image Alt Text

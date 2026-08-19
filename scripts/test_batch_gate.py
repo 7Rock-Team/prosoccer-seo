@@ -17,6 +17,7 @@ Plus: adidas FIFA-permitted negative, cross-brief convergence, cannibalization,
 price-in-body, clean-brief PASS, and honest skip when an input file is absent.
 """
 import json
+import re
 import os
 import shutil
 import sys
@@ -788,6 +789,123 @@ class TestUnrunnableChecksHardFail(GateTestBase):
         block = "```gate-meta" + chr(10) + json.dumps(meta, indent=2) + chr(10) + "```" + chr(10)
         (self.dir / "inputs" / (sku + "_input.md")).write_text(
             "# Input" + chr(10) * 2 + block, encoding="utf-8")
+
+
+class TestURLHandleField(GateTestBase):
+    """Batch 15 (2026-08-18): two of ten briefs wrote only a no-change rationale in
+    `### URL Handle`, with the handle itself absent. Step 9 says handles always come
+    from the briefs and are never reconstructed from product titles, so that field is
+    the ONLY source and a status word silently breaks it.
+    """
+
+    def _brief_with_handle_field(self, body):
+        # Same in-band body the clean-batch tests use, so a word-band failure cannot
+        # masquerade as a url-handle result.
+        text = make_brief(
+            short_desc="The ball settles under your foot before the defender can set.",
+            body_sections=[("## Built for the player who reads the game",
+                            "This cleat rewards the player who reads the game a beat early. "
+                            + _para(250, "touch"))],
+            complete=True)
+        text = re.sub(r"(?m)^(### URL Handle\n)(.*)$", lambda m: m.group(1) + body, text, count=1)
+        self.write_brief("HJ2146", text)
+        self.write_input("HJ2146", {"primary_keyword": "nike phantom low elite fg"})
+        self.write_registry1()
+
+    def test_status_word_only_fails(self):
+        self._brief_with_handle_field("No change.")
+        self.assertIn("url-handle", self.checks_present())
+        self.assertNotEqual(self.exit_code(), 0)
+
+    def test_rationale_without_handle_fails(self):
+        self._brief_with_handle_field(
+            "No change. The current handle runs 73 characters, 3 over the 70-character guideline.")
+        self.assertIn("url-handle", self.checks_present())
+
+    def test_empty_field_fails(self):
+        self._brief_with_handle_field("")
+        self.assertIn("url-handle", self.checks_present())
+
+    def test_handle_present_passes(self):
+        self._brief_with_handle_field("`nike-phantom-6-low-pro-firm-ground-soccer-cleats-fa25`")
+        self.assertNotIn("url-handle", self.checks_present())
+
+    def test_handle_followed_by_rationale_passes(self):
+        """The fix shape: handle first, rationale after. Both must survive."""
+        self._brief_with_handle_field(
+            "`nike-phantom-6-low-pro-firm-ground-soccer-cleats-fa25`\n\n"
+            "No change. Runs 73 characters, over the guideline, but a rewrite needs a 301.")
+        self.assertNotIn("url-handle", self.checks_present())
+        self.assertEqual(self.exit_code(), 0,
+                         "handle plus rationale must pass; findings="
+                         + str([f.format() for f in self.findings()]))
+
+
+class TestGateRunLog(GateTestBase):
+    """_gate-run.json: converts "the gate passed" from a recollection into evidence.
+
+    Motivated by two unanswerable cases: Batch 9 provably ran without cross-batch
+    cannibalization (known only because the registry file is absent from git), and
+    Batch 14 printed the skip despite having the file, which cannot be settled at all.
+    """
+
+    def _clean(self):
+        self.write_brief("HJ2146", make_brief(
+            short_desc="The ball settles under your foot before the defender can set.",
+            body_sections=[("## Built for the player who reads the game",
+                            "This cleat rewards the player who reads the game a beat early. "
+                            + _para(250, "touch"))],
+            complete=True))
+        self.write_input("HJ2146", {"primary_keyword": "nike phantom low elite fg"})
+
+    def _log(self):
+        p = self.dir / bg.GATE_RUN_LOG
+        self.assertTrue(p.exists(), "_gate-run.json must be written on every run")
+        return json.loads(p.read_text(encoding="utf-8"))
+
+    def test_log_written_on_pass(self):
+        self._clean()
+        self.write_registry1(("some other claimed primary", "and another"))
+        self.assertEqual(self.exit_code(), 0)
+        d = self._log()
+        self.assertEqual(d["verdict"], "PASS")
+        self.assertEqual(d["exit_code"], 0)
+        self.assertEqual(d["briefs_checked"], 1)
+        self.assertEqual(d["skus"], ["HJ2146"])
+        self.assertTrue(d["registry1"]["present"])
+        self.assertEqual(d["registry1"]["row_count"], 2)
+        self.assertTrue(d["registry1"]["cross_batch_cannibalization_ran"])
+        self.assertEqual(d["checks_skipped"], [])
+        self.assertIn("word-band", d["checks_run"])
+
+    def test_log_records_that_cross_batch_check_did_not_run(self):
+        """The exact fact Batch 9 and Batch 14 could not establish afterwards."""
+        self._clean()
+        # no registry file
+        self.assertNotEqual(self.exit_code(), 0)
+        d = self._log()
+        self.assertEqual(d["verdict"], "FAIL")
+        self.assertFalse(d["registry1"]["present"])
+        self.assertEqual(d["registry1"]["row_count"], 0)
+        self.assertFalse(d["registry1"]["cross_batch_cannibalization_ran"])
+        self.assertIn("registry1-missing", d["findings"]["by_check"])
+
+    def test_log_records_skipped_checks(self):
+        self.write_brief("HJ2146", make_brief(complete=True))
+        self.write_registry1()
+        # no input file -> word-band, forbidden-phrasings, fifa-terms cannot run
+        self.assertNotEqual(self.exit_code(), 0)
+        d = self._log()
+        self.assertTrue(d["checks_skipped"], "skipped checks must be recorded, not just printed")
+        self.assertNotIn("word-band", d["checks_run"])
+
+    def test_log_has_timestamp_and_schema(self):
+        self._clean()
+        self.write_registry1()
+        self.exit_code()
+        d = self._log()
+        self.assertEqual(d["schema"], 1)
+        self.assertRegex(d["timestamp_utc"], r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+00:00$")
 
 if __name__ == "__main__":
     unittest.main()

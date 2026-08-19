@@ -56,6 +56,12 @@ scripts/build/
 !package.json
 !package-lock.json
 !tsconfig.json
+# Batch gate run log. Carries no secrets: exit code, timestamp, which checks ran,
+# and the Registry 1 row count. It MUST be tracked, because its whole purpose is to
+# make "the gate passed" auditable after the fact. Caught 2026-08-19: the blanket
+# *.json rule above was silently swallowing it, which would have left the record
+# undiscoverable in exactly the way the log was built to prevent.
+!**/_gate-run.json
 # Shared workforce config (permissions allowlist, no secrets). The personal
 # .claude/settings.local.json stays ignored via the "Claude Code local overrides" rule above.
 !.claude/settings.json

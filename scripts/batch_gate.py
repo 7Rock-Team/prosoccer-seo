@@ -236,6 +236,55 @@ def load_registry1_primaries(session_dir: Path) -> list[str] | None:
     return out or None
 
 
+FIELD_URL_HANDLE = re.compile(r"^#{3}\s+URL\s+Handle\b", re.IGNORECASE)
+# A ProSoccer handle: lowercase alphanumerics and hyphens, at least two hyphenated
+# parts, long enough not to match an ordinary word. Deliberately loose: this check
+# asks "is a handle PRESENT", not "is this the RIGHT handle".
+HANDLE_TOKEN = re.compile(r"\b[a-z0-9]+(?:-[a-z0-9]+){2,}\b")
+# Words that look like a handle to a naive extractor but are prose about one.
+HANDLE_DECOYS = re.compile(r"^(?:no[- ]change|unchanged|n/?a|same|none|tbd|\d+[- ]character)$",
+                           re.IGNORECASE)
+
+
+def check_url_handle_field(sku, lines) -> list[Finding]:
+    """The `### URL Handle` field must RESTATE the live handle, never only a status word.
+
+    Origin, Batch 15 (2026-08-18): two of ten briefs wrote only prose explaining why the
+    handle should not change ("No change. The current handle runs 73 characters..."),
+    with the handle itself absent. `SEO_BATCH_PROCESS.md` step 9 says handles always come
+    from the briefs and are never reconstructed from product titles, so a field that omits
+    the handle silently breaks that rule's ONLY source: an extractor building the Matrixify
+    paste list returned the words "70-character" instead of a handle. A no-change rationale
+    is welcome, but it goes AFTER the handle, not instead of it.
+    """
+    start = -1
+    for i, ln in enumerate(lines):
+        if FIELD_URL_HANDLE.match(ln):
+            start = i + 1
+            break
+    if start == -1:
+        return [Finding(sku, "url-handle", FAIL,
+                        "no `### URL Handle` field; Step 2 has no source for the export filter")]
+    end = len(lines)
+    for i in range(start, len(lines)):
+        if FIELD_MARKER.match(lines[i]):
+            end = i
+            break
+    content = " ".join(lines[start:end]).strip()
+    if not content:
+        return [Finding(sku, "url-handle", FAIL, "`### URL Handle` field is empty")]
+    if not HANDLE_TOKEN.search(content):
+        stripped = content.strip(" .`*")
+        why = ("it states a status word only" if HANDLE_DECOYS.match(stripped)
+               else "it contains no handle-shaped token")
+        return [Finding(sku, "url-handle", FAIL,
+                        f"`### URL Handle` does not restate the handle ({why}): {content[:90]!r}. "
+                        "Write the live handle verbatim, then any no-change rationale after it. "
+                        "Step 2 builds the Matrixify export filter from this field and must never "
+                        "reconstruct a handle from the product title.")]
+    return []
+
+
 def check_registry1_present(registry1) -> list[Finding]:
     """Batch-level hard fail when the cross-batch cannibalization check cannot run.
 
@@ -992,6 +1041,8 @@ def gate_brief(sku, path, meta) -> tuple[list[Finding], list[str]]:
     # Customization claims: name/number location (product page, not checkout) + duration
     # (business days, not weeks). Unconditional. SEO_BATCH_PROCESS.md §7 pattern 1.
     findings += check_customization_claims(sku, lines)
+    # URL Handle field must restate the handle (Batch 15 defect, added 2026-08-19).
+    findings += check_url_handle_field(sku, lines)
     # Check 10: price in body.
     findings += check_price_in_body(sku, lines)
     # Heritage honour claims (specific counts / "most"-"record" superlatives) -- claims gate.
@@ -1063,7 +1114,76 @@ def run(session_dir: Path) -> int:
     all_findings += check_cannibalization(briefs_meta, registry1)
     all_findings += check_cross_brief(briefs_data)
 
-    return report(session_dir, briefs, all_findings, all_skipped, registry1)
+    exit_code = report(session_dir, briefs, all_findings, all_skipped, registry1)
+    write_run_log(session_dir, briefs, all_findings, all_skipped, registry1, exit_code)
+    return exit_code
+
+
+GATE_RUN_LOG = "_gate-run.json"
+
+# Every check the gate can run, so the log records what RAN, not only what fired.
+ALL_CHECKS = [
+    "voice", "heading-levels", "section-presence", "customization-claims",
+    "url-handle", "price-in-body", "heritage-counts", "fabrication-hedge",
+    "fifa-terms", "forbidden-phrasings", "word-band", "brand-casing",
+    "cannibalization", "cross-brief", "registry1-present",
+]
+
+
+def write_run_log(session_dir, briefs, findings, skipped, registry1, exit_code) -> None:
+    """Persist the run to <session>/_gate-run.json.
+
+    Why this exists (approved by Mike 2026-08-19): gate output went to stdout and was
+    never persisted, so "the gate passed" was a recollection rather than evidence, and
+    past runs could not be audited. Two concrete cases motivated it. Batch 9
+    (2026-07-21_session-01) provably ran without the cross-batch cannibalization check,
+    and we only know because the registry file is absent from git. Batch 14 is recorded
+    as printing the skip DESPITE having the file committed with its session, and that
+    cannot be settled at all. Both would be answerable from a run log.
+
+    The log records the registry file's presence and row count explicitly, because that
+    is the fact neither case could establish afterwards.
+    """
+    import datetime
+    by_check: dict[str, int] = {}
+    for f in findings:
+        by_check[f.check] = by_check.get(f.check, 0) + 1
+    # Skip labels arrive as "<SKU>: <check>(<reason>)"; reduce to the bare check name so
+    # they line up with ALL_CHECKS. Without this, checks_run wrongly listed a check that
+    # had been skipped, which is the exact false reassurance this log exists to prevent.
+    skipped_checks = sorted({
+        re.sub(r"\(.*\)$", "", s.split(":", 1)[-1].strip()).strip()
+        for s in skipped
+    })
+    payload = {
+        "schema": 1,
+        "timestamp_utc": datetime.datetime.now(datetime.timezone.utc)
+                                  .replace(microsecond=0).isoformat(),
+        "session": session_dir.name,
+        "exit_code": exit_code,
+        "verdict": {0: "PASS", 1: "REVIEW", 2: "FAIL"}.get(exit_code, "UNKNOWN"),
+        "briefs_checked": len(briefs),
+        "skus": sorted(sku_from_brief(p) for p in briefs),
+        "registry1": {
+            "present": registry1 is not None,
+            "row_count": len(registry1) if registry1 is not None else 0,
+            "cross_batch_cannibalization_ran": registry1 is not None,
+        },
+        "checks_run": [c for c in ALL_CHECKS if c not in skipped_checks],
+        "checks_skipped": skipped_checks,
+        "findings": {
+            "total": len(findings),
+            "fail": sum(1 for f in findings if f.severity == FAIL),
+            "review": sum(1 for f in findings if f.severity == REVIEW),
+            "by_check": dict(sorted(by_check.items())),
+        },
+    }
+    try:
+        (session_dir / GATE_RUN_LOG).write_text(
+            json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    except OSError as e:
+        # Never let logging fail the gate: the verdict is the product, the log is a record.
+        print(f"  (warning: could not write {GATE_RUN_LOG}: {e})", file=sys.stderr)
 
 
 def report(session_dir, briefs, findings, skipped, registry1) -> int:

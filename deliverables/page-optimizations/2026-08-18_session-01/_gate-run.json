@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "timestamp_utc": "2026-08-19T19:07:37+00:00",
+  "session": "2026-08-18_session-01",
+  "exit_code": 0,
+  "verdict": "PASS",
+  "briefs_checked": 10,
+  "skus": [
+    "HJ2147-003",
+    "HQ3158-001",
+    "IB3094-800",
+    "IB4477-101",
+    "IF8508-600",
+    "IQ2162-900",
+    "IQ2399-900",
+    "JH7718",
+    "JR5899",
+    "JR8971"
+  ],
+  "registry1": {
+    "present": true,
+    "row_count": 148,
+    "cross_batch_cannibalization_ran": true
+  },
+  "checks_run": [
+    "voice",
+    "heading-levels",
+    "section-presence",
+    "customization-claims",
+    "url-handle",
+    "price-in-body",
+    "heritage-counts",
+    "fabrication-hedge",
+    "fifa-terms",
+    "forbidden-phrasings",
+    "word-band",
+    "brand-casing",
+    "cannibalization",
+    "cross-brief",
+    "registry1-present"
+  ],
+  "checks_skipped": [],
+  "findings": {
+    "total": 0,
+    "fail": 0,
+    "review": 0,
+    "by_check": {}
+  }
+}
