@@ -1448,6 +1448,14 @@ Reference: `SEO_BATCH_PROCESS.md` section 5 ("What must never happen"), rules 1,
 
     This is mechanically identical to the exemplar failures in items 7 and 8: an artifact encoding what was observed rather than what was intended, which then teaches the next reader (or the next test run) the wrong thing. Same fix in both cases: when you write or change a rule, check the artifacts that DEMONSTRATE it (examples, fixtures, assertions), not only the artifacts that STATE it. A test asserting a currently-passing state is worth little unless you can also say what it would fail on.
 
+    **THIRD INSTANCE, 2026-08-19, and it is the same family: the gate run log.** Building `_gate-run.json` produced two defects of exactly this shape within one commit. (a) The log listed `word-band` under `checks_run` even when it had been skipped, because skip labels arrive as `word-band(no-input)` and the names never matched: the log reproducing the false reassurance it was built to prevent. (b) A blanket `*.json` in `.gitignore` silently swallowed the log, so it would have worked perfectly on every local run and left nothing behind, which is the identical failure shape as the silent path-3 skip in item 9: **a mechanism that appears to function while producing no evidence.**
+
+11. **A new artifact is not verified until it is confirmed present in a FRESH CLONE, not merely present locally (added 2026-08-19, Mike).**
+
+    Existing on disk after the code ran proves the writer works. It does not prove the artifact survives to anyone else, and `.gitignore`, a build step, or a cleanup task can each remove it silently. The check is cheap: `git check-ignore -v <path>`, then confirm the file appears in `git status` as untracked or staged before you claim the feature is done. For anything whose purpose is to be READ LATER (a log, a record, a report, a fixture), the local copy is not the deliverable; the committed copy is.
+
+    This generalizes items 9 and 10 rather than repeating them: an artifact that produces no evidence, a test that asserts the wrong thing, and a record that never leaves the machine all fail the same way, by appearing to work.
+
 ## Cross-references
 
 - `context/matrixify-import-template.md` is the reference shape for Matrixify product-import files (two valid forms, XLSX default vs handle-keyed CSV; scope note that Step 2 owns the build).
