@@ -28,6 +28,16 @@ Why this rule exists: a 2026-08-14 audit fetched all 151 registry rows live and 
 
 Your part is the last link. After Mike confirms the import, report back the handle list that actually landed, **the batch label, and the date the import landed**, plus anything that failed or was skipped. The workforce flips those rows to `shipped` and writes `batch` and `implementation_date` from your report; the rest stay `pending`. A handle you do not report stays `pending`, which is the safe direction: an unshipped row wrongly marked `pending` costs one re-check, while a shipped row wrongly marked `shipped` hides four pages of finished work for months.
 
+**THE IMPORT REPORT MUST STATE `Updated N / Created 0` EXPLICITLY (added 2026-08-19, Mike). A nonzero Created is a STOP CONDITION.**
+
+Read both counts off the Matrixify job summary and report them with the handle list, along with the job ID and timestamp. Matrixify reports them per job; do not paraphrase them as "it worked."
+
+**Why this is a standing check and not a nicety.** Matrixify matches on handle. A mistyped, reconstructed or stale handle does not fail loudly: it matches nothing, so Matrixify CREATES a new product instead. That phantom product is live, empty of real merchandising, and **invisible to every check we run**, because the registry only knows about pages we chose to track and the gate only reads the session folder. Nothing downstream would ever surface it. `Created 0` is the only cheap evidence that every handle hit an existing product.
+
+This is the positive form of the rule that handles always come from the briefs and are never reconstructed from product titles. Until 2026-08-19 we had no evidence that rule was holding, only an absence of complaints. The Batch 15 and C-FIX Group 2 jobs (#729762205, 10 updated 0 created; #729757812, 3 updated 0 created) are the first confirmation.
+
+**If Created is nonzero: STOP.** Do not report the batch as imported. Identify which handle failed to match, tell Mike which phantom product was created so it can be deleted in the admin, and treat the affected row as not imported. A row whose handle created a product has not shipped; it has made a mess.
+
 Report the import date explicitly even when it is the same day you built the file. Often it is not. Measured across B5 to B14, the gap between the last brief and the import runs from 0 days to 10 (B9 ten, B13 nine, B10 three), so the brief date is not a usable stand-in and must never be substituted for it. The workforce cannot recover the real date later. A 2026-08-14 analysis of whether this work is paying off found that date recorded on zero rows out of 142 and had to reconstruct all ten cohorts by hand before it could measure anything.
 
 Do not infer status from the brief existing, from the file validating, or from the export matching. Only the confirmed import counts.

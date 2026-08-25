@@ -1456,6 +1456,14 @@ Reference: `SEO_BATCH_PROCESS.md` section 5 ("What must never happen"), rules 1,
 
     This generalizes items 9 and 10 rather than repeating them: an artifact that produces no evidence, a test that asserts the wrong thing, and a record that never leaves the machine all fail the same way, by appearing to work.
 
+    **THE BROADER FORM, added 2026-08-19 after a fourth instance: ANY TOOL WITH A SILENT DEFAULT THAT WRITES DATA MUST FAIL RATHER THAN DEFAULT.**
+
+    `scripts/build_ceded_terms.py` defaulted `--date` to a hardcoded value, so a bare run rewrote the recording date of all 24 derived rows from their real date back to the default. The rows' CONTENT was byte-identical, which is what made it invisible: the diff read as an ordinary update rather than a regression. It was caught only because the regeneration was diffed against the committed file instead of trusted. Fixed the same day by refusing to run without `--date`, the same posture `batch_gate.py` takes on a check that cannot run.
+
+    The rule: **a tool that writes data must never invent the value that records WHEN or WHETHER it was written.** Defaults are fine for presentation and formatting; they are not fine for provenance. If the caller has not supplied a date, a source, or a verification status, the tool stops. Silence plus a plausible value is the worst combination available, because it is indistinguishable from correct output.
+
+    Four instances now, one mechanism: a bad exemplar teaching the wrong copy (items 7 and 8), a test asserting the bug was correct (item 10), a run log that never left the machine (this item), and a writer inventing its own provenance. Each appeared to work.
+
 ## Cross-references
 
 - `context/matrixify-import-template.md` is the reference shape for Matrixify product-import files (two valid forms, XLSX default vs handle-keyed CSV; scope note that Step 2 owns the build).
