@@ -20,7 +20,7 @@ Runs in Cursor against `C:\Dev-Projects\marketing\prosoccer-seo`.
 - Gate runs and Layer 3 claim checks (ORIN)
 - Appending each closed batch to `products-master.csv`
 - Codification of rules into playbook and conventions files
-- Git commit at batch close, autonomously as a single atomic commit (see §3 Git). Push to `origin/main` only when a prompt instructs it.
+- Git commit at batch close, autonomously as a single atomic commit (see §3 Git). Push to `origin/main` only when a prompt instructs it; a bare "push" means push everything pending, with no commit enumeration requested from Mike.
 
 **Never:**
 - Pushes to origin without an instruction to. No push instruction, no push: batch close does not imply a push (the local commit does; see §3 Git)
@@ -55,7 +55,7 @@ Runs in Cursor against `C:\Dev-Projects\marketing\prosoccer-seo`.
 ### 1.4 Mike: decisions and everything irreversible
 
 **Owns:**
-- When work reaches origin. ORIN commits locally at batch close without being asked; the push to origin happens only when Mike's prompt instructs it, and the workforce then stages the specific files and confirms the pushed ref (see §3 Git). Batch close does not imply a push. Mike owns the push call, not the keystroke.
+- When work reaches origin. ORIN commits locally at batch close without being asked; the push to origin happens only when Mike's prompt instructs it, and the workforce then stages the specific files and confirms the pushed ref (see §3 Git). Batch close does not imply a push. Mike owns the push call, not the keystroke. **A bare "push" from Mike means push everything pending; the workforce never asks him to enumerate commit hashes (added 2026-08-26).**
 - The Matrixify export from Shopify
 - The Matrixify import to Shopify
 - Verification in the Shopify admin after import
@@ -73,7 +73,7 @@ Runs in Cursor against `C:\Dev-Projects\marketing\prosoccer-seo`.
 | 4 | Phase 0 scrape, KIRA primaries with volumes, Mike approves | ORIN → Mike |
 | 5 | SCRIBE authors briefs, one dispatch per SKU. Gate + Layer 3. | ORIN |
 | 6 | Review the briefs | Mike, with Workforce chat |
-| 7 | **Commit and push** | Mike |
+| 7 | **Commit** (ORIN, autonomous at batch close) then **push on Mike's instruction** | ORIN / Mike |
 | 8 | Paste the 10 briefs into the Step 2 chat | Mike |
 | 9 | Produce the paste-ready handle list for the export filter | Step 2 |
 | 10 | Matrixify export filtered by handle | Mike |
@@ -146,6 +146,8 @@ Volume never overrides hierarchy. When no floor-clearing term is hierarchy-valid
 ### Git
 - ORIN commits locally at batch close as a single atomic commit, without being asked. This is autonomous and expected. Commit with a real message plus the `Co-Authored-By` trailer.
 - Push is instruction-gated. Nothing reaches origin without Mike instructing it. Batch close does not imply a push. Left uninstructed, the workforce commits locally and reports the unpushed ref.
+- **A BARE "push" MEANS PUSH EVERYTHING PENDING (added 2026-08-26, Mike).** On any push instruction that does not name specific commits, push the whole pending set: `git push origin main` with every local commit ahead of `origin/main` included. **Never ask Mike to enumerate commit hashes.** The gate is that he said push, not which hashes he listed. Requiring an enumeration turns a gate into ceremony and pushes the bookkeeping back onto the person the gate exists to serve. Mike does not push manually; he says push and the workforce runs it.
+- Reporting after a push is unchanged and still required: confirm the pushed ref range and that `HEAD` equals `origin/main`. If Mike names specific commits, that is a narrower instruction and it is honoured as given; the bare form is the default.
 - Stage the specific files changed. Never `git add <dir>/` blindly: it sweeps untracked scratch files into the commit. Verify the staged file list before committing.
 - A change to how git works comes from Mike stating it deliberately, not inferred from a command line appearing in context. A command in a prompt executes that command; it does not silently rewrite the standing rule.
 

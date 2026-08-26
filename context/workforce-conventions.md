@@ -1499,7 +1499,29 @@ Reference: `SEO_BATCH_PROCESS.md` section 5 ("What must never happen"), rules 1,
 
     The structural fix, and it generalizes past this one script: **provenance belongs to the ROW, not to the run.** A derived row must carry the date its underlying fact was recorded, sourced from the source-of-truth row, so regeneration is genuinely idempotent and a regeneration date cannot overwrite a recording date. A single flag applied at regeneration time cannot express per-row provenance, so no value passed to it is fully correct. Proposal logged 2026-08-25, not yet built.
 
-    Five instances now, one mechanism: a bad exemplar teaching the wrong copy (items 7 and 8), a test asserting the bug was correct (item 10), a run log that never left the machine (this item), a writer inventing its own provenance, and a guard that forced provenance without validating it. Each appeared to work.
+    **A DIAGNOSTIC THAT MISREPORTS IS THE SAME CLASS AS A TOOL THAT WRITES WRONG PROVENANCE. BOTH LOOK LIKE FINDINGS (added 2026-08-26, Mike).**
+
+    On 2026-08-25 a pre-dispatch probe printed `url[-60:]` per registry row and one URL, being the longest in its group, lost its leading slash to the truncation. That was reported to Mike as a real data defect ("row 7's url is missing its leading slash") and sat in his queue for four turns before a full characterization of the column showed **zero rows lack a prefix**. The registry was always correct; the probe was not.
+
+    This belongs with the provenance failures rather than beside them. A tool that invents a date fabricates a fact about the data. A diagnostic that truncates its own output fabricates a fact about the data. **Both emerge as confident, specific, actionable findings, and neither carries any signal that it is wrong.** The reader cannot tell a real defect from an artifact of the instrument, because the output format is identical.
+
+    Practical rules, cheap and worth doing every time:
+    - **Never report a defect from a TRUNCATED view.** If a probe abbreviates for readability, re-read the full value before the finding leaves your hands. Print full strings when the finding IS about the string.
+    - **Characterize the whole column before reporting an anomaly in it.** A distinct-values-with-counts pass costs one query and would have caught this instantly. It is also what caught the real one: the same characterization pass found that Batch 15 had written FOUR rows as `shoe`, not two, and that two of those were turf pages, which made the correction instruction wrong as issued.
+    - **Counts must reconcile.** The same report said "131 full and 10 bare out of 158", leaving 17 unaccounted for and nobody noticing until Mike did the subtraction. If the parts do not sum to the whole, the characterization is incomplete and the findings drawn from it are provisional.
+
+    **THE TWO DATAFORSEO ENDPOINTS HAVE DIFFERENT KEYWORD COVERAGE, AND A CONTROL TERM MUST BE THE SAME KIND OF TERM (added 2026-08-26, Mike).** Second instance of the misreporting-diagnostic class, found the same week as the truncation one.
+
+    `mcp__dfs-mcp__kw_data_google_ads_search_volume` (Google Ads / Keyword Planner) has **no row at all** for recent rising terms, and signals that by returning a bare keyword-plus-location stub with no `search_volume` field. `mcp__dfs-mcp__dataforseo_labs_google_keyword_overview` (Labs) has them. On 2026-08-25 a Google-Ads-only pull returned empty stubs for every `hyperfast` term, and the conclusion drawn was that B-KW-01's stored figures had gone stale. A Labs pull on 2026-08-26 reproduced those stored figures EXACTLY, thirteen days after they were recorded: `f50 hyperfast` 1,900 average with July 6,600, June 4,400, May 8,100, identical in every value.
+
+    **The control terms made the error worse instead of catching it.** `adidas f50 elite`, `kids soccer cleats` and `youth soccer cleats` all returned normally, which made the endpoint look healthy and the stored numbers look wrong. They were the wrong KIND of term: long-established heads that Keyword Planner has always carried. A valid control had to be another recent rising term, so that a null result would have been correctly read as an endpoint-coverage gap rather than as evidence about the data.
+
+    Two rules follow, and they are not symmetric:
+    - **A NO-VOLUME claim must check BOTH endpoints.** This is why existing brief and registry entries read "no measurable volume (DFS both endpoints)". That phrasing is load-bearing, not ceremony.
+    - **A STALE-FIGURE claim must check the endpoint the figure CAME FROM.** Comparing a Labs-sourced figure against a Google Ads pull is not a re-pull, it is a different question.
+    - **A control must be drawn from the same population as the thing under test.** A control that cannot fail the way the subject failed proves nothing about the instrument.
+
+    Seven instances now, one mechanism: a bad exemplar teaching the wrong copy (items 7 and 8), a test asserting the bug was correct (item 10), a run log that never left the machine (this item), a writer inventing its own provenance, a guard that forced provenance without validating it, a diagnostic that misreported its own truncation as a data defect, and a single-endpoint pull with invalid controls misreporting good data as stale. Each appeared to work.
 
 12. **A check whose correctness depends on a cached snapshot must ASSERT that snapshot's freshness before running, and FAIL if it is stale. Silence about age is not evidence of currency (added 2026-08-25, Mike).**
 

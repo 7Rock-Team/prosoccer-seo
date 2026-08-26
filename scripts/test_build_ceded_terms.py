@@ -20,10 +20,20 @@ correct. Ask of every required-argument guard: what happens if the caller passes
 plausible but WRONG value? Here, the same silent corruption the guard was added to
 prevent.
 
-    KNOWN-FAILING BY DESIGN: test_idempotent_under_any_date and
-    test_existing_row_dates_survive_a_later_run FAIL TODAY. That failure IS the
-    proof of the open defect, and it is the cheapest available demonstration that
-    per-row provenance is needed rather than another flag validation.
+    QUARANTINED, NOT IGNORED (2026-08-26, Mike). The two tests naming the open defect
+    are marked `@unittest.expectedFailure` and renamed to carry B-PROV-01 in the test
+    NAME, so the suite runs GREEN and the pending work is visible in the run output
+    rather than buried in this docstring:
+
+        test_PENDING_B_PROV_01_idempotent_under_any_date
+        test_PENDING_B_PROV_01_existing_row_dates_survive_a_later_run
+
+    Why quarantine rather than leave them red: a red suite teaches everyone to ignore
+    failures, which is the broken-window problem the codification checklist already
+    warns about. An expected-failure is a claim with a deadline; a red suite is noise.
+    If either test starts PASSING, unittest reports an UNEXPECTED SUCCESS and the run
+    goes non-zero, which is the signal that the fix landed and the decorator and the
+    PENDING prefix should both come off.
 
     Do not "fix" them by relaxing the assertion. They go green when per-row
     provenance lands: inline `term@YYYY-MM-DD` inside `ceded_from`, so the generator
@@ -111,7 +121,8 @@ class CededTermsTestCase(unittest.TestCase):
 
     # ---- the guard that does NOT work: known-failing, and that is the point --------
 
-    def test_idempotent_under_any_date(self):
+    @unittest.expectedFailure  # B-PROV-01: goes green when inline term@date lands
+    def test_PENDING_B_PROV_01_idempotent_under_any_date(self):
         """Regenerating with NO new cedes must produce a byte-identical file under ANY
         --date. Nothing about the underlying facts changed, so nothing in the output
         should change.
@@ -134,7 +145,8 @@ class CededTermsTestCase(unittest.TestCase):
             "Per-row provenance (inline term@YYYY-MM-DD) is the fix, not a stricter flag.",
         )
 
-    def test_existing_row_dates_survive_a_later_run(self):
+    @unittest.expectedFailure  # B-PROV-01: goes green when inline term@date lands
+    def test_PENDING_B_PROV_01_existing_row_dates_survive_a_later_run(self):
         """The Batch 15.1 case exactly: a run passing an HONEST current date, made to
         record NEW cedes, must not rewrite the dates of the rows already recorded.
 
