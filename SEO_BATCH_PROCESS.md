@@ -96,7 +96,7 @@ Runs in Cursor against `C:\Dev-Projects\marketing\prosoccer-seo`.
 
 Origin: a live audit of all 151 registry rows on 2026-08-14 found **16 statuses wrong in both directions**. Ten `pending` rows were live (the whole Batch 10 set). Six `shipped` rows had never been imported: the three Mexico 2026 Stadium jerseys, the Predator Accuracy Crazyrush page, HP9971 and IH1779-900. Two of those six were about to be touched by a correction batch that assumed their copy was live. The audit is the expensive way to find this; this step is the cheap way to prevent it.
 
-**The gate (step 5).** `scripts/batch_gate.py` runs 10 mechanical checks over the session folder, including `check_section_presence` (added 2026-07-31): every required PDP section must be present with content, and the Description body must carry at least one internal link, an unconditional hard fail. Exit 0 only when nothing fires. The gate replaces the human per-brief review for mechanical defect classes; the escalate-on-exception batch mode (CLAUDE.md 'Approval mode') is safe only because it runs.
+**The gate (step 5).** `scripts/batch_gate.py` runs 15 mechanical checks over the session folder, including `check_section_presence` (added 2026-07-31): every required PDP section must be present with content, and the Description body must carry at least one internal link, an unconditional hard fail. Exit 0 only when nothing fires. The gate replaces the human per-brief review for mechanical defect classes; the escalate-on-exception batch mode (CLAUDE.md 'Approval mode') is safe only because it runs.
 
 **A check that CANNOT run is now a hard failure (changed 2026-08-18, Mike).** The gate used to print a skip line and still exit 0. Three false-green paths existed and all three are closed:
 1. `inputs/_registry1_primaries.txt` absent, empty or unreadable, which silently downgraded cannibalization to intra-batch only. Now `registry1-missing`, a batch-level FAIL.
@@ -111,6 +111,8 @@ A backstop in `report()` returns non-zero on any remaining skip, so a future ski
 
 Handles always come from the briefs (step 9). Never reconstruct them from product titles. ProSoccer handles abbreviate in ways titles do not: `man-united` not `manchester-united`, `ls` not `long-sleeve`, `fg` not `firm-ground`.
 
+**And the converse, which is a separate rule (added 2026-08-25, Mike): the LIVE TITLE governs product attributes, and the handle is never a source for them.** Tier, cut, surface, age band, closure and gender come from a fresh fetch of the live title. The two rules point in opposite directions on purpose: the brief is authoritative about what the URL SAYS, the live title is authoritative about what the product IS. Batch 15.1 had two SKUs where reading attributes off the handle would have produced the wrong primary: `adidas-jr-f50-hyperfast-mid-fg-mg-...` carries no tier token and is actually a **Club** Mid page, and `adidas-kids-f50-hyperfast-club-fg-mg-...` omits **Velcro**, the closure that separates it from the laced Junior page in the same pack. Full rule, prior instances (`jr`/`ll`/`in`/`tf`) and the Shopify option-label trap: `context/workforce-conventions.md` 'The live title governs; the handle is never a source of product attributes'.
+
 ---
 
 ## 3. Standing rules
@@ -121,7 +123,9 @@ Handles always come from the briefs (step 9). Never reconstruct them from produc
 - Taxonomy nodes, tags, variants, prices, or any metafield not in the import file.
 
 ### Keyword hierarchy
-Collections own brand, model, club, category, and any term where a searcher would be satisfied by multiple products. PDPs own model + tier + cut + surface + **pack (when a concurrent live pack sibling exists)** + width + colorway, terms that resolve to one product.
+Collections own brand, model, club, category, and any term where a searcher would be satisfied by multiple products. PDPs own **age band** + model + tier + cut + surface + **pack (when a concurrent live pack sibling exists)** + width + colorway, terms that resolve to one product.
+
+**Age band (adult, women's, junior, kids) is part of the configuration tuple (added 2026-08-25).** It always was in practice, since `adidas f50 club` and `adidas junior f50 club` have long been separate held primaries, but the tuple text did not name it. Read it off the live title and confirm against variant size VALUES, not the Shopify option label. Full rule: `context/workforce-conventions.md` 'Pack succession' point 1.
 
 Volume never overrides hierarchy. When no floor-clearing term is hierarchy-valid, the page takes the exact qualified term and is flagged sub-floor. It does not take a collection or sibling term.
 
@@ -200,13 +204,14 @@ The XLSX form stays the default because the sheet name auto-resolves the entity 
 4. **Rules that live outside the repo do not exist.** If SCRIBE cannot read it, SCRIBE will not follow it. Codify at the point of discovery, not at batch close.
 5. **Examples teach louder than rules.** The 20 meta title brand-suffix violations happened because the playbook's own examples demonstrated the violation while the rule beside them forbade it. When an exemplar and a rule disagree, the exemplar wins. Audit examples whenever a rule is written or changed.
 6. **Do not assert a tool's behavior without testing it.** Infer, flag, then verify. An untested claim stated as fact costs more than the uncertainty it was meant to resolve.
+7. **A check that ran against STALE data is not a pass, and it is harder to catch than one that did not run (added 2026-08-25, Mike).** Rule 2 covers the check that skips and says so. This is the check that runs, prints nothing unusual, exits 0, and is wrong, because its cached input aged out. Assert the snapshot's freshness before trusting the verdict, and fail on stale rather than warn. Batch 15.1: a 12-day-old sitemap cache would have reported "no live pack sibling" for both Sparkfusion SKUs, because the two pages that ARE their siblings were published inside those 12 days. Nothing in the output would have differed from a correct run. Full rule: `context/workforce-conventions.md` codification checklist item 12.
 
 ---
 
 ## 6. Open at last update
 
 - Batch 11 (10 SKUs: Barcelona men's/women's home, Arsenal home/LS/youth, Bayern Munich authentic/LS, 3 Nike Shadow cleats) closed end to end: briefs (e68a999), process-doc update (25fd986), registry append step 14 COMPLETE (products-master.csv rows 113-122, commit c5edafb). Live on Shopify.
-- Gate: `check_section_presence` BUILT (added 2026-07-31); the gate now runs 10 mechanical checks. Remaining hardening still to build: (a) cannibalization check (#9) is exact-match only, with no containment or token-subset detection, so that class is caught only by ORIN's manual pre-dispatch pass, never the gate; (b) `voice_check.py` skips fenced code blocks, so worked examples inside canonical files are invisible to it; (c) meta-title length (48-char cap) and meta-description length/format are not gated, enforced by SCRIBE plus Layer 3 only.
+- Gate: `check_section_presence` BUILT (added 2026-07-31); the gate now runs 15 mechanical checks (`ALL_CHECKS`, verified against the code 2026-08-25). Remaining hardening still to build: (a) cannibalization check (#9) is exact-match only, with no containment or token-subset detection, so that class is caught only by ORIN's manual pre-dispatch pass, never the gate; (b) `voice_check.py` skips fenced code blocks, so worked examples inside canonical files are invisible to it; (c) meta-title length (48-char cap) and meta-description length/format are not gated, enforced by SCRIBE plus Layer 3 only.
 - 20 meta title brand-suffix violations found across all batches. KA6868 fixed manually 2026-07-28; 19 remain live, awaiting fix-forward.
 - Meta title and meta description format rules being codified into the playbook
 - Collection page workstream, pending audit of the 61 inherited white-label primaries

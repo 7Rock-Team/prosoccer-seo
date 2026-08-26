@@ -124,3 +124,13 @@ _Batch 4 (2026-06-17) appended 8 entries. JP6237 is the Batch-4 Predator exempla
 - Use case scenario: the 4-8 player taking first real touches on grass; the parent buying a first-pair cleat
 - Angle of emphasis: Kids tier (FIRST workforce Kids PDP); comfort + confidence + first-cleats; standard LACE closure (scrape-confirmed, NOT hook-and-loop -- closure features MUST be scrape-confirmed per SKU, never assumed); FG-MG do-it-all outsole; owns KIDS-qualified `adidas kids predator club` (senior HQ2273 owns the unqualified term)
 - Heritage angle: the Predator fold-over-tongue look scaled to the youngest players' build
+
+_Batch 15.1 (2026-08-26) added eight junior and kids Chaos vs Control FA26 entries plus the first two WOMEN'S Sparkfusion entries. The two Sparkfusion rows are NOT in the parent-facing junior lane and fit none of the four avatars; see the silo note at the top of this file and B-AVATAR-02._
+
+### SKU IH2080 (Junior Predator League Laceless FG, Chaos vs Control FA26) [Batch 15.1]
+- Brief: `deliverables/page-optimizations/2026-08-26_session-01/IH2080_adidas-jr-predator-league-laceless-fg-chaos-vs-control.md`
+- Date: 2026-08-26
+- Opening hook approach: Predator is a striking cleat, not a speed cleat: control and the quality of contact, at a junior price
+- Primary metaphor: contact quality and a stable base to hit through. Speed belongs to the F50 rows and is barred here
+- Use case scenario: dry firm natural grass, junior match play, the player who shoots and passes long
+- Angle of emphasis: Primary `adidas junior predator league laceless fg`, unqualified: every other live Junior Predator League FG page is fold-over tongue, a different cut. HP9998 holds the broader `adidas junior predator league`; cut plus surface is hierarchy-valid qualification. NANOSTRIKE EXCEPTION APPLIED: written as `Nanostrike` in title case with no plus, because adidas uses Nanostrike+ at Elite and Nanostrike at League and this is a League page, while the live page renders both all-caps. Verified 5 occurrences, all correct. Powerspine and Strikeframe title case. No weight on the live page, so none stated.

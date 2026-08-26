@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "timestamp_utc": "2026-08-26T18:18:48+00:00",
+  "session": "2026-08-26_session-01",
+  "exit_code": 0,
+  "verdict": "PASS",
+  "briefs_checked": 10,
+  "skus": [
+    "IH2080",
+    "IH4459",
+    "IH4488",
+    "KJ0670",
+    "KK1314",
+    "KK1316",
+    "KK1326",
+    "KK1341",
+    "KK1345",
+    "KK1368"
+  ],
+  "registry1": {
+    "present": true,
+    "row_count": 158,
+    "cross_batch_cannibalization_ran": true
+  },
+  "checks_run": [
+    "voice",
+    "heading-levels",
+    "section-presence",
+    "customization-claims",
+    "url-handle",
+    "price-in-body",
+    "heritage-counts",
+    "fabrication-hedge",
+    "fifa-terms",
+    "forbidden-phrasings",
+    "word-band",
+    "brand-casing",
+    "cannibalization",
+    "cross-brief",
+    "registry1-present"
+  ],
+  "checks_skipped": [],
+  "findings": {
+    "total": 0,
+    "fail": 0,
+    "review": 0,
+    "by_check": {}
+  }
+}
