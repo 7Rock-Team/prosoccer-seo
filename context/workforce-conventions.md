@@ -16,7 +16,7 @@ deliverables/page-optimizations/
       <slug-2>_audit-and-regen.md
       ...
   YYYY-MM-DD_session-NN/
-    <SKU>_<slug>_brief.md
+    <SKU>_<slug>.md
     ...
 ```
 
@@ -28,7 +28,7 @@ deliverables/page-optimizations/
   - `deliverables/page-optimizations/whitelabel-audit/2026-05-16_session-01/` (whitelabel audit pilot, session 1)
   - `deliverables/page-optimizations/whitelabel-audit/2026-05-17_session-02/` (whitelabel audit pilot, session 2)
   - `deliverables/page-optimizations/2026-06-01_session-01/` (a non-whitelabel batch of per-page briefs)
-- **Brief filename pattern (SKU-first, added 2026-06-15):** `[SKU]_[descriptive-handle]_brief.md`. The SKU LEADS the filename because SKU is the operationally relevant identifier when Mike looks products up in Shopify admin; the descriptive handle is secondary. Example: `IO8225-900_nike-vapor-17-pro-firm-ground-soccer-cleats-breakout-pack-su26_brief.md`. Separator: a single underscore between SKU and handle (matching the existing `_brief.md` suffix convention). SKU formatting: use the SKU exactly as it appears in the white-label sheet / Shopify admin, preserving hyphens, dashes, and suffix variants (`IO8225-900`, `J000693-CRFT`, `JR5386`, `IH4571`); no case conversion, no character substitution. Forward-only: the existing 20 brief files (Day 3 + Batch 2, at `2026-06-08_session-01/` and `2026-06-10_session-01/`) keep their current handle-first filenames; Batch 3 onward complies.
+- **Brief filename pattern (SKU-first, added 2026-06-15; `_brief` suffix DROPPED 2026-08-26, Mike):** `[SKU]_[descriptive-handle].md`. The SKU LEADS the filename because SKU is the operationally relevant identifier when Mike looks products up in Shopify admin; the descriptive handle is secondary. Example: `KK1345_adidas-kids-f50-hyperfast-club-velcro-chaos-vs-control.md`. Separator: a single underscore between SKU and handle. **The `_brief` suffix is gone: every file in the folder is a brief, so it carried no information.** This is the convention being updated to match practice, not a rename: Batch 15 and Batch 15.1 both shipped without the suffix before the rule was corrected, and **existing files are NOT renamed** (the same forward-only posture the SKU-first change took in 2026-06-15). SKU formatting: use the SKU exactly as it appears in the white-label sheet / Shopify admin, preserving hyphens, dashes, and suffix variants (`IO8225-900`, `J000693-CRFT`, `JR5386`, `IH4571`); no case conversion, no character substitution. Forward-only: the existing 20 brief files (Day 3 + Batch 2, at `2026-06-08_session-01/` and `2026-06-10_session-01/`) keep their current handle-first filenames; Batch 3 onward complies.
 
 ### Session folder creation
 
@@ -355,7 +355,7 @@ Surfaced from Mike's first production Shopify implementation pass: he implemente
 
 **Two artifacts per brief, two audiences.**
 
-1. **The brief file** (`deliverables/page-optimizations/[YYYY-MM-DD_session-XX]/<SKU>_<slug>_brief.md`, SKU-first per 'Naming convention' above, added 2026-06-15) carries ONLY implementer-facing content, ordered for top-to-bottom copy-paste into Shopify admin (plus the clean Keywords table for Mike's at-a-glance tracking). No keyword rationale, no brand-IP reasoning, no sibling differentiation lane, no defense-in-depth notes. The Keywords table (added 2026-06-15) is the one keyword-related element that lives in the brief: it carries Volume and Difficulty only, never the selection rationale, GSC analysis, or "why this keyword" justification, which stay in the audit file.
+1. **The brief file** (`deliverables/page-optimizations/[YYYY-MM-DD_session-XX]/<SKU>_<slug>.md`, SKU-first per 'Naming convention' above, added 2026-06-15) carries ONLY implementer-facing content, ordered for top-to-bottom copy-paste into Shopify admin (plus the clean Keywords table for Mike's at-a-glance tracking). No keyword rationale, no brand-IP reasoning, no sibling differentiation lane, no defense-in-depth notes. The Keywords table (added 2026-06-15) is the one keyword-related element that lives in the brief: it carries Volume and Difficulty only, never the selection rationale, GSC analysis, or "why this keyword" justification, which stay in the audit file.
 2. **The per-batch audit file** (`deliverables/page-optimizations/[YYYY-MM-DD_session-XX]/_audit-trail.md`) carries the workforce-internal audit content for every SKU in the batch, in one navigable document. One audit file per batch, not per SKU (easier to maintain than scattered per-SKU files).
 
 **Brief file structure (implementer-facing only):**
@@ -485,6 +485,14 @@ The v2 architecture moves the upstream work SCRIBE used to repeat per dispatch (
 - **Schema / template:** `templates/per-sku-input-template.md`. Sections: Identity (SKU, URL, handle, brand, brand-IP posture, product category, tier, word band), Phase 0 scrape data, Keywords, Validated internal links, Differentiation lane, Structure skeleton (Mechanism A), Forbidden phrasings (three tiers), and a fenced `gate-meta` JSON block.
 - **One source of truth:** the fenced ```` ```gate-meta ```` JSON block is the machine-readable AUTHORITATIVE source for brand, brand-IP posture, tier, word band, primary keyword, and the three-tier forbidden-phrasings lists (verbatim / motifs / title-frames). `scripts/batch_gate.py` parses this block; SCRIBE reads it for the barred lists, the tier band, and the brand-IP posture; ORIN writes it. Three consumers, one list, no drift. The human-readable sections above the block echo the same values for reading convenience, written in the same pass so they stay in sync.
 - **Tier + word band are SKU-specific, never inherited from the exemplar** (the IF8512 Elite-band-on-a-Pro-SKU defect). The word band comes from the SKU's own tier: Elite 400-450, Pro 340-390, League/Club 280-340 (+15 tolerance).
+- **JUNIOR AND KIDS SKUs TAKE THEIR TIER BAND UNCHANGED: League and Club juniors are 280-340, the same as adults (settled 2026-08-26, Mike).** There is no separate youth band. Age band changes the keyword configuration (see 'Pack succession' point 1) and the buyer voice; it does not change the word band.
+
+  **Which batches predate this and are therefore NOT comparable.** The junior band drifted before it was settled, and cross-batch word-count comparisons must not cross this boundary:
+  - **Batch 14 (2026-08-13) used [280, 360] for junior and kids SKUs** (KK1321 Junior F50 League Turf, IO1528 Junior Superfly Academy AG), and also ran senior League and Club at [340, 390], which is a second, separate drift from the values above.
+  - **Batch 15 (2026-08-18) used the convention values** and had no junior or kids SKUs, so it does not settle the junior question either way.
+  - **Batch 15.1 (2026-08-26) used [280, 340] for all eight junior and kids SKUs**, which is the tighter of the two candidates and matches this convention. That choice is what this note ratifies.
+
+  A tighter band is never a loosening, which is why adopting [280, 340] retroactively is safe to state as the rule while leaving Batch 14's pages alone. Batch 14 is not re-banded or re-briefed; it is simply excluded from band comparisons. Origin: `strategy/sprint-backlog.md` B-COPY-02, where this drift is recorded as the second blocker on cross-batch comparison.
 
 ### Where the deterministic gate reads it
 
