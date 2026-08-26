@@ -1519,7 +1519,7 @@ Reference: `SEO_BATCH_PROCESS.md` section 5 ("What must never happen"), rules 1,
     Two rules follow, and they are not symmetric:
     - **A NO-VOLUME claim must check BOTH endpoints.** This is why existing brief and registry entries read "no measurable volume (DFS both endpoints)". That phrasing is load-bearing, not ceremony.
     - **A STALE-FIGURE claim must check the endpoint the figure CAME FROM.** Comparing a Labs-sourced figure against a Google Ads pull is not a re-pull, it is a different question.
-    - **A control must be drawn from the same population as the thing under test.** A control that cannot fail the way the subject failed proves nothing about the instrument.
+    - **A control must be drawn from the same population as the thing under test.** A control that cannot fail the way the subject failed proves nothing about the instrument. See checklist item 13.
 
     Seven instances now, one mechanism: a bad exemplar teaching the wrong copy (items 7 and 8), a test asserting the bug was correct (item 10), a run log that never left the machine (this item), a writer inventing its own provenance, a guard that forced provenance without validating it, a diagnostic that misreported its own truncation as a data defect, and a single-endpoint pull with invalid controls misreporting good data as stale. Each appeared to work.
 
@@ -1536,6 +1536,8 @@ Reference: `SEO_BATCH_PROCESS.md` section 5 ("What must never happen"), rules 1,
     **Maximum age for the live-sitemap pack collision check: 3 DAYS (adopted 2026-08-25, Mike).** Derived, not guessed: the store added 127 products across the 12 stale days, roughly 10 a day, so a 3-day window bounds the worst-case miss at about 30 products while the 12-day window bounded it at 127 and concealed two decisive pack siblings. A snapshot with no recoverable timestamp is stale at any age.
 
     **This applies to the BACKLOG as well as to scripts (added 2026-08-25, Mike).** A figure recorded in `strategy/sprint-backlog.md` is a cached snapshot of a measurement, and the gap between logging and deciding is usually months. Re-pull figures at DECISION time, not at logging time, and never decide on a logged number without refreshing it first. See B-KW-01, where two stored volumes disagreed with a live pull on 2026-08-25 while control terms confirmed the endpoint was healthy.
+
+13. **A control must be chosen so that it would fail under the same conditions as the subject (added 2026-08-26, Mike).** A control drawn from a different population confirms the instrument works for that population and nothing more. Instance: `hyperfast` terms returned no volume on the DFS Google Ads endpoint, and the controls picked to test the endpoint (`adidas f50 elite`, `kids soccer cleats`, `youth soccer cleats`) were long-established heads that could not exhibit the suspected failure mode, coverage of recent rising terms. They passed, the endpoint looked healthy, and correct stored figures were reported as stale. See item 11 for this and the truncated-url probe as instrument artifacts.
 
 ## Cross-references
 
