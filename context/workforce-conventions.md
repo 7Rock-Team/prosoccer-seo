@@ -802,6 +802,33 @@ Read age band off the LIVE TITLE, never the handle, and confirm it against the v
 
 The incumbent is the live page at that age band + model + tier + cut + surface **earning the most GSC impressions over a trailing 90 days.**
 
+### CANONICAL URLS ONLY. Standing ruling, added 2026-08-27 (Mike)
+
+**Every GSC comparison in this system uses CANONICAL URLs only.** Incumbency, config totals, before-and-after cohorts, all of it. Rows carrying `?variant=`, `?_pos=`, `?_sid=`, `utm_*`, `com_cvv`, or a locale prefix (`/en-ca/`, `/en-gb/`, `/en-au/`, `/en-es/`) are EXCLUDED from the sum. This is not a per-case judgement; do not re-litigate it per batch.
+
+**The reasoning, recorded because the conclusion is not recoverable from the rule:**
+
+1. **A `?variant=` or locale URL is not a page, it is the same document reported separately.** Optimizing the canonical does not change what those visitors see, so counting them inflates a signal we cannot act on. The whole purpose of the measurement is to choose which page to write copy for.
+2. **A large non-canonical skew between near-identical pages is itself the evidence.** Real organic demand does not distribute that unevenly across two products at the same configuration. A shopping feed does.
+3. **Consistency with determinations already made.** Batch 16's Predator incumbency (League fold-over Indoor, Pro fold-over FG) was determined canonical-only. Changing the convention afterwards would make those determinations inconsistent with later ones, which is worse than either choice taken on its own.
+
+**THE COUNTER-ARGUMENT, recorded so a future reader knows it was considered rather than missed:** canonical-only discards real traffic. If a page genuinely earns 977 impressions across all its URLs and we count 650, we are throwing away a third of the measured demand, and a page could lose an incumbency contest it would win on total volume. That is a real cost and it was accepted deliberately, on the ground that the discarded traffic is not addressable by the copy decision the measurement exists to make.
+
+**The case that forced the ruling.** The Furon Elite V9 2E Wide FG colorway pair, 90 days to 2026-08-27:
+
+| SKU | Canonical | Non-canonical | Total |
+|---|---|---|---|
+| UF1F16X (`Black with White`) | **727** | 40 | 767 |
+| UF1F3ZB (`Black`) | 650 | **327** | 977 |
+
+Canonical-only gives UF1F16X by 1.12x; all-rows gives UF1F3ZB by 1.27x. **The two methods named different winners**, which is the first time the convention changed an answer rather than merely tidying one. UF1F3ZB's non-canonical tail is eight times UF1F16X's, with a single `?variant=` row worth 144 impressions. Under this ruling **UF1F16X is briefed and UF1F3ZB is recorded `intentionally-unoptimized`** (see 'Colorway pairs are one optimization target' below, and `strategy/sprint-backlog.md` B-PACK-04).
+
+### Colorway pairs are one optimization target (added 2026-08-27, Mike)
+
+Where two live pages differ ONLY on colorway, they are one optimization target, not two. **Colorway is a filter, not a query:** nobody searches `furon elite black with white`, so a colorway-qualified primary would be below floor on a page whose sibling already covers the configuration. Two briefs at one config buy nothing and cost two slots.
+
+Brief the page with the stronger canonical GSC signal, or the earlier-created page where neither has data. **Record the sibling in `products-master.csv` with `status` = `intentionally-unoptimized` and a `notes` value naming the briefed page and the reason.** The status value matters: a row left `pending` forever, or absent entirely, is indistinguishable from work nobody got round to. This disposition says a decision was made and what it was.
+
 Season-earliest is the FALLBACK, used only where GSC data is absent or below a meaningful threshold (as a working floor, under ~50 impressions across the config in the measured window, where rank ordering is noise). The fallback order is unchanged: earliest-shipped live pack by season code (FA25 < HO25 < SP26 < SU26 < FA26, earlier year first), ties breaking by launch date.
 
 **Why this changed.** Season-earliest was always a proxy for "which page holds the equity." It became testable when page-level GSC arrived, and it failed: at `adidas predator elite ag` the season-earliest incumbent (Radiant Blaze FA25) earned **4 impressions** in 29 days while the Born For Goals SP26 page earned **1,256**. Same shape at F50 League Indoor: named incumbent 4, actual earner 1,469. Mike's ruling, 2026-08-18: when direct measurement of the thing a proxy estimates is available, the proxy yields.
