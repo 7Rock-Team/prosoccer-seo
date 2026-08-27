@@ -20,13 +20,13 @@ Nike Phantom 6 Low Pro FG Soccer Cleats - Erling Haaland Pack (FA25)
 
 ### Short Description
 
-Blue in the heel, red and yellow up front. The Phantom 6 Low Pro wears the calm-then-clinical story on the outside, and it plays that way too. The collar stays out of your ankle's business. The ball sits where you put it on a first touch. When the gap opens, you plant, you turn, and you're through it before the center back has read the shape.
+Blue in the heel, Laser Orange and Lemon Venom up front. The Phantom 6 Low Pro wears the calm-then-clinical story on the outside, and it plays that way too. The collar stays out of your ankle's business. The ball sits where you put it on a first touch. When the gap opens, you plant, you turn, and you're through it before the center back has read the shape.
 
 ### Description
 
 ## Cool in the heel, fire at the toe
 
-Look down at the heel and it's blue. Nike calls that the calm Erling's holding as he settles himself in the heat of the moment. From there it runs forward into red and yellow, brightest where most goals get scored. You're wearing the whole sequence.
+Look down at the heel and it's blue. Nike calls that the calm Erling's holding as he settles himself in the heat of the moment. From there it runs forward into Laser Orange and Lemon Venom, brightest where most goals get scored. You're wearing the whole sequence.
 
 ## VNMSkin grips, Flyknit keeps it quiet
 
@@ -42,7 +42,7 @@ Cyclone 360 sits in the forefoot, a circular pattern for the moment you plant an
 - Plate: firm ground outsole, Cyclone 360 traction in the forefoot
 - Cut and tier: low-cut, Pro
 - Fit: new frame that molds to your foot
-- Colorway: Erling Haaland Pack (FA25), blue heel into red and yellow
+- Colorway: Laser Orange / Blue Void / Lemon Venom (Erling Haaland Pack, FA25)
 
 ## Fit Notes
 
@@ -67,7 +67,7 @@ It's the grippy layer across the striking area, so the ball behaves the same whe
 
 ### What's the story behind the colorway?
 
-Blue in the heel and core stands for Erling's calm under pressure, running into red and yellow at the cleat's brightest point.
+Blue in the heel and core stands for Erling's calm under pressure, running into Laser Orange and Lemon Venom at the cleat's brightest point.
 
 ### Meta Title
 
@@ -86,7 +86,7 @@ No change. The current handle runs 73 characters, 3 over the 70-character guidel
 ### Image Alt Text
 
 - Nike Phantom 6 Low Pro firm ground soccer cleats in the Erling Haaland Pack colorway
-- Nike Phantom 6 Low Pro Haaland Pack side profile showing the blue heel and red forefoot
+- Nike Phantom 6 Low Pro Haaland Pack side profile showing the Blue Void heel and Laser Orange forefoot
 - Nike Phantom 6 Low Pro firm ground outsole with Cyclone 360 forefoot traction
 - Nike Phantom 6 Low Pro VNMSkin striking area detail
 
