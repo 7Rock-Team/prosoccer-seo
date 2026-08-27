@@ -743,6 +743,25 @@ Cross-references: `.claude/agents/keyword-research/agent.md` Section 9 'Volume-w
 
 **The rule.** Product attributes (tier, cut, surface, age band, closure, gender, generation) come from the LIVE PRODUCT TITLE, verified by a fresh fetch. The URL handle is never a source for any of them. Handles abbreviate, omit, and sometimes disagree outright with the title. Read the handle for one purpose only, which is to identify the page.
 
+**THE COLORWAY EXCEPTION (added 2026-08-27, Mike). The title governs where it SPEAKS. On colorway it is silent by store convention, and the `Color` product option is authoritative there.**
+
+ProSoccer no longer puts colorways in footwear product titles. The colorway lives in a Shopify **product option named `Color` at position 1**, whose single value is the colorway string, and it is rendered on the PDP as a swatch row. It is not a metafield and not free text. The variant SKU is `<BASE-SKU>-<size>`, so the base SKU is recoverable from any variant.
+
+So the title governing is a statement about the fields it actually populates. Where the title is silent by convention, "the title governs" must not be read as "no other source is admissible", because that turns a silence into a denial. **This is the same shape as the Nanostrike tier exception** (`context/page-type-playbooks/product-page-playbook.md`): the live page erases or omits a distinction that is real, and the authoritative source sits elsewhere. Cross-reference both; they are one principle with two instances.
+
+**Worked case, and it cost a whole SKU.** Batch 16 pulled UF1F16X on the finding that two live Furon Elite V9 2E Wide FG pages were "byte-identical" in title, price, config, pack and season, and filed it as a merchandising defect. That was wrong. The two pages are distinct colorways in the same pack and both are correctly listed:
+
+| Handle | Product ID | `Color` option | Base SKU | Sizes |
+|---|---|---|---|---|
+| `...-fg-soccer-cleats-black-fa26` | 9573891997951 | **Black with White** | UF1F16X | 10 |
+| `...-fg-soccer-cleats-black` | 9573744148735 | **Black** | UF1F3ZB | 9 |
+
+They read as identical only because the comparison was title-only and the title is silent on the one axis that separates them. The failure was ours, not merchandising's. Filed and closed as `strategy/sprint-backlog.md` B-MERCH-02 (INVALID).
+
+**Consequences, both mandatory.**
+1. **Phase 0 must capture the `Color` option value** into the per-SKU input file for every footwear SKU, from `/products/<handle>.json` `options[]`, not from prose and never from the handle or the pack name. Pack names routinely contain colour words (Coral Blaze, Neon Tide, Black Pack, Radiant Blaze) and are not colorways.
+2. **APPAREL HAS NO `Color` OPTION.** Verified 2026-08-27: the Arsenal and Liverpool jersey PDPs expose only `Men's Apparel Size`. For jerseys the colorway comes from the scraped description prose, and where prose is silent the correct action is to state no colorway at all. Do not synthesise one from the kit slot: "home" does not entail a colour.
+
 This is a DIFFERENT rule from "handles always come from the briefs verbatim, never reconstructed from titles" (`SEO_BATCH_PROCESS.md` section 2). That one protects the handle STRING from being invented out of a title. This one protects the ATTRIBUTES from being inferred out of a handle. They point in opposite directions on purpose, and both are correct: the title is authoritative about what the product IS, the brief is authoritative about what the URL SAYS. Neither substitutes for the other.
 
 **Evidence, Batch 15.1 pre-dispatch 2026-08-25.** Two of ten SKUs carried handles that would have produced the wrong primary if read as attribute sources, and neither was detectable without the live title:
