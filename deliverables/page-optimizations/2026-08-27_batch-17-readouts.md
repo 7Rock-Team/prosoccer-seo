@@ -169,6 +169,74 @@ gated on Mike per page.
 - **Null:** flat.
 - **Confound:** **the cleanest page in the batch and the best control we have.** Evergreen equipment, no World Cup exposure, no seasonal story. If every World Cup page moves and this one does not, the movement was the tournament. If this one moves too, the copy did something.
 
+
+## Does the merchant-listing surface change what this batch is testing?
+
+**Asked by Mike 2026-08-28, after the variant finding. Answer: the impression baselines survive,
+the CTR baselines do not, and one page needs its narrative corrected. The core test holds.**
+
+These nine were selected from an organic-only list and the read-outs above were written against
+canonical organic behaviour. Merchant-listing impressions are reported exclusively against
+`?variant=` URLs, which the canonical-only ruling strips, so none of it was counted. Measured per
+page over the same 90 days:
+
+| Page | Canon impr | Canon clicks | Variant impr | Variant clicks | of which merch listing | Variant share of CLICKS |
+|---|---|---|---|---|---|---|
+| `umbro-2025-2026-guatemala-mens-home-soccer-j` | 26,492 | 21 | 89 | 35 | 65 | 62% |
+| `adidas-2026-spain-mens-stadium-away-soccer-j` | 23,297 | 104 | 2,185 | 43 | 1,164 | 29% |
+| `puma-2026-paraguay-mens-authentic-home-socce` | 19,068 | 51 | 490 | 6 | 29 | 11% |
+| `adidas-2026-italy-mens-authentic-home-soccer` | 11,312 | 10 | 38 | 0 | 38 | 0% |
+| `nike-phantom-6-low-elite-firm-ground-soccer-` | 21,658 | 27 | 584 | 15 | 23 | 36% |
+| `adidas-2026-27-club-america-mens-authentic-h` | 10,688 | 2 | 6 | 0 | 8 | 0% |
+| `nike-2026-27-usmnt-mens-stadium-home-shorts` | 10,913 | 29 | 0 | 0 | 0 | 0% |
+| `panini-2026-fifa-world-cup-stickers-box-50-p` | 30,039 | 98 | 2,479 | 20 | 2,024 | 17% |
+| `nike-strike-sleeves-socks` | 14,925 | 74 | 334 | 55 | 345 | 43% |
+
+**Batch totals: variant URLs are 3.6% of impressions but 29.5% of CLICKS.**
+
+| | Impressions | Clicks | CTR |
+|---|---|---|---|
+| Canonical, what the read-outs measure | 168,392 | 416 | **0.247%** |
+| Variant URLs, never counted | 6,205 | 174 | **2.804%** |
+| Combined, what the pages actually do | 174,597 | 590 | **0.338%** |
+
+### What this changes
+
+**1. Impression read-outs stand.** Variant URLs are 3.6% of impressions. Any read-out phrased as
+"impressions rise" or "share of the term" is measuring 96.4% of the page and is not materially
+affected.
+
+**2. Every CTR figure in this document understates by about 1.37x and is hereby restated.** The
+batch converts at **0.338%**, not the 0.247% the canonical-only view shows. Per-page CTR targets
+in the read-outs above are canonical-only baselines: they remain valid as a like-for-like
+before-and-after, but they are NOT the page's true CTR and must not be quoted as such.
+
+**3. One page needs its narrative corrected, and it is Guatemala.** It was described in the
+near-zero-click diagnostic as converting nothing. In canonical organic that is true: 21 clicks on
+26,492 impressions. **But it takes 35 clicks off variant URLs, of which 26 come from merchant
+listings on 65 impressions.** More of its clicks come from the surface we never counted than from
+the one we did. It is the only page of the nine where that is so.
+
+**The Guatemala picture is therefore the opposite of what was reported.** The page is not failing
+to convert. It converts through free listings and not through organic, which is consistent with
+the collection owning the organic term. That strengthens rather than weakens the decision to cede
+`guatemala soccer jersey` to the collection and give the PDP a qualified primary.
+
+**4. The decisive test survives intact, which is the important part.** The read-outs name Club
+America and Paraguay as the two pages whose null results would settle the copy question. **Club
+America has 6 variant impressions and 0 variant clicks; Paraguay has 490 and 6.** Neither has
+meaningful hidden traffic, so both remain clean tests and the "one result that would change the
+programme" section stands without amendment.
+
+**5. USMNT shorts, the merch probe, has ZERO variant impressions.** The merch hypothesis is
+unaffected.
+
+### Measurement rule for the post-import read
+
+**Report both surfaces, always, and never collapse them into one number.** At 30 and 60 days
+pull canonical rows and query-string rows separately, and state impressions, clicks and CTR for
+each. A page can improve in organic while losing in free listings, or the reverse, and a combined
+figure hides both. Guatemala is the proof that the split can invert a conclusion.
 ## The one result that would change the programme
 
 If Club America and Paraguay both come back null, the case is close to settled. They are the two
