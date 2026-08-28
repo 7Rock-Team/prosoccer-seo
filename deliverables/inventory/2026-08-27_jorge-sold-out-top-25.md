@@ -91,6 +91,23 @@ results page, where 1 is the top result, so a lower number is better.
 24. https://www.prosoccer.com/products/adidas-2022-23-mexico-away-long-sleeve-jersey-wonder-white
 25. https://www.prosoccer.com/products/adidas-2026-spain-mens-authentic-home-soccer-jersey
 
+## Three more, a different question: nearly sold out rather than sold out
+
+These three are not on the list above. They still have stock, but only just, and we are about to
+spend real work on their pages. Before we do, it is worth knowing whether more is coming.
+
+| Product | Sizes left | Times shown (90 days) |
+|---|---|---|
+| Nike Phantom 6 Low Elite Haaland | **2 of 15** | see note below |
+| Umbro Guatemala Home | **2 of 6** | see note below |
+| adidas Spain Stadium Away | **3 of 8** | see note below |
+
+Times shown over the last 90 days: Guatemala 26,482, Spain 23,122, Haaland Phantom 21,639.
+
+A page with two sizes left out of fifteen behaves almost like a sold-out page for most visitors,
+since the odds that the one size they want is among the two remaining are poor. Same question as
+above: restock, or is this the end of the run.
+
 ## One small separate thing, not urgent
 
 Item 14 on the list, the Predator Freak .3 Laceless, has the brand name capitalised in its
