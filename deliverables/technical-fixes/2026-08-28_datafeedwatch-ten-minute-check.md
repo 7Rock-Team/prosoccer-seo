@@ -6,6 +6,14 @@
 and stop at the first thing that looks wrong; each step is written so a problem is recognisable
 without knowing the tool.
 
+**SUPERSEDED 2026-08-28. Mike ran this and the feed is healthy: 44.4K approved, 15 limited, 4 not
+approved, Top Quality Store, all channels OK. There is no eligibility problem, so steps 1 to 3
+below are answered. The follow-on analysis is at `2026-08-28_merchant-listings-diagnostic.md`.**
+
+**One correction to the table below: the percentages were computed against 8.25M, which is the sum
+of search-appearance rows, not the site total. The true site total is 19,842,113, so merchant
+listings are 3.4% of impressions rather than 8.2%. The CTR and position figures are unaffected.**
+
 **Why this is worth ten minutes, in one number.** Across the whole property over 90 days:
 
 | Search surface | Impressions | Clicks | CTR | Avg position |
