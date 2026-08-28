@@ -65,14 +65,134 @@ Fresh Optimization is the default workflow for page-optimization deliverables pr
 9. Hold at GATE for Mike review.
 10. Append the matching row to `deliverables/tracking/collections-master.csv` or `products-master.csv` once Mike approves.
 
-### Ranking-aware posture
+### Ranking-aware posture (v2, approved by Mike 2026-08-27)
 
-The Current ranking position governs how aggressively SCRIBE iterates on Title and H1 copy.
+**Supersedes the v1 four-band posture in full.** v1 is reproduced at the end of this subsection
+because the reason it failed is the reason v2 is shaped the way it is.
 
-- **Top 5:** WARNING required in the visible brief. The line reads: "Page currently ranks top 5. Title/H1 changes carry equity risk. Confirm with Mike before shipping changes to these fields." Recommendations preserve exact-match phrasing of the primary keyword in Title and H1; copy iteration leans toward Meta Description, Short Description, and Long Description where equity risk is lower.
-- **Top 6 to 20:** Standard recommendations. Current position noted for context. No warning line.
-- **Top 21 to 100:** Standard recommendations. Current position noted for context.
-- **Not ranking (not in top 100):** Standard recommendations. Treated as opportunity for a fresh ranking attempt.
+#### Primary selection for a page that already earns impressions
+
+**For a page already earning impressions, the primary is the term it already earns.** The copy
+supports that term rather than redirecting the page. We are improving performance on a query the
+page has already won the right to appear for, not picking a new destination. Google has already
+run the experiment; assigning a different primary to a page that fields the majority of a term is
+starting over on a page that has already arrived.
+
+**The concentration condition (approved 2026-08-27).** The rule applies only where the page HAS
+an earned term. A term qualifies as earned when it holds **at least 15% of the page's impressions
+AND at least 1,000 term impressions** over a trailing 90 days. Below either threshold the page
+has no earned term and falls back to conventional keyword assignment.
+
+The 1,000-impression floor is the same meaningful-signal floor B-CEDE-01 and pack succession v3
+already use. The worked case for the 15% share: the Panini World Cup sticker box earns 29,765
+impressions and its single largest query is 329 of them, 1.1%. There is no earned term there,
+only diffuse long-tail demand, and naming that query the primary would be picking a new
+destination while telling ourselves we were not.
+
+**Measure the TERM, never the page average.** GSC page position is an average across every query
+the page appears for and is not the number this rule keys on. The two differ materially in both
+directions: Club America page 5.48 against term 3.50; Colombia page 9.14 against term 10.20;
+Paraguay 5.99 against 4.89. Keying the bands on page average fires them on the wrong pages.
+
+#### When the earned term is hierarchy-invalid: an AMENDMENT, not an exception
+
+**The earned term overrides the keyword hierarchy only when the hierarchy-preferred owner is
+demonstrably worse at that term, measured rather than assumed.**
+
+Test, per contested term, trailing 90 days, 50-impression floor on both sides, canonical rows
+only:
+
+1. Pull term-level GSC for the exact term with dimension `page`.
+2. If a collection appears and earns **more impressions or more clicks** than the PDP, the
+   collection keeps the term and the PDP takes a qualified sub-floor primary.
+3. If the PDP earns more on both and the collection is materially worse in position, the PDP
+   holds the term and it is recorded as PDP-held.
+4. If no collection clears the floor, there is nothing to cede to and the PDP holds the term.
+
+**This is an amendment to the hierarchy, not an exception to it, and the wording matters.** The
+hierarchy's stated justification is intent: collections own terms where a searcher would be
+satisfied by multiple products. That is a PREDICTION about behaviour, and clicks are the
+measurement of the same prediction. Where they agree, nothing changes. Where they disagree on a
+specific term with real volume, the measurement is better evidence than the prediction, because
+it is the same question answered by data instead of by judgment.
+
+**Mike's ruling on the wording, 2026-08-27, recorded verbatim because it is the load-bearing
+part:** calling it an exception "is the word that lets instances pile up without anyone revisiting
+the rule." An exception implies the rule is right and the case is odd; an amendment obliges the
+rule to account for what was measured. **An amendment that mostly confirms the rule is not a
+weakening of it.**
+
+The worked case runs in the hierarchy's favour. On `guatemala soccer jersey`,
+`/collections/guatemala` takes 8,131 impressions and ALL 180 clicks at position 5.62, while the
+Guatemala home PDP takes 6,450 impressions and ZERO clicks at a marginally better 4.88. The
+collection is better at the term, so the amendment hands the term TO the collection. Guatemala is
+therefore NOT a second Cruz Azul, and **B-CEDE-01 stays at n=1.**
+
+Reassignment carries the same churn guard as pack succession v3: no shipped page is retargeted
+without Mike's explicit per-page decision, and no ownership change on a single measurement period.
+
+#### When the earned term is already assigned to a registry page
+
+**Demonstrated performance outranks assignment, but it never silently reassigns.** An assigned
+term is a claim; an earned term is a result. The earning page takes a QUALIFIED primary and the
+conflict is logged with both pages' term-level numbers. If the assigned page earns nothing on its
+claimed term across two consecutive measurement periods while the unassigned page earns it, that
+is the trigger to bring the reassignment to Mike. One period is never enough.
+
+#### The bands (v2), keyed on EARNED-TERM position
+
+| Earned-term position | Posture |
+|---|---|
+| **Under 5** | Protect Title and H1 fully. Exact-match phrasing of the earned term preserved. Changes to those two fields require Mike per page. Iterate on Meta Description, Short Description and Long Description. The brief MUST carry the WARNING line. |
+| **5 to 10** | Title and H1 may be improved but MUST retain the earned term in exact-match form. Everything else is open. No per-page Mike gate; the brief states the earned term and its position so the constraint is visible and auditable. |
+| **10 to 20** | Standard recommendations. Carry the earned term into the Title where it fits naturally. Not binding. |
+| **Over 20, or not ranking** | Standard recommendations. Nothing to protect; treat as a fresh attempt. |
+
+**Why the lines moved.** Measured across the 1,280 untracked products: 4.5% sit under 5, **77.3%
+sit between 5 and 10**, 16.8% at 10 to 20, and 1.4% past 20. CTR is 0.607% under 5, 0.530% at 5 to
+10, and 0.382% at 10 to 20, so the first real break in the curve is at 10, not at 5. A protection
+line drawn at 5 leaves the overwhelming majority of the population unprotected.
+
+**The 5-to-10 band is deliberately a constraint on wording rather than a gate on shipping.** Mike,
+2026-08-27: gating 77% of the population on him "makes the batch model unworkable," and **a
+safeguard nobody can operate is the same as no safeguard.** The old posture's 21-to-100 and
+not-ranking bands collapse into one because only 1.4% of the population lives there.
+
+#### The input is MANDATORY and the gate fails without it
+
+**`earned_term_position` and `earned_term` are required fields in every per-SKU `gate-meta`
+block.** ORIN writes them at Phase 0 from GSC term-level data. `scripts/batch_gate.py`
+`check_ranking_input` FAILS the batch when the position is absent or malformed, when a page under
+position 5 carries no WARNING line, and when a page in the 5-to-10 band drops the earned term from
+its Title. Eight regression tests. Set the position to the string `"not-ranking"` where there is
+no earned term; that is an explicit declaration, not an omission.
+
+**This is the fix for why v1 never worked, and it is the whole point of v2.**
+
+#### Why v1 failed, recorded so v2 is not undone by the same mechanism
+
+v1 read: top 5 warns, 6 to 20 standard, 21 to 100 standard, not ranking standard. It depended on
+a `Current ranking:` lookup that SCRIBE was instructed to run and nobody enforced.
+
+Audited 2026-08-27 across every brief on disk:
+
+- Briefs carrying the top-5 WARNING line: **0 of 314.**
+- Briefs carrying a `Current ranking:` line at all: **26 of 314, about 8%.**
+- `baseline_position`, `day_30_position` and `day_60_position` in `products-master.csv`:
+  populated on **0 of 178 rows.**
+
+**It never fired, but not because pages were measured and found lower. The mandatory input was
+never collected on 92% of briefs and the registry has never stored a position for any page.** It
+was not a safeguard waiting for a qualifying page. It was a safeguard wired to nothing, which is
+codification checklist item 9's class: a check that cannot fire is not a check.
+
+Mike, 2026-08-27: "A rule that depends on someone remembering to look it up will end up exactly
+where this one did." Hence the mandatory gate-meta field and the failing gate check.
+
+**`baseline_position` is filled going forward (Mike, 2026-08-27).** A registry that has never
+recorded a position cannot support any before-and-after on the one metric this work moves. The
+value is the earned-term GSC position at brief date, recorded on the row at step 14 alongside the
+other baseline fields.
 
 **LLM ranking is deferred.** LLM visibility tooling (ChatGPT citation rates, Claude / Gemini surfaces, AI Overview presence) is immature today. Revisit in 6 months when the category matures and the tooling becomes practical. Do not include an LLM ranking field in the brief.
 

@@ -40,6 +40,12 @@ DEFAULT_META = {
     "word_band": [340, 390],
     "word_band_tolerance": 15,
     "primary_keyword": "nike test cleat",
+    # Mandatory as of 2026-08-27: the ranking-aware posture keys on the EARNED TERM's
+    # position and its absence is a hard fail, so every fixture must carry it. The
+    # default is "not-ranking", the band that imposes no constraint, so existing tests
+    # exercise the checks they were written for rather than this one.
+    "earned_term_position": "not-ranking",
+    "earned_term": "",
     "forbidden_phrasings": {"verbatim": [], "motifs": [], "title_frames": []},
 }
 
@@ -55,6 +61,7 @@ def make_brief(
     body_sections=None,
     meta_title="Nike Test Cleat FG Soccer Cleats",
     meta_desc="A clean first touch, a locked-in fit, firm-ground grip. Shop the pack.",
+    title="Nike Test Cleat Firm Ground Soccer Cleats",
     complete=False,
 ):
     """Build a minimal but structurally real PDP brief. body_sections is a list of
@@ -92,7 +99,7 @@ def make_brief(
         "| Primary | nike test cleat |  |  |",
         "",
         "### Title (Shopify \"Title\" field)",
-        "Nike Test Cleat Firm Ground Soccer Cleats",
+        title,
         "",
         "### Short Description (metafield, hero block above Add to Cart)",
         short_desc,
@@ -334,6 +341,79 @@ class TestShadowConvergence(GateTestBase):
         fs = [f for f in self.findings() if f.check == "cross-brief-motif"]
         self.assertTrue(fs, "shared motif across siblings must surface as REVIEW")
         self.assertTrue(all(f.severity == bg.REVIEW for f in fs))
+
+
+class TestRankingInput(GateTestBase):
+    """The ranking-aware posture, wired to the gate 2026-08-27.
+
+    It existed from 2026-05 and never fired once: 0 of 314 briefs carried the top-5
+    WARNING, 26 of 314 carried a ranking line at all, and 0 of 178 registry rows stored a
+    position. A rule that depends on someone remembering to look a number up ends up
+    exactly there, so absence of the input is now a hard fail.
+    """
+
+    def test_missing_position_hard_fails(self):
+        self.write_brief("HJ2146", make_brief())
+        # write_input always merges DEFAULT_META, so the key has to be removed by
+        # writing the block directly. This is the path that matters: a gate-meta
+        # block that is PRESENT but carries no position.
+        meta = dict(DEFAULT_META)
+        meta["sku"] = "HJ2146"
+        meta.pop("earned_term_position", None)
+        block = "```gate-meta\n" + json.dumps(meta, indent=2) + "\n```\n"
+        (self.dir / "inputs" / "HJ2146_input.md").write_text(
+            "# Input for HJ2146\n\n" + block, encoding="utf-8")
+        fs = [f for f in self.findings() if f.check == "ranking-input"]
+        self.assertTrue(fs, "absent earned_term_position must FAIL, not skip")
+        self.assertEqual(self.exit_code(), 2)
+
+    def test_malformed_position_hard_fails(self):
+        self.write_brief("HJ2146", make_brief())
+        self.write_input("HJ2146", {"earned_term_position": "top five"})
+        fs = [f for f in self.findings() if f.check == "ranking-input"]
+        self.assertTrue(fs, "a non-numeric position that is not 'not-ranking' must FAIL")
+        self.assertEqual(self.exit_code(), 2)
+
+    def test_not_ranking_passes(self):
+        self.write_brief("HJ2146", make_brief())
+        self.write_input("HJ2146", {"earned_term_position": "not-ranking"})
+        self.assertNotIn("ranking-input", self.checks_present())
+
+    def test_under_five_without_warning_fails(self):
+        """Protected band: Title and H1 need Mike per page, so the brief must say so."""
+        self.write_brief("HJ2146", make_brief())
+        self.write_input("HJ2146", {"earned_term_position": 3.5,
+                                    "earned_term": "america jersey 2026"})
+        fs = [f for f in self.findings() if f.check == "ranking-input"]
+        self.assertTrue(fs, "position under 5 with no WARNING line must FAIL")
+
+    def test_under_five_with_warning_passes(self):
+        body = make_brief() + "\nPage currently ranks top 5. Title and H1 changes carry equity risk.\n"
+        self.write_brief("HJ2146", body)
+        self.write_input("HJ2146", {"earned_term_position": 3.5,
+                                    "earned_term": "america jersey 2026"})
+        self.assertNotIn("ranking-input", self.checks_present())
+
+    def test_five_to_ten_title_dropping_earned_term_fails(self):
+        """The 5-to-10 band is the one the old posture left completely unprotected, and
+        it is where the bulk of the population sits (77.3% of the 1,280 measured)."""
+        self.write_brief("HJ2146", make_brief(title="Puma Paraguay Home Shirt"))
+        self.write_input("HJ2146", {"earned_term_position": 6.5,
+                                    "earned_term": "paraguay jersey"})
+        fs = [f for f in self.findings() if f.check == "ranking-input"]
+        self.assertTrue(fs, "5-to-10 band Title must retain the earned term verbatim")
+
+    def test_five_to_ten_title_retaining_earned_term_passes(self):
+        self.write_brief("HJ2146", make_brief(title="Puma 2026 Paraguay Jersey Authentic Home"))
+        self.write_input("HJ2146", {"earned_term_position": 6.5,
+                                    "earned_term": "paraguay jersey"})
+        self.assertNotIn("ranking-input", self.checks_present())
+
+    def test_above_ten_is_unconstrained(self):
+        self.write_brief("HJ2146", make_brief(title="Something Entirely Different"))
+        self.write_input("HJ2146", {"earned_term_position": 12.3,
+                                    "earned_term": "usmnt shorts"})
+        self.assertNotIn("ranking-input", self.checks_present())
 
 
 class TestIF8512WordBandAndHedge(GateTestBase):

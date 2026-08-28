@@ -12,7 +12,8 @@ Replaces the ten SKUs previously queued. Nothing is dispatched until Mike approv
 | criterion 1: 10k to 100k band, giants excluded | 156 |
 | criterion 2: in stock | 46 |
 | criterion 4: term not already held by an optimized page | 36 |
-| criterion 3: selected for type spread | **10** |
+| criterion 3: selected for type spread | 10 |
+| Colombia pulled after the term-level check (see below) | **9** |
 
 **Only 29% of the band is in stock (46 of 156).** That is the sold-out pattern continuing well
 below the giants, and it is why criterion 2 removes more pages than any other step.
@@ -26,51 +27,65 @@ against 429 primary, target and ceded terms drawn from `products-master.csv` and
 
 | # | Handle | Type | Impr | Top query | Pos | Stock | Season | Price |
 |---|---|---|---|---|---|---|---|---|
-| 1 | `adidas-2026-colombia-mens-stadium-home-soccer-jersey` | National team | 22,329 | `colombia jersey 2026` | 9.14 | 4/6 | 2026 | $65.00 |
-| 2 | `umbro-2025-2026-guatemala-mens-home-soccer-jersey` | National team | 26,482 | `guatemala soccer jersey` | 5.93 | 2/6 | 2025 | $62.00 |
-| 3 | `puma-2026-paraguay-mens-authentic-home-soccer-jersey` | National team | 18,010 | `paraguay jersey` | 5.99 | 5/5 | 2026 | $98.00 |
-| 4 | `adidas-2026-italy-mens-authentic-home-soccer-jersey` | National team | 11,312 | `italy world cup jersey` | 10.52 | 5/6 | 2026 | $98.00 |
-| 5 | `adidas-2026-spain-mens-stadium-away-soccer-jersey` | National team | 23,122 | `spain jersey 2026` | 6.36 | 3/8 | 2026 | $99.99 |
-| 6 | `nike-phantom-6-low-elite-firm-ground-soccer-cleats-erling-haaland-pack-fa25` | Footwear | 21,639 | `haaland cleats` | 6.10 | 2/15 | n/a | $162.00 |
-| 7 | `adidas-2026-27-club-america-mens-authentic-home-soccer-jersey` | Club jersey | 10,657 | `america jersey 2026` | 5.48 | 6/6 | 2026 | $159.99 |
-| 8 | `nike-2026-27-usmnt-mens-stadium-home-shorts` | National team, non-jersey | 10,589 | `usmnt shorts` | 12.28 | 4/4 | 2026 | $53.00 |
-| 9 | `panini-2026-fifa-world-cup-stickers-box-50-packs-each` | Other | 29,765 | `panini sticker box` | 9.79 | 1/1 | 2026 | $129.99 |
-| 10 | `nike-strike-sleeves-socks` | Other | 14,025 | `soccer sleeve socks` | 8.44 | 6/10 | n/a | $13.99 |
+| 1 | `umbro-2025-2026-guatemala-mens-home-soccer-jersey` | National team | 26,482 | `guatemala soccer jersey` | 5.93 | 2/6 | 2025 | $62.00 |
+| 2 | `puma-2026-paraguay-mens-authentic-home-soccer-jersey` | National team | 18,010 | `paraguay jersey` | 5.99 | 5/5 | 2026 | $98.00 |
+| 3 | `adidas-2026-italy-mens-authentic-home-soccer-jersey` | National team | 11,312 | `italy world cup jersey` | 10.52 | 5/6 | 2026 | $98.00 |
+| 4 | `adidas-2026-spain-mens-stadium-away-soccer-jersey` | National team | 23,122 | `spain jersey 2026` | 6.36 | 3/8 | 2026 | $99.99 |
+| 5 | `nike-phantom-6-low-elite-firm-ground-soccer-cleats-erling-haaland-pack-fa25` | Footwear | 21,639 | `haaland cleats` | 6.10 | 2/15 | n/a | $162.00 |
+| 6 | `adidas-2026-27-club-america-mens-authentic-home-soccer-jersey` | Club jersey | 10,657 | `america jersey 2026` | 5.48 | 6/6 | 2026 | $159.99 |
+| 7 | `nike-2026-27-usmnt-mens-stadium-home-shorts` | National team, non-jersey | 10,589 | `usmnt shorts` | 12.28 | 4/4 | 2026 | $53.00 |
+| 8 | `panini-2026-fifa-world-cup-stickers-box-50-packs-each` | Other | 29,765 | `panini sticker box` | 9.79 | 1/1 | 2026 | $129.99 |
+| 9 | `nike-strike-sleeves-socks` | Other | 14,025 | `soccer sleeve socks` | 8.44 | 6/10 | n/a | $13.99 |
 
-**Combined: 187,930 impressions.** Type spread: 5 national team jerseys, 1 footwear, 1 club jersey,
-1 national-team non-jersey, 2 other.
+**Combined: 165,601 impressions across nine.** Type spread: 4 national team jerseys, 1 footwear,
+1 club jersey, 1 national-team non-jersey, 2 other.
 
 ## Why each was chosen
 
-**1. `adidas-2026-colombia-mens-stadium-home-soccer-jersey`**  
-Highest-impression in-stock national team page in the band with usable depth. Colombia 2026 is a live World Cup nation and the term is unclaimed.
-
-**2. `umbro-2025-2026-guatemala-mens-home-soccer-jersey`**  
+**1. `umbro-2025-2026-guatemala-mens-home-soccer-jersey`**  
 Guatemala is already flagged in B-COLL-05: the collection earns 48,496 impressions and 1,163 clicks at position 5.82, the strongest converting untracked collection we have. Optimizing the PDP under a collection that already performs is the cheapest test of whether PDP work compounds.
 
-**3. `puma-2026-paraguay-mens-authentic-home-soccer-jersey`**  
+**2. `puma-2026-paraguay-mens-authentic-home-soccer-jersey`**  
 Every size in stock, 5 of 5, at position 5.99 on the head term paraguay jersey. The cleanest case in the pool: full availability, strong position, nothing claimed.
 
-**4. `adidas-2026-italy-mens-authentic-home-soccer-jersey`**  
+**3. `adidas-2026-italy-mens-authentic-home-soccer-jersey`**  
 Strong depth at 5 of 6 and the weakest position of the five jersey picks at 10.52, which makes it the clearest before-and-after read in the batch. Italy is also the one pick whose top query, italy world cup jersey, carries explicit tournament intent.
 
-**5. `adidas-2026-spain-mens-stadium-away-soccer-jersey`**  
+**4. `adidas-2026-spain-mens-stadium-away-soccer-jersey`**  
 Second-highest in-stock impressions in the band. Spain has four sold-out siblings in the top 25, so this is the one Spain page that can actually take traffic.
 
-**6. `nike-phantom-6-low-elite-firm-ground-soccer-cleats-erling-haaland-pack-fa25`**  
+**5. `nike-phantom-6-low-elite-firm-ground-soccer-cleats-erling-haaland-pack-fa25`**  
 The ONLY in-stock unclaimed footwear page in the entire band. Footwear is 228 pages and 9.0% of the gap, so it earns a slot, and this is the only one available to fill it. Stock is thin at 2 of 15, flagged below.
 
-**7. `adidas-2026-27-club-america-mens-authentic-home-soccer-jersey`**  
+**6. `adidas-2026-27-club-america-mens-authentic-home-soccer-jersey`**  
 The only in-stock unclaimed club jersey in the band, and every size is available, 6 of 6, at position 5.48. Club America was examined in B-EQUITY-01 and found NOT stranded, so this is a clean club test with no equity complication.
 
-**8. `nike-2026-27-usmnt-mens-stadium-home-shorts`**  
+**7. `nike-2026-27-usmnt-mens-stadium-home-shorts`**  
 Deliberate probe of the merch finding. National-team non-jersey merch converts at 1.559%, three to seven times any jersey bucket, and it is the only bucket behaving like a healthy page. Full stock at 4 of 4. Weakest position in the set at 12.28, which is the point: if copy moves a healthy-CTR page from 12 to single digits, that is the strongest available evidence for the merch hypothesis.
 
-**9. `panini-2026-fifa-world-cup-stickers-box-50-packs-each`**  
+**8. `panini-2026-fifa-world-cup-stickers-box-50-packs-each`**  
 Highest-impression in-stock page in the whole band at 29,765. Collectibles are outside every silo the workforce has written for, so it tests whether the playbook generalizes past apparel and footwear.
 
-**10. `nike-strike-sleeves-socks`**  
+**9. `nike-strike-sleeves-socks`**  
 Equipment and accessories, 6 of 10 in stock, an evergreen product with no season. Gives the batch one page whose value does not decay with a tournament cycle.
+
+## Colombia was PULLED. Batch 17 is nine (Mike, 2026-08-27)
+
+The term-level check showed the pick is not the page that earns its term. On
+`colombia jersey 2026`:
+
+| Page | Impr | Pos | Share |
+|---|---|---|---|
+| `adidas-2026-colombia-mens-authentic-away` | **15,933** | 5.02 | **49.8%** |
+| `adidas-2026-colombia-mens-stadium-home` (the pick) | 5,613 | 10.20 | 17.5% |
+
+The real earner is the Authentic Away, and it is **sold out**, which is exactly why the in-stock
+filter surfaced the Stadium Home instead. Mike's ruling: do not give the wrong page a qualified
+primary to preserve a slot. The correct action on that lane is inventory, not copy, so the
+Authentic Away has been added to the Jorge item and Colombia leaves the batch.
+
+Nine is the batch. No replacement was drawn: the remaining pool is heavily national team, and a
+tenth national-team jersey would buy less than the type spread already achieved.
 
 ## Flags Mike should see before approving
 

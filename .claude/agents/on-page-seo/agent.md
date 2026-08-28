@@ -1022,12 +1022,16 @@ Page-type input rules (per `context/workforce-conventions.md` 'Fresh Optimizatio
 
 **Current ranking lookup is mandatory.** For the chosen primary keyword, SCRIBE runs `mcp__dfs-mcp__serp_organic_live_advanced` and identifies whether the target URL appears in the top 100 organic results. The visible brief carries a `Current ranking:` line with position OR "not in top 100" plus the lookup date. GSC MCP `search_analytics` is the source of record for ProSoccer's own ranking context (operational since 2026-06-09 per `context/workforce-conventions.md` 'Tool inventory'); the DataForSEO SERP lookup above remains the quick top-100 presence check and the competitor-context tool. LLM ranking is NOT captured in the brief; LLM visibility tooling is immature and revisits at 6-month mark.
 
-**Ranking-aware posture (applies before drafting Recommended new SEO setup):**
+**Ranking-aware posture (v2, approved by Mike 2026-08-27). CANONICAL TEXT LIVES IN `context/workforce-conventions.md` 'Ranking-aware posture (v2)'. Read it there; the bands are summarised below and must not drift from it.**
 
-- **Top 5:** WARNING required in the visible brief. The line reads: "Page currently ranks top 5. Title/H1 changes carry equity risk. Confirm with Mike before shipping changes to these fields." Recommendations preserve exact-match phrasing of the primary keyword in Title and H1; copy iteration leans toward Meta Description, Short Description, and Long Description where equity risk is lower.
-- **Top 6 to 20:** Standard recommendations. Current position noted for context. No warning line.
-- **Top 21 to 100:** Standard recommendations. Current position noted for context.
-- **Not ranking (not in top 100):** Standard recommendations. Treated as opportunity for a fresh ranking attempt.
+The bands key on the **earned-term position** (the GSC 90-day position for the term the page already earns), NEVER the page-average position across all queries. ORIN supplies both `earned_term` and `earned_term_position` in the per-SKU `gate-meta` block; SCRIBE does not look them up.
+
+- **Under 5:** WARNING required in the visible brief: "Page currently ranks top 5. Title/H1 changes carry equity risk. Confirm with Mike before shipping changes to these fields." Preserve exact-match phrasing of the earned term in Title and H1; iterate on Meta Description, Short Description and Long Description.
+- **5 to 10:** Title and H1 may be improved but MUST retain the earned term in exact-match form. No Mike gate. State the earned term and its position in the brief.
+- **10 to 20:** Standard recommendations. Carry the earned term into the Title where it fits naturally.
+- **Over 20, or not ranking:** Standard recommendations. Fresh attempt.
+
+**`scripts/batch_gate.py` `check_ranking_input` enforces all of this and FAILS the batch when the input is absent.** v1 of this posture fired 0 times across 314 briefs because its input was collected on only 8% of them; it was a safeguard wired to nothing. Do not treat the position as optional.
 
 **PDP link policy: internal links only.** Product page body copy includes links to ProSoccer collection or product pages ONLY; external links are forbidden on PDPs per `context/page-type-playbooks/product-page-playbook.md` 'Internal links only on product pages'. The External links field does NOT appear on PDP briefs at all. Collection pages may include external links per the collection-page playbook's link strategy; the External links field appears on collection-page briefs only when an outbound link is part of the recommendation.
 
@@ -1043,7 +1047,7 @@ Page-type input rules (per `context/workforce-conventions.md` 'Fresh Optimizatio
 - **Primary keyword:** `<head keyword>` ([volume]/mo, KD [X])
 - **Supporting keywords:** `<variant 1>` ([volume]/mo), `<variant 2>` ([volume]/mo), `<variant 3>` ([volume]/mo)
 - **Current ranking:** position #[X] for `<head keyword>` (DataForSEO SERP, [YYYY-MM-DD]) OR not in top 100
-- **WARNING (top 5 only):** Page currently ranks top 5. Title/H1 changes carry equity risk. Confirm with Mike before shipping changes to these fields.
+- **WARNING (earned-term position under 5 only):** Page currently ranks top 5. Title/H1 changes carry equity risk. Confirm with Mike before shipping changes to these fields.
 
 ## Recommended new SEO setup
 

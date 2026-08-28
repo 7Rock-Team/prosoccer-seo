@@ -590,6 +590,97 @@ def _faq_has_qa(lines: list[str], faq_idx: int, end: int) -> bool:
     return False
 
 
+FIELD_TITLE = re.compile(r"^#{3}\s+Title\b", re.IGNORECASE)
+RANKING_WARNING = re.compile(r"page currently ranks", re.IGNORECASE)
+
+
+def _field_text(lines, field_re):
+    """Return the text under the first heading matching field_re, or None if absent."""
+    start = -1
+    for i, ln in enumerate(lines):
+        if field_re.match(ln):
+            start = i + 1
+            break
+    if start == -1:
+        return None
+    end = len(lines)
+    for i in range(start, len(lines)):
+        if FIELD_MARKER.match(lines[i]):
+            end = i
+            break
+    return " ".join(lines[start:end]).strip()
+
+
+def check_ranking_input(sku, lines, meta) -> list[Finding]:
+    """The earned-term position must be PRESENT in gate-meta, and the band posture it
+    implies must be honoured in the brief.
+
+    Origin (Mike, 2026-08-27). The ranking-aware posture existed from 2026-05 and never
+    fired once. The audit is the reason this check exists: across all 314 briefs on disk,
+    0 carried the top-5 WARNING line, only 26 carried a `Current ranking:` line at all
+    (8%), and `baseline_position` was populated on 0 of 178 registry rows. The posture had
+    never been wired to anything, so it was not a safeguard waiting for a qualifying page.
+    It was a safeguard nothing could trigger.
+
+    A rule that depends on someone remembering to look a number up ends up exactly there,
+    so the number is now a mandatory gate-meta field and its absence is a FAIL, the same
+    posture `word_band` takes.
+
+    Bands key on the EARNED TERM's position, never the page average across all queries.
+    Those differ materially in both directions (Club America page 5.48 / term 3.50;
+    Colombia page 9.14 / term 10.20), and keying on the page average fires on the wrong
+    pages.
+    """
+    if not meta:
+        return []
+    if "earned_term_position" not in meta:
+        return [Finding(
+            sku, "ranking-input", FAIL,
+            "gate-meta has no `earned_term_position`, so the ranking-aware posture could "
+            "not run. Set it to the GSC 90-day position for the earned term, or to the "
+            'string "not-ranking". A check that cannot run is a failure.',
+        )]
+    pos = meta["earned_term_position"]
+    if pos == "not-ranking":
+        return []
+    if not isinstance(pos, (int, float)) or pos <= 0:
+        return [Finding(
+            sku, "ranking-input", FAIL,
+            f"gate-meta `earned_term_position` is malformed ({pos!r}); expected a positive "
+            'number or the string "not-ranking". The posture could not run.',
+        )]
+    term = (meta.get("earned_term") or "").strip()
+    if pos < 5:
+        if not RANKING_WARNING.search("\n".join(lines)):
+            return [Finding(
+                sku, "ranking-input", FAIL,
+                f"earned-term position is {pos}, inside the protected band (under 5), but "
+                "the brief carries no ranking WARNING line. Title and H1 changes on this "
+                "page need Mike per page; state the warning in the brief.",
+            )]
+        return []
+    if pos < 10:
+        if not term:
+            return [Finding(
+                sku, "ranking-input", FAIL,
+                f"earned-term position is {pos}, inside the 5-to-10 band, but gate-meta "
+                "carries no `earned_term`, so exact-match retention could not be checked.",
+            )]
+        title = _field_text(lines, FIELD_TITLE)
+        if title is None:
+            return [Finding(
+                sku, "ranking-input", FAIL,
+                "no `### Title` field, so the 5-to-10 band rule could not be checked",
+            )]
+        if term.lower() not in title.lower():
+            return [Finding(
+                sku, "ranking-input", FAIL,
+                f"earned-term position is {pos} (5-to-10 band), so the Title must retain "
+                f"the earned term {term!r} in exact-match form. Title reads: {title[:90]!r}",
+            )]
+    return []
+
+
 def check_section_presence(sku, lines) -> list[Finding]:
     """FAIL for each required PDP section that is absent, or present as a heading with no
     content beneath it. Required PDP set: an editorial narrative region (overview,
@@ -1055,7 +1146,8 @@ def gate_brief(sku, path, meta) -> tuple[list[Finding], list[str]]:
     # a hard failure, not a skip note: same false-green class as the Registry 1 file
     # (Mike's ruling 2026-08-18, extended from registry1 to every unrunnable check).
     if meta is None:
-        skipped += ["fifa-terms(no-input)", "forbidden-phrasings(no-input)", "word-band(no-input)"]
+        skipped += ["fifa-terms(no-input)", "forbidden-phrasings(no-input)",
+                    "word-band(no-input)", "ranking-input(no-input)"]
         findings.append(Finding(
             sku, "input-file", FAIL,
             "no input file at inputs/{}_input.md (or it carries no gate-meta block), so "
@@ -1073,6 +1165,7 @@ def gate_brief(sku, path, meta) -> tuple[list[Finding], list[str]]:
         findings += check_fifa_terms(sku, lines, meta)
         findings += check_forbidden_phrasings(sku, lines, meta)
         findings += check_word_band(sku, lines, meta)
+        findings += check_ranking_input(sku, lines, meta)
 
     return findings, skipped
 
@@ -1126,7 +1219,7 @@ ALL_CHECKS = [
     "voice", "heading-levels", "section-presence", "customization-claims",
     "url-handle", "price-in-body", "heritage-counts", "fabrication-hedge",
     "fifa-terms", "forbidden-phrasings", "word-band", "brand-casing",
-    "cannibalization", "cross-brief", "registry1-present",
+    "cannibalization", "cross-brief", "registry1-present", "ranking-input",
 ]
 
 
