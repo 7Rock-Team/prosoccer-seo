@@ -591,6 +591,7 @@ def _faq_has_qa(lines: list[str], faq_idx: int, end: int) -> bool:
 
 
 FIELD_TITLE = re.compile(r"^#{3}\s+Title\b", re.IGNORECASE)
+FIELD_META_TITLE = re.compile(r"^#{3}\s+Meta\s+Title\b", re.IGNORECASE)
 RANKING_WARNING = re.compile(r"page currently ranks", re.IGNORECASE)
 
 
@@ -666,17 +667,34 @@ def check_ranking_input(sku, lines, meta) -> list[Finding]:
                 f"earned-term position is {pos}, inside the 5-to-10 band, but gate-meta "
                 "carries no `earned_term`, so exact-match retention could not be checked.",
             )]
+        # The retention rule is satisfied by EITHER title field, and on a PDP the Meta
+        # Title is the one that can satisfy it. Product titles are never changed
+        # (SEO_BATCH_PROCESS.md §3 'Never changed'), so reading only `### Title` made
+        # this branch unsatisfiable for any PDP whose immutable product title does not
+        # already contain the earned term verbatim -- which is most of them. Batch 17
+        # is the first batch with 5-to-10 pages and both of them (Spain
+        # `spain jersey 2026`, Haaland `haaland cleats`) hit exactly that: the term is
+        # writable in the Meta Title and unwritable in the Title. The posture calls the
+        # 5-to-10 band "a constraint on wording rather than a gate on shipping"
+        # (workforce-conventions.md), and a constraint no PDP can satisfy is the v1
+        # failure mode in the other direction, so the check reads both fields and passes
+        # on either. (ORIN, 2026-08-28.)
         title = _field_text(lines, FIELD_TITLE)
-        if title is None:
+        meta_title = _field_text(lines, FIELD_META_TITLE)
+        if title is None and meta_title is None:
             return [Finding(
                 sku, "ranking-input", FAIL,
-                "no `### Title` field, so the 5-to-10 band rule could not be checked",
+                "neither a `### Title` nor a `### Meta Title` field is present, so the "
+                "5-to-10 band rule could not be checked",
             )]
-        if term.lower() not in title.lower():
+        haystacks = [t.lower() for t in (title, meta_title) if t]
+        if not any(term.lower() in h for h in haystacks):
             return [Finding(
                 sku, "ranking-input", FAIL,
-                f"earned-term position is {pos} (5-to-10 band), so the Title must retain "
-                f"the earned term {term!r} in exact-match form. Title reads: {title[:90]!r}",
+                f"earned-term position is {pos} (5-to-10 band), so the Title or the Meta "
+                f"Title must retain the earned term {term!r} in exact-match form. Title "
+                f"reads: {(title or '')[:90]!r}; Meta Title reads: "
+                f"{(meta_title or '')[:90]!r}",
             )]
     return []
 

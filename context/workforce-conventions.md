@@ -169,6 +169,37 @@ no earned term; that is an explicit declaration, not an omission.
 
 **This is the fix for why v1 never worked, and it is the whole point of v2.**
 
+#### On a PDP the 5-to-10 retention rule lands on the META Title (corrected 2026-08-28, ORIN)
+
+**"Title and H1 may be improved but MUST retain the earned term" was written from a collection-page
+frame, where the Title is an editable field. On a PDP it is not.** Product titles are never changed
+under any circumstances (`SEO_BATCH_PROCESS.md` §3 'Never changed'), and the H1 renders from the
+same immutable string. The only title field the workforce writes on a PDP is the **Meta Title**, so
+that is the field the retention rule can bind.
+
+`check_ranking_input` originally read only `### Title`. That made the 5-to-10 branch **unsatisfiable
+for any PDP whose immutable product title does not already happen to contain the earned term
+verbatim**, which is most of them. It now reads `### Title` OR `### Meta Title` and passes on
+either; dropping the term from both still FAILs. Two regression tests added, suite green at 68.
+
+**Batch 17 is where it surfaced, and both 5-to-10 pages hit it.** Spain earns `spain jersey 2026`
+at 5.50 with the product title "adidas 2026 Spain Men's Stadium Away Soccer Jersey": the words are
+all present, the string is not. The Haaland Phantom earns `haaland cleats` at 6.08 with a product
+title that never puts those two words together. Both terms are writable in a Meta Title and
+unwritable in a Title.
+
+**The correction is in the same class as v1's failure, pointing the other way.** v1 was a check
+nothing could trigger. This was a check nothing could satisfy. Both produce a safeguard that is not
+one, and the posture's own words settle which reading is right: the 5-to-10 band is "deliberately a
+constraint on wording rather than a gate on shipping," and a constraint no page can satisfy is a
+gate on shipping.
+
+**The known gap this does NOT close** (flagged in the Batch 17 handoff, still open): a page that
+CEDES its earned term while sitting in the 5-to-10 band would have the gate demand the ceded term
+in a title field, contradicting the cede. Batch 17's only ceding page, Guatemala, sits under 5 and
+takes the WARNING branch, so no conflict arose. Flag it when a future batch produces a ceding page
+at 5 to 10.
+
 #### Why v1 failed, recorded so v2 is not undone by the same mechanism
 
 v1 read: top 5 warns, 6 to 20 standard, 21 to 100 standard, not ranking standard. It depended on

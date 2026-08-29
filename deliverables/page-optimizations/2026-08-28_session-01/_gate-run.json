@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "timestamp_utc": "2026-08-29T00:46:32+00:00",
+  "session": "2026-08-28_session-01",
+  "exit_code": 0,
+  "verdict": "PASS",
+  "briefs_checked": 9,
+  "skus": [
+    "20490-BOX",
+    "783301-01",
+    "DH6621",
+    "HQ2332-800",
+    "IB4855-410",
+    "JL6934",
+    "JN4397",
+    "KB9024",
+    "UUM1GUAJ525101-U10"
+  ],
+  "registry1": {
+    "present": true,
+    "row_count": 177,
+    "cross_batch_cannibalization_ran": true
+  },
+  "checks_run": [
+    "voice",
+    "heading-levels",
+    "section-presence",
+    "customization-claims",
+    "url-handle",
+    "price-in-body",
+    "heritage-counts",
+    "fabrication-hedge",
+    "fifa-terms",
+    "forbidden-phrasings",
+    "word-band",
+    "brand-casing",
+    "cannibalization",
+    "cross-brief",
+    "registry1-present",
+    "ranking-input"
+  ],
+  "checks_skipped": [],
+  "findings": {
+    "total": 0,
+    "fail": 0,
+    "review": 0,
+    "by_check": {}
+  }
+}

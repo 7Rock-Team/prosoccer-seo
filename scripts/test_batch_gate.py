@@ -409,6 +409,30 @@ class TestRankingInput(GateTestBase):
                                     "earned_term": "paraguay jersey"})
         self.assertNotIn("ranking-input", self.checks_present())
 
+    def test_five_to_ten_meta_title_can_carry_the_earned_term(self):
+        """On a PDP the product Title is immutable (SEO_BATCH_PROCESS.md §3 'Never
+        changed'), so the Meta Title is the only title field that can retain the earned
+        term. Reading `### Title` alone made this branch unsatisfiable for any PDP whose
+        product title does not already contain the term verbatim. Batch 17 origin: Spain
+        (`spain jersey 2026`, pos 5.50) and the Haaland Phantom (`haaland cleats`, pos
+        6.08) both hit it. Either field satisfies the rule."""
+        self.write_brief("HJ2146", make_brief(
+            title="Puma 2026 Paraguay Men's Authentic Home Soccer Jersey",
+            meta_title="Puma 2026 Paraguay Jersey Authentic Home"))
+        self.write_input("HJ2146", {"earned_term_position": 6.5,
+                                    "earned_term": "paraguay jersey"})
+        self.assertNotIn("ranking-input", self.checks_present())
+
+    def test_five_to_ten_fails_when_neither_title_carries_the_term(self):
+        """The retention rule still bites: dropping the term from BOTH fields fails."""
+        self.write_brief("HJ2146", make_brief(
+            title="Puma 2026 Paraguay Men's Authentic Home Soccer Jersey",
+            meta_title="Puma Paraguay Authentic Home Shirt"))
+        self.write_input("HJ2146", {"earned_term_position": 6.5,
+                                    "earned_term": "paraguay jersey"})
+        fs = [f for f in self.findings() if f.check == "ranking-input"]
+        self.assertTrue(fs, "term absent from Title AND Meta Title must still FAIL")
+
     def test_above_ten_is_unconstrained(self):
         self.write_brief("HJ2146", make_brief(title="Something Entirely Different"))
         self.write_input("HJ2146", {"earned_term_position": 12.3,
