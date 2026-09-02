@@ -123,12 +123,13 @@ They are carried as secondaries, which is where category-adjacent terms belong. 
 overrides hierarchy.
 
 ## Meta fields (ORIN-set; use the title EXACTLY)
-- Meta Title: `Nike Strike Sleeves, Nike Sleeve Socks` (38 chars, under the 48 cap). Never end a
-  title or description with a manufacturer brand as a pipe suffix; brand at the front is correct.
-  **Corrected 2026-09-02.** The second half was `Shin Guard Sleeves`, which described the product
-  accurately but matched no query the page ranks on. It is replaced by the earned phrasing, which
-  the 5-to-10 band requires in exact-match form. Shin-guard language stays in the body, the FAQ
-  and the `/collections/shin-guards` link, where it is doing the disambiguation work.
+- Meta Title: `Nike Sleeve Socks, Strike Footless Sleeves` (42 chars, under the 48 cap). Never end
+  a title or description with a manufacturer brand as a pipe suffix; brand at the front is correct.
+  **Corrected 2026-09-02.** The original second half was `Shin Guard Sleeves`, which described the
+  product accurately but matched no query the page ranks on. The earned term leads instead, which
+  the 5-to-10 band requires in exact-match form, and `Strike Footless Sleeves` carries the model
+  without repeating the brand. Shin-guard language stays in the body, the FAQ and the
+  `/collections/shin-guards` link, where it is doing the disambiguation work.
 - Meta Description: write it. 120 to 160 characters, full sentences, no colon opener,
   product-anchored call to action. **It should make clear these go over a shin guard**, because the
   product name does not and the mismatch is this page's likeliest source of a bad click.

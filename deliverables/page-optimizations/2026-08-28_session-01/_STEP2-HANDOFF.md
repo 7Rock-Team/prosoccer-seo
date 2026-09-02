@@ -54,7 +54,7 @@ and the sleeves at 240-300. A band is set from the SKU's own tier and source dep
 | KB9024 | adidas Club America 2026 Authentic Jersey | 41 | The authentic America jersey for 2026-27 is adidas's on-pitch cut, slim fit with Climacool+ and Aeroready. Pull it on and back Las Águilas. | 139 |
 | IB4855-410 | Nike 2026 USMNT Stadium Home Shorts | 35 | The 2026 USMNT home shorts finish the kit you started with the jersey. Nike Stadium replica details, Dri-FIT to keep you dry. Get the other half. | 145 |
 | 20490-BOX | Panini 2026 World Cup Sticker Box, 50 Packs | 43 | The Panini 2026 World Cup sticker box holds 50 packs, 7 stickers each, 350 in all. Enough to fill real spreads in one sitting. Grab a box. | 138 |
-| DH6621 | Nike Strike Sleeves, Nike Sleeve Socks | 38 | The Nike Strike Sleeves are footless soccer sleeve socks that pull on over your shin guard and hold it in place. Dri-FIT, in five colors and two sizes. | 151 |
+| DH6621 | Nike Sleeve Socks, Strike Footless Sleeves | 42 | The Nike Strike Sleeves are footless soccer sleeve socks that pull on over your shin guard and hold it in place. Dri-FIT, in five colors and two sizes. | 151 |
 
 All nine Meta Titles are under the 48-character cap and none ends with a manufacturer brand as a
 pipe suffix. All nine Meta Descriptions are 120 to 160 characters, full sentences, no colon opener.
@@ -66,9 +66,11 @@ the strings that satisfy it.
 
 **DH6621 was corrected on 2026-09-02, after the briefs were first committed.** It was recorded as
 not-ranking against the assigned primary; it in fact ranks 9 and 10 across its sleeve/sock cluster
-(6,152 impressions, 41.7% of the page). The Meta Title's second half changed from
-`Shin Guard Sleeves` to `Nike Sleeve Socks`. Body copy, the shin-guard FAQ and the
-`/collections/shin-guards` link are unchanged. If you exported before that date, re-pull DH6621.
+(6,152 impressions, 41.7% of the page). The Meta Title is now
+`Nike Sleeve Socks, Strike Footless Sleeves`, leading with the earned term rather than repeating
+the brand. It was `Nike Strike Sleeves, Shin Guard Sleeves` when the briefs were first committed.
+Body copy, the shin-guard FAQ and the `/collections/shin-guards` link are unchanged. If you
+exported before 2026-09-02, re-pull DH6621.
 
 **One character to watch on import: `Las Águilas` in KB9024's Meta Description carries an accented
 Á.** Confirm it survives the export-to-import round trip rather than arriving as a mojibake pair.

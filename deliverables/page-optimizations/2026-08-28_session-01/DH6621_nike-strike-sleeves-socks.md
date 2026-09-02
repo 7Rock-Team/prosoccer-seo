@@ -106,7 +106,7 @@ Yes. Grip sock first, guard over it, sleeve on top.
 
 ### Meta Title
 
-Nike Strike Sleeves, Nike Sleeve Socks
+Nike Sleeve Socks, Strike Footless Sleeves
 
 ### Meta Description
 
