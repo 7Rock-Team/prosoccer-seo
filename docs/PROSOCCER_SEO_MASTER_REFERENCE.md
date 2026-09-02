@@ -184,6 +184,14 @@ XLSX stays the default because the sheet name answers that question automaticall
 
 # PART 2: THE FILES
 
+> **VERIFIED 2026-09-02 against actual directory listings.** Every entry below was checked against `ls` output for the repository root, `context/`, `context/page-type-playbooks/`, `context/silo-positioning/`, `templates/`, `scripts/`, `deliverables/tracking/`, `data/`, `strategy/`, `work-log/` and `.claude/agents/`.
+>
+> **Four entries described files that do not exist and are struck through, not deleted:** `scripts/crossfile_audit.py`, `scripts/build_registry.py`, `HOW_IT_WORKS.md`, `seo-batch-workflow.svg`. Neither script appears anywhere in git history, so they were never removed; they were described without being built. **A struck row is a warning, not a gap to fill:** the reason to keep it visible is that this document was cited as evidence these files existed.
+>
+> **Four entries existed but were described wrongly** and have been corrected in place: the gate's check count, `sitemap-state.md`'s location, the contents of an agent folder, and the per-batch file counts.
+>
+> This part is **not** a complete inventory. Directories and files present but undocumented are listed at the end of each section where the omission is material.
+
 ## Repository root
 
 | File | Purpose |
@@ -193,7 +201,11 @@ XLSX stays the default because the sheet name answers that question automaticall
 | `CLAUDE.md` | Governing instructions all agents read first. |
 | `README.md` | Repository orientation. |
 
-## `context/` — business knowledge and rules, read at startup
+All four verified present 2026-09-02.
+
+**Also at root, undocumented above:** `docs/`, `deliverables/`, `assets/`, `reports/`, `shared-intelligence/`, `tools/` (which holds the `brief-to-shopify-csv` tool), plus **18 untracked `scratch_*.json` files** left over from analysis sessions. The scratch files are working residue, not part of the system.
+
+## `context/`: business knowledge and rules, read at startup
 
 | File | Contents | State |
 |---|---|---|
@@ -213,6 +225,8 @@ XLSX stays the default because the sheet name answers that question automaticall
 | `04-product-catalog-overview.md` | Catalog overview | **Template, unpopulated** |
 | `05-competitors.md` | Competitor set | **Largely placeholder** |
 
+All fifteen verified present 2026-09-02. The three marked unpopulated are **not empty files**: `01-industry-context.md` (39 non-blank lines), `04-product-catalog-overview.md` (41) and `05-competitors.md` (49) each hold headings, a "How to Use This File" block and unanswered prompts. The state labels are accurate in substance, and the distinction matters: an agent reading them at startup gets **questions, not facts**, which is a worse failure mode than an empty file because it looks like content.
+
 **`context/page-type-playbooks/`**
 
 | File | State |
@@ -222,7 +236,9 @@ XLSX stays the default because the sheet name answers that question automaticall
 | `homepage-playbook.md` | Written, never used. The homepage has never been optimized. |
 | `technical-seo-playbook.md` | Active for technical checks. |
 
-**`context/silo-positioning/`** — Registry 2, described above. README plus one file per product family. Append-only.
+All four verified present 2026-09-02.
+
+**`context/silo-positioning/`**: Registry 2, described above. README plus one file per product family. Append-only. Verified 2026-09-02: `README.md` plus **11 family files** (club-team-jerseys, copa, f50, furon, mercurial, morelia, national-team-jerseys, phantom, predator, tekela, tiempo).
 
 ## `templates/`
 
@@ -232,20 +248,24 @@ XLSX stays the default because the sheet name answers that question automaticall
 | `consolidated-page-brief-template.md` | **Not in current use.** | A one-page brief format for Mike, from before the batch workflow. Describes a flow where Mike supplies the existing descriptions rather than ORIN scraping them, which is no longer how it works. |
 | `consolidated-page-brief-template-archive.md` | **Not in current use.** | The deep-brief format for landmark pages, merging contributions from all four specialist agents. Kept for reference. |
 
-## `scripts/` — what each one actually does
+All three verified present 2026-09-02, and `templates/` holds nothing else.
+
+## `scripts/`: what each one actually does
 
 | File | In plain terms |
 |---|---|
-| `batch_gate.py` | **The quality gate.** Reads all ten briefs at once and runs 15 automated checks over them: are the required sections there, is the word count in range, are there banned words or em dashes, does any keyword clash with one already in use, is a brand name capitalized wrong, are the shipping facts stated correctly, is there at least one internal link. It either passes or lists exactly which brief and which line failed. It cannot be argued with, which is the point. |
+| `batch_gate.py` | **The quality gate.** Reads every brief in the session folder at once and runs **16** automated checks over them: are the required sections there, is the word count in range, are there banned words or em dashes, does any keyword clash with one already in use, is a brand name capitalized wrong, are the shipping facts stated correctly, is there at least one internal link, and is the earned-term ranking input present and honoured. It either passes or lists exactly which brief and which line failed. It cannot be argued with, which is the point. **CORRECTED 2026-09-02: this row said 15 checks and "all ten briefs".** `ALL_CHECKS` has held 16 since `ranking-input` was added 2026-08-27, and batches are not always ten (Batch 16 and Batch 17 are nine). |
 | `test_batch_gate.py` | **Proof the gate still works.** A set of deliberately broken examples drawn from real past mistakes. If a change to the gate ever stops it catching one of them, this fails loudly. |
 | `voice_check.py` | **The style checker.** Scans for banned terms, em dashes, wrong brand capitalization and UK terminology. Also checks inside code-block examples in instruction files, because an example teaches more than a rule. |
 | `test_voice_check.py` | Same idea for the style checker. |
 | `build_ceded_terms.py` | **Keeps the "handed over" keyword list in sync.** Some keywords are deliberately given to collection pages rather than product pages. This script rebuilds that list from the collections file so there is only one place to maintain it. It refuses to run without being told today's date, so it cannot quietly stamp wrong dates on the record. |
-| `build_registry.py` | **Backfill tool.** Reads old batch folders and extracts what each page targeted, used to reconstruct the record for work done before the registry existed. |
-| `crossfile_audit.py` | **Contradiction finder.** Compares the rule files against each other looking for places where two files say opposite things. |
+| ~~`build_registry.py`~~ | ~~**Backfill tool.** Reads old batch folders and extracts what each page targeted, used to reconstruct the record for work done before the registry existed.~~ **DOES NOT EXIST (struck 2026-09-02).** Not in `scripts/`, and `git log --all` returns nothing for the path, so it was never built and never deleted. The backfill it describes was really done, by hand, on 2026-08-14 from verified Matrixify session folders. |
+| ~~`crossfile_audit.py`~~ | ~~**Contradiction finder.** Compares the rule files against each other looking for places where two files say opposite things.~~ **DOES NOT EXIST (struck 2026-09-02).** Not in `scripts/`, absent from git history, and no file in the repository references it. **There is no cross-file audit tooling of any kind.** Principle 8 calls cross-file contradiction a recurring class and says to audit for it deliberately; that audit is a manual read, and this row was the only thing suggesting otherwise. |
 | `_build_sitemap_state.py` | **Store inventory refresh.** Pulls Shopify's sitemap and writes down every live product and collection URL, so the workforce can check what actually exists rather than guessing. |
 
-## `deliverables/tracking/` — the running record
+Six of the eight rows above are real. **Present in `scripts/` but undocumented here:** `phase0_product_facts.py` and its test (the Phase 0 scrape helper, which is production code), `test_build_ceded_terms.py`, `_classify_404_table.py`, `convert_to_pdf.py`, `generate_presentation.py`, `crawl-national-team-collections.js`, `crawl-retry.js`, `test-firecrawl.ps1`, `_wordcount_probe.py`, and a `build/` directory. The last two are untracked scratch.
+
+## `deliverables/tracking/`: the running record
 
 This folder is the system's memory of what has been done and what each page owns.
 
@@ -256,29 +276,34 @@ This folder is the system's memory of what has been done and what each page owns
 | `ceded-terms.csv` | **The flat list of handed-over keywords** the automated check reads. Generated from the collections file, never edited by hand, so the two cannot drift apart. |
 | `technical-seo-log.md` | Technical findings that need a developer rather than a copy change. |
 | `cost-log.md` | Token and cost tracking per batch. |
+| `sitemap-state.md` | **The live-URL snapshot. It lives HERE, not in `data/`.** See the correction in the `data/` section below. |
 
-## `deliverables/page-optimizations/<date>_session-NN/` — one folder per batch
+All five original rows verified present 2026-09-02. **Also present, undocumented:** `detection-gap-2026-08-27.csv` and `detection-gap-2026-08-27_shortlist.md`, the working files behind B-DETECT-01.
+
+## `deliverables/page-optimizations/<date>_session-NN/`: one folder per batch
 
 | File | What it is |
 |---|---|
-| `<SKU>_<slug>.md` × 10 | The finished briefs. This is the deliverable. |
-| `inputs/<SKU>_input.md` × 10 | The briefing packets ORIN built for each writer. |
+| `<SKU>_<slug>.md` × N | The finished briefs. This is the deliverable. **CORRECTED 2026-09-02: this said × 10.** A batch is not always ten. Batch 16 and Batch 17 are nine, and Batch 5 was eleven. |
+| `inputs/<SKU>_input.md` × N | The briefing packets ORIN built for each writer. One per brief, always the same count. |
 | `inputs/_registry1_primaries.txt` | The copy of Registry 1 taken at the start of the batch. The gate refuses to run without it. |
 | `inputs/_phase0-scrape.md` | What the live pages actually said when scraped, so any spec in the copy can be traced back. |
-| `_audit-trail.md` | Decisions made during the batch and why. |
+| `_audit-trail.md` | Decisions made during the batch and why. **CORRECTED 2026-09-02: no longer written.** The last session folder containing one is `2026-08-04_session-01`. The five sessions since (`2026-08-16_batch15`, `2026-08-18_session-01`, `2026-08-26_session-01`, `2026-08-26_session-02`, `2026-08-28_session-01`) have none. The v2 refactor moved this content into `_STEP2-HANDOFF.md` and the batch commit message without anyone recording that the file had stopped being produced. **Listed here as expected-but-absent, not as a defect to fix**, since the decision record did not disappear, it moved. |
 | `_gate-run.json` | The gate's own record: pass or fail, which checks ran, which were skipped, when. Turns "the gate passed" from a memory into evidence. |
 | `_STEP2-HANDOFF.md` | Everything the Step 2 chat needs: the handle list and this batch's deliberate exceptions. |
 
-## `data/` — reference data pulled from outside
+## `data/`: reference data pulled from outside
 
 | File | What we do with it |
 |---|---|
-| `sitemap-state.md` | **A snapshot of every live URL on the store**, products and collections. Refreshed before any footwear batch. Used to answer questions the registry cannot, most importantly whether a competing version of a shoe is currently live, since the registry only knows about pages we have already optimized. |
+| `sitemap-state.md` | **WRONG PATH, corrected 2026-09-02. This file is not in `data/`; it is at `deliverables/tracking/sitemap-state.md`.** The description is right: a snapshot of every live URL on the store, products and collections, refreshed before any footwear batch, used to answer questions the registry cannot, most importantly whether a competing version of a shoe is currently live, since the registry only knows about pages we have already optimized. **A wrong path is worse than a missing row here**, because pack succession depends on this file and the rule says to check the live sitemap rather than the registry. An agent looking in `data/` finds nothing and may conclude no sibling is live, which is the exact false negative the freshness rule (principle 2, B-FRESH-01) exists to prevent. |
 | `templates/ProSoccer_Matrixify_Template.xlsx` | A blank import file with the correct sheet name and column headers and no data. Copy it rather than rebuilding the format by hand. |
 | `gsc-exports/` | Search Console data pulls, kept so an analysis can be re-run without re-fetching. |
 | `shopify-exports/` | Product exports from Shopify. |
 
-## `strategy/` — planning documents
+`templates/`, `gsc-exports/` and `shopify-exports/` verified present 2026-09-02. **Also in `data/`, undocumented:** `ahrefs/`, `ga4-exports/`, `screaming-frog/`, `README.md`, and two national-team collection crawl JSON files.
+
+## `strategy/`: planning documents
 
 | File | What we do with it | State |
 |---|---|---|
@@ -287,16 +312,23 @@ This folder is the system's memory of what has been done and what each page owns
 | `90-day-roadmap.md` | Intended as the quarterly plan | **Empty template** |
 | `keyword-map.md` | Intended as the keyword-to-URL map | **Empty template, superseded** by the registry CSVs |
 
-## `work-log/` — the running journal
+All four verified present 2026-09-02, and the three "empty template" labels are accurate in substance. As in `context/`, they are not zero-length: `master-strategy.md` (28 non-blank lines), `90-day-roadmap.md` (31) and `keyword-map.md` (23) each hold a purpose statement, a "How to Use This File" block and an example row. **`master-strategy.md` is the one that matters**, because CLAUDE.md's startup protocol tells every agent to read it. Today that read returns instructions for writing a strategy rather than a strategy.
+
+## `work-log/`: the running journal
 
 | File | What we do with it |
 |---|---|
 | `follow-ups.md` | **Open items that came up mid-work.** Smaller and more immediate than the backlog: things noticed in passing that should not be lost. |
-| `<date>_*.md` | **Dated records of specific pieces of work**: claims reviews, analysis results, session handoffs. Written when a piece of work produces findings someone will need later. |
+| `<date>_*.md` | **Dated records of specific pieces of work**: claims reviews, analysis results, session handoffs. Written when a piece of work produces findings someone will need later. Nine present as of 2026-09-02, the most recent being `2026-08-26_batch15.1-close.md`. |
+| `README.md` | Present but undocumented above. Added 2026-09-02. |
+
+Both original entries verified present 2026-09-02. **Note for the batch cadence:** the most recent close file is Batch 15.1. Batches 16 and 17 have no work-log close entry, which is step 15 output rather than a repo defect, but it means this folder currently understates what has shipped.
 
 ## `.claude/agents/`
 
-One folder per agent containing `agent.md` (the agent's own instructions), `learnings.md`, `decisions.md`, and `briefings/` (a per-session record of what that agent did).
+One folder per agent containing `agent.md` (the agent's own instructions), `learnings.md`, and `briefings/` (a per-session record of what that agent did).
+
+**CORRECTED 2026-09-02: `decisions.md` is not universal.** Verified across the seven agent folders (competitor-intel, content-writer, keyword-research, master-strategist, on-page-seo, reporting, technical-seo): **only `on-page-seo` has a `decisions.md`.** master-strategist, keyword-research and reporting each carry `agent.md`, `learnings.md` and `briefings/` only. Reading this row as written would have an agent look for a decision record that does not exist for it, and treat its absence as data loss rather than as a file that was never created.
 
 `.claude/settings.json` holds the permission list: routine commands like reading files, running scripts and committing are pre-approved, while destructive ones like force-push or recursive delete still prompt.
 
@@ -304,10 +336,11 @@ One folder per agent containing `agent.md` (the agent's own instructions), `lear
 
 | File | Purpose |
 |---|---|
-| `docs/workforce-v2-pipeline.md` | Narrative description of the batch flow |
-| `docs/workforce-v2-refactor-promt.md` | The specification the current architecture was built from |
-| `HOW_IT_WORKS.md` | System explainer written for people rather than agents |
-| `seo-batch-workflow.svg` | The workflow diagram |
+| `docs/workforce-v2-pipeline.md` | Narrative description of the batch flow. Verified present. |
+| `docs/workforce-v2-refactor-promt.md` | The specification the current architecture was built from. Verified present, and tracked in git as of 2026-09-02; it was untracked until then, so this row pointed at a file no clone contained. The filename misspells "prompt" and is left alone because `workforce-v2-pipeline.md` cites it by path. |
+| `docs/PROSOCCER_SEO_MASTER_REFERENCE.md` | This document. Added to the repository 2026-09-02. |
+| ~~`HOW_IT_WORKS.md`~~ | ~~System explainer written for people rather than agents~~ **DOES NOT EXIST (struck 2026-09-02).** No file of that name anywhere in the repository, under any casing. |
+| ~~`seo-batch-workflow.svg`~~ | ~~The workflow diagram~~ **DOES NOT EXIST (struck 2026-09-02).** No `.svg` matching a workflow diagram anywhere in the repository, including `assets/`. |
 
 ---
 
@@ -443,14 +476,20 @@ A youth product is written for the parent buying it, not the child wearing it.
 
 ## 3.8 Ranking-aware posture
 
-Before recommending changes, check where the page currently ranks for its keyword.
+The bands key on the position of the term the page has **already earned**, never on the page's average position across all queries and never on the keyword someone assigned it.
 
-| Current position | Approach |
+Copied verbatim from `context/workforce-conventions.md` as committed at `3449bfd`, section "The bands (v2), keyed on EARNED-TERM position". **That file is the source of truth. If the table changes there, recopy it here rather than editing this copy.**
+
+| Earned-term position | Posture |
 |---|---|
-| Top 5 | **Warning required.** Changing the title or H1 risks losing existing ranking. Confirm with Mike first. Keep the keyword phrasing intact in those fields and make changes in the meta description and body copy instead. |
-| 6 to 20 | Standard recommendations, position noted. |
-| 21 to 100 | Standard recommendations, position noted. |
-| Not ranking | Standard recommendations, treated as a fresh attempt. |
+| **Under 5** | Protect the Meta Title fully. Exact-match phrasing of the earned term preserved. Changes to that field require Mike per page. Iterate on Meta Description, Short Description and Long Description. The brief MUST carry the WARNING line. |
+| **5 to 10** | The Meta Title may be improved but MUST retain the earned term in exact-match form. Everything else is open. No per-page Mike gate; the brief states the earned term and its position so the constraint is visible and auditable. |
+| **10 to 20** | Standard recommendations. Carry the earned term into the Meta Title where it fits naturally. Not binding. |
+| **Over 20, or not ranking** | Standard recommendations. Nothing to protect; treat as a fresh attempt. |
+
+**What this replaced.** The previous table here was the v1 posture: four bands (Top 5, 6 to 20, 21 to 100, Not ranking) keyed on where the page ranked for its assigned keyword, with the top-5 row protecting "the title or H1". v1 was superseded in full on 2026-08-27. Two things about it were wrong rather than merely old. It keyed on the assigned keyword instead of the earned term, and it named the H1, which on a PDP renders from the Shopify product title and is never a brief output (see §3.9 and the 2026-08-30 standing rule). The band lines also moved: 77.3% of the untracked population sits between positions 5 and 10, so a protection line drawn at 5 left almost everyone unprotected.
+
+**The input is mandatory.** `earned_term` and `earned_term_position` are required fields in every per-SKU `gate-meta` block. The `ranking-input` gate check fails the batch when the position is absent or malformed. Where there is no earned term, the position is set to the string `"not-ranking"`, which is an explicit declaration rather than an omission.
 
 ## 3.9 What never changes
 
@@ -464,7 +503,7 @@ Four layers, deliberately different in kind, because each catches things the oth
 
 ## The automated gate
 
-A script that reads all ten briefs and runs 15 checks. It either passes or it fails with the exact brief and line number. It cannot be reasoned with and it does not accept an agent's word for anything.
+A script that reads every brief in the batch and runs **16** checks. It either passes or it fails with the exact brief and line number. It cannot be reasoned with and it does not accept an agent's word for anything. (Corrected 2026-09-02 from "all ten briefs" and 15 checks, the same error as the `scripts/` row in Part 2.)
 
 What it checks: required sections are present with real content, word count is in the right range for that product's tier, no banned words or em dashes, no wrong brand capitalization, no FIFA language on a brand without a license, no keyword that clashes with one already claimed, no prices in the copy, shipping facts stated correctly, at least one internal link, the URL handle field actually contains a handle, and no sibling page reusing another's distinctive phrasing.
 
