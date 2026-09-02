@@ -12,7 +12,9 @@
 
 ## 1. Page-level baselines, as written to `products-master.csv`
 
-These four figures are written to `baseline_impressions`, `baseline_clicks`, `baseline_ctr` and `baseline_position` on each SKU's row.
+These four figures are written to `baseline_impressions`, `baseline_clicks`, `baseline_ctr` and `baseline_position` on each SKU's row. All four are **page-scope** and comparable with each other.
+
+**The earned-term positions in section 2 are written to a separate column, `baseline_term_position`** (added 2026-09-02, Mike's ruling). It is term-scope and it is the figure the follow-up measures. The two position columns are never substituted for each other and never averaged.
 
 | SKU | Handle | Impressions | Clicks | CTR | Position |
 |---|---|---|---|---|---|

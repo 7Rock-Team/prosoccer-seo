@@ -160,7 +160,22 @@ What remains, with owners:
 
 **Three of the nine are close to sold out** (Spain 1 of 6, Haaland 2 of 15, Guatemala 2 of 6). The copy is evergreen and makes no availability claim in either direction, so this is implementation ordering rather than a blocker.
 
-**One thing to know before step 8:** DH6621, the Nike Strike Sleeves, was amended on 2026-09-02 after the briefs were first committed. Its meta title changed and its ranking band was corrected from not-ranking to 5-to-10. If an export was taken before that date, re-pull it. The reasoning is in B-RANK-01 and it is not settled; see §3.8.
+**One thing to know before step 8:** DH6621, the Nike Strike Sleeves, was amended on 2026-09-02 after the briefs were first committed. Its meta title changed and its ranking band was corrected from not-ranking to 5-to-10. If an export was taken before that date, re-pull it.
+
+### DH6621 is both the control and the open question. Read those two facts together.
+
+Anyone interpreting the Batch 17 follow-up needs both of these at once, because separately each one is misleading.
+
+**It is the batch's evergreen control.** Eight of the nine SKUs are tournament-cycle products in a World Cup year. The Nike Strike Sleeves have no season tag, no tournament exposure and no seasonal story, and the brief was written under a hard constraint that nothing in the copy may be dated. That is deliberate: **it is the page that tells you whether movement across the batch was the copy or the calendar.** If every World Cup page moves and this one does not, the calendar did it. If this one moves too, the copy did something. Without it the batch is unreadable, because World Cup demand rises on its own and the 2026-08-14 analysis showed exactly how badly that confounds a cohort.
+
+**It is also the page carrying B-RANK-01.** Its recorded earned term, `nike sleeve socks`, **fails both halves of the concentration condition**: 2.50% of page impressions against a 15% threshold, and 368 term impressions against a 1,000 floor, measured fresh on 2026-09-02. It is nonetheless held at the 5-to-10 band by Mike's disposition, because the term genuinely ranks at position 9.07 and recording `not-ranking` for a page at 9.07 would be a false record. Six of the batch's other seven earned terms pass the condition cleanly; this is the only one that does not.
+
+**Why the combination matters.** The control page is the one whose band rests on a judgment call rather than a rule, so it is simultaneously the most load-bearing page in the measurement and the least rule-governed one in the batch. Two consequences for whoever reads the follow-up:
+
+- **A null result on DH6621 does not validate the control.** It could mean the calendar explains the batch, which is what the control is for, or it could mean the page was optimized against a term too small to move anything. 368 term impressions over 90 days is a thin base. Those two readings are not distinguishable from the page-level number alone, which is why `baseline_term_position` and the term-level figures in the capture file exist.
+- **Do not quietly resolve B-RANK-01 using this page's result.** Whether the copy moved is a different question from whether the band was assigned correctly, and a good outcome here would be weak evidence for a rule that has to hold across every future ranking-page batch.
+
+The disposition, the four questions a real rule has to answer, and the reasoning are in `strategy/sprint-backlog.md` under B-RANK-01. The band table and its enforcement note are in §3.8.
 
 **Also open at this stopping point:** the work log has no close entry for Batch 16 or Batch 17, so `work-log/` currently understates what has shipped by two batches.
 
@@ -457,7 +472,24 @@ This folder is the system's memory of what has been done and what each page owns
 | `cost-log.md` | Token and cost tracking per batch. |
 | `sitemap-state.md` | **The live-URL snapshot. It lives HERE, not in `data/`**, where this document placed it until 2026-09-02. Written by `scripts/_build_sitemap_state.py`. Pack succession reads it; see the correction in the `data/` section below for why the wrong path was dangerous. |
 
-The five original rows and `sitemap-state.md` all verified present 2026-09-02. **Also present, undocumented:** `detection-gap-2026-08-27.csv` and `detection-gap-2026-08-27_shortlist.md`, the working files behind B-DETECT-01.
+The five original rows and `sitemap-state.md` all verified present 2026-09-02. **Also present, undocumented:** `detection-gap-2026-08-27.csv` and `detection-gap-2026-08-27_shortlist.md`, the working files behind B-DETECT-01, and `2026-09-02_batch17-baselines.md`, the Batch 17 pre-import capture.
+
+### The two baseline position columns, and why there are two
+
+`products-master.csv` carries **36 columns** as of 2026-09-02, when `baseline_term_position` was added directly after `baseline_position`. **They are different scopes and must never be substituted for each other or averaged together.**
+
+| Column | Scope | What it is | Comparable with |
+|---|---|---|---|
+| `baseline_position` | **Page** | GSC average position across **every query the page appeared for** in the window | `baseline_impressions`, `baseline_clicks`, `baseline_ctr`, which are all page-scope |
+| `baseline_term_position` | **Term** | GSC average position for the **earned term only** | The earned-term impressions, clicks and share recorded in the batch's capture file |
+
+**Why the split exists.** The 2026-08-27 ruling asked that `baseline_position` be written from the earned-term position, so that the registry would start recording the one metric this work is meant to move. Writing it into that column would have produced a row carrying four fields that look like one measurement and are not: page impressions, page clicks, page CTR, and a term-level position. Anything later reading the row as a unit would mix scopes silently, which is the failure class principle 6 exists for. The fix is a second column rather than a substitution, so the row carries both facts unambiguously.
+
+**Which one the follow-up measures: `baseline_term_position`.** The ranking bands key on the earned term's position and explicitly not on the page average, because the two differ materially in both directions. Batch 17 shows it directly: Club America is 5.39 on the page and 3.40 on its term, while the Nike Strike Sleeves are 8.50 on the page and 9.07 on its term. The page average moves when unrelated queries drift and tells you nothing about whether the copy worked.
+
+**Populated on 7 of 187 rows**, the Batch 17 pages that have an earned term. Italy and the Panini box are `not-ranking` and are correctly blank. Every other row predates the column.
+
+**Note for anyone updating the schema:** `.claude/agents/master-strategist/agent.md` documents the `products-master.csv` column list and has not been updated for this addition.
 
 ## `deliverables/page-optimizations/<date>_session-NN/`: one folder per batch
 

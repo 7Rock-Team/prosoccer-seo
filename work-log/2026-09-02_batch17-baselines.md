@@ -45,12 +45,22 @@ To keep the deviation as narrow as possible:
 - **`batch` and `implementation_date` are deliberately left BLANK.** Both are written at step 15 from the single import-confirmation event, per the rule added 2026-08-14, and writing either now would break that. Batch identity is recorded in `notes` instead.
 - `baseline_position` holds the **page-level** average, matching the other three baseline fields so the four are one consistent set. The earned-term positions live in the capture file.
 
-**That last point needs Mike's ruling.** The 2026-08-27 decision recorded in `_STEP2-HANDOFF.md` says Batch 17 writes `baseline_position` from the earned-term positions. This capture wrote the page average instead, because mixing a term-level position into a page-level set of impressions, clicks and CTR would produce four numbers that are not comparable with each other and would silently break any future analysis reading the row as a unit. Both values exist and neither is lost. If the earned-term position is wanted in the column, it is a one-line change, and the cleaner fix is a separate `baseline_term_position` column so the row carries both without ambiguity.
+**RULED, same day.** The 2026-08-27 decision recorded in `_STEP2-HANDOFF.md` said Batch 17 writes `baseline_position` from the earned-term positions. This capture wrote the page average instead, because mixing a term-level position into a page-level set of impressions, clicks and CTR would produce four numbers that are not comparable with each other and would silently break any future analysis reading the row as a unit.
+
+**Mike's ruling, 2026-09-02: add a second column.** `baseline_term_position` was inserted directly after `baseline_position` and populated with the earned-term positions for the seven pages that have one. Italy and the Panini box are `not-ranking` and are correctly blank. `baseline_position` stays as written, page average. The registry now carries 36 columns and the row carries both facts without ambiguity.
+
+- **`baseline_position`** is page-scope, comparable with `baseline_impressions`, `baseline_clicks` and `baseline_ctr`.
+- **`baseline_term_position`** is term-scope and is **what the follow-up measures**, because the bands key on the earned term and not on the page average.
+
+Batch 17 shows why the distinction is not academic: Club America is 5.39 on the page and 3.40 on its term, while the Nike Strike Sleeves are 8.50 on the page and 9.07 on its term. The two move for different reasons.
+
+The insert was verified the same way as the append: round trip before writing, then **zero drift across the original 35 columns on all 187 rows.** `.claude/agents/master-strategist/agent.md` documents this schema and has not been updated for the new column.
 
 ## What has to happen next, in order
 
-1. **Mike rules on `baseline_position`:** page average as written, earned-term position, or a new column carrying both.
+1. ~~Mike rules on `baseline_position`~~ **DONE 2026-09-02: `baseline_term_position` added as a second column.** See above.
 2. **Steps 8 to 15 run.** The import flips these nine rows to `shipped` and writes `batch` and `implementation_date`.
 3. **The follow-up pull uses the identical method**, which is written out step by step in the capture file. A 90-day post-window against a 90-day pre-window, page level and term level reported separately, per-page paired changes rather than a cohort average.
+4. **Open, logged not resolved:** B-LOCALE-01 asks whether the follow-up should report an out-of-scope click figure alongside canonical, and whether the locale segment is underserved. Decide question one before the follow-up runs, because it changes what gets reported.
 
 Do not run the follow-up as a cohort mean. Three of these nine pages are above 23,000 impressions in a World Cup year and any one of them can flip a cohort result on its own, which is exactly how the 2026-08-14 analysis went wrong.

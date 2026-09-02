@@ -94,6 +94,22 @@ Runs in Cursor against `C:\Dev-Projects\marketing\prosoccer-seo`.
 - **The same flip writes `batch` and `implementation_date` (added 2026-08-14).** They come from the one confirmation event, so they are recorded in the one step. `implementation_date` is the import date Mike confirms, not the brief date and not the commit date. **Never infer it from `brief_date`:** Batch 9's brief-to-import gap is ten days. A row without a confirmed import leaves both fields blank rather than carrying a guess.
 - Why this was added: the 2026-08-14 GSC cohort analysis found `implementation_date` populated on **0 of 142 rows** and `batch` absent entirely, so every before/after comparison had to reconstruct the cohorts from Matrixify session folders before it could run at all. The 101 shipped rows were backfilled that day from that verified mapping; the 47 pre-B5 rows stay blank permanently. Recording it at step 15 is what stops the next analysis paying that cost again.
 
+**A batch that captures baselines appends its registry rows BEFORE import (added 2026-09-02, Mike).** This is a deliberate exception to step 14, which otherwise appends after the import is confirmed.
+
+The reason is mechanical: a baseline has to attach to a row, and the row has to exist before the import that the baseline will be measured against. Once the import runs, the pre-window is gone and cannot be reconstructed, because the copy on the page has already changed.
+
+When a batch appends early, three things hold:
+
+- **`status` is `pending`.** Unchanged from the normal rule. A row is `shipped` only after Mike confirms the import landed, and an early append does not make a page live.
+- **`batch` and `implementation_date` stay BLANK.** Both are written at step 15 from the single import-confirmation event, per the 2026-08-14 rule above, and populating either at append time breaks that. Batch identity goes in `notes` until step 15 fills the columns.
+- **The append is verified, not assumed.** Round-trip the CSV before writing and confirm zero field drift across the pre-existing rows afterwards. Adding rows to the registry is the one place where a bad write silently corrupts every future cannibalization check.
+
+Step 14 then has nothing left to append for that batch, and step 15 does what it always does: flip the reported handles to `shipped` and write `batch` and `implementation_date`.
+
+**Batch 17 is the first case, on 2026-09-02.** Nine rows appended while the batch sat at step 7, taking the registry from 178 to 187, with page-level and term-level GSC baselines recorded. It is the first batch in the programme with a pre-import baseline on disk: every performance column was empty on all 178 prior rows, and the 2026-08-14 attempt to reconstruct a pre-window after the fact could not detect an effect in either direction. Full capture and method: `deliverables/tracking/2026-09-02_batch17-baselines.md`.
+
+**Two baseline position columns exist and they are not interchangeable.** `baseline_position` is the page average across every query the page appears for and is comparable with `baseline_impressions`, `baseline_clicks` and `baseline_ctr`, which are all page-scope. `baseline_term_position` is the position of the earned term only, and it is the figure the ranking bands key on and the one a follow-up should measure. Never substitute one for the other, and never average them.
+
 Origin: a live audit of all 151 registry rows on 2026-08-14 found **16 statuses wrong in both directions**. Ten `pending` rows were live (the whole Batch 10 set). Six `shipped` rows had never been imported: the three Mexico 2026 Stadium jerseys, the Predator Accuracy Crazyrush page, HP9971 and IH1779-900. Two of those six were about to be touched by a correction batch that assumed their copy was live. The audit is the expensive way to find this; this step is the cheap way to prevent it.
 
 **The gate (step 5).** `scripts/batch_gate.py` runs **16** mechanical checks over the session folder. Exit 0 only when nothing fires. The gate replaces the human per-brief review for mechanical defect classes; the escalate-on-exception batch mode (CLAUDE.md 'Approval mode') is safe only because it runs.
