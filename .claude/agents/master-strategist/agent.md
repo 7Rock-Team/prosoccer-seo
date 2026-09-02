@@ -883,20 +883,30 @@ Field rules:
 ### Master CSV row format: products-master.csv
 
 ```
-url,product_id,product_type,brand,target_keywords,brief_date,brief_file_path,implementer,batch,implementation_date,crawl_verified_date,baseline_impressions,baseline_clicks,baseline_position,baseline_ctr,merchant_listing_status,product_schema_status,review_schema_status,day_30_impressions,day_30_clicks,day_30_position,day_30_ctr,day_60_impressions,day_60_clicks,day_60_position,day_60_ctr,status,notes,primary_keyword,normalized_primary,normalized_target_keywords,primary_volume,ceded_from,kw_source,kw_recorded_date
+url,product_id,product_type,brand,target_keywords,brief_date,brief_file_path,implementer,batch,implementation_date,crawl_verified_date,baseline_impressions,baseline_clicks,baseline_position,baseline_term_position,baseline_ctr,merchant_listing_status,product_schema_status,review_schema_status,day_30_impressions,day_30_clicks,day_30_position,day_30_ctr,day_60_impressions,day_60_clicks,day_60_position,day_60_ctr,status,notes,primary_keyword,normalized_primary,normalized_target_keywords,primary_volume,ceded_from,kw_source,kw_recorded_date
 ```
 
+**36 columns, verified against the file on 2026-09-02. 187 rows.** `baseline_term_position` was added that day, directly after `baseline_position`. This block was stale before then and had been carrying a 35-column list plus a wrong `product_id` description; re-verify it against the file rather than trusting it, whenever a column is added.
+
 Field rules: same baseline as collections-master, plus:
-- `product_id`: currently holds the SKU, not the Shopify numeric ID (known defect, see `SEO_BATCH_PROCESS.md` §6)
-- `product_type`: Shopify product type field value (e.g., "Soccer Cleats", "Jerseys")
+- `product_id`: **holds the SKU, not the Shopify numeric ID.** Populated on 181 of 187 rows: 178 carry a SKU, 3 carry a genuine numeric Shopify ID (`18281`, `18278`, `18282`), 6 are blank. The mixed content is the known defect, see `SEO_BATCH_PROCESS.md` §6. Never read this column expecting a numeric ID; the import file sources real numeric IDs from the Matrixify export.
+- `product_type`: short internal token, NOT the Shopify product type field. Values in use: `cleat`, `cleat-turf`, `shoe-indoor`, `jersey`, and from Batch 17 `shorts`, `legwear`, `collectible`. The three Batch 17 values were chosen by ORIN and are pending Mike's ruling, see B-TAX-02.
 - `brand`: adidas / Nike / Puma / Joma / etc.
 - `merchant_listing_status`: [eligible / ineligible / disapproved / not yet evaluated]
 - `product_schema_status`: [present complete / present incomplete / absent]
 - `review_schema_status`: [present / absent / not applicable]
-- `batch`: the batch label the page shipped in, `B5` through `B14` and forward. Blank for the 47 pre-B5 rows, which were manual work with no Matrixify record. Never invent one.
+- `batch`: the batch label the page shipped in, `B5` through `B16` and forward, plus `B15.1`. Blank for the 48 pre-B5 rows, which were manual work with no Matrixify record, and blank for any batch that has not yet imported. Never invent one.
 - `implementation_date`: the date the Shopify import actually landed, written at step 15 alongside the `status` flip, from the same confirmation. **Never infer it from `brief_date`**: Batch 9's gap between brief and import is ten days, and batches 1 to 4 have no import record at all. A row with no confirmed import date stays blank, not guessed.
 
+**The two baseline position columns are different scopes and are never interchangeable:**
+- `baseline_position`: **page scope.** GSC average position across every query the page appeared for. Comparable with `baseline_impressions`, `baseline_clicks` and `baseline_ctr`, which are all page scope.
+- `baseline_term_position`: **term scope.** GSC average position for the earned term only. **This is the figure the ranking bands key on and the one a follow-up measures.** Blank where the page has no earned term (`not-ranking`), which is a declaration and not an omission.
+
+Never substitute one for the other and never average them. They differ materially in both directions: Batch 17's Club America page is 5.39 on the page and 3.40 on its term, while the Nike Strike Sleeves are 8.50 on the page and 9.07 on its term. Populated on 7 of 187 rows as of 2026-09-02; every earlier row predates the column.
+
 `batch` and `implementation_date` are what make cohort performance analysis possible at all. Both were added on 2026-08-14 by backfill from a verified Matrixify-session mapping, after a GSC analysis found `implementation_date` populated on 0 of 142 rows and had to reconstruct the cohorts from scratch to run.
+
+**Appending rows before import (added 2026-09-02).** A batch that captures pre-import baselines appends its registry rows at brief close rather than at step 14, because a baseline has to attach to a row and the row must exist before the import it is measured against. When that happens: `status` is `pending`, and `batch` and `implementation_date` stay **blank** so step 15 still writes both from the single confirmation event. Round-trip the CSV before writing and confirm zero field drift across pre-existing rows afterwards. Batch 17 is the first case. Full rule: `SEO_BATCH_PROCESS.md` §2.
 
 ### Technical SEO log entry format
 
