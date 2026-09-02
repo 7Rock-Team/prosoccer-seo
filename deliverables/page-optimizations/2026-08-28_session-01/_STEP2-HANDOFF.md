@@ -100,6 +100,43 @@ Italy 5 of 6, sleeves 6 of 10.
 
 The confirmed-live handle list, plus any failures or skips, plus `Updated N / Created 0` and the job ID.
 ORIN flips exactly those rows to `shipped` and writes `batch` + `implementation_date`. A handle not
-reported stays `pending`. **Batch 17 also writes `baseline_position` from the earned-term positions in
-the table above**, per the 2026-08-27 ruling that the registry starts recording the one metric this
-work is supposed to move.
+reported stays `pending`.
+
+### Baselines: what step 15 writes, corrected 2026-09-02
+
+~~**Batch 17 also writes `baseline_position` from the earned-term positions in the table above**, per
+the 2026-08-27 ruling that the registry starts recording the one metric this work is supposed to
+move.~~
+
+**SUPERSEDED 2026-09-02. Struck rather than deleted, because anyone who read the earlier version of
+this handoff was told to write the earned-term position into `baseline_position`, and following that
+now would overwrite a page-level figure with a term-level one.**
+
+The registry carries **two** position columns and they are different scopes:
+
+| Column | Scope | Holds |
+|---|---|---|
+| `baseline_position` | page | GSC average across every query the page appeared for. Comparable with `baseline_impressions`, `baseline_clicks` and `baseline_ctr`, which are all page scope |
+| `baseline_term_position` | term | GSC average for the earned term only. **This is the metric the 2026-08-27 ruling was reaching for, and the one the follow-up measures** |
+
+The 2026-08-27 ruling was right about what to record and wrong about where. Writing a term-level
+position into `baseline_position` would have left four fields in one row that look like a single
+measurement and are not, so anything reading the row as a unit would mix scopes silently.
+`baseline_term_position` was added on 2026-09-02 to carry both facts without ambiguity.
+
+**For Batch 17 specifically, step 15 does NOT write either column. They are already populated.**
+Baselines were captured on 2026-09-02 **before** the import, which is the only moment a true
+pre-state exists, and the nine rows were appended early to hold them. Step 15's job here is
+narrower than usual: flip `status` to `shipped`, and write `batch` and `implementation_date`.
+**Do not overwrite the baseline columns.** Full capture and method:
+`deliverables/tracking/2026-09-02_batch17-baselines.md`.
+
+Term positions as captured, for reference against the table above (measured 2026-06-05 to
+2026-09-02, canonical URL only): Club America 3.40, Guatemala 4.93, Paraguay 4.89, Spain 5.50,
+Haaland 6.08, Strike Sleeves 9.07, USMNT shorts 10.55. Italy and the Panini box are `not-ranking`
+and are correctly blank.
+
+**For a future batch that does NOT capture pre-import baselines**, step 15 writes both columns from
+a GSC pull at that time, page average into `baseline_position` and earned-term position into
+`baseline_term_position`. That is a worse measurement than capturing before import, because the
+copy has already changed by then. Capture early where you can. See `SEO_BATCH_PROCESS.md` §2.
