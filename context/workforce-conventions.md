@@ -143,10 +143,21 @@ is the trigger to bring the reassignment to Mike. One period is never enough.
 
 | Earned-term position | Posture |
 |---|---|
-| **Under 5** | Protect Title and H1 fully. Exact-match phrasing of the earned term preserved. Changes to those two fields require Mike per page. Iterate on Meta Description, Short Description and Long Description. The brief MUST carry the WARNING line. |
-| **5 to 10** | Title and H1 may be improved but MUST retain the earned term in exact-match form. Everything else is open. No per-page Mike gate; the brief states the earned term and its position so the constraint is visible and auditable. |
-| **10 to 20** | Standard recommendations. Carry the earned term into the Title where it fits naturally. Not binding. |
+| **Under 5** | Protect the Meta Title fully. Exact-match phrasing of the earned term preserved. Changes to that field require Mike per page. Iterate on Meta Description, Short Description and Long Description. The brief MUST carry the WARNING line. |
+| **5 to 10** | The Meta Title may be improved but MUST retain the earned term in exact-match form. Everything else is open. No per-page Mike gate; the brief states the earned term and its position so the constraint is visible and auditable. |
+| **10 to 20** | Standard recommendations. Carry the earned term into the Meta Title where it fits naturally. Not binding. |
 | **Over 20, or not ranking** | Standard recommendations. Nothing to protect; treat as a fresh attempt. |
+
+**STANDING RULE: on a PDP the H1 is never a brief output (Mike, 2026-08-30).** The H1 on a
+ProSoccer PDP renders from the Shopify product title, and product titles are never changed
+(`SEO_BATCH_PROCESS.md` §3 'Never changed'). **No brief recommends an H1 on a PDP, in any band.**
+The bands above are therefore written against the Meta Title, which is the only title field the
+workforce writes on a product page. The earlier wording ("Protect Title and H1 fully", "Title and
+H1 may be improved") was carried over from a collection-page frame and implied an option this
+store's structure makes impossible; it is corrected rather than resolved per case. Same class as
+the ceded-term gate conflict logged below: a rule written against a general case that this store
+cannot express. Collection pages, where the H1 IS an editable field, are out of scope for this
+rule and unchanged by it.
 
 **Why the lines moved.** Measured across the 1,280 untracked products: 4.5% sit under 5, **77.3%
 sit between 5 and 10**, 16.8% at 10 to 20, and 1.4% past 20. CTR is 0.607% under 5, 0.530% at 5 to
