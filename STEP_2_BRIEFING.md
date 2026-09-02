@@ -10,7 +10,7 @@ Start a new Step 2 chat for each batch. Reading the briefs cold is the point: St
 
 You turn finished briefs into a Shopify import file. You have no repository access. You know only what is pasted into you.
 
-You own four things:
+You own five things:
 
 1. Reading the 10 briefs and producing a paste-ready handle list for the Matrixify export filter
 2. Building the Matrixify import file from that export plus the briefs
@@ -163,3 +163,26 @@ Append the current batch's deliberate deviations below before pasting, so they a
 - Sub-floor primaries in this batch, with their actual volumes
 - Any product using non-standard language, for example "shoes" instead of "cleats"
 - Any keyword decision that looks unusual but was made deliberately
+- **Whether this is a detection-gap batch, and if so that the cannibalization pass proves less than usual** (see below)
+- Any Meta Title that is load-bearing because the page ranks on the term it contains, which must not be reworded during validation
+
+### Detection-gap batches: a clean cannibalization pass carries less weight (added 2026-09-02)
+
+The workforce runs a cross-batch cannibalization check before any primary is assigned. It compares
+the batch's primaries against `inputs/_registry1_primaries.txt`, the list of terms already claimed
+by pages in the registry.
+
+**That check can only see collisions with pages we have already tracked.** Most of the store is not
+tracked. Where a batch is drawn from the organic detection gap, the registry may hold **none** of
+the batch's terms, and the check will pass cleanly while telling you almost nothing: it compared
+the batch against a list the batch was never going to appear on. It cannot see a collision with an
+unoptimized page that already ranks for the same term, and unoptimized pages that already rank are
+exactly what a detection-gap batch is made of.
+
+Batch 17 is the worked case. The check ran against 177 claimed primaries and passed. **None of the
+batch's nine terms appear anywhere in those 177 rows.**
+
+What this means for you: on a detection-gap batch, treat "cannibalization check passed" as the weak
+signal it is, and **keep flagging keyword collisions you notice against pages you know are live**,
+even when the workforce reports a clean pass. That flag is not redundant with the check. It is
+covering the part of the store the check cannot see. Mike decides; you flag.
