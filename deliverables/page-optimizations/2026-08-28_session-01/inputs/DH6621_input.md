@@ -14,8 +14,8 @@ _v2 pre-dispatch input. Work from THIS FILE ONLY. Do not read sibling briefs; th
   ],
   "word_band_tolerance": 15,
   "primary_keyword": "nike strike sleeves",
-  "earned_term": "",
-  "earned_term_position": "not-ranking",
+  "earned_term": "nike sleeve socks",
+  "earned_term_position": 9.38,
   "forbidden_phrasings": {
     "verbatim": [],
     "motifs": [
@@ -30,12 +30,24 @@ _v2 pre-dispatch input. Work from THIS FILE ONLY. Do not read sibling briefs; th
 }
 ```
 
-## NO EARNED TERM. Conventional keyword assignment applies.
+## EARNED TERM: `nike sleeve socks`, position 9.38. 5-to-10 band. (Corrected 2026-09-02.)
 
-The page's largest query, `soccer sleeve socks`, is 854 impressions and **6.1% of the page's
-14,211**. That fails the 15% share condition, so the page has no earned term.
-`earned_term_position` is the string `"not-ranking"`, an explicit declaration. No band constraint
-applies.
+**This block previously read "NO EARNED TERM" and that was wrong.** The original derivation ran
+against the assigned primary string `nike strike sleeves`, which returns no query of its own in
+GSC, and then tested a single query (`soccer sleeve socks`) against the 15% share condition. The
+page's demand is a cluster, and the cluster ranks.
+
+GSC, canonical URL only, 90 days to 2026-08-27: the sleeve/sock cluster is **6,152 impressions,
+41.7% of the page's 14,758, at aggregate position 9.23.** Its two phrasing blocks sit at
+`sock sleeve(s)` 1,192 impressions / position 9.00 and `sleeve socks` 2,890 impressions /
+position 10.83. 41.7% clears the 15% condition with room.
+
+**The band is derived from `nike sleeve socks`: 394 impressions, position 9.38**, the
+highest-impression single query inside the band and the head form of the larger phrasing block.
+Bands key on a term's own position, never the page average (8.30) and never the cluster aggregate.
+
+Consequence: the Meta Title must retain `nike sleeve socks` in exact-match form. Everything else
+is open. No per-page Mike gate at this band.
 
 ## This is the batch's control page. Write it as well as the others, for a different reason.
 
@@ -111,8 +123,12 @@ They are carried as secondaries, which is where category-adjacent terms belong. 
 overrides hierarchy.
 
 ## Meta fields (ORIN-set; use the title EXACTLY)
-- Meta Title: `Nike Strike Sleeves, Shin Guard Sleeves` (39 chars, under the 48 cap). Never end a
+- Meta Title: `Nike Strike Sleeves, Nike Sleeve Socks` (38 chars, under the 48 cap). Never end a
   title or description with a manufacturer brand as a pipe suffix; brand at the front is correct.
+  **Corrected 2026-09-02.** The second half was `Shin Guard Sleeves`, which described the product
+  accurately but matched no query the page ranks on. It is replaced by the earned phrasing, which
+  the 5-to-10 band requires in exact-match form. Shin-guard language stays in the body, the FAQ
+  and the `/collections/shin-guards` link, where it is doing the disambiguation work.
 - Meta Description: write it. 120 to 160 characters, full sentences, no colon opener,
   product-anchored call to action. **It should make clear these go over a shin guard**, because the
   product name does not and the mismatch is this page's likeliest source of a bad click.

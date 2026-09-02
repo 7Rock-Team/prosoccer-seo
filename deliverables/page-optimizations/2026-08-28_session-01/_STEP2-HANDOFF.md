@@ -32,7 +32,7 @@ export filter or the import file, and do not reconstruct it from the title.
 | 6 | KB9024 | `adidas-2026-27-club-america-mens-authentic-home-soccer-jersey` | `america jersey 2026` | 497 | 450-520 | `america jersey 2026` | 3.50 |
 | 7 | IB4855-410 | `nike-2026-27-usmnt-mens-stadium-home-shorts` | `usmnt shorts` | 351 | 300-360 | `usmnt shorts` | 10.57 |
 | 8 | 20490-BOX | `panini-2026-fifa-world-cup-stickers-box-50-packs-each` | `panini sticker box` | 372 | 320-380 | none | not-ranking |
-| 9 | DH6621 | `nike-strike-sleeves-socks` | `nike strike sleeves` | 292 | 240-300 | none | not-ranking |
+| 9 | DH6621 | `nike-strike-sleeves-socks` | `nike strike sleeves` | 292 | 240-300 | `nike sleeve socks` | 9.38 |
 
 Word counts are `batch_gate.py`'s own `body_word_count` run against the written files, not a
 self-report. Every one sits inside its base band, none is riding the tolerance line.
@@ -54,14 +54,21 @@ and the sleeves at 240-300. A band is set from the SKU's own tier and source dep
 | KB9024 | adidas Club America 2026 Authentic Jersey | 41 | The authentic America jersey for 2026-27 is adidas's on-pitch cut, slim fit with Climacool+ and Aeroready. Pull it on and back Las Águilas. | 139 |
 | IB4855-410 | Nike 2026 USMNT Stadium Home Shorts | 35 | The 2026 USMNT home shorts finish the kit you started with the jersey. Nike Stadium replica details, Dri-FIT to keep you dry. Get the other half. | 145 |
 | 20490-BOX | Panini 2026 World Cup Sticker Box, 50 Packs | 43 | The Panini 2026 World Cup sticker box holds 50 packs, 7 stickers each, 350 in all. Enough to fill real spreads in one sitting. Grab a box. | 138 |
-| DH6621 | Nike Strike Sleeves, Shin Guard Sleeves | 39 | The Nike Strike Sleeves are footless soccer sleeve socks that pull on over your shin guard and hold it in place. Dri-FIT, in five colors and two sizes. | 151 |
+| DH6621 | Nike Strike Sleeves, Nike Sleeve Socks | 38 | The Nike Strike Sleeves are footless soccer sleeve socks that pull on over your shin guard and hold it in place. Dri-FIT, in five colors and two sizes. | 151 |
 
 All nine Meta Titles are under the 48-character cap and none ends with a manufacturer brand as a
 pipe suffix. All nine Meta Descriptions are 120 to 160 characters, full sentences, no colon opener.
 
-**Two Meta Titles are load-bearing and must not be reworded in the import file.** Spain and the
-Haaland Phantom sit in the 5-to-10 ranking band, where the earned term must be retained in
-exact-match form. `Spain Jersey 2026` and `Haaland Cleats` are the strings that satisfy it.
+**Three Meta Titles are load-bearing and must not be reworded in the import file.** Spain, the
+Haaland Phantom and the Strike Sleeves sit in the 5-to-10 ranking band, where the earned term must
+be retained in exact-match form. `Spain Jersey 2026`, `Haaland Cleats` and `Nike Sleeve Socks` are
+the strings that satisfy it.
+
+**DH6621 was corrected on 2026-09-02, after the briefs were first committed.** It was recorded as
+not-ranking against the assigned primary; it in fact ranks 9 and 10 across its sleeve/sock cluster
+(6,152 impressions, 41.7% of the page). The Meta Title's second half changed from
+`Shin Guard Sleeves` to `Nike Sleeve Socks`. Body copy, the shin-guard FAQ and the
+`/collections/shin-guards` link are unchanged. If you exported before that date, re-pull DH6621.
 
 **One character to watch on import: `Las Águilas` in KB9024's Meta Description carries an accented
 Á.** Confirm it survives the export-to-import round trip rather than arriving as a mojibake pair.
