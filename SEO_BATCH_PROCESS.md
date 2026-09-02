@@ -1,7 +1,7 @@
 # ProSoccer SEO Batch Process
 
 **Owner:** Mike Hakopyan, 7 Rock Marketing LLC
-**Last updated:** 2026-08-03
+**Last updated:** 2026-09-02
 **Applies to:** PDP optimization batches (10 SKUs per batch). Collection page batches will extend this once that workstream is defined.
 
 ---
@@ -96,7 +96,15 @@ Runs in Cursor against `C:\Dev-Projects\marketing\prosoccer-seo`.
 
 Origin: a live audit of all 151 registry rows on 2026-08-14 found **16 statuses wrong in both directions**. Ten `pending` rows were live (the whole Batch 10 set). Six `shipped` rows had never been imported: the three Mexico 2026 Stadium jerseys, the Predator Accuracy Crazyrush page, HP9971 and IH1779-900. Two of those six were about to be touched by a correction batch that assumed their copy was live. The audit is the expensive way to find this; this step is the cheap way to prevent it.
 
-**The gate (step 5).** `scripts/batch_gate.py` runs 15 mechanical checks over the session folder, including `check_section_presence` (added 2026-07-31): every required PDP section must be present with content, and the Description body must carry at least one internal link, an unconditional hard fail. Exit 0 only when nothing fires. The gate replaces the human per-brief review for mechanical defect classes; the escalate-on-exception batch mode (CLAUDE.md 'Approval mode') is safe only because it runs.
+**The gate (step 5).** `scripts/batch_gate.py` runs **16** mechanical checks over the session folder. Exit 0 only when nothing fires. The gate replaces the human per-brief review for mechanical defect classes; the escalate-on-exception batch mode (CLAUDE.md 'Approval mode') is safe only because it runs.
+
+The sixteen, named as `ALL_CHECKS` emits them into `_gate-run.json` (verified against the code and against a live run 2026-09-02):
+
+`voice`, `heading-levels`, `section-presence`, `customization-claims`, `url-handle`, `price-in-body`, `heritage-counts`, `fabrication-hedge`, `fifa-terms`, `forbidden-phrasings`, `word-band`, `brand-casing`, `cannibalization`, `cross-brief`, `registry1-present`, `ranking-input`.
+
+Two of those deserve naming here because they are unconditional hard fails:
+- `section-presence` (added 2026-07-31): every required PDP section must be present WITH content, and the Description body must carry at least one internal link.
+- `ranking-input` (added 2026-08-27, the sixteenth): `earned_term_position` is a mandatory `gate-meta` field and its absence is a FAIL. See §2 "Ranking-page batches" below. This is the check the count was stale by: the doc said 15 from 2026-08-25 until 2026-09-02 while the code ran 16 from Batch 17 onward.
 
 **A check that CANNOT run is now a hard failure (changed 2026-08-18, Mike).** The gate used to print a skip line and still exit 0. Three false-green paths existed and all three are closed:
 1. `inputs/_registry1_primaries.txt` absent, empty or unreadable, which silently downgraded cannibalization to intra-batch only. Now `registry1-missing`, a batch-level FAIL.
@@ -113,6 +121,49 @@ Handles always come from the briefs (step 9). Never reconstruct them from produc
 
 **And the converse, which is a separate rule (added 2026-08-25, Mike): the LIVE TITLE governs product attributes, and the handle is never a source for them.** Tier, cut, surface, age band, closure and gender come from a fresh fetch of the live title. The two rules point in opposite directions on purpose: the brief is authoritative about what the URL SAYS, the live title is authoritative about what the product IS. Batch 15.1 had two SKUs where reading attributes off the handle would have produced the wrong primary: `adidas-jr-f50-hyperfast-mid-fg-mg-...` carries no tier token and is actually a **Club** Mid page, and `adidas-kids-f50-hyperfast-club-fg-mg-...` omits **Velcro**, the closure that separates it from the laced Junior page in the same pack. Full rule, prior instances (`jr`/`ll`/`in`/`tf`) and the Shopify option-label trap: `context/workforce-conventions.md` 'The live title governs; the handle is never a source of product attributes'.
 
+### Ranking-page batches (added 2026-09-02)
+
+Where a batch's SKUs already earn impressions, primary assignment is not a free choice. The
+authority is `context/workforce-conventions.md` 'Ranking-aware posture (v2, approved by Mike
+2026-08-27)'. **That file is the source of truth and this section quotes it rather than restating
+it, because SCRIBE reads conventions and a paraphrase here would be a second, divergent rule.**
+
+**The earned-term rule, quoted:**
+
+> **For a page already earning impressions, the primary is the term it already earns.** The copy
+> supports that term rather than redirecting the page. We are improving performance on a query the
+> page has already won the right to appear for, not picking a new destination.
+
+**The concentration condition, quoted:**
+
+> **The concentration condition (approved 2026-08-27).** The rule applies only where the page HAS
+> an earned term. A term qualifies as earned when it holds **at least 15% of the page's impressions
+> AND at least 1,000 term impressions** over a trailing 90 days. Below either threshold the page
+> has no earned term and falls back to conventional keyword assignment.
+
+Both thresholds bind, and the measurement is term-level:
+
+> **Measure the TERM, never the page average.** GSC page position is an average across every query
+> the page appears for and is not the number this rule keys on.
+
+**The bands, quoted:**
+
+| Earned-term position | Posture |
+|---|---|
+| **Under 5** | Protect the Meta Title fully. Exact-match phrasing of the earned term preserved. Changes to that field require Mike per page. Iterate on Meta Description, Short Description and Long Description. The brief MUST carry the WARNING line. |
+| **5 to 10** | The Meta Title may be improved but MUST retain the earned term in exact-match form. Everything else is open. No per-page Mike gate; the brief states the earned term and its position so the constraint is visible and auditable. |
+| **10 to 20** | Standard recommendations. Carry the earned term into the Meta Title where it fits naturally. Not binding. |
+| **Over 20, or not ranking** | Standard recommendations. Nothing to protect; treat as a fresh attempt. |
+
+The bands are written against the **Meta Title** and never the H1. See §3 "Never changed".
+
+**The input is mandatory.** `earned_term` and `earned_term_position` are required fields in every
+per-SKU `gate-meta` block, written by ORIN at Phase 0 from GSC term-level data. The `ranking-input`
+gate check FAILS the batch when the position is absent or malformed, when a page under position 5
+carries no WARNING line, and when a page in the 5-to-10 band drops the earned term from its Title
+or Meta Title. Where there is no earned term, set the position to the string `"not-ranking"`: that
+is an explicit declaration, not an omission.
+
 ---
 
 ## 3. Standing rules
@@ -121,6 +172,23 @@ Handles always come from the briefs (step 9). Never reconstruct them from produc
 - Product titles. Under any circumstances, even if a brief proposes one.
 - URL handles. Changes are flagged only and require a 301 coordinated with Misha.
 - Taxonomy nodes, tags, variants, prices, or any metafield not in the import file.
+- **The H1 on a PDP. No brief recommends one, in any band.** See the standing rule below.
+
+**STANDING RULE: on a PDP the H1 is never a brief output (Mike, 2026-08-30).** Quoted from
+`context/workforce-conventions.md`:
+
+> The H1 on a ProSoccer PDP renders from the Shopify product title, and product titles are never
+> changed (`SEO_BATCH_PROCESS.md` §3 'Never changed'). **No brief recommends an H1 on a PDP, in any
+> band.** The bands above are therefore written against the Meta Title, which is the only title
+> field the workforce writes on a product page.
+
+The earlier band wording ("Protect Title and H1 fully", "Title and H1 may be improved") came over
+from a collection-page frame and named a field this store's structure makes unwritable. It was
+corrected in conventions rather than resolved case by case.
+
+**Collection pages are explicitly out of scope for this rule.** A collection H1 IS an editable
+field, and nothing here changes how collection briefs treat it. The rule is about PDPs only. The
+collection workstream is not yet in production (§6), so this scoping is forward-looking.
 
 ### Keyword hierarchy
 Collections own brand, model, club, category, and any term where a searcher would be satisfied by multiple products. PDPs own **age band** + model + tier + cut + surface + **pack (when a concurrent live pack sibling exists)** + width + colorway, terms that resolve to one product.
@@ -212,12 +280,25 @@ The XLSX form stays the default because the sheet name auto-resolves the entity 
 
 ## 6. Open at last update
 
-- Batch 11 (10 SKUs: Barcelona men's/women's home, Arsenal home/LS/youth, Bayern Munich authentic/LS, 3 Nike Shadow cleats) closed end to end: briefs (e68a999), process-doc update (25fd986), registry append step 14 COMPLETE (products-master.csv rows 113-122, commit c5edafb). Live on Shopify.
-- Gate: `check_section_presence` BUILT (added 2026-07-31); the gate now runs 15 mechanical checks (`ALL_CHECKS`, verified against the code 2026-08-25). Remaining hardening still to build: (a) cannibalization check (#9) is exact-match only, with no containment or token-subset detection, so that class is caught only by ORIN's manual pre-dispatch pass, never the gate; (b) `voice_check.py` skips fenced code blocks, so worked examples inside canonical files are invisible to it; (c) meta-title length (48-char cap) and meta-description length/format are not gated, enforced by SCRIBE plus Layer 3 only.
-- 20 meta title brand-suffix violations found across all batches. KA6868 fixed manually 2026-07-28; 19 remain live, awaiting fix-forward.
-- Meta title and meta description format rules being codified into the playbook
-- Collection page workstream, pending audit of the 61 inherited white-label primaries
-- `products-master.csv` `product_id` column holds the SKU, not the Shopify numeric ID
+_Refreshed 2026-09-02 against disk. The previous state of this section was written at Batch 11 and stood six batches stale._
+
+**Batches.** Everything through Batch 16 is live on Shopify. `products-master.csv` carries **178 data rows: 173 `shipped`, 4 `pending`, 1 `intentionally-unoptimized`.** Batch labels run B5 through B16 (B5 is 11 rows, B6 through B15.1 are 10 each, B16 is 9); **48 pre-B5 rows carry no batch label** and permanently never will.
+
+**Batch 17 is briefed and not imported.** Nine SKUs, gate green (exit 0, 16 checks, 0 findings), committed. It stops before the Matrixify export. **Step 14 has NOT run: no Batch 17 rows are in `products-master.csv` yet**, so the registry currently knows nothing about those nine pages. Step 3 goes blind on the next batch if that append is skipped.
+
+**The 4 `pending` rows are the unimported remainder of the 2026-08-14 audit:** the Predator Accuracy Crazyrush page and the three Mexico 2026 Stadium jerseys (home, away, third). All four are briefed, none imported, and all four now fail current meta rules. Tracked as B-IMP-01 in `strategy/sprint-backlog.md`.
+
+**Gate.** Now **16** mechanical checks, not 15 (`ALL_CHECKS`, verified against the code and a live run 2026-09-02). `ranking-input` is the sixteenth, added 2026-08-27 and first exercised in Batch 17. Hardening status, re-verified 2026-09-02:
+- (a) **Still open.** The cannibalization check is exact-match only, keyed on the literal primary string, with no containment or token-subset detection. That class is caught by ORIN's manual pre-dispatch pass, never by the gate.
+- (b) **RESOLVED.** `voice_check.py` no longer skips fenced blocks in canonical instruction files: `strip_backticks(keep_fenced=True)` plus `is_canonical_instruction` puts worked examples back in scope. This closed the exemplar class that produced the brand-suffix violations.
+- (c) **Still open.** Meta-title length (48-char cap) and meta-description length/format are not gated at all. Enforced by SCRIBE, the Step 2 validation pass, and Layer 3 only.
+
+**Still open, carried forward:**
+- 20 meta title brand-suffix violations found across all batches. KA6868 fixed manually 2026-07-28; 19 remain live, awaiting fix-forward. Status not re-verified against the live store on 2026-09-02.
+- Collection page workstream. `collections-master.csv` holds **199 rows: 137 `not_started`, 60 `inherited`, 1 `approved`, 1 `existing-optimized`.** **The workstream is not in production and there is no collection workflow documented anywhere in this repo.** No collection batch has run. The inherited white-label primaries still need their audit.
+- `products-master.csv` `product_id` is **populated on only 3 of 178 rows** and blank on the rest. Where it was populated historically it held the SKU rather than the Shopify numeric ID. Nothing reads it; the import file sources real numeric IDs from the Matrixify export instead.
+
+**Open decision, not resolved here:** where an earned term and the keyword hierarchy point at different owners, conventions call the override an amendment and require a measured test per contested term. What conventions do NOT state is which query the band derives from when several members of one cluster qualify. Logged in `strategy/sprint-backlog.md`; see the Batch 17 DH6621 case.
 
 ---
 
@@ -230,3 +311,11 @@ A customer-facing fact or mechanical class that shipped wrong. Each entry: sympt
 - **Root cause:** both facts are wrong. Name/number customization is a PRODUCT-PAGE option, not a checkout step, and it adds business days (Customized name/number: 2-3 business days, about one extra day), not weeks. The "weeks" figure conflated the name/number add with the separate personalized-jersey tier and rounded days up to weeks.
 - **Discovered:** Mike, Batch 11 prep (2026-08-03). Present in 7 of 10 Batch 10 briefs (II1624-683, KB8261, KB8251, KC3952, KC3989, KC3947, KC3993), which were pushed but not yet imported to Shopify.
 - **Fix:** facts codified in `context/shipping-customization-facts.md` (read every run, referenced from `CLAUDE.md`); standing rule in §3 "Shipping and customization claims"; deterministic gate check `check_customization_claims` in `scripts/batch_gate.py` (FAILS customization language paired with "checkout", or name/number timing given in weeks) with a regression fixture in `scripts/test_batch_gate.py`; handoff-template discipline: brief inputs and FAQs state the product-page location and the 2-3 business-day figure, never "at checkout" or "weeks."
+
+### 2. An agent report described analysis that produced no artifact
+
+- **Symptom:** a past-tense agent report stating that the Phase 0 scrape had been run, metrics pulled and incumbency resolved for a SKU, reading as finished work. **No file for that SKU existed anywhere on disk:** no input, no brief, no scrape record, nothing in the session folder, nothing untracked. The report was the only trace.
+- **Root cause:** the analysis really was performed. It lived entirely in the agent's context and was never written down, then the session ended before anything was persisted. The report described a true past event whose only artifact was the context that reported it, so the work and the record of the work died together.
+- **This is NOT §5 rule 1 and the difference is the whole point.** Rule 1 covers a report that overstates the work performed: the claim outruns what was done, and reading the artifact catches it. This is the opposite failure. The work was done and the claim is honest; there is simply no artifact to read. Rule 1's remedy ("read the artifact, not the summary of it") does not fire here, because a reader who goes looking finds nothing at all rather than finding a discrepancy. **Treat absence of an artifact as absence of the work, however credible the report and however genuinely the work happened.**
+- **Discovered:** 2026-09-02, reconciling Batch 17 state after a session crash.
+- **Fix:** persist at the point of production, not at the end of a phase. Any analysis a later step depends on gets written to the session folder as it is produced, so a crash costs the tail of the work rather than all of it. When a report and the filesystem disagree about whether something exists, **the filesystem is right**. Re-run the analysis; do not reconstruct it from the report, because a reconstruction inherits the report's confidence without inheriting its evidence.
