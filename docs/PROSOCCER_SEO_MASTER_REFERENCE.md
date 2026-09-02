@@ -7,7 +7,162 @@ The full workflow start to finish, every file the system uses, every rule it enf
 **Agency:** 7 Rock Marketing LLC
 **State:** Batches 1 through 16 live. `products-master.csv` at 178 rows. `collections-master.csv` at 199 rows (137 not_started, 60 inherited, 1 approved, 1 existing-optimized). Batch 17 is briefed, gate-green and pushed at nine SKUs, and has NOT been imported. Its rows are not yet in the registry, because step 14 has not run.
 
-**Verification status of this document.** Parts 1, 3, 4, 5 and 6 were reconciled against `SEO_BATCH_PROCESS.md`, `STEP_2_BRIEFING.md` and `context/workforce-conventions.md` on 2026-09-02. **Part 2, the file inventory, has NOT been verified against disk.** At least one entry in it was wrong: `scripts/crossfile_audit.py` is described below but does not exist anywhere in the repository. Treat every other entry in Part 2 as a claim until ORIN confirms it against a directory listing. See the note at the head of Part 2.
+**Verification status of this document.** Parts 1, 3, 4, 5 and 6 were reconciled against `SEO_BATCH_PROCESS.md`, `STEP_2_BRIEFING.md` and `context/workforce-conventions.md` on 2026-09-02. **Part 2, the file inventory, was verified against actual directory listings later the same day** and the result is recorded at the head of Part 2: four entries described files that do not exist and are struck through, four more were described wrongly and are corrected in place. Part 2 is still not a complete inventory, and undocumented files are now listed per section rather than being silently absent.
+
+**Part 0 was built on 2026-09-02 from `products-master.csv`, the session folders, `sitemap-state.md` and `work-log/`.** Every figure in it is derived from those files. Where a fact was not recorded at the time, Part 0 says so rather than inferring one; the selection basis for most batches is the main case.
+
+---
+
+# START HERE: READING ORDER FOR A NEW TEAM
+
+Read in this order. It takes about an hour and it is the difference between running a batch and re-deriving one.
+
+1. **This document, Part 0 then Part 1.** What has been done, then how the pipeline works.
+2. **`CLAUDE.md`.** The governing instructions every agent reads first, including the startup protocol and the approval mode.
+3. **`SEO_BATCH_PROCESS.md`.** The operational reference: the fifteen steps, standing rules, the git rules, Matrixify formats. Sections 5 and 7 are the failure record.
+4. **`context/workforce-conventions.md`.** The largest file in the system and the one SCRIBE actually reads. Do not read it end to end on day one; read the ranking-aware posture, pack succession, and the codification checklist, and treat the rest as reference.
+5. **`strategy/sprint-backlog.md`.** Every open question with its evidence and what was decided. Read the High and CRITICAL rows.
+6. **One recent session folder**, `deliverables/page-optimizations/2026-08-28_session-01/`, front to back: an input, the brief it produced, the gate run, the handoff. This is what the work looks like.
+
+**Do not start with `strategy/master-strategy.md`.** The startup protocol names it, but it is an unfilled template. See the finding in Part 2.
+
+## The decisions you will hit in your first batch
+
+Four, and none of them has a rule that decides it for you. Each is an escalation to Mike, not a judgment call for an agent.
+
+1. **Which SKUs, and on what basis.** Merchandising need, measured demand, lane completion or correction. These produce different results and are judged by different standards, so the basis gets recorded before the batch starts. Batches 5 through 16 mostly did not record it, which is why Part 0's table has a column that is often "not recorded".
+2. **What to do when an earned term collides with the keyword hierarchy.** Open, logged as B-CANNIB-03, worked case `messi cleats`. §3.1 says escalate rather than assign by rule.
+3. **How to band a page whose demand is spread across a cluster rather than concentrated in one query.** Open, logged as B-RANK-01, worked case DH6621 in Batch 17. One threshold is currently doing two jobs.
+4. **Whether a detection-gap batch's clean cannibalization pass means anything.** Usually it does not, because the registry holds none of the batch's terms. Logged as B-DETECT-02.
+
+---
+
+# PART 0: WHAT HAS BEEN DONE
+
+_Every figure in this part is derived from `deliverables/tracking/products-master.csv`, the session folders under `deliverables/page-optimizations/`, `deliverables/tracking/sitemap-state.md` and `work-log/`, read on 2026-09-02. Nothing here is carried from memory or from a prior report._
+
+## 0.1 The batches
+
+**178 rows in the registry. 173 shipped, 4 pending, 1 intentionally unoptimized.**
+
+| Batch | Briefed | Imported | SKUs | Selection basis | What it covered | Status |
+|---|---|---|---|---|---|---|
+| **pre-B5** | 2026-05-26 to 2026-06-17 | **unrecorded** | **48** | **Not recorded** | Mixed manual work before the batch process existed: Mexico 2026 home/away/third, UAE, Liverpool away, plus early Nike Phantom 6, Tiempo and adidas Copa Pure cleats | Shipped, except the 4 `pending` below |
+| **B5** | 2026-06-30 | 2026-07-02 | **11** | Not recorded | adidas Copa Pure IV Road to Glory, all five tiers; Kelme Bosnia youth kits; Nike Croatia women's and youth; two Nike Breakout cleats | Shipped |
+| **B6** | 2026-07-08 | 2026-07-10 | 10 | Not recorded | National-team jerseys (Jamaica, South Korea, DR Congo home and away, Chelsea youth) plus the first Nike Shadow-pack cleats | Shipped |
+| **B7** | 2026-07-11 | 2026-07-13 | 10 | Not recorded | Nike Shadow pack, nine cleats across Vapor 17, Tiempo Ligera, Tiempo Maestro, Phantom 6 and Superfly 11, plus Kelme Jordan away | Shipped |
+| **B8** | 2026-07-13 | 2026-07-13 | 10 | Not recorded | Liverpool and Manchester United home lanes (men's, women's, youth, long sleeve), the Messi junior F50, two more Shadow cleats | Shipped |
+| **B9** | 2026-07-21 | 2026-07-31 | 10 | Not recorded | Manchester United authentic lane, Real Madrid home, and the full New Balance wide-fit line (Furon, Tekela, junior) | Shipped |
+| **B10** | 2026-07-31 | 2026-08-03 | 10 | Not recorded | Real Madrid and Liverpool lane completion, Barcelona youth, remaining New Balance junior and kids wide cleats | Shipped |
+| **B11** | 2026-08-03 | 2026-08-03 | 10 | Not recorded | Barcelona, Arsenal and Bayern Munich home lanes, plus three Nike Shadow Academy and Club cleats | Shipped |
+| **B12** | 2026-08-03 | 2026-08-04 | 10 | Not recorded | Nike Shadow Academy and Club tiers across Phantom, Superfly and Tiempo; first Mizuno Morelia; first adidas F50 Chaos vs Control; Chivas home | Shipped |
+| **B13** | 2026-08-04 | 2026-08-13 | 10 | Not recorded | adidas Predator Elite and F50 League in Chaos vs Control, Nike junior and kids Shadow cleats | Shipped |
+| **B14** | 2026-08-13 | 2026-08-14 | 10 | Not recorded | adidas F50 Club and indoor tiers, Nike Tiempo Maestro Club including indoor, Mizuno Made in Japan | Shipped |
+| **B15** | 2026-08-18 | 2026-08-19 | 10 | **Recorded: measured demand.** B-STRAT-01, orphaned unoptimized incumbents holding real volume | Nike Phantom 6, Tiempo Ligera, Vapor 17 and adidas F50/Predator pages that held unqualified terms nobody had optimized | Shipped |
+| **B15.1** | 2026-08-26 | 2026-08-26 | 10 | Not recorded | Age-band completion, all ten adidas: junior, kids and women's F50 Hyperfast, Sparkfusion and Predator | Shipped |
+| **B16** | 2026-08-26 | 2026-08-27 | **9** | Not recorded | adidas Predator Chaos vs Control tiers, Arsenal authentic, and the first Pirma pages (Cruz Azul) | Shipped |
+| **B17** | 2026-08-28 | **NOT IMPORTED** | **9** | **Recorded: measured demand, detection gap.** `2026-08-27_batch-17-candidates.md` | Guatemala, Spain, Paraguay, Italy, Club America jerseys; Haaland Phantom; USMNT shorts; Panini sticker box; Nike Strike Sleeves | **Briefed, gate-green, pushed, stopped at step 7.** See §0.5 |
+
+**Correction sessions, which are not numbered batches** and whose rows sit in the registry without a batch label: `2026-08-04_iq2388-retarget`, `2026-08-14_cfix` (12 products), `2026-08-18_cfix-group2` (3 products, imported 2026-08-19), `2026-08-27_cfix-colorway`, and `whitelabel-audit`. Only the three C-FIX Group 2 retargets carry an `implementation_date` without a batch label.
+
+**On the "selection basis" column.** The four bases named in Part 1 (merchandising need, measured demand, lane completion, correction) are the vocabulary the process uses today. **For most batches the basis was never written down at the time**, and the column says so rather than inferring one. The composition of each batch is observable from the registry, and the "what it covered" column reports that; it is not the same thing as a recorded intent. Only B15 and B17 have a basis stated in a document written before or during the batch. Anyone reconstructing why B6 chose national-team jerseys in a World Cup year is reading the composition and guessing, and should say so.
+
+**The pre-B5 gap is permanent.** Forty-eight rows carry neither `batch` nor `implementation_date`, and never will. They were briefed between 2026-05-26 and 2026-06-17, before the batch labelling existed. The 2026-08-14 backfill reconstructed 101 rows from verified Matrixify session folders and deliberately left these blank rather than guessing; their brief dates do not overlap the earliest backfilled row (2026-06-30), which independently confirms they are the pre-B5 manual set rather than rows the join missed. **No before-and-after measurement will ever be possible for those 48 pages.**
+
+**The brief-to-import gap runs 0 to 10 days** (B9 ten, B13 nine, B10 three, four batches same-day). This is why `implementation_date` is never inferred from `brief_date`.
+
+## 0.2 How the work got here
+
+**First, what was in front of us.** The pre-B5 work in May and June 2026 was manual, one page at a time, and it went where the merchandising pressure was: the Mexico 2026 kits, UAE, a Liverpool away shirt, and a handful of Nike and adidas cleats that had launched with thin or default descriptions. There was no registry, no gate and no batch structure. That is why those 48 rows are unlabelled: the system that would have labelled them did not exist yet.
+
+**Then the batch process, from Batch 5 onward.** The pattern through Batches 5 to 14 is lane completion in two lanes at once. Footwear moved down the tier ladder pack by pack (Shadow, then Chaos vs Control, then Breakout and Born For Goals), and club jerseys moved across the configuration grid one club at a time (men's, women's, youth, long sleeve, authentic). Liverpool, Manchester United, Real Madrid, Barcelona, Arsenal and Bayern Munich were each worked as a lane rather than a page. This was efficient and it was also self-limiting, which is the finding that eventually changed the strategy.
+
+**The registry became real on 2026-08-14, not before.** A live audit of all 151 rows that day found **16 statuses wrong in both directions**: ten rows marked `pending` were already live, and six marked `shipped` had never been imported, two of which a correction batch was about to touch. The same day, an analysis of whether the work was paying off found `implementation_date` populated on **0 of 142 rows**, so every cohort had to be rebuilt by hand from Matrixify session folders before any measurement could start. Both problems produced rules that are now in the process: status flips only on a confirmed import, and the same confirmation event writes `batch` and `implementation_date`.
+
+**The workforce was rebuilt in July 2026.** The specification is `docs/workforce-v2-refactor-promt.md` (2026-07-08) and the resulting pipeline is `docs/workforce-v2-pipeline.md` (2026-07-10). The goal was to cut a ten-SKU batch from roughly 4 to 6 hours and 3 to 4M tokens down to under 90 minutes and 1 to 1.5M tokens without losing quality. Three things changed:
+
+- **ORIN gathers once.** Previously each of ten writers scraped its own page, looked up its own keywords and validated its own links, doing the same work ten times. Now one briefing packet per product is built upfront.
+- **Approval moved from every action to exceptions only.** ORIN runs the batch end to end and stops only on a genuine exception it cannot resolve from codified rules.
+- **A deterministic gate replaced the human per-brief review** for mechanical defects. This is the load-bearing part: escalate-on-exception is safe *only* because `scripts/batch_gate.py` runs. It has grown from the checks it launched with to sixteen.
+
+**Then, in late August 2026, the finding that changed the target.** A GSC analysis run at Batch 16 close asked a question nobody had asked: of the top 26 product pages by organic impressions, how many are in the registry? **Exactly one.** Roughly **1,280 untracked pages each earn over 1,000 organic impressions, about 9.0M combined.** Logged as B-DETECT-01, priority CRITICAL.
+
+The implication is uncomfortable and worth stating plainly to anyone inheriting this. For seventeen batches the pipeline optimized pages chosen mostly by merchandising need and lane tidiness, while the pages actually carrying the store's organic demand sat outside the registry entirely, unoptimized and invisible to every conflict check. **Batch 17 is the first batch selected from that gap**, and it is why its nine SKUs look nothing like Batch 14's: national-team jerseys with real impression counts, a collectible, a pair of shorts and an accessory, rather than the next tier of a cleat line.
+
+## 0.3 Coverage: what is done and what is left
+
+**178 rows against a catalog of 14,496 products in the public sitemap (2026-08-25 refresh), or 15,381 live published products by Shopify admin count. That is 1.2%.**
+
+Read that number carefully before drawing a conclusion from it. Optimizing 1.2% of a 15,000-product catalog is not obviously the wrong ratio, because catalog products are not equally valuable and most of the tail earns nothing. What makes it a problem is B-DETECT-01: the 1.2% was not selected to be the highest-earning 1.2%.
+
+**By type:** 90 cleats, 27 turf cleats, 10 indoor shoes (**127 footwear**), 50 jerseys, 1 blank.
+
+**By brand:** adidas 93, Nike 66, New Balance 8, Kelme 3, Mizuno 3, Pirma 3, Umbro 2.
+
+**Footwear families with optimized pages** (row counts include every tier, cut, surface and age band worked):
+
+| Family | Rows | | Family | Rows |
+|---|---|---|---|---|
+| adidas F50 (Hyperfast, Sparkfusion) | 34 | | Nike Mercurial Superfly 11 | 11 |
+| adidas Predator | 23 | | Nike Mercurial Vapor 17 | 10 |
+| Nike Phantom 6 | 19 | | adidas Copa Pure IV | 6 |
+| Nike Tiempo (Maestro, Ligera) | 14 | | New Balance Furon | 5 |
+| New Balance Tekela | 3 | | Mizuno Morelia | 3 |
+
+**Clubs:** Manchester United 7, Liverpool 7, Real Madrid 6, Arsenal 4, Cruz Azul 3, Barcelona 3, Bayern Munich 2, Chelsea 1, Chivas 1.
+
+**National teams:** Croatia 5, Mexico 3, Bosnia 2, DR Congo 2, Jamaica 1, South Korea 1, Jordan 1, UAE 1. Batch 17 adds Guatemala, Spain, Paraguay, Italy and Club America once imported.
+
+**What is left, in the order it matters:**
+
+1. **The detection gap.** ~1,280 untracked pages above 1,000 organic impressions each. This is the largest item on the board and only nine pages of it have been touched.
+2. **Whole brands with no coverage.** Puma and Hummel appear in the catalog and have zero registry rows. Umbro has two, Pirma three.
+3. **Non-footwear, non-jersey categories.** Shorts, socks and legwear, balls, goalkeeper gloves, training gear and collectibles have essentially no coverage. Batch 17 is the first to touch shorts, legwear and collectibles at all, and it is unimported. B-TAX-02 records that three of those product types have no canonical taxonomy node.
+4. **Collections.** 199 rows in `collections-master.csv`, of which 137 are `not_started` and 60 are inherited from the white-label team and have never been audited. **No collection page has ever been optimized through this pipeline.** See Part 5B.
+5. **The homepage.** Never optimized. A playbook exists and has never been used.
+
+## 0.4 Measured results: what the data can and cannot support
+
+**It cannot currently support a performance claim, and this section exists to stop one being made.**
+
+**What is on disk.** `products-master.csv` has 35 columns including `baseline_impressions`, `baseline_clicks`, `baseline_position`, `baseline_ctr` and the matching `day_30_*` and `day_60_*` sets. **All twelve of those columns are empty on all 178 rows.** The 2026-08-14 backfill populated `batch` (130 rows) and `implementation_date` (133 rows), which makes cohorts definable, but it did not populate a single performance figure. So the registry can tell you which pages shipped together and when, and nothing about what happened next.
+
+**The one rigorous attempt, and what it found.** `work-log/2026-08-14_gsc-analysis-results.md` is a full before-and-after analysis of Batches 5 to 9 against a control group, run from raw GSC pulls. Its method: pre-window and post-window impressions and CTR per page, optimized cohort against control cohort. Its conclusion, quoted:
+
+> **Recommendation: do not report the +34.2% CTR improvement to Mike or Tony as evidence the work is paying off.** It is not "directionally positive, not significant" as the handoff recorded. It is not robust to the removal of two pages, and it reverses. Neither impressions nor CTR can currently detect an optimization effect in either direction on this corpus.
+
+**Why it failed, which is the useful part.** The cohorts are dominated by a handful of pages. Two DR Congo World Cup jersey pages are **49.4% of the optimized cohort's pre-window impressions** across B5 to B9. Removing those two pages moves the headline CTR result from +18.2 points to **-20.8 points**: the sign flips on two pages out of fifty-one. The underlying mechanism is not copy quality at all but **where each page sits on its own tournament demand curve** when the measurement window opens. A page past its spike shows a collapse; a page still near plateau shows stability; both collapsed by 95% or more from their own peaks. The apparent CTR gain was mechanical, a low-intent impression flood receding and leaving a higher-converting remainder, not a page converting better.
+
+**What would be needed for a defensible measurement**, per that analysis: match pages on position within their own demand curve rather than on impression level, or exclude spike-prone pages from the measured set, or abandon cohort matching for a per-page paired view using medians or trimmed means. None of those has been built. The control-rebuild item is parked with a revised specification.
+
+**The honest summary for a new team or a client conversation:** seventeen batches of copy have shipped and been verified live, the mechanical quality of that copy is enforced by a deterministic gate, and **there is no measurement on disk showing that the work moved traffic in either direction.** Anyone who tells you otherwise is quoting the +34.2% figure that the analysis above specifically retracted. Building a measurement this corpus can carry is open work, and Batch 17 was designed partly as a cleaner test: nine pages with one deliberate evergreen control (the Nike Strike Sleeves, no season and no tournament exposure) so that movement across the batch can be attributed to copy or to the calendar.
+
+## 0.5 Where it stands right now: Batch 17 at step 7
+
+**A new team's first action on this repository is finishing a batch someone else briefed.** Nothing else in this document tells you that, so it is stated here.
+
+Batch 17 is **briefed, gate-green, committed and pushed, and not imported.** Nine SKUs. The gate run recorded in `deliverables/page-optimizations/2026-08-28_session-01/_gate-run.json` is exit 0, PASS, 16 checks, 0 skipped, 0 findings. `_STEP2-HANDOFF.md` in that folder is the handover artifact and contains the paste-ready handle list.
+
+**No Batch 17 rows exist in `products-master.csv`.** Step 14 has not run. Until it does, the registry does not know those nine pages were briefed, and the next batch's conflict check cannot see them.
+
+What remains, with owners:
+
+| Step | What it requires | Who |
+|---|---|---|
+| **8** | Paste `_STEP2-HANDOFF.md` and the nine briefs into a **fresh** Step 2 chat. Fresh matters: reading cold is what has caught defects the workforce approved | Mike |
+| **9** | Produce the handle list for the Matrixify export filter. It is already written in the handoff; take it verbatim and never reconstruct a handle from a product title | Step 2 |
+| **10** | Matrixify export filtered by those nine handles. **Confirm the summary reads 9 products, not 10** | Mike |
+| **11** | Build and validate the import file: MERGE on every row, no Title column, four content fields only. Watch the accented `Á` in the Club America meta description through the round trip | Step 2 |
+| **12** | Import to Shopify. Irreversible, stays in human hands. **Expected result `Updated 9 / Created 0`. A nonzero Created is a STOP CONDITION**, not a note: it means a handle matched nothing and Shopify created a phantom product that no check we run can see | Mike |
+| **13** | Spot-check the live PDPs | Mike |
+| **14** | Append the nine rows to `products-master.csv`. **Batch 17 also writes `baseline_position`** from the earned-term positions in the handoff table, per the 2026-08-27 ruling that the registry should start recording the one metric this work is meant to move | ORIN |
+| **15** | Close the work log entry, report the confirmed-live handle list plus `Updated N / Created 0` and the job ID. ORIN flips exactly those rows to `shipped` and writes `batch` and `implementation_date`. A handle not reported stays `pending` | Step 2, then ORIN |
+
+**Three of the nine are close to sold out** (Spain 1 of 6, Haaland 2 of 15, Guatemala 2 of 6). The copy is evergreen and makes no availability claim in either direction, so this is implementation ordering rather than a blocker.
+
+**One thing to know before step 8:** DH6621, the Nike Strike Sleeves, was amended on 2026-09-02 after the briefs were first committed. Its meta title changed and its ranking band was corrected from not-ranking to 5-to-10. If an export was taken before that date, re-pull it. The reasoning is in B-RANK-01 and it is not settled; see §3.8.
+
+**Also open at this stopping point:** the work log has no close entry for Batch 16 or Batch 17, so `work-log/` currently understates what has shipped by two batches.
 
 ---
 
@@ -373,6 +528,12 @@ One folder per agent containing `agent.md` (the agent's own instructions), `lear
 
 # PART 3: THE RULES
 
+> **On the origin notes below.** Most rules here were not designed. They were written after something shipped wrong, and knowing which incident produced a rule is what stops a new team quietly reversing it. Where a rule traces to a specific batch and a specific failure, one sentence marked **Origin** names it. **Where no traceable incident exists on disk, no origin sentence is given**, and the absence is deliberate rather than an oversight.
+>
+> **Source coverage is uneven, and unevenly in both directions.** `_audit-trail.md` files exist for sessions between 2026-06-10 and 2026-08-04 and then stop, so mid-period batches have a decision record that later ones do not. Later batches are covered instead by `strategy/sprint-backlog.md`, which is richest from Batch 12 onward, by dated entries in `context/workforce-conventions.md`, and by commit messages. **Batches 5 through 8 are the thinnest period**: they predate the backlog's heavy use and their audit trails are sparse, so several early rules have no recoverable incident and get no sentence. `.claude/agents/*/learnings.md` and `decisions.md` look like origin sources and are not: all seven learnings files and all three decisions files are unfilled templates carrying "No entries yet".
+
+
+
 ## 3.1 Keyword hierarchy
 
 **Collections own broad terms.** Brand, model, club, category. Anything where a searcher would be happy with any of a dozen products.
@@ -386,6 +547,8 @@ One folder per agent containing `agent.md` (the agent's own instructions), `lear
 **Sub-floor lock.** Sub-floor means fewer than 100 searches a month. When no higher-volume term is valid for that page under the hierarchy, the page takes the exact qualified term and it is flagged sub-floor. It does not reach for a broader term belonging to something else.
 
 **Ceded terms.** Keywords deliberately handed from product pages to a collection are recorded in `collections-master.csv`, one policy per family, so the decision applies automatically to every future batch. Currently in place for Manchester United, Real Madrid, Liverpool, Barcelona, Arsenal, Bayern Munich, Chivas and Mizuno.
+
+**Origin, and an open caution.** The per-family policy exists because the same cede was being re-argued every time a club lane came back around. **B-CEDE-01, raised at Batch 16 close on 2026-08-27, is the case that a cede can hand a term to a collection that ranks WORSE for it than the PDP we just optimized.** It stands at n=1 (Cruz Azul). The Guatemala case tested the same shape at Batch 17 and ran the other way, so it did not become a second instance: `/collections/guatemala` takes 8,131 impressions and all 180 clicks at position 5.62 while the PDP takes 6,450 impressions and zero clicks at a marginally better 4.88, so the collection is genuinely better at the term.
 
 ### The earned-term rule (ranking-page batches only, added 2026-09-02)
 
@@ -417,7 +580,11 @@ Footwear brands release the same shoe repeatedly in new colorways under new pack
 
 **Who keeps the plain term.** The incumbent, meaning the page earning the most search impressions at that configuration over the trailing 90 days. Where search data is **absent or below threshold**, the earliest-released live pack is the fallback. Stock level does not affect this: a sold-out page keeps its keyword, because search equity does not disappear when inventory does.
 
+**Origin.** Incumbency was defined as season-earliest until 2026-08-18, when page-level GSC made the proxy testable and it failed outright: at `adidas predator elite ag` the season-earliest incumbent (Radiant Blaze FA25) earned **4 impressions in 29 days** while the Born For Goals SP26 page earned **1,256**, and F50 League Indoor showed the same shape at 4 against 1,469. Mike's ruling that day: when direct measurement of the thing a proxy estimates is available, the proxy yields.
+
 **Measure the term, not the page (added 2026-09-02).** Incumbency is decided on impressions for the contested term at that configuration. Total page impressions are a different quantity and must not be substituted for it. A page can lead its siblings on total impressions while trailing them on the specific term in dispute, because total impressions aggregate every query the page earns, most of which are not the contested one. An incumbency argument that cites page totals has not established incumbency, whatever conclusion it reaches.
+
+**Origin.** C-FIX Group 1 row 8 (Mizuno Morelia Neo Beta Pro, Bright Black). The proposed retarget would have stripped the unqualified term from a page earning **1,068 of its configuration's 1,089 impressions, 98%**, and handed it to a sibling earning 21. It was approved under season-earliest and is backwards under v3. The row was dropped; row 4 (IO1494-001) was the same shape.
 
 Every newer pack takes a pack-qualified keyword. A season code is added where a pack name repeats across years.
 
@@ -449,6 +616,8 @@ Every newer pack takes a pack-qualified keyword. A season code is added where a 
 
 **Scrape-wins, with one exception.** The live product page is normally the authority on specs. The exception is where the store's own page erases a distinction the brand makes: adidas uses `Nanostrike+` on Elite and `Nanostrike` below it, while ProSoccer renders both in capitals. In that narrow case the brand source wins. If the scrape is simply silent, the fact stays out.
 
+**Origin of the colorway exception, which is the same shape.** At Batch 16 pre-dispatch on 2026-08-26, two live New Balance Furon Elite V9 2E Wide FG pages appeared to share a byte-identical title, and were logged as a merchandising defect for Jorge. **They were two genuine distinct colorways and the defect was ours:** ProSoccer no longer puts colorways in footwear titles, the value lives in a Shopify product option named `Color`, and Phase 0 was not capturing it, so a title-only comparison made two different products read as one. Closed invalid on 2026-08-27 as B-MERCH-02, and the scrape now captures the option. The lesson generalizes: **when the scrape appears to show two products are identical, confirm the scrape is capturing everything that distinguishes them before believing it.**
+
 ## 3.4 Copy conventions
 
 - **adidas** is always lowercase. Every other brand is capitalized in customer copy.
@@ -476,13 +645,19 @@ Name and number customization is selected **on the product page**, not at checko
 
 Correct: "Add your name and number right on this page. Name and number orders ship in about 2 to 3 business days."
 
+**Origin.** Found by Mike during Batch 11 prep on 2026-08-03, present in **7 of the 10 Batch 10 briefs**, which had been pushed but not yet imported. Those briefs told customers to customize "at checkout" (it is a product-page option) and that it adds "1 to 2 weeks" (it adds 2 to 3 business days). The weeks figure came from conflating the name-and-number add with the separate personalized-jersey tier and rounding days up. This is §7 failure pattern 1, and it is now enforced by the `customization-claims` gate check with a regression fixture, because it is a customer-facing promise about delivery time rather than a style question.
+
 ### Forbidden-phrase lists
 
 When a phrase is barred so a sibling page does not reuse it, the barred phrase must not be contained inside a phrase we approve. The check matches on substrings, so barring a short phrase will also flag a longer approved one that contains it. For the same reason, never put a brand name on a forbidden list.
 
+**Origin.** Batch 11. The barred phrase `germany's most storied club` fired on the approved phrasing `one of Germany's most storied clubs`, hard-failing correct copy. The bar was a substring of the thing the claims bar explicitly permitted.
+
 ## 3.5 Meta fields
 
 **Meta title.** Maximum 48 characters for the part you write; the theme adds the store name automatically. Never type the store name. Never end with a manufacturer brand after a pipe. A pack or product-line suffix is fine. Brand at the front is correct.
+
+**Origin, and it is the most instructive failure in the repository.** **20 meta titles shipped with a manufacturer brand pipe suffix, across every batch up to that point.** The rule against it was written and sitting in the playbook the whole time. It happened because **the playbook's own worked examples demonstrated the violation** while the rule beside them forbade it, and writers copied what they saw rather than what they were told. That is §5 rule 5, examples teach louder than rules, and it is why examples are now audited whenever a rule changes. KA6868 was fixed manually on 2026-07-28; **19 are still live awaiting fix-forward.** Note also that meta title length is still not gated (Part 4), so this class is caught by writers and review, not by the machine.
 
 **Priority when it will not all fit:** brand, model, generation, configuration, pack. The pack drops first, and when it does, the meta description must name it instead.
 
@@ -523,6 +698,8 @@ A youth product is written for the parent buying it, not the child wearing it.
 
 **Heading case.** Editorial headings are sentence case. Structural headings (`Product Details:`, `Care and Maintenance`, `FAQs about`) are Title Case.
 
+**Known collision, logged rather than fixed.** `voice_check.py` requires an editorial H2 to start with a capital and treats `adidas` as its only lowercase-start exception, which collides with the rule preserving vendor styling on brand technology names. Batch 17's Paraguay brief drafted `## dryCELL and the second half in August` and the gate hard-failed it; rewriting to `## What dryCELL does in a hot second half` passed. Neither rule is wrong and **any lane leading on a lowercase-styled technology token will hit this**, so Puma, Nike and Mizuno pages are all exposed. Logged as B-VOICE-02; the intended fix is one line in the input template telling the writer to place such a token mid-heading, not widening the script's exception list.
+
 **Internal links.** One or two per page, each confirmed working, placed where the copy naturally refers to the target rather than defaulting to the same two spots every time. Links go in the main description only, never the short description. **External links are not used on product pages.**
 
 ## 3.8 Ranking-aware posture
@@ -548,9 +725,15 @@ Three things that must survive into whatever text lands here:
 
 Enforcement note: `check_ranking_input` is the sixteenth gate check and it verifies that a ranking input is present and that the earned term appears where the band requires. **Presence of a ranking input is not correctness of the band derived from it.** The check passed on DH6621 while the band was wrong.
 
+**Origin of the whole posture, and why it is enforced by a gate rather than by instruction.** A ranking-aware posture existed from 2026-05 and **never fired once in three months.** The audit that established this: across all 314 briefs then on disk, **0 carried the top-5 WARNING line**, only **26 carried a `Current ranking:` line at all** (8%), and `baseline_position` was populated on **0 of 178 registry rows**. The posture had never been wired to anything, so it was not a safeguard waiting for a qualifying page; it was a safeguard nothing could trigger. A rule that depends on someone remembering to look a number up ends up exactly there, which is why `earned_term_position` is now a mandatory `gate-meta` field whose absence is a hard failure, the same posture `word_band` takes. **Batch 17 is the first batch in which it fired.**
+
 ## 3.9 What never changes
 
 Product titles. URL handles, which are flagged only and need a redirect coordinated with the developer. Tags, taxonomy, variants, prices. The import file physically cannot touch any of them, because those columns are not in it.
+
+**The H1 follows from this, and its origin is Batch 17.** Because the product title never changes and the PDP H1 renders from it, no brief recommends an H1 on a PDP in any band. The rule was written on 2026-08-30 after Batch 17 became the first batch with pages in the 5-to-10 band and the band's retention requirement turned out to be **unsatisfiable as written**: it demanded the earned term be retained in a title field, and the only title field a PDP can write is the meta title. The band rows were rewritten against the Meta Title and the gate check was widened to accept either field. Collection pages are scoped out, because their H1 is editable.
+
+**A related origin worth keeping, since it points the opposite way.** The handle is authoritative for what the URL says and is **never** a source for what the product is. At Batch 15.1 two SKUs would have taken the wrong primary if attributes had been read off the handle: `adidas-jr-f50-hyperfast-mid-fg-mg-...` carries no tier token and is actually a **Club** Mid page, and `adidas-kids-f50-hyperfast-club-fg-mg-...` omits **Velcro**, the closure separating it from the laced Junior page in the same pack. The live title governs product attributes; the brief governs the handle.
 
 ---
 
